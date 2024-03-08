@@ -6,12 +6,16 @@ import sys
 import csv
 import ast
 import time
+import tkinter as tk
+from tkinter import PhotoImage
+
 
 # 0nom 1description 2stigma+ 3stigma- 4stigma* 5techniques 
 # 6sorts 7items 8talents 9vie 10mana 11force
 # 12inteligence 13defence 14tauxcoupcrit
 # 15degatcoupcrit 16tauxsortcrit 17degatsortcrit
 # 18tauxesquive 19gold
+
 LISTEDEPERSONNAGE = {
     "Saumel": [  # char
         "Saumel",
@@ -49,6 +53,38 @@ LISTEDEPERSONNAGE = {
         10,  # int degat sort crit
         8,  # int taux esquive
         0,  # int gold
+    ],
+    "Dylan": [  # char
+        "Dylan",
+        ("Bobo Bourgeois blanc d'Extreme droite, éduqué a la dure par son papa fan de moto, et sa maman qui est aussi une moto. (il a été adopté)"
+         "\n           S'est fait volé son gouter par un noir, et cherche dans le Coliseum la puissance de prendre sa revanche."),  # char
+        "Forces Obscure",  # char stigma +
+        "Agent d'Entretien",  # char stigma -
+        "Aucun",  # char stigma *
+        [
+            "Attaque Légère",
+            "Corne Argile"
+        ],  # char list technic
+        [
+            "Tir Arcanique",
+        ],  # char list sorts
+        {
+            "Hydromel": 3,
+        },  # char dict of int items
+        [
+            "Affinitée de Terre"
+        ],  # char list
+        40,  # int vie
+        20,  # int mana
+        400,  # int force
+        0,  # int intelligence
+        0,  # int defence
+        30,  # int taux coup crit
+        8,  # int degat coup crit
+        8,  # int taux sort crit
+        15,  # int degat sort crit
+        15,  # int taux esquive
+        15000,  # int gold
     ],
     "Elma": [  # char
         "Elma",
@@ -119,7 +155,7 @@ LISTEDEPERSONNAGE = {
          "\n           Est venue se cacher des buchers et des horreurs dans le seul endroit ou on la considererait morte sans l'être vraiment : le Coliseum."
          "\n           S'étonne que son lien avec la nature dans cet endroit sordide ne soit pas brisé, malgrès l'omniprésence de la mort."),  # char
         "Cueilleuse",  # char stigma +
-        "Coeur Pur",  # char stigma -
+        "Incompatible",  # char stigma -
         "Aucun",  # char stigma *
         [
             "Attaque Légère",
@@ -531,10 +567,117 @@ LISTEDEPERSONNAGE = {
         2500000,  # int gold
     ],
 }
+LISTEITEMDEFENCE = [
+    "Feuille Jindagee",
+    "Fruit Jindagee",
+    "Feuille Aatma",
+    "Fruit Aatma",
+    "Ambroisie",
+    "Hydromel",
+    "Orbe de Furie",
+    "Orbe de Folie",
+    "Remède",
+    "Remède Superieur",
+    "Remède Divin",
+    "Pillule",
+    "Pillule Superieure",
+    "Pillule Divine",
+    "Mutagène Bleu",
+    "Grand Mutagène Bleu",
+    "Mutagène Rouge",
+    "Grand Mutagène Rouge",
+    "Mutagène Vert",
+    "Grand Mutagène Vert",
+    "Mutagène Doré",
+    "Grand Mutagène Doré",
+    "Mutagène Hérétique",
+    "Mutagène Fanatique",
+]
+LISTEITEMATTAQUE = [
+    "Crystal Elémentaire",
+    "Fléchette Rouge",
+    "Flèche Rouge",
+    "Fléchette Bleue",
+    "Flèche Bleue",
+    "Poudre Explosive",
+    "Roche Explosive",
+    "Bombe Explosive",
+    "Fiole de Poison",
+    "Gourde de Poison",
+    "Sève d'Absolution",
+    "Larme d'Absolution",
+    "Soluté d'Absolution",
+    "Sève d'Exorcisme",
+    "Larme d'Exorcisme",
+    "Soluté d'Exorcisme",
+]
+LISTEITEMDEBUTTOUR = [
+    "Fiole de Poison",
+    "Gourde de Poison",
+    "Sève d'Absolution",
+    "Larme d'Absolution",
+    "Soluté d'Absolution",
+    "Sève d'Exorcisme",
+    "Larme d'Exorcisme",
+    "Soluté d'Exorcisme",
+    "Mutagène Bleu",
+    "Grand Mutagène Bleu",
+    "Mutagène Rouge",
+    "Grand Mutagène Rouge",
+    "Mutagène Vert",
+    "Grand Mutagène Vert",
+    "Mutagène Doré",
+    "Grand Mutagène Doré",
+    "Mutagène Hérétique",
+    "Mutagène Fanatique",
+]
+LISTEITEM = [
+    "Feuille Jindagee",
+    "Fruit Jindagee",
+    "Feuille Aatma",
+    "Fruit Aatma",
+    "Crystal Elémentaire",
+    "Ambroisie",
+    "Hydromel",
+    "Orbe de Furie",
+    "Orbe de Folie",
+    "Remède",
+    "Remède Superieur",
+    "Remède Divin",
+    "Pillule",
+    "Pillule Superieure",
+    "Pillule Divine",
+    "Fléchette Rouge",
+    "Flèche Rouge",
+    "Fléchette Bleue",
+    "Flèche Bleue",
+    "Poudre Explosive",
+    "Roche Explosive",
+    "Bombe Explosive",
+    "Fiole de Poison",
+    "Gourde de Poison",
+    "Sève d'Absolution",
+    "Larme d'Absolution",
+    "Soluté d'Absolution",
+    "Sève d'Exorcisme",
+    "Larme d'Exorcisme",
+    "Soluté d'Exorcisme",
+    "Mutagène Bleu",
+    "Grand Mutagène Bleu",
+    "Mutagène Rouge",
+    "Grand Mutagène Rouge",
+    "Mutagène Vert",
+    "Grand Mutagène Vert",
+    "Mutagène Doré",
+    "Grand Mutagène Doré",
+    "Mutagène Hérétique",
+    "Mutagène Fanatique",
+]
 LISTEDEMUSIQUE = [
-    "Nouveaux Départs",
+    "Gigantomachie",
+    "Endorphines",
     "Dangereuses Mélancolies",
-    "Le Calme avant la Tempête",
+    "L'Orage avant la Tempête",
     "Fanfare",
     "Pluie d'Automne",
     "Exploratio",
@@ -546,7 +689,7 @@ LISTEDEMUSIQUE = [
     "Ruines d'Antan",
     "Sables Mouvants",
     "Golem de Chair",
-    "Puit de Connaisance",
+    "Puit de Connaissance",
     "Nerd Party",
     "Jeux d'Enfants",
     "Pantomime",
@@ -555,7 +698,7 @@ LISTEDEMUSIQUE = [
     "Tragicomique",
     "Combler les Vides",
     "Systèmes Défaillants",
-    "Seigneur des Mouches",
+    "Sa Majesté Des Mouches",
     "Divin Karma",
     "Folie Furieuse",
     "Comment Tuer le Grand Méchant Loup",
@@ -564,7 +707,7 @@ LISTEDEMUSIQUE = [
     "Faux semblants",
     "La Hache et le Grimoire",
     "Contradictions",
-    "Pas encore trouvée",
+    "Arythmie",
     "Au Détour D’un Sentier Une Charogne Infâme",
     "La Divine Comédie",
     "Apogée Inversée",
@@ -575,8 +718,9 @@ LISTEDEMUSIQUE = [
 ]
 LISTECARACTERISTIQUEMUSIQUE = [
     ["start", "Vous écoutez "],
+    ["tutorial", "Vous écoutez "],
     ["alfredproto", "Vous écoutez "],
-    ["boss_intro", "Vous écoutez "],
+    ["boss_introV2", "Vous écoutez "],
     ["battle_win", "Vous écoutez "],
     ["ending", "Vous écoutez "],
     ["etage_1", "Vous écoutez "],
@@ -907,13 +1051,13 @@ ANNUAIREDECHOIXPOURREDCOIN = {
 }
 
 
-
 class TraderUsage:
 
     def __init__(self):
         self.modificateur = 1
         if Player.stigma_negatif == "Mauvaise Réputation":
             self.modificateur = 1.5
+        self.modificateur += ((Player.numero_de_letage / 10) - 0.1)
         self.annuaire_des_prix = {
             "Feuille Jindagee": round(15*self.modificateur),
             "Fruit Jindagee": round(35 * self.modificateur),
@@ -960,6 +1104,7 @@ class TraderUsage:
             "Gemme de Vie": round(300 * self.modificateur),
             "Gemme d'Esprit": round(300 * self.modificateur),
             "Fée dans un Bocal": 0,
+            "Méga Tirage": 777
         }
         self.liste_item_etage_1_2 = [
             "Feuille Jindagee",
@@ -978,6 +1123,7 @@ class TraderUsage:
             "Pillule",
             "Poudre Explosive",
             "Tirage",
+            "Méga Tirage",
             "Red Coin",
             "Gemme de Vie"
         ]
@@ -988,6 +1134,7 @@ class TraderUsage:
             "Pillule",
             "Poudre Explosive",
             "Tirage",
+            "Méga Tirage",
             "Red Coin",
             "Gemme d'Esprit",
             "Fée dans un Bocal"
@@ -999,6 +1146,7 @@ class TraderUsage:
             "Pillule",
             "Poudre Explosive",
             "Tirage",
+            "Méga Tirage",
             "Red Coin",
             "Gemme de Vie",
             "Gemme d'Esprit"
@@ -1045,6 +1193,7 @@ class TraderUsage:
             "Mutagène Hérétique",
             "Mutagène Fanatique",
             "Tirage",
+            "Méga Tirage",
             "Red Coin",
             "Fée dans un Bocal"
         ]
@@ -1074,11 +1223,85 @@ class TraderUsage:
     
     def SetRedCoinPrice(self):
         if Player.redcoin_bought:
-            self.annuaire_des_prix["Red Coin"] = 99999
+            self.annuaire_des_prix["Red Coin"] = 9999999
         else:
-            self.annuaire_des_prix["Red Coin"] = Player.numero_de_letage * 100
-        self.annuaire_des_prix["Tirage"] = (Player.numero_de_letage * 75) + (Player.number_of_tirage * 100)
-        self.annuaire_des_prix["Fée dans un Bocal"] = ((Player.numero_de_letage * 50) + 50) * self.modificateur
+            self.annuaire_des_prix["Red Coin"] = round(Player.numero_de_letage * 100)
+        self.annuaire_des_prix["Tirage"] = round((Player.numero_de_letage * 75) + (Player.number_of_tirage * 100))
+        self.annuaire_des_prix["Fée dans un Bocal"] = round(((Player.numero_de_letage * 50) + 50) * self.modificateur)
+
+    def UseMegaTirage(self):
+        #double tirage des recompenses 
+        element_tirage = []
+        for _ in range(0, 2):
+            nombre_aleatoire = random.randint(1, 16)
+            if nombre_aleatoire == 1:
+                element_tirage.append("Feu")
+            if nombre_aleatoire == 3:
+                element_tirage.append("Foudre")
+            if nombre_aleatoire == 5:
+                element_tirage.append("Glace")
+            if nombre_aleatoire == 7:
+                element_tirage.append("Terre")
+            if nombre_aleatoire == 9:
+                element_tirage.append("Physique")
+            if nombre_aleatoire == 11:
+                element_tirage.append("Sang")
+            if nombre_aleatoire == 13:
+                element_tirage.append("Effort")
+            if nombre_aleatoire == 15:
+                element_tirage.append("Maitrise")
+            else:
+                element_tirage.append("Vide")
+        #choix du joueur
+        while True:
+            try:
+                if Player.affronte_un_boss:
+                    print(f"A l'endroit ou se tenait l'ennemi, il y a maintenant une petite boite en métal bleu ornée d'un grand *POW*.\nVous y plongez la main à l'interieur.")
+                else:
+                    print(f"Le marchand vous laisse plonger la main dans une boite en carton bleue ornée d'un grand *POW*.")
+                print("A l'interieur, vous pouvez toucher le contour de deux masses étranges, rugueuse."
+                      f"\nEn les palpant, vous ressentez une connection avec l'élément [{element_tirage[0]}] et l'élement [{element_tirage[1]}]."
+                      f"\n1 - Retirer le [{element_tirage[0]}]"
+                      f"\n2 - Retirer le [{element_tirage[1]}]")
+                choix = int(input("Choisissez avec les nombres : "))
+                ClearConsole()
+                if choix in [1, 2]:
+                    break
+            except ValueError:
+                ClearConsole()
+        if element_tirage[choix - 1] == "Feu":
+            type_du_tirage = "le sort"
+            nom_du_tirage = "Explosion de Feu Sacré"
+        elif element_tirage[choix - 1] == "Foudre":
+            nom_du_tirage = "Combo Electrique"
+            type_du_tirage = "la technique"
+        elif element_tirage[choix - 1] == "Glace":
+            nom_du_tirage = "Mirroir d'Eau"
+            type_du_tirage = "le sort"
+        elif element_tirage[choix - 1] == "Terre":
+            nom_du_tirage = "Position du Massif"
+            type_du_tirage = "la technique"
+        elif element_tirage[choix - 1] == "Physique":
+            nom_du_tirage = "Poussée d'Adrénaline"
+            type_du_tirage = "la technique"
+        elif element_tirage[choix - 1] == "Sang":
+            nom_du_tirage = "Brume de Sang"
+            type_du_tirage = "le sort"
+        elif element_tirage[choix - 1] == "Effort":
+            nom_du_tirage = "Iaido"
+            type_du_tirage = "la technique"
+        elif element_tirage[choix - 1] == "Maitrise":
+            nom_du_tirage = "Carrousel"
+            type_du_tirage = "le sort"
+        if (element_tirage[choix - 1] != "Vide") and (nom_du_tirage not in Player.sorts_possedes) and (nom_du_tirage not in Player.techniques_possedes) :
+            commentaire = f"Vous obtenez {type_du_tirage} {nom_du_tirage} !"
+            if type_du_tirage == "le sort":
+                Player.sorts_possedes.append(nom_du_tirage)
+            elif type_du_tirage == "la technique":
+                Player.techniques_possedes.append(nom_du_tirage)
+        else:
+            commentaire = "Vous sortez la masse, et elle disparait dans les airs.\nMauvaise Pioche !"
+        Affichage.AfficheMegaTirage(commentaire)
 
     def UseTirage(self):
         #sort ou technique ?
@@ -1090,7 +1313,10 @@ class TraderUsage:
         #element ?
         element_tirage = []
         for _ in range(0, 2):
-            nombre_aleatoire = random.randint(1, 6)
+            if type_tirage == "le sort":
+                nombre_aleatoire = random.randint(1, 7)
+            else:
+                nombre_aleatoire = random.randint(1, 6)
             if nombre_aleatoire == 1:
                 element_tirage.append("Feu")
             if nombre_aleatoire == 2:
@@ -1101,8 +1327,10 @@ class TraderUsage:
                 element_tirage.append("Terre")
             if nombre_aleatoire == 5:
                 element_tirage.append("Physique")
-            else:
+            if nombre_aleatoire == 6:
                 element_tirage.append("Sang")
+            if nombre_aleatoire == 7:
+                element_tirage.append("Divin")
         #choix du joueur
         while True:
             try:
@@ -1135,6 +1363,8 @@ class TraderUsage:
                 nom_du_tirage = "Explosion"
             elif element_tirage[choix - 1] == "Sang":
                 nom_du_tirage = "Dance"
+            elif element_tirage[choix - 1] == "Divin":
+                nom_du_tirage = "Sonata"
         elif type_tirage == "la technique":
             if element_tirage[choix - 1] == "Feu":
                 nom_du_tirage = "Bô"
@@ -1168,6 +1398,8 @@ class TraderUsage:
                 nom_du_tirage += " Léger"
             elif element_tirage[choix - 1] == "Sang":
                 nom_du_tirage += " Volevie"
+            elif element_tirage[choix - 1] == "Divin":
+                nom_du_tirage += " Pitoyable"
         elif Player.numero_de_letage in [3, 4]:
             if element_tirage[choix - 1] == "Feu":
                 nom_du_tirage += " Brulant"
@@ -1181,6 +1413,8 @@ class TraderUsage:
                 nom_du_tirage += " Renforcé"
             elif element_tirage[choix - 1] == "Sang":
                 nom_du_tirage += " Siphoneuse"
+            elif element_tirage[choix - 1] == "Divin":
+                nom_du_tirage += " Miséricordieuse"
         elif Player.numero_de_letage in [5, 6]:
             if element_tirage[choix - 1] == "Feu":
                 nom_du_tirage += " Enflammé"
@@ -1194,6 +1428,8 @@ class TraderUsage:
                 nom_du_tirage += " Lourd"
             elif element_tirage[choix - 1] == "Sang":
                 nom_du_tirage += " Vampirique"
+            elif element_tirage[choix - 1] == "Divin":
+                nom_du_tirage += " Empathique"
         elif Player.numero_de_letage in [7, 8]:
             if element_tirage[choix - 1] == "Feu":
                 if sort_attaque_forte_pour_etage_7_8:
@@ -1225,6 +1461,11 @@ class TraderUsage:
                     nom_du_tirage += " Parasite"
                 else:
                     nom_du_tirage += " Destructrice"
+            elif element_tirage[choix - 1] == "Divin":
+                if sort_attaque_forte_pour_etage_7_8:
+                    nom_du_tirage += " Sincère"
+                else:
+                    nom_du_tirage += " Bienveillante"
         elif Player.numero_de_letage in [9, 10]:
             if element_tirage[choix - 1] == "Feu":
                 nom_du_tirage += " Solaire"
@@ -1238,6 +1479,8 @@ class TraderUsage:
                 nom_du_tirage += " de la Comète"
             elif element_tirage[choix - 1] == "Sang":
                 nom_du_tirage += " Créatrice"
+            elif element_tirage[choix - 1] == "Divin":
+                nom_du_tirage += " Absolutrice"
         #Accord au féminin, si besoin
         if nom_du_tirage == "Faisceau Foudroyante":
             nom_du_tirage = "Faisceau Foudroyant"
@@ -1279,6 +1522,7 @@ class TraderUsage:
     def DoTrading(self):
         # marchand
         Affichage.AfficheRentrerChezMarchand()
+        self.MiseAJourDesPrix()
         Trader.SetItemList()
         while True:
             while True:
@@ -1305,6 +1549,8 @@ class TraderUsage:
                     elif nom_de_litem == "Tirage":
                         Player.number_of_tirage += 1
                         Trader.UseTirage()
+                    elif nom_de_litem == "Méga Tirage":
+                        Trader.UseMegaTirage()
                     elif nom_de_litem == "Gemme de Vie":
                         if Player.gemme_de_vie:
                             print("Mais vous en aviez déjà une...\nTant pis.")
@@ -1336,6 +1582,8 @@ class TraderUsage:
                 break
             ClearConsole()
 
+    def MiseAJourDesPrix(self):
+        self.__init__()
 
 
 class Affiche:
@@ -1347,7 +1595,45 @@ class Affiche:
         input("(Appuyez sur entrée pour continuer)")
         ClearConsole()
 
+    def IntroBoss(self, commentaire):
+        print(commentaire)
+        self.EntreePourContinuer()
+
+    def AfficheMegaTirage(self, commentaire):
+        print(commentaire)
+        self.EntreePourContinuer()
+
+    def AfficheLongChargement(self):
+        print("Récupération en cours, veuillez patienter...")
+        print("(Temps d'attente estimé a 5 minutes)")
+        time.sleep(5*60)
+        ClearConsole()
+
     def AfficheIntroCombat(self):
+        if Player.stigma_positif == "Débrouillarde":
+            print("Vous vous approchez de l'arène et trouvez des déchets et autres bidules sur le sol...")
+            self.EntreePourContinuer()
+            nombre_aleatoire = random.randint(0, 100)
+            if nombre_aleatoire <= 20:
+                nom_de_litem = GetRandomItemFromList(LISTEITEM)
+                print("...et une idée germe dans votre esprit !"
+                      f"\nVous rassemblez alors les objets entre eux et créez l'objet : {nom_de_litem} !")
+                Player.items_possedes[nom_de_litem] += 1
+            else:
+                print("...mais aucune idée ne vous vient a l'esprit.")
+            self.EntreePourContinuer()
+        if Player.stigma_positif == "Cueilleuse":
+            print("Vous vous approchez de l'arène et trouvez de curieuses plantes dans les interstices entre les briques...")
+            self.EntreePourContinuer()
+            nombre_aleatoire = random.randint(0, 100)
+            if nombre_aleatoire <= 50:
+                nom_de_litem = GetRandomItemFromList(LISTEITEMDEFENCE)
+                print("...et une idée germe dans votre esprit !"
+                      f"\nVous cueillez alors les monceaux biologiques, appliquez vos techniques de druidesses, et créez l'objet : {nom_de_litem} !")
+                Player.items_possedes[nom_de_litem] += 1
+            else:
+                print("...mais rien ne peut etre fait avec.")
+            self.EntreePourContinuer()
         print("Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides, avant de frapper le sol de votre pied."
               "\nAussitôt, une vague bruyante de spectateurs fantomatiques apparaissent, et un ennemi apparait devant vous.")
         self.EntreePourContinuer()
@@ -1355,51 +1641,254 @@ class Affiche:
     def AffichePlusDennemis(self):
         print("Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides, avant de frapper le sol de votre pied."
               "\nMais rien ne se passe.\nIl n'y a plus personne pour vous affronter, a part le boss.")
-        if Player.red_coin_recu_par_extermination:
+        if not Player.red_coin_recu_par_extermination and Player.boss_battu:
             print("Un spectateur fantomatique amusé par votre désir d'extermination vous envoie un cadeau depuis les gradins, avant de disparaitre.")
             self.EntreePourContinuer()
             print("Vous gagnez un Red Coin !")
             self.EntreePourContinuer()
             Player.nombre_de_red_coin += 1
+            Player.red_coin_recu_par_extermination = True
         self.EntreePourContinuer()
 
     def AfficheIntroCombatBoss(self):
         print("Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides, avant de frapper le sol de votre pied."
               "\nAussitôt, une vague silencieuse de spectateurs fantomatiques apparaissent, et la grille de métal ancien à l'autre bout de l'arène s'ouvre.")
         self.EntreePourContinuer()
-        PlayMusic("boss_intro")
+        if Player.numero_de_letage != 8:
+            PlayMusic("boss_introV2")
+        liste_commentaire = []
         if Player.numero_de_letage == 1:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = ("Une boule d'obsidienne flotte jusqu'à votre niveau, et une voix artificielle remplit l'arène.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*SENTIENCE RECONNUE. INITIATION DU PROTOCOLE D'EXPLIQUATION ENCLENCHE*"
+                           "\n*POUR LES CRIMES SUIVANT CONTRE VOTRE ROI MALGRES SES ANNEES DE BONS ET LOYAUX SERVICES, VOUS VOILA CONDAMNE A LA PEINE DE MORT :*"
+                           "\n*TENTATIVE DE TRAHISON, TENTATIVE DE REGICIDE, TENTATIVE DE REBELLION, TENTATIVE DE REVOLUTION,*"
+                           "\n*AVOIR CRACHE SUR UN TABLEAU DU ROI, AVOIR EXPRIME DE LA DISSATISFACTION ENVERS LE ROI ACTUEL,*"
+                           "\n*AVOIR UN COMPORTEMENT SUSPECT PROCHE DE LA RESIDENCE DU ROI, AVOIR UN COMPORTEMENT SUSPECT PROCHE DE LA CAPITALE DU ROI,"
+                           "\n*AVOIR UN COMPORTEMENT SUSPECT DANS LE ROYAUME DIRIGE PAR LE ROI, ET ENCORE 2324 AUTRES INFRACTIONS NON CITEE.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*QUESTIONS SOUVENT POSEES :"
+                           "\n* - MAIS JE N'AI JAMAIS FAIT CELA !*"
+                           "\n* - CELA DOIT ETRE UNE ERREUR !*"
+                           "\n* - COMMENT PEUT ON SORTIR D'ICI ?*"
+                           "\n*UNE SEULE REPONSE : UN ROI JUSTE NE PUNIT PAS LES INNOCENTS."
+                           "\n*CONSIDEREZ VOTRE PRESENCE ICI COMME UNE PREUVE IRREFUTABLE DE VOTRE CULPABILITE.*"
+                           "\n\n*PROTOCOLE DEXPLIQUATION TERMINE*"
+                           "\n*PROTOCOLE DE COMBAT ENCLENCHE*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("La sphère bouge et se transforme en une copie conforme de vous, puis se met a parler :"
+                           "\n*J'ai toujours dit qu'il fallait combattre le feu avec le feu !*")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 2:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = ("Un chevalier en armure violette saute depuis le sommet de la tour et atterit en plein milieu de l'arène."
+                           "\n*C'est toi le prochain traitre ?*"
+                           "\nVous le regardez avec étonnement.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Fais pas semblant, je suis une bonne personne, je sais reconnaitre qui n'est ou n'est pas une menace pour le chateau.*"
+                           f"\n*Toi par exemple, tu a du sang de monstre sur les mains.*\n*Je dirais que tu a massacré...{Player.nombre_de_monstres_tues} monstres.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Tu a gouté aux joies du combat, et tu en veux plus, toujours plus.*\n*Je fais confiance a mon flair pour ca. Il m'a sauvé la mise de très nombreuses fois.*"
+                           "\n*Tu es une menace pour mon roi et sa sécuritée.*\n*Tu es une menace pour le royaume et son épanouissement.*"
+                           "\n*Tu es une menace pour tout ceux que tu croisera sur ton chemin.*"
+                           "\nIl se tourne alors vers les spectateurs.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Et quel piètre chevalier je serais si je n'arretais pas une vermine dans son genre, hein ?*"
+                           "\nLe chevalier pourpre se tourne vers vous et sort une lame rongée par la rouille et la souillure."
+                           "\n*Laisse tomber, l'affreux. La justice et le bien sont de mon coté. Tu n'a aucune chance de gagner.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Car tu vois...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...je suis le Chevalier que les gens comme toi ne veulent pas rencontrer.*")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 3:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = ("L'arène se met alors a trembler, et le sable commence a s'écouler par les cotés."
+                           "\nDes blocs de roche, de bois et d'or commencent alors a apparaitre, et au milieu de tout ca, une bien étrange structure pentagonale surmontée d'un sarcophage et de 5 vases canopes.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Un examen plus approfondi de la salle révèle aussi des têtes empaillées et accrochées sur tous les murs de l'arène."
+                           "\n*Il faut toujours rendre la chose plus spectaculaire. Plus incroyable. C'est du travail, empailler les têtes. Tu aime ?*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Le sarcophage se souleve alors et une forme vaguement humaine zébrée de lignes de coutures avec un masque de pharaon en sort."
+                           "\n*Le roi, dans sa folie, s'est emparé des cadavres de ses soi-disants ennemis qu'il a cousut entre eux. puis il a mit l'âme de son frère a l'interieur.*"
+                           "\n*Je suis un monstre, une atrocitée, mais sur laquelle il avait enfin le controle que son esprit malade requit.\nUn Roi des sables du sud que l'on a enfermé dans ce corps....* ")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Les vases canopes commencent alors a leviter."
+                           "\n*Vois ce qu'il reste de la grande lignée qui précédait ce fou : des morceaux de chairs dans des vases magiques.*\n\n\n*Pitoyable.*\n\n"
+                           "\n*Mais bon. Trêve de bavardage. Il est temps que je t'acceuille comme il se doit.* ")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Le roi-monstre jette un coup d'oeil inquiet vers les spectateurs avant de se retourner vers vous et de prendre une pose extravagante.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Je te souhaite la bienvenue dans mon antre voyageur.*\n*Devant toi se trouve une folie engendrée par le plus malade des esprits : Moi même ! Le grand roi Amonrê !*"
+                           "\n*JE SUIS NE HOMME ET SI TU EST ASSEZ FORT, C'EST AUJOURDHUI QUE JE MOURRAI MONSTRE !*\n*APPROCHE DONC ET MONTRE MOI L'ETENDUE DE TA PUISSANCE !* ")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 4:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = ("Vous entendez le son d'un livre qui se ferme fort, et l'apparence de l'arène change brusquement. "
+                           "\nVous observez alors un bureau finement décoré et rempli d'étagères sur lesquelles sont négligement placés des livres de magie et de sortillèges."
+                           "\nAu milieu, un adolescent d'une quinzaine d'année vous regarde fixement, coincé entre deux piles de livre plus haute que lui.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*C'est l'heure pas vrai ?*\n*Bon, ben me fout pas la honte hein !*\n*Ya un endroit qu'il faut pas taper, c'est là.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("L'ennemi tapote son torse, ou repose une amulette a l'aspect ancien.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Allez, bonne chance !*"
+                           "\nVous vous retrouvez alors dans l'arène, avec l'enfant mage en face de vous.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Vous voulez aller plus loin ?*\n*Vous souhaitez sortir du Coliseum avec la gloire, l'argent, et la vie sauve ?*"
+                           "\n*Dommage pour vous !*\nCar vous êtes tombé sur le disciple du grand...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Du puissant...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Du musculeux...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Maitre Mage ! Créateur des ces lieux !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Votre expression s'assombrit.\n*Bah alors ? Fait pas cette tête ! Tu va pas l'affronter maintenant !*\n*Il n'est pas avec moi car...il est en...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Son expression s'assombrit.\n*...en réclusion. Quelque part. Pour devenir plus fort. Surement.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...amène toi.*")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 5:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = ("Vous entendez du bruit vers un stand de chamboule-tout, et voyez une clochette dépasser d'une poubelle proche.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("L'ennemi sort alors de sa cachette."
+                           "\nIl est habillé avec des vêtements colorés déchirés, de grandes chaussures rouges trouées, "
+                           "et un masque sur lequel est représenté un sourire béant."
+                           "\nVous frissonnez en voyant la folie sanguinaire dans les yeux de l'ennemi, a travers un trou dans le costume.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*BONJOUR-JOUR VOYAGEUR ! JE SUIS LE BOUFFON BOUFFON ! JE SUIS ICI-CI POUR AMUSER-MUSER MON ROI !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*ET TU SAIS CE QUI L'AMUSERAIT BEAUCOUP ? MOI JE SAIS ! MOI JE SAIS !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*CA SERAIT TA TETE AU BOUT D'UN PIQUE ET TES TRIPES DANS UN GATEAU !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*ET PUIS SI JE FAIT CA IL ME LAISSERA SUREMENT-REMENT REMONTER DANS LE CHATEAU PAS VRAI ? ET PUIS IL ME LAISSERA MANGER AUTRE CHOSE QUE CES VOYAGEURS SANS RIEN SUR LES OS !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*JOUONS ! JOUONS ! YAHAHAHA !*")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 6:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = "Vous entendez des bruits de pas venant de derriere vous.\nAlors que vous vous retournez, vous les entendez encore derriere vous."
+            liste_commentaire.append(commentaire)
+            commentaire = "*Bienvenue dans mon domaine, voyageur.*"
+            liste_commentaire.append(commentaire)
+            commentaire = ("Finalement, vous vous retournez une dernière fois et trouvez un enfant petit, mais d'allure robuste.\nUn chapeau de pirate est vissé sur sa tête."
+                          "\nAutour de lui se trouvent des batisses faites de vêtements et autres monceaux de métal.\nDe part et d'autres, des ossements humains jonchent le sol.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Enfin, mon domaine, plutot celui du Roi.*"
+                           "\n*Mais avec quelques amis, nous sommes arrivés a battre celui qui dominait cet étage.*"
+                           "\n*Il est d'ailleurs en plein changement de propriétaire !*"
+                           "\n*Je pense que c'est assez pour pouvoir dire que c'est le mien maintenant*."
+                           "\n*N'est-ce pas ?*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Vous le regardez, pensif. Cet enfant serait donc si agé ?")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Pas de réponses ?*"
+                           "\n*Tu dois être déterminé a en finir avec cet endroit.*"
+                           "\n*Mais regarde donc : Ici repose toutes les personnes qui m'ont suivie.*"
+                           "\n*Nous avons tenté de nous installer ici, mais le manque d'eau et de lumière nous a rendu fou.*"
+                           "\n*Enfin, nous...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Eux plutot. L'espèce de pendule vivante qui vivait ici possédait plusieurs reliques qui m'ont aidé a survivre.*"
+                           "\n*Mais que je suis impoli ! Je ne me suis même pas présenté.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Je suis le Prince des voleurs !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Intemporel, Plus riche que le plus riche des hommes, Libéré des chaines de la soif et de la satiété !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Et afin de conserver tout ces privilèges, je vais me battre contre toi voyageur.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Le Prince des Voleurs se tourne alors vers un des membres fantomatiques de l'audience, qui a presque l'air de..."
+                           "\n...sourire ?")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Trop de blabla...pas assez envoutant...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Il commence a marmoner en regardant le sol, puis vous regarde brusquement.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Pas grave ! Alors ? On commence ?*")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 7:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = ("Vous voyez un vieillard aux joues creusées et aux bras tailladés."
+                           "\nSon apparence ressemble a ces descriptions que l'on fait des ames damnées, tourmentées en enfer pour l'éternité."
+                           "\nCe n'est plus qu'une trace de lui meme maintenant.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*T-t-t-TOI !*\n*Tu est venu me TUER c'est ca ?*\n*Comme tout le monde dans ce foutu trou a rat !*\n*Quoique je ne me rapelle pas t'avoir fait jeter ici..*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("En le voyant vous parler, deux expressions vous viennent a l'esprit : En plein burnout, et Roi de pacotille."
+                           "\nSait il seulement qu'il ne parle pas a un des spectres qui hante ses cauchemards ?"
+                           "\nQu'il ne parle pas a une création de son cerveau malade, mais a une vraie personne ?")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*MAIS!*\n*Tu ne vas RIEN me faire !*\n*héhé... CLONE D'OBSIDIENNE ! VIENS A MOI !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Mais personne ne vient.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Tu... l'a tué ?*\n*HAHAHAHA ! TU ES FORT ! MAIS CELA NE SUFFIRA PAS !*\n*TOUS MES GENERAUX SONT SOUS MON COMMANDEMENT !*"
+                           "\n*ROI AMONRE ! MON FRERE ! VIENS ICI DEFENDRE TA FAMILLE !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Mais personne ne vient.                                            Seul le bruit des flammes répond a ses supplications.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Ah.... Ah... Je t'avais tout donné mon frère...misérable...*\n*CHEVALIER POURPRE !*\n*RIGOR MORTEX !*\n*AMENEZ VOUS BON SANG !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Mais personne ne vient.                              Répéter les mêmes actions en s'attendant a un résultat différent...")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Ah...AH....AH... STUPIDE CHEVALIER ! ET STUPIDE HORLOGE MAGIQUE !*\n\n*bouffon...s'il te plait...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Mais personne ne vient.                                                ...n'est-ce pas là la définition de la folie ? :)")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*m-m-mon bouffon n'est pas mort, i-i-il est trop fort pour ca...*\n*Il se sont tous retournés contre moi c'est ça ?*"
+                           "\n*HEIN ?*\n*JE ME SUIS FAIT TRAHIR ENCORE UNE FOIS ! HAHAHAHAHAHHHHHHH *")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*MAGE ! TU M'A CREE CET ENDROIT !*\n*NE ME TOURNE PAS LE DOS TOI AUSSI !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Une voix se met à résonner a l'interieur de la salle.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Ce type a tué mon apprenti. Je m'occuperais personnellement de son cas. Débrouillez vous avec ca.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Une armure d'or et de rubis magiques apparait sur le Roi Déchu. Une épée apparait a ses pieds.")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*HAHAHA!*\n*A nous deux maintenant ASSASSIN !* ")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 8:
-            commentaire = (""
-                           "\n"
-                           "\n")
+            commentaire = "Le vieil homme à la barbe blanche se lève et vient se positionner à quelques mètres de vous,\nHache de guerre dans une main, Grimoire dans l'autre."
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Sincèrement...*\n*Que dire de plus que ce qui n'a pas déjà été dit ?*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Tu as tué tout le monde ici.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Tu a affronté la quintessence de gardes loyaux, fusionnés en une conscience collective, figés dans l'éternité d'un rêve couleur encre...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...d'un mercenaire devenu chevalier par peur de la mort, bercé d'idéaux souillés par la triste réalitée de sa condition...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...d'un roi dur mais juste, tranformé en monstre a son insu, gardé captif par les liens de la famille...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...d'un faux génie, un trésor d'efforts sans résultats, un apprenti loyal brisé par ses propres démons...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...d'un homme du nord portant un masque de faux sourires, porté par l'espoir de revoir ses contrées...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...d'un représentant du peuple des bas-fonds du royaume, sacrifié au nom d'une loi brimée par le sang et l'injustice...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...et enfin d'un pitoyable Roi qui a, dans sa folie, changé le destin de millions de pauvre gens.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Tu as usé de ta lame sur la quasi-entieretée de la cour du Roi Déchu...*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*...et maintenant il ne te reste plus que le magicien, l'outil sans qui tout cela n'aurait été possible.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*Alors gardons cette conversation simple.*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*le Maitre Mage prend une grande inspiration.*"
+                           "\n*JE SUIS LE MAITRE MAGE, CREATEUR DE CES LIEUX. MA MAGIE COULE EN CHACUN DE CES MURS.*"
+                           "\n*JE SUIS L'APOGEE DE TA QUETE, L'OBJECTIF FINAL DE TA DESTINEE !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("Les hauts murs de l'arène se détruisent pour réveler les autres étages flottant dans un vide pourpre nacré, tournés vers vous deux."
+                           "\nLa foule fantomatique silencieuse se met a s'agiter dans tout les sens,"
+                           "\net sur un claquement de doigt du Maitre Mage, s'autorise a exprimer leur excitation de manière verbale."
+                           "\nElle se met a scander votre nom, et celui du Maitre Mage, dans un chaos et un brouhaha sans nom !"
+                           "\nLes spectateurs sont en pleine ébulition !\nVous reconnaissez les figures fantomatiques des différents boss dans les gradins !")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*NE FAISONS PAS ATTENDRE NOTRE PUBLIC !*")
+            liste_commentaire.append(commentaire)
+            commentaire = ("*ROCK AND ROLL !*")
+            liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 9:
             commentaire = (""
                            "\n"
@@ -1408,8 +1897,8 @@ class Affiche:
             commentaire = (""
                            "\n"
                            "\n")
-        print(commentaire)
-        Affichage.EntreePourContinuer()
+        for commentaire in liste_commentaire:
+            Affichage.IntroBoss(commentaire)
 
     def AfficheDescente(self):
         print("Vous passez la grille autrefois fermée et vous enfoncez encore plus profondément dans le Coliseum.")
@@ -1484,10 +1973,22 @@ class Affiche:
                            "\net le mot *Traitre* écrit a l'aide de différents type **d'encre** sur tout les murs de l'arène, telle est la vision qui vous attend en bas."
                            "\nVous voici au septieme étage du Coliseum , le bac à sable d'un esprit fou, torturé, paranoïaque.")
         elif Player.numero_de_letage == 8:
-            commentaire = ("Vous laissez derrière vous les cris de désespoirs, et vous concentrez sur le but."
-                           "\nDes murs propres, neufs, ornés de torches. Un sol de marbre, dépassant les gradins, montant au plafond. Et une place au dessus de la sortie,"
-                           "\nsur laquelle se trouve un vieil homme à la barbe blanche, soignée. Voila ce que vous trouvez en bas."
+            commentaire = ("Vous laissez derrière vous les cris de désespoirs, et vous concentrez sur votre but."
+                           "\nDes murs propres, neufs, ornés de torches. Un sol de marbre, dépassant les gradins, montant au plafond.\nEt une place au dessus de la sortie,"
+                           " sur laquelle se trouve un vieil homme à la barbe blanche, soignée.\nVoila ce que vous trouvez en bas."
                            "\nVous voici au huitième étage du Coliseum , une arène digne de ce nom pour un affrontement avec son créateur.")
+        elif Player.numero_de_letage == 9 and not Player.invitation_received:
+            print("Derrière, vous voyez un long couloir.\nUne vieille porte rouillée a votre gauche vous intrigue,"
+                           " mais pas plus que ca.")
+            Affichage.EntreePourContinuer()
+            print("Sur le chemin menant a la fin du couloir, vous voyez un petit trou dans les murs."
+                           "\nA l'interieur, vous apercevez le mot coliseum reposant sur une sorte d'épée,\navec un genre de scintillement au dessus du i."
+                           "\nEn dessous, le mot O B S E R V A T O R I U M est gravé au couteau, et un nombre en dessous de chaques lettre."
+                           "\nCa fait un nombre sacrément long !")
+            Affichage.EntreePourContinuer()
+            commentaire = ("Mais vos pensées sont interrompues par le chant des oiseaux que vous entendez a quelques metres."
+                           "\nVous courrez en direction de la sortie, et retrouvez l'herbe verte, les batiments au loin, et le grillage"
+                           " caractéristique entourant le Coliseum.\nVous êtes sorti vivant !")
         elif Player.numero_de_letage == 9:
             commentaire = ("Vous laissez derrière vous la sortie et les promesses de vie facile à la poursuite de la véritée."
                            "\nUn étage étrange, ou la fabrique de la réalitée semble venir mourir a vos pied."
@@ -1546,6 +2047,7 @@ class PlayerCaracteristics:
         self.red_coin_recu_par_extermination = False
         self.redcoin_bought = False
         self.number_of_tirage = 0
+        self.invitation_received = False
 
     def UseCharacterForInitCaracteristics(self, caracteristiques):
         self.nom_du_personnage = caracteristiques[0]
@@ -1707,14 +2209,13 @@ class PlayerCaracteristics:
         Affichage.EntreePourContinuer()
 
 
-
 class Observe:
 
     def __init__(self):
         pass
 
     def SeeSomething(self):
-        if Player.numero_de_letage==1:
+        if Player.numero_de_letage == 1:
             DoTheThing()  # bibliotheque de gros sorts (recuperer les sorts consignés)
         elif Player.numero_de_letage == 2:
             DoTheThing()  # Fontaine redonne pv 3 fois
@@ -1995,6 +2496,108 @@ def GetPersonnageValideChoice(caracteristiques):
     return int(input("\nChoisissez une action avec le nombre correspondant : "))
 
 
+def GetRandomItemFromList(liste):
+    number_of_item = len(liste)
+    numero_aleatoire = random.randint(0, (number_of_item - 1))
+    return liste[numero_aleatoire]
+
+
+def open_image(chemin_vers_limage):
+    # Créer une fenêtre Tkinter
+    root = tk.Tk()
+
+    # Créer une image Tkinter à partir du fichier
+    image = PhotoImage(file=chemin_vers_limage)
+
+    # Créer un canevas pour afficher l'image
+    canvas = tk.Canvas(root, width=image.width(), height=image.height())
+    canvas.pack()
+    canvas.create_image(0, 0, anchor=tk.NW, image=image)
+
+    # Boucle principale Tkinter
+    root.mainloop()
+
+
+def GetChoiceRecup():
+    print("     -=[ Outil de Récupération de Données ]=-")
+    print("\nInserez le numéro de l'adresse de l'information souhaitée,\net laissez notre programme récuperer ces données pour vous !")
+    print("Plus besoin de paniquer lorsque l'on supprime d'anciennes données sans le vouloir !")
+    print("Vos données n'auront plus de secret pour vous !")
+    return int(input("\nNuméro de l'adresse ipv4 : "))
+
+
+def ShowRecup():
+    # images doivent etre en png
+    while True:
+        try:
+            choix = GetChoiceRecup()
+            ClearConsole()
+            break
+        except ValueError:
+            ClearConsole()
+    Affichage.AfficheLongChargement()
+    if choix in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+        if choix == 1:
+            nom_de_limage = "Feu"
+        elif choix == 1:
+            nom_de_limage = "Foudre"
+        elif choix == 2:
+            nom_de_limage = "Glace"
+        elif choix == 3:
+            nom_de_limage = "Terre"
+        elif choix == 4:
+            nom_de_limage = "Physique"
+        elif choix == 5:
+            nom_de_limage = "Sang"
+        elif choix == 6:
+            nom_de_limage = "Ame"
+        elif choix == 7:
+            nom_de_limage = "Indice1"
+        elif choix == 8:
+            nom_de_limage = "Indice2"
+        elif choix == 9:
+            nom_de_limage = "Indice3"
+        elif choix == 10:
+            nom_de_limage = "Invitation"
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        chemin_de_limage = dir_path + "\\stuff\\"
+        open_image(f"{chemin_de_limage}{nom_de_limage}.png")
+    else:
+        print("                           Donnée Récupérée :")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15szfdaqsxsdfadza33e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5fzr59168126s1ef6s5g12r65313s0fe6zfesrfesrgfefsef16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15zadazdzadzsdz6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6adzdazdadazda3e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3th4d9hd1g6e6d52u964kj,9u8njgh6fd5r1s6j1gu85yhe653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wgseh8g71sr6hju9i6mo1ikh6ugjhy1tdg9rs6f216rrj82tu9j61i9r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+        print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
+    Affichage.EntreePourContinuer()
+
+
 def GetChoixPersonnageChoice():
     print("     -={ Personnages }=-")
     print("\n1 - Retour")
@@ -2010,6 +2613,119 @@ def InitialiseDictionnaireDePersonnageAAfficher():
         numero_du_personnage += 1
 
 
+def ShowTutorial():
+    PlayMusic("tutorial")
+    print("                    { Tutoriel }")
+    print("             { Partie 1 : Introduction }")
+    print("\nBienvenue dans le Coliseum ! Prononcé Co-li-zé-oum, ca veut dire Colisée en Latin.")
+    print("Vous êtes sans doute excités a l'idée de vous plonger dans les méandres de cette batisse légendaire !")
+    print("Mais avant toute chose, quelques bases à connaitre.")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("              { Partie 2 : Histoire }")
+    print("\nLe coliseum est une batisse ancienne, commandée par un roi fou a son magicien pour enfermer")
+    print("les gens de son peuple qu'il croyait dangereux. Au fur et a mesure des années, de plus en plus")
+    print("d'innoncent se sont retrouvé dans les arènes sordides, a combattre des créations monstrueuses de chair et de sang.")
+    print("Jusqu'à un beau matin de printemps ou le Roi, dans un généreux élan de folie et de paranoïa, décida de se jeter dans")
+    print("sa création, accompagnée de toute sa cour."
+          "\nDes années plus tard, la batisse sera déclarée dangereuse par les gouvernements,")
+    print("et plus personne ne se frottera aux étages malicieux du Coliseum, qui changera alors de nom et de structure...")
+    print("...mais c'est une histoire pour plus tard :)")
+    print("En attendant, plusieurs personnages se seront attaqué au tombeau du Roi fou, pour diverses raisons,"
+          "\net c'est eux que vous allez pouvoir controller !")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("             { Partie 3 : Bien Commencer }")
+    print("\nLe coliseum se compose de plusieurs étages. Pour naviguer dans les étages inferieurs, vous devez")
+    print("d'abord battre le boss de l'étage en cours. Seulement, c'est le plus souvent un individu sacrément puissant !")
+    print("Comment faire ? Eh bien... devenir plus fort !")
+    print("Chaques monstres tués vous rapoorte une amélioration de certaines de vos caractéristiques, et un peu de golds.")
+    print("Vous pouvez ensuite échanger vos gold contre des objets chez le marchand de l'étage.")
+    print("Et une fois que vous serez dotés de meilleurs objets, améliorés avec de meilleurs caractéristiques, et")
+    print("équ00000ipés de meilleqdznqdurs tttAAAaaaalEnnnttsss...z,lqnd.......")
+    print("Vous verrez que le boss de l'étage ne sera plus un mur, mais un simple obstacle sur votree chemin ! ")
+    print("Ainsi, il faut tuer des monstres, acheter des objets, tuer le boss, descendre, et répéter l'opération jusqu'au")
+    print("dernier étage : le HdUiIxTiIèEmMeE !")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("         { Partie 4a : Les menus : Navigation }")
+    print("\nVous pouvez vous diriger dans les menus a l'aide des nombres, qui sont affectés a chaques actions.")
+    print("Par exemple, dans le menu principal, vous pouvez commencer une nouvelle aventure avec 1,")
+    print("et continuer une partie déja sauvegardée avec 2. Vous pouvez aussi lancer le tutoriel avec 3")
+    print("(ce que vous avez faitpl ou ezdnore landzd leefnzos pefisp avevevevc WWWWXXXWWW.")
+    print("\nEnfin bref, chaque actions sont affectées a un numéro.")
+    print("Et n'ayez pas peur ! Si vous rentrez un mauvais numéro, , une chaine de caractère ou même rien du tout,")
+    print("le programme continuera normalement sans planter, et se contentera de vous redemander votre choix !")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("          { Partie 4b : Les menus: Utilité }")
+    print("\nGrace aux menus, vous pouvez naviguer dans vos options possibles pour chaques situations.")
+    print("Le menu de l'étage actuel du Coliseum permet ainsi de:")
+    print(" - Combattre un monstre (attention, le nombre de monstre par étage est limité ! ne fuyez pas tout vos commbats !)"
+          "\n- Combattre un boss / Descendre a l'étage inferieur (si le boss est battu)"
+          "\n- Acheter des items chez le marchand "
+          "\n- etc")
+    print("Un même nombre change d'action effectuée selon la situation actuelle.")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("            { Partie 5 : Les Combats }")
+    print("\nLe Coliseum s'explore en deux temps : "
+          "\nLe temps de repos, ou menu d'étage, qui permet de choisir ses actions"
+          "\nLe temps de combat, pour devenir plus fort ou battre le boss.")
+    print("\nEn temps de combat, tout se déroule au tour par tour.")
+    print("En premier lieu s'effectuent les actions de début de combat.")
+    print("Ensuite, vous choisissez un menu parmis ceux disponibles.")
+    print("Juste après, vous choisissez une action dans le menu affiché.")
+    print("Votre action est effectuée, puis celle de l'ennemi a la suite.")
+    print("Les différents effets d'altérations d'états s'appliquent")
+    print("Et on recommence jusqu'a ce qu'un des deux participant meure ou fuie.")
+    print("\ngardez a l'esprit que vos points de vie représentent la vitalité qu'il vous reste,"
+          "\nEt que si ils tombent a zéro, c'est terminé.\nCepandant, les points de mana servent juste"
+          "a lancer des sorts, et peuvent descendre a zéro sans réelles conséquences.")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("         { Partie 6a : Foire aux Questions }")
+    print("\n*Dans le menu de choix des personnage, il y a des stigmas. C'est quoi ?*")
+    print(" - Ce sont des passifs intrinsèques aux personnages, liés a leur situation ou leur experience,"
+          " qui s'activent avant, pendant, ou apres un combat.")
+    print("\n*J'ai vu qu'on pouvait utiliser des redcoins dans le menu d'étage. C'est quoi ? Ca fait quoi ?*")
+    print("˙ǝɹı̣ɹɔ́ǝp ǝp zǝuǝʌ snoʌ ǝnb nuǝɯ ǝן suɐp ́ǝʇou ʇsǝ uı̣oɔpǝꓤ uǝ ʇnoɔ uos ǝnb ı̣suı̣ɐ sʇuǝןɐʇ ǝnbɐɥɔ ǝp ǝpoɔ ǝ"
+          "ן ʇƎ ˙ǝɹʇnɐ ʇǝ 'sǝpnʇı̣ʇdɐ ' sǝnbɐʇʇɐ sǝןןǝʌnou ǝp ɹǝnboןq́ǝp ʇuǝʌnǝd sʇuǝןɐʇ sǝƆ ˙npı̣ʌı̣puı̣'ן ǝp sdɹoɔ ǝן suɐp"
+          " 'sʇuǝןɐʇ sǝ́ǝןǝddɐ 'sǝןɐı̣ɔ́ǝds sǝɔuǝʇ́ǝdɯoɔ sǝp ǝɹʇı̣ɐu ʇı̣ɐɟ ')sǝɹɟɟı̣ɥɔ ǝp ǝʇı̣ns ǝun ɹɐd ́ǝnbı̣puı̣ 'ןɐɹ́ǝúǝƃ uǝ("
+          " sı̣ɔ́ǝɹd ǝɹpɹo un suɐp ɐuɐɯ np uoı̣ʇɐןnɔɹı̣ɔ ɐן ɐ sǝ́ǝןdnoɔ ' ʇǝ sdɹoɔ np sǝuoz sǝp ɹǝןnɯı̣ʇs ǝp ʇǝɯɹǝd ǝpı̣nbı̣ן ǝƆ"
+          " ˙uı̣ǝs uos uǝ nuǝʇuoɔ ǝɹoןoɔuı̣ ǝpı̣nbı̣ן np ʇuǝı̣ʌ ʇǝ 'ǝɹı̣ɐןı̣ɯı̣s ʇsǝ suı̣oƆpǝꓤ un'p ɹnǝןɐʌ ɐꓶ ˙sǝʇı̣ɐɟ ʇuǝı̣ɐʇ́ǝ sǝןןǝ"
+          " sǝןןǝnbsǝן suɐp nɐı̣ɹ́ǝʇɐɯ np ́ǝʇı̣soı̣ɔ́ǝɹd ɐן ǝp ʇı̣ɐuǝʌ ǝnbı̣ʇuɐ ǝɯoꓤ ɐן ǝp sǝɔ̀ǝı̣d sǝp ɹnǝןɐʌ ɐꓶ")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("        { Partie 6b : Foire aux Questions }")
+    print("\n*Ya un type bizarre qui execute les rochemikazes. C'est qui ?*")
+    print(" - C'est Alfred.")
+    print("\n*Ya des types de sorts et de techniques différentes qui inflige des effets élémentaires différents, non ?*")
+    print(" - C'est exact. Par exemple, la glace peut geler, ce qui fait qu'une ennemi prendra 50% de dégâts supplémentaire.")
+    print("\n*...et le reste ? Les autres altérations d'états ? Et les effets des talents ? Et les effets des stigmas ?\nVous n'avez rien expliqué !*")
+    print(" - C'est aussi exact ! Le fun du Coliseum viens du fait que vous êtes lachés dans un environnement étranger, sans guide,")
+    print("et avec le moins d'expliquations possibles !"
+          "\nAlors prenez un papier, un crayon, et notez au fur et a mesure les informations que vous découvrirez !")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("            { Partie 7 : Bonne chance ! }")
+    print("\nMaintenant, vous savez tout ce qu'il y a a savoir pour débuter une partie.")
+    print("Alors qu'attendez vous ? Ne soyez pas timide ! Il y a une montagne de chose a faire et a découvrir !")
+    print("Lancez donc une partie sans attendre, et dans l'échec apprenez a réussir !")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    PlayMusic("start")
+    
+
+
 def MenuDeDemarrage(Player):
     ClearConsole()
     InitialiseDictionnaireDePersonnageAAfficher()
@@ -2021,7 +2737,7 @@ def MenuDeDemarrage(Player):
                 # affiche le menu
                 choix = GetMenuPrincipalChoice()
                 ClearConsole()
-                if choix in [1, 2, 3, 1521951822120151892113]:
+                if choix in [1, 2, 3, 24, 1521951822120151892113]:
                     break
             except ValueError:
                 ClearConsole()
@@ -2049,6 +2765,11 @@ def MenuDeDemarrage(Player):
         #Observatoire de musique
         elif choix == 1521951822120151892113:
             ShowObservatorium()
+
+        elif choix == 24:
+            mixer.quit()
+            ShowRecup()
+            PlayMusic("start")
 
 
 def ShowObservatorium():
@@ -2089,8 +2810,8 @@ def ShowMenuObservatorium():
 def GetChoiceMenuColiseum():
     print(f"             -=[ Etage {Player.numero_de_letage} ]=-"
           "\n\n          ~~{ Combat }~~"
-          f"\n     1 - Affronter un monstre ({Player.nombre_dennemis_a_letage} restants)"
-          f"\n     2 - {Player.commentaire_boss}"
+          f"\n      1 - Affronter un monstre ({Player.nombre_dennemis_a_letage} restants)"
+          f"\n      2 - {Player.commentaire_boss}"
           "\n\n          ~~{ Interraction }~~"
           "\n      3 - Interragir avec le Marchand"
           "\n      4 - Observer l'Etage (WIP)"
@@ -2126,7 +2847,6 @@ def DoFight():
     #plus dennemi a combattre
     else:
         Affichage.AffichePlusDennemis()
-        Player.red_coin_recu_par_extermination = True
 
 
 def DoBossFight():
@@ -2145,7 +2865,7 @@ def GoDown():
     Player.numero_de_letage += 1
     RemiseAZeroDesVariablesPourProchainEtage()
     Affichage.AffichageDescriptionEtage()
-    if Player.numero_de_letage == 11 :
+    if Player.numero_de_letage == 11 or (Player.numero_de_letage == 9 and not Player.invitation_received) :
         game_in_session = False
     else:
         game_in_session = True
@@ -2156,17 +2876,17 @@ def DoRedcoin():
     while True:
         while True:
             try:
-                print("     -={ RedCoin }=-   /96219874637545247624572858712286971176")
-                print("                      /742698563215698521568521585215656256665     ")
-                print("1 - Retour           /7896545685698742315698522685256985632596   ")
+                print("     -={ RedCoin }=-   /9SERVICEDERECUPERATIONDEDONNEES7117764")
+                print("                      /74269856321569852156AOUVRIRVIALEMENU556     ")
+                print("1 - Retour           /7896545685698742315698522685256PRINCIPAL   ")
                 print("1257 - Affinité de F/52565265163512ERRORERRORERRORERRORERROR98 ")
                 print("5675 - Affinité de /487965651268416535498165319651965ERRORROOR  ")
-                print("9731 - Affi_______/7895412156985116484156341653196516519651988  ")
+                print("9731 - Affi_______/789ERREUR:DONNESMANQUANTES96515866519651988  ")
                 print("7563 - Af/78451235896652567841961561653163165ERRORERRORERROR58   ")
-                print("8240 - A/78456213657898456532698562598416368416358614896589465 ")
-                print("6______/789528935651468251534253465131651650165100651651313135 ")
-                print("/5698994524527/==================================\9885ERRORE88 ")
-                print("1569899452452/alent à débloquer avec le nombre cor\84522456852")
+                print("8240 - A/78456213657VEUILLEZCONTACTERLESERVICEINFORMATIQUE9465 ")
+                print("6______/789OUUTILISEZNOTRESERVICEDERECUPERATIONDEDONNEES313135 ")
+                print("/5698994524527/==================================\9AU5NUMERO58 ")
+                print("1569899452452/alent à débloquer avec le nombre cor\8SUIVANT:24")
                 choix = int(input("                              "))
                 ClearConsole()
                 if choix in ANNUAIREDECHOIXPOURREDCOIN or choix == 1:
@@ -2184,12 +2904,19 @@ def DoRedcoin():
             or
             (Player.nombre_de_red_coin >= cout_du_talent) and (talent_necessaire_pour_obtention in Player.talents_possedes) and (talent not in Player.talents_possedes)
         ):
-            Player.talents_possedes.append(talent)
-            Player.nombre_de_red_coin -= cout_du_talent
-            print("Vous buvez le liquide incolore contenu dans les redcoins et faites circuler votre mana comme indiqué par le code .")
-            print(f"Vous gagnez le talent [{talent}] !")
-            Affichage.EntreePourContinuer()
-            CheckForFusionOfTalent(talent)
+            if Player.stigma_negatif != "Incompatible":
+                Player.talents_possedes.append(talent)
+                Player.nombre_de_red_coin -= cout_du_talent
+                print("Vous buvez le liquide incolore contenu dans les redcoins et faites circuler votre mana comme indiqué par le code .")
+                print(f"Vous gagnez le talent [{talent}] !")
+                Affichage.EntreePourContinuer()
+                CheckForFusionOfTalent(talent)
+            else:
+                Player.nombre_de_red_coin -= cout_du_talent
+                print("Vous buvez le liquide incolore contenu dans les redcoins et faites circuler votre mana comme indiqué par le code...")
+                print("...avant de vomir violemment tout le contenu de votre estomac.")
+                print("On dirait que votre corps n'est pas compatible avec les redcoins.")
+                Affichage.EntreePourContinuer()
 
     
 def CheckForFusionOfTalent(talent):
@@ -2275,12 +3002,14 @@ def CheckForFusionOfTalent(talent):
             Player.talents_possedes.append(talent)
             commentaire += (f"\nVous gagnez le talent [{talent}] !")  
     if talent in ["Rapide", "Grand Froid", "Réflex", "Conditions Limites", "Aura de Feu", "Poussière de Diamants"]:
-        if (("Rapide" in Player.talents_possedes) and
-            ("Grand Froid" in Player.talents_possedes) and
-            ("Réflex" in Player.talents_possedes) and
-            ("Conditions Limites" in Player.talents_possedes) and
-            ("Aura de Feu" in Player.talents_possedes) and
-            ("Poussière de Diamants" in Player.talents_possedes)):
+        if (
+                ("Rapide" in Player.talents_possedes) and
+                ("Grand Froid" in Player.talents_possedes) and
+                ("Réflex" in Player.talents_possedes) and
+                ("Conditions Limites" in Player.talents_possedes) and
+                ("Aura de Feu" in Player.talents_possedes) and
+                ("Poussière de Diamants" in Player.talents_possedes)
+        ):
             commentaire += ("\nLes talents Rapide, Grand Froid,"
                             " Réflex, Conditions Limites, Aura de Feu"
                             " et Poussière de Diamants interragissent dans votre corps et "
@@ -2339,14 +3068,6 @@ def CheckForFusionOfTalent(talent):
         Affichage.EntreePourContinuer()
 
 
-
-
-
-
-
-
-
-
 Save = SaveManagement()
 Player = PlayerCaracteristics()
 Trader = TraderUsage()
@@ -2370,11 +3091,11 @@ while game_in_session:
             ClearConsole()
     # application de l'action
     if choix == 1:
-        DoFight() #Have to hook up to Battle
+        DoFight()
     elif choix == 2:
         #combat contre boss
         if not Player.boss_battu:
-            DoBossFight() #Have to hook up to Battle
+            DoBossFight()
         #descente au niveau inferieur
         else:
             game_in_session = GoDown() 
@@ -2394,7 +3115,7 @@ while game_in_session:
     elif choix == 7:
         Save.SaveTheGame() #DONE
 PlayMusic("battle_win")
-print("Vous avez gagné !")
+print("Vous avez gagné le jeu !")
 Affichage.EntreePourContinuer()
 
 
@@ -2408,9 +3129,5 @@ Affichage.EntreePourContinuer()
 
 
 
-# faire tutorial
-# moyen d'afficher les cartes de redcoins
-# description etage
-# descrpition boss
 
-# faire les observations (non)où
+

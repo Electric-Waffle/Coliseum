@@ -2034,7 +2034,7 @@ class Model:
         #ANNUAIRE DE CARACTERISTIQUES ATTAQUES GENERALES ET SPECIALES
         self.annuaire_de_caracteristique_des_techniques_generales_de_monstre = {
             # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
-            "Poing de Feu": [80, 8, 30, 5, 25, "L'ennemi lance un poing enflammé vers vous, laissant derrière lui une traînée de flammes...",
+            "Poing de Feu": [80, 5, 30, 5, 25, "L'ennemi lance un poing enflammé vers vous, laissant derrière lui une traînée de flammes...",
                        "...mais son poing s'écrase dans le vide, les flammes se dissipant dans l'air.",
                        "...et son poing enflammé vous frappe, provoquant une brûlure vive !",
                        "...et son poing enflammé s'abat violemment, engendrant une explosion de flammes dévastatrice !!",

@@ -54,38 +54,6 @@ LISTEDEPERSONNAGE = {
         8,  # int taux esquive
         0,  # int gold
     ],
-    "Dylan": [  # char
-        "Dylan",
-        ("Bobo Bourgeois blanc d'Extreme droite, éduqué a la dure par son papa fan de moto, et sa maman qui est aussi une moto. (il a été adopté)"
-         "\n           S'est fait volé son gouter par un noir, et cherche dans le Coliseum la puissance de prendre sa revanche."),  # char
-        "Forces Obscure",  # char stigma +
-        "Agent d'Entretien",  # char stigma -
-        "Aucun",  # char stigma *
-        [
-            "Attaque Légère",
-            "Corne Argile"
-        ],  # char list technic
-        [
-            "Tir Arcanique",
-        ],  # char list sorts
-        {
-            "Hydromel": 3,
-        },  # char dict of int items
-        [
-            "Affinitée de Terre"
-        ],  # char list
-        40,  # int vie
-        20,  # int mana
-        400,  # int force
-        0,  # int intelligence
-        0,  # int defence
-        30,  # int taux coup crit
-        8,  # int degat coup crit
-        8,  # int taux sort crit
-        15,  # int degat sort crit
-        15,  # int taux esquive
-        15000,  # int gold
-    ],
     "Elma": [  # char
         "Elma",
         ("Quinquagénère, Voleuse inarrêtable, surnommée Princesse de Suie, a la tête d'un gang de sans-abris."

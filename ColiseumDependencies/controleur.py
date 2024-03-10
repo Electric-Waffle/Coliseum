@@ -796,14 +796,24 @@ class Control:
         if self.modele.stigma_joueur_positif == ["Endurci"]:
             bonus_stigma = -100
         self.modele.CHANCEBONUSJOUEURPARALYSE = bonus_talent + bonus_stigma
-        # pourcentage de degat bonus contre le joueur
+        # pourcentage de degat bonus de technique contre le joueur
         bonus_gel = 0
         if self.modele.est_gele:
             bonus_gel = 50
         bonus_stigma = 0
         if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
             bonus_stigma = 25
-        self.modele.DEGATBONUSDUMONSTRE = bonus_gel + bonus_stigma
+        bonus_force = self.modele.monstre_points_de_force * 10
+        self.modele.DEGATTECHNIQUEBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force
+        # pourcentage de degat bonus de sort contre le joueur
+        bonus_gel = 0
+        if self.modele.est_gele:
+            bonus_gel = 50
+        bonus_stigma = 0
+        if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
+            bonus_stigma = 25
+        bonus_force = self.modele.monstre_points_de_intelligence * 10
+        self.modele.DEGATSORTBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force
         # pourcentage de se faire enflammer (pas de modificateurs pour l'instant)
         self.modele.CHANCEBONUSJOUEURENFEU = 0
         # pourcentage de se faire geler (pas de modificateurs pour l'instant)
@@ -934,7 +944,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 70
+            self.modele.monstre_points_de_vie_max = 20
             self.modele.monstre_liste_actions = {
                 "Coup de Boule": "Technique",
                 "Etranglement": "Technique", # rend muet
@@ -949,7 +959,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 60
+            self.modele.monstre_points_de_vie_max = 20
             self.modele.monstre_liste_actions = {
                 "Tout Feu Tout Flamme": "Sort", # combo electrique, pour le feu [x]
                 "Feu Regénérateur": "Sort", # soin
@@ -964,7 +974,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 80
+            self.modele.monstre_points_de_vie_max = 35
             self.modele.monstre_liste_actions = {
                 "Frappe Lourde": "Technique",  # gros degat, peu chance toucher
                 "Poing Eclat": "Technique",  # rend blesse
@@ -977,10 +987,10 @@ class Control:
             self.modele.stigma_monstre_positif = "Malédiction"
             self.modele.stigma_monstre_negatif = "Astralien"
             self.modele.monstre_points_de_force = 0
-            self.modele.monstre_points_de_intelligence = 3
+            self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 65
+            self.modele.monstre_points_de_vie_max = 25
             self.modele.monstre_liste_actions = {
                 "Froideur d'Outretombe": "Sort", # gele
                 "Claquement de Foudre": "Sort", # paralyse
@@ -995,12 +1005,11 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 70
+            self.modele.monstre_points_de_vie_max = 25
             self.modele.monstre_liste_actions = {
                 "Attaque Légère": "Technique",
                 "Durcissement Argilite": "Technique", # augmente def
-                "Tir Arcanique": "Sort",
-                "Soin": "Sort"
+                "Tir Arcanique": "Sort"
             }
             self.modele.monstre_recompense = {"Vie": 10, "Mana": 10, "Gold": 45 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Métroïde":
@@ -1263,7 +1272,7 @@ class Control:
                 "Attaque Lourde": "Technique",
                 "Durcissement Calcaire": "Technique", # augmente def
                 "Bombe Arcanique": "Sort",
-                "Sonata": "Sort", #soin
+                "Sonata Pitoyable": "Sort", #soin
                 "Eveil de Runes": "Sort" # differents effet selon la rune invoquée [x]
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 50 + gold_bonus_par_etage, "Mana max": 10}
@@ -2557,8 +2566,10 @@ class Control:
                     )
                 elif cle == "Tirage":
                     self.tirage.UseTirage()
+                    commentaire = "La boite disparait..."
                 elif cle == "Méga Tirage":
                     self.tirage.UseMegaTirage()
+                    commentaire = "La boite disparait..."
                 elif cle == "Gold":
                     nombre_de_gold_gagne = self.modele.monstre_recompense[cle]
                     if self.modele.stigma_joueur_negatif == "Chrometophobia":
@@ -3243,9 +3254,9 @@ class Control:
                                 (pourcentage_saignee / 100)
                                 * self.modele.monstre_points_de_vie_max
                             )
+                            degat_saignee = self.AppliqueLimitationSaignee(degat_saignee)
                             # application de la saignee
                             self.modele.monstre_points_de_vie -= degat_saignee
-                            degat_saignee = self.AppliqueLimitationSaignee(degat_saignee)
                             soin_saignee = degat_saignee
                             soin_saignee += round(
                                 (self.modele.SOINSSAIGNEE / 100) * degat_saignee
@@ -4140,22 +4151,30 @@ class Control:
                     self.modele.utilise_feuille_jindagee = True
                     self.modele.utilise_feuille_jindagee_nombre_tour += 5
                     soin = round(self.modele.points_de_vie_max*0.03)
+                    if soin < 3:
+                        soin = 3
                     commentaire_item = f"Vous reprenez {soin} pv pendant 5 tours !"
                 elif nom_de_litem == "Fruit Jindagee":
                     self.modele.utilise_fruit_jindagee = True
                     self.modele.utilise_fruit_jindagee_nombre_tour += 5
                     soin = round(self.modele.points_de_vie_max*0.06)
+                    if soin < 6:
+                        soin = 6
                     commentaire_item = f"Vous reprenez {soin} pv pendant 5 tours !"
             elif nom_de_litem in ["Feuille Aatma", "Fruit Aatma"]:
                 if nom_de_litem == "Feuille Aatma":
                     self.modele.utilise_feuille_aatma = True
                     self.modele.utilise_feuille_aatma_nombre_tour += 5
                     soin = round(self.modele.points_de_mana_max*0.03)
+                    if soin < 3:
+                        soin = 3
                     commentaire_item = f"Vous reprenez {soin} pm pendant 5 tours !"
                 elif nom_de_litem == "Fruit Aatma":
                     self.modele.utilise_fruit_aatma = True
                     self.modele.utilise_fruit_aatma_nombre_tour += 5
                     soin = round(self.modele.points_de_mana_max*0.06)
+                    if soin < 6:
+                        soin = 6
                     commentaire_item = f"Vous reprenez {soin} pm pendant 5 tours !"
             elif nom_de_litem in ["Crystal Elémentaire"]:
                 element_aleatoire = random.randint(1, 4)
@@ -4524,6 +4543,7 @@ class Control:
                     self.GetMonsterChoice()
                 )
                 # Effectue les differentes actions monstre
+                self.modele.type_daction_du_monstre = type_de_laction_du_monstre
                 if type_de_laction_du_monstre == "Sort":
                     self.UseMonsterMagic(nom_de_laction_du_monstre)
                 elif type_de_laction_du_monstre == "Technique":
@@ -5157,9 +5177,14 @@ class Control:
         self.vue.AfficheInvoquationCanope(commentaire_description, commentaire_vase, commentaire_effet)
 
     def AppliqueDegatsBonusDuMonstreContreLeJoueur(self, degat):
-        degat += round(
-            (self.modele.DEGATBONUSDUMONSTRE / 100) * degat
+        if self.modele.type_daction_du_monstre == "Sort":
+            degat += round(
+            (self.modele.DEGATSORTBONUSDUMONSTRE / 100) * degat
         )
+        else:
+            degat += round(
+                (self.modele.DEGATTECHNIQUEBONUSDUMONSTRE / 100) * degat
+            )
         degat -= round(
             (self.modele.BONUSREDUCTIONDEGATSURJOUEUR / 100) * degat
         )
@@ -7039,7 +7064,7 @@ class Control:
             self.modele.est_paralyse = True
             self.modele.est_paralyse_nombre_tour += nombre_tour
 
-    def AppliqueLimitationSaignee(degat_saignee):
+    def AppliqueLimitationSaignee(self, degat_saignee):
         if degat_saignee > 50:
             degat_saignee = 50
         return degat_saignee

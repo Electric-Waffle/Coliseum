@@ -1205,6 +1205,7 @@ class Model:
         
 
         # Placeholdeur pour les caractéristiques du monstre
+        self.type_daction_du_monstre = "None"
         self.vie_du_monstre_pour_sables_du_temps_actuel = 0
         self.vie_du_monstre_pour_sables_du_temps_tour_avant = 0
         self.vie_du_monstre_pour_sables_du_temps_a_utiliser = 0
@@ -1590,7 +1591,7 @@ class Model:
             "Carotte Magique",
             "Soin Avancé",
             "Engloutis",
-            "Sonata",
+            "Sonata Pitoyable",
             "Rejuvenation",
             "Sonata Miséricordieuse",
             "Sonata Sincère",
@@ -1801,7 +1802,7 @@ class Model:
                                             "...et les flammes vous brûlent avec une intensité infernale, vous laissant marqué par leur chaleur !",
                                             "...et les flammes vous engloutissent dans un brasier de destruction, vous réduisant en cendres dans un spectacle apocalyptique !!",
                                             4, 5],
-            "Claquement de Foudre": [82, 13, 10, 4, 10, "L'ennemi invoque un éclair en claquant des doigts, le dirigeant droit vers vous avec un geste rapide...",
+            "Claquement de Foudre": [80, 6, 10, 4, 10, "L'ennemi invoque un éclair en claquant des doigts, le dirigeant droit vers vous avec un geste rapide...",
                                                 "...mais votre agilité vous permet d'éviter l'éclair, le laissant frapper le sol sans vous toucher.",
                                                 "...et l'éclair vous frappe avec une décharge électrique, vous infligeant des dégâts d'électricité !",
                                                 "...et l'éclair vous cible avec précision, vous laissant secoué par sa puissance électrique !!",
@@ -1816,7 +1817,7 @@ class Model:
                                             "...et le rituel invoque des éclairs célestes pour vous punir, vous infligeant des dégâts d'électricité !",
                                             "...et le rituel critique invoque la colère divine, vous paralysant dans une tourmente d'éclairs et de tonnerre !!",
                                             3, 0],
-            "Froideur d'Outretombe": [90, 7, 40, 5, 15, "L'ennemi canalise un froid glacial de l'outretombe, enveloppant tout dans un gel éternel...",
+            "Froideur d'Outretombe": [90, 5, 40, 5, 15, "L'ennemi canalise un froid glacial de l'outretombe, enveloppant tout dans un gel éternel...",
                                     "...mais vous esquivez habilement l'attaque, vous échappant au piège de la glace.",
                                     "...et vous êtes gelé jusqu'aux os, vous laissant engourdi et vulnérable !",
                                     "...et une force sinistre vous enserre dans un étau de gel mortel !!",
@@ -1861,12 +1862,12 @@ class Model:
                                 "...et le houken vous balaie d'un coup puissant, vous laissant marqué par son passage !",
                                 "...et une lame d'acier vous coupe en deux dans un éclat de lumière divine !!",
                                 0, 0],
-            "Poing de Mana": [90, 8, 30, 5, 0, "L'ennemi canalise le pouvoir du mana dans son poing, déclenchant un coup explosif...",
+            "Poing de Mana": [90, 6, 25, 4, 0, "L'ennemi canalise le pouvoir du mana dans son poing, déclenchant un coup explosif...",
                                     "...mais vous parvenez à contrer l'attaque, dissipant l'énergie du poing de mana.",
                                     "...et le poing de mana vous frappe avec une force magique, vous laissant secoué et désorienté !",
                                     "...et une explosion d'énergie vous consume dans un tourbillon de mana !!",
                                     0, 0],
-            "Tir Arcanique": [90, 10, 25, 5, 0, "L'ennemi tire une flèche chargée d'arcane, déchirant l'air avec une précision mortelle...",
+            "Tir Arcanique": [90, 5, 30, 2, 0, "L'ennemi tire une flèche chargée d'arcane, déchirant l'air avec une précision mortelle...",
                                     "...mais vous déviez habilement la flèche, évitant de justesse d'être transpercé.",
                                     "...et la flèche d'arcane vous frappe avec une force mystique, vous laissant affaibli et vulnérable !",
                                     "...et une salve de flèches d'arcane vous transperce dans un éclair de magie !!",
@@ -1894,9 +1895,9 @@ class Model:
         }
         self.annuaire_de_caracteristique_des_sorts_speciaux_de_monstre = {
             # taux de reussite/soin minimum, tours d'effet/%soin, description, message si touche
-            "Soin": [17, 8, "L'ennemi lance un sort de soin !", 
+            "Soin": [7, 8, "L'ennemi lance un sort de soin !", 
                      "Le mana l'enveloppe et il reprend des points de vie !"],
-            "Feu Regénérateur": [20, 10, "L'ennemi invoque un feu régénérateur pour restaurer ses points de vie.", 
+            "Feu Regénérateur": [8, 10, "L'ennemi invoque un feu régénérateur pour restaurer ses points de vie.", 
                                 "Le feu répare ses os brisés et guérit ses blessures."],
             "Réglages d'Usine": [22, 11, "L'ennemi tente de réinitialiser ses points de vie avec des réglages d'usine.", 
                                 "Une énergie mystérieuse enveloppe l'ennemi, le restaurant à son état optimal."],
@@ -1911,7 +1912,7 @@ class Model:
             "Rejuvenation": [40, 20, "L'ennemi invoque un sort de réjuvenation pour se régénérer.", 
                             "Une lueur énergétique entoure l'ennemi, le revitalisant et réparant ses blessures."],
             "Tournicoti": [45, 21, "Tournicoti ! Tournicoti !\nL'ennemi tourne sur lui même et ses vêtements deviennent verts .", "Il reprend des points de vie !"],
-            "Sonata": [35, 14, "description", "touche"],
+            "Sonata Pitoyable": [35, 14, "L'ennemi utilise le sort Sonata Pitoyable !", "Un bruit pathétique enveloppe l'ennemi et apaise la douleur de ses blessures."],
             "Sonata Miséricordieuse": [45, 17, "L'ennemi utilise le sort Sonata Miséricordieuse !", 
                                        "Un son a peine apréciable se plaque contre sa peau et referme ses blessures."],
             "Sonata Sincère": [55, 23, "L'ennemi utilise le sort Sonata Sincère !", 
@@ -1930,7 +1931,7 @@ class Model:
             "Ruée vers l'or": [50, 4, "L'ennemi vous stimule avec des effets sonores et lumineux, l'incitant à dépenser des pièces...", 
                                "...mais vous n'êtes pas très réceptif a ce genre de choses.", 
                                "...et fait naitre en vous les symptomes du Mal Jaune !"],
-            "Confusion": [50, 4, "L'ennemi vous jette un sort de confusion...", 
+            "Confusion": [50, 3, "L'ennemi vous jette un sort de confusion...", 
                           "...mais il échoue.", 
                           "...et vos pensées deviennent aussi brouillées qu'un bruit de fond."],
         }
@@ -2034,7 +2035,7 @@ class Model:
         #ANNUAIRE DE CARACTERISTIQUES ATTAQUES GENERALES ET SPECIALES
         self.annuaire_de_caracteristique_des_techniques_generales_de_monstre = {
             # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
-            "Poing de Feu": [80, 5, 30, 5, 25, "L'ennemi lance un poing enflammé vers vous, laissant derrière lui une traînée de flammes...",
+            "Poing de Feu": [80, 5, 25, 5, 25, "L'ennemi lance un poing enflammé vers vous, laissant derrière lui une traînée de flammes...",
                        "...mais son poing s'écrase dans le vide, les flammes se dissipant dans l'air.",
                        "...et son poing enflammé vous frappe, provoquant une brûlure vive !",
                        "...et son poing enflammé s'abat violemment, engendrant une explosion de flammes dévastatrice !!",
@@ -2100,7 +2101,7 @@ class Model:
                       "...et il vous touche, vous secouant violemment et vous brisant !",
                       "...et avec une force titanesque, il vous frappe avec un coup de pierre, vous laissant brisés et affaiblis !!",
                       85, 0],
-            "Eboulis": [88, 13, 25, 5, 15, "L'ennemi déclenche un éboulement de roches sur vous, prêt à vous submerger et vous briser...",
+            "Eboulis": [85, 8, 25, 3, 15, "L'ennemi déclenche un éboulement de roches sur vous, prêt à vous submerger et vous briser...",
                         "...mais son éboulis manque sa cible, les roches se brisant sur le sol.",
                         "...et il vous touche, vous ensevelissant sous les décombres et vous broyant !",
                         "...et avec un rugissement puissant, il vous ensevelit sous un torrent de pierres, vous laissant écrasés et affaiblis !!",
@@ -2126,16 +2127,16 @@ class Model:
                         "...et avec un rituel démoniaque, il vous aspire de votre vitalité, se renforçant tandis que vous vous affaiblissez !!",
                         7, 0],
 
-            "Coup de Boule": [85, 8, 25, 5, 20, "L'ennemi s'approche de vous et envoie un gros coup de boule !", 
+            "Coup de Boule": [85, 5, 25, 3, 10, "L'ennemi s'approche de vous et envoie un gros coup de boule !", 
                               "Mais vous esquivez le coup !", 
                               "Et vous vous le prenez en pleine tronche !", 
                               "Et il vous envoie valser !", 0, 0],
-            "Frappe Lourde": [83, 17, 10, 8, 0, "L'ennemi lève son arme lourde et s'apprête à vous frapper avec une force dévastatrice...",
+            "Frappe Lourde": [70, 10, 10, 5, 0, "L'ennemi lève son arme lourde et s'apprête à vous frapper avec une force dévastatrice...",
                       "...mais son attaque puissante manque sa cible, vous laissant indemne.",
                       "...et il vous touche de plein fouet avec sa frappe lourde, vous infligeant des dégâts massifs !",
                       "...et avec un coup dévastateur, il vous frappe violemment, vous causant d'énormes dégâts !!",
                       0, 0],
-            "Attaque Légère": [100, 10, 60, 3, 0, "L'ennemi effectue une attaque rapide et légère...",
+            "Attaque Légère": [95, 5, 25, 2, 0, "L'ennemi effectue une attaque rapide et légère...",
                                     "...mais elle n'atteint pas sa cible, vous laissant indemne.",
                                     "...et il vous touche avec son attaque légère, vous infligeant des dégâts mineurs.",
                                     "...et avec une attaque précise, il vous touche légèrement, vous causant quelques dégâts !",
@@ -2217,7 +2218,7 @@ class Model:
                                             "...et tombe en avant sous le poids de l'objet.",
                                             "...et il enveloppe l'ennemi, le protégeant et le soignant."],
 
-            "Poing Eclat": [15, 80, 4, "Le monstre vous assène un puissant coup de poing qui explose en une pluie d'éclats acérés...",
+            "Poing Eclat": [7, 80, 4, "Le monstre vous assène un puissant coup de poing qui explose en une pluie d'éclats acérés...",
                             "...mais les éclats se dispersent dans l'air sans vous toucher .",
                             "...et vous êtes criblé de blessures alors que les éclats s'enfoncent profondément dans votre chair !"],
             "Coup du Foie": [17, 75, 4, "Le monstre vous frappe violemment au niveau du foie...",
@@ -2226,10 +2227,10 @@ class Model:
             "Lame Dorée": [15, 85, 5, "Le monstre vous attaque avec une lame dorée étincelante...",
                             "...mais son attaque manque sa cible, vous laissant indemne.",
                             "...et vous sentez une étrange sensation de malaise alors que la lame vous infecte d'une maladie sournoise !"],
-            "Etranglement": [12, 60, 3, "L'ennemi s'enroule autour de votre cou...", 
+            "Etranglement": [5, 60, 3, "L'ennemi s'enroule autour de votre cou...", 
                              "...mais vous arrivez a vous débarrasser de son étreinte.", 
                              "...et vous étrangle sans ménagement.\nVous devenez muet pendant 2 tours !"],
-            "Brulevent": [18, 100, 4, "Le monstre libère un souffle ardent qui consume tout l'oxygène de la salle...",
+            "Brulevent": [7, 90, 4, "Le monstre libère un souffle ardent qui consume tout l'oxygène de la salle...",
                           "...mais vous parvenez à éviter de justesse le souffle brûlant.",
                           "...et vous vous retrouvez soudainement incapable de parler alors que la chaleur envahit votre gorge !"],
             "Roulé-Boulet": [20, 75, 5, "Le monstre se met en boule et vous percute avec une force dévastatrice, vous envoyant valser à travers la pièce...",
@@ -2285,7 +2286,8 @@ class Model:
         self.DEGATBONUSSORTPHYSIQUE = 0
         self.DEGATBONUSATTAQUESANG = 0
         self.DEGATBONUSSORTSANG = 0
-        self.DEGATBONUSDUMONSTRE = 0 #===
+        self.DEGATTECHNIQUEBONUSDUMONSTRE = 0 #===
+        self.DEGATSORTBONUSDUMONSTRE = 0 #===
         self.DEGATSAIGNEE = 0
         self.SOINSSAIGNEE = 0
         self.PIRADEGAT = 0

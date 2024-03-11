@@ -1701,7 +1701,7 @@ class Affiche:
                            "\nVous vous retrouvez alors dans l'arène, avec l'enfant mage en face de vous.")
             liste_commentaire.append(commentaire)
             commentaire = ("*Vous voulez aller plus loin ?*\n*Vous souhaitez sortir du Coliseum avec la gloire, l'argent, et la vie sauve ?*"
-                           "\n*Dommage pour vous !*\nCar vous êtes tombé sur le disciple du grand...*")
+                           "\n*Dommage pour vous !*\n*Car vous êtes tombé sur le disciple du grand...*")
             liste_commentaire.append(commentaire)
             commentaire = ("*Du puissant...*")
             liste_commentaire.append(commentaire)

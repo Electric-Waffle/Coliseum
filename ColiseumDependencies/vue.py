@@ -177,7 +177,7 @@ class Vue:
         print("La salle se retrouve baignée dans une teinte dorée.")
         print("Vous commencez à avoir la tête qui tourne et seul le"
               " tintement des gold dans votre poche semble pouvoir vous calmer.")
-        print("Vous êtes touché par le Mal Jaune ! Les sorts coutent des pièces !")
+        print("Vous êtes touché par le Mal Jaune ! Vos actions coutent des pièces !")
         self.EntreePourContinuer()
 
     def AfficheBeniParLesFees(self, sante_recupere):

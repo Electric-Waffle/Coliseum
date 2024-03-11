@@ -49,9 +49,10 @@ class Control:
                     clear_console()
 
     def CheckHp(self, type_de_laction="None"):
-        """Ne prend rien, retourne True ou False si il reste de la vie ou pas
+        """Peux prendre le type d'action du monstre, retourne True ou False si il reste de la vie ou pas
 
-        Verifie si les points de vie du joueur puis du monstre sont superieurs a zéro.
+        Verifie si les points de vie du joueur puis du monstre sont superieurs a zéro, 
+        applique les effets et introductions liés a une résurection
         """
         if self.modele.points_de_vie < 1:
             if self.modele.possede_une_fee:
@@ -92,6 +93,8 @@ class Control:
                 return False
         elif self.modele.monstre_points_de_vie < 1:
             if self.modele.monstre_nombre_de_vies_supplementaire > 0:
+                self.modele.monstre_passe_son_tour = True
+                self.modele.commentaire_de_resurection_de_monstre = "...fatigué par sa resurection."
                 self.modele.monstre_nombre_de_vies_supplementaire -= 1
                 vie_recupere = round(0.5 * self.modele.monstre_points_de_vie_max)
                 commentaire = (
@@ -105,8 +108,10 @@ class Control:
                 )
                 if self.modele.stigma_monstre_positif == "Cendres du Renouveau":
                     vie_recupere = self.modele.monstre_points_de_vie_max
+                    self.modele.monstre_passe_son_tour = False
+                    self.modele.commentaire_de_resurection_de_monstre = "Aucun"
                     commentaire = (
-                        "Soudainemenet, le monstre s'embrase et disparait dans un nuage de cendre. "
+                        "Soudainement, le monstre s'embrase et disparait dans un nuage de cendre. "
                         "\nLe nuage se met alors a tourner, tourner, tourner, puis se regroupe en une"
                         "forme particulière, comme une statue noire de jais."
                         f"\nLa statue se met alors a prendre des couleurs, et bientot vous"
@@ -117,12 +122,15 @@ class Control:
                 if self.modele.monstre_nom in ["Maitre Mage", "Apprenti", "Coliseum"]:
                     musique = self.modele.CHEMINABSOLUMUSIQUE 
                     if self.modele.monstre_nom == "Maitre Mage":
+                        self.modele.commentaire_de_resurection_de_monstre = "...un peu sonné par sa transformation."
                         self.vue.AfficheResurrectionMaitreMage(musique)
                         self.modele.monstre_nom = "Ministre du Mana"
                     elif self.modele.monstre_nom == "Apprenti":
+                        self.modele.commentaire_de_resurection_de_monstre = "...pour s'adapter a son nouvel hôte."
                         self.vue.AfficheResurrectionApprenti(musique)
                         self.modele.monstre_nom = "Minaraï"
                     elif self.modele.monstre_nom == "Coliseum":
+                        self.modele.commentaire_de_resurection_de_monstre = "...afin de se libérer de son ancienne forme."
                         self.vue.AfficheResurrectionColiseum(musique)
                         self.modele.monstre_nom = "Pierre de Désir"
                     self.SetAttributesFromName()
@@ -1337,7 +1345,7 @@ class Control:
             self.modele.monstre_points_de_force = 10
             self.modele.monstre_points_de_intelligence = 20
             self.modele.monstre_points_de_resistance = 12
-            self.modele.monstre_nombre_de_vies_supplementaire = 0
+            self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 400
             self.modele.monstre_liste_actions = {
                 "Faisceau de l'Eclair": "Sort",  #paralyse
@@ -1993,8 +2001,11 @@ class Control:
 
     def RaisonDePasserTourMonstre(self):
         personnage = "Le monstre passe son"
+        # a cause de la resurection
+        if self.modele.commentaire_de_resurection_de_monstre != "Aucun":
+            commentaire = self.modele.commentaire_de_resurection_de_monstre
         # a cause de la paralysie
-        if self.modele.monstre_est_paralyse:
+        elif self.modele.monstre_est_paralyse:
             commentaire = "...mais ses muscles paralysés se détendent petit à petit."
         # a cause du stigma musculeux
         elif (
@@ -2470,6 +2481,8 @@ class Control:
             self.modele.vie_du_monstre_pour_sables_du_temps_tour_avant = 5
         if self.modele.vie_du_monstre_pour_sables_du_temps_a_utiliser < 0:
             self.modele.vie_du_monstre_pour_sables_du_temps_a_utiliser = 5
+        self.modele.commentaire_de_resurection_de_monstre = "Aucun"
+        
 
     def CheckForGameOver(self):
         if self.modele.points_de_vie <= 0:
@@ -4537,8 +4550,6 @@ class Control:
             type_de_laction_du_monstre = "None"
             if not self.modele.monstre_passe_son_tour:
                 # genere une commande aleatoire pour le monstre
-                # l'antislash permet de mettre la commande sur
-                # plusieurs lignes.
                 nom_de_laction_du_monstre, type_de_laction_du_monstre = (
                     self.GetMonsterChoice()
                 )
@@ -6453,7 +6464,7 @@ class Control:
         if nombre_de_tour_maudit != 0:
             self.modele.est_maudit_par_les_sorts = True
             self.modele.est_maudit_par_les_sorts_nombre_tour = nombre_de_tour_maudit + 1
-            degat_finaux = self.EnleveVieAuJoueur(degats_finaux)
+            degats_finaux = self.EnleveVieAuJoueur(degats_finaux)
             commentaire = (
                 "L'assaut s'arrête enfin."
                 f"\nAu final, vous perdez {degats_finaux} points de vie et resterez muet pendant {nombre_de_tour_maudit} tours !"
@@ -6998,7 +7009,7 @@ class Control:
     
     def EnleveVieAuJoueur(self, degat):
         degat = self.SiZeroRameneAUn(degat)
-        if self.modele.metamorphose and (self.modele.nombre_de_tours in [1, 2]) and (degat > 0):
+        if self.modele.metamorphose and (self.modele.nombre_de_tours in [1, 2]):
             self.vue.AfficheTalentMetamorphose()
         else:
             self.modele.points_de_vie -= degat

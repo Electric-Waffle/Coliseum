@@ -1205,6 +1205,7 @@ class Model:
         
 
         # Placeholdeur pour les caractéristiques du monstre
+        self.commentaire_de_resurection_de_monstre = "Aucun"
         self.type_daction_du_monstre = "None"
         self.vie_du_monstre_pour_sables_du_temps_actuel = 0
         self.vie_du_monstre_pour_sables_du_temps_tour_avant = 0

@@ -300,7 +300,7 @@ LISTEDEPERSONNAGE = {
         "Chaos Emotionel",  # char stigma *
         [
             "Attaque Légère",
-            "Katana Froid"
+            "Katana Bleu"
         ],  # char list technic
         [
             "Tir Arcanique",
@@ -1573,8 +1573,8 @@ class Affiche:
 
     def AfficheLongChargement(self):
         print("Récupération en cours, veuillez patienter...")
-        print("(Temps d'attente estimé a 5 minutes)")
-        time.sleep(5*60)
+        print("(Temps d'attente estimé a 1 minute)")
+        time.sleep(60)
         ClearConsole()
 
     def AfficheIntroCombat(self):
@@ -2504,7 +2504,7 @@ def ShowRecup():
         except ValueError:
             ClearConsole()
     Affichage.AfficheLongChargement()
-    if choix in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+    if choix in [784951623]:
         if choix == 1:
             nom_de_limage = "Feu"
         elif choix == 1:
@@ -2519,8 +2519,8 @@ def ShowRecup():
             nom_de_limage = "Sang"
         elif choix == 6:
             nom_de_limage = "Ame"
-        elif choix == 7:
-            nom_de_limage = "Indice1"
+        elif choix == 784951623:
+            nom_de_limage = "python_properties_Anox"
         elif choix == 8:
             nom_de_limage = "Indice2"
         elif choix == 9:
@@ -2529,7 +2529,7 @@ def ShowRecup():
             nom_de_limage = "Invitation"
         dir_path = os.path.dirname(os.path.realpath(__file__))
         chemin_de_limage = dir_path + "\\"
-        open_image(f"{chemin_de_limage}{nom_de_limage}.png")
+        open_image(f"{chemin_de_limage}{nom_de_limage}.xldr")
     else:
         print("                           Donnée Récupérée :")
         print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
@@ -3071,7 +3071,10 @@ while game_in_session:
     elif choix == 4:
         #Observation.SeeSomething()
         print("Vous vous baladez dans l'étage...")
-        print("...et ne trouvez rien d'interressant.")
+        if Player.numero_de_letage == 2 :
+            print("...et remarquez le numéro 784951623 gravé a coté de la phrase *Récupère moi*.")
+        else:
+            print("...et ne trouvez rien d'interressant.")
         Affichage.EntreePourContinuer()
     elif choix == 5:
         Player.ShowPlayerCaracteristicsAndItems() #DONE

@@ -2149,7 +2149,7 @@ class Control:
             soin_du_fruit = 10 + round(self.modele.points_de_vie_max * 0.1)
             if soin_du_fruit < 13:
                 soin_du_fruit = 13
-        mana_soigne = soin_de_la_feuille + soin_du_fruit
+        vie_soignee = soin_de_la_feuille + soin_du_fruit
         vie_soignee = self.AppliqueSupportBonusItem(vie_soignee)
         self.modele.points_de_vie += vie_soignee
         self.EquilibragePointsDeVieEtMana()

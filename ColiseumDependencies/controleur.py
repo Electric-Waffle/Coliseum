@@ -66,7 +66,7 @@ class Control:
                     return False
                 else:
                     self.modele.possede_une_fee = False
-                    vie_recupere = round(0.25 * self.modele.points_de_vie_max)
+                    vie_recupere = round(0.66 * self.modele.points_de_vie_max)
                     self.modele.points_de_vie = vie_recupere
                     commentaire = (
                         "Alors que vous alliez mourir, votre fée sort de son flacon "

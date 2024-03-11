@@ -1,4 +1,4 @@
-import random
+﻿import random
 import os
 
 
@@ -1888,7 +1888,7 @@ class Model:
                                     "...et le son rapide vous assaille avec une force assourdissante, vous laissant désorienté et étourdi !",
                                     "...et une vague sonore déchire vos sens dans un tourbillon de cacophonie !!",
                                     0, 0],
-            "Bombe Arcanique": [90, 14, 30, 5, 0, "L'ennemi lance une bombe chargée d'arcane, détonant dans un éclair de magie dévastateur...",
+            "Bombe Arcanique": [90, 8, 30, 5, 0, "L'ennemi lance une bombe chargée d'arcane, détonant dans un éclair de magie dévastateur...",
                                         "...mais vous parvenez à esquiver la bombe arcanique, évitant de justesse d'être consumé par sa puissance.",
                                         "...et la bombe arcanique vous frappe avec une force mystique, vous laissant brûlé et meurtri !",
                                         "...et une explosion magique vous engloutit dans un tourbillon de pouvoir arcanique !!",
@@ -1913,7 +1913,7 @@ class Model:
             "Rejuvenation": [40, 20, "L'ennemi invoque un sort de réjuvenation pour se régénérer.", 
                             "Une lueur énergétique entoure l'ennemi, le revitalisant et réparant ses blessures."],
             "Tournicoti": [45, 21, "Tournicoti ! Tournicoti !\nL'ennemi tourne sur lui même et ses vêtements deviennent verts .", "Il reprend des points de vie !"],
-            "Sonata Pitoyable": [35, 14, "L'ennemi utilise le sort Sonata Pitoyable !", "Un bruit pathétique enveloppe l'ennemi et apaise la douleur de ses blessures."],
+            "Sonata Pitoyable": [20, 14, "L'ennemi utilise le sort Sonata Pitoyable !", "Un bruit pathétique enveloppe l'ennemi et apaise la douleur de ses blessures."],
             "Sonata Miséricordieuse": [45, 17, "L'ennemi utilise le sort Sonata Miséricordieuse !", 
                                        "Un son a peine apréciable se plaque contre sa peau et referme ses blessures."],
             "Sonata Sincère": [55, 23, "L'ennemi utilise le sort Sonata Sincère !", 
@@ -2167,7 +2167,7 @@ class Model:
                         "...et il vous avale d'un coup, vous infligeant des dégâts internes.",
                         "...et avec un appétit vorace, il vous engloutit, vous causant des dégâts !",
                         0, 0],
-            "Attaque Lourde": [85, 15, 10, 7, 0, "L'ennemi prépare une attaque puissante, cherchant à vous submerger sous la force de son assaut...",
+            "Attaque Lourde": [85, 11, 10, 5, 0, "L'ennemi prépare une attaque puissante, cherchant à vous submerger sous la force de son assaut...",
                                     "...mais son attaque lourde manque sa cible, vous laissant indemne.",
                                     "...et il vous touche avec son attaque massive, vous infligeant des dégâts importants.",
                                     "...et avec un coup colossal, il vous frappe violemment, vous causant d'énormes dégâts !!",
@@ -2387,3 +2387,4 @@ class Model:
         #
         #                           cleanup                                                                               |
         #                           Documention méthodes                                                                  | DERNIERE LIGNE DROITE (plus tard)
+

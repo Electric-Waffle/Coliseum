@@ -1,4 +1,4 @@
-import modele
+﻿import modele
 import vue
 import os
 import random
@@ -1271,11 +1271,11 @@ class Control:
             self.modele.stigma_monstre_positif = "Roche Ténébreuse"
             self.modele.stigma_monstre_negatif = "Flocon de Neige"
             self.modele.stigma_monstre_bonus = "Hyallo-Réflection"
-            self.modele.monstre_points_de_force = 5
-            self.modele.monstre_points_de_intelligence = 5
-            self.modele.monstre_points_de_resistance = 5
+            self.modele.monstre_points_de_force = 3
+            self.modele.monstre_points_de_intelligence = 4
+            self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 250
+            self.modele.monstre_points_de_vie_max = 190
             self.modele.monstre_liste_actions = {
                 "Attaque Lourde": "Technique",
                 "Durcissement Calcaire": "Technique", # augmente def
@@ -2139,12 +2139,17 @@ class Control:
     def AppliqueEffetJindagee(self):
         commentaire = "Les effets combinés des plantes jindagee soignent votre corps."
         type_de_soin = "vie"
-        pourcentage_soin = 0
+        soin_de_la_feuille = 0
+        soin_du_fruit = 0
         if self.modele.utilise_feuille_jindagee:
-            pourcentage_soin += 3
+            soin_de_la_feuille = 5 + round(self.modele.points_de_vie_max * 0.05)
+            if soin_de_la_feuille < 8:
+                soin_de_la_feuille = 8
         if self.modele.utilise_fruit_jindagee:
-            pourcentage_soin += 6
-        vie_soignee = round(self.modele.points_de_vie_max * (pourcentage_soin / 100))
+            soin_du_fruit = 10 + round(self.modele.points_de_vie_max * 0.1)
+            if soin_du_fruit < 13:
+                soin_du_fruit = 13
+        mana_soigne = soin_de_la_feuille + soin_du_fruit
         vie_soignee = self.AppliqueSupportBonusItem(vie_soignee)
         self.modele.points_de_vie += vie_soignee
         self.EquilibragePointsDeVieEtMana()
@@ -2153,12 +2158,17 @@ class Control:
     def AppliqueEffetAatma(self):
         commentaire = "Les effets combinés des plantes aatma soignent votre esprit."
         type_de_soin = "mana"
-        pourcentage_soin = 0
+        soin_de_la_feuille = 0
+        soin_du_fruit = 0
         if self.modele.utilise_feuille_aatma:
-            pourcentage_soin += 3
+            soin_de_la_feuille = 5 + round(self.modele.points_de_mana_max * 0.05)
+            if soin_de_la_feuille < 8:
+                soin_de_la_feuille = 8
         if self.modele.utilise_fruit_aatma:
-            pourcentage_soin += 6
-        mana_soigne = round(self.modele.points_de_mana_max * (pourcentage_soin / 100))
+            soin_du_fruit = 10 + round(self.modele.points_de_mana_max * 0.1)
+            if soin_du_fruit < 13:
+                soin_du_fruit = 13
+        mana_soigne = soin_de_la_feuille + soin_du_fruit
         mana_soigne = self.AppliqueSupportBonusItem(mana_soigne)
         self.modele.points_de_mana += mana_soigne
         self.EquilibragePointsDeVieEtMana()
@@ -4162,33 +4172,33 @@ class Control:
             if nom_de_litem in ["Feuille Jindagee", "Fruit Jindagee"]:
                 if nom_de_litem == "Feuille Jindagee":
                     self.modele.utilise_feuille_jindagee = True
-                    self.modele.utilise_feuille_jindagee_nombre_tour += 5
-                    soin = round(self.modele.points_de_vie_max*0.03)
-                    if soin < 3:
-                        soin = 3
-                    commentaire_item = f"Vous reprenez {soin} pv pendant 5 tours !"
+                    self.modele.utilise_feuille_jindagee_nombre_tour += 3
+                    soin = 5 + round(self.modele.points_de_vie_max * 0.05)
+                    if soin < 8:
+                        soin = 8
+                    commentaire_item = f"Vous reprenez {soin} pv pendant 3 tours !"
                 elif nom_de_litem == "Fruit Jindagee":
                     self.modele.utilise_fruit_jindagee = True
-                    self.modele.utilise_fruit_jindagee_nombre_tour += 5
-                    soin = round(self.modele.points_de_vie_max*0.06)
-                    if soin < 6:
-                        soin = 6
-                    commentaire_item = f"Vous reprenez {soin} pv pendant 5 tours !"
+                    self.modele.utilise_fruit_jindagee_nombre_tour += 3
+                    soin = 10 + round(self.modele.points_de_vie_max * 0.1)
+                    if soin < 13:
+                        soin = 13
+                    commentaire_item = f"Vous reprenez {soin} pv pendant 3 tours !"
             elif nom_de_litem in ["Feuille Aatma", "Fruit Aatma"]:
                 if nom_de_litem == "Feuille Aatma":
                     self.modele.utilise_feuille_aatma = True
-                    self.modele.utilise_feuille_aatma_nombre_tour += 5
-                    soin = round(self.modele.points_de_mana_max*0.03)
-                    if soin < 3:
-                        soin = 3
-                    commentaire_item = f"Vous reprenez {soin} pm pendant 5 tours !"
+                    self.modele.utilise_feuille_aatma_nombre_tour += 3
+                    soin = 5 + round(self.modele.points_de_mana_max * 0.05)
+                    if soin < 8:
+                        soin = 8
+                    commentaire_item = f"Vous reprenez {soin} pm pendant 3 tours !"
                 elif nom_de_litem == "Fruit Aatma":
                     self.modele.utilise_fruit_aatma = True
-                    self.modele.utilise_fruit_aatma_nombre_tour += 5
-                    soin = round(self.modele.points_de_mana_max*0.06)
-                    if soin < 6:
-                        soin = 6
-                    commentaire_item = f"Vous reprenez {soin} pm pendant 5 tours !"
+                    self.modele.utilise_fruit_aatma_nombre_tour += 3
+                    soin = 10 + round(self.modele.points_de_mana_max * 0.1)
+                    if soin < 13:
+                        soin = 13
+                    commentaire_item = f"Vous reprenez {soin} pm pendant 3 tours !"
             elif nom_de_litem in ["Crystal Elémentaire"]:
                 element_aleatoire = random.randint(1, 4)
                 if element_aleatoire == 1:
@@ -6059,7 +6069,7 @@ class Control:
 
 
     def DurcissementArgilite(self):
-        gain_de_points_de_defence = 20
+        gain_de_points_de_defence = 6
         commentaire = "L'ennemi rassemble l'argile en dessous des dalles pour se faire une carapace solide !"
         commentaire_effet = f"Il gagne {gain_de_points_de_defence} points de défence pendant 3 tours !"
         self.vue.AfficheDurcissementArgilite(commentaire, commentaire_effet)
@@ -6068,13 +6078,13 @@ class Control:
         self.modele.monstre_gain_de_defence_nombre_tour += 4
 
     def DurcissementCalcaire(self):
-        gain_de_points_de_defence = 40
+        gain_de_points_de_defence = 12
         commentaire = "L'ennemi rassemble le calcaire contenu dans les murs de la salle se faire une carapace solide !"
-        commentaire_effet = f"Il gagne {gain_de_points_de_defence} points de défence pendant 5 tours !"
+        commentaire_effet = f"Il gagne {gain_de_points_de_defence} points de défence pendant 3 tours !"
         self.vue.AfficheDurcissementCalcaire(commentaire, commentaire_effet)
         self.modele.monstre_gain_de_defence = True
         self.modele.monstre_gain_de_defence_nombre = gain_de_points_de_defence
-        self.modele.monstre_gain_de_defence_nombre_tour += 6
+        self.modele.monstre_gain_de_defence_nombre_tour += 4
 
     def PanaceeUniverselle(self):
         commentaire = "L'ennemi avale un fruit étrange à peau rouge, de la taille/forme d'une orange, mais avec une chair jauneâtre ."

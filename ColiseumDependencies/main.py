@@ -1194,7 +1194,7 @@ class TraderUsage:
             self.annuaire_des_prix["Red Coin"] = 9999999
         else:
             self.annuaire_des_prix["Red Coin"] = round(Player.numero_de_letage * 100)
-        self.annuaire_des_prix["Tirage"] = round((Player.numero_de_letage * 75) + (Player.number_of_tirage * 100))
+        self.annuaire_des_prix["Tirage"] = round((Player.numero_de_letage * 50) + (Player.number_of_tirage * (Player.numero_de_letage * 15)))
         self.annuaire_des_prix["Fée dans un Bocal"] = round(((Player.numero_de_letage * 50) + 50) * self.modificateur)
 
     def UseMegaTirage(self):

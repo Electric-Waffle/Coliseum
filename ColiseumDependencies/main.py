@@ -28,7 +28,6 @@ LISTEDEPERSONNAGE = {
             "Attaque Légère"
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Explosion Légère"
         ],  # char list sorts
         {
@@ -67,7 +66,6 @@ LISTEDEPERSONNAGE = {
             "Dague Volevie"
         ],  # char list technic
         [
-            "Tir Arcanique",
         ],  # char list sorts
         {
         },  # char dict of int items
@@ -97,7 +95,6 @@ LISTEDEPERSONNAGE = {
             "Attaque Légère",
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Thermosphère Chaude",
             "Sonata Pitoyable"
         ],  # char list sorts
@@ -129,7 +126,6 @@ LISTEDEPERSONNAGE = {
             "Attaque Légère",
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Sonata Miséricordieuse"
         ],  # char list sorts
         {   
@@ -166,7 +162,6 @@ LISTEDEPERSONNAGE = {
             "Katana Bleu"
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Dance Volevie"
         ],  # char list sorts
         {
@@ -199,7 +194,6 @@ LISTEDEPERSONNAGE = {
             "Poing Renforcé"
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Faisceau Statique",
             "Thermosphère Brulante",
             "Pic Froid",
@@ -238,7 +232,6 @@ LISTEDEPERSONNAGE = {
             "Attaque Légère",
         ],  # char list technic
         [
-            "Tir Arcanique",
         ],  # char list sorts
         {
         },  # char dict of int items
@@ -268,7 +261,6 @@ LISTEDEPERSONNAGE = {
             "Attaque Légère",
         ],  # char list technic
         [
-            "Tir Arcanique",
         ],  # char list sorts
         {
             "Remède": 15,
@@ -303,7 +295,6 @@ LISTEDEPERSONNAGE = {
             "Katana Bleu"
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Pic Bleu",
             "Pic Froid"
         ],  # char list sorts
@@ -338,7 +329,6 @@ LISTEDEPERSONNAGE = {
             "Lance Rapide"
         ],  # char list technic
         [
-            "Tir Arcanique",
         ],  # char list sorts
         {
         },  # char dict of int items
@@ -369,7 +359,6 @@ LISTEDEPERSONNAGE = {
             "Lance Rapide"
         ],  # char list technic
         [
-            "Tir Arcanique",
         ],  # char list sorts
         {
         },  # char dict of int items
@@ -399,7 +388,6 @@ LISTEDEPERSONNAGE = {
             "Attaque Légère",
         ],  # char list technic
         [
-            "Tir Arcanique",
         ],  # char list sorts
         {
         },  # char dict of int items
@@ -430,7 +418,6 @@ LISTEDEPERSONNAGE = {
             "Attaque Légère",
         ],  # char list technic
         [
-            "Tir Arcanique",
         ],  # char list sorts
         {
             "Ambroisie": 10,
@@ -469,7 +456,6 @@ LISTEDEPERSONNAGE = {
             "Bô Brulant"
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Thermosphère Chaude",
             "Thermosphère Brulante",
         ],  # char list sorts
@@ -508,7 +494,6 @@ LISTEDEPERSONNAGE = {
             "Bô Brulant"
         ],  # char list technic
         [
-            "Tir Arcanique",
             "Thermosphère Chaude",
             "Thermosphère Brulante",
         ],  # char list sorts
@@ -647,6 +632,7 @@ LISTEDEMUSIQUE = [
     "Dangereuses Mélancolies",
     "L'Orage avant la Tempête",
     "Fanfare",
+    "Prosopagnosie",
     "Pluie d'Automne",
     "Exploratio",
     "Les Joies du Combat",
@@ -656,8 +642,8 @@ LISTEDEMUSIQUE = [
     "Le Chevalier Qu'on Ne Veut Pas Rencontrer",
     "Ruines d'Antan",
     "Sables Mouvants",
-    "Golem de Chair",
-    "Puit de Connaissance",
+    "Euthanasie Régalienne",
+    "Pāramitā",
     "Nerd Party",
     "Jeux d'Enfants",
     "Pantomime",
@@ -690,6 +676,7 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["alfredproto", "Vous écoutez "],
     ["boss_introV2", "Vous écoutez "],
     ["battle_win", "Vous écoutez "],
+    ["abyss", "Vous écoutez "],
     ["ending", "Vous écoutez "],
     ["etage_1", "Vous écoutez "],
     ["battle_theme_1", "Vous écoutez "],
@@ -1027,30 +1014,30 @@ class TraderUsage:
             self.modificateur = 1.5
         self.modificateur += ((Player.numero_de_letage / 10) - 0.1)
         self.annuaire_des_prix = {
-            "Feuille Jindagee": round(15*self.modificateur),
-            "Fruit Jindagee": round(35 * self.modificateur),
-            "Feuille Aatma": round(15 * self.modificateur),
-            "Fruit Aatma": round(35 * self.modificateur),
+            "Feuille Jindagee": round(25*self.modificateur),
+            "Fruit Jindagee": round(50 * self.modificateur),
+            "Feuille Aatma": round(35 * self.modificateur),
+            "Fruit Aatma": round(70 * self.modificateur),
             "Crystal Elémentaire": round(50 * self.modificateur),
-            "Ambroisie": round(30 * self.modificateur),
-            "Hydromel": round(30 * self.modificateur),
+            "Ambroisie": round(50 * self.modificateur),
+            "Hydromel": round(50 * self.modificateur),
             "Orbe de Furie": round(50 * self.modificateur),
             "Orbe de Folie": round(50 * self.modificateur),
-            "Remède": round(10 * self.modificateur),
-            "Remède Superieur": round(20 * self.modificateur),
-            "Remède Divin": round(30 * self.modificateur),
-            "Pillule": round(10 * self.modificateur),
-            "Pillule Superieure": round(20 * self.modificateur),
-            "Pillule Divine": round(30 * self.modificateur),
+            "Remède": round(30 * self.modificateur),
+            "Remède Superieur": round(60 * self.modificateur),
+            "Remède Divin": round(100 * self.modificateur),
+            "Pillule": round(40 * self.modificateur),
+            "Pillule Superieure": round(70 * self.modificateur),
+            "Pillule Divine": round(120 * self.modificateur),
             "Fléchette Rouge": round(30 * self.modificateur),
             "Flèche Rouge": round(65 * self.modificateur),
             "Fléchette Bleue": round(30 * self.modificateur),
             "Flèche Bleue": round(65 * self.modificateur),
-            "Poudre Explosive": round(30 * self.modificateur),
-            "Roche Explosive": round(40 * self.modificateur),
-            "Bombe Explosive": round(50 * self.modificateur),
-            "Fiole de Poison": round(40 * self.modificateur),  # [debutTour]
-            "Gourde de Poison": round(80 * self.modificateur),  # [debutTour]
+            "Poudre Explosive": round(40 * self.modificateur),
+            "Roche Explosive": round(60 * self.modificateur),
+            "Bombe Explosive": round(80 * self.modificateur),
+            "Fiole de Poison": round(60 * self.modificateur),  # [debutTour]
+            "Gourde de Poison": round(120 * self.modificateur),  # [debutTour]
             "Sève d'Absolution": round(40 * self.modificateur),  # [debutTour]
             "Larme d'Absolution": round(70 * self.modificateur),  # [debutTour]
             "Soluté d'Absolution": round(100 * self.modificateur),  # [debutTour]
@@ -1902,6 +1889,23 @@ class Affiche:
         print("Chargement Terminé !")
         self.EntreePourContinuer()
 
+    def AfficheSauvegarde(self):
+        for nombre in range(1, 7):
+            if nombre in [1, 4]:
+                print("Sauvegarde en cours.")
+            elif nombre in [2, 5]:
+                print("Sauvegarde en cours..")
+            elif nombre in [3, 6]:
+                print("Sauvegarde en cours...")
+            time.sleep(0.3)
+            ClearConsole()
+        print("Sauvegarde Terminé !")
+        self.EntreePourContinuer()
+    
+    def AfficheAvecUnTempsDattente(self, temps):
+        time.sleep(temps)
+        ClearConsole()
+
     def AffichageDescriptionEtage(self):
         mixer.quit()
         if Player.numero_de_letage == 1:
@@ -1974,7 +1978,6 @@ class Affiche:
         print(commentaire)
         Affichage.EntreePourContinuer()
 
-     
 
 class PlayerCaracteristics:
 
@@ -2014,6 +2017,7 @@ class PlayerCaracteristics:
         self.nombre_dennemis_a_letage = 15
         self.red_coin_recu_par_extermination = False
         self.redcoin_bought = False
+        self.library_used = False
         self.number_of_tirage = 0
         self.invitation_received = False
         self.chemin_musique = os.path.dirname(os.path.realpath(__file__))
@@ -2112,23 +2116,33 @@ class PlayerCaracteristics:
         if item in ["Feuille Jindagee", "Fruit Jindagee"]:
             Player.items_possedes[item] -= 1
             if item == "Feuille Jindagee":
-                soin = 5 * round(self.points_de_vie_max * 0.03)
+                soin = 5 + round(Player.points_de_vie_max * 0.05)
+                if soin < 8:
+                    soin = 8
             elif item == "Fruit Jindagee":
-                soin = 5 * round(self.points_de_vie_max * 0.06)
+                soin = 10 + round(Player.points_de_vie_max * 0.1)
+                if soin < 13:
+                    soin = 13
             if self.stigma_positif == "Pharmacodynamisme":
                 soin += soin
-            self.points_de_vie += soin
+            soin_final = soin * 3
+            self.points_de_vie += soin_final
             if Player.points_de_vie > Player.points_de_vie_max:
                 Player.points_de_vie = Player.points_de_vie_max
             print(f"Vous utilisez l'item [{item}], et regagnez {soin} points de vie en peu de temps !")
         elif item in ["Feuille Aatma", "Fruit Aatma"]:
             Player.items_possedes[item] -= 1
             if item == "Feuille Aatma":
-                soin = 5 * round(self.points_de_mana_max * 0.03)
+                soin = 5 + round(Player.points_de_mana_max * 0.05)
+                if soin < 8:
+                    soin = 8
             elif item == "Fruit Aatma":
-                soin = 5 * round(self.points_de_mana_max * 0.06)
+                soin = 10 + round(Player.points_de_mana_max * 0.1)
+                if soin < 13:
+                    soin = 13
             if self.stigma_positif == "Pharmacodynamisme":
                 soin += soin
+            soin_final = soin * 3
             self.points_de_mana += soin
             if Player.points_de_mana > Player.points_de_mana_max:
                 Player.points_de_mana = Player.points_de_mana_max
@@ -2137,16 +2151,16 @@ class PlayerCaracteristics:
             Player.items_possedes[item] -= 1
             if item == "Remède":
                 soin = round(Player.points_de_vie_max*0.1)
-                if soin < 10:
-                    soin = 10
+                if soin < 17:
+                    soin = 17
             elif item == "Remède Superieur":
                 soin = round(Player.points_de_vie_max*0.2)
-                if soin < 20:
-                    soin = 20
+                if soin < 27:
+                    soin = 27
             elif item == "Remède Divin":
                 soin = round(Player.points_de_vie_max*0.3)
-                if soin < 30:
-                    soin = 30
+                if soin < 39:
+                    soin = 39
             if self.stigma_positif == "Pharmacodynamisme":
                 soin += soin
             Player.points_de_vie += soin
@@ -2157,16 +2171,16 @@ class PlayerCaracteristics:
             Player.items_possedes[item] -= 1
             if item == "Pillule":
                 soin = round(Player.points_de_mana_max*0.1)
-                if soin < 10:
-                    soin = 10
+                if soin < 17:
+                    soin = 17
             elif item == "Pillule Superieure":
                 soin = round(Player.points_de_mana_max*0.2)
-                if soin < 20:
-                    soin = 20
+                if soin < 27:
+                    soin = 27
             elif item == "Pillule Divine":
                 soin = round(Player.points_de_mana_max*0.3)
-                if soin < 30:
-                    soin = 30
+                if soin < 39:
+                    soin = 39
             if self.stigma_positif == "Pharmacodynamisme":
                 soin += soin
             Player.points_de_mana += soin
@@ -2185,7 +2199,7 @@ class Observe:
 
     def SeeSomething(self):
         if Player.numero_de_letage == 1:
-            DoTheThing()  # bibliotheque de gros sorts (recuperer les sorts consignés)
+            self.DoTheLibrary()  # bibliotheque de gros sorts (recuperer les sorts consignés)
         elif Player.numero_de_letage == 2:
             DoTheThing()  # Fontaine redonne pv 3 fois
         elif Player.numero_de_letage == 3:
@@ -2204,6 +2218,109 @@ class Observe:
             DoTheThing()  # Porte demande 100 red coins pour etre ouverte (reste par partie), débloque un gauntlet de 50 ennemis pour avoir ame
         elif Player.numero_de_letage == 10:
             DoTheThing()  # Affronte Alfred pour plein de récompenses
+
+    def DoTheLibrary(self):
+        # Recuperation de la liste de sorts enregistrés
+        donnees_de_s0ve = self.GetPermanentThingsFromS0ve()
+        liste_de_sorts_enregistres = ast.literal_eval(donnees_de_s0ve["Livre de sort"])
+        nombre_aleatoire = random.randint(0, 100)
+        if nombre_aleatoire == 1:
+            liste_de_sorts_enregistres = ["jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable"]
+        print("...et quelque chose attire votre attention !")
+        Affichage.EntreePourContinuer()
+        print("Derrière un rocher, vous trouvez un ancien passage quasi-effondré menant a une petite pièce étroite.")
+        print("Au milieu se tient un livre usé par le temps, dont la couverture représente une magnifique cigogne bleue regardant vers la droite.")
+        print("Vous ouvrez le livre...")
+        Affichage.EntreePourContinuer()
+        if Player.library_used:
+            print("...mais ce dernier est vide.")
+            print("Vous le refermez et repartez ailleurs.")
+            Affichage.EntreePourContinuer()
+        else:
+            if "jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable" in liste_de_sorts_enregistres:
+                mixer.quit()
+            while True:
+                try:
+                    print("A l'interieur se trouvent plusieurs lignes écrite à l'encre noire."
+                        "\nCertaines sont effacées, mais celles qui ne le sont pas semblent attirer votre main...")
+                    numero_a_afficher = 1
+                    for sort in liste_de_sorts_enregistres:
+                        print(f"{numero_a_afficher} - Toucher les mots [{sort}]")
+                        numero_a_afficher += 1
+                    print(f"{numero_a_afficher} - Ne rien toucher")
+                    choix = int(input("Que souhaitez vous faire ? "))
+                    ClearConsole()
+                    if choix in range(1, (len(liste_de_sorts_enregistres) + 2)):
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == (len(liste_de_sorts_enregistres) + 1):
+                print("Vous refermez le livre et vous éloignez de la pièce.")
+                Affichage.EntreePourContinuer()
+            elif liste_de_sorts_enregistres[choix-1] == "jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable":
+                PlayMusic("abyss")
+                print("C3 n'est pas vous.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("Ca 6'est pas possible.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("Vous 2'êtes jamais passé par la...")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("...et c9 n'est pourtant pas la premiere fois que vous venez ici.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("C'est vo5s, sans l'être.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("Ca n'est 1as vous, tout en l'étant.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("Comment es8-ce possible ?")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("Comment est4ce possible...")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("Comment est-7e...")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("...")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("...oh.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("je vois.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("C'est quelqu'un d'autre.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("C'est une trace.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("...")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("Retrouve moi.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("....non.")
+                Affichage.AfficheAvecUnTempsDattente(5)
+                print("*Récupère* moi.")
+                Affichage.AfficheAvecUnTempsDattente(3)
+            else:
+                Player.library_used = True
+                Player.sorts_possedes.append(liste_de_sorts_enregistres[choix-1])
+                Player.points_de_vie_max -= 5
+                if Player.points_de_vie > Player.points_de_vie_max :
+                    Player.points_de_vie = Player.points_de_vie_max
+                print("Alors que vos doigts effleurent les lettres, l'entieretée de l'encre sur la page se rassemble au centre et saute sur votre main."
+                      "\nElle se répend le long de votre membre, s'infiltre par vos pores, et fait apparaitre sur votre bras un tatouage étrange et douloureux.")
+                print("Vous perdez 5 points de vie max !")
+                print(f"Vous gagnez le sort [{liste_de_sorts_enregistres[choix-1]}]")
+                Affichage.EntreePourContinuer()
+                print("La page est maintenant vide.\nVous refermez le livre et repartez ailleurs.")
+                Affichage.EntreePourContinuer()
+        if "jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable" in liste_de_sorts_enregistres:
+            PlayMusic(f"etage_{Player.numero_de_letage}")
+
+    def GetPermanentThingsFromS0ve(self):
+        dictionnaire_de_choses_permanentes = {}
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        #fichier de sauvegarde (temporaire)
+        chemin_du_fichier_save = dir_path + "\\s0ve.txt"
+        with open(chemin_du_fichier_save, "r") as fichier:
+            reader = csv.DictReader(fichier, delimiter="|")
+            for line in reader:
+                dictionnaire_de_choses_permanentes[line["Caracteristique"]] = line["Valeur"]
+        return dictionnaire_de_choses_permanentes
 
 
 class SaveManagement:
@@ -2237,13 +2354,14 @@ class SaveManagement:
             "Quete en cours": "",
             "Le Boss a ete Battu": "",
             "Commentaire pour l'affichage du Boss dans le menu": "",
-            "Nombre_d'ennemis restant a l'étage": "",
+            "Nombre d'ennemis restant a l'étage": "",
             "Le Redcoin d'extermination a ete recu": "",
+            "Le livre de sort a ete utilise": "",
             "Le Redcoin du marchand a ete achete": "",
             "Nombre de Tirage acheté": "",
             "Possede une gemme de vie": "",
             "Possede une gemme de mana": "",
-            "Possede une fée": ""
+            "Possede une fée": "",
         }
 
     def FromPlayerToDict(self):
@@ -2274,13 +2392,14 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["Quete en cours"] = Player.quete
         self.dictionnaire_de_sauvegarde["Le Boss a ete Battu"] = Player.boss_battu
         self.dictionnaire_de_sauvegarde["Commentaire pour l'affichage du Boss dans le menu"] = Player.commentaire_boss
-        self.dictionnaire_de_sauvegarde["Nombre_d'ennemis restant a l'étage"] = Player.nombre_dennemis_a_letage
+        self.dictionnaire_de_sauvegarde["Nombre d'ennemis restant a l'étage"] = Player.nombre_dennemis_a_letage
         self.dictionnaire_de_sauvegarde["Le Redcoin d'extermination a ete recu"] = Player.red_coin_recu_par_extermination
         self.dictionnaire_de_sauvegarde["Le Redcoin du marchand a ete achete"] = Player.redcoin_bought
         self.dictionnaire_de_sauvegarde["Nombre de Tirage acheté"] = Player.number_of_tirage
         self.dictionnaire_de_sauvegarde["Possede une gemme de vie"] = Player.gemme_de_vie
         self.dictionnaire_de_sauvegarde["Possede une gemme de mana"] = Player.gemme_de_mana
         self.dictionnaire_de_sauvegarde["Possede une fée"] = Player.possede_une_fee
+        self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"] = Player.library_used
 
     def FromDictToPlayer(self):
         Player.nom_du_personnage = ((self.dictionnaire_de_sauvegarde["Nom"]).strip('"'))
@@ -2323,11 +2442,13 @@ class SaveManagement:
         Player.quete = ((self.dictionnaire_de_sauvegarde["Quete en cours"]).strip('"'))
         Player.boss_battu = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le Boss a ete Battu"])
         Player.commentaire_boss = ((self.dictionnaire_de_sauvegarde["Commentaire pour l'affichage du Boss dans le menu"]).strip('"'))
-        Player.nombre_dennemis_a_letage = int(self.dictionnaire_de_sauvegarde["Nombre_d'ennemis restant a l'étage"])
+        Player.nombre_dennemis_a_letage = int(self.dictionnaire_de_sauvegarde["Nombre d'ennemis restant a l'étage"])
         Player.red_coin_recu_par_extermination = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le Redcoin d'extermination a ete recu"])
         Player.redcoin_bought = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le Redcoin du marchand a ete achete"])
         Player.number_of_tirage = int(self.dictionnaire_de_sauvegarde["Nombre de Tirage acheté"])
-
+        if "Invitation Recue" in self.dictionnaire_de_sauvegarde:
+            Player.invitation_received = ast.literal_eval(self.dictionnaire_de_sauvegarde["Invitation Recue"])
+        Player.library_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"])
 
     def FromDictToSaveFile(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -2339,7 +2460,14 @@ class SaveManagement:
 
     def FromSaveFileToDict(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
+        #fichier de sauvegarde (temporaire)
         chemin_du_fichier_save = dir_path + "\\save.txt"
+        with open(chemin_du_fichier_save, "r") as fichier:
+            reader = csv.DictReader(fichier, delimiter="|")
+            for line in reader:
+                self.dictionnaire_de_sauvegarde[line["Caracteristique"]] = line["Valeur"]
+        #autre sauvegarde (permanente)
+        chemin_du_fichier_save = dir_path + "\\s0ve.txt"
         with open(chemin_du_fichier_save, "r") as fichier:
             reader = csv.DictReader(fichier, delimiter="|")
             for line in reader:
@@ -2348,13 +2476,25 @@ class SaveManagement:
     def SaveTheGame(self):
         self.FromPlayerToDict()
         self.FromDictToSaveFile()
-        sys.exit()
+        Affichage.AfficheSauvegarde()
+        while True:
+            try:
+                print("Voulez vous quitter la partie ?")
+                print("\n1 - Oui")
+                print("2 - Non")
+                choix = int(input("\n"))
+                ClearConsole()
+                if choix == 1:
+                    sys.exit()
+                elif choix == 2:
+                    break
+            except ValueError:
+                ClearConsole()
 
     def LoadTheGame(self):
         self.FromSaveFileToDict()
         self.FromDictToPlayer()
         return True
-    
 
 
 def ClearConsole():
@@ -2504,7 +2644,7 @@ def ShowRecup():
         except ValueError:
             ClearConsole()
     Affichage.AfficheLongChargement()
-    if choix in [784951623]:
+    if choix in [362951847]:
         if choix == 1:
             nom_de_limage = "Feu"
         elif choix == 1:
@@ -2519,7 +2659,7 @@ def ShowRecup():
             nom_de_limage = "Sang"
         elif choix == 6:
             nom_de_limage = "Ame"
-        elif choix == 784951623:
+        elif choix == 362951847:
             nom_de_limage = "python_properties_Anox"
         elif choix == 8:
             nom_de_limage = "Indice2"
@@ -2716,6 +2856,11 @@ def MenuDeDemarrage(Player):
             if personnage_a_ete_choisi:
                 # personnage choisi
                 in_menu_principal = False
+                #sauvegarde et charge le personnage choisi
+                Save.FromPlayerToDict()
+                Save.FromDictToSaveFile()
+                Save.FromSaveFileToDict()
+                Save.FromDictToPlayer()
                 Affichage.AffichageDescriptionEtage()
 
         # continuer une partie sauvegardee
@@ -2786,7 +2931,7 @@ def GetChoiceMenuColiseum():
           f"\n\n          ~~{{ {Player.nom_du_personnage} }}~~"
           "\n      5 - Fiche de Personnage"
           "\n      6 - Utiliser un Red Coin"
-          "\n      7 - Sauvegarder et Quitter"
+          "\n      7 - Sauvegarder la Partie"
           "\n\n")
     return int(input("Choisissez une action avec les nombres : "))
 
@@ -3069,10 +3214,9 @@ while game_in_session:
     elif choix == 3:
         Trader.DoTrading() #DONE
     elif choix == 4:
-        #Observation.SeeSomething()
         print("Vous vous baladez dans l'étage...")
-        if Player.numero_de_letage == 2 :
-            print("...et remarquez le numéro 784951623 gravé a coté de la phrase *Récupère moi*.")
+        if Player.numero_de_letage == 1 :
+            Observation.SeeSomething()
         else:
             print("...et ne trouvez rien d'interressant.")
         Affichage.EntreePourContinuer()

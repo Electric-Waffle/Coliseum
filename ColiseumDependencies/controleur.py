@@ -2611,7 +2611,7 @@ class Control:
                         nombre_de_gold_gagne = round(0.5 * nombre_de_gold_gagne)
                     if self.modele.facture and self.modele.monstre_est_paralyse:
                         self.Player.nombre_de_gold += (nombre_de_gold_gagne * 5)
-                        commentaire = ("Les esprits de foudre qui vous regardent vous battre depuis les tribunes du Coliseum sont enchantées"
+                        commentaire = ("Les esprits de foudre qui vous regardent vous battre depuis les tribunes du Coliseum sont enchantés"
                                        " de voir que vous avez abattu de sang froid un ennemi paralysé et sans défence !\n"
                                        f"Elles font pleuvoir des golds sur vous !\n"
                                        f"Vous récuperez {(nombre_de_gold_gagne * 5)} golds  !")

@@ -2304,7 +2304,7 @@ class Observe:
         donnees_de_s0ve = self.GetPermanentThingsFromS0ve()
         liste_de_sorts_enregistres = ast.literal_eval(donnees_de_s0ve["Livre de sort"])
         nombre_aleatoire = random.randint(0, 100)
-        if nombre_aleatoire == 1:
+        if nombre_aleatoire in [1, 2, 3]:
             liste_de_sorts_enregistres = ["jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable"]
         print("...et quelque chose attire votre attention !")
         Affichage.EntreePourContinuer()
@@ -3302,7 +3302,7 @@ while game_in_session:
             Observation.SeeSomething()
         else:
             print("...et ne trouvez rien d'interressant.")
-        Affichage.EntreePourContinuer()
+            Affichage.EntreePourContinuer()
     elif choix == 5:
         Player.ShowPlayerCaracteristicsAndItems() #DONE
     elif choix == 6:

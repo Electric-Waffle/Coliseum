@@ -952,14 +952,14 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 20
+            self.modele.monstre_points_de_vie_max = 40
             self.modele.monstre_liste_actions = {
                 "Coup de Boule": "Technique",
                 "Etranglement": "Technique", # rend muet
                 "Soin": "Sort",
                 "Flamme": "Sort"
             }
-            self.modele.monstre_recompense = {"Vie max": 2, "Gold": 25 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie max": 2, "Gold": 15 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Feu Follet":
             self.modele.stigma_monstre_positif = "Siphon de Mana"
             self.modele.stigma_monstre_negatif = "Pyrolien"
@@ -967,14 +967,14 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 20
+            self.modele.monstre_points_de_vie_max = 40
             self.modele.monstre_liste_actions = {
                 "Tout Feu Tout Flamme": "Sort", # combo electrique, pour le feu [x]
                 "Feu Regénérateur": "Sort", # soin
                 "Poing de Feu": "Technique", # brule
                 "Brulevent": "Technique" # rend muet
             }
-            self.modele.monstre_recompense = {"Mana max": 2, "Gold": 25 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Mana max": 2, "Gold": 10 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Golem de Terre":
             self.modele.stigma_monstre_positif = "Géodynamisme"
             self.modele.stigma_monstre_negatif = "Corps Massif"
@@ -982,7 +982,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 35
+            self.modele.monstre_points_de_vie_max = 45
             self.modele.monstre_liste_actions = {
                 "Frappe Lourde": "Technique",  # gros degat, peu chance toucher
                 "Poing Eclat": "Technique",  # rend blesse
@@ -998,14 +998,14 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 25
+            self.modele.monstre_points_de_vie_max = 40
             self.modele.monstre_liste_actions = {
                 "Froideur d'Outretombe": "Sort", # gele
                 "Claquement de Foudre": "Sort", # paralyse
                 "Confusion": "Sort", # confond
                 "Poing de Mana": "Sort"
             }
-            self.modele.monstre_recompense = {"Degat sort critique": 2, "Gold": 20 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Degat sort critique": 2, "Gold": 15 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Clone de Verre":
             self.modele.stigma_monstre_positif = "Brisures"
             self.modele.stigma_monstre_negatif = "Fragile"
@@ -1013,13 +1013,13 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 25
+            self.modele.monstre_points_de_vie_max = 40
             self.modele.monstre_liste_actions = {
                 "Attaque Légère": "Technique",
                 "Durcissement Argilite": "Technique", # augmente def
                 "Tir Arcanique": "Sort"
             }
-            self.modele.monstre_recompense = {"Vie": 10, "Mana": 10, "Gold": 45 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie": 10, "Mana": 10, "Gold": 15 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Métroïde":
             self.modele.stigma_monstre_positif = "Xénoanatomie"
             self.modele.stigma_monstre_negatif = "Cryophobia"
@@ -1272,10 +1272,10 @@ class Control:
             self.modele.stigma_monstre_negatif = "Flocon de Neige"
             self.modele.stigma_monstre_bonus = "Hyallo-Réflection"
             self.modele.monstre_points_de_force = 3
-            self.modele.monstre_points_de_intelligence = 4
+            self.modele.monstre_points_de_intelligence = 3
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 190
+            self.modele.monstre_points_de_vie_max = 195
             self.modele.monstre_liste_actions = {
                 "Attaque Lourde": "Technique",
                 "Durcissement Calcaire": "Technique", # augmente def
@@ -4242,16 +4242,16 @@ class Control:
             elif nom_de_litem in ["Remède", "Remède Superieur", "Remède Divin"]:
                 if nom_de_litem == "Remède":
                     soin = round(self.modele.points_de_vie_max*0.1)
-                    if soin < 17:
-                        soin = 17
+                    if soin < 10:
+                        soin = 10
                 elif nom_de_litem == "Remède Superieur":
                     soin = round(self.modele.points_de_vie_max*0.2)
-                    if soin < 27:
-                        soin = 27
+                    if soin < 20:
+                        soin = 20
                 elif nom_de_litem == "Remède Divin":
                     soin = round(self.modele.points_de_vie_max*0.3)
-                    if soin < 39:
-                        soin = 39
+                    if soin < 30:
+                        soin = 30
                 soin = self.AppliqueSupportBonusItem(soin)
                 self.modele.points_de_vie += soin
                 commentaire_item = f"Vous appliquez le remède sur vos blessures et regagnez {soin} points de vie !"
@@ -4259,16 +4259,16 @@ class Control:
             elif nom_de_litem in ["Pillule", "Pillule Superieure", "Pillule Divine"]:
                 if nom_de_litem == "Pillule":
                     soin = round(self.modele.points_de_mana_max*0.1)
-                    if soin < 17:
-                        soin = 17
+                    if soin < 10:
+                        soin = 10
                 elif nom_de_litem == "Pillule Superieure":
                     soin = round(self.modele.points_de_mana_max*0.2)
-                    if soin < 27:
-                        soin = 27
+                    if soin < 20:
+                        soin = 20
                 elif nom_de_litem == "Pillule Divine":
                     soin = round(self.modele.points_de_mana_max*0.3)
-                    if soin < 39:
-                        soin = 39
+                    if soin < 30:
+                        soin = 30
                 soin = self.AppliqueSupportBonusItem(soin)
                 self.modele.points_de_mana += soin
                 commentaire_item = f"Vous avalez la pillule et regagnez {soin} points de mana !"
@@ -7089,3 +7089,4 @@ class Control:
         if degat_saignee > 50:
             degat_saignee = 50
         return degat_saignee
+

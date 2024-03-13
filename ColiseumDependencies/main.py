@@ -665,6 +665,7 @@ LISTEDEMUSIQUE = [
     "L'Orage avant la Tempête",
     "Fanfare",
     "Prosopagnosie",
+    "Sillages Sur Une Mer de Rêves",
     "Pluie d'Automne",
     "Exploratio",
     "Les Joies du Combat",
@@ -709,6 +710,7 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["boss_introV2", "Vous écoutez "],
     ["battle_win", "Vous écoutez "],
     ["abyss", "Vous écoutez "],
+    ["gravestone", "Vous écoutez "],
     ["ending", "Vous écoutez "],
     ["etage_1", "Vous écoutez "],
     ["battle_theme_1", "Vous écoutez "],
@@ -2960,7 +2962,7 @@ def MenuDeDemarrage(Player):
             ShowObservatorium()
 
         elif choix == 24:
-            mixer.quit()
+            PlayMusic("gravestone")
             ShowRecup()
             PlayMusic("start")
 

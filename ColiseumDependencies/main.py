@@ -16,6 +16,38 @@ from tkinter import PhotoImage
 # 15degatcoupcrit 16tauxsortcrit 17degatsortcrit
 # 18tauxesquive 19gold
 
+ANNUAIRESORTSSOIN = {  # cout moins élevé quand utilise sort en dehors combat
+    "Sonata Pitoyable": 6, 
+    "Sonata Miséricordieuse": 13,
+    "Sonata Empathique": 18,
+    "Sonata Sincère": 23,
+    "Sonata Bienveillante": 18,
+    "Sonata Absolutrice": 38
+}
+ANNUAIREDESCRIPTIONSORTSSOIN = {
+    "Sonata Pitoyable": "Un bruit pathétique vous enveloppe et apaise la douleur de vos blessures.",
+    "Sonata Miséricordieuse": "Un son a peine apréciable se plaque contre votre peau et referme vos blessures.",
+    "Sonata Empathique": "Une musique potable soulage votre âme et vos blessures.",
+    "Sonata Sincère": "Un chant cristallin inspire votre esprit et revigore votre corps.",
+    "Sonata Bienveillante": "Une chorale glorieuse vous fait oublier les problèmes de votre situation et cicatrise vos blessures.",
+    "Sonata Absolutrice": "Une mélodie féerique ramène votre être tout entier a un état optimal."
+}
+POURCENTAGESORTSOIN = {
+    "Sonata Pitoyable": 5,
+    "Sonata Miséricordieuse": 7,
+    "Sonata Empathique": 14,
+    "Sonata Sincère": 19,
+    "Sonata Bienveillante": 22,
+    "Sonata Absolutrice": 27,
+}
+SOINMINIMUMSORTSOIN = {
+    "Sonata Pitoyable": 10,
+    "Sonata Miséricordieuse": 17,
+    "Sonata Empathique": 22,
+    "Sonata Sincère": 27,
+    "Sonata Bienveillante": 35,
+    "Sonata Absolutrice": 42,
+}
 LISTEDEPERSONNAGE = {
     "Saumel": [  # char
         "Saumel",
@@ -1014,30 +1046,30 @@ class TraderUsage:
             self.modificateur = 1.5
         self.modificateur += ((Player.numero_de_letage / 10) - 0.1)
         self.annuaire_des_prix = {
-            "Feuille Jindagee": round(25*self.modificateur),
-            "Fruit Jindagee": round(50 * self.modificateur),
-            "Feuille Aatma": round(35 * self.modificateur),
-            "Fruit Aatma": round(70 * self.modificateur),
-            "Crystal Elémentaire": round(50 * self.modificateur),
-            "Ambroisie": round(50 * self.modificateur),
-            "Hydromel": round(50 * self.modificateur),
-            "Orbe de Furie": round(50 * self.modificateur),
-            "Orbe de Folie": round(50 * self.modificateur),
-            "Remède": round(30 * self.modificateur),
-            "Remède Superieur": round(60 * self.modificateur),
+            "Feuille Jindagee": round(15*self.modificateur),
+            "Fruit Jindagee": round(40 * self.modificateur),
+            "Feuille Aatma": round(25 * self.modificateur),
+            "Fruit Aatma": round(60 * self.modificateur),
+            "Crystal Elémentaire": round(40 * self.modificateur),
+            "Ambroisie": round(40 * self.modificateur),
+            "Hydromel": round(40 * self.modificateur),
+            "Orbe de Furie": round(40 * self.modificateur),
+            "Orbe de Folie": round(40 * self.modificateur),
+            "Remède": round(20 * self.modificateur),
+            "Remède Superieur": round(50 * self.modificateur),
             "Remède Divin": round(100 * self.modificateur),
-            "Pillule": round(40 * self.modificateur),
-            "Pillule Superieure": round(70 * self.modificateur),
-            "Pillule Divine": round(120 * self.modificateur),
-            "Fléchette Rouge": round(30 * self.modificateur),
-            "Flèche Rouge": round(65 * self.modificateur),
-            "Fléchette Bleue": round(30 * self.modificateur),
-            "Flèche Bleue": round(65 * self.modificateur),
-            "Poudre Explosive": round(40 * self.modificateur),
-            "Roche Explosive": round(60 * self.modificateur),
-            "Bombe Explosive": round(80 * self.modificateur),
-            "Fiole de Poison": round(60 * self.modificateur),  # [debutTour]
-            "Gourde de Poison": round(120 * self.modificateur),  # [debutTour]
+            "Pillule": round(30 * self.modificateur),
+            "Pillule Superieure": round(60 * self.modificateur),
+            "Pillule Divine": round(110 * self.modificateur),
+            "Fléchette Rouge": round(20 * self.modificateur),
+            "Flèche Rouge": round(55 * self.modificateur),
+            "Fléchette Bleue": round(20 * self.modificateur),
+            "Flèche Bleue": round(55 * self.modificateur),
+            "Poudre Explosive": round(30 * self.modificateur),
+            "Roche Explosive": round(50 * self.modificateur),
+            "Bombe Explosive": round(70 * self.modificateur),
+            "Fiole de Poison": round(50 * self.modificateur),  # [debutTour]
+            "Gourde de Poison": round(110 * self.modificateur),  # [debutTour]
             "Sève d'Absolution": round(40 * self.modificateur),  # [debutTour]
             "Larme d'Absolution": round(70 * self.modificateur),  # [debutTour]
             "Soluté d'Absolution": round(100 * self.modificateur),  # [debutTour]
@@ -1182,7 +1214,7 @@ class TraderUsage:
         else:
             self.annuaire_des_prix["Red Coin"] = round(Player.numero_de_letage * 100)
         self.annuaire_des_prix["Tirage"] = round((Player.numero_de_letage * 50) + (Player.number_of_tirage * (Player.numero_de_letage * 15)))
-        self.annuaire_des_prix["Fée dans un Bocal"] = round(((Player.numero_de_letage * 50) + 50) * self.modificateur)
+        self.annuaire_des_prix["Fée dans un Bocal"] = round(((Player.numero_de_letage * 50) + 25) * self.modificateur)
 
     def UseMegaTirage(self):
         #double tirage des recompenses 
@@ -2067,8 +2099,9 @@ class PlayerCaracteristics:
               f"\nStigmas + : {Player.stigma_positif} | Stigmas - : {Player.stigma_negatif} | Stigmas * : {Player.stigma_bonus}"
               "\n \n          -={{ Items }}=-"
               "\n1 - Retour")
-        Player.AffichageItem()
-        return int(input("\nChoisissez une action avec les nombres : "))
+        numero_de_laffichage = Player.AffichageItem()
+        numero_de_laffichage = Player.AffichageSortSoin(numero_de_laffichage)
+        return numero_de_laffichage, int(input("\nChoisissez une action avec les nombres : "))
 
     def AffichageItem(self):
         self.liste_ditem_a_afficher = []
@@ -2080,6 +2113,21 @@ class PlayerCaracteristics:
         for item in self.liste_ditem_a_afficher:
             print(f"{numero_de_laffichage} - {item} : {Player.items_possedes[item]}")
             numero_de_laffichage += 1
+        return numero_de_laffichage
+    
+    def AffichageSortSoin(self, numero_de_laffichage):
+        numero_a_afficher = numero_de_laffichage
+        for sort in Player.sorts_possedes:
+            if sort in ANNUAIRESORTSSOIN:
+                if numero_a_afficher == numero_de_laffichage:
+                    print("\n     -={{ Sorts de Soin }}=-\n")
+                print(f"{numero_a_afficher} - {sort} [{ANNUAIRESORTSSOIN[sort]}pm]")
+                numero_a_afficher += 1
+                break
+        return numero_a_afficher
+            
+
+
 
     def PutArtefactInList(self):
         liste_artefact = []
@@ -2099,9 +2147,9 @@ class PlayerCaracteristics:
         while dans_le_menu:
             while True:
                 try:
-                    choix = Player.ShowcaseCaracteristics()
+                    limite_de_choix, choix = Player.ShowcaseCaracteristics()
                     ClearConsole()
-                    if choix in range(1, (len(self.liste_ditem_a_afficher) + 2)):
+                    if choix in range(1, (limite_de_choix)):
                         break
                 except ValueError:
                     ClearConsole()
@@ -2109,8 +2157,40 @@ class PlayerCaracteristics:
                 ClearConsole()
                 dans_le_menu = False
             else:
-                item_a_utiliser = self.liste_ditem_a_afficher[choix - 2]
-                Player.UseItem(item_a_utiliser)
+                if choix in range(2, (len(self.liste_ditem_a_afficher) + 2)):
+                    item_a_utiliser = self.liste_ditem_a_afficher[choix - 2]
+                    Player.UseItem(item_a_utiliser)
+                else:
+                    position_du_sort = choix - ((len(self.liste_ditem_a_afficher) + 1))
+                    Player.UseHealingMagic(position_du_sort)
+
+    def UseHealingMagic(self, position_du_sort):
+        # prendre le sort en question
+        liste_de_sorts_de_soin = []
+        for sort in Player.sorts_possedes:
+            if sort in ANNUAIRESORTSSOIN:
+                liste_de_sorts_de_soin.append(sort)
+        sort_de_soin_a_utiliser = liste_de_sorts_de_soin[(position_du_sort - 1)]
+        # voir si on peux utiliser le sort
+        cout_du_sort = ANNUAIRESORTSSOIN[sort_de_soin_a_utiliser]
+        if Player.points_de_mana >= cout_du_sort:
+            # utilisation du sort
+            Player.points_de_mana -= cout_du_sort
+            print(f"Vous prenez le temps de vous concentrer pour lancer le sort [{sort_de_soin_a_utiliser}], ce qui réduit son cout en mana et augmente son efficacité.")
+            print(ANNUAIREDESCRIPTIONSORTSSOIN[sort_de_soin_a_utiliser])
+            soin = round((((POURCENTAGESORTSOIN[sort_de_soin_a_utiliser]) + (self.points_dintelligence // 2)) / 100) * self.points_de_vie_max)
+            if soin < SOINMINIMUMSORTSOIN[sort_de_soin_a_utiliser]:
+                soin = SOINMINIMUMSORTSOIN[sort_de_soin_a_utiliser]
+            soin += self.points_dintelligence
+            self.points_de_vie += soin
+            if self.points_de_vie > self.points_de_vie_max:
+                self.points_de_vie = self.points_de_vie_max
+            print(f"Vous reprenez {soin} points de vie !")
+        else:
+            # pas assez de mana
+            print("Vous condensez le mana pour invoquer le sort...mais pas assez ne se réunit pour terminer l'invoquation.")
+        Affichage.EntreePourContinuer()
+        ClearConsole()
 
     def UseItem(self, item):
         if item in ["Feuille Jindagee", "Fruit Jindagee"]:
@@ -2129,7 +2209,7 @@ class PlayerCaracteristics:
             self.points_de_vie += soin_final
             if Player.points_de_vie > Player.points_de_vie_max:
                 Player.points_de_vie = Player.points_de_vie_max
-            print(f"Vous utilisez l'item [{item}], et regagnez {soin} points de vie en peu de temps !")
+            print(f"Vous utilisez l'item [{item}], et regagnez {soin_final} points de vie en peu de temps !")
         elif item in ["Feuille Aatma", "Fruit Aatma"]:
             Player.items_possedes[item] -= 1
             if item == "Feuille Aatma":
@@ -2143,10 +2223,10 @@ class PlayerCaracteristics:
             if self.stigma_positif == "Pharmacodynamisme":
                 soin += soin
             soin_final = soin * 3
-            self.points_de_mana += soin
+            self.points_de_mana += soin_final
             if Player.points_de_mana > Player.points_de_mana_max:
                 Player.points_de_mana = Player.points_de_mana_max
-            print(f"Vous utilisez l'item [{item}], et regagnez {soin} points de mana en peu de temps !")
+            print(f"Vous utilisez l'item [{item}], et regagnez {soin_final} points de mana en peu de temps !")
         elif item in ["Remède", "Remède Superieur", "Remède Divin"]:
             Player.items_possedes[item] -= 1
             if item == "Remède":
@@ -2989,17 +3069,20 @@ def DoRedcoin():
     while True:
         while True:
             try:
-                print("     -={ RedCoin }=-   /9SERVICEDERECUPERATIONDEDONNEES7117764")
-                print("                      /74269856321569852156AOUVRIRVIALEMENU556     ")
-                print("1 - Retour           /7896545685698742315698522685256PRINCIPAL   ")
-                print("1257 - Affinité de F/52565265163512ERRORERRORERRORERRORERROR98 ")
-                print("5675 - Affinité de /487965651268416535498165319651965ERRORROOR  ")
-                print("9731 - Affi_______/789ERREUR:DONNESMANQUANTES96515866519651988  ")
-                print("7563 - Af/78451235896652567841961561653163165ERRORERRORERROR58   ")
-                print("8240 - A/78456213657VEUILLEZCONTACTERLESERVICEINFORMATIQUE9465 ")
-                print("6______/789OUUTILISEZNOTRESERVICEDERECUPERATIONDEDONNEES313135 ")
-                print("/5698994524527/==================================\9AU5NUMERO58 ")
-                print("1569899452452/alent à débloquer avec le nombre cor\8SUIVANT:24")
+                print("     -={ RedCoin }=-   /925435351305251SERVICEDERECUPERATIONDEDONNEES7117764")
+                print("                      /7420952721321625369856321569852156AOUVRIRVIALEMENU556")
+                print("1 - Retour           /981265161565513513513165050742315698522685256PRINCIPAL")
+                print(" ____/1233232311579764382419683214618568246856824565546532854663243615463745")
+                print(" \95363541653155641654135641459565415631612952955265653959562413153556163153")
+                print("Code -       Nom       -    Prix    /128243165325615323235106506863236550325")
+                print("1257 - Affinité de Feu - 1 Redcoin /52565265163512ERRORERRORERRORERORERROR98")
+                print("5675 - Affinité de Foudre - 1 Red/487965651268416535498165319651965ERRORROOR")
+                print("9731 - Affinité de Sang - 1 Redc/789ERREUR:DONNESMANQUANTES96515866519651988")
+                print("7563 - Af/7845123553213506516896652565167841961561653163165ERRORERRORERROR58")
+                print("8240 - A/7845621365265216532561517VEUILLEZCONTACTERLESERVICEINFORMATIQUE9465")
+                print("6______/789OUUTILISEZNOTRESERVICE65235216513351DERECUPERATIONDEDONNEES313135")
+                print("/5698994524527/==================================\9AU5NUMERO5612353105151588")
+                print("1569899452452/Talent à débloquer avec le nombre corresponda\_35168SUIVANT:24")
                 choix = int(input("                              "))
                 ClearConsole()
                 if choix in ANNUAIREDECHOIXPOURREDCOIN or choix == 1:

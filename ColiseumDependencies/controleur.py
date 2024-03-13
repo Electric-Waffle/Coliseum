@@ -242,13 +242,15 @@ class Control:
                     elif valeur_menu == 4:
                         valeur_action = "Fuir"
                     elif valeur_menu == 5:
-                        valeur_action = "Passer son tour"
+                        valeur_action = "Se défendre"
                     elif valeur_menu == 6:
+                        valeur_action = "Passer son tour"
+                    elif valeur_menu == 7:
                         if (
                             derniere_action_utilise == "[Aucune]"
                             or type_de_derniere_action_utilise == "Pas possible"
                         ):  # si pas de derniere action
-                            valeur_menu = 5
+                            valeur_menu = 6
                             valeur_action = "Passer son tour"
                         else:
                             valeur_menu = type_de_derniere_action_utilise
@@ -334,6 +336,9 @@ class Control:
             type_de_laction = "Fuir"
             nom_de_laction = "Fuir"
         elif numero_du_type_de_laction == 5:
+            type_de_laction = "Se défendre"
+            nom_de_laction = "Se défendre"
+        elif numero_du_type_de_laction == 6:
             type_de_laction = "Passer son tour"
             nom_de_laction = "Passer son tour"
         else:  # Si cest la derniere attaque faite, il ny a pas de numero, mais deja les noms en caracteres
@@ -2435,10 +2440,12 @@ class Control:
             if self.modele.monstre_est_paralyse_nombre_tour == 0:
                 self.modele.monstre_est_paralyse = False
                 self.modele.monstre_passe_son_tour = False
-                self.AppliqueTalentLuciole()
+                if self.modele.luciole:
+                    self.AppliqueTalentLuciole()
                 commentaire += "\nLe monstre n'est plus paralysé !"
             else:
-                self.AppliqueTalentAntiNeurotransmetteur()
+                if self.modele.anti_neurotransmitteurs:
+                    self.AppliqueTalentAntiNeurotransmetteur()
         # vulnerable, monstre suceptible elements
         if self.modele.monstre_est_vulnerable:
             self.modele.monstre_est_vulnerable_nombre_tour -= 1
@@ -2472,8 +2479,11 @@ class Control:
             if self.modele.monstre_est_regeneration_nombre_tour == 0:
                 self.modele.monstre_est_regeneration = False
                 commentaire += "\nLe monstre ne se regénère plus !"
+        # applique la benediction du mana
         if self.modele.benediction_du_mana:
             self.AppliqueBenedictionMana()
+        # enleve la defence
+        self.modele.se_defend = False
         # arrete de faire passer son tour au monstre
         if self.modele.monstre_passe_son_tour and not self.modele.monstre_est_paralyse:
             self.modele.monstre_passe_son_tour = False
@@ -2595,6 +2605,8 @@ class Control:
                     commentaire = "La boite disparait..."
                 elif cle == "Gold":
                     nombre_de_gold_gagne = self.modele.monstre_recompense[cle]
+                    bonus_gold_gagne = round((self.modele.numero_de_letage / 10) * nombre_de_gold_gagne) 
+                    nombre_de_gold_gagne += bonus_gold_gagne
                     if self.modele.stigma_joueur_negatif == "Chrometophobia":
                         nombre_de_gold_gagne = round(0.5 * nombre_de_gold_gagne)
                     if self.modele.facture and self.modele.monstre_est_paralyse:
@@ -3206,7 +3218,7 @@ class Control:
                                         self.modele.monstre_est_en_feu_degat = (
                                             degat_du_feu
                                         )
-                                    commentaire_element = f"Vous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
+                                    commentaire_element = f"\nVous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
                                 else:
                                     # finition des degats
                                     pourcentage_degat_du_feu = (
@@ -3250,9 +3262,10 @@ class Control:
                                 self.modele.monstre_est_en_feu_degat = (
                                     caracteristique_du_techniques[10]
                                 )
-                                commentaire_element = f"Vous enflammez l'ennemi pendant {nombre_tour} tours !"
+                                commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
                         elif self.modele.a_utilise_foudre_ce_tour:
                             self.modele.monstre_est_paralyse = True
+                            self.modele.monstre_passe_son_tour = True
                             nombre_tour_para = caracteristique_du_techniques[9] + self.modele.TOURBONUSENNEMIENPARALYSIE
                             self.modele.monstre_est_paralyse_nombre_tour += (
                                 nombre_tour_para
@@ -3842,7 +3855,7 @@ class Control:
                                     self.modele.monstre_est_en_feu_nombre_tour += (
                                         nombre_tour
                                     )
-                                    commentaire_element = f"Vous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
+                                    commentaire_element = f"\nVous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
                                     # ajustement des degats
                                     degat_du_feu = caracteristique_du_sort[10]
                                     if (
@@ -3896,9 +3909,10 @@ class Control:
                                     caracteristique_du_sort[10]
                                 )
 
-                                commentaire_element = f"Vous enflammez l'ennemi pendant {nombre_tour} tours !"
+                                commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
                         elif self.modele.a_utilise_foudre_ce_tour:
                             self.modele.monstre_est_paralyse = True
+                            self.modele.monstre_passe_son_tour = True
                             nombre_tour_para = caracteristique_du_sort[9] + self.modele.TOURBONUSENNEMIENPARALYSIE
                             self.modele.monstre_est_paralyse_nombre_tour += (
                                 nombre_tour_para
@@ -4551,6 +4565,8 @@ class Control:
                     self.modele.InCombat = self.FailFleeing()
                 elif type_de_laction == "Passer son tour":
                     self.PasserSonTour()
+                elif type_de_laction == "Se défendre":
+                    self.SeDefendre()
             else:
                 # affiche la raison pour laquelle le joueur a passé son tour
                 self.RaisonDePasserSonTour()
@@ -5815,7 +5831,7 @@ class Control:
                                     self.modele.est_en_feu_degat = (
                                         degat_du_feu
                                     )
-                                commentaire_element = f"Vous vous enflammez pour {nombre_tour} tours supplémentaires !"
+                                commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
                             else:
                                 # finition des degats
                                 pourcentage_degat_du_feu = (
@@ -5860,7 +5876,7 @@ class Control:
                             self.modele.est_en_feu_degat = (
                                 caracteristique_du_sort[10]
                             )
-                            commentaire_element = f"Vous vous enflammez pendant {nombre_tour} tours !"
+                            commentaire_element = f"\nVous vous enflammez pendant {nombre_tour} tours !"
                     elif self.modele.monstre_a_utilise_foudre_ce_tour:
                         nombre_tour_para =(
                             caracteristique_du_sort[9] +
@@ -6616,7 +6632,7 @@ class Control:
                                     self.modele.est_en_feu_degat = (
                                         degat_du_feu
                                     )
-                                commentaire_element = f"Vous vous enflammez pour {nombre_tour} tours supplémentaires !"
+                                commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
                             else:
                                 # finition des degats
                                 pourcentage_degat_du_feu = (
@@ -6661,7 +6677,7 @@ class Control:
                             self.modele.monstre_est_en_feu_degat = (
                                 caracteristique_du_techniques[10]
                             )
-                            commentaire_element = f"Vous vous enflammez pendant {nombre_tour} tours !"
+                            commentaire_element = f"\nVous vous enflammez pendant {nombre_tour} tours !"
                     elif self.modele.monstre_a_utilise_foudre_ce_tour:
                         nombre_tour_para =(
                             caracteristique_du_techniques[9] +
@@ -7017,14 +7033,6 @@ class Control:
             commentaire += f"\nLa vitalité de l'ennemi répond a votre appel et vous lui drainez {drain} points de vie !"
         self.vue.AfficheTalentConditionLimite(commentaire)
     
-    def EnleveVieAuJoueur(self, degat):
-        degat = self.SiZeroRameneAUn(degat)
-        if self.modele.metamorphose and (self.modele.nombre_de_tours in [1, 2]):
-            self.vue.AfficheTalentMetamorphose()
-        else:
-            self.modele.points_de_vie -= degat
-        return degat
-
     def AppliqueTalentBougieMagique(self):
         commentaire = "\nLe monstre n'est plus en feu !"
         if self.modele.bougie_magique:
@@ -7090,3 +7098,16 @@ class Control:
             degat_saignee = 50
         return degat_saignee
 
+    def SeDefendre(self):
+        self.vue.AfficheSeDefendre()
+        self.modele.se_defend = True
+
+    def EnleveVieAuJoueur(self, degat):
+        if self.modele.se_defend:
+            degat = round (0.6 * degat)
+        degat = self.SiZeroRameneAUn(degat)
+        if self.modele.metamorphose and (self.modele.nombre_de_tours in [1, 2]):
+            self.vue.AfficheTalentMetamorphose()
+        else:
+            self.modele.points_de_vie -= degat
+        return degat

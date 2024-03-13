@@ -67,8 +67,9 @@ class Vue:
         print(f"2 Sorts {alteration_sort}")
         print(f"3 Items {alteration_item}")
         print(f"4 Fuir {alteration_fuite}")
-        print("5 Passer son tour")
-        print(f"6 Derniere action : {derniere_action_utilise}")
+        print("5 Se défendre")
+        print("6 Passer son tour")
+        print(f"7 Derniere action : {derniere_action_utilise}")
         print("")
         return int(input("Choisissez une action avec les nombres : "))
 
@@ -906,3 +907,7 @@ class Vue:
     def AfficheJugement(self, commentaire, commentaire_degat):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_degat)
+
+    def AfficheSeDefendre(self):
+        print("Vous ramenez vos bras a votre torse et vous préparez a recevoir un coup.")
+        self.EntreePourContinuer()

@@ -54,6 +54,7 @@ class Model:
             self.possede_une_gemme_magie = Player.gemme_de_mana  # rend 20% de mana a la fin d'un combat
 
         # alteration de letat ou influence d'artefacts
+        self.se_defend = False
         self.nombre_de_tours = 1
         self.commentaire_transmutation_degat = ""
         self.gain_mana_mutagene = 0
@@ -527,16 +528,16 @@ class Model:
             "Attaque Légère": [95, 7, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
                                "...ce qui ne vous empeche pas de rater quand meme.", "..et le faites grimacer de douleur !", 
                                "et le faites reculer de plusieurs pas en arrière !!", 0, 0],
-            "Lance Rapide": [80, 8, 20, 6, 8, 
+            "Lance Rapide": [8, 8, 20, 6, 80, 
                              "Vous concentrez de l'énergie dans votre lance et...", 
                              "...donnez un coup dans le vide.", 
                              "...touchez l'ennemi !", 
-                             "...embrochez l'ennemi !!", 2, 0],
+                             "...embrochez l'ennemi !!", 1, 0],
             "Lance Statique": [78, 18, 20, 8, 8, 
                                "Vous chargez quelques volts dans votre lance et...", 
                                "...la lachez sous le coup du choc statique.", 
                                "...frappez l'ennemi !", 
-                               "...embrochez l'ennemi !!", 2, 0],
+                               "...embrochez l'ennemi !!", 1, 0],
             "Lance Electrique": [76, 27, 18, 8, 10, 
                                  "Vous chargez votre lance en électricitée et...", 
                                  "...trébuchez sur un caillou.", 
@@ -837,20 +838,20 @@ class Model:
             "Sonata Absolutrice", #25% ou 40pv
         ]
         self.annuaire_de_pourcentage_de_soin_des_sorts = {
-            "Sonata Pitoyable": 3,
-            "Sonata Miséricordieuse": 5,
-            "Sonata Empathique": 12,
-            "Sonata Sincère": 17,
-            "Sonata Bienveillante": 20,
-            "Sonata Absolutrice": 25
+            "Sonata Pitoyable": 3 + (self.points_de_intelligence // 2),
+            "Sonata Miséricordieuse": 5 + (self.points_de_intelligence // 2),
+            "Sonata Empathique": 12 + (self.points_de_intelligence // 2),
+            "Sonata Sincère": 17 + (self.points_de_intelligence // 2),
+            "Sonata Bienveillante": 20 + (self.points_de_intelligence // 2),
+            "Sonata Absolutrice": 25 + (self.points_de_intelligence // 2)
         }
         self.annuaire_de_soin_minimum_des_sorts = {
-            "Sonata Pitoyable": 8,
-            "Sonata Miséricordieuse": 15,
-            "Sonata Empathique": 20,
-            "Sonata Sincère": 25,
-            "Sonata Bienveillante": 33,
-            "Sonata Absolutrice": 40
+            "Sonata Pitoyable": 8 + (self.points_de_intelligence),
+            "Sonata Miséricordieuse": 15 + (self.points_de_intelligence),
+            "Sonata Empathique": 20 + (self.points_de_intelligence),
+            "Sonata Sincère": 25 + (self.points_de_intelligence // 2),
+            "Sonata Bienveillante": 33 + (self.points_de_intelligence // 2),
+            "Sonata Absolutrice": 40 + (self.points_de_intelligence // 2)
         }
         self.annuaire_de_description_des_sorts_de_soin = {
             "Sonata Pitoyable": "Un bruit pathétique vous enveloppe et apaise la douleur de vos blessures.",
@@ -866,17 +867,17 @@ class Model:
                               "Vous faites un signe de pistolet avec vos doigts...", 
                               "...mais cela n'impressionne pas l'ennemi.", 
                               "...et faites sortir une boule de mana qui vient s'écraser sur l'ennemi !", 
-                              "...en faites sortir une dizaine de petites boules de mana qui viennent projeter l'ennemi en arrière !!", 2, 0],
+                              "...en faites sortir une dizaine de petites boules de mana qui viennent projeter l'ennemi en arrière !!", 0, 0],
             "Faisceau Rapide": [90, 14, 20, 2, 8, "Vous lancez un faisceau d'énergie avec une rapidité fulgurante, illuminant le champ de bataille...",
                               "...mais votre sort est dissipé par l'ennemi, l'énergie se dissipant dans l'air.",
                               "...et votre faisceau frappe l'ennemi avec une précision éclair, infligeant des dégâts rapides !",
                               "...et votre faisceau déchire l'ennemi avec une force explosive, le projetant dans les ténèbres !!",
-                              2, 0],
+                              1, 0],
             "Faisceau Statique": [88, 22, 20, 4, 10, "Vous chargez votre faisceau d'énergie statique, créant des étincelles d'électricité dans l'air...",
                                         "...mais votre sort est dissipé par l'ennemi, l'énergie statique se dispersant sans effet.",
                                         "...et votre faisceau électrise l'ennemi, créant des arcs d'électricité qui parcourent leur corps !",
                                         "...et votre faisceau critique surcharge l'ennemi, le consumant dans un tourbillon d'éclairs et de foudre !!",
-                                        2, 0],
+                                        1, 0],
             "Faisceau Electrique": [86, 31, 18, 4, 12, "Vous concentrez une grande quantité d'électricité dans votre faisceau, créant une aura électrique autour de vous...",
                                         "...mais votre sort est contrecarré par l'ennemi, l'énergie électrique se dispersant dans l'air.",
                                         "...et votre faisceau électrocute l'ennemi, les faisant trembler sous la décharge !",
@@ -2230,7 +2231,7 @@ class Model:
                             "...et vous sentez une étrange sensation de malaise alors que la lame vous infecte d'une maladie sournoise !"],
             "Etranglement": [5, 90, 3, "L'ennemi s'enroule autour de votre cou...", 
                              "...mais vous arrivez a vous débarrasser de son étreinte.", 
-                             "...et vous étrangle sans ménagement.\nVous devenez muet pendant 2 tours !"],
+                             "...et vous étrangle sans ménagement."],
             "Brulevent": [7, 90, 4, "Le monstre libère un souffle ardent qui consume tout l'oxygène de la salle...",
                           "...mais vous parvenez à éviter de justesse le souffle brûlant.",
                           "...et vous vous retrouvez soudainement incapable de parler alors que la chaleur envahit votre gorge !"],

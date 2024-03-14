@@ -44,7 +44,8 @@ class Vue:
     def GetMenuChoice(
             self, nombre_tour, alteration_technique, alteration_sort,
             alteration_item, alteration_fuite, derniere_action_utilise,
-            points_de_vie_monstre, points_de_vie,
+            points_de_vie_monstre, points_de_mana_monstre,
+            points_de_vie,
             points_de_vie_max, affiche_pm_et_gold,
             nom_monstre, alteration_etat_monstre,
             alteration_etat_joueur
@@ -52,7 +53,8 @@ class Vue:
         clear_console()
         print("     _-{ Informations }-_    ")
         print(f"          | Tour {nombre_tour} |     ")
-        print(f"  | L'ennemi possède {points_de_vie_monstre} pv | ")
+        print(f"    | L'ennemi possède {points_de_vie_monstre} pv | ")
+        print(f"    | L'ennemi possède {points_de_mana_monstre} pm | ")
         print(f"    | Vous avez {points_de_vie}/{points_de_vie_max} pv | ")
         print(f"    {affiche_pm_et_gold} ")
         print("")
@@ -908,6 +910,11 @@ class Vue:
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_degat)
 
-    def AfficheSeDefendre(self):
-        print("Vous ramenez vos bras a votre torse et vous préparez a recevoir un coup.")
-        self.EntreePourContinuer()
+    def AfficheSeDefendre(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheMonstreEtatDeChoc(self, action):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"L'ennemi tente d'utiliser le sort [{action}],"
+                                                        " mais il n'a pas assez de mana ."
+                                                        "\nSon réservoir de mana implose !"
+                                                        "\nIl est en état de choc !")

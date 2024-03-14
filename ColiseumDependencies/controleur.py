@@ -222,6 +222,7 @@ class Control:
                         alteration_fuite,
                         derniere_action_utilise,
                         self.modele.monstre_points_de_vie,
+                        self.modele.monstre_points_de_mana,
                         self.modele.points_de_vie,
                         self.modele.points_de_vie_max,
                         affiche_pm_et_gold,
@@ -940,6 +941,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 3
             self.modele.monstre_nombre_de_vies_supplementaire = 99
             self.modele.monstre_points_de_vie_max = 100
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Sables du Temps": "Technique",
                 "Coup de Boule": "Technique",
@@ -958,6 +960,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Coup de Boule": "Technique",
                 "Etranglement": "Technique", # rend muet
@@ -973,6 +976,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Tout Feu Tout Flamme": "Sort", # combo electrique, pour le feu [x]
                 "Feu Regénérateur": "Sort", # soin
@@ -988,6 +992,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 45
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Frappe Lourde": "Technique",  # gros degat, peu chance toucher
                 "Poing Eclat": "Technique",  # rend blesse
@@ -1004,6 +1009,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Froideur d'Outretombe": "Sort", # gele
                 "Claquement de Foudre": "Sort", # paralyse
@@ -1019,12 +1025,13 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Attaque Légère": "Technique",
                 "Durcissement Argilite": "Technique", # augmente def
                 "Tir Arcanique": "Sort"
             }
-            self.modele.monstre_recompense = {"Vie": 10, "Mana": 10, "Gold": 15 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie max": 1, "Vie": 15, "Mana max": 1, "Mana": 15, "Gold": 15 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Métroïde":
             self.modele.stigma_monstre_positif = "Xénoanatomie"
             self.modele.stigma_monstre_negatif = "Cryophobia"
@@ -1033,6 +1040,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 170
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Accrochage": "Technique", # paralyse et degat
                 "Drain": "Technique", # draine vie
@@ -1047,6 +1055,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 135
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Réglages d'Usine": "Sort", #soin
                 "Volepièce": "Sort", # prend golds [x]
@@ -1062,6 +1071,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 100
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Souffle de Feu": "Technique",
                 "Envol": "Technique", #reduit les chances de toucher de 30%  [x]
@@ -1077,6 +1087,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 5
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 130
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Roulé-Boulet": "Technique", # confond
                 "Jet de Magma": "Technique", # enflamme
@@ -1093,6 +1104,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 4
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 175
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Morsure de Givre": "Technique", #peux geler
                 "Coup de Griffe": "Technique", #peu degat, gros degat crit
@@ -1108,6 +1120,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Attire-Gold": "Technique", #prend du gold [x]
                 "Lèche-Blessure": "Technique", # soin
@@ -1123,6 +1136,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 330
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Vents du Nord": "Sort", #gele
                 "Vents du Sud": "Sort", #brule
@@ -1140,6 +1154,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 9
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 250
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Morsure": "Technique", #gros degats
                 "Gel": "Sort", # gele
@@ -1156,6 +1171,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 14
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 325
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Coup Anti-Magie": "Technique", #attaaque meme si protection [x]
                 "Attire-Magie": "Technique", #perd pm [x]
@@ -1172,6 +1188,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Aspiration": "Technique" # prend gold, mana + vie, manamax + viemax, taux critique sort+ attaque, force + intelligence, defence [x]
             }
@@ -1184,6 +1201,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 450
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Gros Coup de Boule": "Technique",
                 "Corruption": "Technique", #drain
@@ -1201,6 +1219,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 400
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Roulette": "Technique", #lance roulette. mise ou pas = critique ou pas. si rouge, foule d'effet sur joueur. si vert, foule d'effet sur ennemi. [x]
                 "Jet d'Argent": "Technique", #jette piece passe a travers sorts, 75% gros degats , 25% attrape gold. [x]
@@ -1214,6 +1233,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 415
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Tempêtes du Nord": "Sort", #gele + 50% plus de sorts [x]
                 "Tempêtes du Sud": "Sort", #brule + 50% plus de techniques [x]
@@ -1231,6 +1251,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 2
             self.modele.monstre_points_de_vie_max = 500
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Lame Dorée": "Technique", #peut donner mal jaune
                 "Ultralaser": "Technique", #peut bruler
@@ -1248,6 +1269,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 420
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Gemme Rouge": "Technique", #soin
                 "Gemme Bleue": "Technique", #vol mana [x]
@@ -1261,6 +1283,7 @@ class Control:
             self.modele.monstre_points_de_resistance = round(2.5 * self.modele.numero_de_letage)
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = round(60 * self.modele.numero_de_letage)
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Avale": "Technique", #bcp degat
                 "Vide": "Sort", # plus technique plus sorts plus item [x]
@@ -1281,12 +1304,15 @@ class Control:
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 195
+            self.modele.monstre_points_de_mana_max = 15
             self.modele.monstre_liste_actions = {
                 "Attaque Lourde": "Technique",
                 "Durcissement Calcaire": "Technique", # augmente def
                 "Bombe Arcanique": "Sort",
                 "Sonata Pitoyable": "Sort", #soin
-                "Eveil de Runes": "Sort" # differents effet selon la rune invoquée [x]
+                "Eveil de Runes": "Sort", # differents effet selon la rune invoquée [x]
+                "Coup de Boule": "Technique",
+                "Froideur d'Outretombe": "Sort", # gele
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 50 + gold_bonus_par_etage, "Mana max": 10}
         elif self.modele.monstre_nom == "Chevalier Pourpre":
@@ -1298,6 +1324,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 420
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Lame de Feu": "Technique", #brule
                 "Lame de Gel": "Technique", #gele
@@ -1316,6 +1343,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 420
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Invoquation Canope": "Sort", #invoque vase canope, peut echouer [x]
                 "Rejuvenation": "Sort", #gros soin
@@ -1332,6 +1360,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 5
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Faisceau Statique": "Sort",  #paralyse
                 "Thermosphère Brulante": "Sort", #brule
@@ -1352,6 +1381,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 400
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Faisceau de l'Eclair": "Sort",  #paralyse
                 "Thermosphère de la Fournaise": "Sort", #brule
@@ -1372,6 +1402,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 1000
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Tournicoti": "Sort", #reprend vie
                 "Tournicota": "Sort", #envoie boule a renvoyer ou esquiver [x]
@@ -1388,6 +1419,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 20
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 1400
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Attaque Titanesque": "Technique", #utilise orbe furie et attaque
                 "Remede Divin": "Technique", #soin
@@ -1411,6 +1443,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 25
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 732
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Lame Ultime": "Technique", #gros degats
                 "Bouclier Ultime": "Technique", #reprend beaucoup de vie
@@ -1429,6 +1462,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 14
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 1000
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Ascension Runique": "Technique", #seulement la rune du drain de vie
                 "Lame Vaillante": "Technique", #grosse attaque
@@ -1453,6 +1487,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 24
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 888
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Dragon Ascendant": "Sort", #attaque par vague a esquiver [x]
                 "Rituel Canope": "Sort", #seulement le canope de la paralysie 
@@ -1476,6 +1511,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 10
             self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Attaque Lourde": "Technique",
                 "Durcissement Calcaire": "Technique", # augmente def
@@ -1562,6 +1598,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 1200
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Lame Ultime": "Technique", #gros degats
                 "Bouclier Ultime": "Technique", #reprend beaucoup de vie
@@ -1580,6 +1617,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 20
             self.modele.monstre_nombre_de_vies_supplementaire = 2
             self.modele.monstre_points_de_vie_max = 2000
+            self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Lame Ultime": "Technique", #gros degats
                 "Bouclier Ultime": "Technique", #reprend beaucoup de vie
@@ -1591,6 +1629,8 @@ class Control:
                                        "Attaque": 99999, "Intelligence": 99999}
         self.modele.monstre_points_de_vie_max += vie_bonus_par_etage
         self.modele.monstre_points_de_vie = self.modele.monstre_points_de_vie_max
+        self.modele.monstre_points_de_mana_max += vie_bonus_par_etage
+        self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
 
     def AfficheMonstreNiveauEtMusique(self):
         if not self.modele.monstre_EstUnBoss:
@@ -1935,16 +1975,6 @@ class Control:
         nom_action, type_action = random.choice(items_list)
         return nom_action, type_action
 
-    def PasserSonTour(self):
-        personnage = "Vous passez votre"
-        commentaire = "...tout simplement."
-        if self.modele.patience:
-            soin = round(self.modele.points_de_vie_max * 0.08)
-            self.modele.points_de_vie += soin
-            self.EquilibragePointsDeVieEtMana()
-            commentaire = f"...et reprenez {soin} points de vie."
-        self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
-
     def RaisonDePasserSonTour(self):
         personnage = "Vous passez votre"
         iaido_effectue = False
@@ -2048,6 +2078,20 @@ class Control:
             commentaire = (
                 "...absolument dégouté par la vision du sang que vous lui avez offerte."
             )
+        # a cause de letat de choc
+        elif self.modele.monstre_en_etat_de_choc:
+            commentaire = (
+                "...et récupère son mana.\nIl perd 15 points de vie a cause de son réservoir de mana troué."
+            )
+            self.modele.monstre_en_etat_de_choc_nombre_tour -= 1
+            if self.modele.monstre_en_etat_de_choc_nombre_tour == 0:
+                commentaire = (
+                    "...et fini enfin de récupérer son mana !"
+                )
+                self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
+                self.modele.monstre_en_etat_de_choc = False
+            else:
+                self.modele.monstre_points_de_vie -= 15
         self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
         self.modele.monstre_passe_son_tour = False
 
@@ -2487,6 +2531,9 @@ class Control:
         # arrete de faire passer son tour au monstre
         if self.modele.monstre_passe_son_tour and not self.modele.monstre_est_paralyse:
             self.modele.monstre_passe_son_tour = False
+        #continue de faire passer son tour au monstre si il est en etat de choc
+        if self.modele.monstre_en_etat_de_choc == True:
+            self.modele.monstre_passe_son_tour = True
         if commentaire != "":
             self.vue.AfficheFinAlterationEtat(commentaire)
         # met en place les sables du temps
@@ -2586,7 +2633,7 @@ class Control:
                     ]
                     commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]}% de chance d'esquiver !"
                 elif cle == "Degat sort critique":
-                    self.Player.degat_coup_critique += (
+                    self.Player.degat_sort_critique += (
                         self.modele.monstre_recompense[cle]
                     )
                     commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de degats de sort critique !"
@@ -3011,6 +3058,8 @@ class Control:
             liste_alteration_monstre.append("Durcissement")
         if self.modele.monstre_est_envol:
             liste_alteration_monstre.append("Envol")
+        if self.modele.monstre_en_etat_de_choc:
+            liste_alteration_monstre.append("Etat de Choc")
         # construction de la phrase a montrer
         # switch true =) rajoute l'alteration detat + espace
         # switch false =) rajouter alteration detat + retour a la ligne
@@ -4256,16 +4305,16 @@ class Control:
             elif nom_de_litem in ["Remède", "Remède Superieur", "Remède Divin"]:
                 if nom_de_litem == "Remède":
                     soin = round(self.modele.points_de_vie_max*0.1)
-                    if soin < 10:
-                        soin = 10
+                    if soin < 17:
+                        soin = 17
                 elif nom_de_litem == "Remède Superieur":
                     soin = round(self.modele.points_de_vie_max*0.2)
-                    if soin < 20:
-                        soin = 20
+                    if soin < 27:
+                        soin = 27
                 elif nom_de_litem == "Remède Divin":
                     soin = round(self.modele.points_de_vie_max*0.3)
-                    if soin < 30:
-                        soin = 30
+                    if soin < 39:
+                        soin = 39
                 soin = self.AppliqueSupportBonusItem(soin)
                 self.modele.points_de_vie += soin
                 commentaire_item = f"Vous appliquez le remède sur vos blessures et regagnez {soin} points de vie !"
@@ -4273,16 +4322,16 @@ class Control:
             elif nom_de_litem in ["Pillule", "Pillule Superieure", "Pillule Divine"]:
                 if nom_de_litem == "Pillule":
                     soin = round(self.modele.points_de_mana_max*0.1)
-                    if soin < 10:
-                        soin = 10
+                    if soin < 17:
+                        soin = 17
                 elif nom_de_litem == "Pillule Superieure":
                     soin = round(self.modele.points_de_mana_max*0.2)
-                    if soin < 20:
-                        soin = 20
+                    if soin < 27:
+                        soin = 27
                 elif nom_de_litem == "Pillule Divine":
                     soin = round(self.modele.points_de_mana_max*0.3)
-                    if soin < 30:
-                        soin = 30
+                    if soin < 39:
+                        soin = 39
                 soin = self.AppliqueSupportBonusItem(soin)
                 self.modele.points_de_mana += soin
                 commentaire_item = f"Vous avalez la pillule et regagnez {soin} points de mana !"
@@ -5766,309 +5815,312 @@ class Control:
     def UseMonsterMagic(self, action):
         # [0]=%touche, [1]=degat, [2]=%crit, [3]=degat crit, [4]=%element,
         # [5]=description, [6]=message si rate, [7]=si touche, [8]=si touche crit
-        # [9]=nombre tours, [10]=effet element
-        if action in self.modele.annuaire_de_caracteristique_des_sorts_generaux_de_monstre:
-            caracteristique_du_sort = self.modele.annuaire_de_caracteristique_des_sorts_generaux_de_monstre[
-                action
-            ]
-            # regarde l'élément de l'action pour les bonus associés
-            self.CheckMonsterTypeOfAction(action)
-            # application des modificateurs sur la chance de toucher
-            pourcentage_de_touche = caracteristique_du_sort[0]
-            pourcentage_de_touche -= self.modele.CHANCEBONUSESQUIVE
-            # application des modificateurs sur les degats de base
-            degat_de_base = caracteristique_du_sort[1]
-            degat_de_base = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat_de_base)
-            # application des modificateurs sur les chances de coup critique
-            pourcentage_de_critique = caracteristique_du_sort[2]
-            pourcentage_de_critique += round((self.modele.CHANCESORTCRITIQUEDUMONSTRE/100)*pourcentage_de_critique)
-            # application des modificateurs sur les degats de coup critique
-            degat_critique = caracteristique_du_sort[3]
-            # application des modificateurs sur les chances d'appliquer un element
-            pourcentage_de_element = caracteristique_du_sort[4]
-            if self.modele.monstre_a_utilise_feu_ce_tour:
-                pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURENFEU / 100) * pourcentage_de_element)
-            elif self.modele.monstre_a_utilise_foudre_ce_tour:
-                pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURPARALYSE / 100) * pourcentage_de_element)
-            elif self.modele.monstre_a_utilise_terre_ce_tour:
-                pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURLAPIDE / 100) * pourcentage_de_element)
-            elif self.modele.monstre_a_utilise_sang_ce_tour:
-                pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURENSANG / 100) * pourcentage_de_element)
-            elif self.modele.monstre_a_utilise_glace_ce_tour:
-                pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURENGLACE / 100) * pourcentage_de_element)
-            description = caracteristique_du_sort[5]
-            nombre_aleatoire = random.randint(0, 100)
-            degat = 0
-            # ca touche ?
-            if nombre_aleatoire < pourcentage_de_touche:
-                commentaire_element = ""
-                commentaire_a_afficher = caracteristique_du_sort[7]
-                degat += degat_de_base
-                # ca fait un critique ?
-                if nombre_aleatoire < pourcentage_de_critique:
-                    commentaire_a_afficher = caracteristique_du_sort[8]
-                    degat += degat_critique
-                # ca declenche  un effet elementaire ?
-                if nombre_aleatoire < pourcentage_de_element:
-                    # si oui, quel effet ?
-                    if self.modele.monstre_a_utilise_feu_ce_tour:
-                        # deja en feu ?
-                        if self.modele.est_en_feu:
-                            nombre_aleatoire = random.randint(1, 100)
-                            if nombre_aleatoire <= 90:
-                                # addition des tours
+        # [9]=nombre tours, [10]=effet element,[11]=cout mana
+        assez_de_mana = self.RegardeSiMonstreAAssezDeMana(action)
+        if assez_de_mana:
+            if action in self.modele.annuaire_de_caracteristique_des_sorts_generaux_de_monstre:
+                caracteristique_du_sort = self.modele.annuaire_de_caracteristique_des_sorts_generaux_de_monstre[
+                    action
+                ]
+                # regarde l'élément de l'action pour les bonus associés
+                self.CheckMonsterTypeOfAction(action)
+                # application des modificateurs sur la chance de toucher
+                pourcentage_de_touche = caracteristique_du_sort[0]
+                pourcentage_de_touche -= self.modele.CHANCEBONUSESQUIVE
+                # application des modificateurs sur les degats de base
+                degat_de_base = caracteristique_du_sort[1]
+                degat_de_base = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat_de_base)
+                # application des modificateurs sur les chances de coup critique
+                pourcentage_de_critique = caracteristique_du_sort[2]
+                pourcentage_de_critique += round((self.modele.CHANCESORTCRITIQUEDUMONSTRE/100)*pourcentage_de_critique)
+                # application des modificateurs sur les degats de coup critique
+                degat_critique = caracteristique_du_sort[3]
+                # application des modificateurs sur les chances d'appliquer un element
+                pourcentage_de_element = caracteristique_du_sort[4]
+                if self.modele.monstre_a_utilise_feu_ce_tour:
+                    pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURENFEU / 100) * pourcentage_de_element)
+                elif self.modele.monstre_a_utilise_foudre_ce_tour:
+                    pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURPARALYSE / 100) * pourcentage_de_element)
+                elif self.modele.monstre_a_utilise_terre_ce_tour:
+                    pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURLAPIDE / 100) * pourcentage_de_element)
+                elif self.modele.monstre_a_utilise_sang_ce_tour:
+                    pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURENSANG / 100) * pourcentage_de_element)
+                elif self.modele.monstre_a_utilise_glace_ce_tour:
+                    pourcentage_de_element += round((self.modele.CHANCEBONUSJOUEURENGLACE / 100) * pourcentage_de_element)
+                description = caracteristique_du_sort[5]
+                nombre_aleatoire = random.randint(0, 100)
+                degat = 0
+                # ca touche ?
+                if nombre_aleatoire < pourcentage_de_touche:
+                    commentaire_element = ""
+                    commentaire_a_afficher = caracteristique_du_sort[7]
+                    degat += degat_de_base
+                    # ca fait un critique ?
+                    if nombre_aleatoire < pourcentage_de_critique:
+                        commentaire_a_afficher = caracteristique_du_sort[8]
+                        degat += degat_critique
+                    # ca declenche  un effet elementaire ?
+                    if nombre_aleatoire < pourcentage_de_element:
+                        # si oui, quel effet ?
+                        if self.modele.monstre_a_utilise_feu_ce_tour:
+                            # deja en feu ?
+                            if self.modele.est_en_feu:
+                                nombre_aleatoire = random.randint(1, 100)
+                                if nombre_aleatoire <= 90:
+                                    # addition des tours
+                                    nombre_tour = caracteristique_du_sort[9]
+                                    nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
+                                    self.modele.est_en_feu_nombre_tour += (
+                                        nombre_tour
+                                    )
+                                    # ajustement des degats
+                                    degat_du_feu = caracteristique_du_sort[10]
+                                    if (
+                                        self.modele.est_en_feu_degat
+                                        < degat_du_feu
+                                    ):
+                                        self.modele.est_en_feu_degat = (
+                                            degat_du_feu
+                                        )
+                                    commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
+                                else:
+                                    # finition des degats
+                                    pourcentage_degat_du_feu = (
+                                        self.modele.est_en_feu_nombre_tour
+                                        * (
+                                            self.modele.est_en_feu_degat
+                                        )
+                                    )
+                                    degat_du_feu = round(
+                                        pourcentage_degat_du_feu
+                                        * self.modele.points_de_vie_max
+                                    )
+                                    degat_du_feu = self.EnleveVieAuJoueur(degat_du_feu)
+                                    # arret du feu
+                                    self.modele.est_en_feu_nombre_tour = 0
+                                    self.modele.est_en_feu_degat = 0
+                                    self.modele.est_en_feu = False
+                                    # paralysie
+                                    nombre_tour = 2
+                                    self.AppliqueLaParalysieSurJoueur(nombre_tour)
+                                    if self.modele.est_paralyse:
+                                        # construction du comentaire_element
+                                        commentaire_element = ("\nL'attaque vous enflamme.\nCepandant, les"
+                                                            " deux feux s'éteignent mutuellement en"
+                                                            " consommant l'oxygène disponible, et vous "
+                                                            "font de gros dégâts.\nDe plus, le choc vous "
+                                                            "paralyse !")
+                                    else:
+                                        # construction du comentaire_element
+                                        commentaire_element = ("\nL'attaque vous enflamme.\nCepandant, les"
+                                                            " deux feux s'éteignent mutuellement en"
+                                                            " consommant l'oxygène disponible, et vous "
+                                                            "font de gros dégâts.")
+                            else:
+                                # mise a feu du monstre
+                                self.modele.est_en_feu = True
                                 nombre_tour = caracteristique_du_sort[9]
                                 nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
                                 self.modele.est_en_feu_nombre_tour += (
                                     nombre_tour
                                 )
-                                # ajustement des degats
-                                degat_du_feu = caracteristique_du_sort[10]
-                                if (
-                                    self.modele.est_en_feu_degat
-                                    < degat_du_feu
-                                ):
-                                    self.modele.est_en_feu_degat = (
-                                        degat_du_feu
-                                    )
-                                commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
+                                self.modele.est_en_feu_degat = (
+                                    caracteristique_du_sort[10]
+                                )
+                                commentaire_element = f"\nVous vous enflammez pendant {nombre_tour} tours !"
+                        elif self.modele.monstre_a_utilise_foudre_ce_tour:
+                            nombre_tour_para =(
+                                caracteristique_du_sort[9] +
+                                self.modele.TOURBONUSJOUEURENPARALYSIE
+                            )
+                            self.AppliqueLaParalysieSurJoueur(nombre_tour_para)
+                            if self.modele.est_paralyse:
+                                commentaire_element = f"\nL'ennemi vous paralyse pendant {nombre_tour_para} tours !"
                             else:
-                                # finition des degats
-                                pourcentage_degat_du_feu = (
-                                    self.modele.est_en_feu_nombre_tour
-                                    * (
-                                        self.modele.est_en_feu_degat
-                                    )
-                                )
-                                degat_du_feu = round(
-                                    pourcentage_degat_du_feu
-                                    * self.modele.points_de_vie_max
-                                )
-                                degat_du_feu = self.EnleveVieAuJoueur(degat_du_feu)
-                                # arret du feu
-                                self.modele.est_en_feu_nombre_tour = 0
-                                self.modele.est_en_feu_degat = 0
-                                self.modele.est_en_feu = False
-                                # paralysie
-                                nombre_tour = 2
-                                self.AppliqueLaParalysieSurJoueur(nombre_tour)
-                                if self.modele.est_paralyse:
-                                    # construction du comentaire_element
-                                    commentaire_element = ("\nL'attaque vous enflamme.\nCepandant, les"
-                                                        " deux feux s'éteignent mutuellement en"
-                                                        " consommant l'oxygène disponible, et vous "
-                                                        "font de gros dégâts.\nDe plus, le choc vous "
-                                                        "paralyse !")
-                                else:
-                                    # construction du comentaire_element
-                                    commentaire_element = ("\nL'attaque vous enflamme.\nCepandant, les"
-                                                        " deux feux s'éteignent mutuellement en"
-                                                        " consommant l'oxygène disponible, et vous "
-                                                        "font de gros dégâts.")
-                        else:
-                            # mise a feu du monstre
-                            self.modele.est_en_feu = True
-                            nombre_tour = caracteristique_du_sort[9]
-                            nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
-                            self.modele.est_en_feu_nombre_tour += (
-                                nombre_tour
+                                commentaire_element = f"\nVous résistez a la paralysie déclenchée par l'ennemi !"
+                        elif self.modele.monstre_a_utilise_glace_ce_tour:
+                            self.modele.est_gele = True
+                            nombre_tour_gele = (
+                                caracteristique_du_sort[9] + 
+                                self.modele.TOURBONUSJOUEURENGLACE
                             )
-                            self.modele.est_en_feu_degat = (
-                                caracteristique_du_sort[10]
+                            self.modele.est_gele_nombre_tour += (
+                                nombre_tour_gele
                             )
-                            commentaire_element = f"\nVous vous enflammez pendant {nombre_tour} tours !"
-                    elif self.modele.monstre_a_utilise_foudre_ce_tour:
-                        nombre_tour_para =(
-                            caracteristique_du_sort[9] +
-                            self.modele.TOURBONUSJOUEURENPARALYSIE
-                        )
-                        self.AppliqueLaParalysieSurJoueur(nombre_tour_para)
-                        if self.modele.est_paralyse:
-                            commentaire_element = f"\nL'ennemi vous paralyse pendant {nombre_tour_para} tours !"
-                        else:
-                            commentaire_element = f"\nVous résistez a la paralysie déclenchée par l'ennemi !"
-                    elif self.modele.monstre_a_utilise_glace_ce_tour:
-                        self.modele.est_gele = True
-                        nombre_tour_gele = (
-                            caracteristique_du_sort[9] + 
-                            self.modele.TOURBONUSJOUEURENGLACE
-                        )
-                        self.modele.est_gele_nombre_tour += (
-                            nombre_tour_gele
-                        )
-                        commentaire_element = f"\nL'ennemi vous gèle pendant {nombre_tour_gele} tours !"
-                    elif self.modele.monstre_a_utilise_sang_ce_tour:
-                        # calcul de la saignee
-                        pourcentage_saignee = caracteristique_du_sort[10]
-                        degat_saignee = round(
-                            (pourcentage_saignee / 100)
-                            * self.modele.points_de_vie_max
-                        )
-                        # application de la saignee
-                        degat_saignee = self.EnleveVieAuJoueur(degat_saignee)
-                        soin_saignee = degat_saignee
-                        self.modele.monstre_points_de_vie += soin_saignee
-                        self.EquilibragePointsDeVieEtMana()
-                        commentaire_element = f"\nL'ennemi vous draine {degat_saignee} points de vie , et en récupere {soin_saignee} !"
-                    elif self.modele.a_utilise_terre_ce_tour:
-                        # calcul de lapidation
-                        pourcentage_lapidation = caracteristique_du_sort[10]
-                        degat_lapidation = round(
-                            (pourcentage_lapidation / 100) * degat
-                        )
-                        # application lapidation
-                        degat_lapidation = self.EnleveVieAuJoueur(degat_lapidation)
-                        # construction du comentaire_element
-                        commentaire_element = f"\nL'ennemi vous inflige {degat_lapidation} points de dégâts supplémentaire par lapidation !"
-                degat = self.EnleveVieAuJoueur(degat)
-                commentaire_degat = (
-                    f"L'ennemi vous inflige {degat} points de dégât !"
-                )
-                commentaire_degat += commentaire_element
-                self.CheckePuisAppliqueTransmutation(degat)
-            else:
-                commentaire_a_afficher = caracteristique_du_sort[6]
-                commentaire_degat = "L'ennemi ne vous inflige aucun dégât."
-            self.vue.AfficheSortOuAttaque(
-                description, commentaire_a_afficher, commentaire_degat
-            )
-        else:
-            # attaques avec d'autres effets que ceux de la méthode globale
-            #soin
-            if action in self.modele.sorts_de_soin_de_monstre:
-                caracteristique_du_sort = self.modele.annuaire_de_caracteristique_des_sorts_speciaux_de_monstre[action]
-                #intialisation des caracteristiques
-                soin_minimum = caracteristique_du_sort[0]
-                pourcentage_de_soin = caracteristique_du_sort[1]
-                description = caracteristique_du_sort[2]
-                commentaire_a_afficher = caracteristique_du_sort[3]
-                #appliquer soin
-                soin_applique = round(self.modele.monstre_points_de_vie_max * (pourcentage_de_soin / 100))
-                if soin_applique < soin_minimum:
-                    soin_applique = soin_minimum
-                self.modele.monstre_points_de_vie += soin_applique
-                self.EquilibragePointsDeVieEtMana
-                #construire message a afficher
-                commentaire_degat = f"L'ennemi récupère {soin_applique} points de vie !"
-                #afficher resultat
-                self.vue.AfficheSortOuAttaque(
-                description, commentaire_a_afficher, commentaire_degat
-                )
-            #alteration d'état
-            elif ((action in self.modele.sorts_de_blessure_de_monstre) or
-                  (action in self.modele.sorts_de_deconcentration_de_monstre) or
-                  (action in self.modele.sorts_de_gold_de_monstre) or
-                  (action in self.modele.sorts_de_instable_de_monstre) or
-                  (action in self.modele.sorts_de_muet_de_monstre) or
-                  (action in self.modele.sorts_de_confusion_de_monstre)):
-                caracteristique_du_sort = self.modele.annuaire_de_caracteristique_des_sorts_speciaux_de_monstre[action]
-                #construction message a afficher
-                description = caracteristique_du_sort[2]
-                #intialisation du pourcentage de touche
-                pourcentage_de_touche = caracteristique_du_sort[0]
-                pourcentage_de_touche -= self.modele.CHANCEBONUSESQUIVE
-                #ca touche ?
-                nombre_aleatoire = random.randint(0, 100)
-                if nombre_aleatoire < pourcentage_de_touche:
-                    #touche
-                    #construction du message
-                    commentaire_a_afficher = caracteristique_du_sort[4]
-                    #application de l'effet
-                    nombre_tour = caracteristique_du_sort[1]
-                    if action in self.modele.sorts_de_blessure_de_monstre:
-                        self.modele.est_maudit_par_la_vie = True
-                        self.modele.est_maudit_par_la_vie_nombre_tour = nombre_tour
-                        commentaire_degat = f"Vous voilà Blessé pendant {nombre_tour} tours !"
-                    elif action in self.modele.sorts_de_deconcentration_de_monstre:
-                        self.modele.est_maudit_par_le_mana = True
-                        self.modele.est_maudit_par_le_mana_nombre_tour = nombre_tour
-                        commentaire_degat = f"Vous voilà Déconcentré pendant {nombre_tour} tours !"
-                    elif action in self.modele.sorts_de_gold_de_monstre:
-                        self.modele.est_maudit_par_le_gold = True
-                        self.modele.est_maudit_par_le_gold_nombre_tour = nombre_tour
-                        commentaire_degat = f"Vous voilà victime du Mal Jaune pendant {nombre_tour} tours !"
-                    elif action in self.modele.sorts_de_instable_de_monstre:
-                        self.modele.est_maudit_par_les_techniques = True
-                        self.modele.est_maudit_par_les_techniques_nombre_tour = nombre_tour
-                        commentaire_degat = f"Vous voilà Instable pendant {nombre_tour} tours !"
-                    elif action in self.modele.sorts_de_muet_de_monstre:
-                        self.modele.est_maudit_par_les_sorts = True
-                        self.modele.est_maudit_par_les_sorts_nombre_tour = nombre_tour
-                        commentaire_degat = f"Vous voilà Muet pendant {nombre_tour} tours !"
-                    elif action in self.modele.sorts_de_confusion_de_monstre:
-                        self.modele.est_maudit_par_les_items = True
-                        self.modele.est_maudit_par_les_items_nombre_tour = nombre_tour
-                        commentaire_degat = f"Vous voilà Confus pendant {nombre_tour} tours !"
+                            commentaire_element = f"\nL'ennemi vous gèle pendant {nombre_tour_gele} tours !"
+                        elif self.modele.monstre_a_utilise_sang_ce_tour:
+                            # calcul de la saignee
+                            pourcentage_saignee = caracteristique_du_sort[10]
+                            degat_saignee = round(
+                                (pourcentage_saignee / 100)
+                                * self.modele.points_de_vie_max
+                            )
+                            # application de la saignee
+                            degat_saignee = self.EnleveVieAuJoueur(degat_saignee)
+                            soin_saignee = degat_saignee
+                            self.modele.monstre_points_de_vie += soin_saignee
+                            self.EquilibragePointsDeVieEtMana()
+                            commentaire_element = f"\nL'ennemi vous draine {degat_saignee} points de vie , et en récupere {soin_saignee} !"
+                        elif self.modele.a_utilise_terre_ce_tour:
+                            # calcul de lapidation
+                            pourcentage_lapidation = caracteristique_du_sort[10]
+                            degat_lapidation = round(
+                                (pourcentage_lapidation / 100) * degat
+                            )
+                            # application lapidation
+                            degat_lapidation = self.EnleveVieAuJoueur(degat_lapidation)
+                            # construction du comentaire_element
+                            commentaire_element = f"\nL'ennemi vous inflige {degat_lapidation} points de dégâts supplémentaire par lapidation !"
+                    degat = self.EnleveVieAuJoueur(degat)
+                    commentaire_degat = (
+                        f"L'ennemi vous inflige {degat} points de dégât !"
+                    )
+                    commentaire_degat += commentaire_element
+                    self.CheckePuisAppliqueTransmutation(degat)
                 else:
-                    #touche pas
-                    commentaire_a_afficher = caracteristique_du_sort[3]
-                    commentaire_degat = "C'est pas passé loin !"
+                    commentaire_a_afficher = caracteristique_du_sort[6]
+                    commentaire_degat = "L'ennemi ne vous inflige aucun dégât."
                 self.vue.AfficheSortOuAttaque(
-                description, commentaire_a_afficher, commentaire_degat
+                    description, commentaire_a_afficher, commentaire_degat
                 )
-            # attaques qui ne rentrent pas dans la méthode globale (fait plus que juste des degat ou un element)
-            elif action == "Tout Feu Tout Flamme":
-                self.ToutFeuToutFlamme()
-            elif action == "Volepièce":
-                self.Volepiece()
-            elif action == "Bandit Manchot":
-                self.BanditManchot()
-            elif action == "Cat-astrophe":
-                self.Cat_astrophe()
-            elif action == "Son Lent":
-                self.SonLent()
-            elif action == "Vole-Ame":
-                self.Vole_Ame()
-            elif action == "Rituel":
-                self.Rituel()
-            elif action == "Tempêtes du Nord":
-                self.TempeteDuNord()
-            elif action == "Tempêtes du Sud":
-                self.TempeteDuSud()
-            elif action == "Tempêtes de l'Est":
-                self.TempeteDeEst()
-            elif action == "Tempêtes de l'Ouest":
-                self.TempeteDeOuest()
-            elif action == "Vacarme Rapide":
-                self.VacarmeRapide()
-            elif action == "Vacarme Lent":
-                self.VacarmeLent()
-            elif action == "Vide":
-                self.Vide()
-            elif action == "Eveil de Runes":
-                self.EveilDeRunes()
-            elif action == "Lamentations":
-                self.Lamentations()
-            elif action == "Invoquation Canope":
-                self.InvoquationCanope()
-            elif action == "Magie Noire":
-                self.MagieNoire()
-            elif action == "Magie Ténébreuse":
-                self.MagieTenebreuse()
-            elif action == "Tournicota":
-                self.Tournicota()
-            elif action == "Tournicotons":
-                self.Tournicotons()
-            elif action == "Tournicotez":
-                self.Tournicotez()
-            elif action == "Tome de Salomon":
-                self.TomeDeSalomon()
-            elif action == "Sort Ultime":
-                self.SortUltime()
-            elif action == "Ultime Ultime":
-                self.UltimeUltime()
-            elif action == "Ultima":
-                self.Ultima()
-            elif action == "Dragon Ascendant":
-                self.DragonAscendant()
-            elif action == "Magie Abyssale":
-                self.MagieAbyssale()
-            elif action == "Jugement":
-                self.Jugement()
-        #affiche si les degats ont été changés par bluff, montagne, brume de sang ou mirroir d'eau
-        if self.modele.commentaire_transmutation_degat != "":
-            self.vue.AfficheTransmutationDegat(self.modele.commentaire_transmutation_degat)
-
+            else:
+                # attaques avec d'autres effets que ceux de la méthode globale
+                #soin
+                if action in self.modele.sorts_de_soin_de_monstre:
+                    caracteristique_du_sort = self.modele.annuaire_de_caracteristique_des_sorts_speciaux_de_monstre[action]
+                    #intialisation des caracteristiques
+                    soin_minimum = caracteristique_du_sort[0]
+                    pourcentage_de_soin = caracteristique_du_sort[1]
+                    description = caracteristique_du_sort[2]
+                    commentaire_a_afficher = caracteristique_du_sort[3]
+                    #appliquer soin
+                    soin_applique = round(self.modele.monstre_points_de_vie_max * (pourcentage_de_soin / 100))
+                    if soin_applique < soin_minimum:
+                        soin_applique = soin_minimum
+                    self.modele.monstre_points_de_vie += soin_applique
+                    self.EquilibragePointsDeVieEtMana
+                    #construire message a afficher
+                    commentaire_degat = f"L'ennemi récupère {soin_applique} points de vie !"
+                    #afficher resultat
+                    self.vue.AfficheSortOuAttaque(
+                    description, commentaire_a_afficher, commentaire_degat
+                    )
+                #alteration d'état
+                elif ((action in self.modele.sorts_de_blessure_de_monstre) or
+                    (action in self.modele.sorts_de_deconcentration_de_monstre) or
+                    (action in self.modele.sorts_de_gold_de_monstre) or
+                    (action in self.modele.sorts_de_instable_de_monstre) or
+                    (action in self.modele.sorts_de_muet_de_monstre) or
+                    (action in self.modele.sorts_de_confusion_de_monstre)):
+                    caracteristique_du_sort = self.modele.annuaire_de_caracteristique_des_sorts_speciaux_de_monstre[action]
+                    #construction message a afficher
+                    description = caracteristique_du_sort[2]
+                    #intialisation du pourcentage de touche
+                    pourcentage_de_touche = caracteristique_du_sort[0]
+                    pourcentage_de_touche -= self.modele.CHANCEBONUSESQUIVE
+                    #ca touche ?
+                    nombre_aleatoire = random.randint(0, 100)
+                    if nombre_aleatoire < pourcentage_de_touche:
+                        #touche
+                        #construction du message
+                        commentaire_a_afficher = caracteristique_du_sort[4]
+                        #application de l'effet
+                        nombre_tour = caracteristique_du_sort[1]
+                        if action in self.modele.sorts_de_blessure_de_monstre:
+                            self.modele.est_maudit_par_la_vie = True
+                            self.modele.est_maudit_par_la_vie_nombre_tour = nombre_tour
+                            commentaire_degat = f"Vous voilà Blessé pendant {nombre_tour} tours !"
+                        elif action in self.modele.sorts_de_deconcentration_de_monstre:
+                            self.modele.est_maudit_par_le_mana = True
+                            self.modele.est_maudit_par_le_mana_nombre_tour = nombre_tour
+                            commentaire_degat = f"Vous voilà Déconcentré pendant {nombre_tour} tours !"
+                        elif action in self.modele.sorts_de_gold_de_monstre:
+                            self.modele.est_maudit_par_le_gold = True
+                            self.modele.est_maudit_par_le_gold_nombre_tour = nombre_tour
+                            commentaire_degat = f"Vous voilà victime du Mal Jaune pendant {nombre_tour} tours !"
+                        elif action in self.modele.sorts_de_instable_de_monstre:
+                            self.modele.est_maudit_par_les_techniques = True
+                            self.modele.est_maudit_par_les_techniques_nombre_tour = nombre_tour
+                            commentaire_degat = f"Vous voilà Instable pendant {nombre_tour} tours !"
+                        elif action in self.modele.sorts_de_muet_de_monstre:
+                            self.modele.est_maudit_par_les_sorts = True
+                            self.modele.est_maudit_par_les_sorts_nombre_tour = nombre_tour
+                            commentaire_degat = f"Vous voilà Muet pendant {nombre_tour} tours !"
+                        elif action in self.modele.sorts_de_confusion_de_monstre:
+                            self.modele.est_maudit_par_les_items = True
+                            self.modele.est_maudit_par_les_items_nombre_tour = nombre_tour
+                            commentaire_degat = f"Vous voilà Confus pendant {nombre_tour} tours !"
+                    else:
+                        #touche pas
+                        commentaire_a_afficher = caracteristique_du_sort[3]
+                        commentaire_degat = "C'est pas passé loin !"
+                    self.vue.AfficheSortOuAttaque(
+                    description, commentaire_a_afficher, commentaire_degat
+                    )
+                # attaques qui ne rentrent pas dans la méthode globale (fait plus que juste des degat ou un element)
+                elif action == "Tout Feu Tout Flamme":
+                    self.ToutFeuToutFlamme()
+                elif action == "Volepièce":
+                    self.Volepiece()
+                elif action == "Bandit Manchot":
+                    self.BanditManchot()
+                elif action == "Cat-astrophe":
+                    self.Cat_astrophe()
+                elif action == "Son Lent":
+                    self.SonLent()
+                elif action == "Vole-Ame":
+                    self.Vole_Ame()
+                elif action == "Rituel":
+                    self.Rituel()
+                elif action == "Tempêtes du Nord":
+                    self.TempeteDuNord()
+                elif action == "Tempêtes du Sud":
+                    self.TempeteDuSud()
+                elif action == "Tempêtes de l'Est":
+                    self.TempeteDeEst()
+                elif action == "Tempêtes de l'Ouest":
+                    self.TempeteDeOuest()
+                elif action == "Vacarme Rapide":
+                    self.VacarmeRapide()
+                elif action == "Vacarme Lent":
+                    self.VacarmeLent()
+                elif action == "Vide":
+                    self.Vide()
+                elif action == "Eveil de Runes":
+                    self.EveilDeRunes()
+                elif action == "Lamentations":
+                    self.Lamentations()
+                elif action == "Invoquation Canope":
+                    self.InvoquationCanope()
+                elif action == "Magie Noire":
+                    self.MagieNoire()
+                elif action == "Magie Ténébreuse":
+                    self.MagieTenebreuse()
+                elif action == "Tournicota":
+                    self.Tournicota()
+                elif action == "Tournicotons":
+                    self.Tournicotons()
+                elif action == "Tournicotez":
+                    self.Tournicotez()
+                elif action == "Tome de Salomon":
+                    self.TomeDeSalomon()
+                elif action == "Sort Ultime":
+                    self.SortUltime()
+                elif action == "Ultime Ultime":
+                    self.UltimeUltime()
+                elif action == "Ultima":
+                    self.Ultima()
+                elif action == "Dragon Ascendant":
+                    self.DragonAscendant()
+                elif action == "Magie Abyssale":
+                    self.MagieAbyssale()
+                elif action == "Jugement":
+                    self.Jugement()
+            #affiche si les degats ont été changés par bluff, montagne, brume de sang ou mirroir d'eau
+            if self.modele.commentaire_transmutation_degat != "":
+                self.vue.AfficheTransmutationDegat(self.modele.commentaire_transmutation_degat)
+        else:
+            self.MetMonstreEnEtatDeChoc(action)
 
     def Jugement(self):
         degat = self.modele.nombre_de_monstres_tues
@@ -7099,8 +7151,26 @@ class Control:
         return degat_saignee
 
     def SeDefendre(self):
-        self.vue.AfficheSeDefendre()
         self.modele.se_defend = True
+        commentaire = ("Vous ramenez vos bras a votre torse et vous préparez a recevoir un coup.")
+        if self.modele.patience:
+            soin = round(self.modele.points_de_vie_max * 0.12)
+            self.modele.points_de_vie += soin
+            self.EquilibragePointsDeVieEtMana()
+            commentaire += f"\nLa Terre récompense votre patience. Vous reprenez {soin} points de vie !"
+        self.vue.AfficheSeDefendre(commentaire)
+
+    
+    def PasserSonTour(self):
+        personnage = "Vous passez votre"
+        commentaire = "...tout simplement."
+        if self.modele.patience:
+            soin = round(self.modele.points_de_vie_max * 0.12)
+            self.modele.points_de_vie += soin
+            self.EquilibragePointsDeVieEtMana()
+            commentaire = f"...et reprenez {soin} points de vie."
+        self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
+
 
     def EnleveVieAuJoueur(self, degat):
         if self.modele.se_defend:
@@ -7111,3 +7181,18 @@ class Control:
         else:
             self.modele.points_de_vie -= degat
         return degat
+    
+    def RegardeSiMonstreAAssezDeMana(self, action):
+        if self.modele.monstre_points_de_mana >= self.modele.ANNUAIRECOUTSORTMONSTRE[action]:
+            action_possible = True
+            self.modele.monstre_points_de_mana -= self.modele.ANNUAIRECOUTSORTMONSTRE[action]
+        else:
+            action_possible = False
+        return action_possible
+    
+    def MetMonstreEnEtatDeChoc(self, action):
+        self.vue.AfficheMonstreEtatDeChoc(action)
+        self.modele.monstre_en_etat_de_choc = True
+        self.modele.monstre_en_etat_de_choc_nombre_tour = 3
+        self.modele.monstre_passe_son_tour = True
+        self.modele.monstre_points_de_mana = "ERROR"

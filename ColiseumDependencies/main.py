@@ -694,13 +694,13 @@ LISTEDEMUSIQUE = [
     "Dissonance Cognitive",
     "Faux semblants",
     "La Hache et le Grimoire",
-    "Contradictions",
+    "Réarrangement Liminal",
     "Arythmie",
     "Au Détour D’un Sentier Une Charogne Infâme",
     "La Divine Comédie",
     "Apogée Inversée",
-    "Pénultima",
-    "Théorie du Chaos"
+    "Théorie du Chaos",
+    "Pénultime",
 
 
 ]

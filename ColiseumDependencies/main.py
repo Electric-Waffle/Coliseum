@@ -667,6 +667,7 @@ LISTEDEMUSIQUE = [
     "Prosopagnosie",
     "Sillages Sur Une Mer de Rêves",
     "Pluie d'Automne",
+    "Bêtise Humaine",
     "Exploratio",
     "Les Joies du Combat",
     "Revenant",
@@ -712,6 +713,7 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["abyss", "Vous écoutez "],
     ["gravestone", "Vous écoutez "],
     ["ending", "Vous écoutez "],
+    ["reconfort", "Vous écoutez "],
     ["etage_1", "Vous écoutez "],
     ["battle_theme_1", "Vous écoutez "],
     ["boss_1", "Vous écoutez "],
@@ -2052,6 +2054,7 @@ class PlayerCaracteristics:
         self.red_coin_recu_par_extermination = False
         self.redcoin_bought = False
         self.library_used = False
+        self.fountain_used = False
         self.number_of_tirage = 0
         self.invitation_received = False
         self.chemin_musique = os.path.dirname(os.path.realpath(__file__))
@@ -2280,10 +2283,12 @@ class Observe:
         pass
 
     def SeeSomething(self):
+        print("...et quelque chose attire votre attention !")
+        Affichage.EntreePourContinuer()
         if Player.numero_de_letage == 1:
             self.DoTheLibrary()  # bibliotheque de gros sorts (recuperer les sorts consignés)
         elif Player.numero_de_letage == 2:
-            DoTheThing()  # Fontaine redonne pv 3 fois
+            self.DoTheFountain()  # Fontaine redonne pv 3 fois
         elif Player.numero_de_letage == 3:
             DoTheThing()  # Gacha game a mutations
         elif Player.numero_de_letage == 4:
@@ -2301,6 +2306,345 @@ class Observe:
         elif Player.numero_de_letage == 10:
             DoTheThing()  # Affronte Alfred pour plein de récompenses
 
+    def DoTheFountain(self):
+        if Player.fountain_used:
+            print("Au détour d'une haie de roses blanches, vous découvrez une magnifique fontaine de marbre.")
+            print("Des anges sont gravés dans la pierre, ainsi qu'un griffon avec la gueule grande ouverte.")
+            print("Au centre, sur un petit piedestal se trouve une inscription particulière que vous n'aviez pas vu avant :")
+            Affichage.EntreePourContinuer()
+            print("*A ceux qui ont besoin de moi, je donne une chance de prouver leur valeur.*")
+            print("*A ceux qui ont déjà prouvé leur valeur sans mon aide, j'offre la vigueur du griffon.*")
+            print("*Et a ceux qui cherchent plus loin que l'honneur ou la force...*")
+            print("*...laissez donc mourir votre âme et votre corps, et venez à ma rencontre.*")
+            Affichage.EntreePourContinuer()
+            print("Vous laissez la fontaine vide et retournez sur vos pas.")
+            Affichage.EntreePourContinuer()
+        elif Player.points_de_vie == 1 and Player.points_de_mana == 0:
+            mixer.quit()
+            print("Au détour d'une haie de roses blanches, vous découvrez une magnifique fontaine de marbre...?")
+            print("Ce qui semblait être du marbre prend une teinte pâle, puis verte.")
+            Affichage.EntreePourContinuer()
+            print("Vous vous approchez prudemment de la fontaine(?).")
+            Affichage.EntreePourContinuer()
+            numero_du_commentaire = 0
+            commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                           "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve un petit morceau de sucre.")
+            while True:
+                while True:
+                    try:
+                        print(commentaire)
+                        if numero_du_commentaire == 11:
+                            print("1 - Repartir")
+                            print("2 - Boire l'eau(?) de la fontaine")
+                            print("3 - Attendre.")
+                            print("666 - T r a n c h e r  l a  c h o s e")
+                        elif numero_du_commentaire == 12:
+                            print("2 - B   O   I   R   E")
+                        else:
+                            print("1 - Repartir")
+                            print("2 - Boire l'eau(?) de la fontaine")
+                            print("3 - Attendre.")
+                        choix = int(input("Que souhaitez vous faire ? "))
+                        ClearConsole()
+                        if (
+                            ((numero_du_commentaire in range(0, 11)) and (choix in [1, 2, 3])) or
+                            ((numero_du_commentaire == 11) and (choix in [1, 2, 3, 666])) or
+                            ((numero_du_commentaire == 12) and (choix == 2))
+                        ):
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    print("Vous laissez...ça...derrière vous et repartez d'ou vous venez en courant.")
+                    Affichage.EntreePourContinuer()
+                    PlayMusic("etage_2")
+                    break
+                elif choix == 666:
+                    print("Vous sortez une arme, n'importe laquelle, et sentez votre énergie s'épuiser.")
+                    Affichage.AfficheAvecUnTempsDattente(4)
+                    print("Mu par l'énergie du désespoir, les yeux pleins de larmes et de terreur, vous frappez un des yeux gluant de la  c  h  o  s  e !")
+                    Affichage.AfficheAvecUnTempsDattente(5)
+                    print("Un hurlement sanguin se fait entendre dans tout l'étage, et les haies de roses blanches se rapprochent de vous !")
+                    Affichage.AfficheAvecUnTempsDattente(5)
+                    print("Vous tentez de frapper une nouvelle fois, mais vous sentez une résistance au niveau du fourreau de votre arme..")
+                    Affichage.AfficheAvecUnTempsDattente(4)
+                    print("Les tentacules se sont enroulés autour de vos pieds !")
+                    Affichage.AfficheAvecUnTempsDattente(3)
+                    print("Les haies de roses blanches se rapprochent encore, et le son devient guttural,")
+                    Affichage.AfficheAvecUnTempsDattente(3)
+                    print("Comme si la c h o s e était entrain de se réjouir...")
+                    Affichage.AfficheAvecUnTempsDattente(3)
+                    print("Vous sentez la peur briser les murs de votre esprit, et les roses blanches entourer votre corps frêle...")
+                    Affichage.AfficheAvecUnTempsDattente(4)
+                    print("...pâle...")
+                    Affichage.AfficheAvecUnTempsDattente(2)
+                    print("...faible...")
+                    Affichage.AfficheAvecUnTempsDattente(2)
+                    print("...pile poil assez faible pour se faire a b s o r b e r sans poser de résistance...")
+                    Affichage.AfficheAvecUnTempsDattente(4)
+                    print("...et les roses poussant leurs racines a travers votre peau !")
+                    Affichage.AfficheAvecUnTempsDattente(3)
+                    print("Vous les sentez s'insinuer dans vos pores, prendre place dans vos organes...")
+                    Affichage.AfficheAvecUnTempsDattente(3.5)
+                    print("VOus senteEz Leees TTENTAculEs se MOUVOIR MOUVOIR souS vOtRe Peauuu")
+                    Affichage.AfficheAvecUnTempsDattente(3)
+                    print("Vooouuss VOUS DEbattEZZ cONTre L'enVAhiissEEEEur BIolooogiquee...")
+                    Affichage.AfficheAvecUnTempsDattente(3)
+                    print("Crieezezz a pleeien pouuopooumon, AppellezzZ DESESPEREMETN le MArchand, OUUOU le BOSsssss...")
+                    Affichage.AfficheAvecUnTempsDattente(4)
+                    print("EN VAIN EN VAIN EN VAIN EN VAIN EN VAIN Eeeeenenn VAaain")
+                    Affichage.AfficheAvecUnTempsDattente(3)
+                    print("VoUs SeNtEz LeS rAcInEs BoUgEr AuToUr De VoS gLoBeS oCcUlAiReS...")
+                    Affichage.AfficheAvecUnTempsDattente(3.5)
+                    print("Vou-")
+                    Affichage.AfficheAvecUnTempsDattente(0.1)
+                    PlayMusic("etage_2")
+                    print("Votre peau se met a picoter, et vous hésitez quelques secondes avant d'engloutir le liquide magique.")
+                    Affichage.EntreePourContinuer()
+                    print("L'eau était fraiche ! Vous gagnez 3 points de mana max et reprenez tout vos points de mana !")
+                    Player.points_de_mana_max += 3
+                    Player.points_de_mana = Player.points_de_mana_max
+                    Affichage.EntreePourContinuer()
+                    print("L'eau s'arrête de couler, et la fée disparait dans l'éther.")
+                    Player.fountain_used = True
+                    print("Vous laissez la fontaine désormais vide et repartez sur vos pas.")
+                    Affichage.EntreePourContinuer()
+                    print("...?")
+                    Affichage.EntreePourContinuer()
+                    print("Vous manquez de trébucher sur quelque chose qui sort du sol !")
+                    Affichage.EntreePourContinuer()
+                    print("On dirait une main autour de laquelle pousse une rose blanche, tenant dans sa paume un bout de papier...")
+                    Affichage.EntreePourContinuer()
+                    print("Vous lisez le bout de papier a voix haute :")
+                    Affichage.EntreePourContinuer()
+                    print("*Nb talent disponible colle pas avec menu redcoin ==) nombre de lignes menu redcoin [LE MEME] alors que plus talent. ==) signification particuliere ?*"
+                          "\n*nb ligne redcoin ==) Action??(le mot est barré) ==)Menu??(le mot est barré) ==)Ipv4??(le mot est entouré)*")
+                    Affichage.EntreePourContinuer()
+                    print("Vous jetez le bout de papier insensé par terre et regardez quelques instants la main.")
+                    Affichage.EntreePourContinuer()
+                    print("Pour une raison qui vous échappe, vous ressentez un frisson en la regardant.")
+                    Affichage.EntreePourContinuer()
+                    print("Le gant qui l'habille ne ressemble-t-il pas au votre aussi ?")
+                    Affichage.EntreePourContinuer()
+                    print("...")
+                    Affichage.EntreePourContinuer()
+                    print(". . .")
+                    Affichage.EntreePourContinuer()
+                    print(".     .     .")
+                    Affichage.EntreePourContinuer()
+                    print(".               .                   .")
+                    Affichage.EntreePourContinuer()
+                    print("Meh. Peut etre pas.")
+                    Affichage.EntreePourContinuer()
+                    break
+                elif choix == 3:
+                    numero_du_commentaire += 1
+                    if numero_du_commentaire == 1:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve un petit morceau de sucre."
+                                       "\nIl y a du mouvement dans un buisson proche de vous.")
+                    elif numero_du_commentaire == 2:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve un petit morceau de sucre."
+                                       "\nUne fée sort du buisson et s'approche du piédestal.")
+                    elif numero_du_commentaire == 3:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve un petit morceau de sucre."
+                                       "\nLa fée se pose sur le morceau de sucre et commence a le grignoter")
+                    elif numero_du_commentaire == 4:
+                        PlayMusic("abyss")
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nSoudainement, des tentacules sortent des côtés du piedestal et entourent la fée.")
+                    elif numero_du_commentaire == 5:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nLa fée se débat, et les tentacules se resserent autour de son petit corps.")
+                    elif numero_du_commentaire == 6:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nLes tentacules verts se font alors de plus en plus fins , et continuent d'entourer la fée dans un cocon serré.")
+                    elif numero_du_commentaire == 7:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve une fée qui a l'air d'être en état de biostase,"
+                                       "\nmais un examen plus approfondi révèle un cocon de fil la maintenant immobile a quelques centimètre du piédestal.")
+                    elif numero_du_commentaire == 8:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve une fée piégée."
+                                       "\nVous apercevez les tentacules autour d'elle vibrer, et pomper quelque chose.")
+                    elif numero_du_commentaire == 9:
+                        commentaire = ("Des anges sont gravés dans la pierre(?), et d'une tête de griffon jaillit une eau(?) noire."
+                                       "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve une fée piégée."
+                                       "\nLe marbre(NON) reprend la couleur du marbre, la fontaine reprend une apparence de fontaine.")
+                    elif numero_du_commentaire == 10:
+                        commentaire = ("Des anges sont gravés dans la pierre(FUIS), et d'une tête de griffon se met à jaillir une eau(NON) cristalline."
+                                       "\nAu centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve une fée en état de biostase(FAUX).")
+                    elif numero_du_commentaire == 11:
+                        commentaire = ("Des yeux s'ouvrent au niveau de l'abdomen des anges taillés.\nIl vous fixe.")
+                    else:
+                        commentaire = ("La c h o s e regarde dans votre âme, et vous sentez votre énergie s'épuiser.\nVos décisions ne vous appartiennent plus.\nC'est trop tard.")
+                elif choix == 2:
+                    print("Vous vous accroupissez et plongez les mains dans l'eau...")
+                    print("...?")
+                    Affichage.EntreePourContinuer()
+                    print("Ce qui semblait être de l'eau est maintenant une sorte de gelée collante, et vos mains sont prises dedans !")
+                    Affichage.EntreePourContinuer()
+                    numero = 152
+                    commentaire = "Appuyez sur Entree pour tenter de vous sortir de la !!!"
+                    while True:
+                        input(commentaire)
+                        ClearConsole()
+                        if numero in range(0, 16):
+                            commentaire = "Appuyez sur Entree pour tenter de vous sortir de la !!"
+                            numero += 1
+                        elif numero in range(16, 31):
+                            commentaire = "Appuyez sur Entree pour tenter de vous sortir de la !"
+                            numero += 1
+                        elif numero in range(31, 46):
+                            commentaire = "Appuyez sur Entree pour tenter de vous sortir de la..."
+                            numero += 1
+                        elif numero in range(46, 61):
+                            commentaire = "Appuyez sur Entree pour tenter de vous sortir..."
+                            numero += 1
+                        elif numero in range(61, 76):
+                            commentaire = "Appuyez sur Entree pour tenter..."
+                            numero += 1
+                        elif numero in range(76, 91):
+                            commentaire = "Appuyez sur Entree pour..."
+                            numero += 1
+                        elif numero in range(91, 106):
+                            commentaire = "..."
+                            numero += 1
+                        elif numero in range(106, 151):
+                            commentaire = "C'est trop tard.\nVous êtes surement déja mort."
+                            numero += 1
+                        else:
+                            commentaire = ("")
+                            for _ in range(1, 100):
+                                commentaire += ("MORS|ACERBIOR|EST|CUM|IN|NEGATIONE|ADHAESISTI|SICUT|MUSCAE|IN|PLANTA|CARNIVORA|")
+        elif Player.boss_battu and (Player.nombre_dennemis_a_letage == 0):
+            while True:
+                try:
+                    print("Au détour d'une haie de roses blanches, vous découvrez une magnifique fontaine de marbre.")
+                    print("Des anges sont gravés dans la pierre, et d'une tête de griffon jaillit une eau rose bonbon.")
+                    print("Au centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve un petit corps en décomposition.")
+                    print("1 - Ne rien faire")
+                    print("2 - Boire l'eau(?) de la fontaine")
+                    choix = int(input("Que souhaitez vous faire ? "))
+                    ClearConsole()
+                    if choix in [1, 2]:
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous laissez la fontaine et repartez sur vos pas.")
+                Affichage.EntreePourContinuer()
+            else:
+                print("Vous mettez vos mains en cul-de-poule et les remplissez avec l'eau de la fontaine.")
+                print("Une vague et délicieuse odeur d'aromates, de liqueur de cèdre, de poudre de santal, de myrrhe et de cinnamome se répend dans la paume de vos mains.")
+                print("Votre peau se met a bruler, et vous hésitez quelques secondes avant d'engloutir le liquide visqueux.")
+                Affichage.EntreePourContinuer()
+                print("L'eau avait un gout de violette ! Vous gagnez 6 points de mana/vie max et reprenez tout vos points de mana/vie !")
+                Player.points_de_mana_max += 6
+                Player.points_de_mana = Player.points_de_mana_max
+                Player.points_de_vie_max += 6
+                Player.points_de_vie = Player.points_de_vie_max
+                Affichage.EntreePourContinuer()
+                print("L'eau s'arrête de couler, et le cadavre disparait dans l'éther.")
+                Player.fountain_used = True
+                print("Vous laissez la fontaine désormais vide et repartez sur vos pas.")
+                Affichage.EntreePourContinuer()
+        else:
+            while True:
+                try:
+                    print("Au détour d'une haie de roses blanches, vous découvrez une magnifique fontaine de marbre.")
+                    print("Des anges sont gravés dans la pierre, et d'une tête de griffon jaillit une eau cristalline.")
+                    print("Au centre, sur un petit piedestal enfoncé a mi-hauteur dans l'eau, se trouve une fée en état de biostase.")
+                    print("1 - Ne rien faire")
+                    print("2 - Boire l'eau de la fontaine")
+                    print("3 - Attraper la fée dans un bocal")
+                    choix = int(input("Que souhaitez vous faire ? "))
+                    ClearConsole()
+                    if choix in [1, 2, 3]:
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous laissez la fontaine et repartez sur vos pas.")
+                Affichage.EntreePourContinuer()
+            elif choix == 2:
+                print("Vous mettez vos mains en cul-de-poule et les remplissez avec l'eau de la fontaine.")
+                print("Votre peau se met a picoter, et vous hésitez quelques secondes avant d'engloutir le liquide magique.")
+                Affichage.EntreePourContinuer()
+                nombre_aleatoire = random.randint(1, 2)
+                if nombre_aleatoire == 1:
+                    print("L'eau était fraiche ! Vous gagnez 3 points de mana max et reprenez tout vos points de mana !")
+                    Player.points_de_mana_max += 3
+                    Player.points_de_mana = Player.points_de_mana_max
+                else:
+                    print("L'eau était chaude ! Vous gagnez 3 points de vie max et reprenez tout vos points de vie !")
+                    Player.points_de_vie_max += 3
+                    Player.points_de_vie = Player.points_de_vie_max
+                Affichage.EntreePourContinuer()
+                print("L'eau s'arrête de couler, et la fée disparait dans l'éther.")
+                Player.fountain_used = True
+                print("Vous laissez la fontaine désormais vide et repartez sur vos pas.")
+                Affichage.EntreePourContinuer()
+            elif choix == 3:
+                print("Vous vous approchez de la fée et la mettez dans votre flacon d'un coup rapide.")
+                print("Vous obtenez une Fée dans un Bocal !")
+                Affichage.EntreePourContinuer()
+                if Player.possede_une_fee:
+                    PlaySound("death")
+                    print("Alors que vous rangiez votre bocal dans votre sacoche,"
+                          " vous voyez les deux fées unir leur pouvoir a travers"
+                          " les bocaux pour briser leur cage de verre et s'enfuir.")
+                    Player.possede_une_fee = False
+                    Affichage.EntreePourContinuer()
+                    PlaySound("death")
+                    print("Et l'eau s'arrête de couler.")
+                    Affichage.EntreePourContinuer()
+                    print("Vous avez...tout perdu.")
+                    print("Votre fée, la fée de la fontaine, et l'eau de la fontaine.")
+                    Affichage.EntreePourContinuer()
+                    print("A ce point la, ca ne serait même pas étonnant que les fees se sont échappées avec tout votre gold !")
+                    Affichage.EntreePourContinuer()
+                    PlaySound("death")
+                    print("Parce que c'est le cas.")
+                    print("Vous n'avez plus un gold a votre nom.")
+                    Player.nombre_de_gold = 0
+                    Affichage.EntreePourContinuer()
+                    print("Vous laissez la fontaine désormais vide et repartez sur vos pas, une expression traumatisée et misérable désormais accrochée a votre visage.")
+                    Affichage.EntreePourContinuer()
+                    PlaySound("death")
+                    print("Qui vous empeche de voir une branche a votre hauteur, que vous vous prenez en pleine poire.")
+                    Affichage.EntreePourContinuer()
+                    degat = Player.points_de_vie - 1
+                    Player.points_de_vie = 1
+                    PlaySound("death")
+                    print(f"Vous perdez {degat} points de vie.")
+                    Affichage.EntreePourContinuer()
+                    PlaySound("death")
+                    print("Le choc vous fait craquer.")
+                    print("Vous vous mettez en position fétale et pleurez toute les larmes de votre corps.")
+                    Affichage.EntreePourContinuer()
+                    print("Votre crise de nerf vous touche au plus profond de votre âme.")
+                    Affichage.EntreePourContinuer()
+                    degat = Player.points_de_mana - 1
+                    Player.points_de_mana = 1
+                    PlaySound("death")
+                    print(f"Vous perdez {degat} points de mana.")
+                    Affichage.EntreePourContinuer()
+                    print("J'espère que vous avez fait une sauvegarde...")
+                    Affichage.EntreePourContinuer()
+                    print("...")
+                    Affichage.EntreePourContinuer()
+                    print("...sinon, voila un peu de musique pour vous réconforter.")
+                    Affichage.EntreePourContinuer()
+                    PlayMusic("reconfort")
+                else:
+                    Player.possede_une_fee = True
+                    print("L'eau s'arrête de couler.")
+                    print("Vous laissez la fontaine désormais vide et repartez sur vos pas.")
+                    Affichage.EntreePourContinuer()
+
     def DoTheLibrary(self):
         # Recuperation de la liste de sorts enregistrés
         donnees_de_s0ve = self.GetPermanentThingsFromS0ve()
@@ -2308,8 +2652,6 @@ class Observe:
         nombre_aleatoire = random.randint(0, 100)
         if nombre_aleatoire in [1, 2, 3]:
             liste_de_sorts_enregistres = ["jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable"]
-        print("...et quelque chose attire votre attention !")
-        Affichage.EntreePourContinuer()
         print("Derrière un rocher, vous trouvez un ancien passage quasi-effondré menant a une petite pièce étroite.")
         print("Au milieu se tient un livre usé par le temps, dont la couverture représente une magnifique cigogne bleue regardant vers la droite.")
         print("Vous ouvrez le livre...")
@@ -2482,6 +2824,7 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["Possede une gemme de mana"] = Player.gemme_de_mana
         self.dictionnaire_de_sauvegarde["Possede une fée"] = Player.possede_une_fee
         self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"] = Player.library_used
+        self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"] = Player.fountain_used
 
     def FromDictToPlayer(self):
         Player.nom_du_personnage = ((self.dictionnaire_de_sauvegarde["Nom"]).strip('"'))
@@ -2531,6 +2874,7 @@ class SaveManagement:
         if "Invitation Recue" in self.dictionnaire_de_sauvegarde:
             Player.invitation_received = ast.literal_eval(self.dictionnaire_de_sauvegarde["Invitation Recue"])
         Player.library_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"])
+        Player.fountain_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"])
 
     def FromDictToSaveFile(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -2619,6 +2963,14 @@ def PlayMusic(musique):
     mixer.init()
     mixer.music.load(musique)
     mixer.music.play(-1)
+
+
+def PlaySound(musique):
+    dir_path = Player.chemin_musique
+    musique = dir_path + f"\\{musique}.mp3"
+    mixer.init()
+    mixer.music.load(musique)
+    mixer.music.play()
 
 
 def ChoseCharacter(Player):
@@ -2725,8 +3077,8 @@ def ShowRecup():
             break
         except ValueError:
             ClearConsole()
-    Affichage.AfficheLongChargement()
-    if choix in [362951847]:
+    #Affichage.AfficheLongChargement()
+    if choix in [362951847, 14]:
         if choix == 1:
             nom_de_limage = "Feu"
         elif choix == 1:
@@ -2743,14 +3095,14 @@ def ShowRecup():
             nom_de_limage = "Ame"
         elif choix == 362951847:
             nom_de_limage = "python_properties_Anox"
-        elif choix == 8:
-            nom_de_limage = "Indice2"
+        elif choix == 14:
+            nom_de_limage = "python_properties_modele"
         elif choix == 9:
             nom_de_limage = "Indice3"
         elif choix == 10:
             nom_de_limage = "Invitation"
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        chemin_de_limage = dir_path + "\\"
+        chemin_de_limage = dir_path + "\\__py.property__\\"
         open_image(f"{chemin_de_limage}{nom_de_limage}.xldr")
     else:
         print("                           Donnée Récupérée :")
@@ -3300,7 +3652,7 @@ while game_in_session:
         Trader.DoTrading() #DONE
     elif choix == 4:
         print("Vous vous baladez dans l'étage...")
-        if Player.numero_de_letage == 1 :
+        if Player.numero_de_letage in [1, 2] :
             Observation.SeeSomething()
         else:
             print("...et ne trouvez rien d'interressant.")

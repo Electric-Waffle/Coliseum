@@ -8,9 +8,9 @@ Sorts|['Thermosphère Chaude', 'Thermosphère Brulante']
 Items|{'Feuille Jindagee': 0, 'Fruit Jindagee': 0, 'Feuille Aatma': 0, 'Fruit Aatma': 0, 'Crystal Elémentaire': 2, 'Ambroisie': 0, 'Hydromel': 3, 'Orbe de Furie': 1, 'Orbe de Folie': 0, 'Remède': 0, 'Remède Superieur': 0, 'Remède Divin': 0, 'Pillule': 0, 'Pillule Superieure': 0, 'Pillule Divine': 0, 'Fléchette Rouge': 0, 'Flèche Rouge': 0, 'Fléchette Bleue': 4, 'Flèche Bleue': 0, 'Poudre Explosive': 0, 'Roche Explosive': 0, 'Bombe Explosive': 0, 'Fiole de Poison': 0, 'Gourde de Poison': 0, "Sève d'Absolution": 0, "Larme d'Absolution": 0, "Soluté d'Absolution": 0, "Sève d'Exorcisme": 0, "Larme d'Exorcisme": 0, "Soluté d'Exorcisme": 0, 'Mutagène Bleu': 0, 'Grand Mutagène Bleu': 0, 'Mutagène Rouge': 0, 'Grand Mutagène Rouge': 0, 'Mutagène Vert': 0, 'Grand Mutagène Vert': 0, 'Mutagène Doré': 0, 'Grand Mutagène Doré': 0, 'Mutagène Hérétique': 0, 'Mutagène Fanatique': 0}
 Talents|['Affinitée de Feu', 'Pyrophile']
 Points de vie max|4000
-Points de vie|4000
+Points de vie|1
 Points de mana max|2000
-Points de mana|2000
+Points de mana|0
 Points de force|200
 Points d'intelligence|200
 Points de defence|200
@@ -22,11 +22,11 @@ Chance d'esquive|0
 Nombre de gold|2500000
 Nombre de Redcoins|0
 Nombre de monstres tués|0
-Numéro de l'etage|1
+Numéro de l'etage|2
 Quete en cours|None
 Le Boss a ete Battu|False
 Commentaire pour l'affichage du Boss dans le menu|Affronter le Boss
-Nombre d'ennemis restant a l'étage|15
+Nombre d'ennemis restant a l'étage|0
 Le Redcoin d'extermination a ete recu|False
 Le livre de sort a ete utilise|False
 Le Redcoin du marchand a ete achete|False
@@ -34,3 +34,4 @@ Nombre de Tirage acheté|0
 Possede une gemme de vie|False
 Possede une gemme de mana|False
 Possede une fée|False
+La fontaine a ete utilise|False

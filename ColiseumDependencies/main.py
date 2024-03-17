@@ -1586,6 +1586,19 @@ class Affiche:
         input("(Appuyez sur entrée pour continuer)")
         ClearConsole()
 
+    def AfficheGacha(self, recompense):
+        PlaySound("gacha")
+        print("Le mutagène se révèle...")
+        Affichage.AfficheAvecUnTempsDattente(1.7)
+        print("Le mutagène se révèle être...")
+        Affichage.AfficheAvecUnTempsDattente(1.7)
+        print("Le mutagène se révèle être un...")
+        Affichage.AfficheAvecUnTempsDattente(1.5)
+        time.sleep(0.9)
+        print(f"Le mutagène se révèle être un [{recompense}] !")
+        self.EntreePourContinuer()
+        PlayMusic("etage_3")
+
     def IntroBoss(self, commentaire):
         print(commentaire)
         self.EntreePourContinuer()
@@ -2057,6 +2070,7 @@ class PlayerCaracteristics:
         self.fountain_used = False
         self.number_of_tirage = 0
         self.invitation_received = False
+        self.gold_in_well = 50
         self.chemin_musique = os.path.dirname(os.path.realpath(__file__))
 
     def UseCharacterForInitCaracteristics(self, caracteristiques):
@@ -2290,21 +2304,475 @@ class Observe:
         elif Player.numero_de_letage == 2:
             self.DoTheFountain()  # Fontaine redonne pv 3 fois
         elif Player.numero_de_letage == 3:
-            DoTheThing()  # Gacha game a mutations
+            self.DoTheGacha()  # Gacha game a mutations
         elif Player.numero_de_letage == 4:
             DoTheThing()  # machine a gold a sang
         elif Player.numero_de_letage == 5:
-            DoTheThing()  # bibliotheque de gros sorts (choisir sort a apprendre, choisir sort a consigner)
+            DoTheThing()  # alchimiste divin demande manamax
         elif Player.numero_de_letage == 6:
             DoTheThing()  # fantome des quetes ultimes
         elif Player.numero_de_letage == 7:
-            DoTheThing()  # alchimiste divin demande manamax
-        elif Player.numero_de_letage == 8:
             DoTheThing()  # rituels de sang pour chance critiques
+        elif Player.numero_de_letage == 8:
+            DoTheThing()  # bibliotheque de gros sorts (choisir sort a apprendre, choisir sort a consigner)
         elif Player.numero_de_letage == 9:
             DoTheThing()  # Porte demande 100 red coins pour etre ouverte (reste par partie), débloque un gauntlet de 50 ennemis pour avoir ame
         elif Player.numero_de_letage == 10:
             DoTheThing()  # Affronte Alfred pour plein de récompenses
+
+    def DoTheGacha(self):
+        chanceux = False
+        malchanceux = False
+        print("Un petit étang, grand comme une chambre d'hotel, entouré de hauts palmiers et de verdure.")
+        commentaire = ("Dans l'eau bleutée, vous pouvez voir un profond abysse dans lequel se perd la lumière.")
+        nombre_aleatoire = random.randint(0, Player.points_de_mana_max)
+        if nombre_aleatoire == Player.points_de_mana:
+            chanceux = True
+            commentaire += "Et à l'interieur, une gigantesque baleine nage sereinement."
+        elif nombre_aleatoire == 0:
+            malchanceux = True
+            commentaire += "Et tout au fond, une paire d'yeux qui vous regarde... fixement."
+        print(commentaire)
+        print("Cepandant, quand vous tentez d'enfoncer vos mains dans l'oasis ou de toucher les buissons qui l'entourent, tout disparait sans laisser de trace.")
+        print("Comme si il n'y avait jamais rien eu.")
+        Affichage.EntreePourContinuer()
+        while True:
+            while True:
+                try:
+                    print("Dans le ciel reflété par la surface de l'étang, vous pouvez voir les mots suivants :")
+                    print("*L'Or Change Le Monde*")
+                    print("1 - Repartir")
+                    print("2 - Jetter 45 golds dans l'étang")
+                    print("3 - Jetter 75 golds dans l'étang")
+                    choix = int(input("Que souhaitez vous faire ? "))
+                    ClearConsole()
+                    if choix in [1, 2, 3]:
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous laissez l'oasis derrière vous et repartez dans l'océan de sable.")
+                Affichage.EntreePourContinuer()
+                break
+            elif choix in [2, 3]:
+                if ((choix == 2 and Player.nombre_de_gold >= 45) or
+                    (choix == 3 and Player.nombre_de_gold >= 75)):
+                    print("Vous jetez vos golds dans l'étang et...")
+                    if choix == 2:
+                        Player.nombre_de_gold -= 45
+                        Player.gold_in_well += 45
+                    else:
+                        Player.nombre_de_gold -= 75
+                        Player.gold_in_well += 75
+                    Affichage.EntreePourContinuer()
+                    numero_de_la_pool_de_recompense = self.GetNumeroDePoolDeRecompense(choix, chanceux, malchanceux)
+                    numero_de_la_pool_de_recompense = self.GetNouveauNumeroDePoolDeRecompense(numero_de_la_pool_de_recompense)
+                    self.GiveRecompenseGacha(numero_de_la_pool_de_recompense)
+                else:
+                    print("Vous n'avez pas assez de golds !")
+                    Affichage.EntreePourContinuer()
+
+    def GiveRecompenseGacha(self, numero_de_pool):
+        liste_de_pools_de_recompenses = [
+                    [
+                        "Rien"
+                    ],
+                    [
+                        "Mutagène Bleu",
+                        "Mutagène Rouge",
+                        "Mutagène Vert",
+                    ],
+                    [
+                        "Mutagène Doré"
+                    ],
+                    [
+                        "Grand Mutagène Bleu",
+                        "Grand Mutagène Rouge",
+                        "Grand Mutagène Vert",
+                    ],
+                    [
+                        "Mutagène Hérétique",
+                        "Mutagène Fanatique",
+                    ],
+                    [
+                        "Grand Mutagène Doré",
+                    ],
+                    [
+                        "Mutagène Sacré"
+                    ],
+                    [
+                        "Gold"
+                    ],
+                    [
+                        "Secret"
+                    ]
+                ]
+        pool_de_recompense = liste_de_pools_de_recompenses[numero_de_pool]
+        numero_aleatoire = random.randint(0, (len(pool_de_recompense) - 1))
+        recompense = pool_de_recompense[numero_aleatoire]
+        if recompense not in ["Rien", "Gold", "Mutagène Sacré", "Secret"]:
+            Affichage.AfficheGacha(recompense)
+            Player.items_possedes[recompense] += 1
+        elif recompense == "Gold":
+            print("Vous vous avancez vers le centre de la ou se trouvait l'étang, et récuperez votre argent !")
+            print(f"Vous regagnez {Player.gold_in_well} golds !")
+            Player.nombre_de_gold += Player.gold_in_well
+            Player.gold_in_well = 0
+            Affichage.EntreePourContinuer()
+        elif recompense == "Mutagène Sacré":
+            print("C'est un Mutagène Sacré !\nExtremement rare, ce mutagène permet d'augmenter de manière permanente la vie et le mana !")
+            Affichage.EntreePourContinuer()
+            gain_pv = round(Player.points_de_vie_max * 0.25)
+            Player.points_de_vie_max += gain_pv
+            Player.points_de_vie += gain_pv
+            gain_pm = round(Player.points_de_mana_max * 0.25)
+            Player.points_de_mana_max += gain_pm
+            Player.points_de_mana += gain_pm
+            print(f"Vous vous l'injectez immédiatement et gagnez {gain_pv} pv et {gain_pm} pm !")
+            Affichage.EntreePourContinuer()
+        elif recompense == "Secret":
+            self.AfficheEtangSecret()
+
+    def GetNouveauNumeroDePoolDeRecompense(self, numero_de_pool):
+        while True:
+            while True:
+                try:
+                    if numero_de_pool == 1:
+                        raretee_avant = "Commun"
+                        raretee_apres = "Rare"
+                        cout_de_laugmentation = "30 golds"
+                    elif numero_de_pool == 2:
+                        raretee_avant = "Rare"
+                        raretee_apres = "Epique"
+                        cout_de_laugmentation = "10 pm et 30 golds"
+                    elif numero_de_pool == 3:
+                        raretee_avant = "Epique"
+                        raretee_apres = "Incarnat"
+                        cout_de_laugmentation = "10 pv et 10 pm et 30 golds"
+                    elif numero_de_pool == 4:
+                        raretee_avant = "Incarnat"
+                        raretee_apres = "Légendaire"
+                        cout_de_laugmentation = "20 pv et 20 pm et 40 golds"
+                    elif numero_de_pool == 5:
+                        raretee_avant = "Légendaire"
+                        raretee_apres = "Mythique"
+                        cout_de_laugmentation = "25 pv et 25 pm et 50 golds"
+                    elif numero_de_pool == 6:
+                        raretee_avant = "Mythique"
+                        raretee_apres = "???"
+                        cout_de_laugmentation = "30 pv et 30 pm et 60 golds"
+                    elif numero_de_pool in [0, 7, 8]:
+                        break
+                    print("Vous sentez que vous pouvez augmenter la raretée du mutagène avant de l'examiner.")
+                    print(f"Raretée actuelle : {raretee_avant}. Raretée après augmentation : {raretee_apres}")
+                    print(f"Prix : {cout_de_laugmentation}")
+                    print("1 - Examiner le Mutagène")
+                    print("2 - Faire l'Augmentation")
+                    choix = int(input("Que souhaitez vous faire ? "))
+                    ClearConsole()
+                    if choix in [1, 2]:
+                        break
+                except ValueError:
+                    ClearConsole()
+            if numero_de_pool in [0, 7, 8]:
+                return numero_de_pool
+            elif choix == 1:
+                print("Vous observez de plus près le mutagène.")
+                Affichage.EntreePourContinuer()
+                return numero_de_pool
+            elif choix == 2:
+                #regarde si c'est possible
+                augmentation_possible = False
+                if (numero_de_pool == 1 and
+                    Player.nombre_de_gold >= 30
+                ):
+                    augmentation_possible = True
+                    Player.nombre_de_gold -= 30
+                    Player.gold_in_well += 30
+                    numero_de_pool = 2
+                elif (numero_de_pool == 2 and
+                        Player.nombre_de_gold >= 30 and
+                        Player.points_de_mana >= 10
+                ):
+                    augmentation_possible = True
+                    Player.nombre_de_gold -= 30
+                    Player.gold_in_well += 30
+                    Player.points_de_mana -= 10
+                    numero_de_pool = 3
+                elif (numero_de_pool == 3 and
+                        Player.nombre_de_gold >= 30 and
+                        Player.points_de_mana >= 10 and
+                        Player.points_de_vie >= 10
+                ):
+                    augmentation_possible = True
+                    Player.nombre_de_gold -= 30
+                    Player.gold_in_well += 30
+                    Player.points_de_mana -= 10
+                    Player.points_de_vie -= 10
+                    numero_de_pool = 4
+                elif (numero_de_pool == 4 and
+                        Player.nombre_de_gold >= 40 and
+                        Player.points_de_mana >= 20 and
+                        Player.points_de_vie >= 20
+                ):
+                    augmentation_possible = True
+                    Player.nombre_de_gold -= 40
+                    Player.gold_in_well += 40
+                    Player.points_de_mana -= 20
+                    Player.points_de_vie -= 20
+                    numero_de_pool = 5
+                elif (numero_de_pool == 5 and
+                        Player.nombre_de_gold >= 50 and
+                        Player.points_de_mana >= 25 and
+                        Player.points_de_vie >= 25
+                ):
+                    augmentation_possible = True
+                    Player.nombre_de_gold -= 50
+                    Player.gold_in_well += 50
+                    Player.points_de_mana -= 25
+                    Player.points_de_vie -= 25
+                    numero_de_pool = 6
+                elif (numero_de_pool == 6 and
+                        Player.nombre_de_gold >= 60 and
+                        Player.points_de_mana >= 30 and
+                        Player.points_de_vie >= 30
+                ):
+                    augmentation_possible = True
+                    Player.nombre_de_gold -= 60
+                    Player.gold_in_well += 60
+                    Player.points_de_mana -= 30
+                    Player.points_de_vie -= 30
+                    numero_de_pool = 8
+                if not augmentation_possible:
+                    print("Impossible.")
+                    Affichage.EntreePourContinuer()
+                else:
+                    if numero_de_pool == 8:
+                        print("Vous approchez votre main de l'étang insaisissable...")
+                        print("Mais rien ne se passe.")
+                        print("Vous sentez votre force vous quitter...")
+                        print("Vous voyez le ciel changer de couleur plusieurs fois, et la course du soleil s'accélerer.")
+                        print("Vous regardez, impuissant, le mutagène dans votre main devenir poussière.")
+                        print("Et soudainement, tout s'arrête.")
+                        Affichage.EntreePourContinuer()
+                        print("Vous jettez un coup d'oeil a l'étang, et vous rendez compte que...")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("Vous approchez votre main de l'étang insaisissable, et un tentacule d'eau s'y accroche.")
+                        print("Ce dernier serpente sur votre peau jusqu'à arriver au niveau du mutagène, qui se met alors a vibrer.")
+                        print("Après ceci, le tentacule repart d'ou il vient, en emportant son dû avec lui.")
+                        Affichage.EntreePourContinuer()
+
+    def GetNumeroDePoolDeRecompense(self, choix, chanceux, malchanceux):
+        # initialisation de la liste de probabilitée
+        if choix == 2:
+            if chanceux:
+                liste_de_probabilite = [0, 7, 8, 29, 30, 46, 47, 61, 62, 78, 79, 87, 88, 89, 90, 95, 96, 100]
+            elif malchanceux:
+                liste_de_probabilite = [0, 30, 31, 51, 52, 62, 63, 73, 74, 94, 95, 97, 98, 98, 99, 99, 100, 100]
+            else:
+                # liste_de_probabilite = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100]
+                liste_de_probabilite = [0, 10, 11, 35, 36, 55, 56, 73, 74, 84, 85, 90, 91, 94, 96, 99, 100, 100]
+        elif choix == 3:
+            if chanceux:
+                liste_de_probabilite = [0, 0, 1, 5, 6, 20, 21, 45, 46, 70, 71, 85, 86, 88, 89, 95, 96, 100]
+            elif malchanceux:
+                liste_de_probabilite = [0, 30, 31, 51, 52, 62, 63, 73, 74, 94, 95, 97, 98, 98, 99, 99, 100, 100]
+            else:
+                liste_de_probabilite = [0, 5, 6, 25, 26, 40, 41, 63, 64, 79, 80, 87, 88, 90, 91, 97, 98, 100]
+        # differents tyes de recompense selon le nombre aleatoire et la liste de probabilité
+        nombre_aleatoire = random.randint(0, 100)
+        if liste_de_probabilite[0] <= nombre_aleatoire <= liste_de_probabilite[1]: #0
+            print("...les regardez couler jusqu'à ce que vous ne les voyez plus.")  # rien ne se passe
+            print("Dur.")
+            numero_de_la_pool_de_recompense = 0
+        elif liste_de_probabilite[2] <= nombre_aleatoire <= liste_de_probabilite[3]: #5
+            print("...quelque chose sort de l'étang et vient violemment heurter votre torse !")  # mutagene bleu ou rouge ou vert
+            print("C'est un mutagène commun !")
+            numero_de_la_pool_de_recompense = 1
+        elif liste_de_probabilite[4] <= nombre_aleatoire <= liste_de_probabilite[5]: #15
+            print("...une noix de coco vous tombe sur la tête.")
+            print("C'est un mutagène rare !")  # mutagene dore
+            numero_de_la_pool_de_recompense = 2
+        elif liste_de_probabilite[6] <= nombre_aleatoire <= liste_de_probabilite[7]: #25
+            print("...une main boueuse sort des flots .")  # grand mutagene bleu ou rouge ou vert
+            print("Elle vous tend un mutagène épique !")
+            numero_de_la_pool_de_recompense = 3
+        elif liste_de_probabilite[8] <= nombre_aleatoire <= liste_de_probabilite[9]: #25
+            print("...une boule de chair et de sang vient s'échouer sur la rive.")  # mutagene fanatique ou heretique
+            print("A l'interieur se trouve un mutagène incarnat !")
+            numero_de_la_pool_de_recompense = 4
+        elif liste_de_probabilite[10] <= nombre_aleatoire <= liste_de_probabilite[11]: #15
+            print("...un coquillage a l'aura dorée sort de terre et s'ouvre devant vous !")  # grand mutagene dore
+            print("A l'interieur se trouve un mutagène légendaire !")
+            numero_de_la_pool_de_recompense = 5
+        elif liste_de_probabilite[14] <= nombre_aleatoire <= liste_de_probabilite[15]: #7
+            print("...l'endroit tout entier se met a scintiller !")  # mutagene permanent (+5 viemax +5 manamax)
+            print("Un mutagène mythique apparait dans la paume de votre main !")
+            numero_de_la_pool_de_recompense = 6
+        elif liste_de_probabilite[12] <= nombre_aleatoire <= liste_de_probabilite[13]: #3
+            print("...l'étang...disparait.")  # reprend tout le fric dépensé
+            print("A sa place se trouve tout les golds que vous avez dépensés !")
+            numero_de_la_pool_de_recompense = 7
+        elif liste_de_probabilite[16] <= nombre_aleatoire <= liste_de_probabilite[17]: #5
+            numero_de_la_pool_de_recompense = 8
+            return numero_de_la_pool_de_recompense
+        Affichage.EntreePourContinuer()
+        return numero_de_la_pool_de_recompense
+
+    def AfficheEtangSecret(self):
+        mixer.quit()
+        print("...l'eau se fait drainer.")  # truc secret
+        print("Vous apercevez alors un escalier maintenant émergé, que vous descendez.")
+        Affichage.EntreePourContinuer()
+        print("Au bout de quelques mètres, la lumière se raréfie. Vous descendez prudemment chaque marches de pierre...")
+        Affichage.EntreePourContinuer()
+        print("...gluantes...")
+        Affichage.EntreePourContinuer()
+        print("...glissantes...")
+        Affichage.EntreePourContinuer()
+        print("...interminables...")
+        Affichage.EntreePourContinuer()
+        print("...")
+        Affichage.EntreePourContinuer()
+        print(". . .")
+        Affichage.EntreePourContinuer()
+        print(".   .   .")
+        Affichage.EntreePourContinuer()
+        print(".        .       .")
+        Affichage.EntreePourContinuer()
+        print("et quelque chose vous pousse.")
+        PlayMusic("abyss")
+        Affichage.EntreePourContinuer()
+        print("Vous sentez une pression là ou la  c h o s e  vous a touchée.")
+        Affichage.EntreePourContinuer()
+        print("Vous sentez l'odeur iodée de la   m e r.")
+        Affichage.EntreePourContinuer()
+        print("Vous sentez l'odeur métallique du   s  a  n  g.")
+        Affichage.EntreePourContinuer()
+        print("Vous entendez les sons crispants de la   c  h  a  i  r   qui se déchire.")
+        Affichage.EntreePourContinuer()
+        print("Avez vous touché le fond ? Vous êtes vous écrasé sur le sol ?")
+        Affichage.EntreePourContinuer()
+        print(". . .  Y - a - t  i l  s e u l e m e n t  u n  f o n d  . . . ")
+        Affichage.EntreePourContinuer()
+        print("Le bruissement de vos vêtements et le vent froid qui les plaquent contre votre peau humide vous ramène a la raison.")
+        Affichage.EntreePourContinuer()
+        print("Vous êtes entrain de tomber.")
+        Affichage.EntreePourContinuer()
+        for _ in range(0, 10):
+            print("Et la chute est interminable.")
+            time.sleep(2.5)
+        ClearConsole()
+        print("ET")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("LA")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("CHUTE")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("EST")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("INTERMINABLE")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("E  T     L  A     C  H  U  T  E     E  S  T     I  N  T  E  R  M  I  N  A  B  L  E")
+        Affichage.AfficheAvecUnTempsDattente(5)
+        print("I N T E R M I N A B L E")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("INTERMINABLE")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("interminable")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print(" ._.__._..")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("  .___.")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("   ._.")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("    .")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("")
+        Affichage.AfficheAvecUnTempsDattente(3)
+        print("jjjejejeeeejeje")
+        Affichage.AfficheAvecUnTempsDattente(1)
+        print("JEJEJEJEJEJEJEJE")
+        Affichage.AfficheAvecUnTempsDattente(1)
+        print("JEEEEEEEEeeeeEEeeeEe")
+        Affichage.AfficheAvecUnTempsDattente(1)
+        print("JEEEEEEEEEEEEEEEEEEEE Te")
+        Affichage.AfficheAvecUnTempsDattente(1)
+        print("J'ai fait un rêve.")
+        Affichage.AfficheAvecUnTempsDattente(10)
+        print("Dedans, je jouais au coliseum.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Une soirée banale, quoi.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Et puis a un moment, j'ai vu de la couleur, des images.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Des images perturbantes. C'est un jeu textuel après tout.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Il n'est pas sensé y en avoir.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Et puis j'ai vu un sourire.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Il était...cruel.\nFroid.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Tout droit sorti d'un documentaire animalier, ou d'une série policière.")
+        Affichage.AfficheAvecUnTempsDattente(8)
+        print("Le moment ou le suspect fait comprendre qu'il joue avec les agents...")
+        Affichage.AfficheAvecUnTempsDattente(8)
+        print("Le moment ou la lionne comprend qu'elle a gagnée contre sa proie...")
+        Affichage.AfficheAvecUnTempsDattente(8)
+        print("...un sourire pervers.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("...un sourire qui ne respecte pas la vie.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("...un sourire qui ne tient rien pour sacré.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("...un sourire...")
+        Affichage.AfficheAvecUnTempsDattente(5)
+        print("...sadique.")
+        Affichage.AfficheAvecUnTempsDattente(5)
+        print("Et puis je l'ai vu ouvrir sa bouche en grand, comme pour manger quelque chose.")
+        Affichage.AfficheAvecUnTempsDattente(8)
+        print("Ce soir la, je crois que...")
+        Affichage.AfficheAvecUnTempsDattente(8)
+        print("...j'ai perdu quelque chose.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Quelque chose de vital.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("D'essentiel.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Des souvenirs, des sentiments, un bout de mon âme peut être ?")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("J'ai perdu quelque chose de vital.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Mais j'ai gagné une obsession.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Quand je me suis réveillé, on aurait dit que mon lit était devenu un étang.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Dans cette flaque de transpiration, noire comme les ténèbres d'un abysse sans fond,")
+        Affichage.AfficheAvecUnTempsDattente(8)
+        print("J'y ai vu le reflet d'un mal qui m'a aggripé le bras.")
+        Affichage.AfficheAvecUnTempsDattente(8)
+        print("Un mal fait de uns, de zéros, de zéros et de uns...")
+        Affichage.AfficheAvecUnTempsDattente(12)
+        print("...et de uns et de zéros...")
+        Affichage.AfficheAvecUnTempsDattente(12)
+        print("Quelque chose de digital, en tout point inoffensif.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("Je crois.")
+        Affichage.AfficheAvecUnTempsDattente(7)
+        print("...")
+        Affichage.AfficheAvecUnTempsDattente(15)
+        print("Il faut que je prenne plus de notes.")
+        Affichage.AfficheAvecUnTempsDattente(5)
+        mixer.quit()
+        print("Vous sentez une douleur aigue a la poitrine, et rouvrez les yeux devant l'étang.")
+        Affichage.EntreePourContinuer()
+        print("L'eau y est maintenant noire.")
+        Affichage.EntreePourContinuer()
+        PlayMusic("etage_3")
+        print("...")
 
     def DoTheFountain(self):
         if Player.fountain_used:
@@ -2825,6 +3293,7 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["Possede une fée"] = Player.possede_une_fee
         self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"] = Player.library_used
         self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"] = Player.fountain_used
+        self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"] = Player.gold_in_well
 
     def FromDictToPlayer(self):
         Player.nom_du_personnage = ((self.dictionnaire_de_sauvegarde["Nom"]).strip('"'))
@@ -2875,6 +3344,7 @@ class SaveManagement:
             Player.invitation_received = ast.literal_eval(self.dictionnaire_de_sauvegarde["Invitation Recue"])
         Player.library_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"])
         Player.fountain_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"])
+        Player.gold_in_well = int(self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"])
 
     def FromDictToSaveFile(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -3061,10 +3531,10 @@ def open_image(chemin_vers_limage):
 
 
 def GetChoiceRecup():
-    print("     -=[ Outil de Récupération de Données ]=-")
-    print("\nInserez le numéro de l'adresse de l'information souhaitée,\net laissez notre programme récuperer ces données pour vous !")
-    print("Plus besoin de paniquer lorsque l'on supprime d'anciennes données sans le vouloir !")
-    print("Vos données n'auront plus de secret pour vous !")
+    print("     -=[ Outil de Récupération de Données ]=-                                                                                                                                        8")
+    print("\nInserez le numéro de l'adresse de l'information souhaitée,\net laissez notre programme récuperer ces données pour vous !                                                           6")
+    print("Plus besoin de paniquer lorsque l'on supprime d'anciennes données sans le vouloir !                                                                                                  2")
+    print("Vos données n'auront plus de secret pour vous !                                                                                                                                      4")
     return int(input("\nNuméro de l'adresse ipv4 : "))
 
 
@@ -3078,7 +3548,7 @@ def ShowRecup():
         except ValueError:
             ClearConsole()
     #Affichage.AfficheLongChargement()
-    if choix in [362951847, 14]:
+    if choix in [362951847, 14, 100110, 8624]:
         if choix == 1:
             nom_de_limage = "Feu"
         elif choix == 1:
@@ -3094,13 +3564,13 @@ def ShowRecup():
         elif choix == 6:
             nom_de_limage = "Ame"
         elif choix == 362951847:
-            nom_de_limage = "python_properties_Anox"
+            nom_de_limage = "python_properties_Anox" #page 1, note
         elif choix == 14:
-            nom_de_limage = "python_properties_modele"
-        elif choix == 9:
-            nom_de_limage = "Indice3"
-        elif choix == 10:
-            nom_de_limage = "Invitation"
+            nom_de_limage = "python_properties_modele" #talent feu et partie foudre
+        elif choix == 100110:
+            nom_de_limage = "python_properties_controleur" #page 2, note et partie foudre
+        elif choix == 8624:
+            nom_de_limage = "python_properties_vue" # table des matieres
         dir_path = os.path.dirname(os.path.realpath(__file__))
         chemin_de_limage = dir_path + "\\__py.property__\\"
         open_image(f"{chemin_de_limage}{nom_de_limage}.xldr")
@@ -3652,7 +4122,7 @@ while game_in_session:
         Trader.DoTrading() #DONE
     elif choix == 4:
         print("Vous vous baladez dans l'étage...")
-        if Player.numero_de_letage in [1, 2] :
+        if Player.numero_de_letage in [1, 2, 3] :
             Observation.SeeSomething()
         else:
             print("...et ne trouvez rien d'interressant.")

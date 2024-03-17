@@ -8,6 +8,7 @@ import ast
 import time
 import tkinter as tk
 from tkinter import PhotoImage
+import threading
 
 
 # 0nom 1description 2stigma+ 3stigma- 4stigma* 5techniques 
@@ -2306,19 +2307,142 @@ class Observe:
         elif Player.numero_de_letage == 3:
             self.DoTheGacha()  # Gacha game a mutations
         elif Player.numero_de_letage == 4:
-            DoTheThing()  # machine a gold a sang
+            self.DoTheBloodStone()  # machine a gold a sang
         elif Player.numero_de_letage == 5:
-            DoTheThing()  # alchimiste divin demande manamax
-        elif Player.numero_de_letage == 6:
             DoTheThing()  # fantome des quetes ultimes
+        elif Player.numero_de_letage == 6:
+            DoTheThing()  # alchimiste divin demande manamax
         elif Player.numero_de_letage == 7:
             DoTheThing()  # rituels de sang pour chance critiques
         elif Player.numero_de_letage == 8:
-            DoTheThing()  # bibliotheque de gros sorts (choisir sort a apprendre, choisir sort a consigner)
+            DoTheThing()  # bibliotheque de gros sorts (choisir sort a consigner)
         elif Player.numero_de_letage == 9:
             DoTheThing()  # Porte demande 100 red coins pour etre ouverte (reste par partie), débloque un gauntlet de 50 ennemis pour avoir ame
         elif Player.numero_de_letage == 10:
             DoTheThing()  # Affronte Alfred pour plein de récompenses
+
+    def DoTheBloodStone(self):
+        print("Entre deux bibliothèque, un passage étroit attire votre attention.")
+        print("De l'autre coté, vous trouvez de nombreuses formes de vies, artefacts, et livres concernant de glorieuses batailles et de magistrales découvertes.")
+        print("Comme dans un musée, chaque trouvaille est encastrée dans un bloc de verre, et son hisoire expliquée de manière concise par une plaquette en dessous.")
+        Affichage.EntreePourContinuer()
+        print("Seul un objet attire votre attention, a cause de sa présence solitaire dans l'allée *Usage Public*,")
+        print("mais aussi par l'impressionnante quantitée de statues d'or présentes autour.")
+        print("Sur un petit coussin de soie, vous apercevez une pierre rouge sang, entourée des mêmes symboles que sur le clone d'obsidienne magique.")
+        Affichage.EntreePourContinuer()
+        while True:
+            while True:
+                try:
+                    print("La plaquette en dessous indique : *Fausse Pierre Philosophale. Transmute la vitalitée en golds.*")
+                    print("1 - Partir")
+                    print("2 - Tenir la Pierre")
+                    choix = int(input("Que souhaitez vous faire ? "))
+                    ClearConsole()
+                    if choix in [1, 2]:
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous retournez sur vos pas et quittez le musée de curiositées.")
+                Affichage.EntreePourContinuer()
+                break
+            else:
+                still_alive = self.AbsorptionParBloodStone()
+                if still_alive:
+                    print("Vous lachez la pierre et toussez quelques pièces.")
+                    print("Certains endroits sur votre corps ont gagné une teinte dorée, et vos articulations vous semblent rigides.")
+                    Affichage.EntreePourContinuer()
+                else:
+                    PlaySound("death")
+                    # affichage de la fin.
+                    print("L'entieretée de votre existance est absorbée par la pierre.")
+                    Affichage.EntreePourContinuer()
+                    print("Vous devenez une statue d'or parmis les autres.")
+                    Affichage.EntreePourContinuer()
+                    print("ERREUR : CORRUPTION DES DONNEES DE SAUVEGARDE")
+                    # mise en place dernieres donnes de sauvegarde ==) joueur
+                    Save.FromSaveFileToDict()
+                    Save.FromDictToPlayer()
+                    Affichage.EntreePourContinuer()
+                    print("REECRITURE EN COURS...")
+                    # remplacement des donnees de sauvegarde pour secret.
+                    dir_path = os.path.dirname(os.path.realpath(__file__))
+                    chemin_du_fichier_save = dir_path + "\\save.txt"
+                    with open(chemin_du_fichier_save, "w") as fichier:
+                        fichier.write("Parmis les rivages distants je vois des montagnes d'or." #15
+                                    "\nQuel enfer attend celui qui n'existe pas ?" #12
+                                    "\nMarqué par la pierre, marqué par la mort," #11
+                                    "\nMon nom réduit en milliers d'éclats."  #11     
+                                    "\nNombreuses sont les syllabes, lignes par lignes," #13
+                                    "\nFlottant dans le vide, j'espère vous arrivent," #11
+                                    "\nMon chemin illuminé, signes par signes," #10
+                                    "\nVous mène a l'infame, vous mène a l'indigne" #13
+                                    "\n\n                                   - Véritée,"
+                                    "\n                                         Auteur inconnu.")
+                    Affichage.EntreePourContinuer()
+                    #mise en place donnees de joueur ( qui est aussi dernieres donnees de sauvegarde) ==) donnes des sauvegarde
+                    Save.FromPlayerToDict()
+                    Save.FromDictToSaveFile("\\save.txt")
+                    print("REECRITURE TERMINEE")
+                    Affichage.EntreePourContinuer()
+                    PlayMusic("etage_4")
+
+    def AbsorptionParBloodStone(self):
+        print("Vous prenez la pierre dans la main et sentez votre énergie s'évaporer.")
+        Affichage.EntreePourContinuer()
+        self.ArreteAbsorption = threading.Event()
+        self.Absorption = threading.Thread(target=self.ConversionBloodStone)
+        self.Absorption.start()
+        input("")
+        self.ArreteAbsorption.set()
+        time.sleep(2)
+        if Player.points_de_vie >= 1:
+            return True
+        return False
+
+    def ConversionBloodStone(self):
+        numero = 0
+        temps_dattente = 2
+        while not self.ArreteAbsorption.isSet():
+            print("                 -=Conversion en Cours=-")
+            print(f"                      {Player.points_de_vie} pv")
+            print(f"                      {Player.nombre_de_gold} golds")
+            print("")
+            print("        Appuyez sur entree pour lacher la pierre")
+            time.sleep(temps_dattente)
+            ClearConsole()
+            numero += 1
+            if numero in range(1, 6):
+                Player.points_de_vie -= 1
+                Player.nombre_de_gold += 1
+            elif numero in range(6, 11):
+                Player.points_de_vie -= 2
+                Player.nombre_de_gold += 2
+                temps_dattente = 1
+            elif numero in range(11, 16):
+                Player.points_de_vie -= 3
+                Player.nombre_de_gold += 4
+                temps_dattente = 0.8
+            elif numero in range(16, 21):
+                Player.points_de_vie -= 4
+                Player.nombre_de_gold += 8
+                temps_dattente = 0.6
+            elif numero in range(21, 26):
+                Player.points_de_vie -= 5
+                Player.nombre_de_gold += 16
+                temps_dattente = 0.4
+            elif numero in range(26, 31):
+                Player.points_de_vie -= 6
+                Player.nombre_de_gold += 32
+                temps_dattente = 0.2
+            elif numero in range(31, 36):
+                Player.points_de_vie -= 7
+                Player.nombre_de_gold += 64
+                temps_dattente = 0.2
+            else:
+                Player.points_de_vie -= round(numero / 2)
+                Player.nombre_de_gold += (numero * numero)
+
 
     def DoTheGacha(self):
         chanceux = False
@@ -3346,9 +3470,9 @@ class SaveManagement:
         Player.fountain_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"])
         Player.gold_in_well = int(self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"])
 
-    def FromDictToSaveFile(self):
+    def FromDictToSaveFile(self, nom_du_fichier):
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        chemin_du_fichier_save = dir_path + "\\save.txt"
+        chemin_du_fichier_save = dir_path + nom_du_fichier
         with open(chemin_du_fichier_save, "w") as fichier:
             fichier.write("Caracteristique|Valeur")
             for caracteristic in self.dictionnaire_de_sauvegarde:
@@ -3371,7 +3495,7 @@ class SaveManagement:
 
     def SaveTheGame(self):
         self.FromPlayerToDict()
-        self.FromDictToSaveFile()
+        self.FromDictToSaveFile("\\save.txt")
         Affichage.AfficheSauvegarde()
         while True:
             try:
@@ -3548,7 +3672,7 @@ def ShowRecup():
         except ValueError:
             ClearConsole()
     #Affichage.AfficheLongChargement()
-    if choix in [362951847, 14, 100110, 8624]:
+    if choix in [362951847, 14, 100110, 8624, 1512111113111013]:
         if choix == 1:
             nom_de_limage = "Feu"
         elif choix == 1:
@@ -3558,13 +3682,13 @@ def ShowRecup():
         elif choix == 3:
             nom_de_limage = "Terre"
         elif choix == 4:
-            nom_de_limage = "Physique"
+            nom_de_limage = "python_properties_vue_Anox"
         elif choix == 5:
-            nom_de_limage = "Sang"
-        elif choix == 6:
-            nom_de_limage = "Ame"
+            nom_de_limage = "python_properties_controleur_Anox"
+        elif choix == 1512111113111013:
+            nom_de_limage = "python_properties_modele_Anox"
         elif choix == 362951847:
-            nom_de_limage = "python_properties_Anox" #page 1, note
+            nom_de_limage = "python_properties_Anox_init" #page 1, note
         elif choix == 14:
             nom_de_limage = "python_properties_modele" #talent feu et partie foudre
         elif choix == 100110:
@@ -3762,7 +3886,7 @@ def MenuDeDemarrage(Player):
                 in_menu_principal = False
                 #sauvegarde et charge le personnage choisi
                 Save.FromPlayerToDict()
-                Save.FromDictToSaveFile()
+                Save.FromDictToSaveFile("\\save.txt")
                 Save.FromSaveFileToDict()
                 Save.FromDictToPlayer()
                 Affichage.AffichageDescriptionEtage()
@@ -4122,7 +4246,7 @@ while game_in_session:
         Trader.DoTrading() #DONE
     elif choix == 4:
         print("Vous vous baladez dans l'étage...")
-        if Player.numero_de_letage in [1, 2, 3] :
+        if Player.numero_de_letage in [1, 2, 3, 4] :
             Observation.SeeSomething()
         else:
             print("...et ne trouvez rien d'interressant.")

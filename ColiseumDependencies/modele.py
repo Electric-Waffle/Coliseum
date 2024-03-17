@@ -1463,7 +1463,7 @@ class Model:
                 "Reponse 2": "2 - Un anneau",
                 "Reponse 3": "3 - De quoi prélever les ressources dont j'ai besoin",
                 "Reponse 4": "4 - Une fiole d'anesthésiant",
-                "Reponse a la question": 3,
+                "Reponse a la question": 2,
             },
             {
                 "Question": ("Que fait le Bouffon quand il dit *Tournicotons* ?"),
@@ -1482,12 +1482,12 @@ class Model:
                 "Reponse a la question": 3,
             },
             {
-                "Question": ("Que dit le Bouffon avant de reprendre de la vie ?"),
-                "Reponse 1": "1 - *Tournicota ! Tournicota !*",
-                "Reponse 2": "2 - *Tournicotez ! Tournicotez !*",
-                "Reponse 3": "3 - *Tournicoti ! Tournicoti !*",
-                "Reponse 4": "4 - *Tournicotons ! Tournicotons !*",
-                "Reponse a la question": 3,
+                "Question": ("Quelle sont les chances que le livre de la cigogne montre un sort enregistré par quelqu'un d'autre ?"),
+                "Reponse 1": "1 - 10%",
+                "Reponse 2": "2 - 1%",
+                "Reponse 3": "3 - 5%",
+                "Reponse 4": "4 - 3%",
+                "Reponse a la question": 4,
             },
             {
                 "Question": ("Les personnages, tout comme les monstres,"

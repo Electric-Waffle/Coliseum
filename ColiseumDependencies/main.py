@@ -184,9 +184,9 @@ LISTEDEPERSONNAGE = {
     ],
     "Vesperum": [  # char
         "Vesperum",
-        ("Un homme devenu démon par amour ayant échappé aux enfers, à la recherche de pouvoir afin de prendre le controle de l'Au-Dela."
+        ("Un homme devenu démon par amour et ayant échappé aux enfers, à la recherche de pouvoir afin de prendre le controle de l'Au-Dela."
          "\n           A été attiré au Coliseum par l'odeur de mort qui s'en échappe, et le son de millions d'âmes emprisonnées entre ses murs."
-         "\n           Ne sait pas pourquoi, mais les troupes du Paradis et de l'Enfer à ses trousses ne viennet pas le chercher ici."),  # char
+         "\n           Ne sait pas pourquoi, mais les troupes du Paradis et de l'Enfer à ses trousses ne viennent pas le chercher ici."),  # char
         "Forces Obscures",  # char stigma +
         "Maudit",  # char stigma -
         "Aucun",  # char stigma *
@@ -284,7 +284,7 @@ LISTEDEPERSONNAGE = {
     ],
     "Samantha": [  # char
         "Samantha",
-        ("Une doctoresse diplomée de l'Universitée Prestigieuse de Prestige-City. Endettée jusque au cou grâce a son prêt etudiant."
+        ("Une doctoresse diplomée de l'Universitée Prestigieuse de Prestige-City. Endettée jusque au cou **grâce** a son prêt etudiant."
          "\n           Entre payer sa detter sur les 50 prochaines années de sa vie ou entrer dans le Coliseum pour gagner des richesses, elle à fait son choix."
          "\n           Elle a pillée les réserves médicales de son école avant de venir ici."),  # char
         "Pharmacodynamisme",  # char stigma +
@@ -382,7 +382,7 @@ LISTEDEPERSONNAGE = {
     "Peralta": [  # char
         "Peralta",
         ("Une policière sous couverture, accusée a tort par un collègue corrompu, attendant son procès."
-         "\n           Enlevée de la prison par le gang qu'elle inflitrait, jetée dans le Coliseum pour éviter qu'elle ne parle, déterminée a sortir de là."
+         "\n           Enlevée de la prison par le gang qu'elle infiltrait, jetée dans le Coliseum pour éviter qu'elle ne parle, déterminée a sortir de là."
          "\n           Elle à un caractère bien trempée, et est connue dans son service pour son coup de boule phénoménal."),  # char
         "Bergentruckung",  # char stigma +
         "Mauvaise Réputation",  # char stigma -
@@ -412,7 +412,7 @@ LISTEDEPERSONNAGE = {
     "Redde": [  # char
         "Redde",
         ("Un streamer de jeux vidéo en burnout total, perdu dans son propre monde et persuadé d'être le personnage principal d'une histoire dont seul lui connait le déroulement."
-         "\n           Entre dans le Coliseum pour vivre l'aventure ultime."
+         "\n           Entre dans le Coliseum pour vivre **l'aventure ultime**."
          "\n           Est connu pour son sens du showmanship inégalé."),  # char
         "Dernier Choix",  # char stigma +
         "Pas d'Echappatoire",  # char stigma -
@@ -446,7 +446,7 @@ LISTEDEPERSONNAGE = {
          "\n           et que c'est pour ca qu'elle aurait été choisie."),  # char
         "Manteau de Faucon",  # char stigma +
         "Ange Déchue",  # char stigma -
-        "Aucun",  # char stigma *
+        "Faveurs d'Odin",  # char stigma *
         [
             "Attaque Légère",
         ],  # char list technic
@@ -516,7 +516,7 @@ LISTEDEPERSONNAGE = {
     ],
     "Bob Doré": [  # char
         "Bob Doré",
-        ("Une poupée dorée représentant un pyrobarbare bruyant à l'allure fière."
+        ("Un golem dorée représentant un pyrobarbare bruyant à l'allure fière."
          "\n           Venu tester les codes du Coliseum sans avoir a se taper 1h de gameplay a chaque fois."
          "\n           Que dire de plus ? Il est doré ! Bling-Bling !"),  # char
         "Ange de Feu",  # char stigma +
@@ -1225,7 +1225,7 @@ class TraderUsage:
         #double tirage des recompenses 
         element_tirage = []
         for _ in range(0, 2):
-            nombre_aleatoire = random.randint(1, 16)
+            nombre_aleatoire = random.randint(1, 13)
             if nombre_aleatoire == 1:
                 element_tirage.append("Feu")
             if nombre_aleatoire == 3:
@@ -1238,10 +1238,6 @@ class TraderUsage:
                 element_tirage.append("Physique")
             if nombre_aleatoire == 11:
                 element_tirage.append("Sang")
-            if nombre_aleatoire == 13:
-                element_tirage.append("Effort")
-            if nombre_aleatoire == 15:
-                element_tirage.append("Maitrise")
             else:
                 element_tirage.append("Vide")
         #choix du joueur
@@ -1278,12 +1274,6 @@ class TraderUsage:
             type_du_tirage = "la technique"
         elif element_tirage[choix - 1] == "Sang":
             nom_du_tirage = "Brume de Sang"
-            type_du_tirage = "le sort"
-        elif element_tirage[choix - 1] == "Effort":
-            nom_du_tirage = "Iaido"
-            type_du_tirage = "la technique"
-        elif element_tirage[choix - 1] == "Maitrise":
-            nom_du_tirage = "Carrousel"
             type_du_tirage = "le sort"
         if (element_tirage[choix - 1] != "Vide") and (nom_du_tirage not in Player.sorts_possedes) and (nom_du_tirage not in Player.techniques_possedes) :
             commentaire = f"Vous obtenez {type_du_tirage} {nom_du_tirage} !"
@@ -2062,6 +2052,7 @@ class PlayerCaracteristics:
         self.affronte_un_boss = False
         self.affronte_une_mimique = False
         self.quete = "None"
+        self.quete_complete = ["None"]
         self.boss_battu = False
         self.commentaire_boss = "Affronter le Boss"
         self.nombre_dennemis_a_letage = 15
@@ -2112,6 +2103,7 @@ class PlayerCaracteristics:
               f"\nNombre de Golds : {Player.nombre_de_gold} | Nombre de Redcoins : {Player.nombre_de_red_coin}"
               f"\nNombre de monstres tués : {Player.nombre_de_monstres_tues}"
               f"\nQuête en cours : {Player.quete}"
+              f"\nQuêtes réalisées : {Player.quete_complete}"
               f"\nTechniques apprises : {Player.techniques_possedes}"
               f"\nSorts appris : {Player.sorts_possedes}"
               f"\nTalents possédés : {Player.talents_possedes}"
@@ -2309,7 +2301,7 @@ class Observe:
         elif Player.numero_de_letage == 4:
             self.DoTheBloodStone()  # machine a gold a sang
         elif Player.numero_de_letage == 5:
-            DoTheThing()  # fantome des quetes ultimes
+            self.DoTheQuests()  # fantome des quetes ultimes
         elif Player.numero_de_letage == 6:
             DoTheThing()  # alchimiste divin demande manamax
         elif Player.numero_de_letage == 7:
@@ -2320,6 +2312,201 @@ class Observe:
             DoTheThing()  # Porte demande 100 red coins pour etre ouverte (reste par partie), débloque un gauntlet de 50 ennemis pour avoir ame
         elif Player.numero_de_letage == 10:
             DoTheThing()  # Affronte Alfred pour plein de récompenses
+
+    def DoTheQuests(self):
+        if Player.quete == "Voeu de Pauvreté" and Player.nombre_de_gold == 0:
+            Player.quete += " [Complete]"
+        print("Dans un coin de la fête foraine, dans une grande poubelle, vous apercevez un robot primitif fait de métal, avec des nuances de cuivre, d'acier ou de bronze.")
+        print("Alors que vous vous approchez de la machine, son visage d'aluminum dans lequel ont été creusé 3 trous pour les yeux et la bouche s'illumine de l'interieur.")
+        Affichage.EntreePourContinuer()
+        print("*Hey, toi la, ouai toi, approche n'aie pas peur !*")
+        print("*Je suis un ancien explorateur, comme toi.*\n*J'ai appris deux trois trucs avant de mourir, et je suis prêt a te les apprendre si tu fais des trucs pour moi.*")
+        Affichage.EntreePourContinuer()
+        while True:
+            while True:
+                try:
+                    print("*Sers toi en quete, et fais gaffe ! Je saurais si tu a triché ou pas !*\n")
+                    print("1 - Retour\n")
+                    print("2 - Voeu de Pauvreté : Reviens me voir avec 0 golds dans ton inventaire ! (Rang E)")
+                    print("3 - Interminable : Fais durer ton prochain combat jusqu'au tour 50 (Rang D)\n")
+                    print("4 - Epreuve du Magister : Bats les 4 prochains ennemis sans utiliser d'action de Feu, Foudre, Glace (Rang C)")
+                    print("5 - Epreuve des Mages-Epeistes : Bats les 4 prochains ennemis sans utiliser d'action de Terre, Physique, Sang (Rang C)\n")
+                    print("6 - Force et Honeur : Bats les 8 prochains ennemis sans utiliser d'items (Rang B)")
+                    print("7 - Moqueries Magiques/Techniques : Bats le Bouffon sans utiliser de sorts ou de technique [au choix] (Rang A)\n")
+                    print("8 - Sérendipité : Finis toute les quêtes (Rang S)\n")
+                    print(f"9 - Abandonner la quête en cours : [{Player.quete}]\n")
+                    choix = int(input("Que souhaitez vous faire ? (Vous ne pouvez prendre qu'une seule quête à la fois.)"))
+                    ClearConsole()
+                    if choix in range(1, 10):
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous laissez la boite de métal parler toute seule, et revenez sur vos pas.")
+                Affichage.EntreePourContinuer()
+                break
+            elif (Player.quete != "None") and (choix != 9):
+                if "[Complete]" in Player.quete:
+                    print("Bien joué ! Voila ta récompense !")
+                    self.DonneRecompenseQuete()
+                    quete_reussie = Player.quete
+                    quete_reussie = quete_reussie.rstrip("[Complete]").rstrip()
+                    Player.quete_complete.append(quete_reussie)
+                    if "None" in Player.quete_complete:
+                        Player.quete_complete.remove("None")
+                    Player.quete = "None"
+                else:
+                    print("*T'a déja prit une quete ! Ouste !*")
+                    Affichage.EntreePourContinuer()
+            elif choix == 2:
+                if "Voeu de Pauvreté" in Player.quete_complete:
+                    print("*Tu l'as déja faite celle là.*")
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("*C'est plutot simple ! Utilise tout ton argent et reviens me voir.*"
+                          "\n*Je te validerait la quete a ce moment la.*")
+                    print("Vous avez accepté la quête [Voeu de Pauvreté]")
+                    Affichage.EntreePourContinuer()
+                    Player.quete = "Voeu de Pauvreté"
+            elif choix == 3:
+                if "Interminable" in Player.quete_complete:
+                    print("*Tu l'as déja faite celle là.*")
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("*Ton prochain combat, boss ou monstre, fait le durer jusqu'au 50eme tour minimum.*"
+                          "\n*Si tu échoue, reviens me voir et je te la redonnerais.*")
+                    print("Vous avez accepté la quête [Interminable]")
+                    Affichage.EntreePourContinuer()
+                    Player.quete = "Interminable"
+            elif choix == 4:
+                if "Epreuve du Magister" in Player.quete_complete:
+                    print("*Tu l'as déja faite celle là.*")
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("*On donnait cette épreuve aux membres du Magister, un consort de mages de la nature.*"
+                          "\n*Tu échoue si tu use de Techniques ou Sorts en lien avec le Feu, la Foudre ou la Glace pendant les 4 prochains combats.*")
+                    print("*Le Tir Arcanique et l'attaque Légère ont tout deux l'élément Physique !*")
+                    print("Vous avez accepté la quête [Epreuve du Magister]")
+                    Affichage.EntreePourContinuer()
+                    Player.quete = "Epreuve du Magister"
+            elif choix == 5:
+                if "Epreuve des Mages-Epeistes" in Player.quete_complete:
+                    print("*Tu l'as déja faite celle là.*")
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("*On donnait cette épreuve à l'escouade des Mages-Epeistes, au service de sa Majestée.*"
+                          "\n*Tu échoue si tu use de Techniques ou Sorts en lien avec la Terre, le Sang ou le Physique pendant les 4 prochains combats.*")
+                    print("*Attention ! Le Tir Arcanique et l'attaque Légère ont tout deux l'élément Physique !*")
+                    print("Vous avez accepté la quête [Epreuve des Mages-Epeistes]")
+                    Affichage.EntreePourContinuer()
+                    Player.quete = "Epreuve des Mages-Epeistes"
+            elif choix == 6:
+                if "Force et Honneur" in Player.quete_complete:
+                    print("*Tu l'as déja faite celle là.*")
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("*Les aventuriers se reposent trop sur leur force donnée, les objets, et pas assez sur leur force acquise, les sorts et techniques.*"
+                          "\n*Libère toi des chaines du consummérisme !*")
+                    print("Vous avez accepté la quête [Force et Honneur]")
+                    Affichage.EntreePourContinuer()
+                    Player.quete = "Force et Honneur"
+            elif choix == 7:
+                if ("Moqueries Magiques" in Player.quete_complete or
+                    "Moqueries Techniques" in Player.quete_complete):
+                    print("*Tu l'as déja faite celle là.*")
+                    Affichage.EntreePourContinuer()
+                else:
+                    while True:
+                        try:
+                            print("*Je me suis fais humilier par le Bouffon, et en échange il m'a foutu dans cette boite de conserve pour l'éternitée.*"
+                                  "\n*Humilie le pour moi !*")
+                            print("1 - *Tu préfere l'écraser sans Sorts ?*")
+                            print("2 - *Tu préfère l'écraser sans Techniques ?*")
+                            choix_quete = int(input("Que souhaitez vous faire ? ")) 
+                            ClearConsole()
+                            if choix_quete in [1, 2]:
+                                break
+                        except ValueError:
+                            ClearConsole()
+                    if choix_quete == 1:
+                        print("*Qu'il en soit ainsi !*")
+                        print("Vous avez accepté la quête [Moqueries Magiques]")
+                        Player.quete = "Moqueries Magiques"
+                    else:
+                        print("*Qu'il en soit ainsi !*")
+                        print("Vous avez accepté la quête [Moqueries Techniques]")
+                        Player.quete = "Moqueries Techniques"
+                    Affichage.EntreePourContinuer()
+            elif choix == 8:
+                if "Sérendipité" in Player.quete_complete:
+                    print("*Tu l'as déja faite celle là.*")
+                    Affichage.EntreePourContinuer()
+                elif (("Moqueries Magiques" in Player.quete_complete or
+                      "Moqueries Techniques" in Player.quete_complete) and
+                      ("Force et Honneur" in Player.quete_complete) and
+                      ("Epreuve des Mages-Epeistes" in Player.quete_complete) and
+                      ("Epreuve du Magister" in Player.quete_complete) and
+                      ("Interminable" in Player.quete_complete) and
+                      ("Voeu de Pauvreté" in Player.quete_complete)):
+                    Player.quete_complete.append("Sérendipité")
+                    self.AfficheSecretQuetes()
+                else:
+                    print("Tu n'a pas réussi toute mes demandes.")
+                    print("Reviens me voir lorsque ce sera le cas.")
+                    Affichage.EntreePourContinuer()
+            elif choix == 9:
+                if Player.quete == "None":
+                    print("*Tu n'a pas de quêtes en cours !*")
+                    print("*Reviens lorsque ce sera le cas.*")
+                elif "[Complete]" in Player.quete:
+                    print("Et puis quoi encore ??")
+                else:
+                    print(f"*Tu veux abandonner la quête [{Player.quete}] ?*")
+                    print("*Très bien, c'est noté.*")
+                    Player.quete = "None"
+                Affichage.EntreePourContinuer()
+
+    def AfficheSecretQuetes(self):
+        print("A implémenter")
+        Affichage.EntreePourContinuer()
+
+    def DonneRecompenseQuete(self):
+        if Player.quete == "Voeu de Pauvreté [Complete]":
+            print("Le truc vous apprend a vous débarraser de votre stress. Vous vous sentez plus leger !")
+            print("Vous gagnez 15 points de vie max !")
+            Player.points_de_vie_max += 15
+            Player.points_de_vie += 15
+        elif Player.quete == "Interminable [Complete]":
+            print("Le truc vous apprend la patience et la concentration sur de longues périodes de temps.")
+            print("Vous gagnez 15 points de mana max !")
+            Player.points_de_mana_max += 15
+            Player.points_de_mana += 15
+        elif Player.quete == "Epreuve du Magister [Complete]":
+            print("Le truc vous apprend une méthode de respiration qui permet de reveiller la force latente.")
+            print("Vous gagnez 8 points de degat de coup/sorts critiques !")
+            Player.degat_coup_critique += 8
+            Player.degat_sort_critique += 8
+        elif Player.quete == "Epreuve des Mages-Epeistes [Complete]":
+            print("Le truc vous montre des points d'acuponctures à presser pour ameliorer le flux sanguin.")
+            print("Vous gagnez 3 points de force/intelligence/defence !")
+            Player.points_de_force += 3
+            Player.points_dintelligence += 3
+            Player.points_de_defence += 3
+        elif Player.quete == "Force et Honneur [Complete]":
+            print("Le truc vous apprend a déduire les arcs vectoriels des attaques ennemies a partir de leurs mouvements.")
+            print("Vous gagnez 8% d'esquive !")
+            Player.taux_desquive += 8
+        elif Player.quete == "Moqueries Techniques [Complete]":
+            print("Le truc vous passe la technique ultime de son clan.")
+            print("Vous apprenez le Iaido !")
+            Player.techniques_possedes.append("Iaido")
+        elif Player.quete == "Moqueries Magiques [Complete]":
+            print("Le truc vous passe le sort ultime de son clan.")
+            print("Vous apprenez le Carrousel !")
+            Player.sorts_possedes.append("Carrousel")
+        Affichage.EntreePourContinuer()
+                    
+            
 
     def DoTheBloodStone(self):
         print("Entre deux bibliothèque, un passage étroit attire votre attention.")
@@ -3372,12 +3559,15 @@ class SaveManagement:
             "Commentaire pour l'affichage du Boss dans le menu": "",
             "Nombre d'ennemis restant a l'étage": "",
             "Le Redcoin d'extermination a ete recu": "",
-            "Le livre de sort a ete utilise": "",
             "Le Redcoin du marchand a ete achete": "",
             "Nombre de Tirage acheté": "",
             "Possede une gemme de vie": "",
             "Possede une gemme de mana": "",
             "Possede une fée": "",
+            "Le livre de sort a ete utilise": "",
+            "La fontaine a ete utilise": "",
+            "Nombre de Gold dans l'étang": "",
+            "Quete complétées": "",
         }
 
     def FromPlayerToDict(self):
@@ -3406,6 +3596,7 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["Nombre de monstres tués"] = Player.nombre_de_monstres_tues
         self.dictionnaire_de_sauvegarde["Numéro de l'etage"] = Player.numero_de_letage
         self.dictionnaire_de_sauvegarde["Quete en cours"] = Player.quete
+        self.dictionnaire_de_sauvegarde["Quete complétées"] = Player.quete_complete
         self.dictionnaire_de_sauvegarde["Le Boss a ete Battu"] = Player.boss_battu
         self.dictionnaire_de_sauvegarde["Commentaire pour l'affichage du Boss dans le menu"] = Player.commentaire_boss
         self.dictionnaire_de_sauvegarde["Nombre d'ennemis restant a l'étage"] = Player.nombre_dennemis_a_letage
@@ -3458,6 +3649,10 @@ class SaveManagement:
         Player.gemme_de_mana = ast.literal_eval(self.dictionnaire_de_sauvegarde["Possede une gemme de mana"])
         Player.possede_une_fee = ast.literal_eval(self.dictionnaire_de_sauvegarde["Possede une fée"])
         Player.quete = ((self.dictionnaire_de_sauvegarde["Quete en cours"]).strip('"'))
+        Player.quete_complete = ((self.dictionnaire_de_sauvegarde["Quete complétées"]))
+        chaine_de_caractere = (self.dictionnaire_de_sauvegarde["Quete complétées"])
+        liste_de_quete_complete = ast.literal_eval(chaine_de_caractere)
+        Player.quete_complete = liste_de_quete_complete
         Player.boss_battu = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le Boss a ete Battu"])
         Player.commentaire_boss = ((self.dictionnaire_de_sauvegarde["Commentaire pour l'affichage du Boss dans le menu"]).strip('"'))
         Player.nombre_dennemis_a_letage = int(self.dictionnaire_de_sauvegarde["Nombre d'ennemis restant a l'étage"])
@@ -4246,7 +4441,7 @@ while game_in_session:
         Trader.DoTrading() #DONE
     elif choix == 4:
         print("Vous vous baladez dans l'étage...")
-        if Player.numero_de_letage in [1, 2, 3, 4] :
+        if Player.numero_de_letage in [1, 2, 3, 4, 5] :
             Observation.SeeSomething()
         else:
             print("...et ne trouvez rien d'interressant.")

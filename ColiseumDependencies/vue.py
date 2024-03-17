@@ -14,10 +14,10 @@ class Vue:
         self.Player = Player
         mixer.init()
         DIRPATH = Player.chemin_musique
-        CHEMINMUSIQUE = DIRPATH + "\\"
-        self.SONSORT = mixer.Sound(CHEMINMUSIQUE + "spell_cast.wav")
+        self.CHEMINMUSIQUE = DIRPATH + "\\"
+        self.SONSORT = mixer.Sound(self.CHEMINMUSIQUE + "spell_cast.wav")
         self.SONSORT.set_volume(0.5)
-        self.SONTECHNIQUE = mixer.Sound(CHEMINMUSIQUE + "attack_cast.wav")
+        self.SONTECHNIQUE = mixer.Sound(self.CHEMINMUSIQUE + "attack_cast.wav")
         self.SONTECHNIQUE.set_volume(0.5)
 
     def AfficheSonSort(self):
@@ -25,6 +25,12 @@ class Vue:
 
     def AfficheSonTechnique(self):
         self.SONTECHNIQUE.play()
+
+    def PlaySound(self, musique):
+        musique = self.CHEMINMUSIQUE + musique + ".mp3"
+        mixer.init()
+        mixer.music.load(musique)
+        mixer.music.play()
 
     def PrintInfo(self, hp, damage): #old
         print(f"Vous avez fait {damage} points de dégats !")

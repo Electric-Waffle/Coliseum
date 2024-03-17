@@ -2063,18 +2063,18 @@ class Control:
             self.modele.nombre_de_gold -= 5
             self.EquilibrageGold()
         # a cause du stigma gluantin
-        elif self.modele.stigma_monstre_negatif == "Gluantin":
+        elif self.modele.stigma_monstre_negatif == "Gluantin" and not self.modele.monstre_en_etat_de_choc:
             commentaire = "...et secoue son corps gluant comme un flanc au caramel. Tout simplement hilarant !"
         # a cause du stigma corps massif
-        elif self.modele.stigma_monstre_negatif == "Corps Massif":
+        elif self.modele.stigma_monstre_negatif == "Corps Massif" and not self.modele.monstre_en_etat_de_choc:
             commentaire = "...et en profite pour reposer son corps aussi titanesque que difficile a bouger."
         # a cause du stigma copycat
-        elif self.modele.stigma_monstre_negatif == "Copycat":
+        elif self.modele.stigma_monstre_negatif == "Copycat" and not self.modele.monstre_en_etat_de_choc :
             commentaire = (
                 "...et prend une pose similaire a la votre. Par moquerie ou fair-play ?"
             )
         # a cause du stigma hématophobe
-        elif self.modele.stigma_monstre_negatif == "Hématophobe":
+        elif self.modele.stigma_monstre_negatif == "Hématophobe" and not self.modele.monstre_en_etat_de_choc:
             commentaire = (
                 "...absolument dégouté par la vision du sang que vous lui avez offerte."
             )
@@ -2698,6 +2698,70 @@ class Control:
             if self.Player.points_de_vie > self.Player.points_de_vie_max:
                 self.Player.points_de_vie = self.Player.points_de_vie_max
             self.vue.EntreePourContinuer()
+            if self.Player.quete != "None":
+                self.ResultatQuete()
+
+    def ResultatQuete(self):
+        # quete interminable
+        if self.Player.quete == "Interminable":
+            if self.modele.nombre_de_tours >= 50:
+                self.Player.quete += " [Complete]"
+            else:
+                self.Player.quete += " [Echec]"
+        # avancement quete magister
+        if "Epreuve du Magister" in self.Player.quete:
+            if self.Player.quete == "Epreuve du Magister":
+                self.Player.quete = "Epreuve du Magister (1/4)"
+            elif self.Player.quete == "Epreuve du Magister (1/4)":
+                self.Player.quete = "Epreuve du Magister (2/4)"
+            elif self.Player.quete == "Epreuve du Magister (2/4)":
+                self.Player.quete = "Epreuve du Magister (3/4)"
+            elif self.Player.quete == "Epreuve du Magister (3/4)":
+                self.Player.quete = "Epreuve du Magister [Complete]"
+        # avancement quete mage epeiste
+        if "Epreuve des Mages-Epeistes" in self.Player.quete:
+            if self.Player.quete == "Epreuve des Mages-Epeistes":
+                self.Player.quete = "Epreuve des Mages-Epeistes (1/4)"
+            elif self.Player.quete == "Epreuve des Mages-Epeistes (1/4)":
+                self.Player.quete = "Epreuve des Mages-Epeistes (2/4)"
+            elif self.Player.quete == "Epreuve des Mages-Epeistes (2/4)":
+                self.Player.quete = "Epreuve des Mages-Epeistes (3/4)"
+            elif self.Player.quete == "Epreuve des Mages-Epeistes (3/4)":
+                self.Player.quete = "Epreuve des Mages-Epeistes [Complete]"
+        # avancement quete honneur
+        if "Force et Honneur" in self.Player.quete:
+            if self.Player.quete == "Force et Honneur":
+                self.Player.quete = "Force et Honneur (1/8)"
+            elif self.Player.quete == "Force et Honneur (1/8)":
+                self.Player.quete = "Force et Honneur (2/8)"
+            elif self.Player.quete == "Force et Honneur (2/8)":
+                self.Player.quete = "Force et Honneur (3/8)"
+            elif self.Player.quete == "Force et Honneur (3/8)":
+                self.Player.quete = "Force et Honneur (4/8)"
+            elif self.Player.quete == "Force et Honneur (4/8)":
+                self.Player.quete = "Force et Honneur (5/8)"
+            elif self.Player.quete == "Force et Honneur (5/8)":
+                self.Player.quete = "Force et Honneur (6/8)"
+            elif self.Player.quete == "Force et Honneur (6/8)":
+                self.Player.quete = "Force et Honneur (7/8)"
+            elif self.Player.quete == "Force et Honneur (7/8)":
+                self.Player.quete = "Force et Honneur [Complete]"
+        # avancement quete Moqueries Magiques
+        if self.Player.quete == "Moqueries Magiques" and self.modele.monstre_EstUnBoss:
+            self.Player.quete = "Moqueries Magiques [Complete]"
+        # avancement quete Moqueries Techniques
+        if self.Player.quete == "Moqueries Techniques" and self.modele.monstre_EstUnBoss:
+            self.Player.quete = "Moqueries Techniques [Complete]"
+        print(f"Etat de la quête en cours : {self.Player.quete}")
+        if "[Echec]" in self.Player.quete:
+            print("Abandonnez cette quete et reprenez la pour réessayer !")
+        elif "[Complete]" in self.Player.quete:
+            self.vue.PlaySound("questdone")
+            print("Félicitation !\nVous avez complété la quête !\nAllez récuperer votre récompense !")
+        else:
+            print("Continuez comme ca !\nVous êtes sur la bonne voie !")
+        self.vue.EntreePourContinuer()
+            
 
     def EffetStigmaDernierChoix(self):
         while True:
@@ -3179,6 +3243,8 @@ class Control:
             self.CheckSiAttaquePossibleEtAppliqueCoutAttaque()
         )
         if action_est_possible:
+            if self.Player.quete == "Moqueries Techniques" and self.modele.monstre_EstUnBoss:
+                self.Player.quete = "Moqueries Techniques [Echec]"   
             # methode globale pour les attaques
             if action in self.modele.annuaire_de_caracteristique_des_techniques:
                 caracteristique_du_techniques = (
@@ -3662,6 +3728,8 @@ class Control:
             or action == "Explosion de Feu Sacré"
         ):
             self.modele.a_utilise_feu_ce_tour = True
+            if "Epreuve du Magister" in self.Player.quete :
+                self.Player.quete = "Epreuve du Magister [Echec]"
         if (
             action in self.modele.sorts_de_foudre
             or action in self.modele.techniques_de_foudre
@@ -3669,6 +3737,8 @@ class Control:
             or action == "Combo Electrique"
         ):
             self.modele.a_utilise_foudre_ce_tour = True
+            if "Epreuve du Magister" in self.Player.quete :
+                self.Player.quete = "Epreuve du Magister [Echec]"
         if (
             action in self.modele.sorts_de_glace
             or action in self.modele.techniques_de_glace
@@ -3677,6 +3747,8 @@ class Control:
             or action == "Avalanche"
         ):
             self.modele.a_utilise_glace_ce_tour = True
+            if "Epreuve du Magister" in self.Player.quete :
+                self.Player.quete = "Epreuve du Magister [Echec]"
         if (
             action in self.modele.sorts_de_physique
             or action in self.modele.techniques_de_physique
@@ -3684,6 +3756,8 @@ class Control:
             or action == "Libération Physique"
         ):
             self.modele.a_utilise_physique_ce_tour = True
+            if "Epreuve des Mages-Epeistes" in self.Player.quete :
+                self.Player.quete = "Epreuve des Mages-Epeistes [Echec]"
         if (
             action in self.modele.sorts_de_sang
             or action in self.modele.techniques_de_sang
@@ -3692,6 +3766,8 @@ class Control:
             or action == "Bluff"
         ):
             self.modele.a_utilise_sang_ce_tour = True
+            if "Epreuve des Mages-Epeistes" in self.Player.quete :
+                self.Player.quete = "Epreuve des Mages-Epeistes [Echec]"
         if (
             action in self.modele.sorts_de_terre
             or action in self.modele.techniques_de_terre
@@ -3701,6 +3777,8 @@ class Control:
             or action == "Position du Massif"
         ):
             self.modele.a_utilise_terre_ce_tour = True
+            if "Epreuve des Mages-Epeistes" in self.Player.quete :
+                self.Player.quete = "Epreuve des Mages-Epeistes [Echec]"
 
     def ResetTypeElementUtiliseCeTour(self):
         self.modele.a_utilise_feu_ce_tour = False
@@ -3809,6 +3887,8 @@ class Control:
                 self.CheckSiSortPossibleEtAppliqueCoutSort(action)
             )
         if action_est_possible:
+            if self.Player.quete == "Moqueries Magiques" and self.modele.monstre_EstUnBoss:
+                self.Player.quete = "Moqueries Magiques [Echec]"
             if action in self.modele.annuaire_de_caracteristique_des_sorts:
                 caracteristique_du_sort = self.modele.annuaire_de_caracteristique_des_sorts[
                     action
@@ -4228,6 +4308,8 @@ class Control:
                 self.CheckSiItemPossible(nom_de_litem)
             )
         if action_est_possible:
+            if "Force et Honneur" in self.Player.quete :
+                self.Player.quete = "Force et Honneur [Echec]"
             # enleve 1 au nombre d'item
             self.modele.items[nom_de_litem] -= 1
             commentaire = f"Vous utilisez l'item [{nom_de_litem}]"

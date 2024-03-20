@@ -112,7 +112,7 @@ class Control:
                     self.modele.commentaire_de_resurection_de_monstre = "Aucun"
                     commentaire = (
                         "Soudainement, le monstre s'embrase et disparait dans un nuage de cendre. "
-                        "\nLe nuage se met alors a tourner, tourner, tourner, puis se regroupe en une"
+                        "\nLe nuage se met alors a tourner, tourner, tourner, puis se regroupe en une "
                         "forme particulière, comme une statue noire de jais."
                         f"\nLa statue se met alors a prendre des couleurs, et bientot vous"
                         " retrouvez votre ennemi en pleine forme, avec tout ses points de vie.\nD'après"
@@ -775,8 +775,6 @@ class Control:
         # tours benef pour la paralysie
         bonus_talent = 0
         malus_stigma = 0
-        if self.modele.stigma_monstre_positif == "Hardi":
-            malus_stigma = 100
         self.modele.TOURBONUSENNEMIENPARALYSIE = bonus_talent
         self.modele.TOURBONUSENNEMIENPARALYSIE -= malus_stigma
         # tours quon se prend pour le feu
@@ -2237,13 +2235,13 @@ class Control:
         # sous la rafale
         if self.modele.utilise_rafale:
             self.modele.rafale_nombre_tours -= 1
-            if self.modele.rafale_nombre_tours == 0:
+            if self.modele.rafale_nombre_tours <= 0:
                 self.modele.utilise_rafale = False
                 commentaire += "\nLes vents de la rafale retournent dans leur monde !"
         # sous la posture de la montagne
         if self.modele.utilise_posture_de_la_montagne:
             self.modele.posture_de_la_montagne_tour -= 1
-            if self.modele.posture_de_la_montagne_tour == 0:
+            if self.modele.posture_de_la_montagne_tour <= 0:
                 self.modele.utilise_posture_de_la_montagne = False
                 self.modele.gain_de_defence = 0
                 commentaire += "\nLa posture de la montagne ne fait plus effet !"
@@ -2264,7 +2262,7 @@ class Control:
         # sous l'adrenaline
         if self.modele.utilise_pousse_adrenaline:
             self.modele.pousse_adrenaline_tour -= 1
-            if self.modele.pousse_adrenaline_tour == 0:
+            if self.modele.pousse_adrenaline_tour <= 0:
                 self.modele.utilise_pousse_adrenaline = False
                 commentaire += ("\nL'adrenaline ne fait plus effet !\n De plus, retenir sa"
                                 " respiration pendant autant de temps vous fait tourner"
@@ -2277,7 +2275,7 @@ class Control:
         # sous le mirroir d'eau
         if self.modele.utilise_mirroir_eau:
             self.modele.mirroir_eau_nombre_tours -= 1
-            if self.modele.mirroir_eau_nombre_tours == 0:
+            if self.modele.mirroir_eau_nombre_tours <= 0:
                 self.modele.utilise_mirroir_eau = False
                 commentaire += "\nLe mirroir d'eau se disperse dans les airs !"
         # sous la brume de sang
@@ -3379,13 +3377,16 @@ class Control:
                                 )
                                 commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
                         elif self.modele.a_utilise_foudre_ce_tour:
-                            self.modele.monstre_est_paralyse = True
-                            self.modele.monstre_passe_son_tour = True
-                            nombre_tour_para = caracteristique_du_techniques[9] + self.modele.TOURBONUSENNEMIENPARALYSIE
-                            self.modele.monstre_est_paralyse_nombre_tour += (
-                                nombre_tour_para
-                            )
-                            commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
+                            if self.modele.stigma_monstre_positif == "Hardi":
+                                commentaire_element = f"\nL'ennemi résiste a la paralysie !"
+                            else:
+                                self.modele.monstre_est_paralyse = True
+                                self.modele.monstre_passe_son_tour = True
+                                nombre_tour_para = caracteristique_du_techniques[9] + self.modele.TOURBONUSENNEMIENPARALYSIE
+                                self.modele.monstre_est_paralyse_nombre_tour += (
+                                    nombre_tour_para
+                                )
+                                commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
                         elif self.modele.a_utilise_glace_ce_tour:
                             nombre_tour_gele = caracteristique_du_techniques[9] + self.modele.TOURBONUSENNEMIENGLACE
                             self.modele.monstre_est_gele = True
@@ -4040,13 +4041,16 @@ class Control:
 
                                 commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
                         elif self.modele.a_utilise_foudre_ce_tour:
-                            self.modele.monstre_est_paralyse = True
-                            self.modele.monstre_passe_son_tour = True
-                            nombre_tour_para = caracteristique_du_sort[9] + self.modele.TOURBONUSENNEMIENPARALYSIE
-                            self.modele.monstre_est_paralyse_nombre_tour += (
-                                nombre_tour_para
-                            )
-                            commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
+                            if self.modele.stigma_monstre_positif == "Hardi":
+                                commentaire_element = f"\nL'ennemi résiste a la paralysie !"
+                            else:
+                                self.modele.monstre_est_paralyse = True
+                                self.modele.monstre_passe_son_tour = True
+                                nombre_tour_para = caracteristique_du_sort[9] + self.modele.TOURBONUSENNEMIENPARALYSIE
+                                self.modele.monstre_est_paralyse_nombre_tour += (
+                                    nombre_tour_para
+                                )
+                                commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
                         elif self.modele.a_utilise_glace_ce_tour:
                             self.modele.monstre_est_gele = True
                             nombre_tour_gele = caracteristique_du_sort[9] + self.modele.TOURBONUSENNEMIENGLACE
@@ -5023,6 +5027,8 @@ class Control:
                     self.modele.monstre_est_paralyse = True
                     self.modele.monstre_est_paralyse_nombre_tour += 1
                     commentaire += "\n -L'ennemi est gelé, brulé, paralysé, pendant 1 tour."
+            # affinage des dalterations d'état (si nombre de tour = 1, l'ennemi ne le subit pas car nombre de tour = 0 a la fin du tour.)
+            # (besoin de rajouter 1 aux nombres de tours)
             self.vue.AfficheBanditManchot(commentaire)
 
     def SonLent(self):
@@ -5194,6 +5200,7 @@ class Control:
         commentaire = "L'ennemi produit un vacarme chaotique qui vous fait saigner des oreilles ! Le son est trop rapide pour être mélodieux !"
         degat = 15 + self.modele.monstre_level
         degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat)
+        degat = self.EnleveVieAuJoueur(degat)
         commentaire_effet = f"Vous perdez {degat} points de vie ."
         self.vue.AfficheTempeteOuVacarme(commentaire, commentaire_effet)
         nombre_aleatoire = random.randint(0, 100)

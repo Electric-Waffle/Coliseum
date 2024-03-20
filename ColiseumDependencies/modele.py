@@ -604,7 +604,7 @@ class Model:
                              "Vous plongez dans la mêlée avec votre katana givré, prêt à défier le froid de l'adversité...", 
                              "...mais votre attaque est déviée par l'ennemi, glissant alors hors de portée.", 
                              "...et votre katana tranche l'ennemi avec une efficacité glaciale, lui infligeant des dommages profonds !", 
-                             "...et votre attaque engloutit l'ennemi dans un torrent de glace, l'emportant contre les murs de l'arène' !!", 3, 0],
+                             "...et votre attaque engloutit l'ennemi dans un torrent de glace, l'emportant contre les murs de l'arène !!", 3, 0],
             "Katana Glacial": [74, 36, 20, 9, 17, 
                                "Vous canalisez le pouvoir de la glace dans votre katana, le couvrant de cristaux gelés...", 
                                "...mais votre attaque est repoussée par l'ennemi, la glace se brisant sur son armure.",
@@ -2461,15 +2461,14 @@ class Model:
         #
         #
         # -un dictionnaire des couts des attaques
+        #
+        #
         # A faire :
         #
         #
         #
-        #
-        #
-        #
-        #
-        #
+        #Faire secret des quetes                                  | MAINTENANT
+        #Faire livres de bibliotheque finale et secret des livres |
         #
         #
         #                           S'assurer que tout les stigmas soient                          |
@@ -2485,7 +2484,7 @@ class Model:
         #faire les intro/intro rez des boss secrets (wip)                                          |
         #faire les systemes de données transverssées a travers les runs (genre bibliotheque) (wip) |
         #faire message de mort des ennemis (wip)                                                   |
-        #faire Vaati personnage d'entretien (wip)                                                       |
+        #faire Vaati personnage d'entretien (wip)                                                  |
         #
         #
         #                           cleanup                                                                               |

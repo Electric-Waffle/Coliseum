@@ -1,2 +1,2 @@
 Caracteristique|Valeur
-Livre de sort|["Tir Arcanique"]
+Livre de sort|['Tir Arcanique']

@@ -16,7 +16,88 @@ import threading
 # 12inteligence 13defence 14tauxcoupcrit
 # 15degatcoupcrit 16tauxsortcrit 17degatsortcrit
 # 18tauxesquive 19gold
-
+LISTETECHNIQUES = [
+    "Lance Rapide",
+    "Lance Statique",
+    "Lance Electrique",
+    "Lance de l'Eclair",
+    "Lance Foudroyante", 
+    "Lance de la Mort Blanche",
+    "Bô Chaud", #
+    "Bô Brulant", #
+    "Bô Enflammé", #
+    "Bô de la Fournaise",
+    "Bô Magmatique",
+    "Bô Solaire",
+    "Katana Bleu",
+    "Katana Froid",
+    "Katana Givré",
+    "Katana Glacial",
+    "Katana Polaire",
+    "Katana Zéro",
+    "Corne Argile", #
+    "Corne Lapis", #
+    "Corne Granite", #
+    "Corne Obsidienne",
+    "Corne de la Montagne",
+    "Corne Continentale",
+    "Poing Léger", #
+    "Poing Renforcé", #
+    "Poing Lourd", #
+    "Poing Maitrisé", #
+    "Poing Fatal", #
+    "Poing de la Comète",
+    "Dague Volevie",
+    "Dague Siphoneuse",
+    "Dague Vampirique",
+    "Dague Parasite",
+    "Dague Destructrice",
+    "Dague Créatrice",
+]
+LISTESORTS = [
+    "Faisceau Rapide",
+    "Faisceau Statique",
+    "Faisceau Electrique",
+    "Faisceau de l'Eclair",
+    "Faisceau Foudroyant",
+    "Faisceau de la Mort Blanche",
+    "Thermosphère Chaude",
+    "Thermosphère Brulante",
+    "Thermosphère Enflammée",
+    "Thermosphère de la Fournaise",
+    "Thermosphère Magmatique",
+    "Thermosphère Solaire",
+    "Pic Bleu",
+    "Pic Froid",
+    "Pic Givré",
+    "Pic Glacial",
+    "Pic Polaire",
+    "Pic Zéro",
+    "Création d'Argile",
+    "Création de Lapis",
+    "Création de Granite",
+    "Création Obsidienne",
+    "Création de la Montagne",
+    "Création Continentale",
+    "Explosion Légère",
+    "Explosion Renforcée",
+    "Explosion Lourde",
+    "Explosion Maitrisée",
+    "Explosion Fatale",
+    "Explosion de la Comète",
+    "Dance Volevie",
+    "Dance Siphoneuse",
+    "Dance Vampirique",
+    "Dance Parasite",
+    "Dance Destructrice",
+    "Dance Créatrice",
+    "Sonata Pitoyable", #3% ou 8pv
+    "Sonata Miséricordieuse", #5% ou 15pv
+    "Sonata Empathique", #12% ou 20pv
+    "Sonata Sincère", #17% ou 25pv
+    "Sonata Bienveillante", #20% ou 33pv
+    "Sonata Absolutrice", #25% ou 40pv
+]
 ANNUAIRESORTSSOIN = {  # cout moins élevé quand utilise sort en dehors combat
     "Sonata Pitoyable": 6, 
     "Sonata Miséricordieuse": 13,
@@ -552,6 +633,10 @@ LISTEDEPERSONNAGE = {
         0,  # int taux esquive
         2500000,  # int gold
     ],
+}
+BIBLIOTHEQUEFINALE = {
+    "Titre": ["Extrait 1", "Extrait 2", "Extrait 3", ],
+    "Titre 2": ["Extrait 1", "Extrait 2", "Extrait 3", ],
 }
 LISTEITEMDEFENCE = [
     "Feuille Jindagee",
@@ -1640,7 +1725,6 @@ class Affiche:
             print("Un spectateur fantomatique amusé par votre désir d'extermination vous envoie un cadeau depuis les gradins, avant de disparaitre.")
             self.EntreePourContinuer()
             print("Vous gagnez un Red Coin !")
-            self.EntreePourContinuer()
             Player.nombre_de_red_coin += 1
             Player.red_coin_recu_par_extermination = True
         self.EntreePourContinuer()
@@ -1704,7 +1788,7 @@ class Affiche:
             liste_commentaire.append(commentaire)
             commentaire = ("Le sarcophage se souleve alors et une forme vaguement humaine zébrée de lignes de coutures avec un masque de pharaon en sort."
                            "\n*Le roi, dans sa folie, s'est emparé des cadavres de ses soi-disants ennemis qu'il a cousut entre eux. puis il a mit l'âme de son frère a l'interieur.*"
-                           "\n*Je suis un monstre, une atrocitée, mais sur laquelle il avait enfin le controle que son esprit malade requit.\nUn Roi des sables du sud que l'on a enfermé dans ce corps....* ")
+                           "\n*Je suis un monstre, une atrocitée, mais sur laquelle il avait enfin le controle que son esprit malade requit.*\n*Un Roi des sables du sud que l'on a enfermé dans ce corps....* ")
             liste_commentaire.append(commentaire)
             commentaire = ("Les vases canopes commencent alors a leviter."
                            "\n*Vois ce qu'il reste de la grande lignée qui précédait ce fou : des morceaux de chairs dans des vases magiques.*\n\n\n*Pitoyable.*\n\n"
@@ -2029,8 +2113,8 @@ class PlayerCaracteristics:
         self.stigma_positif = ""
         self.stigma_negatif = ""
         self.stigma_bonus = ""
-        self.techniques_possedes = ""
-        self.sorts_possedes = ""
+        self.techniques_possedes = []
+        self.sorts_possedes = []
         self.items_possedes = DICTIONNAIREITEMINITIAL
         self.talents_possedes = ""
         self.points_de_vie_max = 0
@@ -2059,6 +2143,9 @@ class PlayerCaracteristics:
         self.red_coin_recu_par_extermination = False
         self.redcoin_bought = False
         self.library_used = False
+        self.liste_daction_oubliees = []
+        self.final_library_used = False
+        self.mercant_healed = False
         self.fountain_used = False
         self.number_of_tirage = 0
         self.invitation_received = False
@@ -2303,15 +2390,503 @@ class Observe:
         elif Player.numero_de_letage == 5:
             self.DoTheQuests()  # fantome des quetes ultimes
         elif Player.numero_de_letage == 6:
-            DoTheThing()  # alchimiste divin demande manamax
+            self.DoTheOldMercant()  # alchimiste divin vampire demande manamax
         elif Player.numero_de_letage == 7:
-            DoTheThing()  # rituels de sang pour chance critiques
+            self.DoTheCursedBook()  # echange sorts/techniques pour carac
         elif Player.numero_de_letage == 8:
-            DoTheThing()  # bibliotheque de gros sorts (choisir sort a consigner)
+            self.DoTheFinalLibrary()  # bibliotheque de gros sorts (choisir sort a consigner)
         elif Player.numero_de_letage == 9:
             DoTheThing()  # Porte demande 100 red coins pour etre ouverte (reste par partie), débloque un gauntlet de 50 ennemis pour avoir ame
         elif Player.numero_de_letage == 10:
             DoTheThing()  # Affronte Alfred pour plein de récompenses
+
+    def DoTheCursedBook(self):
+        print("Dans une cage vide, vous trouvez un livre à moitié brulé dont la couverture représente une cigogne noire regardant vers le haut.")
+        Affichage.EntreePourContinuer()
+        print("Sur la première page, il y a [ERROR : DESCRIPTION NOT FOUND].")
+        print("[IPV4 ADRESS OF LOST DESCRIPTION : 456852]")
+        Affichage.EntreePourContinuer()
+        while True:
+            while True:
+                try:
+                    print("Vous posez la main sur la page, et pensez à:")
+                    print("1 - Rien du tout.")
+                    numero_a_afficher = 2
+                    for sorts in Player.sorts_possedes:
+                        print(f"{numero_a_afficher} - {sorts}")
+                        numero_a_afficher += 1
+                    for techniques in Player.techniques_possedes:
+                        print(f"{numero_a_afficher} - {techniques}")
+                        numero_a_afficher += 1
+                    choix = int(input("\n"))
+                    ClearConsole()
+                    nombre_de_choix_possibles = len(Player.sorts_possedes) + len(Player.techniques_possedes) + 1
+                    if choix in range(1, (nombre_de_choix_possibles + 1)):
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous jetez à votre main un regard vide, et laissez tomber le livre sur le sol avant de repartir.")
+                Affichage.EntreePourContinuer()
+                break
+            else:
+                liste_de_sorts_et_techniques_a_oublier = []
+                for sorts in Player.sorts_possedes:
+                    liste_de_sorts_et_techniques_a_oublier.append(sorts)
+                for techniques in Player.techniques_possedes:
+                    liste_de_sorts_et_techniques_a_oublier.append(techniques)
+                action_a_oublier = liste_de_sorts_et_techniques_a_oublier[(choix - 2)]
+                Player.liste_daction_oubliees.append(action_a_oublier)
+                if action_a_oublier in Player.sorts_possedes:
+                    Player.sorts_possedes.remove(action_a_oublier)
+                    type_daction = "Sort"
+                else:
+                    Player.techniques_possedes.remove(action_a_oublier)
+                    type_daction = "Technique"
+                print("Vous sentez quelque chose sortir de votre esprit et partir dans le livre, mais vous ne savez pas quoi.")
+                print(f"La ligne [{action_a_oublier}] apparait sur la page d'après !")
+                Affichage.EntreePourContinuer()
+                self.DonneRecompensePourOubli(action_a_oublier, type_daction)
+                self.DonneRecompensePourCertainsOubli()
+
+    def DonneRecompensePourCertainsOubli(self):
+        if (
+            "Corne Granite" in Player.liste_daction_oubliees and
+            "Création de Granite" in Player.liste_daction_oubliees
+        ):
+            print("Les lignes Corne Granite et Création de Granite brillent avant de disparaitre.")
+            print("Vous gagnez 3 points de défence !")
+            Player.liste_daction_oubliees.remove("Corne Granite")
+            Player.liste_daction_oubliees.remove("Création de Granite")
+            Player.points_de_defence += 3
+        elif (
+            "Explosion de la Comète" in Player.liste_daction_oubliees and
+            "Thermosphère Solaire" in Player.liste_daction_oubliees
+        ):
+            print("Les lignes Explosion de la Comète et Thermosphère Solaire brillent avant de disparaitre.")
+            print("Vous gagnez 15 points de mana max et 5% de chance de faire un sort critique !")
+            Player.points_de_mana_max += 15
+            Player.taux_sort_critique += 5
+            Player.liste_daction_oubliees.remove("Explosion de la Comète")
+            Player.liste_daction_oubliees.remove("Thermosphère Solaire")
+        elif (
+            "Dague Vampirique" in Player.liste_daction_oubliees and
+            "Sonata Miséricordieuse" in Player.liste_daction_oubliees
+        ):
+            print("Les lignes Dague Vampirique et Sonata Miséricordieuse brillent avant de disparaitre.")
+            print("Vous gagnez 5% de chance d'esquiver !")
+            Player.taux_desquive += 5
+            Player.liste_daction_oubliees.remove("Dague Vampirique")
+            Player.liste_daction_oubliees.remove("Sonata Miséricordieuse")
+        elif (
+            "Lance de l'Eclair" in Player.liste_daction_oubliees and
+            "Katana Polaire" in Player.liste_daction_oubliees
+        ):
+            print("Les lignes Lance de l'Eclair et Katana Polaire brillent avant de disparaitre.")
+            print("Vous gagnez 15 points de vie max 5% de chance de faire un coup critique !")
+            Player.points_de_vie_max += 15
+            Player.taux_coup_critique += 5
+            Player.liste_daction_oubliees.remove("Lance de l'Eclair")
+            Player.liste_daction_oubliees.remove("Katana Polaire")
+        elif (
+            "Dance Destructrice" in Player.liste_daction_oubliees and
+            "Poing Fatal" in Player.liste_daction_oubliees
+        ):
+            print("Les lignes Dance Destructrice et Poing Fatal brillent avant de disparaitre.")
+            print("Vous gagnez 4 points de force !")
+            Player.points_de_force += 4
+            Player.liste_daction_oubliees.remove("Dance Destructrice")
+            Player.liste_daction_oubliees.remove("Poing Fatal")
+        elif (
+            "Faisceau Rapide" in Player.liste_daction_oubliees and
+            "Bô de la Fournaise" in Player.liste_daction_oubliees
+        ):
+            print("Les lignes Faisceau Rapide et Bô de la Fournaise brillent avant de disparaitre.")
+            print("Vous gagnez 4 points d'intelligence !")
+            Player.points_dintelligence += 4
+            Player.liste_daction_oubliees.remove("Faisceau Rapide")
+            Player.liste_daction_oubliees.remove("Bô de la Fournaise")
+        elif (
+            "Pic Zéro" in Player.liste_daction_oubliees and
+            "Sonata Bienveillante" in Player.liste_daction_oubliees and
+            "Création Obsidienne" in Player.liste_daction_oubliees and
+            "Lance Electrique" in Player.liste_daction_oubliees and
+            "Bô Chaud" in Player.liste_daction_oubliees and
+            "Katana Froid" in Player.liste_daction_oubliees 
+        ):
+            mixer.quit()
+            print("Les lignes Pic Zéro, Sonata Bienveillante, "
+                  "Création Obsidienne, Lance Electrique, "
+                  "Katana Froid et Bô Chaud brillent avant de disparaitre.")
+            print("Des mots apparaissent, lettres après lettres, sur la quatrième de couverture.")
+            print("Comme écrits par une main invisible.")
+            Player.liste_daction_oubliees.remove("Pic Zéro")
+            Player.liste_daction_oubliees.remove("Sonata Bienveillante")
+            Player.liste_daction_oubliees.remove("Création Obsidienne")
+            Player.liste_daction_oubliees.remove("Lance Electrique")
+            Player.liste_daction_oubliees.remove("Katana Froid")
+            Player.liste_daction_oubliees.remove("Bô Chaud")
+            Affichage.EntreePourContinuer()
+            PlayMusic("quiet")
+            print("      -=Métamorphose=-")
+            print("")
+            time.sleep(5)
+            print("Mon cher amour.")
+            time.sleep(5)
+            print("De la plus grande plume d'oie")
+            time.sleep(5)
+            print("A la plus pitoyable tache d'encre,")
+            time.sleep(5)
+            print("Du plus radiant des passés")
+            time.sleep(5)
+            print("Au plus austère des futurs,")
+            time.sleep(5)
+            print("De la plus belle femme du monde")
+            time.sleep(5)
+            print("A la plus misérable des ombres,")
+            time.sleep(5)
+            print("Dans la paume de tes mains tourne")
+            time.sleep(5)
+            print("Ma vie mon monde mon éternitée,")
+            time.sleep(5)
+            print("Du pire des meilleurs, aux meilleurs du pire .")
+            time.sleep(10)
+            print("Avec le prix de mon âme,")
+            time.sleep(5)
+            print("Le sépulcre de ton royaume,")
+            time.sleep(5)
+            print("Et la mort de ton présent,")
+            time.sleep(5)
+            print("Enfin j'espère, enfin je vis, enfin j'ose,")
+            time.sleep(5)
+            print("M'offrir cette métamorphose .")
+            time.sleep(5)
+            print("Et de la plus pitoyable tache d'encre,")
+            time.sleep(5)
+            print("A la plus grande plume d'oie,")
+            time.sleep(5)
+            print("Du plus austère des passés")
+            time.sleep(5)
+            print("Au plus radiant des futurs,")
+            time.sleep(5)
+            print("De la plus misérable femme du monde")
+            time.sleep(5)
+            print("A la plus belle des ombres,")
+            time.sleep(5)
+            print("Je renais dans tes cendres.")
+            time.sleep(5)
+            print("")
+            print("                     -(nom illisible) Mage,")
+            print("                          An de grâce 1233")
+            print("")
+            time.sleep(5)
+            Affichage.EntreePourContinuer()
+            mixer.quit()
+            print("La cage est ici.")
+            print("Mais l'oie s'est envolée ailleurs.")
+            Affichage.EntreePourContinuer()
+            PlayMusic("etage_7")
+
+    def DonneRecompensePourOubli(self, action_a_oublier, type_daction):
+        # trouve le niveau de laction oubliée
+        liste_daction_de_même_rang = []
+        for rang in range(0, 6):
+            if type_daction == "Technique":
+                for numero in range(0, 6):
+                    index = rang + (numero * 6)
+                    liste_daction_de_même_rang.append(LISTETECHNIQUES[index])
+            elif type_daction == "Sort":
+                for numero in range(0, 7):
+                    index = rang + (numero * 6)
+                    liste_daction_de_même_rang.append(LISTESORTS[index])
+            if action_a_oublier in liste_daction_de_même_rang:
+                rang_de_laction = rang + 1
+                break
+            liste_daction_de_même_rang = []
+        #nombre de pv/mana rendu, golds gagné, carac supp
+        gain = 5 + rang_de_laction * 5
+        gold_gagne = 100 + rang_de_laction * 5
+        Player.nombre_de_gold += gold_gagne
+        dmg_critique_gagne = 2 * rang_de_laction
+        taux_gagne = rang_de_laction
+        if type_daction == "Technique":
+            type_gain = "pv"
+            type_caracteristique = "techniques"
+            Player.points_de_vie_max += gain
+            Player.points_de_vie += gain
+            Player.taux_coup_critique += taux_gagne
+            Player.degat_coup_critique += dmg_critique_gagne
+        elif type_daction == "Sort":
+            type_gain = "pm"
+            type_caracteristique = "sorts"
+            Player.points_de_mana_max += gain
+            Player.points_de_mana += gain
+            Player.taux_sort_critique += taux_gagne
+            Player.degat_sort_critique += dmg_critique_gagne
+        print(f"Vous gagnez {gain} {type_gain} max !")
+        print(f"Vous gagnez {dmg_critique_gagne} points de dégats de {type_caracteristique} critiques !")
+        print(f"Vous gagnez {taux_gagne}% de chance de faire des {type_caracteristique} critiques !")
+        Affichage.EntreePourContinuer()
+                
+    def DoTheOldMercant(self):
+        if not Player.mercant_healed:
+            print("Vous voyez de la lumière dans une des maisons."
+                "\nAlors que vous entrez, vous découvrez une vieille femme mourrante, allongée sur un vieux lit décrépit.")
+            print("Vous l'entendez vous dire d'une voix faible : *Aidez...moi...*")
+            Affichage.EntreePourContinuer()
+            while True:
+                try:
+                    print("*Pas...besoin de beaucoup...*")
+                    print("*huit...dix...pas plus...*")
+                    print("La dame vous regarde bizarrement.")
+                    print("S'approcher ?")
+                    print("(Vous risqueriez de le regretter)")
+                    print("1 - Non")
+                    print("2 - Oui")
+                    choix = int(input("\n"))
+                    ClearConsole()
+                    if choix in [1, 2]:
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous retournez sur vos pas.")
+                Affichage.EntreePourContinuer()
+            else:
+                print("Vous vous approchez de la dame, et elle se met a murmurer quelque chose en boucle.")
+                print("Vous tendez l'oreille et vous mettez a son chevet...")
+                Affichage.EntreePourContinuer()
+                print("*Merci.*")
+                Affichage.EntreePourContinuer()
+                print("Elle se jette sur vous avec la fureur d'un diable, et plante ses crocs dans votre gorge !")
+                print("Vous tentez de la faire lacher prise, mais elle s'aggripe a vous avec encore plus de force.")
+                print("Vous sentez vos forces diminuer...")
+                Affichage.EntreePourContinuer()
+                Player.points_de_vie_max -= 15
+                Player.points_de_vie -= 15
+                Player.points_de_mana_max -= 15
+                Player.points_de_mana -= 15
+                if Player.points_de_vie <= 0:
+                    PlaySound("death")
+                    print("..et vous mourrez.")
+                    Affichage.EntreePourContinuer()
+                    sys.exit()
+                else:
+                    Player.points_de_vie = 1
+                    Player.points_de_mana = 0
+                    Player.mercant_healed = True
+                    print("...et alors que vous appretez a fermer les yeux pour la derniere fois, la dame vous lache.")
+                    Affichage.EntreePourContinuer()
+                    print("*Merci jeune homme.*"
+                        "\n*Cela faisait longtemps que je n'avais pas eu pareil festin. Ho ho ho !*")
+                    print("*Revenez me voir d'ici quelques minutes et j'aurais de quoi rembourser votre générosité.*")
+                    Affichage.EntreePourContinuer()
+                    print("Vous avez (été forcé d')accepté(r) la quête [La Générositée d'une Alchimiste] !")
+                    print("Retournez voir l'alchimiste le plus vite possible !")
+                    Player.quete = "La Générositée d'une Alchimiste"
+                    Affichage.EntreePourContinuer()
+                    print("Vous sortez de la maison en gémissant.")
+                    print("Vous avez perdu 15 points de vie et de mana max !")
+                    print("Vos points de vie et de mana sont au minimum ! Allez vite vous faire soigner !")
+                    Affichage.EntreePourContinuer()
+        else:
+            print("Vous voyez de la lumière dans une des maisons."
+                  "\nVous passez la porte primitive de taule et d'acier, et découvrez derrière une modeste échoppe.")
+            print("Sur l'étalage, des items d'une raretée phénoménale sont exposés derrière une vitre .")
+            print("Vous entendez une voix familière derrière le comptoir.")
+            Affichage.EntreePourContinuer()
+            if Player.quete == "La Générositée d'une Alchimiste":
+                print("*Merci encore pour le remontant, jeune homme.*")
+                print("*Je me présente : Mariette, alchimiste en quête de nouveaux ingrédients.*")
+                Affichage.EntreePourContinuer()
+                print("*Vampire à mes heures perdues.*")
+                Affichage.EntreePourContinuer()
+                print("*La...condition...de cet étage fait que beaucoup de choses bizarres s'y produisent.*"
+                      "\n*Comme par exemple la force mysterieuse qui fait que toutes mes productions passent de magistrales à divine !*")
+                print("*Ducoup je vis ici avec la permission du nouveau maitre des lieux, et je lui donne deux trois remèdes en échange .*")
+                Affichage.EntreePourContinuer()
+                print("*Ce genre de choses.*")
+                Affichage.EntreePourContinuer()
+                PlaySound("questdone")
+                print("Vous recevez un remède divin et une pillule divine !")
+                print("Vous avez accompli la quête [La Générositée d'une Alchimiste] !")
+                Player.quete_complete.append(Player.quete)
+                if "None" in Player.quete_complete:
+                    Player.quete_complete.remove("None")
+                Player.quete = "None"
+                Affichage.EntreePourContinuer()
+                PlayMusic("etage_6")
+                print("*Ceux la sont gratuits, mais les autres ne le seront pas. Ho ho ho !*")
+                Affichage.EntreePourContinuer()
+            while True:
+                while True:
+                    try:
+                        print("*Vous voyez quelque chose qui vous plait ?*")
+                        print("*J'espère que ce n'est pas moi, car je ne suis pas a vendre ! Ho ho ho !*")
+                        print("1 - Partir")
+                        print("2 - Remède Divin: 150 golds")
+                        print("3 - Pillule Divine: 170 golds")
+                        print("4 - Grand Mutagène Doré: 200 golds")
+                        print("5 - Soluté d'Absolution: 100 golds")
+                        print("6 - Soluté d'Exorcisme: 300 golds")
+                        choix = int(input(f"Vous avez {Player.nombre_de_gold} golds. Que souhaitez vous acheter ? "))
+                        ClearConsole()
+                        if choix in range(1, 7):
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    print("*Au revoir !*")
+                    Affichage.EntreePourContinuer()
+                    break
+                if choix in range(2, 7):
+                    if choix == 2:
+                        cout = 150
+                        nom_de_litem = "Remède Divin"
+                    elif choix == 3:
+                        cout = 170
+                        nom_de_litem = "Pillule Divine"
+                    elif choix == 4:
+                        cout = 200
+                        nom_de_litem = "Grand Mutagène Doré"
+                    elif choix == 5:
+                        cout = 100
+                        nom_de_litem = "Soluté d'Absolution"
+                    elif choix == 6:
+                        cout = 300
+                        nom_de_litem = "Soluté d'Exorcisme"
+                    if Player.nombre_de_gold >= cout:
+                        print(f"Vous achetez l'item [{nom_de_litem}] !")
+                        Player.nombre_de_gold -= cout
+                        Player.items_possedes[nom_de_litem] += 1
+                        Affichage.EntreePourContinuer()
+                        print("(Mariette vous prend le front a deux main et vous y laisse un gros bisou)")
+                        print("*Vous êtes un amour !*")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("*C'est beau de vouloir soutenir un commerce de proximité,"
+                              " mais si vous n'avez pas assez de golds, ca me met dans l'embarras plus qu'autre chose .*")
+                        Affichage.EntreePourContinuer()
+                        print("*Qu'importe, c'est l'intention qui compte !*")
+                        print("*Prenez donc ceci pour votre gentillesse.*")
+                        Affichage.EntreePourContinuer()
+                        print("Mariette vous donne un remède !")
+                        Player.items_possedes["Remède"] += 1
+                        Affichage.EntreePourContinuer()
+
+    def DoTheFinalLibrary(self):
+        print("Entre deux piliers de tufs, vous découvrez un couloir singulier."
+              "\nA l'interieur, vous sentez votre coeur s'arreter de battre...sans que cela ne vous affecte."
+              "\nA la fin du couloir, vous trouvez une magnifique bibliothèque de bois ornemental, dans lequel sont rangés des livres de toute les couleurs.")
+        Affichage.EntreePourContinuer()
+        while True:
+            while True:
+                nombre_a_afficher = 2
+                try:
+                    print("1 - Partir")
+                    for livre in BIBLIOTHEQUEFINALE:
+                        print(f"{nombre_a_afficher} - Prendre le livre [{livre}]")
+                        nombre_a_afficher += 1
+                    choix = int(input("Que souhaitez vous faire ?"))
+                    ClearConsole()
+                    if choix in range(1, (len(BIBLIOTHEQUEFINALE) + 2)):
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous laissez la bibliothèque derriere vous et sortez du couloir.")
+                print("A votre plus grand soulagement, votre coeur se remet a battre.")
+                Affichage.EntreePourContinuer()
+                break
+            elif choix == 22:
+                self.WriteInFinalBook()
+            else:
+                print("Vous ouvrez le livre à une page aléatoire.")
+                Affichage.EntreePourContinuer()
+                dictionnaire_sous_forme_de_liste = list(BIBLIOTHEQUEFINALE)
+                nom_du_livre = dictionnaire_sous_forme_de_liste[(choix - 2)]
+                liste_de_passages_a_lire = BIBLIOTHEQUEFINALE[nom_du_livre]
+                for passage in liste_de_passages_a_lire:
+                    print(passage)
+                    Affichage.EntreePourContinuer()
+                print("Vous refermez le livre et le reposez dans la bibliothèque.")
+                Affichage.EntreePourContinuer()
+
+    def WriteInFinalBook(self):
+        print("Vous prenez le livre familier et observez sa couverture.")
+        print("Une magnifique cigogne rouge regarde vers la gauche.")
+        print("Sur la première page, vous retrouvez les mêmes lignes que dans le livre de la cigogne bleue a une différence près :")
+        print("Elles ne se font pas absorber quand vous les touchez.")
+        Affichage.EntreePourContinuer()
+        print("Vous pouvez y lire les phrases suivantes :")
+        donnees_de_s0ve = self.GetPermanentThingsFromS0ve()
+        liste_de_sorts_enregistres = ast.literal_eval(donnees_de_s0ve["Livre de sort"])
+        for sort in liste_de_sorts_enregistres:
+            print(sort)
+        Affichage.EntreePourContinuer()
+        if not Player.final_library_used:
+            print("...?")
+            Affichage.EntreePourContinuer()
+            while True:
+                try:
+                    print("On dirait presque que le livre tente d'absorber votre mana...")
+                    print("1 - Remettre le livre a sa place")
+                    print("2 - Le laisser absorber votre mana (Coute 100pm)")
+                    choix = int(input("Que souhaitez vous faire ? "))
+                    ClearConsole()
+                    if choix in [1, 2]:
+                        break
+                except ValueError:
+                    ClearConsole()
+            if choix == 1:
+                print("Vous refermez le livre et le reposez dans la bibliothèque.")
+                Affichage.EntreePourContinuer()
+            elif choix == 2 and Player.points_de_mana < 100:
+                print("Vous n'avez pas assez de mana !")
+                print("Vous refermez le livre et le reposez dans la bibliothèque.")
+                Affichage.EntreePourContinuer()
+            else:
+                Player.points_de_mana -= 100
+                print("Vous laissez le livre prendre votre mana.\nUne aura bleue commence a l'entourer, puis il se referme violemment sur votre bras !")
+                Affichage.EntreePourContinuer()
+                while True:
+                    try:
+                        print("Vous ne pouvez pas risquer d'endommager votre bras, il faut se débarrasser du bouquin avec un sort !")
+                        numero_affichage = 1
+                        for sorts in Player.sorts_possedes:
+                            print(f"{numero_affichage} - {sorts}")
+                            numero_affichage += 1
+                        choix = int(input("Quel sort souhaitez-vous utiliser ? "))
+                        ClearConsole()
+                        if choix in range(1, (len(Player.sorts_possedes) + 1)):
+                            break
+                    except ValueError:
+                        ClearConsole()
+                sort_choisi = Player.sorts_possedes[(choix - 1)]
+                self.AddSpellToS0ve(sort_choisi)
+                Player.final_library_used = True
+                Save.SaveTheGameSansAffichage()
+                print("Vous lancez le sort et, dans un flash de lumière illuminant le livre, vous le sentez disparaitre !")
+                Affichage.EntreePourContinuer()
+                print(f"Vous avez inscrit le sort [{sort_choisi}] dans le livre de la Cigogne Rouge !")
+                Affichage.EntreePourContinuer()
+                print("Le livre lache votre bras, et vous le replacez dans la bibliothèque.")
+                Affichage.EntreePourContinuer()
+        else:
+            print("Vous refermez le livre et le reposez dans la bibliothèque.")
+            Affichage.EntreePourContinuer()
+
+    def AddSpellToS0ve(self, sort_choisi):
+        donnees_de_s0ve = self.GetPermanentThingsFromS0ve()
+        liste_de_sorts_enregistres = ast.literal_eval(donnees_de_s0ve["Livre de sort"])
+        if not (sort_choisi in liste_de_sorts_enregistres):
+            liste_de_sorts_enregistres.append(sort_choisi)
+            donnees_de_s0ve["Livre de sort"] = liste_de_sorts_enregistres
+            self.SetPermanentThingsToS0ve(donnees_de_s0ve)
+
+            
+
+
 
     def DoTheQuests(self):
         if Player.quete == "Voeu de Pauvreté" and Player.nombre_de_gold == 0:
@@ -2331,8 +2906,8 @@ class Observe:
                     print("3 - Interminable : Fais durer ton prochain combat jusqu'au tour 50 (Rang D)\n")
                     print("4 - Epreuve du Magister : Bats les 4 prochains ennemis sans utiliser d'action de Feu, Foudre, Glace (Rang C)")
                     print("5 - Epreuve des Mages-Epeistes : Bats les 4 prochains ennemis sans utiliser d'action de Terre, Physique, Sang (Rang C)\n")
-                    print("6 - Force et Honeur : Bats les 8 prochains ennemis sans utiliser d'items (Rang B)")
-                    print("7 - Moqueries Magiques/Techniques : Bats le Bouffon sans utiliser de sorts ou de technique [au choix] (Rang A)\n")
+                    print("6 - Force et Honneur : Bats les 8 prochains ennemis sans utiliser d'items (Rang B)")
+                    print("7 - Moqueries Magiques/Techniques : Bats le Bouffon sans utiliser de sorts ou de techniques [au choix] (Rang A)\n")
                     print("8 - Sérendipité : Finis toute les quêtes (Rang S)\n")
                     print(f"9 - Abandonner la quête en cours : [{Player.quete}]\n")
                     choix = int(input("Que souhaitez vous faire ? (Vous ne pouvez prendre qu'une seule quête à la fois.)"))
@@ -3524,6 +4099,14 @@ class Observe:
             for line in reader:
                 dictionnaire_de_choses_permanentes[line["Caracteristique"]] = line["Valeur"]
         return dictionnaire_de_choses_permanentes
+    
+    def SetPermanentThingsToS0ve(self, dictionnaire_de_choses_permanentes):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        chemin_du_fichier_save = dir_path + "//s0ve.txt"
+        with open(chemin_du_fichier_save, "w") as fichier:
+            fichier.write("Caracteristique|Valeur")
+            for caracteristic in dictionnaire_de_choses_permanentes:
+                fichier.write(f"\n{caracteristic}|{dictionnaire_de_choses_permanentes[caracteristic]}")
 
 
 class SaveManagement:
@@ -3568,6 +4151,7 @@ class SaveManagement:
             "La fontaine a ete utilise": "",
             "Nombre de Gold dans l'étang": "",
             "Quete complétées": "",
+            "La vieille dame a été soignée": "",
         }
 
     def FromPlayerToDict(self):
@@ -3607,6 +4191,9 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["Possede une gemme de mana"] = Player.gemme_de_mana
         self.dictionnaire_de_sauvegarde["Possede une fée"] = Player.possede_une_fee
         self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"] = Player.library_used
+        self.dictionnaire_de_sauvegarde["Actions oubliées"] = Player.liste_daction_oubliees
+        self.dictionnaire_de_sauvegarde["Le livre de sort final a ete utilise"] = Player.final_library_used
+        self.dictionnaire_de_sauvegarde["La vieille dame a été soignée"] = Player.mercant_healed
         self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"] = Player.fountain_used
         self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"] = Player.gold_in_well
 
@@ -3621,6 +4208,9 @@ class SaveManagement:
         chaine_de_caractere = (self.dictionnaire_de_sauvegarde["Sorts"])
         liste_de_sorts = ast.literal_eval(chaine_de_caractere)
         Player.sorts_possedes = liste_de_sorts
+        chaine_de_caractere = (self.dictionnaire_de_sauvegarde["Actions oubliées"])
+        liste_dactions = ast.literal_eval(chaine_de_caractere)
+        Player.liste_daction_oubliees = liste_dactions
         chaine_de_caractere = (self.dictionnaire_de_sauvegarde["Items"])
         dictionaire_de_item = ast.literal_eval(chaine_de_caractere)
         Player.items_possedes = dictionaire_de_item
@@ -3662,6 +4252,8 @@ class SaveManagement:
         if "Invitation Recue" in self.dictionnaire_de_sauvegarde:
             Player.invitation_received = ast.literal_eval(self.dictionnaire_de_sauvegarde["Invitation Recue"])
         Player.library_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"])
+        Player.final_library_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le livre de sort final a ete utilise"])
+        Player.mercant_healed = ast.literal_eval(self.dictionnaire_de_sauvegarde["La vieille dame a été soignée"])
         Player.fountain_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"])
         Player.gold_in_well = int(self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"])
 
@@ -3705,6 +4297,10 @@ class SaveManagement:
                     break
             except ValueError:
                 ClearConsole()
+
+    def SaveTheGameSansAffichage(self):
+        self.FromPlayerToDict()
+        self.FromDictToSaveFile("\\save.txt")
 
     def LoadTheGame(self):
         self.FromSaveFileToDict()
@@ -3866,30 +4462,41 @@ def ShowRecup():
             break
         except ValueError:
             ClearConsole()
-    #Affichage.AfficheLongChargement()
-    if choix in [362951847, 14, 100110, 8624, 1512111113111013]:
-        if choix == 1:
-            nom_de_limage = "Feu"
-        elif choix == 1:
-            nom_de_limage = "Foudre"
-        elif choix == 2:
-            nom_de_limage = "Glace"
-        elif choix == 3:
-            nom_de_limage = "Terre"
-        elif choix == 4:
-            nom_de_limage = "python_properties_vue_Anox"
-        elif choix == 5:
-            nom_de_limage = "python_properties_controleur_Anox"
-        elif choix == 1512111113111013:
-            nom_de_limage = "python_properties_modele_Anox"
-        elif choix == 362951847:
-            nom_de_limage = "python_properties_Anox_init" #page 1, note
-        elif choix == 14:
-            nom_de_limage = "python_properties_modele" #talent feu et partie foudre
-        elif choix == 100110:
-            nom_de_limage = "python_properties_controleur" #page 2, note et partie foudre
-        elif choix == 8624:
+    Affichage.AfficheLongChargement()
+    if choix in [362951847, 14, 100110, 8624, 1512111113111013, 1342, 1233, 456852]:
+        if choix == 8624:
             nom_de_limage = "python_properties_vue" # table des matieres
+
+        elif choix == 456852:
+            nom_de_limage = "python_properties_main_Thread" # image observation e7
+
+        elif choix == 362951847:
+            nom_de_limage = "python_properties_Anox_init" # page 1 (e1)
+        elif choix == 100110:
+            nom_de_limage = "python_properties_controleur" # page 2 (e3)
+        elif choix == 1:
+            nom_de_limage = "python_properties_Thread_init" # page 3 (arret roi, par terre)
+        elif choix == 5:
+            nom_de_limage = "python_properties_controleur_Thread" # page 4 (observatorium, par foudre)
+        elif choix == 6:
+            nom_de_limage = "python_properties_modele_Thread" # page 5 (combo talents)
+        elif choix == 7:
+            nom_de_limage = "python_properties_vue_Thread" # page 6 (combo toutes pages pour etage 0)
+
+        elif choix == 14:
+            nom_de_limage = "python_properties_modele" # talent feu (e2)
+        elif choix == 1512111113111013:
+            nom_de_limage = "python_properties_modele_Anox"  # talent glace (e4)
+        elif choix == 1233:
+            nom_de_limage = "python_properties_main" # talent foudre (e7) 
+        elif choix == 2:
+            nom_de_limage = "python_properties_main_Anox" # talent terre (e5) quete ult
+        elif choix == 2684:
+            nom_de_limage = "python_properties_controleur_Anox" # talent sang (e6) 
+        elif choix == 4:
+            nom_de_limage = "python_properties_vue_Anox" # terre physique (e8) livre + notes de table des matières
+        
+        
         dir_path = os.path.dirname(os.path.realpath(__file__))
         chemin_de_limage = dir_path + "\\__py.property__\\"
         open_image(f"{chemin_de_limage}{nom_de_limage}.xldr")
@@ -4415,6 +5022,8 @@ Observation = Observe()
 MenuDeDemarrage(Player)
 game_in_session = True
 PlayMusic(f"etage_{Player.numero_de_letage}")
+Player.sorts_possedes = list(LISTESORTS)
+Player.techniques_possedes = list(LISTETECHNIQUES)
 while game_in_session:
     # choix de laction
     while True:
@@ -4441,7 +5050,7 @@ while game_in_session:
         Trader.DoTrading() #DONE
     elif choix == 4:
         print("Vous vous baladez dans l'étage...")
-        if Player.numero_de_letage in [1, 2, 3, 4, 5] :
+        if Player.numero_de_letage in range(1, 9) :
             Observation.SeeSomething()
         else:
             print("...et ne trouvez rien d'interressant.")

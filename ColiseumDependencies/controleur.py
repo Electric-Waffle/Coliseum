@@ -226,6 +226,8 @@ class Control:
                         self.modele.points_de_vie,
                         self.modele.points_de_vie_max,
                         affiche_pm_et_gold,
+                        self.modele.points_de_endurance,
+                        self.modele.points_de_endurance_max,
                         self.modele.monstre_nom,
                         alteration_etat_monstre,
                         alteration_etat_joueur,
@@ -1312,7 +1314,7 @@ class Control:
                 "Coup de Boule": "Technique",
                 "Froideur d'Outretombe": "Sort", # gele
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 50 + gold_bonus_par_etage, "Mana max": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 50 + gold_bonus_par_etage, "Mana max": 10, "Endurance": 10}
         elif self.modele.monstre_nom == "Chevalier Pourpre":
             self.modele.stigma_monstre_positif = "Armure de Plates"
             self.modele.stigma_monstre_negatif = "Trauma de Guerre"
@@ -1331,7 +1333,7 @@ class Control:
                 "Medecine de Guerre": "Technique", #soin
                 "Lamentations": "Sort", #blesse et maudit plus mana [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 10, "Endurance": 10}
         elif self.modele.monstre_nom == "Roi Amonrê":
             self.modele.stigma_monstre_positif = "Bénédiction Divine"
             self.modele.stigma_monstre_negatif = "Patchwork"
@@ -1348,7 +1350,7 @@ class Control:
                 "Jugement": "Sort", #degat = monstre tue [x]
                 "Combo Misérable": "Technique" #combo electrique , mais maudit [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 150 + gold_bonus_par_etage, "Taux sort critique": 10 }
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 150 + gold_bonus_par_etage, "Taux sort critique": 10, "Endurance": 10 }
         elif self.modele.monstre_nom == "Apprenti":
             self.modele.stigma_monstre_positif = "Sort Chanceux"
             self.modele.stigma_monstre_negatif = "Anxiété Sociale"
@@ -1390,7 +1392,7 @@ class Control:
                 "Sonata Sincère": "Sort", #soigne
                 "Magie Ténébreuse": "Sort" #empeche sort et technique [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Méga Tirage": 1, "Gold": 200 + gold_bonus_par_etage, "Taux sort critique": 5, "Intelligence": 5}
+            self.modele.monstre_recompense = {"Red coin": 1, "Méga Tirage": 1, "Gold": 200 + gold_bonus_par_etage, "Taux sort critique": 5, "Intelligence": 5, "Endurance": 10}
         elif self.modele.monstre_nom == "Bouffon":
             self.modele.stigma_monstre_positif = "Plus d'un Tour"
             self.modele.stigma_monstre_negatif = "Arlequin"
@@ -1407,7 +1409,7 @@ class Control:
                 "Tournicotons": "Sort", #vague a esquiver [x]
                 "Tournicotez": "Sort", #queston a repondre [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
         elif self.modele.monstre_nom == "Prince des Voleurs":
             self.modele.stigma_monstre_positif = "Bomberman"
             self.modele.stigma_monstre_negatif = "Hautain"
@@ -1431,7 +1433,7 @@ class Control:
                 "Houken": "Sort", #draine vie
                 
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 300 + gold_bonus_par_etage, "Degat coup critique": 10, "Degat sort critique": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 300 + gold_bonus_par_etage, "Degat coup critique": 10, "Degat sort critique": 10, "Endurance": 10}
         elif self.modele.monstre_nom == "Roi Déchu":
             self.modele.stigma_monstre_positif = "Lignée Royale"
             self.modele.stigma_monstre_negatif = "Divinement Renié"
@@ -1450,7 +1452,7 @@ class Control:
                 "Ultime Ultime": "Sort", # impossible d'utiliser sorts et techniques [x]
                 "Ultima": "Sort", #ramene la vie du joueur a 10% [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 350 + gold_bonus_par_etage, "Defence": 5, "Attaque": 5}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 350 + gold_bonus_par_etage, "Defence": 5, "Attaque": 5, "Endurance": 10}
         elif self.modele.monstre_nom == "Maitre Mage":
             self.modele.stigma_monstre_positif = "Hardi"
             self.modele.stigma_monstre_negatif = "Aucun"
@@ -1499,7 +1501,7 @@ class Control:
                 "Sonata Absolutrice": "Sort" #soin
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Méga Tirage": 1, "Vie max": 20, 
-                                       "Mana max": 20, "Gold": 400 + gold_bonus_par_etage}
+                                       "Mana max": 20, "Gold": 400 + gold_bonus_par_etage, "Endurance": 10}
         elif self.modele.monstre_nom == "Amalgame":
             self.modele.stigma_monstre_positif = "Bomberman"
             self.modele.stigma_monstre_negatif = "Inflammable"
@@ -1586,7 +1588,7 @@ class Control:
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 500 + gold_bonus_par_etage, 
                                        "Defence": 2, "Attaque": 2, "Intelligence": 2, 
                                        "Taux coup critique": 2, "Degat coup critique": 2, 
-                                       "Taux sort critique": 2, "Degat sort critique": 2}
+                                       "Taux sort critique": 2, "Degat sort critique": 2, "Endurance": 10}
         elif self.modele.monstre_nom == "Coliseum":
             self.modele.stigma_monstre_positif = "Aucun"
             self.modele.stigma_monstre_negatif = "Aucun"
@@ -1624,7 +1626,7 @@ class Control:
                 "Ultime Ultime": "Sort", # impossible d'utiliser sor
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 99999, 
-                                       "Attaque": 99999, "Intelligence": 99999}
+                                       "Attaque": 99999, "Intelligence": 99999, "Endurance": 99999}
         self.modele.monstre_points_de_vie_max += vie_bonus_par_etage
         self.modele.monstre_points_de_vie = self.modele.monstre_points_de_vie_max
         self.modele.monstre_points_de_mana_max += vie_bonus_par_etage
@@ -1841,13 +1843,11 @@ class Control:
             element_aleatoire = random.randint(1, 4)
             if element_aleatoire == 1:
                 type_delement = "*Feu*"
-                self.modele.est_en_feu = True
-                self.modele.est_en_feu_nombre_tour += 2
+                self.AppliqueEffetElementaireSurJoueur("feu", 2, 5)
                 description_element = "Vous vous enflammez pendant 2 tours !"
             elif element_aleatoire == 2:
                 type_delement = "*Glace*"
-                self.modele.est_gele = True
-                self.modele.est_gele_nombre_tour += 2
+                self.AppliqueEffetElementaireSurJoueur("glace", 2)
                 description_element = "Vous devenez gelé pendant 2 tours !"
             elif element_aleatoire == 3:
                 type_delement = "*Foudre*"
@@ -1855,7 +1855,7 @@ class Control:
                     nombre_tour = 1
                 else:
                     nombre_tour = 2
-                self.AppliqueLaParalysieSurJoueur(nombre_tour)
+                self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
                 if self.modele.est_paralyse:
                     self.modele.passe_son_tour = True
                     description_element = "Vous devenez paralysé pendant 1 tour !"
@@ -2254,7 +2254,7 @@ class Control:
         if self.modele.utilise_le_bluff:
             self.modele.utilise_le_bluff = False
             nombre_tour = 2
-            self.AppliqueLaParalysieSurJoueur(nombre_tour)
+            self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
             if self.modele.est_paralyse:
                 commentaire += "\nPersonne ne vous a fait de dégat !\nVos muscles tendus et prêt a recevoir un coup deviennent paralysé !"
             else:
@@ -2450,7 +2450,7 @@ class Control:
             self.modele.monstre_est_gele_nombre_tour -= 1
             if self.modele.monstre_est_gele_nombre_tour == 0:
                 self.modele.monstre_est_gele = False
-                commentaire += "\nLe monstre n'est plus gelé !"
+                commentaire += f"\n{self.modele.monstre_nom} n'est plus gelé !"
                 if self.modele.eclats_de_glace:
                     self.AppliqueTalentEclatDeGlace()
                 if self.modele.cycle_glaciaire:
@@ -2474,7 +2474,7 @@ class Control:
             self.modele.luciole_tour -= 1
             if self.modele.luciole_tour == 0:
                 self.modele.luciole_etat = False
-                commentaire += "\nLe feu électrique sur le monstre s'éteint !"
+                commentaire += f"\nLe feu électrique s'éteint !"
         # paralysie, monstre passe son tour
         if self.modele.monstre_est_paralyse:
             self.modele.monstre_passe_son_tour = True
@@ -2484,7 +2484,7 @@ class Control:
                 self.modele.monstre_passe_son_tour = False
                 if self.modele.luciole:
                     self.AppliqueTalentLuciole()
-                commentaire += "\nLe monstre n'est plus paralysé !"
+                commentaire += f"\n{self.modele.monstre_nom} n'est plus paralysé !"
             else:
                 if self.modele.anti_neurotransmitteurs:
                     self.AppliqueTalentAntiNeurotransmetteur()
@@ -2493,34 +2493,34 @@ class Control:
             self.modele.monstre_est_vulnerable_nombre_tour -= 1
             if self.modele.monstre_est_vulnerable_nombre_tour == 0:
                 self.modele.monstre_est_vulnerable = False
-                commentaire += "\nLe monstre n'est plus vulnérable !"
+                commentaire += f"\n{self.modele.monstre_nom} n'est plus vulnérable !"
         # poison, gros degat peu de tours
         if self.modele.monstre_est_empoisonne:
             self.AppliquePoison()
             self.modele.monstre_est_empoisonne_nombre_tour -= 1
             if self.modele.monstre_est_empoisonne_nombre_tour == 0:
                 self.modele.monstre_est_empoisonne = False
-                commentaire += "\nLe monstre n'est plus empoisonné !"
+                commentaire += f"\n{self.modele.monstre_nom} n'est plus empoisonné !"
         # envol, 30% chance rater attaque/sorts
         if self.modele.monstre_est_envol:
             self.modele.monstre_est_envol_nombre_tour -= 1
             if self.modele.monstre_est_envol_nombre_tour == 0:
                 self.modele.monstre_est_envol = False
-                commentaire += "\nLe monstre se pose sur le sol !"
+                commentaire += f"\n{self.modele.monstre_nom} se pose sur le sol !"
         # arrete le gain de defence du monstre
         if self.modele.monstre_gain_de_defence:
             self.modele.monstre_gain_de_defence_nombre_tour -= 1
             if self.modele.monstre_gain_de_defence_nombre_tour == 0:
                 self.modele.monstre_gain_de_defence = False
                 self.modele.monstre_gain_de_defence_nombre = 0
-                commentaire += "\nLe durcissement du monstre n'a plus effet !"
+                commentaire += f"\nLe durcissement de {self.modele.monstre_nom} n'a plus effet !"
         # regen, reprend vie par tour
         if self.modele.monstre_est_regeneration:
             self.AppliqueRegenerationMonstre()
             self.modele.monstre_est_regeneration_nombre_tour -= 1
             if self.modele.monstre_est_regeneration_nombre_tour == 0:
                 self.modele.monstre_est_regeneration = False
-                commentaire += "\nLe monstre ne se regénère plus !"
+                commentaire += f"\n{self.modele.monstre_nom} ne se regénère plus !"
         # applique la benediction du mana
         if self.modele.benediction_du_mana:
             self.AppliqueBenedictionMana()
@@ -2610,6 +2610,11 @@ class Control:
                         cle
                     ]
                     commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de mana maximum !"
+                elif cle == "Endurance":
+                    self.Player.points_dendurance += self.modele.monstre_recompense[
+                        cle
+                    ]
+                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points d'endurance maximum !"
                 elif cle == "Taux coup critique":
                     self.Player.taux_coup_critique += self.modele.monstre_recompense[
                         cle
@@ -3203,23 +3208,24 @@ class Control:
         cout -= round((reduction_mana / 100) * cout)
         if cout <= 0:
             cout = 1
-        affichage_cout += f"{cout} pm"
+        affichage_cout += f"{cout} PM"
         if self.modele.est_maudit_par_le_gold:
-            affichage_cout += f" et {cout} gold"
+            affichage_cout += f" et {cout} GOLD"
         if self.modele.est_maudit_par_les_sorts:
             affichage_cout = "Impossible"
         return affichage_cout
 
     def ConstructionAffichageCoutTechnique(self, action):
-        affichage_cout = ""
+        cout_endurance = self.modele.annuaire_de_cout_des_techniques[action]
+        affichage_cout = f"{cout_endurance} PE"
         cout_pourcentage = self.modele.BONUSCOUTMALEDICTIONVIEOUGOLD
         cout = round(self.modele.points_de_vie_max * (cout_pourcentage / 100))
         if self.modele.est_maudit_par_la_vie and self.modele.est_maudit_par_le_gold:
-            affichage_cout = f"{cout} pv et {cout} gold"
+            affichage_cout += f" {cout} PV et {cout} GOLD"
         elif self.modele.est_maudit_par_la_vie:
-            affichage_cout = f"{cout} pv"
+            affichage_cout += f" {cout} PV"
         elif self.modele.est_maudit_par_le_gold:
-            affichage_cout = f"{cout} gold"
+            affichage_cout += f" {cout} GOLD"
         if self.modele.est_maudit_par_les_techniques:
             affichage_cout = "Impossible"
         return affichage_cout
@@ -3238,7 +3244,7 @@ class Control:
         self.CheckTypeOfAction(action)
         # l'action est elle possible ? Applique le cout de l'action
         action_est_possible, raison_si_action_pas_possible = (
-            self.CheckSiAttaquePossibleEtAppliqueCoutAttaque()
+            self.CheckSiAttaquePossibleEtAppliqueCoutAttaque(action)
         )
         if action_est_possible:
             if self.Player.quete == "Moqueries Techniques" and self.modele.monstre_EstUnBoss:
@@ -3845,9 +3851,10 @@ class Control:
             action_est_possible = False
             return action_est_possible, affichage_raison_sort_impossible
 
-    def CheckSiAttaquePossibleEtAppliqueCoutAttaque(self):
+    def CheckSiAttaquePossibleEtAppliqueCoutAttaque(self, action):
         cout_vie = 0
         cout_gold = 0
+        cout_endurance = self.modele.annuaire_de_cout_des_techniques[action]
         affichage_raison_technique_impossible = ""
         cout_vie_a_appliquer = False
         # calcule le cout de vie
@@ -3855,6 +3862,9 @@ class Control:
             pourcentage = self.modele.BONUSCOUTMALEDICTIONVIEOUGOLD
             cout_vie += round(self.modele.points_de_vie_max * (pourcentage/100))
             cout_vie_a_appliquer = True
+        # checke si le joueur a assez d'endurance. Non = affichage raison.
+        if self.modele.points_de_endurance < cout_endurance:
+            affichage_raison_technique_impossible = "Vous tentez d'utiliser la technique...mais vous vous effondrez, haletant, sur le sol de l'arène."
         # checke si le jjoueur a assez de vie. Non = affichage raison.
         if self.modele.points_de_vie < cout_vie:
             affichage_raison_technique_impossible = "Vous tentez d'utiliser la technique...mais vos blessures sont trop graves et la douleur vous fait abandonner en plein milieu."
@@ -3874,6 +3884,7 @@ class Control:
             if cout_vie_a_appliquer:
                 cout_vie = self.EnleveVieAuJoueur(cout_vie)
             self.modele.nombre_de_gold -= cout_gold
+            self.modele.points_de_endurance -= cout_endurance
             action_est_possible = True
             return action_est_possible, affichage_raison_technique_impossible
         else:
@@ -3884,6 +3895,7 @@ class Control:
         # [0]=%touche, [1]=degat, [2]=%crit, [3]=degat crit, [4]=%element,
         # [5]=description, [6]=message si rate, [7]=si touche, [8]=si touche crit
         # [9]=nombre tours, [10]=effet element
+        self.RecupEndurance(4)
         action_est_possible, raison_si_action_pas_possible = (
                 self.CheckSiSortPossibleEtAppliqueCoutSort(action)
             )
@@ -4308,6 +4320,7 @@ class Control:
 
     def UseItem(self, nom_de_litem):
         # checke si on peut utiliser l'item
+        self.RecupEndurance(4)
         action_est_possible, raison_si_action_pas_possible = (
                 self.CheckSiItemPossible(nom_de_litem)
             )
@@ -4893,9 +4906,7 @@ class Control:
             if nombre_de_flamelette > 9:
                 nombre_aleatoire = 100
         if nombre_de_tour_enflamme != 0:
-            self.modele.est_en_feu = True
-            self.modele.est_en_feu_nombre_tour = nombre_de_tour_enflamme + 1
-            self.modele.est_en_feu_degat = 5
+            self.AppliqueEffetElementaireSurJoueur("feu", (nombre_de_tour_enflamme + 1), 5)
             commentaire = (
                 "L'assaut des flamelettes s'arrete enfin."
                 f"\nAu final, vous resterez enflammé pendant {nombre_de_tour_enflamme} tours !"
@@ -4978,33 +4989,27 @@ class Control:
             commentaire = "\nVoici les résultats :"
             for symbol in liste_symbole:
                 if symbol == "Citron":
-                    self.modele.est_gele = True
-                    self.modele.est_gele_nombre_tour += 1
-                    commentaire += "\n -Vous gelez pendant 1 tour."
+                    self.AppliqueEffetElementaireSurJoueur("glace", 2)
+                    commentaire += "\n -Vous gelez pendant 2 tours."
                 elif symbol == "Charbon":
-                    self.modele.est_en_feu = True
-                    self.modele.est_en_feu_nombre_tour += 1
-                    self.modele.est_en_feu_degat = 5
-                    commentaire += "\n -Vous brulez pendant 1 tour."
+                    self.AppliqueEffetElementaireSurJoueur("feu", 2, 5)
+                    commentaire += "\n -Vous brulez pendant 2 tours."
                 elif symbol == "Cloche":
                     nombre_tour = 1
-                    self.AppliqueLaParalysieSurJoueur(nombre_tour)
+                    self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
                     if self.modele.est_paralyse:
                         commentaire += "\n -Vous êtes paralysé pendant 1 tour."
                     else:
                         commentaire += "\n -Vous deviez être paralysé pendant 1 tour... mais vous y résistez."
                 elif symbol == "Quatre":
-                    self.modele.est_gele = True
-                    self.modele.est_gele_nombre_tour += 1
-                    self.modele.est_en_feu = True
-                    self.modele.est_en_feu_nombre_tour += 1
-                    self.modele.est_en_feu_degat = 5
-                    nombre_tour = 1
-                    self.AppliqueLaParalysieSurJoueur(nombre_tour)
+                    self.AppliqueEffetElementaireSurJoueur("glace", 2)
+                    self.AppliqueEffetElementaireSurJoueur("feu", 2, 5)
+                    nombre_tour = 2
+                    self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
                     if self.modele.est_paralyse:
-                        commentaire += "\n -Vous gelez, brulez, êtes paralysé, pendant 1 tour."
+                        commentaire += "\n -Vous gelez, brulez, êtes paralysé, pendant 2 tours."
                     else:
-                        commentaire += "\n -Vous gelez et brulez pendant 1 tour, masi résistez a la paralysie."
+                        commentaire += "\n -Vous gelez et brulez pendant 1 tour, mais résistez a la paralysie."
                 elif symbol == "Ananas":
                     self.modele.monstre_est_gele = True
                     self.modele.monstre_est_gele_nombre_tour += 1
@@ -5053,11 +5058,8 @@ class Control:
                        "\nQuand vous vous en rendez compte, vous échangez un regard confus avec la chose a vos pied pendant quelques secondes."
                        "\nL'ennemi vous lache, retourne a sa position sans vous lacher du regard, et se remet en posture de combat en essayant de cacher son embarras. ")
         commentaire_2 = ("...eeeet vous recevez un coktail de fléchette bleue et rouge dans le dos par la machine de goldberg.\nCat-Astrophe, amusé, repart dans sa dimension.")
-        self.modele.est_en_feu = True
-        self.modele.est_en_feu_degat = 5
-        self.modele.est_en_feu_nombre_tour += 3
-        self.modele.est_gele = True
-        self.modele.est_gele_nombre_tour += 3
+        self.AppliqueEffetElementaireSurJoueur("feu", 3, 5)
+        self.AppliqueEffetElementaireSurJoueur("glace", 3)
         drain = round(self.modele.points_de_vie_max *0.05)
         drain = self.EnleveVieAuJoueur(drain)
         self.modele.monstre_points_de_vie += drain
@@ -5135,8 +5137,7 @@ class Control:
     def TempeteDuNord(self):
         commentaire = "L'ennemi fait souffler une tempête venant du Nord ! Le froid est insupportable !"
         commentaire_effet = "Vous gelez pendant 4 tours !"
-        self.modele.est_gele = True
-        self.modele.est_gele_nombre_tour += 4
+        self.AppliqueEffetElementaireSurJoueur("glace", 4)
         self.vue.AfficheTempeteOuVacarme(commentaire, commentaire_effet)
         nombre_aleatoire = random.randint(0, 100)
         if nombre_aleatoire < 50:
@@ -5148,12 +5149,10 @@ class Control:
     
     def TempeteDuSud(self):
         nombre_tour = 5
-        nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
+        
         commentaire = "L'ennemi fait souffler une tempête venant du Sud ! La chaleur est intenable !"
         commentaire_effet = f"Vous brulez pendant {nombre_tour - 1} tours !"
-        self.modele.est_en_feu = True
-        self.modele.est_en_feu_nombre_tour += nombre_tour
-        self.modele.est_en_feu_degat = 5
+        self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, 5)
         self.vue.AfficheTempeteOuVacarme(commentaire, commentaire_effet)
         nombre_aleatoire = random.randint(0, 100)
         if nombre_aleatoire < 50:
@@ -5165,7 +5164,7 @@ class Control:
     def TempeteDeEst(self):
         commentaire = "L'ennemi fait souffler une tempête venant de l'Est ! L'électricitée statique produite par les particules en friction rentre dans votre corps !"
         nombre_tour = 3
-        self.AppliqueLaParalysieSurJoueur(nombre_tour)
+        self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
         if self.modele.est_paralyse:
             commentaire_effet = "Vous devenez paralysé pendant 2 tours !"
         else:
@@ -5259,11 +5258,9 @@ class Control:
             commentaire = (f"-=[MET: LA MORT]=-\nUne douleur atroce vous tord les boyaux, et vous commencez a cracher du sang.\nVous perdez {degat} points de vie !")
         elif nombre_aleatoire ==  3:
             nombre_tour = 4
-            nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
+            
             commentaire = (f"-=[SH: LE FEU]=-\nVous vous enflammez instantanément pendant {nombre_tour - 1} tours !")
-            self.modele.est_en_feu = True
-            self.modele.est_en_feu_degat = 5
-            self.modele.est_en_feu_nombre_tour += nombre_tour
+            self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, 5)
         elif nombre_aleatoire ==  4:
             commentaire = ("-=[HKHEYM : LA VIE]=-\nL'ennemi et vous reprenez tous deux quelques points de vie !")
             pourcentage = 10
@@ -5315,12 +5312,10 @@ class Control:
                 commentaire_effet = self.ConstructionCommentaireVaseCanopeEchec()
             else:
                 nombre_tour = 4
-                nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
+                
                 commentaire_effet = ("Apparement les anciennes déesses connaisent pas le sens figuré, parce que vous vous embrasez sur place !"
                         f"\nVous brulez pendant {nombre_tour - 1} tours!")
-                self.modele.est_en_feu = True
-                self.modele.est_en_feu_nombre_tour += nombre_tour
-                self.modele.est_en_feu_degat = 5
+                self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, 5)
         elif nombre_aleatoire == 3:
             commentaire_vase = ("Le vase canope a tête de faucon s'approche de vous et une voix résonne dans votre tête :"
                                 "\n -=[QUE TES TRIPES SE TORDENT, PAR SELKET !]=- ")
@@ -5892,14 +5887,21 @@ class Control:
                 self.vue.AfficheUltimaError(commentaire)
                 nombre_aleatoire = random.randint(1, (len(liste_commentaire) - 1))
                 nombre_de_affichage += 1
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            chemin_du_fichier = dir_path + "\\error.txt"
+            with open(chemin_du_fichier, "w") as fichier:
+                fichier.write("Caracteristique|Valeur")
+                fichier.write("\nerror|error")
             commentaire = ("[ERREUR : VIE DU PERSONNAGE N'EXISTE PAS]"
                            "\n[CREATION D'UNE NOUVELLE VARIABLE VIE DU PERSONNAGE]"
                            "\n[VIE DU PERSONNAGE INITIALISEE A 5% DE SA VIE MAXIMUM]")
             self.vue.AfficheUltima(commentaire)
             commentaire = ("L'ennemi vous regarde sans comprendre puis se met a maudire la faiblesse de traditions\ninutiles et du soutien inexistant de son peuple.\nSans savoir...")
+            os.remove(chemin_du_fichier)
+            self.vue.AfficheUltima(commentaire)
         else:
             commentaire = ("Mais rien ne se passe.\nL'ennemi se met a maudire la faiblesse de traditions inutiles et du soutient inexistant de son peuple.")
-        self.vue.AfficheUltima(commentaire)
+            self.vue.AfficheUltima(commentaire)
 
     def UseMonsterMagic(self, action):
         # [0]=%touche, [1]=degat, [2]=%crit, [3]=degat crit, [4]=%element,
@@ -5958,19 +5960,15 @@ class Control:
                                 if nombre_aleatoire <= 90:
                                     # addition des tours
                                     nombre_tour = caracteristique_du_sort[9]
-                                    nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
-                                    self.modele.est_en_feu_nombre_tour += (
-                                        nombre_tour
-                                    )
+                                    
                                     # ajustement des degats
                                     degat_du_feu = caracteristique_du_sort[10]
                                     if (
                                         self.modele.est_en_feu_degat
                                         < degat_du_feu
                                     ):
-                                        self.modele.est_en_feu_degat = (
-                                            degat_du_feu
-                                        )
+                                        degat_du_feu = self.modele.est_en_feu_degat
+                                    self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, degat_du_feu)
                                     commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
                                 else:
                                     # finition des degats
@@ -5991,7 +5989,7 @@ class Control:
                                     self.modele.est_en_feu = False
                                     # paralysie
                                     nombre_tour = 2
-                                    self.AppliqueLaParalysieSurJoueur(nombre_tour)
+                                    self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
                                     if self.modele.est_paralyse:
                                         # construction du comentaire_element
                                         commentaire_element = ("\nL'attaque vous enflamme.\nCepandant, les"
@@ -6006,37 +6004,20 @@ class Control:
                                                             " consommant l'oxygène disponible, et vous "
                                                             "font de gros dégâts.")
                             else:
-                                # mise a feu du monstre
-                                self.modele.est_en_feu = True
-                                nombre_tour = caracteristique_du_sort[9]
-                                nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
-                                self.modele.est_en_feu_nombre_tour += (
-                                    nombre_tour
-                                )
-                                self.modele.est_en_feu_degat = (
-                                    caracteristique_du_sort[10]
-                                )
+                                # mise a feu du joueur
+                                self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, caracteristique_du_sort[10])
                                 commentaire_element = f"\nVous vous enflammez pendant {nombre_tour} tours !"
                         elif self.modele.monstre_a_utilise_foudre_ce_tour:
-                            nombre_tour_para =(
-                                caracteristique_du_sort[9] +
-                                self.modele.TOURBONUSJOUEURENPARALYSIE
-                            )
-                            self.AppliqueLaParalysieSurJoueur(nombre_tour_para)
+                            nombre_tour_para = caracteristique_du_sort[9]
+                            self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour_para)
                             if self.modele.est_paralyse:
-                                commentaire_element = f"\nL'ennemi vous paralyse pendant {nombre_tour_para} tours !"
+                                commentaire_element = f"\nL'ennemi vous paralyse pendant {nombre_tour_para+self.modele.TOURBONUSJOUEURENPARALYSIE} tours !"
                             else:
                                 commentaire_element = f"\nVous résistez a la paralysie déclenchée par l'ennemi !"
                         elif self.modele.monstre_a_utilise_glace_ce_tour:
-                            self.modele.est_gele = True
-                            nombre_tour_gele = (
-                                caracteristique_du_sort[9] + 
-                                self.modele.TOURBONUSJOUEURENGLACE
-                            )
-                            self.modele.est_gele_nombre_tour += (
-                                nombre_tour_gele
-                            )
-                            commentaire_element = f"\nL'ennemi vous gèle pendant {nombre_tour_gele} tours !"
+                            nombre_tour_gele = caracteristique_du_sort[9]
+                            self.AppliqueEffetElementaireSurJoueur("glace", nombre_tour_gele)
+                            commentaire_element = f"\nL'ennemi vous gèle pendant {nombre_tour_gele + self.modele.TOURBONUSJOUEURENGLACE} tours !"
                         elif self.modele.monstre_a_utilise_sang_ce_tour:
                             # calcul de la saignee
                             pourcentage_saignee = caracteristique_du_sort[10]
@@ -6436,13 +6417,11 @@ class Control:
             self.modele.points_de_mana -= mana_perdu
             self.EquilibragePointsDeVieEtMana()
             nombre_tour = 4
-            nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
+            
             commentaire_effet = ("Ce dernier carbonise la peau de votre thorax et fait bruler le mana dans votre réserve."
                                  f"\nVous perdez {degat} points de vie, {mana_perdu} points de mana, "
                                  f"et vous vous mettez a bruler pendant {nombre_tour - 1} tours !")
-            self.modele.est_en_feu = True
-            self.modele.est_en_feu_nombre_tour += 4
-            self.modele.est_en_feu_degat = 5
+            self.AppliqueEffetElementaireSurJoueur("feu", 4, 5)
         else:
             commentaire_effet = ("Mais une erreur de calcul dans le traitement des rayons de lumière fait que le laser"
                            " s'éclate en ensemble chaotique de plus petits lasers qui laissent sur les murs de profonds sillages carbonisés.")
@@ -6517,12 +6496,9 @@ class Control:
             commentaire_effet = (f"Vous gelez et vous enflammez pendant {nombre_tour} tours."
                                  f"\nVous devenez déconcentré et blessé pendant {nombre_tour} tours."
                                  "\nC'est le jeu ma pauvre lucette !")
-            self.modele.est_gele = True
-            self.modele.est_gele_nombre_tour += nombre_tour
-            self.modele.est_en_feu = True
-            nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
-            self.modele.est_en_feu_nombre_tour += nombre_tour
-            self.modele.est_en_feu_degat = degat_feu
+            self.AppliqueEffetElementaireSurJoueur("glace", nombre_tour)
+            
+            self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, degat_feu)
             self.modele.est_maudit_par_le_mana = True
             self.modele.est_maudit_par_le_mana_nombre_tour += nombre_tour
             self.modele.est_maudit_par_la_vie = True
@@ -6648,19 +6624,16 @@ class Control:
         element_aleatoire = random.randint(1, 4)
         if element_aleatoire == 1:
             commentaire_item = "Le crystal prend une teinte rouge avant de se briser. Vous vous retrouvez enflammé pendant 4 tours !"
-            self.modele.est_en_feu = True
-            self.modele.est_en_feu_degat = 5
             nombre_tour = 5
-            nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
-            self.modele.est_en_feu_nombre_tour += nombre_tour
+            
+            self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, 5)
 
         elif element_aleatoire == 2:
             commentaire_item = "Le crystal prend une teinte bleue avant de se briser. Vous vous retrouvez gelé pendant 3 tours !"
-            self.modele.est_gele = True
-            self.modele.est_gele_nombre_tour += 4
+            self.AppliqueEffetElementaireSurJoueur("glace", 4)
         elif element_aleatoire == 3:
             nombre_tour = 5
-            self.AppliqueLaParalysieSurJoueur(nombre_tour)
+            self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
             if self.modele.est_paralyse:
                 commentaire_item = "Le crystal prend une teinte blanche avant de se briser. Vous vous retrouvez paralysé pendant 4 tour !"
             else:
@@ -6760,19 +6733,15 @@ class Control:
                             if nombre_aleatoire <= 90:
                                 # addition des tours
                                 nombre_tour = caracteristique_du_techniques[9]
-                                nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
-                                self.modele.est_en_feu_nombre_tour += (
-                                    nombre_tour
-                                )
+                                
                                 # ajustement des degats
                                 degat_du_feu = caracteristique_du_techniques[10]
                                 if (
                                     self.modele.est_en_feu_degat
                                     < degat_du_feu
                                 ):
-                                    self.modele.est_en_feu_degat = (
-                                        degat_du_feu
-                                    )
+                                    degat_du_feu = self.modele.est_en_feu_degat
+                                self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, degat_du_feu)
                                 commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
                             else:
                                 # finition des degats
@@ -6793,7 +6762,7 @@ class Control:
                                 self.modele.est_en_feu = False
                                 # paralysie
                                 nombre_tour = 2
-                                self.AppliqueLaParalysieSurJoueur(nombre_tour)
+                                self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour)
                                 if self.modele.est_paralyse:
                                     # construction du comentaire_element
                                     commentaire_element = ("\nL'attaque vous enflamme.\nCepandant, les"
@@ -6809,33 +6778,21 @@ class Control:
                                                         "font de gros dégâts.")
                         else:
                             # mise a feu du joueur
-                            self.modele.est_en_feu = True
                             nombre_tour = caracteristique_du_techniques[9]
-                            nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
-                            self.modele.est_en_feu_nombre_tour += (
-                                nombre_tour
-                            )
-                            self.modele.monstre_est_en_feu_degat = (
-                                caracteristique_du_techniques[10]
-                            )
+                            
+                            self.AppliqueEffetElementaireSurJoueur("feu", nombre_tour, caracteristique_du_techniques[10])
                             commentaire_element = f"\nVous vous enflammez pendant {nombre_tour} tours !"
                     elif self.modele.monstre_a_utilise_foudre_ce_tour:
-                        nombre_tour_para =(
-                            caracteristique_du_techniques[9] +
-                            self.modele.TOURBONUSJOUEURENPARALYSIE
-                        )
-                        self.AppliqueLaParalysieSurJoueur(nombre_tour_para)
+                        nombre_tour_para = caracteristique_du_techniques[9]
+                        self.AppliqueEffetElementaireSurJoueur("foudre", nombre_tour_para)
                         if self.modele.est_paralyse:
-                            commentaire_element = f"\nL'ennemi vous paralyse pendant {nombre_tour_para} tours !"
+                            commentaire_element = f"\nL'ennemi vous paralyse pendant {nombre_tour_para + self.modele.TOURBONUSJOUEURENPARALYSIE} tours !"
                         else:
                             commentaire_element = f"\nVous résistez a la paralysie déclenchée par l'ennemi !"
                     elif self.modele.monstre_a_utilise_glace_ce_tour:
-                        self.modele.est_gele = True
-                        nombre_tour_gele = caracteristique_du_techniques[9] + self.modele.TOURBONUSJOUEURENGLACE
-                        self.modele.est_gele_nombre_tour += (
-                            nombre_tour_gele
-                        )
-                        commentaire_element = f"\nL'ennemi vous gèle pendant {nombre_tour_gele} tours !"
+                        nombre_tour_gele = caracteristique_du_techniques[9]
+                        self.AppliqueEffetElementaireSurJoueur("glace", nombre_tour_gele)
+                        commentaire_element = f"\nL'ennemi vous gèle pendant {nombre_tour_gele + self.modele.TOURBONUSJOUEURENGLACE} tours !"
                     elif self.modele.monstre_a_utilise_sang_ce_tour:
                         # calcul de la saignee
                         pourcentage_saignee = caracteristique_du_techniques[10]
@@ -7228,11 +7185,6 @@ class Control:
         if nombre <= 0:
             nombre = 1
         return nombre
-    
-    def AppliqueLaParalysieSurJoueur(self, nombre_tour):
-        if not (self.modele.stigma_joueur_positif == "Endurci"):
-            self.modele.est_paralyse = True
-            self.modele.est_paralyse_nombre_tour += nombre_tour
 
     def AppliqueLimitationSaignee(self, degat_saignee):
         if degat_saignee > 50:
@@ -7240,6 +7192,7 @@ class Control:
         return degat_saignee
 
     def SeDefendre(self):
+        self.RecupEndurance(7)
         self.modele.se_defend = True
         commentaire = ("Vous ramenez vos bras a votre torse et vous préparez a recevoir un coup.")
         if self.modele.patience:
@@ -7251,6 +7204,7 @@ class Control:
 
     
     def PasserSonTour(self):
+        self.RecupEndurance(14)
         personnage = "Vous passez votre"
         commentaire = "...tout simplement."
         if self.modele.patience:
@@ -7285,3 +7239,24 @@ class Control:
         self.modele.monstre_en_etat_de_choc_nombre_tour = 3
         self.modele.monstre_passe_son_tour = True
         self.modele.monstre_points_de_mana = "ERROR"
+
+    def RecupEndurance(self, endurance_recuperee):
+        gain_endurance = endurance_recuperee + self.modele.numero_de_letage
+        self.modele.points_de_endurance += gain_endurance
+        if self.modele.points_de_endurance > self.modele.points_de_endurance_max:
+            self.modele.points_de_endurance = self.modele.points_de_endurance_max
+
+    def AppliqueEffetElementaireSurJoueur(self, element, nombre_tour, degats = 0):
+        if element == "feu":
+            nombre_tour += round((self.modele.TOURBONUSJOUEURENFEU / 100) * nombre_tour)
+            self.modele.est_en_feu = True
+            self.modele.est_en_feu_nombre_tour += nombre_tour
+            self.modele.est_en_feu_degat = degats
+        elif element == "glace":
+            nombre_tour += round((self.modele.TOURBONUSJOUEURENGLACE / 100) * nombre_tour)
+            self.modele.est_gele = True
+            self.modele.est_gele_nombre_tour += nombre_tour
+        elif element == "foudre":
+            nombre_tour += round((self.modele.TOURBONUSJOUEURENPARALYSIE / 100) * nombre_tour)
+            self.modele.est_paralyse = True
+            self.modele.est_paralyse_nombre_tour += nombre_tour

@@ -53,6 +53,7 @@ class Vue:
             points_de_vie_monstre, points_de_mana_monstre,
             points_de_vie,
             points_de_vie_max, affiche_pm_et_gold,
+            endurance, endurance_max,
             nom_monstre, alteration_etat_monstre,
             alteration_etat_joueur
             ):
@@ -62,6 +63,7 @@ class Vue:
         print(f"    | L'ennemi possède {points_de_vie_monstre} pv | ")
         print(f"    | L'ennemi possède {points_de_mana_monstre} pm | ")
         print(f"    | Vous avez {points_de_vie}/{points_de_vie_max} pv | ")
+        print(f"    | Vous avez {endurance}/{endurance_max} pe |")
         print(f"    {affiche_pm_et_gold} ")
         print("")
         print(f"     _-{{ Status - {nom_monstre} }}-_")

@@ -635,8 +635,289 @@ LISTEDEPERSONNAGE = {
     ],
 }
 BIBLIOTHEQUEFINALE = {
-    "Titre": ["Extrait 1", "Extrait 2", "Extrait 3", ],
-    "Titre 2": ["Extrait 1", "Extrait 2", "Extrait 3", ],
+    "The Presence": ["Its hands push at the seams\nLike a drowning animal\nTrying to get out from beneath\nBut the surface is of ice",
+                          "It can see the world outside\nHe's in a soon-to-be corpse\nKinda state, all the time,",
+                          "Born from the ripple in the laws\nUnder the shadow of the waves\nA parasite of untold years\nGrown around the noosphere",
+                          "Divine in shape, Devil in form\nDreaming the freedom his fate stole\nLurking right outside your mind\nBehind the art block you despise"],
+    "Analyse de la Réaction Chimique du Métamorphoseur Volcanique": [
+        "L'échantillon de métamorphoseur volcanique, prélevé à une profondeur de 2000 mètres sous le cratère actif, présentait une composition minérale complexe.",
+        "Lorsqu'il a été exposé à des conditions de température et de pression similaires à celles du milieu d'origine, une réaction exothermique s'est produite, accompagnée d'une émission de gaz.",
+        "L'observation au microscope électronique a révélé des changements structuraux significatifs, avec la formation de cristaux de silicate à la surface de l'échantillon.",
+        "L'analyse spectroscopique a identifié la présence de composés sulfurés dans les émanations gazeuses, suggérant une réaction catalytique impliquant des éléments volatils.",
+        "Ces résultats suggèrent un mécanisme de transformation complexe impliquant des interactions entre les minéraux et les fluides magmatiques, ouvrant de nouvelles perspectives sur la compréhension des processus géochimiques dans les environnements volcaniques."],
+    "Texte Incohérent": [
+    "Le vent soufflait doucement à travers les arbres, caressant les feuilles "
+    "et créant une symphonie apaisante.\n",
+
+    "Les oiseaux chantaient leur mélodie matinale, remplissant l'air de leur "
+    "joie contagieuse.\n",
+
+    "Les nuages dérivaient paresseusement dans le ciel, prenant des formes "
+    "fantaisistes et changeantes.\n",
+
+    "Soudain, un lapin blanc surgit de derrière un buisson, agitant "
+    "frénétiquement une montre de poche.\n",
+
+    "Il sembla hésiter un instant, puis se précipita dans un terrier à "
+    "proximité, disparaissant dans l'obscurité.\n",
+
+    "Un sourire énigmatique se dessina sur le visage d'un chat rayé qui "
+    "observait la scène, perché sur une branche basse.\n",
+
+    "Il ouvrit la bouche pour dire quelque chose, mais aucun son ne sortit.\n",
+
+    "Puis, réalisant qu'il était seul, il se mit à miauler de manière "
+    "répétitive, comme s'il cherchait désespérément une réponse à une "
+    "question invisible.\n",
+
+    "La forêt écouta en silence, absorbant les bruits étranges qui "
+    "remplissaient l'air.\n",
+
+    "Finalement, le silence retomba, et la scène reprit son cours habituel, "
+    "comme si rien d'étrange ne s'était jamais produit."],
+    "Journal Personnel du Capitaine James Thompson, US Navy, 1943":[
+    ("- 3 Juillet 1943 :\nLa tension est palpable à bord du navire. \nNous sommes en route vers la Méditerranée pour participer à l'opération Husky,"
+     " le débarquement en Sicile. \nLes hommes sont nerveux, mais je dois rester fort pour maintenir la confiance de l'équipage. "
+     "\nC'est une mission cruciale, et nous devons être prêts à affronter l'ennemi à tout moment."),
+    ("- 15 Juillet 1943 :\nL'opération Husky est lancée. \nLes premiers échanges de tirs avec les batteries côtières ennemies ont été intenses. "
+     "\nNotre formation est sous un feu nourri, mais nos défenses tiennent bon. \nLes jeunes marins font preuve d'un courage admirable. \nJe suis fier de les commander."),
+    ("- 26 Juillet 1943 :\nAprès des jours de combats acharnés, la Sicile est enfin entre nos mains. \nLes sacrifices consentis ont été lourds,"
+     " mais la victoire est notre. \nNous entamons maintenant des opérations de nettoyage et de sécurisation de l'île. \nC'est un soulagement de voir nos"
+     " efforts porter leurs fruits, mais nous savons que de nouveaux défis nous attendent."),
+    ("- 5 Septembre 1943 :\nDes nouvelles choquantes nous parviennent du front. \nL'Italie a signé un armistice avec les Alliés."
+     " \nC'est une tournure inattendue des événements, et cela change considérablement la dynamique du conflit en Méditerranée. "
+     "\nNous devons rester vigilants et prêts à réagir à toute éventualité."),
+    ("- 18 Octobre 1943 :\nLes opérations de convoi dans l'Atlantique Nord deviennent de plus en plus périlleuses. "
+     "\nLes attaques de sous-marins ennemis se multiplient, mettant en danger nos convois de ravitaillement essentiels. \nNous devons"
+     " redoubler de vigilance et d'ingéniosité pour protéger nos navires contre cette menace sournoise."),
+    ("- 25 Décembre 1943 :\nNoël en mer est une expérience singulière. \nMalgré les conditions difficiles et l'éloignement de nos proches,"
+     " l'esprit de camaraderie règne à bord. \nNous avons organisé une modeste célébration pour remonter le moral de l'équipage."
+     " \nCes moments de répit sont rares, mais précieux."),],
+    "Recettes Divines": ["Les meilleurs cookies du monde !\n\n300g Farine\n120g sucre semoule\n120g sucre cassonade\n6g levure\n1 oeuf\n175g beurre\n2 tablettes chocolats",
+                               "Mélanger farine, sucres semoule et cassonade, levure, chocolat.\nRajouter beurre fondu et oeuf", 
+                               "Pétrir\nLaisser reposer 30 min au frigo",
+                               "10 minutes a 170°" ],
+    "Naissance du Monde": ["Notre univers a été crée en deux temps par une force suprême, ou simplement par hasard.", 
+                 "Qui, ou quoi, que ce soit, on a réussit a analyser le *fond sonore* de l'univers et a le comparer aux spectrographes de certains sorts.\nVoici ce que l'on a pu conclure :", 
+                 "L'ordre naturel des choses, c'est a dire leur ordre de *naissance*, se base sur le temps, qui est une constante inéluctable présente bien avant le vide, au début de toute choses.",
+                 "Ainsi, on a pu construire le sceau (idéologique) des éléments, et les mettre a leur place, en commencant par le Divin, en haut, et en suivant le sens des aiguilles d'une montre.",
+                 "Ensuite, la vie est arrivée.\nSeule l'intention fait partie des éléments, car elle a une conscience superieure, indestructible mais très instable.\nC'est la raison pour laquelle on la laisse avec les éléments.",
+                 "Mais le reste de ce qui fait de nous, des êtres vivants, ne fait pas parti des éléments.\nCe sont des principes anarchiques, mais qui possèdent cepandant un ordre d'apparition, commencant par l'intention et continuant a l'inverse de l'ordre naturel des choses.",
+                 "En effet, si l'état normal de l'univers c'est la mort, alors la vie est a l'inverse de cet état normal et de ce qu'il le fait avancer : le temps.",
+                 "Cela voudrait il dire que la vie est la seule chose qui peut aller a l'encontre du temps ?\nDans ce cas, elle a peut etre existé avant tout ?",
+                 "Cette question de savoir qui de la Vie ou de la Mort est arrivée en premier, c'est un problème qui élude depuis toujours les scientifiques.",
+                 "Je dirais cepandant que cette question n'a aucune importance.\nLes deux ont besoin l'un de l'autre pour interragir a notre niveau de réalité."],
+    "Description d'une femme se levant": [
+    "Dans une pièce baignée par la douce lumière du matin, une femme est "
+    "assise dans un fauteuil rembourré de velours. Sa silhouette est définie "
+    "par la clarté tamisée qui filtre à travers les rideaux, enveloppant la "
+    "pièce d'une ambiance chaleureuse. Son visage, éclairé par les premiers "
+    "rayons du soleil, révèle des traits délicats et une expression paisible, "
+    "trahissant à la fois la quiétude du sommeil et l'anticipation d'une "
+    "nouvelle journée.",
+    "Lentement, elle glisse ses mains le long des accoudoirs du fauteuil, "
+    "sentant la texture luxueuse du tissu sous ses doigts. Elle prend une "
+    "profonde inspiration, remplissant ses poumons d'air frais matinal, et se "
+    "redresse avec grâce. Ses muscles s'étirent paresseusement, comme si elle "
+    "savourait chaque sensation de son corps en mouvement après une nuit de "
+    "repos bien méritée.",
+    "Ses pieds, chaussés de chaussons moelleux, rencontrent le sol avec une "
+    "légèreté presque imperceptible. Elle se lève, dévoilant une silhouette "
+    "élégante enveloppée dans une robe fluide qui glisse sur ses courbes avec "
+    "fluidité. La lumière du matin danse sur le tissu, créant des motifs "
+    "d'ombre et de lumière qui accentuent sa grâce naturelle.",
+    "Un sourire doux se dessine sur ses lèvres alors qu'elle se tourne vers "
+    "la fenêtre, accueillant pleinement les premiers rayons du soleil qui "
+    "inondent la pièce. Prête à affronter les défis de la journée, elle quitte "
+    "son fauteuil avec une assurance tranquille, prête à embrasser le monde "
+    "qui l'attend à l'extérieur.",],
+    "Les Aventures de l'Explorateur Perdu": [
+        "Le soleil brûlant battait implacablement sur le désert aride, faisant onduler l'air dans des mirages trompeurs.",
+        "Parmi les dunes de sable doré, un explorateur solitaire avançait, son visage protégé par un voile contre les grains abrasifs.",
+        "Des ruines anciennes surgissaient soudainement de l'horizon, témoins silencieux d'une civilisation disparue depuis des siècles.",
+        "Les murmures du vent semblaient porter des histoires oubliées, évoquant les jours de gloire et de décadence de ce peuple autrefois prospère.",
+        "Au cœur du temple effondré, une relique sacrée reposait, attendant d'être découverte par celui qui oserait défier les épreuves du désert."],
+    "Foi": ["(le livre contient la phrase *Gary vous aime* en boucle.)",],
+    "Céleste": ["Madeline réouvra ses yeux.\nDevant elle se trouvait le directeur, sous une forme monstrueuse.\nCorrompu par son anxiété, ou peut être était-ce sa solitude ?", 
+                "Elle laissa ses questions sans réponses et se retourna.\nSur le toit de l'hotel, elle pouvait se déplacer jusqu'a l'autre coté sans se faire bloquer par les monticules de valises.", 
+                "C'était maintenant ou jamais.\nElle prit son élan et s'élanca dans les airs, avant de dasher sur une plateforme en contrebas.\nElle évita le directeur foncant sur elle, puis sauta sur le mur devant elle.",
+                "Elle grimpa le mur et se mit a dasher vers le haut.",
+                "Se prenant ainsi un ennemi en pleine tronche." ],
+    "Analyse du Monstre Trienun et de son Pouvoir de Manifestation du Bandit Manchot":[
+    ("- Origine et Caractéristiques Physiques :\nLe monstre Trienun, découvert dans une région isolée des montagnes, présente une apparence reptilienne unique avec des écailles iridescentes"
+     " et des cornes acérées. Sa silhouette imposante mesure environ 3 mètres de haut et est dotée de membres puissants, lui conférant une agilité remarquable malgré sa taille. Les analyses "
+     "anatomiques révèlent une constitution robuste et une capacité de régénération cellulaire accélérée, caractéristiques communes aux prédateurs de haut niveau."),
+    ("- Capacité de Manifestation du Bandit Manchot :\nTrienun démontre une aptitude extraordinaire à invoquer un Bandit Manchot, un dispositif semblable à ceux utilisés dans les casinos,"
+     " mais modifié pour des desseins mystérieux. Lorsque le Bandit Manchot est activé, il génère une combinaison aléatoire de symboles élémentaires. Ces symboles déterminent les effets"
+     " élémentaires infligés aux individus à proximité de Trienun."),
+    ("- Effets Élémentaires :\nSelon les symboles arrêtés sur le Bandit Manchot, différents effets élémentaires sont observés chez les individus environnants :\n  - Symbole de glace : Les "
+     "sujets sont enveloppés dans un halo de gel, provoquant une sensation de froid intense et des engourdissements.\n  - Symbole de feu : Des flammes émergent brusquement autour des cibles,"
+     " leur infligeant des brûlures sévères.\n  - Symbole de foudre : Des décharges électriques parcourent le corps des sujets, entraînant des spasmes musculaires et des dommages nerveux.\n "
+     " - Symbole de terre : Des éclats de roche et de terre se matérialisent, projetant les individus au sol avec force.\n  - Symbole d'eau : Une vague d'eau puissante submerge les cibles, "
+     "les entraînant dans un tourbillon aquatique."),
+    ("- Conclusion :\nLe pouvoir de manifestation du Bandit Manchot par Trienun représente une capacité extraordinaire qui combine la manipulation d'énergies élémentaires et des phénomènes"
+     " de chance aléatoires. Cette capacité soulève des questions fascinantes sur l'origine et la nature profonde de Trienun, ainsi que sur les implications de son existence pour notre "
+     "compréhension de la magie et de l'énergie dans notre monde.")],
+    "Kya-san loves me ??! Chapitre 6534": [
+    "Le soleil couchant teintait le ciel de nuances chaudes, créant une "
+    "toile de fond parfaite pour ce moment tendu entre les deux amoureux.\n",
+
+    "Ils se tenaient face à face, à quelques centimètres l'un de l'autre, "
+    "captivés par l'intensité du moment.\n",
+
+    "Chaque détail de l'autre semblait amplifié par l'excitation et "
+    "l'anticipation qui imprégnaient l'air.\n",
+
+    "Leurs regards se croisèrent, et dans les yeux de chacun, on pouvait "
+    "voir la profondeur de leurs émotions.\n",
+
+    "Un frisson électrique parcourut leur peau au moindre contact, comme si "
+    "l'air lui-même vibrait d'une énergie palpable.\n",
+
+    "Leurs cœurs battaient à l'unisson, rythmant le tempo de ce moment "
+    "suspendu dans le temps.\n",
+
+    "Leurs mains, presque instinctivement, se tendirent l'une vers l'autre, "
+    "attirées par une force magnétique irrésistible.\n",
+
+    "Les doigts effleurèrent à peine, créant une sensation de chaleur qui se "
+    "propagea à travers leurs corps.\n",
+
+    "Chaque souffle était lourd de désir, emplissant l'espace entre eux "
+    "d'une tension presque palpable.\n",
+
+    "Ils se rapprochèrent lentement, leurs respirations se mêlant dans un "
+    "doux ballet synchronisé.\n",
+
+    "Leurs lèvres étaient si proches qu'ils pouvaient presque sentir le "
+    "frisson d'anticipation parcourir leur peau.\n",
+
+    "Le monde entier semblait s'effacer autour d'eux, ne laissant place "
+    "qu'à l'autre et à cette connexion électrique qui les liait.",
+    "Leurs lèvres se rapprochèrent, leurs yeux se fermèrent, ils pensèrent a "
+    "tout ce qu'ils avaient traversé ensemble, prêt a oficialiser leur "
+    "union en scellant leur désirs par leur premier baiser, tant attendu.",
+    "Quelques millimètres, quelques centièmes de secondes, séparaient les deux amoureux de leur destin, et",
+    "(Le livre s'arrête la.)"],
+    "Lettre d'Amour": [("(nombre de cartes) (numéro de la carte) (nom du pouvoir) (effet du pouvoir)\n(5)1 et joker:fou: devinez la carte d'un type. Si vous reeussisez il meurt "
+                        "(sauf si c'est un autre fou) \n(4)2:chevalier: voir la carte de l'autre\n(4)3:tour: comparer sa carte avec celle de l'autre. La plus petite carte perd\n"
+                        "(3)4:la dame: vous protège de tout les cartes pendant un tours\n(3)5:scribe:fait poser la carte de quelqu'un \n(2)6:sorcier: échange sa carte avec celle "
+                        "d'un autre\n(2)7:Le chasseur: Annonce deux nombres. Ceux qui possèdent une carte dont la valeur se situe entre les deux nombres (ou est égale à l'un des "
+                        "nombres) doivent lever la main.\n(3)8:la servante: fais passer le tour de quelqu'un ou change le sens du jeu\n(1)9:magistrat: si en additionnant vos 2 cartes "
+                        "ça fait 15 ou + vous mourrez\n(1)10:la princesse:si vous posez cette carte vous mourrez (même par le scribe) \n(1)valet:le bourreau : désigne une personne. "
+                        "Si la personne a une carte avec un nombre pair, il meurt. \n(1)dame:l'imperatrice: permet de gagner de tromper la mort une seule fois (gagne une vie qui dure "
+                        "jusqu'à la fin de la partie)\n(1)roi :enfant empereur: aucun effet. Mais quand on l'a, on doit la poser la carte face retournée sur le front pour que tout le"
+                        "monde la voie."),
+                        "A chaque tour, les joueurs prennent une carte, et en jettent une.\nLe pouvoir de la carte jetée s'active.\nLe jeu continue jusqu'a ce qu'il n'y aie plus qu'une personne.\nSi il n'y a plus qu'une seule carte, c'est celui qui a la plus grande carte qui gagne."],
+    "Les Secrets du Manoir Hanté": [
+        "La nuit était tombée sur le vieux manoir, enveloppant ses murs de mystère et de silence.",
+        "À travers les fenêtres poussiéreuses, la lueur de la lune révélait des ombres dansantes, semblant murmurer des secrets oubliés.",
+        "Au détour d'un couloir sombre, une porte grinça sinistrement, révélant une pièce plongée dans l'obscurité.",
+        "Des échos lointains semblaient résonner dans les murs, comme si les pierres elles-mêmes avaient une histoire à raconter.",
+        "Dans un coin obscur de la pièce, une vieille malle en bois renfermait des artefacts anciens, témoins silencieux des événements passés."],
+    "Confession d'une Horreur des Abysses": ["Mon esprit est pareil au mouvement d'une rocking chair\nPensées tantôt sombre tantôt claires, quel enfer\nAucune constance, tout dans l'original",
+              "Je m'attaque à la vie comme un homme de Néandertal \nArmé de mots, d'expérience , et d'un mental de fer\nD'un humour de bout d'chandelle trempé dans vie amère",
+              "Je regarde les étoiles briller et vit au travers\nLes histoires des hommes passionné sont mes plus beau salaires\nRongé, le vide se sert sur mon corps",
+              "Prend l'amour et la haine,et la rancoeur et la mort\nEntre ses ongles , ma peau fatiguée s'orne\nDes griffures sur mes poignets , je sens couler l'ychor "],
+    "Rapport : Mirroir de Culte": [
+        "L'appelation *Miroir de Culte* désigne un miroir rectangulaire mesurant approximativement 47 cm par 43 cm.\nLa bordure de ce miroir est encadrée par les vertèbres de quatre individus supposés être"
+        "les membres fondateurs d'un culte de petite taille connu sous le nom de l'Ordre du Reflet.",
+        "Le *Miroir de Culte* possède un léger effet de danger-cognitif contraignant les individus à éprouver une dévotion religieuse directe envers le *Miroir de Culte*.\nLa"
+        " nature de cette dévotion varie en fonction des individus, sa manifestation étant basée sur leurs notions préconçues de la prière, du culte et"
+        " d'autres activités connexes. \nCet effet augmente proportionnellement en fonction du temps que l'individu passe en présence du *Miroir de Culte*. \nCependant"
+        ", un déni actif de la croyance en le *Miroir de Culte* semble empêcher cet effet, et l'administration d'amnésiques s'est montrée efficace pour inverser toute modification"
+        " psychologique de long terme.",
+        "Les individus regardant le *Miroir de Culte* en exprimant activement une dévotion religieuse rapportent voir une entité non identifiée à la place de leur reflet. "
+        "\nLa caractérisation de cette anomalie est décrite comme une fusion des diverses conceptions du divin de l'adorateur. \nL'entité semble se nourrir de"
+        " la dévotion religieuse qu'elle reçoit, exprimant des motivations entièrement déterminées par l'intention du culte qui lui est voué et disposant de "
+        "capacités de pliage de réalité qui s'accroîent proportionnellement en fonction de la quantité nette de cette adoration. Aucune limite supérieure de "
+        "ces capacités n'a pour l'instant été déterminée."],
+    "Moi et mes Barils": [
+        "Les barils. Ce ne sont pas juste des contenants. Ils ont une histoire riche.",
+        "Certains barils étaient utilisés pour transporter du poisson, du hareng plus précisément.",
+        "D'autres, de la mélasse. Ce qui, comme nous le savons tous, a été la chute de l'administration Coolidge.",
+        "Il ne l'a pas vu venir, mais c'est arrivé. Ne laissez pas cela vous arriver.",
+        "En conclusion, la prochaine fois que vous verrez un baril, pensez à ceci : Qu'est-ce qu'il contient ?",
+        "Ce n'est ni du poisson ni de la mélasse. C'est du savoir. Et c'est le plus grand trésor de tous.",
+        "Et ce n'est que le début. Les Romains utilisaient des barils pour transporter de l'huile d'olive.",
+        "Les Celtes, de la bière. Et oui, même l'homme lui-même.",
+        "L'homme, qui est sorti de l'océan et s'est dressé pour la première fois, l'a fait près d'un baril.",
+        "J'ai toujours eu une préférence pour l'histoire de Sir Francis Drake qui a fait le tour du monde.",
+        "Savez-vous comment il a empêché ses hommes de mourir du scorbut ? Des barils. Pleins de bière.",
+        "Alors levons nos barils à Sir Francis Drake et à tous les explorateurs marins qui ont suivi.",
+        "Des Vikings à Marco Polo en passant par Magellan.",
+        "Et s'ils étaient là aujourd'hui, j'aimerais penser qu'ils lèveraient tous une pinte en mon honneur.",
+        "À l'avenir !"],
+    "Cigogne Rouge": ["Extrait", "Extrait", "Extrait", ],
+    "La Métaphysique Quantique Très Sérieuse": ["Karakai Jouzu No (Moto) Takagi-San\nKarakai Jouzu No Takagi-San\nBoku No Kanojo Ga Majime Sugiru Shojo Bitch Na Ken\nFechippuru ~Our Innocent Love~",
+                                                "We Never Learn\nKakkou No Linazuke\nOnizuka-Chan And Sawarida-Kun\nSeishun Buta Yarou Wa Bunny Girl Senpai No Yume Wo Minai",
+                                                "Komi-San Wa Komyushou Desu\nKubo san wa Boku\nUzaki-Chan Wa Asobitai!\nZutto Otokonoko da to Omotte ita Gakitaishou ga Onnanoko deshita",
+                                                "Manga Sakourasou No Pet Na Kanojo\nDo chokkyuu kareshi x kanojo\nMaou no ore GA dorei elf Wo home ni shitanda GA d'où medereba li", 
+                                                "(La liste de noms de mangas de romance continue sur 463 pages.)"],
+    "Analyse du Mana : Une Étude des Principes Fondamentaux de l'Énergie Magique":[
+    ("- Nature du Mana :\nLe mana est une forme d'énergie magique omniprésente dans l'univers, perceptible mais insaisissable pour la plupart des individus."
+     " Il réside dans les flux éthérés qui traversent le monde et peut être canalisé par ceux qui maîtrisent les arts de la magie."),
+    ("- Intention et Concentration :\nL'utilisation efficace du mana repose sur l'intention et la concentration de l'utilisateur. L'intention détermine le but de l'acte magique,"
+     " tandis que la concentration permet de canaliser le mana avec précision vers cet objectif. Une intention claire et une concentration soutenue sont essentielles pour obtenir"
+     " des résultats magiques cohérents et puissants."),
+    ("- Utilisation du Mana :\nUne fois canalisé, le mana peut être utilisé pour réaliser une variété d'effets magiques, allant de simples sortilèges à des rituels complexes."
+     " La nature et l'étendue de ces effets dépendent de plusieurs facteurs, notamment la quantité de mana disponible, la compétence de l'utilisateur et la spécificité de l'intention."),
+    ("- Réservoir de Mana :\nLe mana peut être stocké dans un réservoir personnel, souvent situé à l'intérieur de l'individu pratiquant la magie. Ce réservoir agit comme une"
+     " réserve d'énergie magique, permettant à l'utilisateur d'accéder au mana quand il en a besoin. La capacité du réservoir varie d'un individu à l'autre et peut être augmentée"
+     " par des techniques d'entraînement magique."),
+    ("- Absorption du Mana :\nEn plus d'être stocké dans un réservoir interne, le mana peut être absorbé de différentes sources externes, telles que des cristaux magiques,"
+     " des artefacts enchantés ou même l'énergie environnante. L'absorption du mana nécessite souvent une connexion mentale et spirituelle avec la source, ainsi qu'une compréhension"
+     " profonde des flux énergétiques."),
+    ("- Conclusion :\nLe mana représente une force vitale dans la pratique de la magie, reliant l'intention de l'utilisateur à la réalité de ses manifestations."
+     " Comprendre ses principes fondamentaux d'intention, de concentration, d'utilisation, de réservoir et d'absorption est essentiel pour tout praticien de la magie"
+     " souhaitant maîtriser cette énergie mystique et puissante.")],
+    "Comprendre la Noosphère":[
+    ("La noosphère est un concept philosophique et scientifique introduit par le théologien et philosophe français Pierre Teilhard"
+     " de Chardin dans les années 1920.\nIl décrit la sphère de la pensée humaine et de la conscience collective qui englobe la biosphère"
+     " (l'environnement biologique de la Terre).\nSelon Teilhard de Chardin, la noosphère est le stade ultime de l'évolution terrestre,"
+     " où la pensée et la conscience deviennent des forces dominantes et où l'humanité est interconnectée à un niveau global par le biais"
+     " de la communication et de la technologie.\nC'est une notion qui englobe les idées de conscience collective, d'interconnexion et de transformation sociale et spirituelle."),
+    "Testez votre connexion avec la conscience collective théorisée par Pierre avec ces nombres !\nSi vous n'êtes d'accord avec aucune de ces associations, alors il avait peut etre tort...",
+    "Mortel : 11 (stabilité, temoporaire)",
+    "Étoile : 12 (guidance, illumination)"
+    "Positif : 9 (passion, transformation)",
+    "Négatif : 2 (froid, dualité)",
+    "Intention : 7 (spiritualité, introspection)",
+    "Energie : 3 (mouvement, émotion)",
+    "Masse : 1 (individualité, manifestation physique)",
+    "Ciel : 8 (expansion, vision)",
+    "Divin : 5 (omniscient, innaretable)",
+    "Forêt : 10 (abondance, mystère)",
+    "Vent : 6 (liberté, changement)",
+    "Chaleur : 4 (vitalité, lien familial)",],
+    "Cette fois-ci je vais réussir !": ["Réaction= le temps que l'info arrive a mon cerveau (dizaine de la vitesse x3)\nFreinage= force cinétique, le temps que les freins fassent effet (dizaine de la vitesse au carre)",
+                                        ("Arrêt: réaction +freinage\nautoroute: voie de droite est pour poids lourds et véhicules a -  de 60kmh\nBcp d'infraction: 8points max.\n1 infraction: 6 points max"
+                                         "Taux alcoolémie + = 6 points\nQuand QQ veut se mettre alors qu'il a pas la prio, change de voie\nRègle générale: 0,50"),
+                                         "Proba: 0,20\nEthylotest de marché:  pour probatoire et débutants\nQuand on rétrograde, faire attention au surégime. Ne pas rétrograder a tout bout de champ.\nRefus de prio a un piéton: amande et -4 points",
+                                         "(Le reste du livre est composé de notes sur le code de la route.)\n(La plupart sont évidentes, certaines sont fausses.)",],
+    "Les Échos du Temps": ["L'épais brouillard enveloppait la forêt de ses tentacules opaques, étouffant les bruits du monde extérieur.",
+              "Entre les arbres tordus et les buissons épais, une silhouette solitaire se fraya un chemin, ses pas écrasant les feuilles mortes sous ses bottes.",
+              "Le poids de l'obscurité était palpable, mais quelque chose dans l'air semblait annoncer un changement imminent.",
+              "Les murmures lointains des ancêtres semblaient résonner à travers les arbres, comme des échos du passé, appelant à la mémoire des temps oubliés.",
+              "Au cœur de cette clairière oubliée, une lueur faible émergeait, éclairant un objet mystérieux enfoui dans le sol depuis des siècles."],
+    "Mémoires de Géologue": ["Les montagnes verdoyantes se perdent dans les barres brumeuse, se mouvant tel des cavaliers de l'éther affrontant l'éphémère de leur existance.",
+              "Ça et la, le ciel saigne des mares de lumières et de bleu, répondant aux arbres teintés de jai et d'ecrin. ",
+              "Et au milieu de ce spectacle de couleurs...",
+              "...nous on prend des notes sous la flotte.",],
+    "Havre : Rapport": [
+        "*Havre* est la désignation provisoire de la dimension 882R53, un plan extradimensionnel de taille inconnue. "
+        "\nLe *Havre* a l'apparence d'un désert de sel à la surface solide avec une réflectivité quasi parfaite. "
+        "\nIl a été remarqué que la surface a également un goût salé.",
+        "Les entités à l'intérieur du *Havre* ne semblent pas souffrir d'une quelconque forme de perte énergétique ni de décomposition,"
+        " puisque plusieurs appareils électroniques introduits dans le *Havre* fonctionnent continuellement depuis au moins 296 561 années sans défaillance,"
+        " et que les personnes à l'intérieur ne semblent pas vieillir ni avoir besoin de se nourrir, ce qui les rend biologiquement immortelles.",
+        "Le *Havre* est entièrement monotone, à l'exception d'un unique arbre (désigné *Havre:Arbre* ci-après) comportant un danger-sensitif :"
+        " l'observateur est toujours conscient de sa localisation, peu importe la distance ou la visibilité.",
+        "Le corps du Dr Charles Gears a été découvert affaissé contre la base de *Havre:Arbre*. \nLa date de la dernière mise"
+        " à jour de ce document, ainsi que le rapport d'autopsie et les 1 779 095 vidéos retrouvées sur son lecteur indiquent "
+        "qu'il est mort à l'âge d'environ 450 000 ans de causes naturelles."]
+
+    
 }
 LISTEITEMDEFENCE = [
     "Feuille Jindagee",
@@ -750,7 +1031,6 @@ LISTEDEMUSIQUE = [
     "Dangereuses Mélancolies",
     "L'Orage avant la Tempête",
     "Fanfare",
-    "Prosopagnosie",
     "Sillages Sur Une Mer de Rêves",
     "Pluie d'Automne",
     "Bêtise Humaine",
@@ -763,6 +1043,7 @@ LISTEDEMUSIQUE = [
     "Ruines d'Antan",
     "Sables Mouvants",
     "Euthanasie Régalienne",
+    "Pareísaktos",
     "Pāramitā",
     "Nerd Party",
     "Jeux d'Enfants",
@@ -778,15 +1059,20 @@ LISTEDEMUSIQUE = [
     "Comment Tuer le Grand Méchant Loup",
     "Ossuaire Immaculé",
     "Dissonance Cognitive",
-    "Faux semblants",
+    "Faux Semblants",
     "La Hache et le Grimoire",
-    "Réarrangement Liminal",
-    "Arythmie",
-    "Au Détour D’un Sentier Une Charogne Infâme",
-    "La Divine Comédie",
-    "Apogée Inversée",
-    "Théorie du Chaos",
-    "Pénultime",
+    "Gr4c1euse Nécr0log1e",
+    "Pr0s0pagn0sie",
+    "Mach1n3 Inf3rn4le",
+    "S1mul4crum",
+    "Cruc1fix1on",
+    "Réarr4ng3ment L1m1nal",
+    "4rythm1e",
+    "Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme",
+    "La D1v1ne Coméd1e",
+    "Ap0gé3 Inv3rsée",
+    "Thé0r1e du Ch40s",
+    "Pénult1me",
 
 
 ]
@@ -796,7 +1082,6 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["alfredproto", "Vous écoutez "],
     ["boss_introV2", "Vous écoutez "],
     ["battle_win", "Vous écoutez "],
-    ["abyss", "Vous écoutez "],
     ["gravestone", "Vous écoutez "],
     ["ending", "Vous écoutez "],
     ["reconfort", "Vous écoutez "],
@@ -809,6 +1094,7 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["etage_3", "Vous écoutez "],
     ["battle_theme_3", "Vous écoutez "],
     ["boss_3", "Vous écoutez "],
+    ["darkness", "Vous écoutez "],
     ["etage_4", "Vous écoutez "],
     ["battle_theme_4", "Vous écoutez "],
     ["boss_4", "Vous écoutez "],
@@ -826,6 +1112,11 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["battle_theme_8", "Vous écoutez "],
     ["boss_8", "Vous écoutez "],
     ["boss_8_phase_2", "Vous écoutez "],
+    ["observatorium", "Vous écoutez "],
+    ["abyss", "Vous écoutez "],
+    ["tales", "Vous écoutez "],
+    ["etage_0", "Vous écoutez "],
+    ["boss_0", "Vous écoutez "],
     ["etage_9", "Vous écoutez "],
     ["battle_theme_9", "Vous écoutez "],
     ["boss_9", "Vous écoutez "],
@@ -2122,6 +2413,7 @@ class PlayerCaracteristics:
         self.points_de_mana_max = 0
         self.points_de_mana = 0
         self.points_de_force = 0
+        self.points_dendurance = 0
         self.points_dintelligence = 0
         self.points_de_defence = 0
         self.taux_coup_critique = 0
@@ -2145,6 +2437,7 @@ class PlayerCaracteristics:
         self.library_used = False
         self.liste_daction_oubliees = []
         self.final_library_used = False
+        self.quest_giver = True
         self.mercant_healed = False
         self.fountain_used = False
         self.number_of_tirage = 0
@@ -2176,12 +2469,14 @@ class PlayerCaracteristics:
         self.degat_sort_critique = caracteristiques[17]
         self.taux_desquive = caracteristiques[18]
         self.nombre_de_gold = caracteristiques[19]
+        self.points_dendurance = 20
 
     def ShowcaseCaracteristics(self):
         liste_artefacts = self.PutArtefactInList()
         print(f"          -={{ {Player.nom_du_personnage} }}=-")
         print( f"\nPoints de vie : {Player.points_de_vie}/{Player.points_de_vie_max}"
               f"\nPoints de mana : {Player.points_de_mana}/{Player.points_de_mana_max}"
+              f"\nEndurance maximale : {Player.points_dendurance}"
               f"\nPoints de force : {Player.points_de_force} | Points d'intelligence : {Player.points_dintelligence}"
               f"\nPoints de defence : {Player.points_de_defence}"
               f"\nChance de coup critique : {Player.taux_coup_critique}% | Degats de coup critique : {Player.degat_coup_critique}"
@@ -2783,6 +3078,7 @@ class Observe:
             while True:
                 nombre_a_afficher = 2
                 try:
+                    print("Seuls certains livres attirent votre attention :")
                     print("1 - Partir")
                     for livre in BIBLIOTHEQUEFINALE:
                         print(f"{nombre_a_afficher} - Prendre le livre [{livre}]")
@@ -2798,7 +3094,7 @@ class Observe:
                 print("A votre plus grand soulagement, votre coeur se remet a battre.")
                 Affichage.EntreePourContinuer()
                 break
-            elif choix == 22:
+            elif choix == 19:
                 self.WriteInFinalBook()
             else:
                 print("Vous ouvrez le livre à une page aléatoire.")
@@ -2851,7 +3147,7 @@ class Observe:
                 Affichage.EntreePourContinuer()
                 while True:
                     try:
-                        print("Vous ne pouvez pas risquer d'endommager votre bras, il faut se débarrasser du bouquin avec un sort !")
+                        print("Vous ne pouvez pas risquer d'endommager votre bras avec une technique, il faut se débarrasser du bouquin avec un sort !")
                         numero_affichage = 1
                         for sorts in Player.sorts_possedes:
                             print(f"{numero_affichage} - {sorts}")
@@ -2884,166 +3180,252 @@ class Observe:
             donnees_de_s0ve["Livre de sort"] = liste_de_sorts_enregistres
             self.SetPermanentThingsToS0ve(donnees_de_s0ve)
 
-            
-
-
-
     def DoTheQuests(self):
-        if Player.quete == "Voeu de Pauvreté" and Player.nombre_de_gold == 0:
-            Player.quete += " [Complete]"
-        print("Dans un coin de la fête foraine, dans une grande poubelle, vous apercevez un robot primitif fait de métal, avec des nuances de cuivre, d'acier ou de bronze.")
-        print("Alors que vous vous approchez de la machine, son visage d'aluminum dans lequel ont été creusé 3 trous pour les yeux et la bouche s'illumine de l'interieur.")
-        Affichage.EntreePourContinuer()
-        print("*Hey, toi la, ouai toi, approche n'aie pas peur !*")
-        print("*Je suis un ancien explorateur, comme toi.*\n*J'ai appris deux trois trucs avant de mourir, et je suis prêt a te les apprendre si tu fais des trucs pour moi.*")
-        Affichage.EntreePourContinuer()
-        while True:
+        if Player.quest_giver:
+            if Player.quete == "Voeu de Pauvreté" and Player.nombre_de_gold == 0:
+                Player.quete += " [Complete]"
+            print("Dans un coin de la fête foraine, dans une grande poubelle, vous apercevez un robot primitif fait de métal, avec des nuances de cuivre, d'acier ou de bronze.")
+            print("Alors que vous vous approchez de la machine, son visage d'aluminum dans lequel ont été creusé 3 trous pour les yeux et la bouche s'illumine de l'interieur.")
+            Affichage.EntreePourContinuer()
+            print("*Hey, toi la, ouai toi, approche n'aie pas peur !*")
+            print("*Je suis un ancien explorateur, comme toi.*\n*J'ai appris deux trois trucs avant de mourir, et je suis prêt a te les apprendre si tu fais des trucs pour moi.*")
+            Affichage.EntreePourContinuer()
             while True:
-                try:
-                    print("*Sers toi en quete, et fais gaffe ! Je saurais si tu a triché ou pas !*\n")
-                    print("1 - Retour\n")
-                    print("2 - Voeu de Pauvreté : Reviens me voir avec 0 golds dans ton inventaire ! (Rang E)")
-                    print("3 - Interminable : Fais durer ton prochain combat jusqu'au tour 50 (Rang D)\n")
-                    print("4 - Epreuve du Magister : Bats les 4 prochains ennemis sans utiliser d'action de Feu, Foudre, Glace (Rang C)")
-                    print("5 - Epreuve des Mages-Epeistes : Bats les 4 prochains ennemis sans utiliser d'action de Terre, Physique, Sang (Rang C)\n")
-                    print("6 - Force et Honneur : Bats les 8 prochains ennemis sans utiliser d'items (Rang B)")
-                    print("7 - Moqueries Magiques/Techniques : Bats le Bouffon sans utiliser de sorts ou de techniques [au choix] (Rang A)\n")
-                    print("8 - Sérendipité : Finis toute les quêtes (Rang S)\n")
-                    print(f"9 - Abandonner la quête en cours : [{Player.quete}]\n")
-                    choix = int(input("Que souhaitez vous faire ? (Vous ne pouvez prendre qu'une seule quête à la fois.)"))
-                    ClearConsole()
-                    if choix in range(1, 10):
-                        break
-                except ValueError:
-                    ClearConsole()
-            if choix == 1:
-                print("Vous laissez la boite de métal parler toute seule, et revenez sur vos pas.")
-                Affichage.EntreePourContinuer()
-                break
-            elif (Player.quete != "None") and (choix != 9):
-                if "[Complete]" in Player.quete:
-                    print("Bien joué ! Voila ta récompense !")
-                    self.DonneRecompenseQuete()
-                    quete_reussie = Player.quete
-                    quete_reussie = quete_reussie.rstrip("[Complete]").rstrip()
-                    Player.quete_complete.append(quete_reussie)
-                    if "None" in Player.quete_complete:
-                        Player.quete_complete.remove("None")
-                    Player.quete = "None"
-                else:
-                    print("*T'a déja prit une quete ! Ouste !*")
+                while True:
+                    try:
+                        print("*Sers toi en quete, et fais gaffe ! Je saurais si tu a triché ou pas !*\n")
+                        print("1 - Retour\n")
+                        print("2 - Voeu de Pauvreté : Reviens me voir avec 0 golds dans ton inventaire ! (Rang E)")
+                        print("3 - Interminable : Fais durer ton prochain combat jusqu'au tour 50 (Rang D)\n")
+                        print("4 - Epreuve du Magister : Bats les 4 prochains ennemis sans utiliser d'action de Feu, Foudre, Glace (Rang C)")
+                        print("5 - Epreuve des Mages-Epeistes : Bats les 4 prochains ennemis sans utiliser d'action de Terre, Physique, Sang (Rang C)\n")
+                        print("6 - Force et Honneur : Bats les 8 prochains ennemis sans utiliser d'items en combat (Rang B)")
+                        print("7 - Moqueries Magiques/Techniques : Bats le Bouffon sans utiliser de sorts ou de techniques [au choix] (Rang A)\n")
+                        print("8 - Sérendipité : Finis toute les quêtes (Rang S)\n")
+                        print(f"9 - Abandonner la quête en cours : [{Player.quete}]\n")
+                        choix = int(input("Que souhaitez vous faire ? (Vous ne pouvez prendre qu'une seule quête à la fois.)"))
+                        ClearConsole()
+                        if choix in range(1, 10):
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    print("Vous laissez la boite de métal parler toute seule, et revenez sur vos pas.")
                     Affichage.EntreePourContinuer()
-            elif choix == 2:
-                if "Voeu de Pauvreté" in Player.quete_complete:
-                    print("*Tu l'as déja faite celle là.*")
-                    Affichage.EntreePourContinuer()
-                else:
-                    print("*C'est plutot simple ! Utilise tout ton argent et reviens me voir.*"
-                          "\n*Je te validerait la quete a ce moment la.*")
-                    print("Vous avez accepté la quête [Voeu de Pauvreté]")
-                    Affichage.EntreePourContinuer()
-                    Player.quete = "Voeu de Pauvreté"
-            elif choix == 3:
-                if "Interminable" in Player.quete_complete:
-                    print("*Tu l'as déja faite celle là.*")
-                    Affichage.EntreePourContinuer()
-                else:
-                    print("*Ton prochain combat, boss ou monstre, fait le durer jusqu'au 50eme tour minimum.*"
-                          "\n*Si tu échoue, reviens me voir et je te la redonnerais.*")
-                    print("Vous avez accepté la quête [Interminable]")
-                    Affichage.EntreePourContinuer()
-                    Player.quete = "Interminable"
-            elif choix == 4:
-                if "Epreuve du Magister" in Player.quete_complete:
-                    print("*Tu l'as déja faite celle là.*")
-                    Affichage.EntreePourContinuer()
-                else:
-                    print("*On donnait cette épreuve aux membres du Magister, un consort de mages de la nature.*"
-                          "\n*Tu échoue si tu use de Techniques ou Sorts en lien avec le Feu, la Foudre ou la Glace pendant les 4 prochains combats.*")
-                    print("*Le Tir Arcanique et l'attaque Légère ont tout deux l'élément Physique !*")
-                    print("Vous avez accepté la quête [Epreuve du Magister]")
-                    Affichage.EntreePourContinuer()
-                    Player.quete = "Epreuve du Magister"
-            elif choix == 5:
-                if "Epreuve des Mages-Epeistes" in Player.quete_complete:
-                    print("*Tu l'as déja faite celle là.*")
-                    Affichage.EntreePourContinuer()
-                else:
-                    print("*On donnait cette épreuve à l'escouade des Mages-Epeistes, au service de sa Majestée.*"
-                          "\n*Tu échoue si tu use de Techniques ou Sorts en lien avec la Terre, le Sang ou le Physique pendant les 4 prochains combats.*")
-                    print("*Attention ! Le Tir Arcanique et l'attaque Légère ont tout deux l'élément Physique !*")
-                    print("Vous avez accepté la quête [Epreuve des Mages-Epeistes]")
-                    Affichage.EntreePourContinuer()
-                    Player.quete = "Epreuve des Mages-Epeistes"
-            elif choix == 6:
-                if "Force et Honneur" in Player.quete_complete:
-                    print("*Tu l'as déja faite celle là.*")
-                    Affichage.EntreePourContinuer()
-                else:
-                    print("*Les aventuriers se reposent trop sur leur force donnée, les objets, et pas assez sur leur force acquise, les sorts et techniques.*"
-                          "\n*Libère toi des chaines du consummérisme !*")
-                    print("Vous avez accepté la quête [Force et Honneur]")
-                    Affichage.EntreePourContinuer()
-                    Player.quete = "Force et Honneur"
-            elif choix == 7:
-                if ("Moqueries Magiques" in Player.quete_complete or
-                    "Moqueries Techniques" in Player.quete_complete):
-                    print("*Tu l'as déja faite celle là.*")
-                    Affichage.EntreePourContinuer()
-                else:
-                    while True:
-                        try:
-                            print("*Je me suis fais humilier par le Bouffon, et en échange il m'a foutu dans cette boite de conserve pour l'éternitée.*"
-                                  "\n*Humilie le pour moi !*")
-                            print("1 - *Tu préfere l'écraser sans Sorts ?*")
-                            print("2 - *Tu préfère l'écraser sans Techniques ?*")
-                            choix_quete = int(input("Que souhaitez vous faire ? ")) 
-                            ClearConsole()
-                            if choix_quete in [1, 2]:
-                                break
-                        except ValueError:
-                            ClearConsole()
-                    if choix_quete == 1:
-                        print("*Qu'il en soit ainsi !*")
-                        print("Vous avez accepté la quête [Moqueries Magiques]")
-                        Player.quete = "Moqueries Magiques"
+                    break
+                elif (Player.quete != "None") and (choix != 9):
+                    if "[Complete]" in Player.quete:
+                        print("Bien joué ! Voila ta récompense !")
+                        self.DonneRecompenseQuete()
+                        quete_reussie = Player.quete
+                        quete_reussie = quete_reussie.rstrip("[Complete]").rstrip()
+                        Player.quete_complete.append(quete_reussie)
+                        if "None" in Player.quete_complete:
+                            Player.quete_complete.remove("None")
+                        Player.quete = "None"
                     else:
-                        print("*Qu'il en soit ainsi !*")
-                        print("Vous avez accepté la quête [Moqueries Techniques]")
-                        Player.quete = "Moqueries Techniques"
+                        print("*T'a déja prit une quete ! Ouste !*")
+                        Affichage.EntreePourContinuer()
+                elif choix == 2:
+                    if "Voeu de Pauvreté" in Player.quete_complete:
+                        print("*Tu l'as déja faite celle là.*")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("*C'est plutot simple ! Utilise tout ton argent et reviens me voir.*"
+                            "\n*Je te validerait la quete a ce moment la.*")
+                        print("Vous avez accepté la quête [Voeu de Pauvreté]")
+                        Affichage.EntreePourContinuer()
+                        Player.quete = "Voeu de Pauvreté"
+                elif choix == 3:
+                    if "Interminable" in Player.quete_complete:
+                        print("*Tu l'as déja faite celle là.*")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("*Ton prochain combat, boss ou monstre, fait le durer jusqu'au 50eme tour minimum.*"
+                            "\n*Si tu échoue, reviens me voir et je te la redonnerais.*")
+                        print("Vous avez accepté la quête [Interminable]")
+                        Affichage.EntreePourContinuer()
+                        Player.quete = "Interminable"
+                elif choix == 4:
+                    if "Epreuve du Magister" in Player.quete_complete:
+                        print("*Tu l'as déja faite celle là.*")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("*On donnait cette épreuve aux membres du Magister, un consort de mages de la nature.*"
+                            "\n*Tu échoue si tu use de Techniques ou Sorts en lien avec le Feu, la Foudre ou la Glace pendant les 4 prochains combats.*")
+                        print("*Le Tir Arcanique et l'attaque Légère ont tout deux l'élément Physique !*")
+                        print("Vous avez accepté la quête [Epreuve du Magister]")
+                        Affichage.EntreePourContinuer()
+                        Player.quete = "Epreuve du Magister"
+                elif choix == 5:
+                    if "Epreuve des Mages-Epeistes" in Player.quete_complete:
+                        print("*Tu l'as déja faite celle là.*")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("*On donnait cette épreuve à l'escouade des Mages-Epeistes, au service de sa Majestée.*"
+                            "\n*Tu échoue si tu use de Techniques ou Sorts en lien avec la Terre, le Sang ou le Physique pendant les 4 prochains combats.*")
+                        print("*Attention ! Le Tir Arcanique et l'attaque Légère ont tout deux l'élément Physique !*")
+                        print("Vous avez accepté la quête [Epreuve des Mages-Epeistes]")
+                        Affichage.EntreePourContinuer()
+                        Player.quete = "Epreuve des Mages-Epeistes"
+                elif choix == 6:
+                    if "Force et Honneur" in Player.quete_complete:
+                        print("*Tu l'as déja faite celle là.*")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("*Les aventuriers se reposent trop sur leur force donnée, les objets, et pas assez sur leur force acquise, les sorts et techniques.*"
+                            "\n*Libère toi des chaines du consummérisme !*")
+                        print("Vous avez accepté la quête [Force et Honneur]")
+                        Affichage.EntreePourContinuer()
+                        Player.quete = "Force et Honneur"
+                elif choix == 7:
+                    if ("Moqueries Magiques" in Player.quete_complete or
+                        "Moqueries Techniques" in Player.quete_complete):
+                        print("*Tu l'as déja faite celle là.*")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        while True:
+                            try:
+                                print("*Je me suis fais humilier par le Bouffon, et en échange il m'a foutu dans cette boite de conserve pour l'éternitée.*"
+                                    "\n*Humilie le pour moi !*")
+                                print("1 - *Tu préfere l'écraser sans Sorts ?*")
+                                print("2 - *Tu préfère l'écraser sans Techniques ?*")
+                                choix_quete = int(input("Que souhaitez vous faire ? ")) 
+                                ClearConsole()
+                                if choix_quete in [1, 2]:
+                                    break
+                            except ValueError:
+                                ClearConsole()
+                        if choix_quete == 1:
+                            print("*Qu'il en soit ainsi !*")
+                            print("Vous avez accepté la quête [Moqueries Magiques]")
+                            Player.quete = "Moqueries Magiques"
+                        else:
+                            print("*Qu'il en soit ainsi !*")
+                            print("Vous avez accepté la quête [Moqueries Techniques]")
+                            Player.quete = "Moqueries Techniques"
+                        Affichage.EntreePourContinuer()
+                elif choix == 8:
+                    if "Sérendipité" in Player.quete_complete:
+                        print("*Tu l'as déja faite celle là.*")
+                        Affichage.EntreePourContinuer()
+                    elif (("Moqueries Magiques" in Player.quete_complete or
+                        "Moqueries Techniques" in Player.quete_complete) and
+                        ("Force et Honneur" in Player.quete_complete) and
+                        ("Epreuve des Mages-Epeistes" in Player.quete_complete) and
+                        ("Epreuve du Magister" in Player.quete_complete) and
+                        ("Interminable" in Player.quete_complete) and
+                        ("Voeu de Pauvreté" in Player.quete_complete)):
+                        Player.quete_complete.append("Sérendipité")
+                        self.AfficheSecretQuetes()
+                        break
+                    else:
+                        print("Tu n'a pas réussi toute mes demandes.")
+                        print("Reviens me voir lorsque ce sera le cas.")
+                        Affichage.EntreePourContinuer()
+                elif choix == 9:
+                    if Player.quete == "None":
+                        print("*Tu n'a pas de quêtes en cours !*")
+                        print("*Reviens lorsque ce sera le cas.*")
+                    elif "[Complete]" in Player.quete:
+                        print("Et puis quoi encore ??")
+                    else:
+                        print(f"*Tu veux abandonner la quête [{Player.quete}] ?*")
+                        print("*Très bien, c'est noté.*")
+                        Player.quete = "None"
                     Affichage.EntreePourContinuer()
-            elif choix == 8:
-                if "Sérendipité" in Player.quete_complete:
-                    print("*Tu l'as déja faite celle là.*")
-                    Affichage.EntreePourContinuer()
-                elif (("Moqueries Magiques" in Player.quete_complete or
-                      "Moqueries Techniques" in Player.quete_complete) and
-                      ("Force et Honneur" in Player.quete_complete) and
-                      ("Epreuve des Mages-Epeistes" in Player.quete_complete) and
-                      ("Epreuve du Magister" in Player.quete_complete) and
-                      ("Interminable" in Player.quete_complete) and
-                      ("Voeu de Pauvreté" in Player.quete_complete)):
-                    Player.quete_complete.append("Sérendipité")
-                    self.AfficheSecretQuetes()
-                else:
-                    print("Tu n'a pas réussi toute mes demandes.")
-                    print("Reviens me voir lorsque ce sera le cas.")
-                    Affichage.EntreePourContinuer()
-            elif choix == 9:
-                if Player.quete == "None":
-                    print("*Tu n'a pas de quêtes en cours !*")
-                    print("*Reviens lorsque ce sera le cas.*")
-                elif "[Complete]" in Player.quete:
-                    print("Et puis quoi encore ??")
-                else:
-                    print(f"*Tu veux abandonner la quête [{Player.quete}] ?*")
-                    print("*Très bien, c'est noté.*")
-                    Player.quete = "None"
-                Affichage.EntreePourContinuer()
+        else:
+            print("Il y a un cratère de suie, de déchets, et de bouts de chairs.")
+            Affichage.EntreePourContinuer()
+            print("Parmis les décombres, vous trouvez une carte étudiante :")
+            Affichage.EntreePourContinuer()
+            print("Adrien Stéfalnos\nProfesseur d'Archéologie\nCampus de Capital City\nNuméro de badge: 3236353")
+            Affichage.EntreePourContinuer()
+            print("Vous laissez le cratère et retournez sur vos pas.")
+            Affichage.EntreePourContinuer()
 
     def AfficheSecretQuetes(self):
-        print("A implémenter")
+        mixer.quit()
+        print("*Tu as rendu un fier service a ce vieux spectre.*\n*C'est dingue a quel point on peut s'ennuyer quand on a plus controle de ses membres, et qu'on est enfermé dans une idole d'acier.*")
+        print("*Je n'ai plus rien a te donner, a part peut etre une histoire, alors écoute bien :*")
         Affichage.EntreePourContinuer()
+        print("*C'était il y a très longtemps.\nUn âge tellement reculé que personne ne s'en souvient.*")
+        print("*Enfaite, cette histoire vient d'images retrouvées dans d'anciens temples enfouis, pour te dire a quel point c'est vieux.*")
+        print("*On a même pas de traces dans les livres d'histoires, ou même sous forme de traditions ou chants !*")
+        Affichage.EntreePourContinuer()
+        print("*Mais je m'égare.*")
+        Affichage.EntreePourContinuer()
+        PlayMusic("tales")
+        print("*C'est un chateau dans le ciel. Ou une île volante de marbre blanc. Ou encore un palace porté dans les airs par un oiseau invisible.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est un lieu impossible, ou chaque portes et chaque couloirs mènent a des endroits différents selon l'endroit et le temps.*")
+        Affichage.EntreePourContinuer()
+        print("*Ce sont des êtres puissants, des démons, des esprits, portant de lourds fardeaux, chacun s'occupant d'un aspect de la réalité.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est une batisse abritant les dieux, créee a partir d'un joyau, d'une pièce, du coeur d'un ange, ou de l'oeil d'un guerrier.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est un pouvoir qui traverse les dimensions, teinté par la pureté de l'âme qui se l'approprie.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est un monde éteint, endormi, attisé par les mains divines, hostile.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est une guerre entre nos protecteurs et les légions de voyageurs, aux portes du monde étranger, dans un lieu ou les roses ne fânent jamais.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est la fiertée de 5 êtres exceptionels choisis pour défendre la porte des étoiles.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est la douleur du fratricide, l'odeur du pétrichor carmin, les vents d'un affrontement décisif.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est la disparition de toutes les divinités de ce monde, comme prix a payer pour refermer ce qui n'aurait jamais du être ouvert.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est la chute de la grandeur et fierté des dieux dans l'oubli d'un océan sans nom.*")
+        Affichage.EntreePourContinuer()
+        print("*Cette histoire, c'est celle de la guerre de l'interdit. Ou en tout cas c'est le nom sur lequel se sont mises d'accord les anciennes gravures.*")
+        Affichage.EntreePourContinuer()
+        print("*Mais laisse moi donc la continuer avec ma... théorie.*")
+        Affichage.EntreePourContinuer()
+        print("*La raison pour laquelle je suis ici.*")
+        Affichage.EntreePourContinuer()
+        print("*La raison pour laquelle j'ai persisté toute ces années.*")
+        Affichage.EntreePourContinuer()
+        print("(la lumière dans la statue se fait plus faible.)")
+        Affichage.EntreePourContinuer()
+        print("*C'est peut etre la fin de l'histoire des dieux...*")
+        Affichage.EntreePourContinuer()
+        print("*...mais pas celle du pouvoir qui a crée leur demeure.*")
+        Affichage.EntreePourContinuer()
+        print("(la lumière s'éteint. Seule la voix calme du donneur de quête persiste.)")
+        Affichage.EntreePourContinuer()
+        print("*Ce n'est pas un concept : c'est un objet réel.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est son oubli pendant des millénaires au fond de l'eau salée.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est son repéchage par un homme imprégné de magie.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est son étude pendant des décennies pour comprendre comment il marche.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est sa prise en main par un fou déterminé a répendre sa folie sur le monde.*")
+        Affichage.EntreePourContinuer()
+        print("*C'est l'obnubilation, la détermination, l'obsession.*")
+        Affichage.EntreePourContinuer()
+        print("(Vous sentez le mana s'activer tout autour de vous, comme si quelqu'un lancait un sort)")
+        Affichage.EntreePourContinuer()
+        print("*Nourrie avec le mana du Mage...*")
+        Affichage.EntreePourContinuer()
+        print("*...corrompue par l'obsession du Roi...*")
+        Affichage.EntreePourContinuer()
+        print("*...l'ancienne demeure des dieux est devenue le Co-*")
+        print("(Appuyez sur entrée pour continuer)")
+        time.sleep(1)
+        ClearConsole()
+        PlayWavSound("spell_cast")
+        Player.quest_giver = False
+        Save.SaveTheGameSansAffichage()
+        print("Un gigantesque éclair s'abat sur la chose de métal.")
+        Affichage.EntreePourContinuer()
+        print("Une pluie de ferraille et de chair en décomposition s'abat sur vous.")
+        Affichage.EntreePourContinuer()
+        print("Vous regardez le cratère fumant devant vous pendant quelques minutes, horrifié, et quittez les lieux en courant.")
+        Affichage.EntreePourContinuer()
+        PlayMusic("etage_5")
 
     def DonneRecompenseQuete(self):
         if Player.quete == "Voeu de Pauvreté [Complete]":
@@ -4125,6 +4507,7 @@ class SaveManagement:
             "Points de vie": "",
             "Points de mana max": "",
             "Points de mana": "",
+            "Points d'endurance": "",
             "Points de force": "",
             "Points d'intelligence": "",
             "Points de defence": "",
@@ -4152,6 +4535,7 @@ class SaveManagement:
             "Nombre de Gold dans l'étang": "",
             "Quete complétées": "",
             "La vieille dame a été soignée": "",
+            "Donneur de quetes": "",
         }
 
     def FromPlayerToDict(self):
@@ -4167,6 +4551,7 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["Points de vie"] = Player.points_de_vie
         self.dictionnaire_de_sauvegarde["Points de mana max"] = Player.points_de_mana_max
         self.dictionnaire_de_sauvegarde["Points de mana"] = Player.points_de_mana
+        self.dictionnaire_de_sauvegarde["Points d'endurance"] = Player.points_dendurance
         self.dictionnaire_de_sauvegarde["Points de force"] = Player.points_de_force
         self.dictionnaire_de_sauvegarde["Points d'intelligence"] = Player.points_dintelligence
         self.dictionnaire_de_sauvegarde["Points de defence"] = Player.points_de_defence
@@ -4196,6 +4581,8 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["La vieille dame a été soignée"] = Player.mercant_healed
         self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"] = Player.fountain_used
         self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"] = Player.gold_in_well
+        self.dictionnaire_de_sauvegarde["Donneur de quetes"] = Player.quest_giver
+
 
     def FromDictToPlayer(self):
         Player.nom_du_personnage = ((self.dictionnaire_de_sauvegarde["Nom"]).strip('"'))
@@ -4221,6 +4608,7 @@ class SaveManagement:
         Player.points_de_vie = int(self.dictionnaire_de_sauvegarde["Points de vie"])
         Player.points_de_mana_max = int(self.dictionnaire_de_sauvegarde["Points de mana max"])
         Player.points_de_mana = int(self.dictionnaire_de_sauvegarde["Points de mana"])
+        Player.points_dendurance = int(self.dictionnaire_de_sauvegarde["Points d'endurance"])
         Player.points_de_force = int(self.dictionnaire_de_sauvegarde["Points de force"])
         Player.points_dintelligence = int(self.dictionnaire_de_sauvegarde["Points d'intelligence"])
         Player.points_de_defence = int(self.dictionnaire_de_sauvegarde["Points de defence"])
@@ -4253,6 +4641,7 @@ class SaveManagement:
             Player.invitation_received = ast.literal_eval(self.dictionnaire_de_sauvegarde["Invitation Recue"])
         Player.library_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le livre de sort a ete utilise"])
         Player.final_library_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["Le livre de sort final a ete utilise"])
+        Player.quest_giver = ast.literal_eval(self.dictionnaire_de_sauvegarde["Donneur de quetes"])
         Player.mercant_healed = ast.literal_eval(self.dictionnaire_de_sauvegarde["La vieille dame a été soignée"])
         Player.fountain_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"])
         Player.gold_in_well = int(self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"])
@@ -4278,7 +4667,8 @@ class SaveManagement:
         with open(chemin_du_fichier_save, "r") as fichier:
             reader = csv.DictReader(fichier, delimiter="|")
             for line in reader:
-                self.dictionnaire_de_sauvegarde[line["Caracteristique"]] = line["Valeur"]
+                if line["Caracteristique"] in ["Invitation Recue"]:
+                    self.dictionnaire_de_sauvegarde[line["Caracteristique"]] = line["Valeur"]
 
     def SaveTheGame(self):
         self.FromPlayerToDict()
@@ -4357,6 +4747,12 @@ def PlaySound(musique):
     mixer.music.load(musique)
     mixer.music.play()
 
+def PlayWavSound(musique):
+    dir_path = Player.chemin_musique
+    musique = dir_path + f"\\{musique}.wav"
+    mixer.init()
+    mixer.music.load(musique)
+    mixer.music.play()
 
 def ChoseCharacter(Player):
     ClearConsole()
@@ -4446,10 +4842,11 @@ def open_image(chemin_vers_limage):
 
 
 def GetChoiceRecup():
-    print("     -=[ Outil de Récupération de Données ]=-                                                                                                                                        8")
-    print("\nInserez le numéro de l'adresse de l'information souhaitée,\net laissez notre programme récuperer ces données pour vous !                                                           6")
-    print("Plus besoin de paniquer lorsque l'on supprime d'anciennes données sans le vouloir !                                                                                                  2")
-    print("Vos données n'auront plus de secret pour vous !                                                                                                                                      4")
+    print("     -=[ Outil de Récupération de Données ]=-")
+    print("\nInserez le numéro de l'adresse de l'information souhaitée,                                                             8"
+          "\net laissez notre programme récuperer ces données pour vous !                                                           6")
+    print("Plus besoin de paniquer lorsque l'on supprime d'anciennes données sans le vouloir !                                    2")
+    print("Vos données n'auront plus de secret pour vous !                                                                        4")
     return int(input("\nNuméro de l'adresse ipv4 : "))
 
 
@@ -4463,38 +4860,45 @@ def ShowRecup():
         except ValueError:
             ClearConsole()
     Affichage.AfficheLongChargement()
-    if choix in [362951847, 14, 100110, 8624, 1512111113111013, 1342, 1233, 456852]:
+    if choix in [362951847, 14, 100110, 8624, 1512111113111013, 1342, 1233, 456852, 3236353, 313, 19, 935284761, 5321139741, 7415321139, 9353918170]:
         if choix == 8624:
-            nom_de_limage = "python_properties_vue" # table des matieres
+            nom_de_limage = "python_properties_vue" # table des matieres -
 
         elif choix == 456852:
-            nom_de_limage = "python_properties_main_Thread" # image observation e7
+            nom_de_limage = "python_properties_main_Thread" # image observation e7 -
 
         elif choix == 362951847:
-            nom_de_limage = "python_properties_Anox_init" # page 1 (e1)
+            nom_de_limage = "python_properties_Anox_init" # page 1 (e1) -  
         elif choix == 100110:
-            nom_de_limage = "python_properties_controleur" # page 2 (e3)
-        elif choix == 1:
-            nom_de_limage = "python_properties_Thread_init" # page 3 (arret roi, par terre)
-        elif choix == 5:
-            nom_de_limage = "python_properties_controleur_Thread" # page 4 (observatorium, par foudre)
-        elif choix == 6:
-            nom_de_limage = "python_properties_modele_Thread" # page 5 (combo talents)
-        elif choix == 7:
-            nom_de_limage = "python_properties_vue_Thread" # page 6 (combo toutes pages pour etage 0)
-
+            nom_de_limage = "python_properties_controleur" # page 2 (e3) a faire #
+        elif choix == 313:
+            nom_de_limage = "python_properties_Thread_init" # page 3 (arret roi, par matiere) a faire lore #
+        elif choix == 19:
+            nom_de_limage = "python_properties_controleur_Thread" # page 4 (observatorium, par matiere) a faire secrets des observations #
+        elif choix == 935284761:
+            nom_de_limage = "python_properties_modele_Thread" # page 5 (par tout talent combo talents) -
+        elif choix == 9353918170:
+            PlayMusic("abyss")
+            print("Ce n'est pas encore l'heure.")
+            Affichage.EntreePourContinuer()
+            print("Contente toi de ceci pour l'instant.")
+            Affichage.EntreePourContinuer()
+            print("Menu Coliseum(OBSERVATORIUM) = Musiques")
+            print("Menu Coliseum(OBSERVATORIUM(KEY)) = Plus de Musiques")
+            Affichage.EntreePourContinuer()
+            nom_de_limage = "python_properties_vue_Thread" # page 13 (combo toutes pages donne seulement etage 0, etage 0 donne invitation.) a faire #
         elif choix == 14:
-            nom_de_limage = "python_properties_modele" # talent feu (e2)
+            nom_de_limage = "python_properties_modele" # talent feu (e2) - 
         elif choix == 1512111113111013:
-            nom_de_limage = "python_properties_modele_Anox"  # talent glace (e4)
+            nom_de_limage = "python_properties_modele_Anox"  # talent glace (e4) -
         elif choix == 1233:
-            nom_de_limage = "python_properties_main" # talent foudre (e7) 
-        elif choix == 2:
-            nom_de_limage = "python_properties_main_Anox" # talent terre (e5) quete ult
-        elif choix == 2684:
-            nom_de_limage = "python_properties_controleur_Anox" # talent sang (e6) 
-        elif choix == 4:
-            nom_de_limage = "python_properties_vue_Anox" # terre physique (e8) livre + notes de table des matières
+            nom_de_limage = "python_properties_main" # talent foudre (e7) -
+        elif choix == 3236353:
+            nom_de_limage = "python_properties_main_Anox" # talent terre (e5) quete ult -
+        elif choix == 1342:
+            nom_de_limage = "python_properties_controleur_Anox" # talent sang (e6) -
+        elif choix in [5321139741, 7415321139]:
+            nom_de_limage = "python_properties_vue_Anox" # talent physique (e8) livre + notes de table des matières -   faire page 13 ==) pas maintenant
         
         
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -4717,19 +5121,29 @@ def MenuDeDemarrage(Player):
 
 def ShowObservatorium():
     PlayMusic("observatorium")
+    observatorium_complet = False
     while True:
         while True:
             try:
                 # affiche le menu
-                choix = ShowMenuObservatorium()
+                choix = ShowMenuObservatorium(observatorium_complet)
                 ClearConsole()
-                if choix in range(1, (len(LISTEDEMUSIQUE)) + 2):
-                    break
+                if observatorium_complet:
+                    if choix in range(1, (len(LISTEDEMUSIQUE)) + 2):
+                        break
+                else:
+                    if choix in range(1, 37) or choix == 11525:
+                        break
             except ValueError:
                 ClearConsole()
         if choix == 1:
             PlayMusic("start")
             break
+        elif choix == 11525:
+            mixer.quit()
+            observatorium_complet = True
+            print("Les confins de l'observatorium s'ouvrent a vous, qui avez triomphé des ténèbres au prix de votre âme.")
+            Affichage.EntreePourContinuer()
         else:
             caracteristique_musique = LISTECARACTERISTIQUEMUSIQUE[choix - 2]
             PlayMusic(f"{caracteristique_musique[0]}")
@@ -4737,16 +5151,21 @@ def ShowObservatorium():
             print("\n\n\n")
             Affichage.EntreePourContinuer()
             ClearConsole()
-        PlayMusic("observatorium")
+        if observatorium_complet:
+            PlayMusic("darkness")
+        else:
+            PlayMusic("observatorium")
 
 
-def ShowMenuObservatorium():
+def ShowMenuObservatorium(observatorium_complet):
     numero_affichage = 2
     print("  ~~{ Observatorium }~~")
     print("\n1 - Retour")
     for nom_musique in LISTEDEMUSIQUE:
         print(f"{numero_affichage} - {nom_musique}")
         numero_affichage += 1
+        if numero_affichage == 37 and not observatorium_complet:
+            break
     return int(input("\nChoisissez la musique avec les nombres : "))
 
 
@@ -5013,17 +5432,54 @@ def CheckForFusionOfTalent(talent):
         print(commentaire)
         Affichage.EntreePourContinuer()
 
+def AffichageSecretPage3():
+    try:
+        dummy={}
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        chemin_du_fichier_save = dir_path + "\\error.txt"
+        with open(chemin_du_fichier_save, "r") as fichier:
+            reader = csv.DictReader(fichier, delimiter="|")
+            for line in reader:
+                dummy[line["Caracteristique"]] = line["Valeur"]
+        if dummy["error"] == "error":
+            PlayMusic("abyss")
+            numero = 0
+            while True:
+                print("ERREUR : VARIABLE VIE NON TROUVEE")
+                print("ANCIENNES DONNEES TROUVEES, CHARGEMENT EN COURS...")
+                print("ERREUR : ANCIENNES DONNEES EN COURS DUTILISATION")
+                print("UTILISATION DES DONNEES AVEC UNE AUTRE VARIABLE VIE...")
+                print("ERREUR : TEMPS DE JEU DES ANCIENNES DONNEES DEPASSE MEMOIRE VIVE DE LA MACHINE")
+                print("REBOOT DU PROGRAMME EN COURS....")
+                print(f"TENTATIVE NUMERO {numero} DE RESOLUTIONS DES (ERROR : OVERDRIVE) ERREURS EN COURS...")
+                if numero == 313:
+                    break
+                time.sleep(0.01)
+                ClearConsole()
+                numero += 1
+            print("SOLUTION TROUVEE")
+            print("SUPPRESSION DES DONNEES CORROMPUE TERMINEE")
+            print("MESSAGE DE L'ADMINISTRATEUR : continue. rapproche toi. bientôt.")
+            Affichage.EntreePourContinuer()
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            chemin_du_fichier = dir_path + "\\error.txt"
+            os.remove(chemin_du_fichier)
+            ClearConsole()
+    except FileNotFoundError:
+        ClearConsole()
+
 
 Save = SaveManagement()
 Player = PlayerCaracteristics()
 Trader = TraderUsage()
 Affichage = Affiche()
 Observation = Observe()
+AffichageSecretPage3()
 MenuDeDemarrage(Player)
 game_in_session = True
 PlayMusic(f"etage_{Player.numero_de_letage}")
-Player.sorts_possedes = list(LISTESORTS)
-Player.techniques_possedes = list(LISTETECHNIQUES)
+# Player.sorts_possedes = list(LISTESORTS)
+# Player.techniques_possedes = list(LISTETECHNIQUES)
 while game_in_session:
     # choix de laction
     while True:

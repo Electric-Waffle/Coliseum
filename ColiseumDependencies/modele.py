@@ -29,6 +29,8 @@ class Model:
             self.points_de_vie = Player.points_de_vie
             self.points_de_vie_max = Player.points_de_vie_max
             self.points_de_mana = Player.points_de_mana
+            self.points_de_endurance_max = Player.points_dendurance
+            self.points_de_endurance = self.points_de_endurance_max
             self.points_de_mana_max = Player.points_de_mana_max
             self.points_de_defence = Player.points_de_defence
             self.points_de_force = Player.points_de_force
@@ -461,7 +463,8 @@ class Model:
         self.pousse_adrenaline = True  # degat x2 pendant 2 tours, puis paralysie
         self.iaido = True  # 2 tours de preparation, un coup donnant d'immense degats. 10% de kill sauf boss
 
-        # glossaire de techniques
+        #
+        #  glossaire de techniques
         self.techniques_de_ame = [
             "Pira",
             "Elektron",
@@ -523,9 +526,61 @@ class Model:
             "Dague Destructrice",
             "Dague Créatrice",
         ]
+        self.annuaire_de_cout_des_techniques = {
+            "Attaque Légère": 5,
+            "Pira": 5,
+            "Elektron": 5,
+            "Tsumeta-Sa": 5,
+            "Mathaïr": 5,
+            "Fos": 5,
+            "Haddee": 5,
+            "Lance Rapide": 5,
+            "Lance Statique": 5,
+            "Lance Electrique": 5,
+            "Lance de l'Eclair": 5,
+            "Lance Foudroyante": 5, 
+            "Lance de la Mort Blanche": 5,
+            "Bô Chaud": 5, #
+            "Bô Brulant": 5, #
+            "Bô Enflammé": 5, #
+            "Bô de la Fournaise": 5,
+            "Bô Magmatique": 5,
+            "Bô Solaire": 5,
+            "Katana Bleu": 5,
+            "Katana Froid": 5,
+            "Katana Givré": 5,
+            "Katana Glacial": 5,
+            "Katana Polaire": 5,
+            "Katana Zéro": 5,
+            "Corne Argile": 5, #
+            "Corne Lapis": 5, #
+            "Corne Granite": 5, #
+            "Corne Obsidienne": 5,
+            "Corne de la Montagne": 5,
+            "Corne Continentale": 5,
+            "Poing Léger": 5, #
+            "Poing Renforcé": 5, #
+            "Poing Lourd": 5, #
+            "Poing Maitrisé": 5, #
+            "Poing Fatal": 5, #
+            "Poing de la Comète": 5,
+            "Dague Volevie": 5,
+            "Dague Siphoneuse": 5,
+            "Dague Vampirique": 5,
+            "Dague Parasite": 5,
+            "Dague Destructrice": 5,
+            "Dague Créatrice": 5,
+            "Posture de la Montagne": 5,
+            "Libération Physique": 5,
+            "Bluff": 5,
+            "Combo Electrique": 5,
+            "Position du Massif": 5,
+            "Poussée d'Adrénaline": 5,
+            "Iaido": 5,
+        }
         # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
         self.annuaire_de_caracteristique_des_techniques = {
-            "Attaque Légère": [95, 7, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
+            "Attaque Légère": [0, 7, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
                                "...ce qui ne vous empeche pas de rater quand meme.", "..et le faites grimacer de douleur !", 
                                "et le faites reculer de plusieurs pas en arrière !!", 0, 0],
             "Lance Rapide": [80, 10, 20, 6, 8, 
@@ -2172,7 +2227,7 @@ class Model:
             "Laser Ultime": [75, 15, 20, 7, 10, "L'ennemi concentre toute son énergie dans un rayon laser colossal, puis le déchaîne sur sa cible...",
                                     "...mais son laser ultime vous rate de peu, l'énergie dévastatrice s'éparpillant dans l'air.",
                                     "...et son laser ultime vous frappe avec une force inouïe, laissant derrière un cratère fumant !",
-                                    "...et son laser ultime se transforme en une décharge d'énergie cosmique,vous pulvérisant dans une explosion apocalyptique !!",
+                                    "...et son laser ultime se transforme en une décharge d'énergie cosmique, vous pulvérisant dans une explosion apocalyptique !!",
                                     8, 5],
             "Accrochage": [80, 10, 30, 7, 10, "L'ennemi se jette sur vous, s'accrochant fermement à votre tête et déclenchant des décharges électriques...",
                        "...mais vous le prenez a deux mains et le décrochez, son attaque électrique s'évaporant dans l'air.",

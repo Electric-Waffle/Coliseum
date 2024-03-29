@@ -9,6 +9,7 @@ import time
 import tkinter as tk
 from tkinter import PhotoImage
 import threading
+import traceback
 
 
 # 0nom 1description 2stigma+ 3stigma- 4stigma* 5techniques 
@@ -5203,23 +5204,59 @@ def DoFight():
         #       vue et modele
         control = controleur.Control(Player, Trader)
         # lance la bataille
-        control.Battle()
+        try :
+            control.Battle()
+            Player.nombre_dennemis_a_letage -= 1
+        except Exception as error:
+            WriteErrorInErrorLog(error)
         PlayMusic(f"etage_{Player.numero_de_letage}")
-        Player.nombre_dennemis_a_letage -= 1
     #plus dennemi a combattre
     else:
         Affichage.AffichePlusDennemis()
+
+def WriteErrorInErrorLog(erreur):
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    chemin_du_fichier = dir_path + "ErrorLog.txt"
+    date_et_heure = time.strftime("%Y-%m-%d %H:%M")
+    erreur = traceback.format_exc()
+    with open(chemin_du_fichier, "a") as fichier:
+        fichier.write("-----------------------------------------"
+                      "------------------------------------------"
+                      "------------------------------------------"
+                      "------------------------------------------"
+                      f"---------\n{date_et_heure}\nDébut du Log\n\n")
+        fichier.write(f"{erreur}")
+        fichier.write("\nFin du Log\n-----------------------------"
+                      "-------------------------------------------"
+                      "-------------------------------------------"
+                      "-------------------------------------------"
+                      "------------------\n")
+    print("Une erreur est survenue pendant le déroulement du combat.")
+    print("L'écriture d'un rapport d'erreur est en cours dans le fichier ColiseumDependenciesErrorLog.txt.")
+    print("Veuilez patienter 3 secondes...")
+    time.sleep(3)
+    Affichage.EntreePourContinuer()
+    Player.points_de_vie = Player.points_de_vie_max
+    Player.points_de_mana = Player.points_de_mana_max
+    print("Vous avez récupéré tout vos pv.")
+    print("Vous avez récupéré tout vos pm.") 
+    print("Le nombre de monstres restant à l'étage n'a pas changé.")
+    print("Veuillez nous excuser pour le dérangement.")
+    Affichage.EntreePourContinuer()
 
 
 def DoBossFight():
     Affichage.AfficheIntroCombatBoss()
     Player.affronte_un_boss = True
     control = controleur.Control(Player, Trader)
-    control.Battle()
-    PlayMusic(f"etage_{Player.numero_de_letage}")
-    Player.affronte_un_boss = False
-    Player.boss_battu = True
-    Player.commentaire_boss = "Descendre a l'étage inferieur"
+    try:
+        control.Battle()
+        PlayMusic(f"etage_{Player.numero_de_letage}")
+        Player.affronte_un_boss = False
+        Player.boss_battu = True
+        Player.commentaire_boss = "Descendre a l'étage inferieur"
+    except Exception as error:
+        WriteErrorInErrorLog(error)
 
 
 def GoDown():

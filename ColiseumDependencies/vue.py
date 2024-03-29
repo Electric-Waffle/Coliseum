@@ -52,23 +52,19 @@ class Vue:
             alteration_item, alteration_fuite, derniere_action_utilise,
             points_de_vie_monstre, points_de_mana_monstre,
             points_de_vie,
-            points_de_vie_max, affiche_pm_et_gold,
+            points_de_vie_max, mana, manamax,
             endurance, endurance_max,
             nom_monstre, alteration_etat_monstre,
-            alteration_etat_joueur
+            alteration_etat_joueur, affiche_gold
             ):
         clear_console()
-        print("     _-{ Informations }-_    ")
-        print(f"          | Tour {nombre_tour} |     ")
-        print(f"    | L'ennemi possède {points_de_vie_monstre} pv | ")
-        print(f"    | L'ennemi possède {points_de_mana_monstre} pm | ")
-        print(f"    | Vous avez {points_de_vie}/{points_de_vie_max} pv | ")
-        print(f"    | Vous avez {endurance}/{endurance_max} pe |")
-        print(f"    {affiche_pm_et_gold} ")
-        print("")
+        print(f"          _-{{ Tour {nombre_tour} }}-_     ")
         print(f"     _-{{ Status - {nom_monstre} }}-_")
+        print(f"          {points_de_vie_monstre} PV | {points_de_mana_monstre} PM")
         print(alteration_etat_monstre)
+        print("")
         print(f"     _-{{ Status - {self.Player.nom_du_personnage} }}-_")
+        print(f"  {points_de_vie}/{points_de_vie_max} PV | {endurance}/{endurance_max} PE | {mana}/{manamax} PM{affiche_gold}")
         print(alteration_etat_joueur)
         print("")
         print("     _-{ Choix du Joueur }-_")

@@ -580,7 +580,7 @@ class Model:
         }
         # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
         self.annuaire_de_caracteristique_des_techniques = {
-            "Attaque Légère": [0, 7, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
+            "Attaque Légère": [95, 7, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
                                "...ce qui ne vous empeche pas de rater quand meme.", "..et le faites grimacer de douleur !", 
                                "et le faites reculer de plusieurs pas en arrière !!", 0, 0],
             "Lance Rapide": [80, 10, 20, 6, 8, 
@@ -1718,7 +1718,7 @@ class Model:
             "Thermosphère Brulante": 5,
             "Thermosphère de la Fournaise": 5,
             "Thermosphère Magmatique": 5,
-            "Thermosphère Solaire"
+            "Thermosphère Solaire": 5,
             "Claquement de Foudre": 5,
             "Vents de l'Est": 5,
             "Coup de Foudre": 5,

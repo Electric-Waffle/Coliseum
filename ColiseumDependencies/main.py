@@ -10,6 +10,8 @@ import tkinter as tk
 from tkinter import PhotoImage
 import threading
 import traceback
+from turtle import *
+import math
 
 
 # 0nom 1description 2stigma+ 3stigma- 4stigma* 5techniques 
@@ -705,7 +707,7 @@ BIBLIOTHEQUEFINALE = {
                  "Ensuite, la vie est arrivée.\nSeule l'intention fait partie des éléments, car elle a une conscience superieure, indestructible mais très instable.\nC'est la raison pour laquelle on la laisse avec les éléments.",
                  "Mais le reste de ce qui fait de nous, des êtres vivants, ne fait pas parti des éléments.\nCe sont des principes anarchiques, mais qui possèdent cepandant un ordre d'apparition, commencant par l'intention et continuant a l'inverse de l'ordre naturel des choses.",
                  "En effet, si l'état normal de l'univers c'est la mort, alors la vie est a l'inverse de cet état normal et de ce qu'il le fait avancer : le temps.",
-                 "Cela voudrait il dire que la vie est la seule chose qui peut aller a l'encontre du temps ?\nDans ce cas, elle a peut etre existé avant tout ?",
+                 "Cela voudrait il dire que la vie est la seule chose qui peut aller a l'encontre du temps ?\nDans ce cas, elle a peut etre existé avant tout le reste ?",
                  "Cette question de savoir qui de la Vie ou de la Mort est arrivée en premier, c'est un problème qui élude depuis toujours les scientifiques.",
                  "Je dirais cepandant que cette question n'a aucune importance.\nLes deux ont besoin l'un de l'autre pour interragir a notre niveau de réalité."],
     "Description d'une femme se levant": [
@@ -879,7 +881,7 @@ BIBLIOTHEQUEFINALE = {
      " où la pensée et la conscience deviennent des forces dominantes et où l'humanité est interconnectée à un niveau global par le biais"
      " de la communication et de la technologie.\nC'est une notion qui englobe les idées de conscience collective, d'interconnexion et de transformation sociale et spirituelle."),
     "Testez votre connexion avec la conscience collective théorisée par Pierre avec ces nombres !\nSi vous n'êtes d'accord avec aucune de ces associations, alors il avait peut etre tort...",
-    "Mortel : 11 (stabilité, temoporaire)",
+    "Mortalité : 11 (stabilité, temporaire)",
     "Étoile : 12 (guidance, illumination)"
     "Positif : 9 (passion, transformation)",
     "Négatif : 2 (froid, dualité)",
@@ -1063,6 +1065,7 @@ LISTEDEMUSIQUE = [
     "Faux Semblants",
     "La Hache et le Grimoire",
     "Gr4c1euse Nécr0log1e",
+    "Plum5 d'0ie",
     "Pr0s0pagn0sie",
     "Mach1n3 Inf3rn4le",
     "S1mul4crum",
@@ -1114,6 +1117,7 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["boss_8", "Vous écoutez "],
     ["boss_8_phase_2", "Vous écoutez "],
     ["observatorium", "Vous écoutez "],
+    ["quiet", "Vous écoutez "],
     ["abyss", "Vous écoutez "],
     ["tales", "Vous écoutez "],
     ["etage_0", "Vous écoutez "],
@@ -1954,6 +1958,88 @@ class Affiche:
         input("(Appuyez sur entrée pour continuer)")
         ClearConsole()
 
+    def ShowDeath(self):
+        PlayMusic("ending")
+        print(
+            "|                                                                                         "
+        )
+        print(
+            "|       .-.             .                                                                 "
+        )
+        print(
+            "|      (0.0)                                 +                 .               _.._       "
+        )
+        print(
+            "|       |m|                                                                  .' .-'`      "
+        )
+        print(
+            "|       |=|                                                                 /  /          "
+        )
+        print(
+            "|       |=|                x                       +                     x  |  |          "
+        )
+        print(
+            "|   /|__|_|__|\                                                             \  '.___.;    "
+        )
+        print(
+            "|  (    ( )    )  *                                        x                 '._  _./     "
+        )
+        print(
+            "|   \|\/\\'/\/|/         .                    .                                  ``        "
+        )
+        print(
+            "|     |  Y  |                                                                             "
+        )
+        print(
+            "|     |  |  |                          .                        *                         "
+        )
+        print(
+            "|     |  |  |                                                                             "
+        )
+        print(
+            "|    _|  |  |___________         .                              __________________________"
+        )
+        print(
+            "| __/ |  |  |\          \             _________________________/                          "
+        )
+        print(
+            "|/  \ |  |  |  \         \  _________/                                  88888888          "
+        )
+        print(
+            "|   __|  |  |   |__       \/                                          888888888888        "
+        )
+        print(
+            "|/\/  |  |  |   |\ |______/                                          88888\88/88888       "
+        )
+        print(
+            "| <   +\ |  |\ />  \\'                         ______ ______          888888yy888888       "
+        )
+        print(
+            "|  >   + \  |  \    |                       _/      Y      \_         88888||88888        "
+        )
+        print(
+            "|        + \|+  \  < \                     // Game  | ~~ ~  \\\         88  ||  88         "
+        )
+        print(
+            "|  (O)      +    |    )                   // ~ ~ ~~ |   Over \\\            ||             "
+        )
+        print(
+            "|   |             \  /\                  //________.|.________\\\           ||             "
+        )
+        print(
+            "| ( | )   (o)      \/  )                `----------`-'----------'          ||             "
+        )
+        print(
+            "|_\\\|//__( | )______)_/                                                    ||             "
+        )
+        print(
+            "|        \\\|//                                        Appuyez sur entrée pour terminer.  "
+        )
+        input(
+            "|_________________________________________________________________________________________"
+        )
+        sys.exit()
+
     def AfficheGacha(self, recompense):
         PlaySound("gacha")
         print("Le mutagène se révèle...")
@@ -2012,7 +2098,9 @@ class Affiche:
 
     def AffichePlusDennemis(self):
         print("Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides, avant de frapper le sol de votre pied."
-              "\nMais rien ne se passe.\nIl n'y a plus personne pour vous affronter, a part le boss.")
+              "\nMais rien ne se passe.\nIl n'y a plus personne pour vous affronter.")
+        if not Player.boss_battu:
+            print("A part le boss.")
         if not Player.red_coin_recu_par_extermination and Player.boss_battu:
             print("Un spectateur fantomatique amusé par votre désir d'extermination vous envoie un cadeau depuis les gradins, avant de disparaitre.")
             self.EntreePourContinuer()
@@ -2022,8 +2110,11 @@ class Affiche:
         self.EntreePourContinuer()
 
     def AfficheIntroCombatBoss(self):
-        print("Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides, avant de frapper le sol de votre pied."
-              "\nAussitôt, une vague silencieuse de spectateurs fantomatiques apparaissent, et la grille de métal ancien à l'autre bout de l'arène s'ouvre.")
+        print("Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides."
+              "\nVotre tatouage en forme de clé se met a briller.\nVous tendez votre main en direction de la grille de métal ancien, et celle ci brille a son tour."
+              "\nAussitôt, une vague silencieuse de spectateurs fantomatiques apparaissent.")
+        self.EntreePourContinuer()
+        print("La grille s'ouvre.\nLe Maitre des lieux s'approche.")
         self.EntreePourContinuer()
         if Player.numero_de_letage != 8:
             PlayMusic("boss_introV2")
@@ -2272,7 +2363,10 @@ class Affiche:
             Affichage.IntroBoss(commentaire)
 
     def AfficheDescente(self):
-        print("Vous passez la grille autrefois fermée et vous enfoncez encore plus profondément dans le Coliseum.")
+        print("Vous pressez votre main contre la grille autrefois fermée."
+              "\nAlors que la clé incrustée s'efface de votre main, la grille s'ouvre lentement.")
+        self.EntreePourContinuer()
+        print("Vous vous enfoncez encore plus profondément dans le Coliseum.")
         self.EntreePourContinuer()
 
     def AfficheRentrerChezMarchand(self):
@@ -2445,6 +2539,11 @@ class PlayerCaracteristics:
         self.invitation_received = False
         self.gold_in_well = 50
         self.chemin_musique = os.path.dirname(os.path.realpath(__file__))
+        self.position_y = 0
+        self.position_x = 0
+        self.numero_de_la_salle = 1
+        self.possede_la_cle = False
+
 
     def UseCharacterForInitCaracteristics(self, caracteristiques):
         self.nom_du_personnage = caracteristiques[0]
@@ -2509,7 +2608,7 @@ class PlayerCaracteristics:
             print(f"{numero_de_laffichage} - {item} : {Player.items_possedes[item]}")
             numero_de_laffichage += 1
         return numero_de_laffichage
-    
+
     def AffichageSortSoin(self, numero_de_laffichage):
         numero_a_afficher = numero_de_laffichage
         for sort in Player.sorts_possedes:
@@ -2521,9 +2620,6 @@ class PlayerCaracteristics:
                 break
         return numero_a_afficher
             
-
-
-
     def PutArtefactInList(self):
         liste_artefact = []
         if Player.gemme_de_vie:
@@ -2532,6 +2628,8 @@ class PlayerCaracteristics:
             liste_artefact.append("Gemme d'Esprit")
         if Player.possede_une_fee:
             liste_artefact.append("Fée dans un Bocal")
+        if Player.possede_la_cle:
+            liste_artefact.append("Clé Incrustée")
         if len(liste_artefact) == 0:
             liste_artefact.append("Aucun")
         return liste_artefact
@@ -2598,8 +2696,12 @@ class PlayerCaracteristics:
                 soin = 10 + round(Player.points_de_vie_max * 0.1)
                 if soin < 13:
                     soin = 13
+            bonus_soin = 0
             if self.stigma_positif == "Pharmacodynamisme":
-                soin += soin
+                bonus_soin += 1
+            if ("Carte du Gout" in Player.talents_possedes):
+                bonus_soin += 0.5
+            soin += round(bonus_soin * soin)
             soin_final = soin * 3
             self.points_de_vie += soin_final
             if Player.points_de_vie > Player.points_de_vie_max:
@@ -2615,8 +2717,12 @@ class PlayerCaracteristics:
                 soin = 10 + round(Player.points_de_mana_max * 0.1)
                 if soin < 13:
                     soin = 13
+            bonus_soin = 0
             if self.stigma_positif == "Pharmacodynamisme":
-                soin += soin
+                bonus_soin += 1
+            if ("Carte du Gout" in Player.talents_possedes):
+                bonus_soin += 0.5
+            soin += round(bonus_soin * soin)
             soin_final = soin * 3
             self.points_de_mana += soin_final
             if Player.points_de_mana > Player.points_de_mana_max:
@@ -2636,8 +2742,12 @@ class PlayerCaracteristics:
                 soin = round(Player.points_de_vie_max*0.3)
                 if soin < 39:
                     soin = 39
+            bonus_soin = 0
             if self.stigma_positif == "Pharmacodynamisme":
-                soin += soin
+                bonus_soin += 1
+            if ("Carte du Gout" in Player.talents_possedes):
+                bonus_soin += 0.5
+            soin += round(bonus_soin * soin)
             Player.points_de_vie += soin
             if Player.points_de_vie > Player.points_de_vie_max:
                 Player.points_de_vie = Player.points_de_vie_max
@@ -2656,8 +2766,12 @@ class PlayerCaracteristics:
                 soin = round(Player.points_de_mana_max*0.3)
                 if soin < 39:
                     soin = 39
+            bonus_soin = 0
             if self.stigma_positif == "Pharmacodynamisme":
-                soin += soin
+                bonus_soin += 1
+            if ("Carte du Gout" in Player.talents_possedes):
+                bonus_soin += 0.5
+            soin += round(bonus_soin * soin)
             Player.points_de_mana += soin
             if Player.points_de_mana > Player.points_de_mana_max:
                 Player.points_de_mana = Player.points_de_mana_max
@@ -2667,14 +2781,1342 @@ class PlayerCaracteristics:
         Affichage.EntreePourContinuer()
 
 
+class DrawInTurtle:
+
+    def __init__(self):
+        pass
+
+    def dessin_monstre(self):
+        down()
+        right(45)
+        forward(10)
+        backward(20)
+        forward(10)
+        left(90)
+        forward(10)
+        backward(20)
+        forward(10)
+        right(45)
+        right(90)
+        up()
+        forward(7)
+        left(90)
+        down()
+        circle(7)
+        up()
+        left(90)
+        forward(7)
+        right(90)
+
+    def dessin_gold(self):
+        forward(7)
+        left(90)
+        down()
+        circle(7)
+        up()
+        left(90)
+        forward(7)
+        right(180)
+    
+    def dessin_piege(self):
+        down()
+        right(45)
+        forward(10)
+        backward(20)
+        forward(10)
+        left(90)
+        forward(10)
+        backward(20)
+        forward(10)
+        right(45)
+        up()
+
+    def docs(self):
+        down()
+        up()
+        forward(7)
+        left(90)
+        down()
+        circle(7)
+        up()
+        left(90)
+        forward(7)
+        right(90)
+        right(90)
+        up()
+
+    def room(self):
+        up()
+        forward(12.5)
+        left(90)
+        down()
+        forward(12.5)
+        left(90)
+        forward(25)
+        left(90)
+        forward(25)
+        left(90)
+        forward(25)
+        left(90)
+        forward(12.5)
+        right(90)
+        up()
+
+    def boss_room(self):
+        up()
+        left(90)
+        forward(37.5)
+        right(90)
+        forward(12.5)
+        down()
+        for _ in range(1, 5):
+            hypothenuse = (math.sqrt(22656.25))
+            hypothenuse2 = (math.sqrt(2031.35))
+            angle = 131.65
+            angle2 = 124.62
+            remise_a_zero_de_langle = angle - 90
+            right(90)
+            forward(12.5)
+            left(angle)
+            forward(hypothenuse)
+            up()
+            goto(0, 0)
+            right(remise_a_zero_de_langle)
+            forward(37.5)
+            left(90)
+            down()
+            forward(12.5)
+            left(90)
+            forward(12.5)
+            right(angle)
+            forward(hypothenuse)
+            up()
+            goto(0, 0)
+            left(remise_a_zero_de_langle)
+            right(90)
+            forward(37.5)
+            right(90)
+            down()
+            forward(12.5)
+
+        up()
+        backward(12.5)
+        right(90)
+        forward(37.5)
+        left(180)
+
+    def dessin_key(self):
+        down()
+        forward(6)
+        left(90)
+        forward(2)
+        right(90)
+        forward(4)
+        right(90)
+        forward(4)
+        right(90)
+        forward(4)
+        right(90)
+        forward(2)
+        left(90)
+        forward(6)
+        right(180)
+        forward(3)
+        left(90)
+        forward(1)
+        backward(1)
+        left(90)
+        forward(3)
+        right(90)
+        forward(2)
+        backward(2)
+        right(90)
+        up()
+
+    def dessin_mercant(self):
+        up()
+        left(90)
+        forward(8)
+        left(90)
+        forward(10)
+        right(180)
+        down()
+        forward(20)
+        right(90)
+        forward(16)
+        right(90)
+        forward(20)
+        right(90)
+        forward(16)
+        right(90)
+        forward(10)
+        right(90)
+        up()
+        forward(8)
+        left(90)
+
+    def dessin_mana(self):
+        down()
+        left(90)
+        forward(8)
+        backward(16)
+        forward(8)
+        right(45)
+        forward(6)
+        backward(12)
+        forward(6)
+        right(45)
+        forward(8)
+        backward(16)
+        forward(8)
+        right(45)
+        forward(6)
+        backward(12)
+        forward(6)
+        left(45)
+        up()
+
+    def E(self):
+        up()
+        backward(25)
+        down()
+        right(90)
+        forward(5)
+        backward(5)
+        right(90)
+        forward(4)
+        left(90)
+        forward(3)
+        backward(3)
+        right(90)
+        forward(4)
+        left(90)
+        forward(6)
+        up()
+
+    def Em(self):
+        up()
+        forward(8)
+        left(90)
+        forward(10.5)
+        right(90)
+        down()
+        right(90)
+        forward(8)
+        backward(8)
+        right(90)
+        forward(8)
+        left(90)
+        forward(6)
+        backward(6)
+        right(90)
+        forward(7)
+        left(90)
+        forward(9)
+        up()
+        left(90)
+        goto(12.5, 12.5)
+
+    def T(self):
+        forward(4)
+        left(90)
+        down()
+        forward(7)
+        backward(2)
+        right(90)
+        forward(3)
+        backward(3)
+        left(90)
+        backward(5)
+        right(90)
+        up()
+
+    def A(self):
+        forward(7)
+        left(90)
+        down()
+        forward(4)
+        right(45)
+        forward(0.5)
+        right(45)
+        forward(4)
+        right(45)
+        forward(0.5)
+        left(135)
+        forward(1.5)
+        backward(1.5)
+        backward(4.5)
+        forward(0.5)
+        left(90)
+        left(45)
+        forward(0.8)
+        right(45)
+        forward(4.5)
+        up()
+        right(180)
+        forward(5)
+        left(90)
+        forward(0.5)
+        right(90)
+
+    def G(self):
+        backward(2)
+        A()
+        right(90)
+        down()
+        forward(6)
+        right(90)
+        forward(4)
+        up()
+        backward(4)
+        right(90)
+        forward(6)
+        right(90)
+
+    def e(self):
+        forward(5)
+        down()
+        forward(4)
+        backward(4)
+        left(90)
+        forward(5)
+        right(90)
+        forward(5)
+        right(90)
+        forward(3)
+        right(90)
+        forward(5)
+        left(90)
+        forward(2)
+        left(90)
+        forward(5)
+        up()
+
+    def un(self):
+        forward(10)
+        down()
+        forward(5)
+        backward(2.5)
+        left(90)
+        forward(6)
+        left(90)
+        left(35)
+        forward(4)
+        right(35)
+        right(90)
+        up()
+
+    def deux(self):
+        forward(10)
+        down()
+        forward(5)
+        backward(5)
+        left(45)
+        forward(4)
+        left(45)
+        forward(2)
+        left(90)
+        forward(3)
+        left(45)
+        forward(2)
+        right(45)
+        right(90)
+        up()
+
+    def trois(self):
+        forward(10)
+        down()
+        forward(5)
+        left(90)
+        forward(3)
+        left(90)
+        forward(3)
+        backward(3)
+        right(90)
+        forward(3)
+        left(90)
+        forward(5)
+        right(90)
+        up()
+
+    def quatre(self):
+        forward(10)
+        forward(2.5)
+        left(90)
+        forward(2)
+        down()
+        backward(2)
+        forward(8)
+        left(90)
+        left(55)
+        forward(6)
+        left(35)
+        left(90)
+        forward(6)
+        left(90)
+        up()
+
+    def cinq(self):
+        forward(10)
+        down()
+        forward(5)
+        left(90)
+        forward(2.5)
+        left(90)
+        forward(5)
+        right(90)
+        forward(2.5)
+        right(90)
+        forward(5)
+        left(90)
+        up()
+
+    def six(self):
+        forward(10)
+        down()
+        left(90)
+        forward(2.5)
+        backward(2.5)
+        right(90)
+        forward(5)
+        left(90)
+        forward(2.5)
+        left(90)
+        forward(5)
+        right(90)
+        forward(2.5)
+        right(90)
+        forward(5)
+        left(90)
+        up()
+
+    def neuf(self):
+        forward(10)
+        down()
+        forward(5)
+        left(90)
+        forward(5)
+        forward(3)
+        left(90)
+        forward(5)
+        left(90)
+        forward(3)
+        left(90)
+        forward(5)
+        left(90)
+        up()
+
+    def sept(self):
+        forward(12.5)
+        down()
+        left(60)
+        forward(5.5)
+        left(30)
+        left(90)
+        forward(5)
+        right(90)
+        up()
+
+    def Af(self):
+        forward(4)
+        left(90)
+        down()
+        forward(4)
+        right(45)
+        forward(0.5)
+        right(45)
+        forward(4)
+        right(45)
+        forward(0.5)
+        left(135)
+        forward(1.5)
+        backward(1.5)
+        backward(4.5)
+        forward(0.5)
+        left(90)
+        left(45)
+        forward(0.8)
+        right(45)
+        forward(4.5)
+        up(self)
+        right(180)
+        forward(5)
+        left(90)
+        forward(0.5)
+        right(90)
+
+    def final(self):
+        forward(10)
+        down()
+        left(90)
+        up()
+        forward(1)
+        down()
+        forward(4)
+        right(90)
+        forward(3)
+        backward(3)
+        left(90)
+        forward(3)
+        right(90)
+        forward(5)
+        up()
+        right(90)
+        forward(8)
+        left(90)
+        forward(2)
+        down()
+        forward(4)
+        backward(2)
+        left(90)
+        forward(5)
+        right(90)
+        forward(2)
+        backward(4)
+        forward(2)
+        right(90)
+        forward(5)
+        left(90)
+        forward(2)
+        up()
+        forward(4)
+        left(90)
+        down()
+        forward(5)
+        right(90)
+        right(60)
+        forward(6)
+        left(60)
+        left(90)
+        forward(5)
+        backward(5)
+        right(90)
+        up()
+        Af()
+        up()
+        forward(4)
+        down()
+        left(90)
+        forward(6)
+        backward(6)
+        right(90)
+        forward(3)
+        left(90)
+        up()
+
+    def etage(self):
+        self.E()
+        self.T()
+        self.A()
+        self.G()
+        self.e()
+        if etage == 1:
+            self.un()
+        elif etage == 2:
+            self.deux()
+        elif etage == 3:
+            self.trois()
+        elif etage == 4:
+            self.quatre()
+        elif etage == 5:
+            self.cinq()
+        elif etage == 6:
+            self.six()
+        elif etage == 7:
+            self.sept()
+        elif etage == 8:
+            self.final()
+        elif etage == 9:
+            self.neuf()
+        elif etage == 10:
+            self.final()
+        goto(12.5, 12.5)
+        forward(100)
+        backward(100)
+
+    def fontaine(self):
+        up()
+        left(90)
+        forward(2)
+        right(90)
+        down()
+        forward(7)
+        right(90)
+        forward(4)
+        right(90)
+        forward(7)
+        left(90)
+        forward(7)
+        right(90)
+        forward(4)
+        right(90)
+        forward(7)
+        left(90)
+        forward(7)
+        right(90)
+        forward(4)
+        right(90)
+        forward(7)
+        left(90)
+        forward(7)
+        right(90)
+        forward(4)
+        right(90)
+        forward(7)
+        up()
+        forward(2)
+        left(90)
+
+    def relics(self):
+        longueur = (12.25 / 2)
+        largeur = (6.125 / 2) 
+        up()
+        forward(largeur)
+        left(90)
+        forward(largeur)
+        down()
+        forward(longueur)
+        right(90)
+        forward(largeur)
+        right(90)
+        forward(longueur)
+        right(90)
+        forward(largeur)
+        left(90)
+        up()
+        forward(longueur)
+        down()
+        forward(longueur)
+        left(90)
+        forward(largeur)
+        left(90)
+        forward(longueur)
+        left(90)
+        forward(largeur)
+        right(90)
+        up()
+        forward(largeur)
+        right(90)
+        backward(largeur)
+        left(140)
+        down()
+        forward(3)
+        up()
+        backward(3)
+        left(80)
+        down()
+        forward(3)
+        up()
+        backward(3)
+        left(140)
+        self.dessin_mercant()
+
+    def rituals(self):
+        down()
+        up()
+        left(90)
+        forward(5)
+        right(90)
+        down()
+        forward(3)
+        backward(6)
+        forward(3)
+        right(90)
+        forward(10)
+        left(90)
+        forward(3)
+        backward(6)
+        forward(3)
+        left(90)
+        forward(5)
+        left(90)
+        forward(10)
+        right(90)
+        forward(3)
+        backward(6)
+        forward(3)
+        right(90)
+        forward(10)
+        up()
+
+    def failles(self):
+        down()
+        left(90)
+        forward(2)
+        right(90)
+        forward(12.5)
+        backward(12.5)
+        right(90)
+        forward(4)
+        right(90)
+        forward(12.5)
+        backward(12.5)
+        right(90)
+        forward(2)
+        right(90)
+        up()
+
+    def alchimies(self):
+        down()
+        left(35)
+        forward(10)
+        right(125)
+        forward(11.47)
+        right(125)
+        forward(20)
+        left(125)
+        forward(11.47)
+        left(125)
+        forward(10)
+        right(35)
+        up()
+
+
+class Floor:
+
+    def __init__(self):
+        self.FloorBlueprint={}
+        self.DictionnaireAjout={
+            #direction : [ajout x, ajout y]
+            "Haut": [0, 1],
+            "Bas": [0, -1],
+            "Gauche": [-1, 0],
+            "Droite": [1, 0],
+        }
+        self.carte_ouverte = False
+        self.ListeDePositionsInconstruisibles=[
+            #position x position y
+            [-2, -2],
+            [-2, -1],
+            [-2, 0],
+            [-2, 1],
+            [-2, 2],
+            [-1, -2],
+            [-1, -1],
+            [-1, 0],
+            [-1, 1],
+            [-1, 2],
+            [0, -2],
+            [0, -1],
+            [0, 0],
+            [0, 1],
+            [0, 2],
+            [1, -2],
+            [1, -1],
+            [1, 0],
+            [1, 1],
+            [1, 2],
+            [2, -2],
+            [2, -1],
+            [2, 0],
+            [2, 1],
+            [2, 2],
+
+            [3, 2],
+            [2, 3],
+            [3, 3],
+            [3, 4],
+            [4, 3],
+            [4, 4],
+            [4, 5],
+            [5, 4],
+            [5, 5],
+
+            [-3, -2],
+            [-2, -3],
+            [-3, -3],
+            [-3, -4],
+            [-4, -3],
+            [-4, -4],
+            [-4, -5],
+            [-5, -4],
+            [-5, -5],
+            
+            [-3, 2],
+            [-2, 3],
+            [-3, 3],
+            [-3, 4],
+            [-4, 3],
+            [-4, 4],
+            [-4, 5],
+            [-5, 4],
+            [-5, 5],
+
+            [3, -2],
+            [2, -3],
+            [3, -3],
+            [3, -4],
+            [4, -3],
+            [4, -4],
+            [4, -5],
+            [5, -4],
+            [5, -5],
+        ]
+
+    def MakeFloorBlueprint(self, nombre_de_salles):
+        #faire le dictionnaire de salles, vide
+        for numero_de_salle in range(1, (nombre_de_salles+1)):
+            self.FloorBlueprint[numero_de_salle] = {
+                "position_x" : 0,
+                "position_y" : 0,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        #remplir le dictionnaire avec les salles de base (arene + couloirs sur les cotés)
+        self.FloorBlueprint[1] = {
+                "position_x" : 0,
+                "position_y" : 0,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "ENTREE",
+            }
+        self.FloorBlueprint[2] = {
+                "position_x" : 2,
+                "position_y" : 0,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        self.FloorBlueprint[3] = {
+                "position_x" : -2,
+                "position_y" : 0,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        self.FloorBlueprint[4] = {
+                "position_x" : 0,
+                "position_y" : 2,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        self.FloorBlueprint[5] = {
+                "position_x" : 0,
+                "position_y" : -2,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        self.FloorBlueprint[6] = {
+                "position_x" : 3,
+                "position_y" : 0,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        self.FloorBlueprint[7] = {
+                "position_x" : -3,
+                "position_y" : 0,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        self.FloorBlueprint[8] = {
+                "position_x" : 0,
+                "position_y" : 3,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        self.FloorBlueprint[9] = {
+                "position_x" : 0,
+                "position_y" : -3,
+                "marqué sur la carte" : False,
+                "terminé par joueur" : False,
+                "type" : "None",
+            }
+        #genere aléatoirement une salle autour d'une salle déja posée
+        for numero_de_salle in range(1, nombre_de_salles + 1):
+            #skippe les salles 1 a 9 deja initialisées
+            if numero_de_salle in range(1, 10):
+                continue
+            #selection de la salle origine, autour de laquelle va se rajouter une salle
+            salle_ajoutee = False
+            #print(numero_de_salle)
+            #time.sleep(1)
+            while not salle_ajoutee:
+                #choisi une salle au hasard dans le blueprint
+                salle_origine = random.randint(6, (numero_de_salle-1))
+                #regarde si il est possible de rajouter une salle autour de cette salle d'origine
+                caracteristique_de_la_salle = self.FloorBlueprint[salle_origine]
+                position_x_origine = caracteristique_de_la_salle["position_x"]
+                position_y_origine = caracteristique_de_la_salle["position_y"]
+                #print(position_x_origine)
+                #print(position_y_origine)
+                liste_de_directions_vide = []
+                #test des directions ne possédant pas de salle, depuis l'origine
+                for direction in self.DictionnaireAjout:
+                    construction_possible = True
+                    couple_dajout_sur_les_positions = self.DictionnaireAjout[direction]
+                    position_x_potentielle_nouvelle_salle = position_x_origine + couple_dajout_sur_les_positions[0]
+                    position_y_potentielle_nouvelle_salle = position_y_origine + couple_dajout_sur_les_positions[1]
+
+                    #regarde si la position a déja été attribuée a une autre salle
+                    for numero_de_salle_a_tester_si_elle_existe_a_la_position_potentielle in range(1, numero_de_salle):
+                        salle_a_tester = self.FloorBlueprint[numero_de_salle_a_tester_si_elle_existe_a_la_position_potentielle]
+                        if (
+                            position_x_potentielle_nouvelle_salle == salle_a_tester["position_x"] and
+                            position_y_potentielle_nouvelle_salle == salle_a_tester["position_y"]
+                        ):
+                            construction_possible = False
+                            break
+                            
+                    #regarde si la position se trouve dans la zone inconstruisible
+                    for position in self.ListeDePositionsInconstruisibles:
+                        #print(f"teste {position_x_potentielle_nouvelle_salle}:{position_y_potentielle_nouvelle_salle} | impossible  {position[0]}:{position[1]} ")
+                        if (
+                            position_x_potentielle_nouvelle_salle == position[0] and
+                            position_y_potentielle_nouvelle_salle == position[1]
+                        ):
+                            construction_possible = False
+                            break
+
+                    #si la salle n'est pas sur une salle déja construite ou dans la limite inconstructible,
+                    # on rajoute sa direction dans le dictionnaire
+                    if construction_possible:
+                        liste_de_directions_vide.append(direction)
+                        break
+                #liste_de_direction_vide contient toute les directions dans lesquelles 
+                #   on peut mettre une salle a partir de la salle origine sélectionnée.
+                #on choisit donc parmis ces directions celle que l'on veut prendre, et on y crée une salle.
+                if len(liste_de_directions_vide) != 0:
+                    #selection de la direction prise
+                    numero_de_la_direction_prise = random.randint(0, (len(liste_de_directions_vide)-1))
+                    direction_prise = liste_de_directions_vide[numero_de_la_direction_prise]
+                    #selection des positions grace a la direction.
+                    couple_dajout_sur_les_positions = self.DictionnaireAjout[direction]
+                    position_x_nouvelle_salle = position_x_origine + couple_dajout_sur_les_positions[0]
+                    position_y_nouvelle_salle = position_y_origine + couple_dajout_sur_les_positions[1]
+                    #construction salle (ajout au blueprint des position selectionnées)
+                    salle_a_construire = self.FloorBlueprint[numero_de_salle]
+                    salle_a_construire["position_x"] = position_x_nouvelle_salle
+                    salle_a_construire["position_y"] = position_y_nouvelle_salle
+                    salle_ajoutee = True
+
+    def SetupFloorBlueprint(self):
+        #prendre les numeros des salles vides (normalement, de 2 a nombre_salle)
+        liste_de_salle_vide = []
+        for numero_de_salle in range(2, len(self.FloorBlueprint)):
+            #ajouter ces numéros dans une liste
+            liste_de_salle_vide.append(numero_de_salle)
+        while True:
+            if len(liste_de_salle_vide) == 0:
+                break
+            #sortir un numéro de la liste (de maniere aléatoire, en utilisant les indexs)
+            index_aleatoire = random.randint(0, (len(liste_de_salle_vide) - 1))
+            salle_choisie = liste_de_salle_vide.pop(index_aleatoire)
+            #attribuer une fonction a la salle affectée a ce numéro
+            self.AttributingRoleToRoom(salle_choisie)
+            #recommencer jusqu'a ce qu'il n'y aie plus de numéros dans la liste
+        #pour une raison inconnue, la derniere salle n'est pas attribuée a une fonction
+        self.AttributingRoleToRoom(len(self.FloorBlueprint))
+
+    def PrintFloorBlueprint(self):
+        nombre_de_salle = len(self.FloorBlueprint)
+        setup(width=800, height=800)
+        setworldcoordinates(-200, -200, 200, 200)
+        goto(0, 0)
+        speed(0)
+        for salle in range(1, (nombre_de_salle + 1)):
+            #initialise les coordonnées de la salle
+            caracteristique_de_la_salle = self.FloorBlueprint[salle]
+            position_x = caracteristique_de_la_salle["position_x"] * 25
+            position_y = caracteristique_de_la_salle["position_y"] * 25
+            goto(position_x, position_y)
+
+            #dessine la salle
+            if caracteristique_de_la_salle["type"] == "ENTREE":
+                Draw.boss_room()
+            else:
+                Draw.room()
+
+            #dessine le dessin de la salle, si il y a a le faire
+            if caracteristique_de_la_salle["marqué sur la carte"]:
+                goto(position_x, position_y)
+                if caracteristique_de_la_salle["type"] == "MONSTRE":
+                    Draw.dessin_monstre()
+                elif caracteristique_de_la_salle["type"] == "GOLD":
+                    Draw.dessin_gold()
+                elif caracteristique_de_la_salle["type"] == "ITEM":
+                    Draw.dessin_mercant()
+                elif caracteristique_de_la_salle["type"] == "KEY":
+                    Draw.dessin_key()
+                elif caracteristique_de_la_salle["type"] == "LEY":
+                    Draw.failles()
+                elif caracteristique_de_la_salle["type"] == "MIMIQUE":
+                    Draw.relics()
+                elif caracteristique_de_la_salle["type"] == "PIEGE":
+                    Draw.dessin_piege()
+                elif caracteristique_de_la_salle["type"] == "SECRET":
+                    Draw.alchimies()
+        goto(0, 0)
+
+    def WalkInFloor(self):
+        while True:
+            while True:
+                try:
+                        print(f"             -=[ Observation de l'Etage {Player.numero_de_letage} ]=-")
+                        print("")
+                        print("4 - Aller à Gauche")
+                        print("6 - Aller à Droite")
+                        print("8 - Aller en Haut")
+                        print("5 - Aller en Bas")
+                        print("7 - Observer la Salle")
+                        print("")
+                        choix = int(input("Choisissez une action avec les nombres : "))
+                        ClearConsole()
+                        if choix in [4, 6, 8, 5, 7, 1]:
+                            break
+                except ValueError:
+                    ClearConsole()
+            if choix == 4:
+                self.WalkLeft()
+            #elif choix == 1:
+                #print(self.FloorBlueprint)
+                #Affichage.EntreePourContinuer()
+            elif choix == 6:
+                self.WalkRight()
+            elif choix == 8:
+                self.WalkUp()
+            elif choix == 5:
+                self.WalkDown()
+            elif choix == 7:
+                self.RevealRoom()
+                if Player.numero_de_la_salle == 1:
+                    break
+            self.UpdatePlayerPosition()
+
+    def RevealRoom(self):
+        caracteristique_de_la_salle = self.FloorBlueprint[Player.numero_de_la_salle]
+        if caracteristique_de_la_salle["terminé par joueur"] == True:
+            print("La salle est sans interêt.")
+            Affichage.EntreePourContinuer()
+        else:
+            if caracteristique_de_la_salle["type"] == "ENTREE": #DONE
+                print("Vous retournez dans l'Arène au centre de l'étage.")
+                goto(0, -12.5)
+                Affichage.EntreePourContinuer()
+            elif caracteristique_de_la_salle["type"] == "MONSTRE": #DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.dessin_monstre()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+
+                # lance le combat
+                print("Vous entendez un bruit derrière vous, et découvrez un monstre !")
+                Affichage.EntreePourContinuer()
+                control = controleur.Control(Player, Trader)
+                # lance la bataille
+                try :
+                    control.Battle()
+                except Exception as error:
+                    WriteErrorInErrorLog(error)
+                PlayMusic(f"etage_{Player.numero_de_letage}")
+
+                # fait que l'event soit finit et ne peut ps etre relancé
+                caracteristique_de_la_salle["terminé par joueur"] = True
+            elif caracteristique_de_la_salle["type"] == "GOLD": # DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.dessin_gold()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+                print("Vous trouvez un sac de gold caché sous une table.")
+                gain_gold = 50 * Player.numero_de_letage
+                Player.nombre_de_gold += gain_gold
+                print(f"Vous gagnez {gain_gold} golds !")
+                Affichage.EntreePourContinuer()
+                # fait que l'event soit finit et ne peut ps etre relancé
+                caracteristique_de_la_salle["terminé par joueur"] = True
+
+            elif caracteristique_de_la_salle["type"] == "ITEM": #DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.dessin_mercant()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+                print("Vous trouvez une vieille caisse de provision.")
+                print("La plupart des objets sont irrécupérables, a peine des amas de rouilles et de pourriture.")
+                print("Seul un sac de plastique vert fermé hermétiquement attire votre attention.")
+                Affichage.EntreePourContinuer()
+                nom_de_litem = GetRandomItemFromList(LISTEITEM)
+                print(f"A l'interieur se trouve l'objet : {nom_de_litem} !")
+                Affichage.EntreePourContinuer()
+                Player.items_possedes[nom_de_litem] += 1
+                # fait que l'event soit finit et ne peut ps etre relancé
+                caracteristique_de_la_salle["terminé par joueur"] = True
+
+            elif caracteristique_de_la_salle["type"] == "KEY": #DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.dessin_key()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+                print("Vous trouvez une salle vide, sauf pour une étrange substance flottant dans les airs.")
+                print("Alors que vous approchez votre main de la substance, cette dernière fonce d'un coup sur votre paume ouverte et y imprime un tatouage particulier.")
+                Affichage.EntreePourContinuer()
+                print("Vous obtenez la Clé Incrustée !")
+                Affichage.EntreePourContinuer()
+                Player.possede_la_cle = True
+
+                # fait que l'event soit finit et ne peut ps etre relancé
+                caracteristique_de_la_salle["terminé par joueur"] = True
+
+            elif caracteristique_de_la_salle["type"] == "LEY": #DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.failles()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+                print("Alors que vous fouillez la pièce, vous ressentez une immense puissance dans le sol.")
+                print("Vous avez trouvé un ley !\nC'est un chemin que l'énergie de la nature parcourt.")
+                Affichage.EntreePourContinuer()
+                while True:
+                    try:
+                        print("Vous pouvez cultiver votre corps ou votre esprit sur un ley, et il deviendra bien plus puissant !")
+                        print("\n1 - Cultiver votre corps")
+                        print("2 - Cultiver votre esprit")
+                        choix = int(input("\nChoisissez votre action avec les nombres : "))
+                        ClearConsole()
+                        if choix in [1, 2]:
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    print("Vous tentez par tout les moyens de vous épuiser, mais l'énergie du ley vous revigore a chaque fois.")
+                    Affichage.EntreePourContinuer()
+                    print("Au bout de plusieurs heures de sport intensif, votre corps gagne en puissance alors que votre vitalité est au max.")
+                    Affichage.EntreePourContinuer()
+                    print("Vous gagnez 4 points de vie max !")
+                    print("Vous reprenez tout vos points de vie !")
+                    print("Vous gagnez 1 point d'endurance ! ")
+                    Player.points_de_vie_max += 4
+                    Player.points_de_vie = Player.points_de_vie_max
+                    Player.points_dendurance += 1
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("Vous faites la position du lotus au dessus du ley, et meditez.")
+                    print("Votre esprit se faire remplir de sons, couleurs, et souvenirs que vous n'aviez jamais experiencé auparavant.")
+                    Affichage.EntreePourContinuer()
+                    print("Au bout de lusieurs heures, vous arrivez a dompter la mémoire de la Terre, et votre réservoir de mana s'en trouve aggrandit.")
+                    Affichage.EntreePourContinuer()
+                    print("Vous gagnez 5 points de mana max !")
+                    print("Vous reprenez tout vos points de mana !")
+                    Player.points_de_mana_max += 5
+                    Player.points_de_mana = Player.points_de_mana_max
+                    Affichage.EntreePourContinuer()
+                print("Le ley s'assèche, et disparait.")
+                print("L'énergie a du trouver un autre endroit pour passer.")
+                Affichage.EntreePourContinuer()
+
+                # fait que l'event soit finit et ne peut ps etre relancé
+                caracteristique_de_la_salle["terminé par joueur"] = True
+            elif caracteristique_de_la_salle["type"] == "MIMIQUE": #DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.relics()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+
+                print("Vous trouvez un coffre !")
+                print("Ses reliures de cuivres, ses gravures de bois noble, ses contours en or fin vous attirent comme un buffet asiatique a volonté attire la famille obèse en vacance a Marseille !")
+                Affichage.EntreePourContinuer()
+                print("Seul bémol : une respiration sourde, saccadée, qui résonne dans toute la salle et dont les échos masquent l'origine.")
+                print("Le trésor est peut-être gardé, après tout.")
+                Affichage.EntreePourContinuer()
+                while True:
+                    try:
+                        print("Que faire ?")
+                        print("\n1 - Approcher le coffre")
+                        print("2 - Partir")
+                        choix = int(input("\nChoisissez votre action avec les nombres : "))
+                        ClearConsole()
+                        if choix in [1, 2]:
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    # lance le combat
+                    print("Vous vous approchez du coffre, et il prend soudainement vie !")
+                    Affichage.EntreePourContinuer()
+                    Player.affronte_une_mimique = True
+                    control = controleur.Control(Player, Trader)
+                    # lance la bataille
+                    try :
+                        control.Battle()
+                    except Exception as error:
+                        WriteErrorInErrorLog(error)
+                    Player.affronte_une_mimique = False
+                    PlayMusic(f"etage_{Player.numero_de_letage}")
+                    
+                    # fait que l'event soit finit et ne peut ps etre relancé
+                    caracteristique_de_la_salle["terminé par joueur"] = True
+                else:
+                    print("Vous reculez prudemment.")
+                    Affichage.EntreePourContinuer()
+            elif caracteristique_de_la_salle["type"] == "PIEGE": #DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.dessin_piege()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+
+                print("Vous fouillez la salle...et déclenchez un piège en déplacant un meuble.")
+                print("Aussitot, des arbalètes sournoises, cachées dans les murs, vous criblent de flèches !")
+                Affichage.EntreePourContinuer()
+                degat = round(Player.points_de_vie_max * 0.5)
+                Player.points_de_vie -= degat
+                print(f"Vous perdez {degat} points de vie.")
+                Affichage.EntreePourContinuer()
+                if Player.points_de_vie <= 0:
+                    mixer.quit()
+                    PlaySound("death")
+                    print("Vous échouez a stopper le saignement, et perdez la vie.")
+                    Affichage.EntreePourContinuer()
+                    Affichage.ShowDeath()
+                print("Le piège se ré-enclenche.\nEvitez de fouiller cette salle dans le futur !")
+                Affichage.EntreePourContinuer()
+            elif caracteristique_de_la_salle["type"] == "SECRET": #DONE
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.alchimies()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+
+                Observation.SeeSomething()
+
+    def InitiateRoleToAttribute(self):
+        self.nombre_de_monstre = Player.numero_de_letage + 5
+        self.nombre_de_gold = Player.numero_de_letage + 1
+        self.nombre_de_item = Player.numero_de_letage // 2
+        self.nombre_de_mimique = 2
+        self.nombre_de_piege = Player.numero_de_letage + 2
+        self.nombre_de_secret = 1
+        self.nombre_de_cle = 1
+        self.nombre_de_leys = Player.numero_de_letage // 3 + 1
+
+    def AttributingRoleToRoom(self, salle_choisie):
+        caracteristique_de_la_salle = self.FloorBlueprint[salle_choisie]
+        if self.nombre_de_monstre != 0:
+            caracteristique_de_la_salle["type"] = "MONSTRE"
+            self.nombre_de_monstre -= 1
+        elif self.nombre_de_gold != 0:
+            caracteristique_de_la_salle["type"] = "GOLD"
+            self.nombre_de_gold -= 1
+        elif self.nombre_de_item != 0:
+            caracteristique_de_la_salle["type"] = "ITEM"
+            self.nombre_de_item -= 1
+        elif self.nombre_de_mimique != 0:
+            caracteristique_de_la_salle["type"] = "MIMIQUE"
+            self.nombre_de_mimique -= 1
+        elif self.nombre_de_piege != 0:
+            caracteristique_de_la_salle["type"] = "PIEGE"
+            self.nombre_de_piege -= 1
+        elif self.nombre_de_secret != 0:
+            caracteristique_de_la_salle["type"] = "SECRET"
+            self.nombre_de_secret -= 1
+        elif self.nombre_de_leys != 0:
+            caracteristique_de_la_salle["type"] = "LEY"
+            self.nombre_de_leys -= 1
+        elif self.nombre_de_cle != 0:
+            caracteristique_de_la_salle["type"] = "KEY"
+            self.nombre_de_cle -= 1
+        else:
+            nombre_aleatoire = random.randint(0,5)
+            if nombre_aleatoire == 0:
+                caracteristique_de_la_salle["type"] = "MONSTRE"
+            elif nombre_aleatoire == 1:
+                caracteristique_de_la_salle["type"] = "GOLD"
+            elif nombre_aleatoire in [2, 3]:
+                caracteristique_de_la_salle["type"] = "ITEM"
+            elif nombre_aleatoire in [4, 5]:
+                caracteristique_de_la_salle["type"] = "PIEGE"
+
+    def WalkLeft(self):
+        if Player.position_x == 0 and Player.position_y == 0:
+            Player.position_x = -2
+        elif Player.position_x == 2 and Player.position_y == 0:
+            Player.position_x = 0
+        else:
+            Player.position_x -= 1
+        Valid = self.CheckPlayerPosition()
+        if not Valid:
+            Player.position_x += 1
+            print("Vous rentrez dans un mur.")
+            Affichage.EntreePourContinuer()
+
+    def WalkRight(self):
+        if Player.position_x == 0 and Player.position_y == 0:
+            Player.position_x = 2
+        elif Player.position_x == -2 and Player.position_y == 0:
+            Player.position_x = 0
+        else:
+            Player.position_x += 1
+        Valid = self.CheckPlayerPosition()
+        if not Valid:
+            Player.position_x -= 1
+            print("Vous rentrez dans un mur.")
+            Affichage.EntreePourContinuer()
+
+    def WalkUp(self):
+        if Player.position_x == 0 and Player.position_y == 0:
+            Player.position_y = 2
+        elif Player.position_x == 0 and Player.position_y == -2:
+            Player.position_y = 0
+        else:
+            Player.position_y += 1
+        Valid = self.CheckPlayerPosition()
+        if not Valid:
+            Player.position_y -= 1
+            print("Vous rentrez dans un mur.")
+            Affichage.EntreePourContinuer()
+
+    def WalkDown(self):
+        if Player.position_x == 0 and Player.position_y == 0:
+            Player.position_y = -2
+        elif Player.position_x == 0 and Player.position_y == 2:
+            Player.position_y = 0
+        else:
+            Player.position_y -= 1
+        Valid = self.CheckPlayerPosition()
+        if not Valid:
+            Player.position_y += 1
+            print("Vous rentrez dans un mur.")
+            Affichage.EntreePourContinuer()
+
+    def UpdatePlayerPosition(self):
+        goto(Player.position_x * 25, Player.position_y * 25)
+
+    def CheckPlayerPosition(self):
+        for numero_de_salle in range(1, len(self.FloorBlueprint) + 1):
+            salle_a_tester = self.FloorBlueprint[numero_de_salle]
+            if (
+                Player.position_x == salle_a_tester["position_x"] and
+                Player.position_y == salle_a_tester["position_y"]
+            ):
+                #le joueur se trouve sur une salle qui existe
+                Player.numero_de_la_salle = numero_de_salle
+                return True
+        return False
+    
+    def SetupFloorLayout(self):
+        #Initialise un dictionnaire avec les salles et leur position
+        nombre_de_salles = 15 + (Player.numero_de_letage * 5)
+        self.MakeFloorBlueprint(nombre_de_salles)
+        #détermine les nombres de roles a attribuer aux salles
+        self.InitiateRoleToAttribute()
+        #attribue un role a chaque salles
+        self.SetupFloorBlueprint()
+
+    def ShowFloor(self):
+        if not self.carte_ouverte:
+            self.PrintFloorBlueprint()
+            self.carte_ouverte = True
+        goto(0, 0)
+        self.WalkInFloor()
+
+
 class Observe:
 
     def __init__(self):
         pass
 
     def SeeSomething(self):
-        print("...et quelque chose attire votre attention !")
-        Affichage.EntreePourContinuer()
         if Player.numero_de_letage == 1:
             self.DoTheLibrary()  # bibliotheque de gros sorts (recuperer les sorts consignés)
         elif Player.numero_de_letage == 2:
@@ -2751,10 +4193,10 @@ class Observe:
             "Création de Granite" in Player.liste_daction_oubliees
         ):
             print("Les lignes Corne Granite et Création de Granite brillent avant de disparaitre.")
-            print("Vous gagnez 3 points de défence !")
+            print("Vous gagnez 4 points de défence !")
             Player.liste_daction_oubliees.remove("Corne Granite")
             Player.liste_daction_oubliees.remove("Création de Granite")
-            Player.points_de_defence += 3
+            Player.points_de_defence += 4
         elif (
             "Explosion de la Comète" in Player.liste_daction_oubliees and
             "Thermosphère Solaire" in Player.liste_daction_oubliees
@@ -2963,10 +4405,11 @@ class Observe:
                 Player.points_de_mana_max -= 15
                 Player.points_de_mana -= 15
                 if Player.points_de_vie <= 0:
+                    mixer.quit()
                     PlaySound("death")
                     print("..et vous mourrez.")
                     Affichage.EntreePourContinuer()
-                    sys.exit()
+                    Affichage.ShowDeath()
                 else:
                     Player.points_de_vie = 1
                     Player.points_de_mana = 0
@@ -3463,8 +4906,6 @@ class Observe:
             print("Vous apprenez le Carrousel !")
             Player.sorts_possedes.append("Carrousel")
         Affichage.EntreePourContinuer()
-                    
-            
 
     def DoTheBloodStone(self):
         print("Entre deux bibliothèque, un passage étroit attire votre attention.")
@@ -3587,7 +5028,6 @@ class Observe:
             else:
                 Player.points_de_vie -= round(numero / 2)
                 Player.nombre_de_gold += (numero * numero)
-
 
     def DoTheGacha(self):
         chanceux = False
@@ -4218,12 +5658,12 @@ class Observe:
                     else:
                         commentaire = ("La c h o s e regarde dans votre âme, et vous sentez votre énergie s'épuiser.\nVos décisions ne vous appartiennent plus.\nC'est trop tard.")
                 elif choix == 2:
+                    numero = 0
                     print("Vous vous accroupissez et plongez les mains dans l'eau...")
                     print("...?")
                     Affichage.EntreePourContinuer()
-                    print("Ce qui semblait être de l'eau est maintenant une sorte de gelée collante, et vos mains sont prises dedans !")
+                    print("Ce qui semblait être de l'eau est en faite une sorte de gelée collante, et vos mains sont prises dedans !")
                     Affichage.EntreePourContinuer()
-                    numero = 152
                     commentaire = "Appuyez sur Entree pour tenter de vous sortir de la !!!"
                     while True:
                         input(commentaire)
@@ -4255,7 +5695,7 @@ class Observe:
                         else:
                             commentaire = ("")
                             for _ in range(1, 100):
-                                commentaire += ("MORS|ACERBIOR|EST|CUM|IN|NEGATIONE|ADHAESISTI|SICUT|MUSCAE|IN|PLANTA|CARNIVORA|")
+                                commentaire += ("MORS|ACERBIOR|EST|CUM|IN|NEGATIONE|ADHAESISTI|SICUT|MUSCAE|IN|CARNIVOR|PLANTAE")
         elif Player.boss_battu and (Player.nombre_dennemis_a_letage == 0):
             while True:
                 try:
@@ -4537,6 +5977,8 @@ class SaveManagement:
             "Quete complétées": "",
             "La vieille dame a été soignée": "",
             "Donneur de quetes": "",
+            "Possede la clé": "",
+            "Blueprint de l'étage": "",
         }
 
     def FromPlayerToDict(self):
@@ -4583,6 +6025,9 @@ class SaveManagement:
         self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"] = Player.fountain_used
         self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"] = Player.gold_in_well
         self.dictionnaire_de_sauvegarde["Donneur de quetes"] = Player.quest_giver
+        self.dictionnaire_de_sauvegarde["Possede la clé"] = Player.possede_la_cle
+        self.dictionnaire_de_sauvegarde["Blueprint de l'étage"] = FloorMaker.FloorBlueprint
+
 
 
     def FromDictToPlayer(self):
@@ -4645,7 +6090,11 @@ class SaveManagement:
         Player.quest_giver = ast.literal_eval(self.dictionnaire_de_sauvegarde["Donneur de quetes"])
         Player.mercant_healed = ast.literal_eval(self.dictionnaire_de_sauvegarde["La vieille dame a été soignée"])
         Player.fountain_used = ast.literal_eval(self.dictionnaire_de_sauvegarde["La fontaine a ete utilise"])
+        Player.possede_la_cle = ast.literal_eval(self.dictionnaire_de_sauvegarde["Possede la clé"])
         Player.gold_in_well = int(self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"])
+        chaine_de_caractere = (self.dictionnaire_de_sauvegarde["Blueprint de l'étage"])
+        dictionaire_de_letage = ast.literal_eval(chaine_de_caractere)
+        FloorMaker.FloorBlueprint = dictionaire_de_letage
 
     def FromDictToSaveFile(self, nom_du_fichier):
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -4698,11 +6147,9 @@ class SaveManagement:
         self.FromDictToPlayer()
         return True
 
-
 def ClearConsole():
     # Vérifier le système d'exploitation pour déterminer la commande appropriée
     os.system('cls' if os.name == 'nt' else 'clear')
-
 
 def GetMenuPrincipalChoice():
     print("                                    \            / ")
@@ -4732,14 +6179,12 @@ def GetMenuPrincipalChoice():
     print("                           /                              \ ")
     return int(input("Choisissez une action avec le numéro correspondant, et appuyez sur Entrée pour continuer : "))
 
-
 def PlayMusic(musique):
     dir_path = Player.chemin_musique
     musique = dir_path + f"\\{musique}.mp3"
     mixer.init()
     mixer.music.load(musique)
     mixer.music.play(-1)
-
 
 def PlaySound(musique):
     dir_path = Player.chemin_musique
@@ -4790,13 +6235,12 @@ def ChoseCharacter(Player):
             except ValueError:
                 ClearConsole()
 
-
-# 0nom 1description 2stigma+ 3stigma- 4stigma* 5techniques 
-# 6sorts 7items 8talents 9vie 10mana 11force
-# 12inteligence 13defence 14tauxcoupcrit
-# 15degatcoupcrit 16tauxsortcrit 17degatsortcrit
-# 18tauxesquive 19gold
 def GetPersonnageValideChoice(caracteristiques):
+    # 0nom 1description 2stigma+ 3stigma- 4stigma* 5techniques 
+    # 6sorts 7items 8talents 9vie 10mana 11force
+    # 12inteligence 13defence 14tauxcoupcrit
+    # 15degatcoupcrit 16tauxsortcrit 17degatsortcrit
+    # 18tauxesquive 19gold
     print(f"     -= {caracteristiques[0]} =-"
           "\n"
           f"\nHistoire : {caracteristiques[1]}"
@@ -4819,12 +6263,10 @@ def GetPersonnageValideChoice(caracteristiques):
     )
     return int(input("\nChoisissez une action avec le nombre correspondant : "))
 
-
 def GetRandomItemFromList(liste):
     number_of_item = len(liste)
     numero_aleatoire = random.randint(0, (number_of_item - 1))
     return liste[numero_aleatoire]
-
 
 def open_image(chemin_vers_limage):
     # Créer une fenêtre Tkinter
@@ -4841,7 +6283,6 @@ def open_image(chemin_vers_limage):
     # Boucle principale Tkinter
     root.mainloop()
 
-
 def GetChoiceRecup():
     print("     -=[ Outil de Récupération de Données ]=-")
     print("\nInserez le numéro de l'adresse de l'information souhaitée,                                                             8"
@@ -4849,7 +6290,6 @@ def GetChoiceRecup():
     print("Plus besoin de paniquer lorsque l'on supprime d'anciennes données sans le vouloir !                                    2")
     print("Vos données n'auront plus de secret pour vous !                                                                        4")
     return int(input("\nNuméro de l'adresse ipv4 : "))
-
 
 def ShowRecup():
     # images doivent etre en png
@@ -4940,7 +6380,6 @@ def ShowRecup():
         print("zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5")
     Affichage.EntreePourContinuer()
 
-
 def GetChoixPersonnageChoice():
     print("     -={ Personnages }=-")
     print("\n1 - Retour")
@@ -4948,13 +6387,11 @@ def GetChoixPersonnageChoice():
         print(f"{numero} - {DICTIONNAIREDEPERSONNAGEAAFFICHER[numero]}")
     return int(input("\nChoisissez un personnage avec le nombre correspondant : "))
 
-
 def InitialiseDictionnaireDePersonnageAAfficher():
     numero_du_personnage = 2
     for nom_personnage in LISTEDEPERSONNAGE:
         DICTIONNAIREDEPERSONNAGEAAFFICHER[numero_du_personnage] = nom_personnage
         numero_du_personnage += 1
-
 
 def ShowTutorial():
     PlayMusic("tutorial")
@@ -4969,13 +6406,13 @@ def ShowTutorial():
     print("              { Partie 2 : Histoire }")
     print("\nLe coliseum est une batisse ancienne, commandée par un roi fou a son magicien pour enfermer")
     print("les gens de son peuple qu'il croyait dangereux. Au fur et a mesure des années, de plus en plus")
-    print("d'innoncent se sont retrouvé dans les arènes sordides, a combattre des créations monstrueuses de chair et de sang.")
+    print("d'innoncents se sont retrouvé dans les arènes sordides, a combattre des créations monstrueuses de chair et de sang.")
     print("Jusqu'à un beau matin de printemps ou le Roi, dans un généreux élan de folie et de paranoïa, décida de se jeter dans")
     print("sa création, accompagnée de toute sa cour."
           "\nDes années plus tard, la batisse sera déclarée dangereuse par les gouvernements,")
     print("et plus personne ne se frottera aux étages malicieux du Coliseum, qui changera alors de nom et de structure...")
     print("...mais c'est une histoire pour plus tard :)")
-    print("En attendant, plusieurs personnages se seront attaqué au tombeau du Roi fou, pour diverses raisons,"
+    print("En attendant, plusieurs personnages auront bravés les interdits et se seront attaqués au tombeau du Roi fou, pour diverses raisons,"
           "\net c'est eux que vous allez pouvoir controller !")
     print("\n\n")
     Affichage.EntreePourContinuer()
@@ -4985,10 +6422,10 @@ def ShowTutorial():
     print("d'abord battre le boss de l'étage en cours. Seulement, c'est le plus souvent un individu sacrément puissant !")
     print("Comment faire ? Eh bien... devenir plus fort !")
     print("Chaques monstres tués vous rapoorte une amélioration de certaines de vos caractéristiques, et un peu de golds.")
-    print("Vous pouvez ensuite échanger vos gold contre des objets chez le marchand de l'étage.")
+    print("Vous pouvez ensuite échanger vos golds contre des objets chez le marchand de l'étage.")
     print("Et une fois que vous serez dotés de meilleurs objets, améliorés avec de meilleurs caractéristiques, et")
     print("équ00000ipés de meilleqdznqdurs tttAAAaaaalEnnnttsss...z,lqnd.......")
-    print("Vous verrez que le boss de l'étage ne sera plus un mur, mais un simple obstacle sur votree chemin ! ")
+    print("Vous verrez que le boss de l'étage ne sera plus un mur, mais un simple obstacle sur votre chemin ! ")
     print("Ainsi, il faut tuer des monstres, acheter des objets, tuer le boss, descendre, et répéter l'opération jusqu'au")
     print("dernier étage : le HdUiIxTiIèEmMeE !")
     print("\n\n")
@@ -5000,7 +6437,7 @@ def ShowTutorial():
     print("et continuer une partie déja sauvegardée avec 2. Vous pouvez aussi lancer le tutoriel avec 3")
     print("(ce que vous avez faitpl ou ezdnore landzd leefnzos pefisp avevevevc WWWWXXXWWW.")
     print("\nEnfin bref, chaque actions sont affectées a un numéro.")
-    print("Et n'ayez pas peur ! Si vous rentrez un mauvais numéro, , une chaine de caractère ou même rien du tout,")
+    print("Et n'ayez pas peur ! Si vous rentrez un mauvais numéro, une chaine de caractère ou même rien du tout,")
     print("le programme continuera normalement sans planter, et se contentera de vous redemander votre choix !")
     print("\n\n")
     Affichage.EntreePourContinuer()
@@ -5008,11 +6445,11 @@ def ShowTutorial():
     print("          { Partie 4b : Les menus: Utilité }")
     print("\nGrace aux menus, vous pouvez naviguer dans vos options possibles pour chaques situations.")
     print("Le menu de l'étage actuel du Coliseum permet ainsi de:")
-    print(" - Combattre un monstre (attention, le nombre de monstre par étage est limité ! ne fuyez pas tout vos commbats !)"
+    print("- Combattre un monstre (attention, le nombre de monstre par étage est limité ! ne fuyez pas tout vos commbats !)"
           "\n- Combattre un boss / Descendre a l'étage inferieur (si le boss est battu)"
           "\n- Acheter des items chez le marchand "
           "\n- etc")
-    print("Un même nombre change d'action effectuée selon la situation actuelle.")
+    print("Un même nombre (genre 1) change d'action effectuée (Choisir un personnage, Affronter un monstre) selon le contexte (Menu Principal, Menu d'Etage).")
     print("\n\n")
     Affichage.EntreePourContinuer()
     print("                    { Tutoriel }")
@@ -5027,9 +6464,10 @@ def ShowTutorial():
     print("Votre action est effectuée, puis celle de l'ennemi a la suite.")
     print("Les différents effets d'altérations d'états s'appliquent")
     print("Et on recommence jusqu'a ce qu'un des deux participant meure ou fuie.")
-    print("\ngardez a l'esprit que vos points de vie représentent la vitalité qu'il vous reste,"
-          "\nEt que si ils tombent a zéro, c'est terminé.\nCepandant, les points de mana servent juste"
-          "a lancer des sorts, et peuvent descendre a zéro sans réelles conséquences.")
+    print("\nGardez a l'esprit que vos points de vie (PV) représentent la vitalité qu'il vous reste,"
+          "\net que si ils tombent a zéro, c'est terminé.\nCepandant, les points de mana (PM) servent juste"
+          "a lancer des sorts, et peuvent descendre a zéro sans réelles conséquences."
+          "\nMême chose pour les points d'endurance (PE) qui servent a utiliser des techniques et remontent naturellement.")
     print("\n\n")
     Affichage.EntreePourContinuer()
     print("                    { Tutoriel }")
@@ -5051,7 +6489,7 @@ def ShowTutorial():
     print("\n*Ya un type bizarre qui execute les rochemikazes. C'est qui ?*")
     print(" - C'est Alfred.")
     print("\n*Ya des types de sorts et de techniques différentes qui inflige des effets élémentaires différents, non ?*")
-    print(" - C'est exact. Par exemple, la glace peut geler, ce qui fait qu'une ennemi prendra 50% de dégâts supplémentaire.")
+    print(" - C'est exact. Par exemple, la glace peut geler, ce qui applique l'effet gelure sur la cible, qui prendra alors 50% de dégâts supplémentaire.")
     print("\n*...et le reste ? Les autres altérations d'états ? Et les effets des talents ? Et les effets des stigmas ?\nVous n'avez rien expliqué !*")
     print(" - C'est aussi exact ! Le fun du Coliseum viens du fait que vous êtes lachés dans un environnement étranger, sans guide,")
     print("et avec le moins d'expliquations possibles !"
@@ -5066,8 +6504,6 @@ def ShowTutorial():
     print("\n\n")
     Affichage.EntreePourContinuer()
     PlayMusic("start")
-    
-
 
 def MenuDeDemarrage(Player):
     ClearConsole()
@@ -5097,6 +6533,10 @@ def MenuDeDemarrage(Player):
                 Save.FromSaveFileToDict()
                 Save.FromDictToPlayer()
                 Affichage.AffichageDescriptionEtage()
+                try:
+                    FloorMaker.SetupFloorLayout()
+                except Exception as error:
+                    WriteErrorInErrorLog(error)
 
         # continuer une partie sauvegardee
         elif choix == 2:
@@ -5118,7 +6558,6 @@ def MenuDeDemarrage(Player):
             PlayMusic("gravestone")
             ShowRecup()
             PlayMusic("start")
-
 
 def ShowObservatorium():
     PlayMusic("observatorium")
@@ -5157,7 +6596,6 @@ def ShowObservatorium():
         else:
             PlayMusic("observatorium")
 
-
 def ShowMenuObservatorium(observatorium_complet):
     numero_affichage = 2
     print("  ~~{ Observatorium }~~")
@@ -5168,7 +6606,6 @@ def ShowMenuObservatorium(observatorium_complet):
         if numero_affichage == 37 and not observatorium_complet:
             break
     return int(input("\nChoisissez la musique avec les nombres : "))
-
 
 def GetChoiceMenuColiseum():
     print(f"             -=[ Etage {Player.numero_de_letage} ]=-"
@@ -5185,16 +6622,15 @@ def GetChoiceMenuColiseum():
           "\n\n")
     return int(input("Choisissez une action avec les nombres : "))
 
-
 def RemiseAZeroDesVariablesPourProchainEtage():
     Player.affronte_un_boss = False
     Player.boss_battu = False
     Player.redcoin_bought = False
     Player.red_coin_recu_par_extermination = False
-    Player.nombre_dennemis_a_letage = 15 + Player.numero_de_letage * 2
+    Player.nombre_dennemis_a_letage = 10 + Player.numero_de_letage * 2
     Player.commentaire_boss = "Affronter le Boss"
     Player.quete = "None"
-
+    Player.possede_la_cle = False
 
 def DoFight():
     #combat contre ennemi
@@ -5240,24 +6676,37 @@ def WriteErrorInErrorLog(erreur):
     Player.points_de_mana = Player.points_de_mana_max
     print("Vous avez récupéré tout vos pv.")
     print("Vous avez récupéré tout vos pm.") 
+    gold_gagne = 30 * Player.numero_de_letage
+    Player.nombre_de_gold += gold_gagne
     print("Le nombre de monstres restant à l'étage n'a pas changé.")
+    print(f"Nous vous donnons {gold_gagne} en guise de réparation.")
     print("Veuillez nous excuser pour le dérangement.")
     Affichage.EntreePourContinuer()
 
-
 def DoBossFight():
-    Affichage.AfficheIntroCombatBoss()
-    Player.affronte_un_boss = True
-    control = controleur.Control(Player, Trader)
-    try:
-        control.Battle()
+    if Player.possede_la_cle:
+        Affichage.AfficheIntroCombatBoss()
+        Player.affronte_un_boss = True
+        control = controleur.Control(Player, Trader)
+        try:
+            control.Battle()
+            Player.affronte_un_boss = False
+            Player.boss_battu = True
+            Player.commentaire_boss = "Descendre a l'étage inferieur"
+        except Exception as error:
+            WriteErrorInErrorLog(error)
         PlayMusic(f"etage_{Player.numero_de_letage}")
-        Player.affronte_un_boss = False
-        Player.boss_battu = True
-        Player.commentaire_boss = "Descendre a l'étage inferieur"
-    except Exception as error:
-        WriteErrorInErrorLog(error)
-
+    else:
+        print("Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides, avant de donner un coup de pied sur le sol.")
+        Affichage.EntreePourContinuer()
+        print("Mais rien ne se produit.")
+        Affichage.EntreePourContinuer()
+        print("Une grille de métal ancien a l'autre bout de l'arène attire votre regard.")
+        print("Derriere ses barreaux imposants, vous pouvez apercevoir un escalier s'enfoncant dans les ténèbres.")
+        Affichage.EntreePourContinuer()
+        print("Cepandant, la grille ne semble pas posséder de serrure.")
+        print("Peut-etre pourriez vous trouver, quelque part dans l'étage, un moyen de l'ouvrir ?")
+        Affichage.EntreePourContinuer()
 
 def GoDown():
     Affichage.AfficheDescente()
@@ -5269,7 +6718,6 @@ def GoDown():
     else:
         game_in_session = True
     return game_in_session
-
 
 def DoRedcoin():
     while True:
@@ -5320,7 +6768,6 @@ def DoRedcoin():
                 print("On dirait que votre corps n'est pas compatible avec les redcoins.")
                 Affichage.EntreePourContinuer()
 
-    
 def CheckForFusionOfTalent(talent):
     commentaire = "...?"
     if talent in ["Oeuil Magique", "Pira", "Elektron", "Tsumeta-Sa", "Mathair", "Fos", "Haddee"]:
@@ -5505,33 +6952,8 @@ def AffichageSecretPage3():
     except FileNotFoundError:
         ClearConsole()
 
-
-Save = SaveManagement()
-Player = PlayerCaracteristics()
-Trader = TraderUsage()
-Affichage = Affiche()
-Observation = Observe()
-AffichageSecretPage3()
-MenuDeDemarrage(Player)
-game_in_session = True
-PlayMusic(f"etage_{Player.numero_de_letage}")
-# Player.sorts_possedes = list(LISTESORTS)
-# Player.techniques_possedes = list(LISTETECHNIQUES)
-while game_in_session:
-    # choix de laction
-    while True:
-        try:
-            choix = GetChoiceMenuColiseum()
-            ClearConsole()
-            if choix in range(1, 8):
-                break
-        except ValueError:
-            ClearConsole()
-    # application de l'action
-    if choix == 1:
-        DoFight()
-    elif choix == 2:
-        #combat contre boss
+def DoBossOrGoDown():
+    #combat contre boss
         if not Player.boss_battu:
             DoBossFight()
         #descente au niveau inferieur
@@ -5539,15 +6961,42 @@ while game_in_session:
             game_in_session = GoDown() 
             if game_in_session:
                 PlayMusic(f"etage_{Player.numero_de_letage}")
+                FloorMaker.SetupFloorLayout()
+
+def GetChoix():
+    while True:
+        try:
+            choix = GetChoiceMenuColiseum()
+            ClearConsole()
+            if choix in range(1, 8):
+                return choix
+        except ValueError:
+            ClearConsole()
+
+Save = SaveManagement()
+Draw = DrawInTurtle()
+Player = PlayerCaracteristics()
+Trader = TraderUsage()
+Affichage = Affiche()
+Observation = Observe()
+FloorMaker = Floor()
+AffichageSecretPage3()
+MenuDeDemarrage(Player)
+game_in_session = True
+PlayMusic(f"etage_{Player.numero_de_letage}")
+
+while game_in_session:
+    # choix de laction
+    choix = GetChoix()
+    # application de l'action
+    if choix == 1:
+        DoFight() #DONE
+    elif choix == 2:
+        DoBossOrGoDown() #DONE
     elif choix == 3:
         Trader.DoTrading() #DONE
     elif choix == 4:
-        print("Vous vous baladez dans l'étage...")
-        if Player.numero_de_letage in range(1, 9) :
-            Observation.SeeSomething()
-        else:
-            print("...et ne trouvez rien d'interressant.")
-            Affichage.EntreePourContinuer()
+        FloorMaker.ShowFloor()
     elif choix == 5:
         Player.ShowPlayerCaracteristicsAndItems() #DONE
     elif choix == 6:

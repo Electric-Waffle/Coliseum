@@ -34,7 +34,7 @@ class Vue:
 
     def PrintInfo(self, hp, damage): #old
         print(f"Vous avez fait {damage} points de dégats !")
-        print(f"Il reste {hp} points de vie au monstre.")
+        print(f"Il reste {hp} points de vie a l'ennemi.")
 
     def AffichageUneLignePuisUnEntreePourContinuer(self, commentaire):
         print(commentaire)
@@ -134,26 +134,26 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheBenedictionDivine(self, vie_reprise):
-        print("De par la bénédiction qu'a recu le monstre a sa naissance,")
+        print("De par la bénédiction qu'a recu l'ennemia sa naissance,")
         print(f"Il reprend {vie_reprise} points de vie.")
         self.EntreePourContinuer()
 
     def AfficheBomberman(self, vie_perdue):
-        print("Le monstre envoie une bombe furtive a l'endroit ou"
+        print("L'ennemi envoie une bombe furtive a l'endroit ou"
               " vous vous trouvez !")
         print("Elle explose avant que vous ne puissiez esquiver"
               f" et vous perdez {vie_perdue} points de vie.")
         self.EntreePourContinuer()
 
     def AffichePlusDUnTour(self, type_delement, description_element):
-        print("Le monstre tend son bras et une boule lumineuse sort de"
+        print("L'ennemi tend son bras et une boule lumineuse sort de"
               " sa manche avant de vous rentrer dedans.")
         print(f"L'élément {type_delement} réagit violemment dans votre corps !")
         print(description_element)
         self.EntreePourContinuer()
 
     def AfficheMegalovania(self, vie_perdue):
-        print("Le monstre bouge, tourne, se pavane devant vous.")
+        print("L'ennemi bouge, tourne, se pavane devant vous.")
         print("A tel point qu'il ne voit pas une colonne de "
               "pierre et rentre violemment dedans.")
         print(f"Il perd {vie_perdue} points de vie !")
@@ -162,17 +162,17 @@ class Vue:
     def AfficheHomoncule(self, vie_perdue):
         print("La vie artificielle qui se tient devant vous perd en "
               "vitalité au fur et a mesure que le combat s'éternise.")
-        print(f"Le monstre perd {vie_perdue} points de vie.")
+        print(f"L'ennemi perd {vie_perdue} points de vie.")
         self.EntreePourContinuer()
 
     def AffichePatchwork(self, vie_perdue):
-        print("Le monstre perd des bouts de son corps sans sourciller.")
+        print("L'ennemi perd des bouts de son corps sans sourciller.")
         print("On dirait qu'il ne ressent plus la douleur...")
         print(f"Mais cela ne l'empeche pas de perdre {vie_perdue} points de vie.")
         self.EntreePourContinuer()
 
     def AfficheArlequin(self, type_delement, description_element):
-        print("Le monstre tend son bras et une boule lumineuse sort de"
+        print("L'ennemi tend son bras et une boule lumineuse sort de"
               " sa manche... avant de venir s'écraser sur son torse.")
         print("FAIR PLAY ! FAIR PLAY ! MUAHAHAHAH !")
         print(f"L'élément {type_delement} semble réagir violemment dans son corps !")
@@ -180,7 +180,7 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheMalJaune(self):
-        print("Le monstre conjure une sphère de lumière qui s'élève dans les airs.")
+        print("L'ennemi conjure une sphère de lumière qui s'élève dans les airs.")
         print("La salle se retrouve baignée dans une teinte dorée.")
         print("Vous commencez à avoir la tête qui tourne et seul le"
               " tintement des gold dans votre poche semble pouvoir vous calmer.")
@@ -216,7 +216,7 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheRegenerationMonstre(self, soin):
-        print(f"Le monstre récupere {soin} points de vie.")
+        print(f"L'ennemi récupere {soin} points de vie.")
         self.EntreePourContinuer()
 
     def ShowGameOverScreen(self, musique1, musique2):
@@ -322,7 +322,7 @@ class Vue:
     def AfficheTitreRecompense(self, musique, nom):
         self.PlayMusic(musique)
         print("Vous avez remporté le combat !")
-        print(f"Vous absorbez la puissance du monstre [{nom}].")
+        print(f"Vous absorbez la puissance de l'ennemi [{nom}].")
 
     def PlayMusic(self, musique):
         mixer.init()
@@ -333,12 +333,12 @@ class Vue:
         print(commentaire)
 
     def AfficheNouveauMonstre(self, ancien_nom, nouveau_nom):
-        print(f"Le monstre [{ancien_nom}] profite de votre pitié pour s'enfuir.")
-        print(f"Il se fait remmplacer par le monstre [{nouveau_nom}] !")
+        print(f"L'ennemi [{ancien_nom}] profite de votre pitié pour s'enfuir.")
+        print(f"Il se fait remmplacer par l'ennemi [{nouveau_nom}] !")
         self.EntreePourContinuer()
 
     def GetStigmaDernierChoixChoice(self):
-        print("Vous lancez un regard froid au monstre. Vous êtes désormais le seul garant de son futur.")
+        print("Vous lancez un regard froid a l'ennemi. Vous êtes désormais le seul garant de son futur.")
         print("Vous pouvez :")
         print("1 - Laisser l'ennemi partir et se faire remplacer par un autre de même niveau")
         print("2 - Garder l'ennemi actuel")
@@ -351,17 +351,17 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheAddict(self):
-        print("Le monstre montre des signes de manque.")
+        print("L'ennemi montre des signes de manque.")
         print("Cela fait un bon bout de temps que le combat a commencé et qu'il n'a pas eu sa dose de meurtre journalière.")
         print("Vous le voyez passer par tout les états du sevrage...")
         print("...Sueurs froides, Hallucinations, Assèchement de la bouche...")
         print("...Arrêt Cardiaque.")
-        print("La vie quitte doucement le corps du monstre.")
+        print("La vie quitte doucement le corps de l'ennemi.")
         self.EntreePourContinuer()
 
     def IntroAlfred(self, musique):
         self.PlayMusic(musique)
-        print("Le monstre disparait dans un nuage de poussière. En plein "
+        print("L'ennemi disparait dans un nuage de poussière. En plein "
               "milieu, un homme (?) dans une tenue de maitre hotelier"
               " vous regarde d'un air amusé.")
         print("Sa peau blanchâtre semble avoir la consistance de la craie,"
@@ -411,17 +411,17 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheConsumme(self, nombre_tour):
-        print("Tel un papillon de nuit, la vie du monstre est liée a un cycle"
+        print("Tel un papillon de nuit, la vie de l'ennemi est liée a un cycle"
               " de naissance et de mort invisible et introuvable au niveau humain.")
         print(f"Et au tour {nombre_tour}, le cycle recommence.")
-        print("Le monstre stoppe tout mouvements sans prévenir, et "
+        print("L'ennemi stoppe tout mouvements sans prévenir, et "
               "la lueur de vie dans ses yeux s'éteint tout aussi brusquement.")
         self.EntreePourContinuer()
 
     def AfficheCircuitsLogiques(self):
-        print("Le monstre reconnait que la situation est critique.")
-        print("Les circuits logiques du monstres s'activent et mettent un place un protocole de fuite.")
-        print("Des fils sortent du dos du monstres tels de long tentacules de cuivre.")
+        print("L'ennemi reconnait que la situation est critique.")
+        print("Ses circuits logiques s'activent et mettent un place un protocole de fuite.")
+        print("Des fils sortent du dos de l'ennemi tels de long tentacules de cuivre.")
         print("Ils s'accrochent a votre tête et envoient une impulsion dans une zone ciblée de votre cerveau.")
         self.EntreePourContinuer()
         print("Sans savoir pourquoi, vous vous mettez a fuir le combat !")

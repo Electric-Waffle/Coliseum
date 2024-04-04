@@ -935,8 +935,8 @@ class Control:
         # viemax vie resistance force intelligence viesbonus stigma +/-/*
 
         # Monstres
-        gold_bonus_par_etage = round(100 * (self.modele.numero_de_letage / 10))
-        vie_bonus_par_etage = round(100 * (self.modele.numero_de_letage / 10))
+        gold_bonus_par_etage = round(125 * (self.modele.numero_de_letage / 10))
+        vie_bonus_par_etage = round(500 * (self.modele.numero_de_letage / 10))
         if self.modele.monstre_nom == "Pierre":
             self.modele.stigma_monstre_positif = "Plus d'un Tour"
             self.modele.stigma_monstre_negatif = "Gluantin"
@@ -963,7 +963,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_vie_max = 10
             self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Coup de Boule": "Technique",
@@ -979,7 +979,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_vie_max = 10
             self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Tout Feu Tout Flamme": "Sort", # combo electrique, pour le feu [x]
@@ -995,7 +995,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 45
+            self.modele.monstre_points_de_vie_max = 15
             self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Frappe Lourde": "Technique",  # gros degat, peu chance toucher
@@ -1012,7 +1012,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_vie_max = 10
             self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Froideur d'Outretombe": "Sort", # gele
@@ -1028,7 +1028,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 2
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 40
+            self.modele.monstre_points_de_vie_max = 10
             self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Attaque Légère": "Technique",
@@ -1043,7 +1043,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 170
+            self.modele.monstre_points_de_vie_max = 100
             self.modele.monstre_points_de_mana_max = 40
             self.modele.monstre_liste_actions = {
                 "Accrochage": "Technique", # paralyse et degat
@@ -1090,7 +1090,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 5
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 130
+            self.modele.monstre_points_de_vie_max = 110
             self.modele.monstre_points_de_mana_max = 40
             self.modele.monstre_liste_actions = {
                 "Roulé-Boulet": "Technique", # confond
@@ -1107,7 +1107,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 6
             self.modele.monstre_points_de_resistance = 4
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 175
+            self.modele.monstre_points_de_vie_max = 125
             self.modele.monstre_points_de_mana_max = 40
             self.modele.monstre_liste_actions = {
                 "Morsure de Givre": "Technique", #peux geler
@@ -1123,7 +1123,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 12
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_points_de_vie_max = 75
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Attire-Gold": "Technique", #prend du gold [x]
@@ -1139,7 +1139,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 15
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 330
+            self.modele.monstre_points_de_vie_max = 80
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Vents du Nord": "Sort", #gele
@@ -1157,7 +1157,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 12
             self.modele.monstre_points_de_resistance = 9
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 250
+            self.modele.monstre_points_de_vie_max = 50
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Morsure": "Technique", #gros degats
@@ -1174,7 +1174,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 15
             self.modele.monstre_points_de_resistance = 14
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 325
+            self.modele.monstre_points_de_vie_max = 75
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Coup Anti-Magie": "Technique", #attaaque meme si protection [x]
@@ -1191,7 +1191,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_points_de_vie_max = 25
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Aspiration": "Technique" # prend gold, mana + vie, manamax + viemax, taux critique sort+ attaque, force + intelligence, defence [x]
@@ -1204,7 +1204,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 20
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 450
+            self.modele.monstre_points_de_vie_max = 150
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Gros Coup de Boule": "Technique",
@@ -1222,7 +1222,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 400
+            self.modele.monstre_points_de_vie_max = 110
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Roulette": "Technique", #lance roulette. mise ou pas = critique ou pas. si rouge, foule d'effet sur joueur. si vert, foule d'effet sur ennemi. [x]
@@ -1236,7 +1236,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 25
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 415
+            self.modele.monstre_points_de_vie_max = 115
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Tempêtes du Nord": "Sort", #gele + 50% plus de sorts [x]
@@ -1254,7 +1254,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 35
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 2
-            self.modele.monstre_points_de_vie_max = 500
+            self.modele.monstre_points_de_vie_max = 175
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Lame Dorée": "Technique", #peut donner mal jaune
@@ -1272,7 +1272,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 420
+            self.modele.monstre_points_de_vie_max = 20
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Gemme Rouge": "Technique", #soin
@@ -1287,7 +1287,7 @@ class Control:
             self.modele.monstre_points_de_resistance = round(2.5 * self.modele.numero_de_letage)
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = round(60 * self.modele.numero_de_letage)
-            self.modele.monstre_points_de_mana_max = 60
+            self.modele.monstre_points_de_mana_max = 100
             self.modele.monstre_liste_actions = {
                 "Avale": "Technique", #bcp degat
                 "Vide": "Sort", # plus technique plus sorts plus item [x]
@@ -1307,7 +1307,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 3
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 195
+            self.modele.monstre_points_de_vie_max = 165
             self.modele.monstre_points_de_mana_max = 15
             self.modele.monstre_liste_actions = {
                 "Attaque Lourde": "Technique",
@@ -1327,7 +1327,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 4
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 420
+            self.modele.monstre_points_de_vie_max = 320
             self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Lame de Feu": "Technique", #brule
@@ -1346,7 +1346,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 5
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 420
+            self.modele.monstre_points_de_vie_max = 320
             self.modele.monstre_points_de_mana_max = 45
             self.modele.monstre_liste_actions = {
                 "Invoquation Canope": "Sort", #invoque vase canope, peut echouer [x]
@@ -1363,7 +1363,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 12
             self.modele.monstre_points_de_resistance = 5
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_points_de_vie_max = 200
             self.modele.monstre_points_de_mana_max = 45
             self.modele.monstre_liste_actions = {
                 "Faisceau Statique": "Sort",  #paralyse
@@ -1384,7 +1384,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 20
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 400
+            self.modele.monstre_points_de_vie_max = 300
             self.modele.monstre_points_de_mana_max = 55
             self.modele.monstre_liste_actions = {
                 "Faisceau de l'Eclair": "Sort",  #paralyse
@@ -1405,7 +1405,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 10
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 1000
+            self.modele.monstre_points_de_vie_max = 750
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Tournicoti": "Sort", #reprend vie
@@ -1422,7 +1422,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 18
             self.modele.monstre_points_de_resistance = 20
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 1400
+            self.modele.monstre_points_de_vie_max = 1100
             self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Attaque Titanesque": "Technique", #utilise orbe furie et attaque
@@ -1446,7 +1446,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 5
             self.modele.monstre_points_de_resistance = 25
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 732
+            self.modele.monstre_points_de_vie_max = 432
             self.modele.monstre_points_de_mana_max = 15
             self.modele.monstre_liste_actions = {
                 "Lame Ultime": "Technique", #gros degats
@@ -1465,7 +1465,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 25
             self.modele.monstre_points_de_resistance = 14
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 1000
+            self.modele.monstre_points_de_vie_max = 600
             self.modele.monstre_points_de_mana_max = 70
             self.modele.monstre_liste_actions = {
                 "Ascension Runique": "Technique", #seulement la rune du drain de vie
@@ -1490,7 +1490,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 38
             self.modele.monstre_points_de_resistance = 24
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 888
+            self.modele.monstre_points_de_vie_max = 488
             self.modele.monstre_points_de_mana_max = 100
             self.modele.monstre_liste_actions = {
                 "Dragon Ascendant": "Sort", #attaque par vague a esquiver [x]
@@ -1513,8 +1513,8 @@ class Control:
             self.modele.monstre_points_de_force = 30
             self.modele.monstre_points_de_intelligence = 30
             self.modele.monstre_points_de_resistance = 15
-            self.modele.monstre_nombre_de_vies_supplementaire = 10
-            self.modele.monstre_points_de_vie_max = 300
+            self.modele.monstre_nombre_de_vies_supplementaire = 8
+            self.modele.monstre_points_de_vie_max = 1
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Attaque Lourde": "Technique",
@@ -1601,7 +1601,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 40
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 1200
+            self.modele.monstre_points_de_vie_max = 700
             self.modele.monstre_points_de_mana_max = 100
             self.modele.monstre_liste_actions = {
                 "Lame Ultime": "Technique", #gros degats
@@ -1620,7 +1620,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 50
             self.modele.monstre_points_de_resistance = 20
             self.modele.monstre_nombre_de_vies_supplementaire = 2
-            self.modele.monstre_points_de_vie_max = 2000
+            self.modele.monstre_points_de_vie_max = 1500
             self.modele.monstre_points_de_mana_max = 9999
             self.modele.monstre_liste_actions = {
                 "Lame Ultime": "Technique", #gros degats
@@ -1632,11 +1632,11 @@ class Control:
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 99999, 
                                        "Attaque": 99999, "Intelligence": 99999, "Endurance": 99999}
         #Initilaise des bonus de vie/mana pour tester différentes combinaisons
-        bonus_vie = 20
+        bonus_vie = 0
         bonus_mana = 0
         self.modele.monstre_points_de_vie_max += vie_bonus_par_etage + bonus_vie
         self.modele.monstre_points_de_vie = self.modele.monstre_points_de_vie_max
-        self.modele.monstre_points_de_mana_max += vie_bonus_par_etage + bonus_mana
+        self.modele.monstre_points_de_mana_max += bonus_mana
         self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
 
     def AfficheMonstreNiveauEtMusique(self):
@@ -1780,6 +1780,10 @@ class Control:
             self.modele.points_de_mana = 0
         if self.modele.monstre_points_de_vie > self.modele.monstre_points_de_vie_max:
             self.modele.monstre_points_de_vie = self.modele.monstre_points_de_vie_max
+        if self.modele.monstre_points_de_mana == "ERROR":
+            pass
+        elif self.modele.monstre_points_de_mana > self.modele.monstre_points_de_mana_max:
+            self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
 
     def EffetStigmaToucherDeMidas(self):
         degat = round(self.modele.nombre_de_gold * 0.1)
@@ -1798,6 +1802,7 @@ class Control:
         if nombre_aleatoire < 20:
             mana_siphone = round(self.modele.points_de_mana_max * 0.1)
             self.modele.points_de_mana -= mana_siphone
+            self.modele.monstre_points_de_mana += mana_siphone
             self.EquilibragePointsDeVieEtMana()
             self.vue.AfficheSiphonDeMana(mana_siphone)
 
@@ -4345,13 +4350,16 @@ class Control:
                     soin = 5 + round(self.modele.points_de_vie_max * 0.05)
                     if soin < 8:
                         soin = 8
+                    soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
                     commentaire_item = f"Vous reprenez {soin} pv pendant 3 tours !"
                 elif nom_de_litem == "Fruit Jindagee":
                     self.modele.utilise_fruit_jindagee = True
                     self.modele.utilise_fruit_jindagee_nombre_tour += 3
+                    
                     soin = 10 + round(self.modele.points_de_vie_max * 0.1)
                     if soin < 13:
                         soin = 13
+                    soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
                     commentaire_item = f"Vous reprenez {soin} pv pendant 3 tours !"
             elif nom_de_litem in ["Feuille Aatma", "Fruit Aatma"]:
                 if nom_de_litem == "Feuille Aatma":
@@ -4360,6 +4368,7 @@ class Control:
                     soin = 5 + round(self.modele.points_de_mana_max * 0.05)
                     if soin < 8:
                         soin = 8
+                    soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
                     commentaire_item = f"Vous reprenez {soin} pm pendant 3 tours !"
                 elif nom_de_litem == "Fruit Aatma":
                     self.modele.utilise_fruit_aatma = True
@@ -4367,6 +4376,7 @@ class Control:
                     soin = 10 + round(self.modele.points_de_mana_max * 0.1)
                     if soin < 13:
                         soin = 13
+                    soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
                     commentaire_item = f"Vous reprenez {soin} pm pendant 3 tours !"
             elif nom_de_litem in ["Crystal Elémentaire"]:
                 element_aleatoire = random.randint(1, 4)
@@ -4445,23 +4455,23 @@ class Control:
             elif nom_de_litem in ["Fléchette Rouge", "Fleche Rouge", "Fléchette Bleue", "Fleche Bleue"]:
                 commentaire_item = "Vous lancez l'objet, qui vient se planter dans le torse du monstre."
                 if nom_de_litem == "Fléchette Rouge":
-                    commentaire_item += "\nLe monstre s'enflamme pendant 2 tours !"
+                    commentaire_item += "\nLe monstre s'enflamme pendant 3 tours !"
                     self.modele.monstre_est_en_feu = True
                     self.modele.monstre_est_en_feu_degat = 5
-                    self.modele.monstre_est_en_feu_nombre_tour += 3
+                    self.modele.monstre_est_en_feu_nombre_tour += 4
                 elif nom_de_litem == "Fleche Rouge":
-                    commentaire_item += "\nLe monstre s'enflamme pendant 5 tours !"
+                    commentaire_item += "\nLe monstre s'enflamme pendant 6 tours !"
                     self.modele.monstre_est_en_feu = True
                     self.modele.monstre_est_en_feu_degat = 5
-                    self.modele.monstre_est_en_feu_nombre_tour += 6
+                    self.modele.monstre_est_en_feu_nombre_tour += 7
                 elif nom_de_litem == "Fléchette Bleue":
-                    commentaire_item += "\nLe monstre gèle pendant 2 tours !"
+                    commentaire_item += "\nLe monstre gèle pendant 3 tours !"
                     self.modele.monstre_est_gele = True
-                    self.modele.monstre_est_gele_nombre_tour += 3
+                    self.modele.monstre_est_gele_nombre_tour += 4
                 elif nom_de_litem == "Fleche Bleue":
-                    commentaire_item += "\nLe monstre gèle pendant 5 tours !"
+                    commentaire_item += "\nLe monstre gèle pendant 6 tours !"
                     self.modele.monstre_est_gele = True
-                    self.modele.monstre_est_gele_nombre_tour += 6
+                    self.modele.monstre_est_gele_nombre_tour += 7
             elif nom_de_litem in ["Poudre Explosive", "Roche Explosive", "Bombe Explosive"]:
                 degat = round(self.modele.monstre_points_de_vie_max*0.05)
                 self.modele.monstre_est_vulnerable = True

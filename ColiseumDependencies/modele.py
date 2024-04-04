@@ -1,5 +1,4 @@
 ﻿import random
-import os
 
 
 class Model:
@@ -528,55 +527,55 @@ class Model:
         ]
         self.annuaire_de_cout_des_techniques = {
             "Attaque Légère": 5,
-            "Pira": 5,
-            "Elektron": 5,
-            "Tsumeta-Sa": 5,
-            "Mathaïr": 5,
-            "Fos": 5,
-            "Haddee": 5,
-            "Lance Rapide": 5,
-            "Lance Statique": 5,
-            "Lance Electrique": 5,
-            "Lance de l'Eclair": 5,
-            "Lance Foudroyante": 5, 
-            "Lance de la Mort Blanche": 5,
-            "Bô Chaud": 5, #
-            "Bô Brulant": 5, #
-            "Bô Enflammé": 5, #
-            "Bô de la Fournaise": 5,
-            "Bô Magmatique": 5,
-            "Bô Solaire": 5,
-            "Katana Bleu": 5,
-            "Katana Froid": 5,
-            "Katana Givré": 5,
-            "Katana Glacial": 5,
-            "Katana Polaire": 5,
-            "Katana Zéro": 5,
-            "Corne Argile": 5, #
-            "Corne Lapis": 5, #
-            "Corne Granite": 5, #
-            "Corne Obsidienne": 5,
-            "Corne de la Montagne": 5,
-            "Corne Continentale": 5,
-            "Poing Léger": 5, #
-            "Poing Renforcé": 5, #
-            "Poing Lourd": 5, #
-            "Poing Maitrisé": 5, #
-            "Poing Fatal": 5, #
-            "Poing de la Comète": 5,
-            "Dague Volevie": 5,
-            "Dague Siphoneuse": 5,
-            "Dague Vampirique": 5,
-            "Dague Parasite": 5,
-            "Dague Destructrice": 5,
-            "Dague Créatrice": 5,
-            "Posture de la Montagne": 5,
-            "Libération Physique": 5,
-            "Bluff": 5,
-            "Combo Electrique": 5,
-            "Position du Massif": 5,
-            "Poussée d'Adrénaline": 5,
-            "Iaido": 5,
+            "Pira": 25,
+            "Elektron": 25,
+            "Tsumeta-Sa": 25,
+            "Mathaïr": 25,
+            "Fos": 25,
+            "Haddee": 25,
+            "Lance Rapide": 8,
+            "Lance Statique": 12,
+            "Lance Electrique": 15,
+            "Lance de l'Eclair": 17,
+            "Lance Foudroyante": 20, 
+            "Lance de la Mort Blanche": 25,
+            "Bô Chaud": 8, #
+            "Bô Brulant": 12, #
+            "Bô Enflammé": 15, #
+            "Bô de la Fournaise": 17,
+            "Bô Magmatique": 20,
+            "Bô Solaire": 25,
+            "Katana Bleu": 8,
+            "Katana Froid": 12,
+            "Katana Givré": 15,
+            "Katana Glacial": 17,
+            "Katana Polaire": 20,
+            "Katana Zéro": 25,
+            "Corne Argile": 8, #
+            "Corne Lapis": 12, #
+            "Corne Granite": 15, #
+            "Corne Obsidienne": 17,
+            "Corne de la Montagne": 20,
+            "Corne Continentale": 25,
+            "Poing Léger": 8, #
+            "Poing Renforcé": 12, #
+            "Poing Lourd": 15, #
+            "Poing Maitrisé": 17, #
+            "Poing Fatal": 20, #
+            "Poing de la Comète": 25,
+            "Dague Volevie": 8,
+            "Dague Siphoneuse": 12,
+            "Dague Vampirique": 15,
+            "Dague Parasite": 17,
+            "Dague Destructrice": 20,
+            "Dague Créatrice": 25,
+            "Posture de la Montagne": 15,
+            "Libération Physique": 25,
+            "Bluff": 15,
+            "Combo Electrique": 18,
+            "Position du Massif": 10,
+            "Poussée d'Adrénaline": 30,
+            "Iaido": 30,
         }
         # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
         self.annuaire_de_caracteristique_des_techniques = {
@@ -2386,10 +2385,10 @@ class Model:
             "Lame Dorée": [15, 85, 5, "Le monstre vous attaque avec une lame dorée étincelante...",
                             "...mais son attaque manque sa cible, vous laissant indemne.",
                             "...et vous sentez une étrange sensation de malaise alors que la lame vous infecte d'une maladie sournoise !"],
-            "Etranglement": [5, 90, 3, "L'ennemi s'enroule autour de votre cou...", 
+            "Etranglement": [5, 70, 3, "L'ennemi s'enroule autour de votre cou...", 
                              "...mais vous arrivez a vous débarrasser de son étreinte.", 
                              "...et vous étrangle sans ménagement."],
-            "Brulevent": [7, 90, 4, "Le monstre libère un souffle ardent qui consume tout l'oxygène de la salle...",
+            "Brulevent": [7, 70, 2, "Le monstre libère un souffle ardent qui consume tout l'oxygène de la salle...",
                           "...mais vous parvenez à éviter de justesse le souffle brûlant.",
                           "...et vous vous retrouvez soudainement incapable de parler alors que la chaleur envahit votre gorge !"],
             "Roulé-Boulet": [20, 75, 5, "Le monstre se met en boule et vous percute avec une force dévastatrice, vous envoyant valser à travers la pièce...",

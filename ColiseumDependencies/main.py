@@ -5167,6 +5167,7 @@ class Floor:
         self.InitiateRoleToAttribute()
         # attribue un role a chaque salles
         self.SetupFloorBlueprint()
+        Save.SaveTheGameSansAffichage()
 
     def ShowFloor(self):
         if not self.carte_ouverte:

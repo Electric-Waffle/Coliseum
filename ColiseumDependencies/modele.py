@@ -41,7 +41,7 @@ class Model:
             self.taux_de_esquive = Player.taux_desquive
             self.nombre_de_gold = Player.nombre_de_gold
             self.quete_en_cours = Player.quete
-
+            self.liste_dartefact_optionels = Player.liste_dartefacts_optionels
             self.nombre_de_red_coin = Player.nombre_de_red_coin
             self.numero_de_letage = Player.numero_de_letage
             self.est_une_mimique = Player.affronte_une_mimique
@@ -55,6 +55,7 @@ class Model:
             self.possede_une_gemme_magie = Player.gemme_de_mana  # rend 20% de mana a la fin d'un combat
 
         # alteration de letat ou influence d'artefacts
+        self.sacrifice_actif = False
         self.se_defend = False
         self.nombre_de_tours = 1
         self.commentaire_transmutation_degat = ""
@@ -526,6 +527,7 @@ class Model:
             "Dague Créatrice",
         ]
         self.annuaire_de_cout_des_techniques = {
+            "Griffes du Démon": 66,
             "Attaque Légère": 5,
             "Pira": 25,
             "Elektron": 25,

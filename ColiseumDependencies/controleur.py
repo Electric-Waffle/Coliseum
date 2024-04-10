@@ -55,6 +55,19 @@ class Control:
         applique les effets et introductions liés a une résurection
         """
         if self.modele.points_de_vie < 1:
+            if "Voile de Ino" in self.modele.liste_dartefact_optionels:
+                self.modele.liste_dartefact_optionels.remove("Voile de Ino")
+                vie_recupere = round(0.66 * self.modele.points_de_vie_max)
+                self.modele.points_de_vie = vie_recupere
+                self.modele.beni_par_feu_sacre = True
+                self.modele.beni_par_feu_sacre_nombre_tour = 3
+                commentaire = (
+                    "Alors que vous alliez mourir, le voile d'Ino que vous portiez se plaque alors contre votre peau avant de disparaitre."
+                    f"\nVous vous mettez alors a briller et regagnez {vie_recupere} points de vie !"
+                    "\nDe plus, vous vous sentez béni par la déesse elle-même !\nVos deux prochaines attaques seront des coups critiques !"
+                )
+                self.vue.AfficheResurrection(commentaire)
+                return True
             if self.modele.possede_une_fee:
                 if (self.modele.stigma_joueur_negatif == "Maudit"):
                     commentaire = (
@@ -1308,7 +1321,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 165
-            self.modele.monstre_points_de_mana_max = 15
+            self.modele.monstre_points_de_mana_max = 35
             self.modele.monstre_liste_actions = {
                 "Attaque Lourde": "Technique",
                 "Durcissement Calcaire": "Technique", # augmente def
@@ -1347,7 +1360,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 320
-            self.modele.monstre_points_de_mana_max = 45
+            self.modele.monstre_points_de_mana_max = 55
             self.modele.monstre_liste_actions = {
                 "Invoquation Canope": "Sort", #invoque vase canope, peut echouer [x]
                 "Rejuvenation": "Sort", #gros soin
@@ -1385,7 +1398,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 300
-            self.modele.monstre_points_de_mana_max = 55
+            self.modele.monstre_points_de_mana_max = 75
             self.modele.monstre_liste_actions = {
                 "Faisceau de l'Eclair": "Sort",  #paralyse
                 "Thermosphère de la Fournaise": "Sort", #brule
@@ -2090,8 +2103,11 @@ class Control:
             )
         # a cause de letat de choc
         elif self.modele.monstre_en_etat_de_choc:
+            degat = 15
+            if "Orbe de Disruption" in self.modele.liste_dartefact_optionels:
+                degat += 10
             commentaire = (
-                "...et récupère son mana.\nIl perd 15 points de vie a cause de son réservoir de mana troué."
+                f"...et récupère son mana.\nIl perd {degat} points de vie a cause de son réservoir de mana troué."
             )
             self.modele.monstre_en_etat_de_choc_nombre_tour -= 1
             if self.modele.monstre_en_etat_de_choc_nombre_tour == 0:
@@ -2101,7 +2117,7 @@ class Control:
                 self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
                 self.modele.monstre_en_etat_de_choc = False
             else:
-                self.modele.monstre_points_de_vie -= 15
+                self.modele.monstre_points_de_vie -= degat
         self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
         self.modele.monstre_passe_son_tour = False
 
@@ -2541,6 +2557,10 @@ class Control:
         # arrete de faire passer son tour au monstre
         if self.modele.monstre_passe_son_tour and not self.modele.monstre_est_paralyse:
             self.modele.monstre_passe_son_tour = False
+        # dé-sacrifie le monstre
+        if self.modele.sacrifice_actif:
+            self.modele.sacrifice_actif = False
+            commentaire += f"\nLa marque sacrificielle sur {self.modele.monstre_nom} s'efface !"
         #continue de faire passer son tour au monstre si il est en etat de choc
         if self.modele.monstre_en_etat_de_choc == True:
             self.modele.monstre_passe_son_tour = True
@@ -2715,6 +2735,16 @@ class Control:
             self.vue.EntreePourContinuer()
             if self.Player.quete != "None":
                 self.ResultatQuete()
+            #Ajout des sacrifices
+            if self.modele.sacrifice_actif:
+                self.Player.nombre_de_sacrifices += 1
+                commentaire1 = ("Vous regardez l'ennemi gisant sur le sol, et voyez une lueur bleue émaner de son corps.")
+                commentaire2 = ("Cette lueur commence doucement a monter, avant de venir s'écraser a toute vitesse sur votre bras noirci.")
+                commentaire3 = ("Des lettres apparaissent alors au niveau du dos de votre main :"
+                                "\n\n                          SACRIFICE"
+                                f"\n\n                              {self.Player.nombre_de_sacrifices}\n")
+                commentaire4 = ("Les lettres disparaissent, et tout revient a la normale.")
+                self.vue.AffichageSacrifice(commentaire1, commentaire2, commentaire3, commentaire4)
 
     def ResultatQuete(self):
         # quete interminable
@@ -2767,15 +2797,15 @@ class Control:
         # avancement quete Moqueries Techniques
         if self.Player.quete == "Moqueries Techniques" and self.modele.monstre_EstUnBoss:
             self.Player.quete = "Moqueries Techniques [Complete]"
-        print(f"Etat de la quête en cours : {self.Player.quete}")
+        commentaire = f"Etat de la quête en cours : {self.Player.quete}"
         if "[Echec]" in self.Player.quete:
-            print("Abandonnez cette quete et reprenez la pour réessayer !")
+            commentaire += "\nAbandonnez cette quete et reprenez la pour réessayer !"
         elif "[Complete]" in self.Player.quete:
             self.vue.PlaySound("questdone")
-            print("Félicitation !\nVous avez complété la quête !\nAllez récuperer votre récompense !")
+            commentaire += "\nFélicitation !\nVous avez complété la quête !\nAllez récuperer votre récompense !"
         else:
-            print("Continuez comme ca !\nVous êtes sur la bonne voie !")
-        self.vue.EntreePourContinuer()
+            commentaire += "\nContinuez comme ca !\nVous êtes sur la bonne voie !"
+        self.vue.AfficheQuete(commentaire)
             
 
     def EffetStigmaDernierChoix(self):
@@ -3615,6 +3645,12 @@ class Control:
                     self.vue.AfficheSortOuAttaque(
                         description, commentaire_a_afficher, commentaire_degat
                     )
+                elif action == "Griffes du Démon":
+                    commentaire = ("Vous puisez dans l'énergie démonique qui habite votre corps pour lacerer l'ennemi de vos griffes."
+                                   "\nVous infligez 25 points de dégâts a l'ennemi, et le marquez comme sacrifice jusqu'a la fin de ce tour !")
+                    self.modele.sacrifice_actif = True
+                    self.modele.monstre_points_de_vie -= 25
+                    self.vue.AfficheGriffe(commentaire)
                 elif action == "Posture de la Montagne":
                     commentaire = "Vous utilisez la posture de la montagne."
                     self.modele.gain_de_defence = round(
@@ -3632,8 +3668,8 @@ class Control:
                         "\nJe suis le mana, donc je suis vivant."
                         "\nVous laissez votre corps se remplir avec le monde qui vous entoure."
                     )
-                    soin_vie = round(self.modele.points_de_vie_max * 0.33)
-                    soin_mana = round(self.modele.points_de_mana_max * 0.33)
+                    soin_vie = round(self.modele.points_de_vie_max * 0.4)
+                    soin_mana = round(self.modele.points_de_mana_max * 0.4)
                     self.modele.points_de_vie += soin_vie
                     self.modele.points_de_mana += soin_mana
                     commentaire += f"\nVous reprenez {soin_vie} pv, et {soin_mana} pm."
@@ -3773,6 +3809,7 @@ class Control:
             or action in self.modele.techniques_de_physique
             or action == "Poussée d'Adrénaline"
             or action == "Libération Physique"
+            or action == "Griffes du Démon"
         ):
             self.modele.a_utilise_physique_ce_tour = True
             if "Epreuve des Mages-Epeistes" in self.Player.quete :
@@ -3875,7 +3912,12 @@ class Control:
             cout_vie += round(self.modele.points_de_vie_max * (pourcentage/100))
             cout_vie_a_appliquer = True
         # checke si le joueur a assez d'endurance. Non = affichage raison.
-        if self.modele.points_de_endurance < cout_endurance:
+        if ((self.modele.points_de_endurance < cout_endurance and not
+            ("Couronne Sacrée" in self.modele.liste_dartefact_optionels))
+            or
+            (self.modele.points_de_endurance <= 0 and
+            ("Couronne Sacrée" in self.modele.liste_dartefact_optionels))
+        ):
             affichage_raison_technique_impossible = "Vous tentez d'utiliser la technique...mais vous vous effondrez, haletant, sur le sol de l'arène."
         # checke si le jjoueur a assez de vie. Non = affichage raison.
         if self.modele.points_de_vie < cout_vie:
@@ -7261,7 +7303,7 @@ class Control:
     def RecupEndurance(self, endurance_recuperee):
         gain_endurance = endurance_recuperee + self.modele.numero_de_letage
         self.modele.points_de_endurance += gain_endurance
-        if self.modele.points_de_endurance > self.modele.points_de_endurance_max:
+        if (self.modele.points_de_endurance > self.modele.points_de_endurance_max) :
             self.modele.points_de_endurance = self.modele.points_de_endurance_max
 
     def AppliqueEffetElementaireSurJoueur(self, element, nombre_tour, degats = 0):

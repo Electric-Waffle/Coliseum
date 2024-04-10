@@ -447,6 +447,23 @@ class Vue:
 
     def AfficheMontagne(self, commentaire):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+    
+    def AfficheGriffe(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheQuete(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AffichageSacrifice(self, commentaire1, commentaire2, commentaire3, commentaire4):
+        mixer.quit()
+        print(commentaire1)
+        self.EntreePourContinuer()
+        print(commentaire2)
+        self.EntreePourContinuer()
+        print(commentaire3)
+        self.EntreePourContinuer()
+        print(commentaire4)
+        self.EntreePourContinuer()
 
     def AfficheLiberationPhysique(self, commentaire, commentaire_malus):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)

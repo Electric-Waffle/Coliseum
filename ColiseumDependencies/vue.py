@@ -319,6 +319,17 @@ class Vue:
         print("Vous avez fuit le combat !")
         self.EntreePourContinuer()
 
+    def AfficheWinObelisque(self, musique):
+        mixer.init()
+        mixer.music.load(f"{musique}.mp3")
+        mixer.music.play()
+        print("Vous avez remporté le combat !")
+        self.EntreePourContinuer()
+        print("Mais alors que vous vous approchez de l'ennemi pour absorber sa puissance,"
+              " vous le voyez se dissoudre et ne laisser rien derriere lui.")
+        self.EntreePourContinuer()
+        mixer.quit()
+
     def AfficheTitreRecompense(self, musique, nom):
         self.PlayMusic(musique)
         print("Vous avez remporté le combat !")

@@ -159,7 +159,11 @@ class Control:
 
         calcule la réussite ou non de l'échec de la fuite
         """
-        if self.modele.stigma_joueur_negatif == "Pas d'Echappatoire" or self.modele.monstre_EstUnBoss:
+        if (
+                self.modele.stigma_joueur_negatif == "Pas d'Echappatoire" or 
+                self.modele.monstre_EstUnBoss or
+                self.modele.monstre_de_lobelisque
+            ):
             commentaire = "...et vous vous ravisez.\nPas d'échappatoire.\n \nC'est tout ou rien."
             self.vue.AfficheResultatFuite(commentaire)
             return True
@@ -2612,6 +2616,9 @@ class Control:
         if self.modele.type_de_derniere_action_utilisee == "Fuir":
             musique = self.modele.CHEMINABSOLUMUSIQUE + "escape"
             self.vue.AfficheFuite(musique)
+        elif self.modele.monstre_de_lobelisque:
+            musique = self.modele.CHEMINABSOLUMUSIQUE + "battle_win"
+            self.vue.AfficheWinObelisque(musique)
         else:
             commentaire = ""
             musique = self.modele.CHEMINABSOLUMUSIQUE + "battle_win"

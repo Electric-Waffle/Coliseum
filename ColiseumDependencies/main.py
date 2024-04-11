@@ -1118,6 +1118,7 @@ LISTEDEMUSIQUE = [
     "Jeux d'Enfants",
     "Pantomime",
     "Carnaval",
+    "Fièvre du Samedi Soir",
     "Piñata",
     "Tragicomique",
     "Combler les Vides",
@@ -1168,6 +1169,7 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["boss_4", "Vous écoutez "],
     ["boss_4_phase_2", "Vous écoutez "],
     ["etage_5", "Vous écoutez "],
+    ["dance", "Vous écoutez "],
     ["battle_theme_5", "Vous écoutez "],
     ["boss_5", "Vous écoutez "],
     ["etage_6", "Vous écoutez "],
@@ -2602,6 +2604,7 @@ class PlayerCaracteristics:
         self.possede_la_cle = False
         self.liste_dartefacts_optionels = []
         self.nombre_de_sacrifices = 0
+        self.affronte_obelisque = False
 
     def UseCharacterForInitCaracteristics(self, caracteristiques):
         self.nom_du_personnage = caracteristiques[0]
@@ -2957,9 +2960,9 @@ class DrawInTurtle:
         down()
         for _ in range(1, 5):
             hypothenuse = math.sqrt(22656.25)
-            hypothenuse2 = math.sqrt(2031.35)
+            #hypothenuse2 = math.sqrt(2031.35) hypothénuse pour des pics moins grands, au cas ou
             angle = 131.65
-            angle2 = 124.62
+            #angle2 = 124.62 angle pour des pics moins grands, au cas ou
             remise_a_zero_de_langle = angle - 90
             right(90)
             forward(12.5)
@@ -3308,7 +3311,7 @@ class DrawInTurtle:
         up()
         setheading(90)
 
-    def totem(self, posx, posy):
+    def obelisque(self, posx, posy):
         self.sept()
         goto(posx, posy)
         right(45)
@@ -3337,7 +3340,20 @@ class DrawInTurtle:
         goto(posx, posy)
 
     def ddr(self):
-        pass
+        backward(6)
+        down()
+        circle(4)
+        forward(15)
+        right(90)
+        forward(7)
+        right(90)
+        forward(5)
+        right(90)
+        forward(7)
+        right(90)
+        up()
+        backward(4)
+
 
     def Af(self):
         forward(4)
@@ -3903,8 +3919,8 @@ class Floor:
                     Draw.ddr()
                 elif caracteristique_de_la_salle["type"] == "RITUEL":
                     Draw.rituel()
-                elif caracteristique_de_la_salle["type"] == "TOTEM":
-                    Draw.totem(position_x, position_y)
+                elif caracteristique_de_la_salle["type"] == "OBELISQUE":
+                    Draw.obelisque(position_x, position_y)
         goto(0, 0)
         setheading(90)
 
@@ -3924,13 +3940,13 @@ class Floor:
                     print("")
                     choix = int(input("Choisissez une action avec les nombres : "))
                     ClearConsole()
-                    if choix in [4, 6, 8, 5, 2, 1]:
+                    if choix in [4, 6, 8, 5, 2, 123]:
                         break
                 except ValueError:
                     ClearConsole()
             if choix == 4:
                 self.WalkLeft()
-            elif choix == 1:
+            elif choix == 123:
                 print(self.FloorBlueprint)
                 Affichage.EntreePourContinuer()
             elif choix == 6:
@@ -4371,8 +4387,10 @@ class Floor:
                     Draw.ddr()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
-                print("La salle est remplie de jeux d'arcades aux thêmes divers et variés, mais aucun n'est en état de marche.")
-                print("A part une machine sur laquelle est marquée ""Dance Dance Revolution"" en lettre de néon.")
+                print("La salle est remplie de jeux d'arcades aux thêmes divers et variés, mais les carcasses de métal et de peinture sont presque toutes inopérables.")
+                print("Seule une machine affiche fièrement ses couleurs et son nom en lettres de néon :")
+                Affichage.EntreePourContinuer()
+                print("""Dance Dance Revolution MAXIMUM OUTPUT!!!""")
                 Affichage.EntreePourContinuer()
                 print("Sur l'écran, vous pouvez voir plusieurs images de boites de nuits à l'ambiance endiablée "
                           "dans lesquelles sont modélisés des personnages banals aux visages radieux.")
@@ -4647,14 +4665,79 @@ class Floor:
                             else:
                                 print("BLAGUE ?")
                                 Affichage.EntreePourContinuer()
-            elif caracteristique_de_la_salle["type"] == "TOTEM":  # DONE
+            elif caracteristique_de_la_salle["type"] == "OBELISQUE":  # DONE
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
-                    Draw.totem(caracteristique_de_la_salle["position_x"] * 25, caracteristique_de_la_salle["position_y"] * 25)
+                    Draw.obelisque(caracteristique_de_la_salle["position_x"] * 25, caracteristique_de_la_salle["position_y"] * 25)
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
-                # faire 5 combats, faire dessin ddr
+                print("Vous trouvez un bien étrange obélisque au centre d'une pièce plus grande que les autres.")
+                print("Construit en verre, vous pouvez apercevoir un petit coffre de bois noir au milieu.")
+                Affichage.EntreePourContinuer()
+                print("De plus, sur chaque faces de l'obélisque, il y a une encoche profonde et 5 mots écrits dans une langue que vous ne connaissez pas.")
+                Affichage.EntreePourContinuer()
+                print("Zeroual semble réagir à l'encoche.")
+                Affichage.EntreePourContinuer()
 
+                while True:
+                    try:
+                        print("Approcher Zeroual de l'encoche ?")
+                        print("(Assurez vous d'être prêt.)")
+                        print("\n1 - Non\n2 - Oui")
+                        choix = int(
+                            input("\nChoisissez votre action avec les nombres : ")
+                        )
+                        ClearConsole()
+                        if choix in [1, 2]:
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    print("Vous vous éloignez de la salle de l'obélisque.")
+                    Affichage.EntreePourContinuer()
+
+                else:
+                    mixer.quit()
+                    print("Vous approchez Zeroual de l'encoche."
+                          "\nL'arme prend alors la forme d'une épée a la lame rouillée et au design particulier, et vous l'insérez dans l'encoche.")
+                    Affichage.EntreePourContinuer()
+                    print("Les portes de la salle se ferment.")
+                    Affichage.EntreePourContinuer()
+                    print("Des runes apparaissent dans les airs, flottant sur un axe invisible et encerclant le vide.")
+                    print("Quelque chose résonne en vous, comme une idée que l'on aurait mit de force dans votre crane, et qui émane de votre arme.")
+                    Affichage.EntreePourContinuer()
+                    print("*Retire.*")
+                    print("*Prouver. Valeur.*")
+                    Affichage.EntreePourContinuer()
+                    print("Une terrible présence se fait sentir, et vous retirez Zeroual de l'encoche alors qu'un bruit se fait entendre derriere vous.")
+                    Affichage.EntreePourContinuer()
+                    Player.affronte_obelisque = True
+                    vague = 5
+                    while vague != 0:
+                        control = controleur.Control(Player, Trader)
+                        control.Battle()
+                        print("Alors que l'ennemi disparait, une des lignes de l'obélisque s'efface.")
+                        Affichage.EntreePourContinuer()
+                        vague -= 1
+                        if vague != 0:
+                            print(f"Il n'y a maintenant plus que {vague} mots.")
+                            Affichage.EntreePourContinuer()
+                            print("Vous voyez une des runes se briser, et quelque chose apparait.")
+                            Affichage.EntreePourContinuer()
+                    Player.affronte_obelisque = False
+                    print("L'obélisque, maintenant vide de mots, éclate en plusieurs morceaux."
+                          "\nMais au lieu de tomber, ils restent en place quelques secondes avant d'aller sur votre arme, qui les absorbe.")
+                    Affichage.EntreePourContinuer()
+                    print("Vous sentez que le nombre de monstre que vous avez tué a soudainement augmenté de 15 !")
+                    Player.nombre_de_monstres_tues += 15
+                    Affichage.EntreePourContinuer()
+                    print("Vous laissez vos questions de coté, et récuperez le petit coffre de bois noir, que vous ouvrez immédiatement.")
+                    Affichage.EntreePourContinuer()
+                    caracteristique_de_la_salle["terminé par joueur"] = True
+                    self.GiveRandomArtefact()
+                    print("Les portes de la salle se rouvrent.")
+                    Affichage.EntreePourContinuer()
+                    PlayMusic("etage_8")
 
         #rajoute le numéro de la salle observée a la liste des dernieres salles observées
         self.liste_des_salles_observées.append(Player.numero_de_la_salle)
@@ -5026,10 +5109,10 @@ class Floor:
         self.nombre_de_rituel = 0
         if Player.numero_de_letage == 7:
             self.nombre_de_rituel = 1
-        # artefact de letage 8 (2 totems : battre 5 ennemis a la suite sans mourir et sans gagner d'ame a la fin.)
-        self.nombre_de_totem = 0
+        # artefact de letage 8 (2 obelisques : battre 5 ennemis a la suite sans mourir et sans gagner d'ame a la fin.)
+        self.nombre_de_obelisque = 0
         if Player.numero_de_letage == 8:
-            self.nombre_de_totem = 1
+            self.nombre_de_obelisque = 2
         
     def AttributingRoleToRoom(self, salle_choisie):
         caracteristique_de_la_salle = self.FloorBlueprint[salle_choisie]
@@ -5078,9 +5161,9 @@ class Floor:
         elif self.nombre_de_rituel != 0:
             caracteristique_de_la_salle["type"] = "RITUEL"
             self.nombre_de_rituel -= 1
-        elif self.nombre_de_totem != 0:
-            caracteristique_de_la_salle["type"] = "TOTEM"
-            self.nombre_de_totem -= 1
+        elif self.nombre_de_obelisque != 0:
+            caracteristique_de_la_salle["type"] = "OBELISQUE"
+            self.nombre_de_obelisque -= 1
         else:
             nombre_aleatoire = random.randint(0, 5)
             if nombre_aleatoire == 0:
@@ -8543,7 +8626,7 @@ def ShowObservatorium():
                     if choix in range(1, (len(LISTEDEMUSIQUE)) + 2):
                         break
                 else:
-                    if choix in range(1, 37) or choix == 11525:
+                    if choix in range(1, 38) or choix == 11525:
                         break
             except ValueError:
                 ClearConsole()
@@ -8577,7 +8660,7 @@ def ShowMenuObservatorium(observatorium_complet):
     for nom_musique in LISTEDEMUSIQUE:
         print(f"{numero_affichage} - {nom_musique}")
         numero_affichage += 1
-        if numero_affichage == 37 and not observatorium_complet:
+        if numero_affichage == 38 and not observatorium_complet:
             break
     return int(input("\nChoisissez la musique avec les nombres : "))
 
@@ -8590,7 +8673,7 @@ def GetChoiceMenuColiseum():
         f"\n      2 - {Player.commentaire_boss}"
         "\n\n          ~~{ Interraction }~~"
         "\n      3 - Interragir avec le Marchand"
-        "\n      4 - Observer l'Etage (WIP)"
+        "\n      4 - Observer l'Étage"
         f"\n\n          ~~{{ {Player.nom_du_personnage} }}~~"
         "\n      5 - Fiche de Personnage"
         "\n      6 - Utiliser un Red Coin"
@@ -9098,7 +9181,6 @@ Trader = TraderUsage()
 Affichage = Affiche()
 Observation = Observe()
 FloorMaker = Floor()
-
 
 AffichageSecretPage3()
 MenuDeDemarrage(Player)

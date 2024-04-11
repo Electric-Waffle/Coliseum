@@ -53,6 +53,7 @@ class Model:
             self.possede_une_fee = Player.possede_une_fee  # reprend toute sa vie a la mort, une fois
             self.possede_une_gemme_vie = Player.gemme_de_vie  # rend 20% de vie a la fin d'un combat
             self.possede_une_gemme_magie = Player.gemme_de_mana  # rend 20% de mana a la fin d'un combat
+            self.monstre_de_lobelisque = Player.affronte_obelisque
 
         # alteration de letat ou influence d'artefacts
         self.sacrifice_actif = False

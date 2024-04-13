@@ -21,6 +21,7 @@ class Control:
         self.tirage = Trader
         self.vue = vue.Vue(Player)
         self.modele = modele.Model(Player)
+        self.sound_of_action = "item"
         clear_console()
 
     def SetBenedictionDuMana(self):
@@ -1021,7 +1022,7 @@ class Control:
                 "Eboulis": "Technique",  # peux lapider
                 "Poing de Mana": "Sort"
             }
-            self.modele.monstre_recompense = {"Degat coup critique": 2, "Gold": 20 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie max": 1, "Degat coup critique": 1, "Gold": 20 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Ombre Tangible":
             self.modele.stigma_monstre_positif = "Malédiction"
             self.modele.stigma_monstre_negatif = "Astralien"
@@ -1037,7 +1038,7 @@ class Control:
                 "Confusion": "Sort", # confond
                 "Poing de Mana": "Sort"
             }
-            self.modele.monstre_recompense = {"Degat sort critique": 2, "Gold": 15 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Mana max": 1, "Degat sort critique": 1, "Gold": 15 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Clone de Verre":
             self.modele.stigma_monstre_positif = "Brisures"
             self.modele.stigma_monstre_negatif = "Fragile"
@@ -3503,7 +3504,7 @@ class Control:
                     self.modele.monstre_points_de_vie -= degat
                     if self.modele.oeuil_magique:
                         commentaire_degat += self.AppliqueTalentOeuilMagique()
-                    self.vue.AfficheSonTechnique()
+                    self.vue.AfficheSonTechnique(self.sound_of_action)
                 else:
                     commentaire_a_afficher = caracteristique_du_techniques[6]
                     commentaire_degat = "Vous n'infligez aucun degat au monstre."
@@ -3792,7 +3793,11 @@ class Control:
             self.modele.a_utilise_feu_ce_tour = True
             if "Epreuve du Magister" in self.Player.quete :
                 self.Player.quete = "Epreuve du Magister [Echec]"
-        if (
+            if self.modele.type_de_derniere_action_utilisee == "Techniques":
+                self.sound_of_action = "FIREt"
+            else:
+                self.sound_of_action = "FIREm"
+        elif (
             action in self.modele.sorts_de_foudre
             or action in self.modele.techniques_de_foudre
             or action == "Libération Fulgurante"
@@ -3801,7 +3806,11 @@ class Control:
             self.modele.a_utilise_foudre_ce_tour = True
             if "Epreuve du Magister" in self.Player.quete :
                 self.Player.quete = "Epreuve du Magister [Echec]"
-        if (
+            if self.modele.type_de_derniere_action_utilisee == "Techniques":
+                self.sound_of_action = "ELECt"
+            else:
+                self.sound_of_action = "ELECm"
+        elif (
             action in self.modele.sorts_de_glace
             or action in self.modele.techniques_de_glace
             or action == "Libération Glaciale"
@@ -3811,7 +3820,11 @@ class Control:
             self.modele.a_utilise_glace_ce_tour = True
             if "Epreuve du Magister" in self.Player.quete :
                 self.Player.quete = "Epreuve du Magister [Echec]"
-        if (
+            if self.modele.type_de_derniere_action_utilisee == "Techniques":
+                self.sound_of_action = "ICEt"
+            else:
+                self.sound_of_action = "ICEm"
+        elif (
             action in self.modele.sorts_de_physique
             or action in self.modele.techniques_de_physique
             or action == "Poussée d'Adrénaline"
@@ -3821,7 +3834,11 @@ class Control:
             self.modele.a_utilise_physique_ce_tour = True
             if "Epreuve des Mages-Epeistes" in self.Player.quete :
                 self.Player.quete = "Epreuve des Mages-Epeistes [Echec]"
-        if (
+            if self.modele.type_de_derniere_action_utilisee == "Techniques":
+                self.sound_of_action = "PHYSt"
+            else:
+                self.sound_of_action = "PHYSm"
+        elif (
             action in self.modele.sorts_de_sang
             or action in self.modele.techniques_de_sang
             or action == "Libération Sanglante"
@@ -3831,7 +3848,11 @@ class Control:
             self.modele.a_utilise_sang_ce_tour = True
             if "Epreuve des Mages-Epeistes" in self.Player.quete :
                 self.Player.quete = "Epreuve des Mages-Epeistes [Echec]"
-        if (
+            if self.modele.type_de_derniere_action_utilisee == "Techniques":
+                self.sound_of_action = "BLOODt"
+            else:
+                self.sound_of_action = "BLOODm"
+        elif (
             action in self.modele.sorts_de_terre
             or action in self.modele.techniques_de_terre
             or action == "Avalanche"
@@ -3842,6 +3863,14 @@ class Control:
             self.modele.a_utilise_terre_ce_tour = True
             if "Epreuve des Mages-Epeistes" in self.Player.quete :
                 self.Player.quete = "Epreuve des Mages-Epeistes [Echec]"
+            if self.modele.type_de_derniere_action_utilisee == "Techniques":
+                self.sound_of_action = "DIRTt"
+            else:
+                self.sound_of_action = "DIRTm"
+        elif action in self.modele.sorts_de_soin:
+            self.sound_of_action = "HEAL"
+        elif action in self.modele.techniques_de_ame:
+            self.sound_of_action = "SOUL"
 
     def ResetTypeElementUtiliseCeTour(self):
         self.modele.a_utilise_feu_ce_tour = False
@@ -4183,7 +4212,7 @@ class Control:
                     )
                     commentaire_degat += commentaire_element
                     self.modele.monstre_points_de_vie -= degat
-                    self.vue.AfficheSonSort()
+                    self.vue.AfficheSonSort(self.sound_of_action)
                 else:
                     commentaire_a_afficher = caracteristique_du_sort[6]
                     commentaire_degat = "Vous n'infligez aucun degat au monstre."

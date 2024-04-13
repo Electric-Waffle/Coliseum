@@ -9187,6 +9187,9 @@ MenuDeDemarrage(Player)
 game_in_session = True
 PlayMusic(f"etage_{Player.numero_de_letage}")
 
+#Player.techniques_possedes = LISTETECHNIQUES
+#Player.sorts_possedes = LISTESORTS
+
 while game_in_session:
     # choix de laction
     choix = GetChoix()

@@ -511,6 +511,7 @@ class Model:
         ]
 
         self.techniques_de_physique = [
+            "Attaque Légère",
             "Poing Léger", #
             "Poing Renforcé", #
             "Poing Lourd", #
@@ -2068,7 +2069,7 @@ class Model:
                                 "Les enzymes de la carotte se répandent dans le corps de l'ennemi, le soignant et le revitalisant."],
             "Soin Avancé": [45, 21, "L'ennemi enveloppe son corps de mana pour soigner ses blessures.", 
                             "Les blessures de l'ennemi cicatrisent à l'aide du mana invoqué."],
-            "Engloutis": [40, 20, "L'ennemi engloutit un objet pour récupérer des points de vie.", 
+            "Engloutis": [10 * self.numero_de_letage, 10, "L'ennemi engloutit un objet pour récupérer des points de vie.", 
                   "L'objet est absorbé par l'ennemi qui reprend des forces."],
             "Rejuvenation": [40, 20, "L'ennemi invoque un sort de réjuvenation pour se régénérer.", 
                             "Une lueur énergétique entoure l'ennemi, le revitalisant et réparant ses blessures."],

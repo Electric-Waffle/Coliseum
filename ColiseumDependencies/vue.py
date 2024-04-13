@@ -14,16 +14,18 @@ class Vue:
         self.Player = Player
         mixer.init()
         DIRPATH = Player.chemin_musique
-        self.CHEMINMUSIQUE = DIRPATH + "\\"
-        self.SONSORT = mixer.Sound(self.CHEMINMUSIQUE + "spell_cast.wav")
-        self.SONSORT.set_volume(0.5)
-        self.SONTECHNIQUE = mixer.Sound(self.CHEMINMUSIQUE + "attack_cast.wav")
-        self.SONTECHNIQUE.set_volume(0.5)
+        self.CHEMINMUSIQUE = DIRPATH + "\\sfx\\"
 
-    def AfficheSonSort(self):
+    def AfficheSonSort(self, son):
+        musique = self.CHEMINMUSIQUE + son + ".wav"
+        self.SONSORT = mixer.Sound(musique)
+        self.SONSORT.set_volume(0.5)
         self.SONSORT.play()
 
-    def AfficheSonTechnique(self):
+    def AfficheSonTechnique(self, son):
+        musique = self.CHEMINMUSIQUE + son + ".wav"
+        self.SONTECHNIQUE = mixer.Sound(musique)
+        self.SONTECHNIQUE.set_volume(0.5)
         self.SONTECHNIQUE.play()
 
     def PlaySound(self, musique):
@@ -457,9 +459,11 @@ class Vue:
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheMontagne(self, commentaire):
+        self.AfficheSonSort("DIRTm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
     
     def AfficheGriffe(self, commentaire):
+        self.AfficheSonSort("DARK")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheQuete(self, commentaire):
@@ -477,10 +481,12 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheLiberationPhysique(self, commentaire, commentaire_malus):
+        self.AfficheSonSort("PHYSm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_malus)
 
     def AfficheDebutComboElectrique(self, commentaire):
+        self.AfficheSonSort("ELECt")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheComboElectrique(self, commentaire, paralysie):
@@ -492,9 +498,11 @@ class Vue:
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheMassif(self, commentaire):
+        self.AfficheSonSort("DIRTm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheBluff(self, commentaire):
+        self.AfficheSonSort("PHYSt")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheDebutIaido(self):
@@ -502,47 +510,60 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheIaido(self, commentaire):
+        self.AfficheSonSort("ULTIMEt")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheAdrenaline(self, commentaire):
+        self.AfficheSonSort("PHYSt")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheRafale(self, commentaire):
+        self.AfficheSonSort("FIREm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheAvalanche(self, commentaire):
+        self.AfficheSonSort("ICEm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheLiberationFeu(self, commentaire, commentaire_2):
+        self.AfficheSonSort("FIREm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_2)
 
     def AfficheLiberationFoudre(self, commentaire, commentaire_2):
+        self.AfficheSonSort("ELECm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_2)
 
     def AfficheLiberationGlace(self, commentaire, commentaire_2):
+        self.AfficheSonSort("ICEm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_2)
 
     def AfficheLiberationSang(self, commentaire, commentaire_2):
+        self.AfficheSonSort("BLOODm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_2)
 
     def AfficheLiberationTerre(self, commentaire, commentaire_2):
+        self.AfficheSonSort("DIRTm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_2)
 
     def AfficheMirroirEau(self, commentaire):
+        self.AfficheSonSort("ICEm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheBrumeSang(self, commentaire):
+        self.AfficheSonSort("BLOODm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheFeuSacre(self, commentaire):
+        self.AfficheSonSort("FIREm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheDebutCarrousel(self, commentaire):
+        self.AfficheSonSort("ULTIMEm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheCarrousel(self, commentaire):
@@ -564,6 +585,7 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheSortDeSoin(self, commentaire_sort, commentaire_description_du_sort, commentaire_soin):
+        self.AfficheSonSort("HEAL")
         print(commentaire_sort)
         print(commentaire_description_du_sort)
         print(commentaire_soin)

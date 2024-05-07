@@ -53,7 +53,7 @@ class Control:
         """Peux prendre le type d'action du monstre, retourne True ou False si il reste de la vie ou pas
 
         Verifie si les points de vie du joueur puis du monstre sont superieurs a zéro, 
-        applique les effets et introductions liés a une résurection
+        applique les effets et introductions liés a une résurrection
         """
         if self.modele.points_de_vie < 1:
             if "Voile de Ino" in self.modele.liste_dartefact_optionels:
@@ -61,12 +61,15 @@ class Control:
                 vie_recupere = round(0.66 * self.modele.points_de_vie_max)
                 self.modele.points_de_vie = vie_recupere
                 self.modele.beni_par_feu_sacre = True
-                self.modele.beni_par_feu_sacre_nombre_tour = 3
+                self.modele.beni_par_feu_sacre_nombre_tour += 3
                 commentaire = (
                     "Alors que vous alliez mourir, le voile d'Ino que vous portiez se plaque alors contre votre peau avant de disparaitre."
                     f"\nVous vous mettez alors a briller et regagnez {vie_recupere} points de vie !"
                     "\nDe plus, vous vous sentez béni par la déesse elle-même !\nVos deux prochaines attaques seront des coups critiques !"
                 )
+                if "Oeuil de Phénix" in self.modele.liste_dartefact_optionels:
+                    commentaire += "\nDe plus, votre Oeuil de Phénix s'accroche a votre poitrine et vous injecte une grosse dose de mana !"
+                    self.modele.points_de_mana = self.modele.points_de_mana_max
                 self.vue.AfficheResurrection(commentaire)
                 return True
             if self.modele.possede_une_fee:
@@ -88,6 +91,9 @@ class Control:
                         "\nLa poussiere laissée derriere par ses mouvements"
                         f" s'infiltre dans vos plaies, et vous regagnez {vie_recupere} points de vie !"
                     )
+                    if "Oeuil de Phénix" in self.modele.liste_dartefact_optionels:
+                        commentaire += "\nDe plus, votre Oeuil de Phénix s'accroche a votre poitrine et vous injecte une grosse dose de mana !"
+                        self.modele.points_de_mana = self.modele.points_de_mana_max
                     self.vue.AfficheResurrection(commentaire)
                     return True
             else:
@@ -98,10 +104,16 @@ class Control:
                         self.modele.points_de_vie = round(self.modele.points_de_vie_max * 0.1)
                         self.vue.AfficheResurrection(commentaire)
                         return True
-                if (self.modele.stigma_joueur_bonus == "Emotion au dessus des Cieux") and (type_de_laction == "Technique"):
+                elif (self.modele.stigma_joueur_bonus == "Emotion au dessus des Cieux") and (type_de_laction == "Technique"):
                     if nombre_aleatoire <= 10:
                         commentaire = "Vous sentez la vie vous quitter.\nMais vous refusez de mourir a cause d'une technique.\n \n \nAlors,\nvous ne mourrez pas."
                         self.modele.points_de_vie = round(self.modele.points_de_vie_max * 0.1)
+                        self.vue.AfficheResurrection(commentaire)
+                        return True
+                if "Echarde de Pinocchio" in self.modele.liste_dartefact_optionels:
+                    if nombre_aleatoire in [1, 2]:
+                        commentaire = "Vous sentez la vie vous quitter.\nOu pas.\n \nVotre mort durant ce combat n'etait qu'un simple mensonge. \nEn fait, vous n'avez même jamais perdu de vie !"
+                        self.modele.points_de_vie = self.modele.points_de_vie_max
                         self.vue.AfficheResurrection(commentaire)
                         return True
                 return False
@@ -171,6 +183,9 @@ class Control:
         else:
             taux_de_reussite_de_la_fuite = self.modele.taux_de_esquive + 40
             nombre_aleatoire = random.randint(0, 100)
+            if "Masque d'Oblivion" in self.modele.liste_dartefact_optionels:
+                # fuite garantie
+                nombre_aleatoire = 0
             if nombre_aleatoire > taux_de_reussite_de_la_fuite:  # fuite echec
                 commentaire = "...mais échouez."
                 self.vue.AfficheResultatFuite(commentaire)
@@ -619,7 +634,10 @@ class Control:
         self.modele.DEGATBONUSSORTTERRE = bonus_talent
         self.modele.DEGATBONUSSORTTERRE -= malus_stigma
         # degat de la lapidation
-        self.modele.DEGATLAPIDATION = 0  # %de degat supp
+        bonus_artefact = 0
+        if "Haricot Magique" in self.modele.liste_dartefact_optionels:
+            bonus_artefact = 25
+        self.modele.DEGATLAPIDATION = bonus_artefact  # %de degat supp
         # degat des attk physique
         bonus_talent = 0
         if self.modele.affinite_de_effort:
@@ -791,10 +809,13 @@ class Control:
         bonus_talent = 0
         if self.modele.ere_glaciaire:
             bonus_talent += 3
+        bonus_artefact = 0
+        if "Miette de Pain Congelée" in self.modele.liste_dartefact_optionels:
+            bonus_artefact = 2
         malus_stigma = 0
         if self.modele.stigma_monstre_bonus == "Nordique":
             malus_stigma = 100
-        self.modele.TOURBONUSENNEMIENGLACE = bonus_talent
+        self.modele.TOURBONUSENNEMIENGLACE = bonus_talent + bonus_artefact
         self.modele.TOURBONUSENNEMIENGLACE -= malus_stigma
         # tours benef pour la paralysie
         bonus_talent = 0
@@ -899,11 +920,15 @@ class Control:
         malus_alteration_etat = 0
         if self.modele.est_maudit_par_le_mana:
             malus_alteration_etat = 75
+            if "Morceau de Plomb" in self.modele.liste_dartefact_optionels:
+                malus_alteration_etat = 40
         self.modele.BONUSCOUTMALEDICTIONMANA = malus_alteration_etat
         # cout vie malediction
         malus_alteration_etat = 0
         if self.modele.est_maudit_par_la_vie or self.modele.est_maudit_par_le_gold:
             malus_alteration_etat = 10
+            if "Chaperon Rouge" in self.modele.liste_dartefact_optionels:
+                malus_alteration_etat = 6.5
         self.modele.BONUSCOUTMALEDICTIONVIEOUGOLD = malus_alteration_etat
         #chance du monstre de faire un sort critique :
         malus_stigma = 0
@@ -916,9 +941,14 @@ class Control:
     def SetNameFromLevelAndBoss(self):
         self.modele.monstre_level = self.modele.numero_de_letage
         if self.modele.monstre_EstUnBoss:
-            self.modele.monstre_nom = self.modele.liste_de_boss[
-                (self.modele.numero_de_letage - 1)
-            ]
+            if self.modele.etage_alternatif:
+                self.modele.monstre_nom = self.modele.liste_de_boss_alternatif[
+                    (self.modele.numero_de_letage - 1)
+                ]
+            else:
+                self.modele.monstre_nom = self.modele.liste_de_boss[
+                    (self.modele.numero_de_letage - 1)
+                ]
         else:
             if self.modele.numero_de_letage in [1, 2]:
                 self.modele.monstre_nom = self.modele.liste_de_monstres_etage_1_2[
@@ -1356,6 +1386,25 @@ class Control:
                 "Lamentations": "Sort", #blesse et maudit plus mana [x]
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 10, "Endurance": 10}
+        elif self.modele.monstre_nom == "Coquille Vide":
+            self.modele.stigma_monstre_positif = "Armure de Plates"
+            self.modele.stigma_monstre_negatif = "Trauma de Guerre"
+            self.modele.stigma_monstre_bonus = "Corps d'Acier"
+            self.modele.monstre_points_de_force = 8
+            self.modele.monstre_points_de_intelligence = 4
+            self.modele.monstre_points_de_resistance = 10
+            self.modele.monstre_nombre_de_vies_supplementaire = 0
+            self.modele.monstre_points_de_vie_max = 400
+            self.modele.monstre_points_de_mana_max = 15
+            self.modele.monstre_liste_actions = {
+                "Lame de Feu": "Technique", #brule
+                "Lame de Gel": "Technique", #gele
+                "Lame Pourpre": "Technique", #draine
+                "Lame Courageuse": "Technique", #gros degats
+                "Medecine de Guerre": "Technique", #soin
+                "Lamentations": "Sort", #blesse et maudit plus mana [x]
+            }
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 10, "Endurance": 10}
         elif self.modele.monstre_nom == "Roi Amonrê":
             self.modele.stigma_monstre_positif = "Bénédiction Divine"
             self.modele.stigma_monstre_negatif = "Patchwork"
@@ -1659,9 +1708,12 @@ class Control:
 
     def AfficheMonstreNiveauEtMusique(self):
         if not self.modele.monstre_EstUnBoss:
-            musique = self.modele.CHEMINABSOLUMUSIQUE + f"battle_theme_{self.modele.numero_de_letage}"
+            nom_de_la_musique =  f"battle_theme_{self.modele.numero_de_letage}"
         else:
-            musique = self.modele.CHEMINABSOLUMUSIQUE + f"boss_{self.modele.numero_de_letage}"
+            nom_de_la_musique = f"boss_{self.modele.numero_de_letage}"
+        if self.modele.etage_alternatif:
+            nom_de_la_musique += "_alt"
+        musique = self.modele.CHEMINABSOLUMUSIQUE + nom_de_la_musique
         self.vue.AfficheMonstreLevelMusique(
             self.modele.monstre_nom, self.modele.monstre_level, musique
         )
@@ -2123,6 +2175,13 @@ class Control:
                 self.modele.monstre_en_etat_de_choc = False
             else:
                 self.modele.monstre_points_de_vie -= degat
+            if "Lame Spectrale" in self.modele.liste_dartefact_optionels:
+                mana_recupere = round(self.modele.points_de_mana_max * 0.1)
+                self.modele.points_de_mana += mana_recupere
+                self.EquilibragePointsDeVieEtMana()
+                commentaire += (
+                f"\nDe plus, votre Lame Spectrale vous rapporte {mana_recupere} points de mana !"
+            )
         self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
         self.modele.monstre_passe_son_tour = False
 
@@ -2397,6 +2456,8 @@ class Control:
         # plus d'utilisation d'item
         if self.modele.est_maudit_par_les_items:
             self.modele.est_maudit_par_les_items_nombre_tour -= 1
+            if "Bague de l'Âne" in self.modele.liste_dartefact_optionels:
+                self.modele.est_maudit_par_les_items_nombre_tour = 0
             if self.modele.est_maudit_par_les_items_nombre_tour == 0:
                 self.modele.est_maudit_par_les_items = False
                 commentaire += "\nVous pouvez de nouveau utiliser vos item !"
@@ -2723,6 +2784,11 @@ class Control:
                 vie_regagnee = round(self.modele.points_de_vie_max * 0.25)
                 self.Player.points_de_vie += vie_regagnee
                 commentaire = f"Votre gemme de vie vous fait regagner {vie_regagnee} points de vie !"
+                self.vue.AfficheRecompense(commentaire)
+            if ("Marque du Tyrant" in self.Player.liste_dartefacts_optionels) and (self.modele.points_de_vie_max == self.modele.points_de_vie):
+                self.Player.points_de_vie += 1
+                self.Player.points_de_vie_max += 1
+                commentaire = f"Vous tendez la main vers le monstre, et votre Marque du Tyrant vous donne 1 point de vie max supplémentaire !"
                 self.vue.AfficheRecompense(commentaire)
             if self.modele.possede_une_gemme_magie:
                 mana_regagne = round(self.modele.points_de_mana_max * 0.25)
@@ -3925,11 +3991,23 @@ class Control:
             )
         # si affichage_raison_sort_impossible est vide, alors on peut lancer le sort et on applique son cout. sinon, on retourne la raison.
         if affichage_raison_sort_impossible == "":
-            if self.modele.malediction_du_mana:
-                degat_malediction_du_mana = self.EnleveVieAuJoueur(degat_malediction_du_mana)
-                self.vue.AfficheMaledictionMana(degat_malediction_du_mana)
-            self.modele.points_de_mana -= cout_mana
-            self.modele.nombre_de_gold -= cout_gold
+
+            nombre_aleatoire_qui_definit_si_le_sort_est_gratuit = 50
+
+            if "Serment d'Heimdall" in self.modele.liste_dartefact_optionels:
+                nombre_aleatoire_qui_definit_si_le_sort_est_gratuit = random.randint(0, 100)
+
+            if nombre_aleatoire_qui_definit_si_le_sort_est_gratuit in range(1, 4):
+                #sort gratuit
+                commentaire = "Vous sentez que le mana que vous manipulez pour lancer le sort ne vient pas de vous, mais d'un être superieur.\nVous sentez la marque de la promesse chauffer."
+                self.vue.AfficheSermentHeimdall(commentaire)
+            else:
+                if self.modele.malediction_du_mana:
+                    degat_malediction_du_mana = self.EnleveVieAuJoueur(degat_malediction_du_mana)
+                    self.vue.AfficheMaledictionMana(degat_malediction_du_mana)
+                self.modele.points_de_mana -= cout_mana
+                self.modele.nombre_de_gold -= cout_gold
+
             action_est_possible = True
             return action_est_possible, affichage_raison_sort_impossible
         else:
@@ -4367,7 +4445,7 @@ class Control:
                     self.modele.points_de_mana += mana_recu
                     self.modele.nombre_de_gold += gold_recu
                     self.modele.beni_par_feu_sacre = True
-                    self.modele.beni_par_feu_sacre_nombre_tour = 3
+                    self.modele.beni_par_feu_sacre_nombre_tour += 3
                     self.vue.AfficheFeuSacre(commentaire)
                 elif action == "Carrousel":
                     commentaire = ("Vous invoquez un carnaval magique de couleurs et de sons ! C'est la fête !")
@@ -4397,6 +4475,11 @@ class Control:
                         self.vue.AfficheCarrousel(commentaire)
                     commentaire = "Quel spectacle !"
                     self.vue.AfficheFinCarrousel(commentaire)
+            if "Ecaille d'Ouroboros" in self.modele.liste_dartefact_optionels:
+                commentaire = "l'Ecaille d'Ouroboros réagit a votre sort, et vous reprenez 2 points de vie !"
+                self.modele.points_de_vie += 2
+                self.EquilibragePointsDeVieEtMana()
+                self.vue.AfficheOuroboros(commentaire)
         else:
             # affiche que laction s'est pas passée, et pourquoi
             self.vue.AfficheActionImpossible(raison_si_action_pas_possible)
@@ -4476,6 +4559,15 @@ class Control:
                     self.modele.monstre_est_vulnerable = True
                     self.modele.monstre_est_vulnerable_nombre_tour += 3
                     self.modele.monstre_niveau_de_vulnerabilite = 2
+                if ("Gant de Midas" in self.modele.liste_dartefact_optionels) and self.modele.est_gele:
+                    commentaire_item += "De plus, l'artefact [Gant de Midas] réagit au crystal et vous soigne de votre [Gelure] !"
+                    self.modele.est_gele = False
+                    self.modele.est_gele_nombre_tour = 0
+                if ("Gant d'Héphaïstos" in self.modele.liste_dartefact_optionels) and self.modele.est_en_feu:
+                    commentaire_item += "De plus, l'artefact [Gant d'Héphaïstos] réagit au crystal et vous soigne de votre [Brulure] !"
+                    self.modele.est_en_feu = False
+                    self.modele.est_en_feu_nombre_tour = 0
+                    self.modele.est_en_feu_degat = 0
             elif nom_de_litem in ["Ambroisie", "Hydromel"]:
                 if nom_de_litem == "Ambroisie":
                     self.modele.utilise_ambroisie = True
@@ -7308,12 +7400,19 @@ class Control:
             self.modele.points_de_vie += soin
             self.EquilibragePointsDeVieEtMana()
             commentaire = f"...et reprenez {soin} points de vie."
+        if "Chapelet de Moine" in self.modele.liste_dartefact_optionels:
+            commentaire += "\nDe plus, votre chapelet se met a briller d'un feu sacré, et vous devenez [Béni] pendant 1 tour !"
+            self.modele.beni_par_feu_sacre = True
+            self.modele.beni_par_feu_sacre_nombre_tour += 2
         self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
 
 
     def EnleveVieAuJoueur(self, degat):
         if self.modele.se_defend:
-            degat = round (0.6 * degat)
+            reduction_de_degat = 0.3
+            if "Bocle de Philoctète" in self.modele.liste_dartefact_optionels:
+                reduction_de_degat = 0.5
+            degat = round ((1 - reduction_de_degat) * degat)
         degat = self.SiZeroRameneAUn(degat)
         if self.modele.metamorphose and (self.modele.nombre_de_tours in [1, 2]):
             self.vue.AfficheTalentMetamorphose()

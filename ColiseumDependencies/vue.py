@@ -967,6 +967,12 @@ class Vue:
     def AfficheSeDefendre(self, commentaire):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
+    def AfficheSermentHeimdall(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheOuroboros(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
     def AfficheMonstreEtatDeChoc(self, action):
         self.AffichageUneLignePuisUnEntreePourContinuer(f"L'ennemi tente d'utiliser le sort [{action}],"
                                                         " mais il n'a pas assez de mana ."

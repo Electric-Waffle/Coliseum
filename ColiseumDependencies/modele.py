@@ -54,6 +54,10 @@ class Model:
             self.possede_une_gemme_vie = Player.gemme_de_vie  # rend 20% de vie a la fin d'un combat
             self.possede_une_gemme_magie = Player.gemme_de_mana  # rend 20% de mana a la fin d'un combat
             self.monstre_de_lobelisque = Player.affronte_obelisque
+            if Player.nom_de_letage in ["Jungle Cruelle"]:
+                self.etage_alternatif = True
+            else:
+                self.etage_alternatif = False
 
         # alteration de letat ou influence d'artefacts
         self.sacrifice_actif = False
@@ -581,9 +585,12 @@ class Model:
             "Poussée d'Adrénaline": 30,
             "Iaido": 30,
         }
+        degat_attaque_legere = 7
+        if "Plaquette du Souvenir" in self.liste_dartefact_optionels:
+            degat_attaque_legere *= 3
         # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
         self.annuaire_de_caracteristique_des_techniques = {
-            "Attaque Légère": [95, 7, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
+            "Attaque Légère": [95, degat_attaque_legere, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
                                "...ce qui ne vous empeche pas de rater quand meme.", "..et le faites grimacer de douleur !", 
                                "et le faites reculer de plusieurs pas en arrière !!", 0, 0],
             "Lance Rapide": [80, 10, 20, 6, 8, 
@@ -1396,6 +1403,18 @@ class Model:
         self.liste_de_boss = [
             "Clone d'Obsidienne",
             "Chevalier Pourpre",
+            "Roi Amonrê",
+            "Apprenti",
+            "Bouffon",
+            "Prince des Voleurs",
+            "Roi Déchu",
+            "Maitre Mage",
+            "Amalgame",
+            "Coliseum",
+        ]
+        self.liste_de_boss_alternatif = [
+            "Clone d'Obsidienne",
+            "Coquille Vide",
             "Roi Amonrê",
             "Apprenti",
             "Bouffon",

@@ -987,6 +987,60 @@ LISTEEFFETSARTEFACT = {
     "Couronne Sacrée": {
         "Commentaire": "La Couronne d'Epine de Jésus, un symbole absolu de dévotion, l'incarnation de l'esprit au dessus du corps.\nVos points d'endurance peuvent maintenant aller dans le négatif."
     },  # endurance peut aller dans le négatifs
+    "Gant de Midas": {
+        "Commentaire": "Le gant isolant d'un roi de Phrygie qui transformait tout ce qu'il touche en or.\nRéagit à la magie dans un crystal élémentaire pour enlever l'altération d'état [Gelure]."
+    },  # enleve la gelure quand utilise un crystal élémentaire
+    "Gant d'Héphaïstos": {
+        "Commentaire": "Le gant isolant d'un dieu des Arts de la Forge.\nRéagit à la magie dans un crystal élémentaire pour enlever l'altération d'état [Brulure]."
+    },  # enleve la brulure quand utilise un crystal élémentaire
+    "Plaquette du Souvenir": {
+        "Commentaire": "Une plaquette sur laquelle sont inscrites les postures d'une ancienne version de l'attaque légère, trop forte pour son propre bien.\nL'Attaque Légère fait maintenant bien plus de dégâts."
+    },  # degats de l'attaque légère * 3
+    "Monocle de Vérité": {
+        "Commentaire": "Une race de servants royaux travaillant dans l'ombre, surentrainés, et massacrés par leurs maitres apeurés.\nCe bijou magique né de leur torture vous fait trouver 5 golds par nouvelle salle observée."
+    },  # gagne 5 gold quand observe salle
+    "Sabre du Roi de Glace": {
+        "Commentaire": "Un bout de glace a moitié fondu, ayant appartenu a un Roi reposant dans sa tombe, inutilisable en combat.\nSa magie vous protège cepandant des pièges."
+    },  # immunisé face aux pièges
+    "Bocle de Philoctète": {
+        "Commentaire": "Un petit bouclier a fixer au niveau de la paume, ayant appartenu a un faiseur de légende.\nVotre défence augmente encore plus lorsque vous vous protégez."
+    },  # defence quand se protege * 1.5
+    "Ecaille d'Ouroboros": {
+        "Commentaire": "L'écaille d'un divin serpant signifiant le renouveau et l'infini.\nVous regagnez 2 points de vie a chaque utilisation de sorts."
+    },  # Rend 2 pv par utilisation de sort
+    "Serment d'Heimdall": {
+        "Commentaire": "La marque du serment d'un dieu omniscient envers le peuple qui a continué a le prier dans le pire des moments.\nIl y a de très faibles chance qu'un sort utilise le mana de quelqu'un d'autre au lieu du votre."
+    },  # 3% de chance de ne pas utiliser de mana quand jette un sort
+    "Masque d'Oblivion": {
+        "Commentaire": "Un masque blanc, sans expressions, qui semble faire oublier la présence même de son porteur.\nLa fuite d'un combat normal est garantie."
+    },  # fuite garantie
+    "Chapelet de Moine": {
+        "Commentaire": "Le chapelet ayant appartenu a un pelerin faisant route vers l'Ouest, accompagné d'un roi singe, un porc-démon, et un moine de sable.\nVous gagnez l'altération d'état [Béni] après avoir passé votre tour. La prochaine attaque sera alors critique."
+    },  # beni quand on passe son tour
+    "Oeuil de Phénix": {
+        "Commentaire": "Une gemme représentant l'oeil d'un phénix, dans lequel on peut voir une tempête de feu noir figée.\nVous reprenez tout vos points de mana lors d'une résurrection."
+    },  # Reprend 100% mana quand resurection
+    "Echarde de Pinocchio": {
+        "Commentaire": "Un éclat de la poupée de bois qui trompe la réalitée elle même avec ses mensonges.\nVous avez une très très faible chance de revenir a la vie lorsque vous mourrez, même sans objet pour."
+    },  # Faible pourcentage de chance de ne pas mourir
+    "Voeu Cristallisé": {
+        "Commentaire": "La forme cristallisée du voeu du plus monstreux des hommes qui n'a formulé qu'une seule demande au génie en face de lui : Devenir une meilleure personne.\nVotre stigma négatif disparait a son contact."
+    },  # Efface le stigma négatif
+    "Haricot Magique": {
+        "Commentaire": "La graine d'une plante monstreuse amenant son planteur dans une dimension remplie de ses semblables, affamés et en manque de nutriments, cachée dans les nuages.\nSes racines tentaculaires cherchant le sang ne peuvent être stoppées que par une lame plantée dans la graine originelle.\nInvoque des roches depuis sa dimension d'origine, augmentant les dégâts de l'effet [Lapidation]."
+    },  # 20% de degats supplémentaires par lapidation
+    "Miette de Pain Congelée": {
+        "Commentaire": "Les seules traces d'enfants emmenés dans les sombres forêts du continent pour y être perdus par leurs parents en manque d'argent.\nLa rancoeur d'âmes pures englouties par ce qui se cache dans les bois fait durer l'altération d'état [Gelure] pendant 2 tours supplémentaires."
+    },  # gelure reste 2 tours de plus
+    "Chaperon Rouge": {
+        "Commentaire": "Un vêtement traditionnel médiéval, dont l'interieur est marqués de profondes griffures.\nRéduit le cout en vie des techniques lorsque vous êtes sous l'effet de altération d'état [Blessé]."
+    },  # Cout en vie reduit quad on est blessé
+    "Morceau de Plomb": {
+        "Commentaire": "Un morceau de plomb en forme de goutte, appartenant a un soldat de plomb lancé dans les braises du feu qui a brulé son amante : une danseuse de papier.\nLes échos de l'amour profond qu'il a ressenti dans ses derniers moments aident a rester concentré, et réduit le malus de mana de l'altération d'état [Déconcentré]."
+    },  # Cout en mana reduit quand déconcentré
+    "Bague de l'Âne": {
+        "Commentaire": "La bague d'une princesse fiancée a son propre père a son insu, que ce dernier a pu reconnaitre avant de finaliser l'union incestueuse.\nVos pensées s'éclaircissent lorsque vous tenez l'anneau, et l'altération d'état [Confus] ne vous affecte plus."
+    },  # Confusion s'arrete en 1 tour
 }
 LISTEITEMDEFENCE = [
     "Feuille Jindagee",
@@ -1109,6 +1163,9 @@ LISTEDEMUSIQUE = [
     "Conte de Fée",
     "Epineuses Rencontres",
     "Le Chevalier Qu'on Ne Veut Pas Rencontrer",
+    "Affreux Fertile",
+    "Clair de Sang",
+    "Néophobie Alimentaire",
     "Ruines d'Antan",
     "Sables Mouvants",
     "Euthanasie Régalienne",
@@ -1160,6 +1217,9 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["etage_2", "Vous écoutez "],
     ["battle_theme_2", "Vous écoutez "],
     ["boss_2", "Vous écoutez "],
+    ["etage_2_alt", "Vous écoutez "],
+    ["battle_theme_2_alt", "Vous écoutez "],
+    ["boss_2_alt", "Vous écoutez "],
     ["etage_3", "Vous écoutez "],
     ["battle_theme_3", "Vous écoutez "],
     ["boss_3", "Vous écoutez "],
@@ -1987,7 +2047,7 @@ class Affiche:
         time.sleep(0.9)
         print(f"Le mutagène se révèle être un [{recompense}] !")
         self.EntreePourContinuer()
-        PlayMusic("etage_3")
+        PlayMusicDeLetage()
 
     def IntroBoss(self, commentaire):
         print(commentaire)
@@ -2068,7 +2128,7 @@ class Affiche:
         self.EntreePourContinuer()
         print("La grille s'ouvre.\nLe Maitre des lieux s'approche.")
         self.EntreePourContinuer()
-        if Player.numero_de_letage != 8:
+        if (Player.numero_de_letage != 8) and (Player.nom_de_letage not in ["Jungle Cruelle"]):
             PlayMusic("boss_introV2")
         liste_commentaire = []
         if Player.numero_de_letage == 1:
@@ -2100,34 +2160,62 @@ class Affiche:
             )
             liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 2:
-            commentaire = (
-                "Un chevalier en armure violette saute depuis le sommet de la tour et atterit en plein milieu de l'arène."
-                "\n*C'est toi le prochain traitre ?*"
-                "\nVous le regardez avec étonnement."
-            )
-            liste_commentaire.append(commentaire)
-            commentaire = (
-                "*Fais pas semblant, je suis une bonne personne, je sais reconnaitre qui n'est ou n'est pas une menace pour le chateau.*"
-                f"\n*Toi par exemple, tu a du sang de monstre sur les mains.*\n*Je dirais que tu a massacré...{Player.nombre_de_monstres_tues} monstres.*"
-            )
-            liste_commentaire.append(commentaire)
-            commentaire = (
-                "*Tu a gouté aux joies du combat, et tu en veux plus, toujours plus.*\n*Je fais confiance a mon flair pour ca. Il m'a sauvé la mise de très nombreuses fois.*"
-                "\n*Tu es une menace pour mon roi et sa sécuritée.*\n*Tu es une menace pour le royaume et son épanouissement.*"
-                "\n*Tu es une menace pour tout ceux que tu croisera sur ton chemin.*"
-                "\nIl se tourne alors vers les spectateurs."
-            )
-            liste_commentaire.append(commentaire)
-            commentaire = (
-                "*Et quel piètre chevalier je serais si je n'arretais pas une vermine dans son genre, hein ?*"
-                "\nLe chevalier pourpre se tourne vers vous et sort une lame rongée par la rouille et la souillure."
-                "\n*Laisse tomber, l'affreux. La justice et le bien sont de mon coté. Tu n'a aucune chance de gagner.*"
-            )
-            liste_commentaire.append(commentaire)
-            commentaire = "*Car tu vois...*"
-            liste_commentaire.append(commentaire)
-            commentaire = "*...je suis le Chevalier que les gens comme toi ne veulent pas rencontrer.*"
-            liste_commentaire.append(commentaire)
+            if Player.nom_de_letage == "Jungle Cruelle":
+                mixer.quit()
+                commentaire = ("L'armure vide se rapproche de vous, et se met en position de combat.")
+                liste_commentaire.append(commentaire)
+                commentaire = ("Vous jettez un coup d'oeil au tentacule accroché a l'ennemi,"
+                               " et vous rendez compte qu'elle n'est pas seulement accrochée, mais fusionnée avec l'armure et son précédent occupant...")
+                liste_commentaire.append(commentaire)
+                if "Lame Spectrale" in Player.liste_dartefacts_optionels:
+                    commentaire = ("...que vous pouvez voir a peine respirer.\nLaisser le coeur de bois mourir n'aura donc pas suffit a sauver le pauvre homme.")
+                    liste_commentaire.append(commentaire)
+                    commentaire = ("...")
+                    liste_commentaire.append(commentaire)
+                    commentaire = ("Vous entendez une petite voix sortir avec peine du casque de l'ennemi :")
+                    liste_commentaire.append(commentaire)
+                    commentaire = (" . . . t  u  e   z     m      o       i      .       .            .            .")
+                    liste_commentaire.append(commentaire)
+                else:
+                    commentaire = ("...dont vous apercevez les restes asséchés. La racine a pompé toute l'énergie du pauvre homme.")
+                    liste_commentaire.append(commentaire)
+                    commentaire = ("Ce n'est qu'une poupée de chair controllée par un systeme biologique malicieux.")
+                    liste_commentaire.append(commentaire)
+                    commentaire = ("Une simple...")
+                    liste_commentaire.append(commentaire)
+                    commentaire = ("...Coquille...")
+                    liste_commentaire.append(commentaire)
+                    commentaire = ("......vide.")
+                    liste_commentaire.append(commentaire)
+            else:
+                commentaire = (
+                    "Un chevalier en armure violette saute depuis le sommet de la tour et atterit en plein milieu de l'arène."
+                    "\n*C'est toi le prochain traitre ?*"
+                    "\nVous le regardez avec étonnement."
+                )
+                liste_commentaire.append(commentaire)
+                commentaire = (
+                    "*Fais pas semblant, je suis une bonne personne, je sais reconnaitre qui n'est ou n'est pas une menace pour le chateau.*"
+                    f"\n*Toi par exemple, tu a du sang de monstre sur les mains.*\n*Je dirais que tu a massacré...{Player.nombre_de_monstres_tues} monstres.*"
+                )
+                liste_commentaire.append(commentaire)
+                commentaire = (
+                    "*Tu a gouté aux joies du combat, et tu en veux plus, toujours plus.*\n*Je fais confiance a mon flair pour ca. Il m'a sauvé la mise de très nombreuses fois.*"
+                    "\n*Tu es une menace pour mon roi et sa sécuritée.*\n*Tu es une menace pour le royaume et son épanouissement.*"
+                    "\n*Tu es une menace pour tout ceux que tu croisera sur ton chemin.*"
+                    "\nIl se tourne alors vers les spectateurs."
+                )
+                liste_commentaire.append(commentaire)
+                commentaire = (
+                    "*Et quel piètre chevalier je serais si je n'arretais pas une vermine dans son genre, hein ?*"
+                    "\nLe chevalier pourpre se tourne vers vous et sort une lame rongée par la rouille et la souillure."
+                    "\n*Laisse tomber, l'affreux. La justice et le bien sont de mon coté. Tu n'a aucune chance de gagner.*"
+                )
+                liste_commentaire.append(commentaire)
+                commentaire = "*Car tu vois...*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*...je suis le Chevalier que les gens comme toi ne veulent pas rencontrer.*"
+                liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 3:
             commentaire = (
                 "L'arène se met alors a trembler, et le sable commence a s'écouler par les cotés."
@@ -2456,12 +2544,22 @@ class Affiche:
                 "\nVous voici au premier étage du Coliseum , une ruine mal entretenue."
             )
         elif Player.numero_de_letage == 2:
-            commentaire = (
-                "Vous laissez derrière vous le donjon de pierre fragile, et voyez perler sur le plafond des gouttes d'eau."
-                "\nUne masse informe de plantes extravagantes poussant dans les interstices entre les briques,"
-                "\nune arène envahie par les mauvaises herbes, et une tour de chateau au dessus de la sortie vous attendent en bas."
-                "\nVous voici au deuxieme étage du Coliseum , une forêt (dés)enchantée."
-            )
+            if Player.nom_de_letage == "Jungle Cruelle" :
+                commentaire = (
+                    "Vous laissez derrière vous le donjon de pierre fragile, et voyez perler sur le plafond des gouttes de...sang ?"
+                    "\nUne masse horrible de plantes aux aspects repoussants s'infiltrant dans les moindres interstices,"
+                    "\ndes fleurs sur lequelles se dessinent des visages de mort et des yeux percants,"
+                    "\nune arène envahie par des racines mouvantes, pulsantes, et des monceaux de briques éclatés vous attendent en bas."
+                    "\nAu centre de tout cela, une armure de chevalier maintenue dans les airs par un puissant tentacule de bois semble attendre que vous croisez sa route."
+                    "\nVous voici au deuxieme étage du Coliseum , une jungle assassine, assoifée de sang."
+                )
+            else:
+                commentaire = (
+                    "Vous laissez derrière vous le donjon de pierre fragile, et voyez perler sur le plafond des gouttes d'eau."
+                    "\nUne masse informe de plantes extravagantes poussant dans les interstices entre les briques,"
+                    "\nune arène envahie par les mauvaises herbes, et une tour de chateau au dessus de la sortie vous attendent en bas."
+                    "\nVous voici au deuxieme étage du Coliseum , une forêt (dés)enchantée."
+                )
         elif Player.numero_de_letage == 3:
             commentaire = (
                 "Vous laissez derrière vous l'humiditée excessive, et entendez un bruissement sourd."
@@ -2605,6 +2703,8 @@ class PlayerCaracteristics:
         self.liste_dartefacts_optionels = []
         self.nombre_de_sacrifices = 0
         self.affronte_obelisque = False
+        self.nom_de_letage = "Aucunes Données Utilisables"
+        self.etage_alternatif = False
 
     def UseCharacterForInitCaracteristics(self, caracteristiques):
         self.nom_du_personnage = caracteristiques[0]
@@ -2907,6 +3007,16 @@ class DrawInTurtle:
         forward(7)
         right(180)
 
+    def puit(self):
+        forward(12)
+        left(90)
+        down()
+        circle(12)
+        up()
+        left(90)
+        forward(12)
+        right(180)
+
     def piege(self):
         down()
         right(45)
@@ -3154,19 +3264,37 @@ class DrawInTurtle:
         forward(0.5)
         right(90)
 
-    def G(self):
-        backward(2)
-        self.A()
-        right(90)
+    def coeur(self):
+        forward(2)
         down()
-        forward(6)
+        left(90)
+        forward(3)
+        backward(6)
+        forward(3)
         right(90)
-        forward(4)
+        forward(5)
+        left(90)
+        forward(10)
+        left(90)
+        forward(15)
+        left(90)
+        forward(10)
+        left(90)
+        forward(3)
+        left(90)
+        forward(3)
+        backward(6)
+        forward(3)
+        right(90)
+        backward(5)
+        right(90)
+        forward(10)
+        left(90)
+        forward(15)
+        left(90)
+        forward(10)
         up()
-        backward(4)
-        right(90)
-        forward(6)
-        right(90)
+        setheading(90)
 
     def e(self):
         forward(5)
@@ -3353,7 +3481,6 @@ class DrawInTurtle:
         right(90)
         up()
         backward(4)
-
 
     def Af(self):
         forward(4)
@@ -3917,6 +4044,10 @@ class Floor:
                     Draw.sequence()
                 elif caracteristique_de_la_salle["type"] == "DDR":
                     Draw.ddr()
+                elif caracteristique_de_la_salle["type"] == "PUIT":
+                    Draw.puit()
+                elif caracteristique_de_la_salle["type"] == "COEUR":
+                    Draw.coeur()
                 elif caracteristique_de_la_salle["type"] == "RITUEL":
                     Draw.rituel()
                 elif caracteristique_de_la_salle["type"] == "OBELISQUE":
@@ -3964,6 +4095,10 @@ class Floor:
                     break
             self.UpdatePlayerPosition()
 
+    def UseMonocleDeVerite(self):
+        if "Monocle de Vérité" in Player.liste_dartefacts_optionels:
+            Player.nombre_de_gold += 5
+
     def RevealRoom(self):
         caracteristique_de_la_salle = self.FloorBlueprint[Player.numero_de_la_salle]
         if caracteristique_de_la_salle["terminé par joueur"] == True:
@@ -3978,6 +4113,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.monstre()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 # lance le combat
@@ -3989,7 +4125,7 @@ class Floor:
                     control.Battle()
                 except Exception as error:
                     WriteErrorInErrorLog(error)
-                PlayMusic(f"etage_{Player.numero_de_letage}")
+                PlayMusicDeLetage()
 
                 # fait que l'event soit finit et ne peut ps etre relancé
                 caracteristique_de_la_salle["terminé par joueur"] = True
@@ -3997,6 +4133,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.gold()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
                 print("Vous trouvez un sac de gold caché sous une table.")
                 gain_gold = 50 * Player.numero_de_letage
@@ -4009,7 +4146,9 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.item()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
+
                 print("Vous trouvez une vieille caisse de provision.")
                 print(
                     "La plupart des objets sont irrécupérables, a peine des amas de rouilles et de pourriture."
@@ -4028,7 +4167,9 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.key()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
+
                 print(
                     "Vous trouvez une salle vide, sauf pour une étrange substance flottant dans les airs."
                 )
@@ -4046,7 +4187,9 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.ley()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
+
                 print(
                     "Alors que vous fouillez la pièce, vous ressentez une immense puissance dans le sol."
                 )
@@ -4112,6 +4255,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.mimique()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 print("Vous trouvez un coffre !")
@@ -4152,7 +4296,7 @@ class Floor:
                     except Exception as error:
                         WriteErrorInErrorLog(error)
                     Player.affronte_une_mimique = False
-                    PlayMusic(f"etage_{Player.numero_de_letage}")
+                    PlayMusicDeLetage()
 
                     # fait que l'event soit finit et ne peut ps etre relancé
                     caracteristique_de_la_salle["terminé par joueur"] = True
@@ -4163,6 +4307,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.piege()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 print(
@@ -4172,31 +4317,173 @@ class Floor:
                     "Aussitot, des arbalètes sournoises, cachées dans les murs, vous criblent de flèches !"
                 )
                 Affichage.EntreePourContinuer()
-                degat = round(Player.points_de_vie_max * 0.33)
-                Player.points_de_vie -= degat
-                print(f"Vous perdez {degat} points de vie.")
-                Affichage.EntreePourContinuer()
-                if Player.points_de_vie <= 0:
-                    mixer.quit()
-                    PlaySound("death")
-                    print("Vous échouez a stopper le saignement, et perdez la vie.")
+                if not ("Sabre du Roi de Glace" in Player.liste_dartefacts_optionels):
+                    degat = round(Player.points_de_vie_max * 0.33)
+                    Player.points_de_vie -= degat
+                    print(f"Vous perdez {degat} points de vie.")
                     Affichage.EntreePourContinuer()
-                    Affichage.ShowDeath()
-                print(
-                    "Le piège se ré-enclenche.\nEvitez de fouiller cette salle dans le futur !"
-                )
-                Affichage.EntreePourContinuer()
+                    if Player.points_de_vie <= 0:
+                        mixer.quit()
+                        PlaySound("death")
+                        print("Vous échouez a stopper le saignement, et perdez la vie.")
+                        Affichage.EntreePourContinuer()
+                        Affichage.ShowDeath()
+                    print(
+                        "Le piège se ré-enclenche.\nEvitez de fouiller cette salle dans le futur !"
+                    )
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("Cepandant, des éclats de glace se forment aux endroits ou les flèches auraient du se planter.")
+                    print("De plus, avant que les arbalettes ne puissent battre en retraite dans les murs de la salle, un froid glacial les éclate par gélifraction.")
+                    Affichage.EntreePourContinuer()
+                    print("Vous n'aurez plus a vous soucier de cette salle désormais.")
+                    Affichage.EntreePourContinuer()
+                    # fait que l'event soit finit et ne peut ps etre relancé
+                    caracteristique_de_la_salle["terminé par joueur"] = True
             elif caracteristique_de_la_salle["type"] == "SECRET":  # DONE
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.secret()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 Observation.SeeSomething()
+            elif caracteristique_de_la_salle["type"] == "COEUR":
+                # dessine la salle, si ce n'est pas fait
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.coeur()
+                    self.UseMonocleDeVerite()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+
+                print("Vous arrivez dans une clairière artificielle, au centre de laquelle se tient une lame magnifique encastrée dans un rocher.")
+                print("Loin au dessus du rocher, vous apercevez une ouverture cerclée de vieille pierre.")
+                Affichage.EntreePourContinuer()
+                print("Les racines des arbres environnant semblent converger au niveau du rocher.")
+                while True:
+                    try:
+                        print("Que faire ?")
+                        print("\n1 - S'éloigner\n2 - Retirer la lame")
+                        choix = int(
+                            input("\nChoisissez votre action avec les nombres : ")
+                        )
+                        ClearConsole()
+                        if choix in [1, 2]:
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    print("Vous vous éloignez de la clairière.")
+                    Affichage.EntreePourContinuer()
+                else:
+                    print("Vous vous approchez de la roche, et posez vos main sur le paumeau de l'épée.")
+                    if Player.nom_de_letage == "Jungle Cruelle":
+                        print("Aussitot, les sons de la forêt se taisent.")
+                        Affichage.EntreePourContinuer()
+                        print("Vous sentez les arbres pale étendre les racines sous la surface du sol, comme pour tenter de vous attraper, ou de vous arreter.")
+                        Affichage.EntreePourContinuer()
+                        print("Des cris a glacer le sang émanent de tout les cotés, et vous remarquez enfin la grosse tache de sang tout autour du rocher, a moitié absorbée.")
+                        Affichage.EntreePourContinuer()
+                        print("Votre poul s'accélère, et vous tirez de toutes vos forces sur la lame...")
+                        Affichage.EntreePourContinuer()
+                        print("..qui finit enfin par sortir de son fourreau de pierre, révélant en dessous un coeur de bois se vidant d'une sève couleur cendre.")
+                        Affichage.EntreePourContinuer()
+                        print("Les cris se taisent, et la forêt meurt.")
+                        Affichage.EntreePourContinuer()
+                        print("Alors que vous prenez enfin toute la gravité de vos actions, vous observez la lame, qui luit doucement dans votre main.")
+                        print("Son apparence trompeuse a laissé place a un artefact rongé par la rouille, mais qui semble attirer le mana.")
+                        Affichage.EntreePourContinuer()
+                        print("Vous obtenez l'artefact [Lame Spectrale] !")
+                        print("Lorsqu'un ennemi brise son réservoir de mana, vous retrouvez jusqu'à 30% de vos points de mana maximum !")
+                        caracteristique_de_la_salle["terminé par joueur"] = True
+                        Player.liste_dartefacts_optionels.append("Lame Spectrale")
+                        Affichage.EntreePourContinuer()
+                        print("Vous vous éloignez de la clairière.")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("Aussitot, les sons de la forêt se taisent.")
+                        Affichage.EntreePourContinuer()
+                        print("Un vent violent se lève, alors que vous soulevez la lame de son piédestal.")
+                        Affichage.EntreePourContinuer()
+                        print("Vous finissez par sortir entièrement l'épée de son rocher, et découvrez en dessous un coeur de bois désséché dans lequel le métal était planté.")
+                        Affichage.EntreePourContinuer()
+                        print("Et alors que vous observez votre nouvelle arme...")
+                        Affichage.EntreePourContinuer()
+                        print("...Zeroual grandit...")
+                        Affichage.EntreePourContinuer()
+                        print("...enveloppe l'arme...")
+                        Affichage.EntreePourContinuer()
+                        print("...et l'avale d'un coup.")
+                        Affichage.EntreePourContinuer()
+                        print("La ou se tenait auparavant un artefact splendide arraché a un lieu magique, il y a maintenant une marque ésotérique gravée sur la peaume de votre main.")
+                        Affichage.EntreePourContinuer()
+                        print("Vous obtenez l'artefact [Marque du Tyrant] !")
+                        print("Lorsque vous finissez un combat avec toute votre vie, vous gagnez un point de vie max supplémentaire !")
+                        print("De plus, le nombre de monstre que vous avez tué augmente de 5, pour une raison quelquonque !")
+                        caracteristique_de_la_salle["terminé par joueur"] = True
+                        Player.liste_dartefacts_optionels.append("Marque du Tyrant")
+                        Player.nombre_de_monstres_tues += 5
+                        Affichage.EntreePourContinuer()
+                        print("Vous vous éloignez de la clairière.")
+                        Affichage.EntreePourContinuer()
+            elif caracteristique_de_la_salle["type"] == "PUIT":
+                if not caracteristique_de_la_salle["marqué sur la carte"]:
+                    Draw.puit()
+                    self.UseMonocleDeVerite()
+                    caracteristique_de_la_salle["marqué sur la carte"] = True
+
+                print("Vous apercevez un puit singulier, fait de vieille pierre.")
+                Affichage.EntreePourContinuer()
+                print("Au fond de celui-ci, vous apercevez les contours d'un rocher entouré d'un tapis de verdure")
+                Affichage.EntreePourContinuer()
+                print("Dans le seau porté au dessus du précipice par une corde solide se trouve un liquide carmin, visqueux.")
+                Affichage.EntreePourContinuer()
+                while True:
+                    try:
+                        print("Que faire ?")
+                        print("\n1 - S'éloigner du puit\n2 - Boire le contenu du seau\n3 - Vider le seau dans le puit")
+                        choix = int(
+                            input("\nChoisissez votre action avec les nombres : ")
+                        )
+                        ClearConsole()
+                        if choix in [1, 2, 3]:
+                            break
+                    except ValueError:
+                        ClearConsole()
+                if choix == 1:
+                    print("Vous vous éloignez du puit.")
+                    Affichage.EntreePourContinuer()
+                elif choix == 2:
+                    print("Vous approchez le seau de vos lèvres, et vos narines sont assaillies par une puissante odeur métallique.")
+                    Affichage.EntreePourContinuer()
+                    print("Vous persévérez, et bientôt le liquide froid coule dans votre gorge...")
+                    Affichage.EntreePourContinuer()
+                    print("...et c'était très nutritif !\nVous gagnez 5 points de vie max !")
+                    caracteristique_de_la_salle["terminé par joueur"] = True
+                    Player.points_de_vie += 5
+                    Player.points_de_vie_max += 5
+                    Affichage.EntreePourContinuer()
+                    print("Vous vous éloignez du puit.")
+                    Affichage.EntreePourContinuer()
+                elif choix == 3:
+                    print("Vous prenez le seau a deux mains, et déversez son contenu dans le puit.")
+                    Affichage.EntreePourContinuer()
+                    print("Tout au fond, vous apercezvez le tapis de verdure se teindre de rouge.")
+                    Affichage.EntreePourContinuer()
+                    print("Tout a coup, de grandes secousses et un cris a glacer le sang se fait entendre, et des racines jaillissent des murs du puit pour en obstruer la vue !")
+                    Affichage.EntreePourContinuer()
+                    print("Vous avez le terrible sentiment que quelque chose de végétal, en dessous, vient de se réveiller.")
+                    Affichage.EntreePourContinuer()
+                    print("L E  P R O C H A I N  E T A G E  C H A N G E  D E  P R O P R I E T A I R E       ;-)\n")
+                    caracteristique_de_la_salle["terminé par joueur"] = True
+                    Player.etage_alternatif = True
+                    Affichage.EntreePourContinuer()
+                    print("Vous vous éloignez du puit.")
+                    Affichage.EntreePourContinuer()
             elif caracteristique_de_la_salle["type"] == "LIANE":  # DONE
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.liane()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 print(
@@ -4228,6 +4515,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.spot()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 print(
@@ -4235,7 +4523,7 @@ class Floor:
                     "\nElle ressemble à ce que l'on peut trouver sur une carte aux trésors !"
                 )
                 Affichage.EntreePourContinuer()
-                # si on a la machette rouillee, on peut liberer le coffre
+                # si on a la Vieille Pelle, on peut liberer le coffre
                 if "Vieille Pelle" in Player.liste_dartefacts_optionels:
                     Player.liste_dartefacts_optionels.remove("Vieille Pelle")
                     # fait que l'event soit finit et ne peut ps etre relancé
@@ -4264,6 +4552,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.sequence()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 # determine une sequence aléatoire si yen a pas deja une
@@ -4385,6 +4674,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.ddr()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 print("La salle est remplie de jeux d'arcades aux thêmes divers et variés, mais les carcasses de métal et de peinture sont presque toutes inopérables.")
@@ -4433,7 +4723,7 @@ class Floor:
                         else:
                             print("Vous vous éloignez de la machine et reprenez votre souffle.")
                             Affichage.EntreePourContinuer()
-                        PlayMusic("etage_5")
+                        PlayMusicDeLetage()
                     else:
                         print("Vous videz vos poches, mais ne trouvez pas assez d'argent pour jouer.")
                         Affichage.EntreePourContinuer()
@@ -4458,6 +4748,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.broken()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 print("Vous trouvez une... bien étrange machine.")
@@ -4488,6 +4779,7 @@ class Floor:
                 # dessine la salle, si ce n'est pas fait
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.rituel()
+                    self.UseMonocleDeVerite()
                     caracteristique_de_la_salle["marqué sur la carte"] = True
 
                 if not "Griffes du Démon" in Player.techniques_possedes:
@@ -4670,6 +4962,7 @@ class Floor:
                 if not caracteristique_de_la_salle["marqué sur la carte"]:
                     Draw.obelisque(caracteristique_de_la_salle["position_x"] * 25, caracteristique_de_la_salle["position_y"] * 25)
                     caracteristique_de_la_salle["marqué sur la carte"] = True
+                    self.UseMonocleDeVerite()
 
                 print("Vous trouvez un bien étrange obélisque au centre d'une pièce plus grande que les autres.")
                 print("Construit en verre, vous pouvez apercevoir un petit coffre de bois noir au milieu.")
@@ -4737,7 +5030,7 @@ class Floor:
                     self.GiveRandomArtefact()
                     print("Les portes de la salle se rouvrent.")
                     Affichage.EntreePourContinuer()
-                    PlayMusic("etage_8")
+                    PlayMusicDeLetage()
 
         #rajoute le numéro de la salle observée a la liste des dernieres salles observées
         self.liste_des_salles_observées.append(Player.numero_de_la_salle)
@@ -4996,6 +5289,24 @@ class Floor:
             "Don Sanguin",  # redcoin x2
             "Don Physique",  # redcoin x2
             "Don Astral",  # redcoin x2
+            "Gant de Midas", # enleve la gelure quand utilise un crystal élémentaire
+            "Gant d'Héphaïstos", # enleve la brulure quand utilise un crystal élémentaire
+            "Plaquette du Souvenir", # degats de l'attaque légère * 3
+            "Monocle de Vérité",  # gagne 5 gold quand observe salle
+            "Sabre du Roi de Glace", # immunisé face aux pièges
+            "Bocle de Philoctète",  # defence quand se protege * 1.5
+            "Ecaille d'Ouroboros",  # Rend 2 pv par utilisation de sort
+            "Serment d'Heimdall",  # 3% de chance de ne pas utiliser de mana quand jette un sort
+            "Masque d'Oblivion",  # fuite garantie
+            "Chapelet de Moine",  # beni quand on passe son tour
+            "Oeuil de Phénix",  # Reprend 100% mana quand resurection
+            "Echarde de Pinocchio",  # Faible pourcentage de chance de ne pas mourir
+            "Voeu Cristallisé",  # Efface le stigma négatif
+            "Haricot Magique",  # 20% de degats supplémentaires par laidation
+            "Miette de Pain Congelée",  # gelure reste 2 tours de plus
+            "Chaperon Rouge",  # Cout en vie reduit quad on est blessé
+            "Morceau de Plomb",  # Cout en mana reduit quand déconcentré
+            "Bague de l'Âne",  # Confusion s'arrete en 1 tour
         ]
 
         # enleve la liste les artefacts que l'on possède déja
@@ -5071,6 +5382,8 @@ class Floor:
                 Player.nombre_de_red_coin += liste_recompense[cle]
                 commentaire = f"Vous gagnez {liste_recompense[cle]} Red Coin !"
             print(commentaire)
+        if "Voeu Cristallisé" in Player.liste_dartefacts_optionels:
+            Player.stigma_negatif = "[Purifié]"
         Affichage.EntreePourContinuer()
 
     def InitiateRoleToAttribute(self):
@@ -5082,10 +5395,18 @@ class Floor:
         self.nombre_de_secret = 1
         self.nombre_de_cle = 1
         self.nombre_de_leys = Player.numero_de_letage // 3 + 1
+        #evenement de letage 1 : corrompre la foret pour gagner des trucs de magie
+        self.nombre_de_puit = 0
+        if Player.numero_de_letage == 1:
+            self.nombre_de_puit = 1
         # artefact de letage 2 (liane : besoin de machette rouillee)
         self.nombre_de_coffres_en_lianes = 0
         if Player.numero_de_letage == 2:
             self.nombre_de_coffres_en_lianes = 2
+        # objet de letage 2 selon alt ou pas
+        self.nombre_de_coeur = 0
+        if Player.numero_de_letage == 2:
+            self.nombre_de_coeur = 1
         # artefact de letage 3 (5 spots, 2 artefacts, besoin de pelle rouillee pour ouvrir 1 spot)
         self.nombre_de_faux_spot = 0
         self.nombre_de_spot = 0
@@ -5137,6 +5458,12 @@ class Floor:
         elif self.nombre_de_leys != 0:
             caracteristique_de_la_salle["type"] = "LEY"
             self.nombre_de_leys -= 1
+        elif self.nombre_de_puit != 0:
+            caracteristique_de_la_salle["type"] = "PUIT"
+            self.nombre_de_puit -= 1
+        elif self.nombre_de_coeur != 0:
+            caracteristique_de_la_salle["type"] = "COEUR"
+            self.nombre_de_coeur -= 1
         elif self.nombre_de_cle != 0:
             caracteristique_de_la_salle["type"] = "KEY"
             self.nombre_de_cle -= 1
@@ -5500,7 +5827,7 @@ class Observe:
             print("La cage est ici.")
             print("Mais l'oie s'est envolée ailleurs.")
             Affichage.EntreePourContinuer()
-            PlayMusic("etage_7")
+            PlayMusicDeLetage()
 
     def DonneRecompensePourOubli(self, action_a_oublier, type_daction):
         # trouve le niveau de laction oubliée
@@ -5663,7 +5990,7 @@ class Observe:
                     Player.quete_complete.remove("None")
                 Player.quete = "None"
                 Affichage.EntreePourContinuer()
-                PlayMusic("etage_6")
+                PlayMusicDeLetage()
                 print(
                     "*Ceux la sont gratuits, mais les autres ne le seront pas. Ho ho ho !*"
                 )
@@ -6087,7 +6414,7 @@ class Observe:
         )
         Affichage.EntreePourContinuer()
         print(
-            "*C'était il y a très longtemps.\nUn âge tellement reculé que personne ne s'en souvient.*"
+            "*C'était il y a très longtemps.*\n*Un âge tellement reculé que personne ne s'en souvient.*"
         )
         print(
             "*Enfaite, cette histoire vient d'images retrouvées dans d'anciens temples enfouis, pour te dire a quel point c'est vieux.*"
@@ -6112,7 +6439,7 @@ class Observe:
         )
         Affichage.EntreePourContinuer()
         print(
-            "*C'est une batisse abritant les dieux, créee a partir d'un joyau, d'une pièce, du coeur d'un ange, ou de l'oeil d'un guerrier.*"
+            "*C'est une batisse abritant les dieux, crée a partir d'un joyau, d'une pièce, du coeur d'un ange, ou de l'oeil d'un guerrier.*"
         )
         Affichage.EntreePourContinuer()
         print(
@@ -6191,7 +6518,7 @@ class Observe:
         print("(Appuyez sur entrée pour continuer)")
         time.sleep(1)
         ClearConsole()
-        PlayWavSound("spell_cast")
+        PlayWavSound("ELECm")
         Player.quest_giver = False
         Save.SaveTheGameSansAffichage()
         print("Un gigantesque éclair s'abat sur la chose de métal.")
@@ -6202,7 +6529,7 @@ class Observe:
             "Vous regardez le cratère fumant devant vous pendant quelques minutes, horrifié, et quittez les lieux en courant."
         )
         Affichage.EntreePourContinuer()
-        PlayMusic("etage_5")
+        PlayMusicDeLetage()
 
     def DonneRecompenseQuete(self):
         if Player.quete == "Voeu de Pauvreté [Complete]":
@@ -6330,7 +6657,7 @@ class Observe:
                     Save.FromDictToSaveFile("\\save.txt")
                     print("REECRITURE TERMINEE")
                     Affichage.EntreePourContinuer()
-                    PlayMusic("etage_4")
+                    PlayMusicDeLetage()
 
     def AbsorptionParBloodStone(self):
         print("Vous prenez la pierre dans la main et sentez votre énergie s'évaporer.")
@@ -7029,7 +7356,7 @@ class Observe:
         Affichage.EntreePourContinuer()
         print("L'eau y est maintenant noire.")
         Affichage.EntreePourContinuer()
-        PlayMusic("etage_3")
+        PlayMusicDeLetage()
         print("...")
 
     def DoTheFountain(self):
@@ -7107,7 +7434,7 @@ class Observe:
                         "Vous laissez...ça...derrière vous et repartez d'ou vous venez en courant."
                     )
                     Affichage.EntreePourContinuer()
-                    PlayMusic("etage_2")
+                    PlayMusicDeLetage()
                     break
                 elif choix == 666:
                     print(
@@ -7174,7 +7501,7 @@ class Observe:
                     Affichage.AfficheAvecUnTempsDattente(3.5)
                     print("Vou-")
                     Affichage.AfficheAvecUnTempsDattente(0.1)
-                    PlayMusic("etage_2")
+                    PlayMusicDeLetage()
                     print(
                         "Votre peau se met a picoter, et vous hésitez quelques secondes avant d'engloutir le liquide magique."
                     )
@@ -7632,7 +7959,7 @@ class Observe:
             "jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable"
             in liste_de_sorts_enregistres
         ):
-            PlayMusic(f"etage_{Player.numero_de_letage}")
+            PlayMusicDeLetage()
 
     def GetPermanentThingsFromS0ve(self):
         dictionnaire_de_choses_permanentes = {}
@@ -7794,6 +8121,7 @@ class SaveManagement:
         )
         self.dictionnaire_de_sauvegarde["Donneur de quetes"] = Player.quest_giver
         self.dictionnaire_de_sauvegarde["Possede la clé"] = Player.possede_la_cle
+        self.dictionnaire_de_sauvegarde["Etage alternatif"] = Player.etage_alternatif
         self.dictionnaire_de_sauvegarde["Blueprint de l'étage"] = (
             FloorMaker.FloorBlueprint
         )
@@ -7802,6 +8130,9 @@ class SaveManagement:
         )
         self.dictionnaire_de_sauvegarde["Nombre de Sacrifices"] = (
             Player.nombre_de_sacrifices
+        )
+        self.dictionnaire_de_sauvegarde["Nom de l'étage"] = (
+            Player.nom_de_letage
         )
 
     def FromDictToPlayer(self):
@@ -7895,6 +8226,11 @@ class SaveManagement:
                 "Commentaire pour l'affichage du Boss dans le menu"
             ]
         ).strip('"')
+        Player.nom_de_letage = (
+            self.dictionnaire_de_sauvegarde[
+                "Nom de l'étage"
+            ]
+        ).strip('"')
         Player.nombre_dennemis_a_letage = int(
             self.dictionnaire_de_sauvegarde["Nombre d'ennemis restant a l'étage"]
         )
@@ -7931,6 +8267,9 @@ class SaveManagement:
         )
         Player.possede_la_cle = ast.literal_eval(
             self.dictionnaire_de_sauvegarde["Possede la clé"]
+        )
+        Player.etage_alternatif = ast.literal_eval(
+            self.dictionnaire_de_sauvegarde["Etage alternatif"]
         )
         Player.gold_in_well = int(
             self.dictionnaire_de_sauvegarde["Nombre de Gold dans l'étang"]
@@ -8045,7 +8384,7 @@ def GetMenuPrincipalChoice():
     print("                                 /                  \ ")
     print("                                /                    \ ")
     print("                               /     1 - Nouvelle Partie")
-    print("                              /      2 - Continuer     \ ")
+    print(f"                              /      2 - Continuer : [{Player.nom_de_letage}] ")
     print("                             /       3 - Tutoriel       \ ")
     print("                            /                            \ ")
     print("                           /                              \ ")
@@ -8074,7 +8413,7 @@ def PlaySound(musique):
 
 def PlayWavSound(musique):
     dir_path = Player.chemin_musique
-    musique = dir_path + f"\\{musique}.wav"
+    musique = dir_path + f"\\sfx\\{musique}.wav"
     mixer.init()
     mixer.music.load(musique)
     mixer.music.play()
@@ -8208,7 +8547,7 @@ def ShowRecup():
         456852,
         3236353,
         313,
-        19,
+        22,
         935284761,
         5321139741,
         7415321139,
@@ -8260,99 +8599,10 @@ def ShowRecup():
         open_image(f"{chemin_de_limage}{nom_de_limage}.xldr")
     else:
         print("                           Donnée Récupérée :")
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15szfdaqsxsdfadza33e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5fzr59168126s1ef6s5g12r65313s0fe6zfesrfesrgfefsef16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15zadazdzadzsdz6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6adzdazdadazda3e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3th4d9hd1g6e6d52u964kj,9u8njgh6fd5r1s6j1gu85yhe653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wgseh8g71sr6hju9i6mo1ikh6ugjhy1tdg9rs6f216rrj82tu9j61i9r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
-        print(
-            "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
-        )
+        for _ in range (0, 21):
+            print(
+                "zq4f15sr6wz3f5qe1fs6533e5.2f6e53s1f65ze1qe1fz6f12q6ef531ze653f16r84g61esf5"
+            )
     Affichage.EntreePourContinuer()
 
 
@@ -8483,8 +8733,9 @@ def ShowTutorial():
     print("                    { Tutoriel }")
     print("            { Partie 5 : Les Combats }")
     print(
-        "\nLe Coliseum s'explore en deux temps : "
+        "\nLe Coliseum s'explore en trois temps : "
         "\nLe temps de repos, ou menu d'étage, qui permet de choisir ses actions"
+        "\nLe temps d'observation, afin d'observer toute les salles de l'étage pour trouver objets, artefacts, et salles particulières."
         "\nLe temps de combat, pour devenir plus fort ou battre le boss."
     )
     print("\nEn temps de combat, tout se déroule au tour par tour.")
@@ -8580,6 +8831,7 @@ def MenuDeDemarrage(Player):
             if personnage_a_ete_choisi:
                 try:
                     # sauvegarde et charge le personnage choisi
+                    Player.nom_de_letage = "Ruines Abandonnées"
                     Save.FromPlayerToDict()
                     Save.FromDictToSaveFile("\\save.txt")
                     Save.FromSaveFileToDict()
@@ -8626,7 +8878,7 @@ def ShowObservatorium():
                     if choix in range(1, (len(LISTEDEMUSIQUE)) + 2):
                         break
                 else:
-                    if choix in range(1, 38) or choix == 11525:
+                    if choix in range(1, 41) or choix == 11525:
                         break
             except ValueError:
                 ClearConsole()
@@ -8637,7 +8889,7 @@ def ShowObservatorium():
             mixer.quit()
             observatorium_complet = True
             print(
-                "Les confins de l'observatorium s'ouvrent a vous, qui avez triomphé des ténèbres au prix de votre âme."
+                "Les confins de l'observatorium s'ouvrent a vous, voyageurs sur une mer d'encre a la recherche de la véritée."
             )
             Affichage.EntreePourContinuer()
         else:
@@ -8660,7 +8912,7 @@ def ShowMenuObservatorium(observatorium_complet):
     for nom_musique in LISTEDEMUSIQUE:
         print(f"{numero_affichage} - {nom_musique}")
         numero_affichage += 1
-        if numero_affichage == 38 and not observatorium_complet:
+        if numero_affichage == 41 and not observatorium_complet:
             break
     return int(input("\nChoisissez la musique avec les nombres : "))
 
@@ -8710,7 +8962,7 @@ def DoFight():
             Player.nombre_dennemis_a_letage -= 1
         except Exception as error:
             WriteErrorInErrorLog(error)
-        PlayMusic(f"etage_{Player.numero_de_letage}")
+        PlayMusicDeLetage()
     # plus dennemi a combattre
     else:
         Affichage.AffichePlusDennemis()
@@ -8768,7 +9020,7 @@ def DoBossFight():
             Player.commentaire_boss = "Descendre a l'étage inferieur"
         except Exception as error:
             WriteErrorInErrorLog(error)
-        PlayMusic(f"etage_{Player.numero_de_letage}")
+        PlayMusicDeLetage()
     else:
         print(
             "Vous rentrez dans l'arène et jettez un coup d'oeil aux tribunes vides, avant de donner un coup de pied sur le sol."
@@ -8794,6 +9046,7 @@ def GoDown():
     Affichage.AfficheDescente()
     Player.numero_de_letage += 1
     RemiseAZeroDesVariablesPourProchainEtage()
+    DefinitNomEtage()
     Affichage.AffichageDescriptionEtage()
     if Player.numero_de_letage == 11 or (
         Player.numero_de_letage == 9 and not Player.invitation_received
@@ -9155,7 +9408,7 @@ def DoBossOrGoDown():
     else:
         game_in_session = GoDown()
         if game_in_session:
-            PlayMusic(f"etage_{Player.numero_de_letage}")
+            PlayMusicDeLetage()
             try:
                 FloorMaker.SetupFloorLayout()
             except Exception as error:
@@ -9174,6 +9427,61 @@ def GetChoix():
             ClearConsole()
 
 
+def DefinitNomEtage():
+    if Player.numero_de_letage == 0:
+        Player.nom_de_letage = "Solitudes Sacrificielle"
+    elif Player.numero_de_letage == 1:
+        Player.nom_de_letage = "Ruines Abandonnées"
+    elif Player.numero_de_letage == 2:
+        Player.nom_de_letage = "Forêt Désenchantée"
+        if Player.etage_alternatif:
+            Player.nom_de_letage = "Jungle Cruelle"
+    elif Player.numero_de_letage == 3:
+        Player.nom_de_letage = "Champs de Sables"
+    elif Player.numero_de_letage == 4:
+        Player.nom_de_letage = "Tour de l'Esprit"
+    elif Player.numero_de_letage == 5:
+        Player.nom_de_letage = "Carnaval de Rouille"
+    elif Player.numero_de_letage == 6:
+        Player.nom_de_letage = "Bidonville du Clocher"
+    elif Player.numero_de_letage == 7:
+        Player.nom_de_letage = "Cachot du Pénitent"
+    elif Player.numero_de_letage == 8:
+        Player.nom_de_letage = "Arène du Zénith"
+    elif Player.numero_de_letage == 9:
+        Player.nom_de_letage = "Chemins Coalescents"
+    elif Player.numero_de_letage == 10:
+        Player.nom_de_letage = "Dédale Frontière"
+    elif Player.numero_de_letage == 11:
+        Player.nom_de_letage = "Rivages"
+    Player.etage_alternatif = False
+
+
+def PlayMusicDeLetage():
+    nom_de_la_musique = str(Player.numero_de_letage)
+    if Player.nom_de_letage in ["Jungle Cruelle"]:
+        nom_de_la_musique += "_alt"
+    PlayMusic(f"etage_{nom_de_la_musique}")
+
+
+def GetNomEtage():
+    try:
+        dictionnaire = {}
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        # fichier de sauvegarde (temporaire)
+        chemin_du_fichier_save = dir_path + "\\save.txt"
+        with open(chemin_du_fichier_save, "r") as fichier:
+            reader = csv.DictReader(fichier, delimiter="|")
+            for line in reader:
+                dictionnaire[line["Caracteristique"]] = line[
+                    "Valeur"
+                ]
+        Player.nom_de_letage = dictionnaire["Nom de l'étage"]
+    except KeyError:
+        pass
+    except FileNotFoundError:
+        pass
+
 Save = SaveManagement()
 Draw = DrawInTurtle()
 Player = PlayerCaracteristics()
@@ -9183,13 +9491,15 @@ Observation = Observe()
 FloorMaker = Floor()
 
 AffichageSecretPage3()
+GetNomEtage()
 MenuDeDemarrage(Player)
 game_in_session = True
-PlayMusic(f"etage_{Player.numero_de_letage}")
+
 
 #Player.techniques_possedes = LISTETECHNIQUES
 #Player.sorts_possedes = LISTESORTS
 
+PlayMusicDeLetage()
 while game_in_session:
     # choix de laction
     choix = GetChoix()

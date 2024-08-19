@@ -1,2 +1,6 @@
 Caracteristique|Valeur
 Livre de sort|['Tir Arcanique']
+Artefact Debloques|[]
+Redcoins Inseres|0
+77454135415415|XXXXXXfgrtfhhkj
+486241597531|KPF?DMZK..?

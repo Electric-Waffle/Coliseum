@@ -28,10 +28,20 @@ class Vue:
         self.SONTECHNIQUE.set_volume(0.5)
         self.SONTECHNIQUE.play()
 
+    def PlayMusic(self, musique):
+        mixer.init()
+        mixer.music.load(f"{musique}.mp3")
+        mixer.music.play(-1)
+
     def PlaySound(self, musique):
         musique = self.CHEMINMUSIQUE + musique + ".mp3"
         mixer.init()
         mixer.music.load(musique)
+        mixer.music.play()
+
+    def PlayIntro(self, musique):
+        mixer.init()
+        mixer.music.load(f"{musique}.mp3")
         mixer.music.play()
 
     def PrintInfo(self, hp, damage): #old
@@ -99,7 +109,7 @@ class Vue:
 
     def AfficheMonstreLevelMusique(self, nom, niveau, musique):
         self.PlayMusic(musique)
-        print(f"Un {nom} de niveau {niveau} apparait !")
+        print(f"L'ennemi [{nom}] de niveau {niveau} apparait !")
         self.EntreePourContinuer()
 
     def AfficherAttaquePremierTour(self, element, phrase_indiquant_la_reussite_ou_non):
@@ -136,7 +146,7 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheBenedictionDivine(self, vie_reprise):
-        print("De par la bénédiction qu'a recu l'ennemia sa naissance,")
+        print("De par la bénédiction qu'a recu l'ennemi a sa naissance,")
         print(f"Il reprend {vie_reprise} points de vie.")
         self.EntreePourContinuer()
 
@@ -228,6 +238,19 @@ class Vue:
         print("Votre vision se brouille, et bientôt le monde entier se résume a une tache floue dans l'horizon.")
         print("Vous refermez vos yeux pour la toute dernière fois.")
         self.EntreePourContinuer()
+        print("[AVENTURE TERMINE]")
+        self.EntreePourContinuer()
+        print("[CALCUL DE LA CONTRIBUTION DU PERSONNAGE EN COURS...]")
+        time.sleep(3)
+        clear_console()
+        print("[CALCUL TERMINE]")
+        self.EntreePourContinuer()
+        print("[CONTRIBUTION DU PERSONNAGE INSUFFISANTE]")
+        self.EntreePourContinuer()
+        print("[REALISATION DU DESIR REFUSEE]")
+        self.EntreePourContinuer()
+        print("[MORT VALIDEE]")
+        self.EntreePourContinuer()
         self.PlayMusic(musique2)
         print(
             "|                                                                                         "
@@ -314,11 +337,11 @@ class Vue:
         print(commentaire)
         self.EntreePourContinuer()
 
-    def AfficheFuite(self, musique):
+    def AfficheFuite(self, musique, commentaire):
         mixer.init()
         mixer.music.load(f"{musique}.mp3")
         mixer.music.play()
-        print("Vous avez fuit le combat !")
+        print(commentaire)
         self.EntreePourContinuer()
 
     def AfficheWinObelisque(self, musique):
@@ -336,11 +359,6 @@ class Vue:
         self.PlayMusic(musique)
         print("Vous avez remporté le combat !")
         print(f"Vous absorbez la puissance de l'ennemi [{nom}].")
-
-    def PlayMusic(self, musique):
-        mixer.init()
-        mixer.music.load(f"{musique}.mp3")
-        mixer.music.play(-1)
 
     def AfficheRecompense(self, commentaire):
         print(commentaire)
@@ -925,6 +943,48 @@ class Vue:
         clear_console()
         self.EntreePourContinuer()
 
+    def AfficheResurrectionArmeeAnge(self, musique):
+        mixer.quit()
+        print("L'Arméee des Anges commenca a devenir plus épars.'")
+        self.EntreePourContinuer()
+        print("La victoire semblait être a portée.")
+        self.EntreePourContinuer()
+        print("Vesperum avait assez fait de degat pour rentrer en contact avec des anges plus hauts placés.")
+        self.EntreePourContinuer()
+        print("Et pourtant...")
+        self.EntreePourContinuer()
+        print("Il ne pu que regarder, muet, alors que l'armée des démons rejoignit l'armée des Anges")
+        self.EntreePourContinuer()
+        print("Ce que signifiait sa présence, la réponse que les êtres divins ont apportés quand a sa puissance...")
+        self.EntreePourContinuer()
+        print("C'était une véritable Armée de la Fin.")
+        time.sleep(3)
+        self.PlayMusic(musique + "story_end")
+        clear_console()
+
+    def AfficheResurrectionArchange(self, musique):
+        mixer.quit()
+        print("L'Armée de la Fin commenca a devenir plus épars.")
+        self.EntreePourContinuer()
+        print("Et a ce moment...")
+        self.EntreePourContinuer()
+        print("...le combat s'arrêta.")
+        self.EntreePourContinuer()
+        print("Les combattants des deux cotés s'agenouillèrent.")
+        self.EntreePourContinuer()
+        print("Un Archange descendit des cieux.")
+        self.EntreePourContinuer()
+        print("*Emilien. Arrête donc ta quête. Tu ne peux retrouver Sainte Elisa. IL en a besoin.*")
+        self.EntreePourContinuer()
+        print("Vesperum se releva et lanca a l'archange un regard de défi.")
+        self.EntreePourContinuer()
+        print("*Si IL n'est pas assez concerné pour venir me proposer un autre deal..*")
+        self.EntreePourContinuer()
+        print("*...ca doit être parceque je n'ai pas encore tué un archange !*")
+        time.sleep(3)
+        self.PlayMusic(musique + "story_end")
+        clear_console()
+
     def AfficheResurrectionMaitreMage(self, musique):
         mixer.quit()
         print("Le Maitre Mage pose un genou a terre, et commence a haleter.")
@@ -960,6 +1020,77 @@ class Vue:
         self.EntreePourContinuer()
         self.PlayMusic(musique + "boss_10_phase_2")
 
+    def AfficheResurrectionCauchemard(self, musique):
+        mixer.quit()
+        print("intro de la phase 2")
+        self.PlayIntro(musique + "alt_1_phase_2_intro")
+        self.EntreePourContinuer()
+        print("Phase 2")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_1_phase_2")
+
+    def AfficheResurrectionAhmedEntree(self, musique):
+        mixer.quit()
+        self.EntreePourContinuer()
+        print("Phase 2")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_3_phase_2")
+
+    def AfficheResurrectionAhmedPlat(self, musique):
+        mixer.quit()
+        self.EntreePourContinuer()
+        print("Phase 3")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_3_phase_3")
+
+    def AfficheResurrectionGluancelot(self, musique):
+        mixer.quit()
+        print("intro de la phase 1")
+        self.PlayIntro(musique + "alt_4_phase_1_intro")
+        self.EntreePourContinuer()
+        print("Phase 1")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_4_phase_1")
+
+    def AfficheResurrectionVolonteeImmortelle(self, musique):
+        mixer.quit()
+        self.EntreePourContinuer()
+        print("Phase 2")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_7_phase_2")
+
+    def AfficheResurrectionVolonteePersistante(self, musique):
+        mixer.quit()
+        self.EntreePourContinuer()
+        print("Phase 3")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_7_phase_3")
+
+    def AfficheResurrectionVolonteeInstable(self, musique):
+        mixer.quit()
+        print("intro de la phase 4")
+        self.PlayIntro(musique + "alt_7_phase_4_intro")
+        self.EntreePourContinuer()
+        print("Phase 4")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_7_phase_4")
+
+    def AfficheResurrectionSpectre(self, musique):
+        mixer.quit()
+        self.EntreePourContinuer()
+        print("Phase 2")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_9_phase_2")
+
+    def AfficheResurrectionAurore(self, musique):
+        mixer.quit()
+        print("intro de la phase 2")
+        self.PlayIntro(musique + "alt_10_phase_2_intro")
+        self.EntreePourContinuer()
+        print("Phase 2")
+        self.EntreePourContinuer()
+        self.PlayMusic(musique + "alt_10_phase_2")
+
     def AfficheJugement(self, commentaire, commentaire_degat):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_degat)
@@ -978,3 +1109,137 @@ class Vue:
                                                         " mais il n'a pas assez de mana ."
                                                         "\nSon réservoir de mana implose !"
                                                         "\nIl est en état de choc !")
+        
+    def AfficheEffetTerreur(self, liste_deffets):
+        self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi lance un cri sinistre qui réveille en vous vos plus sombres terreurs !")
+        print(liste_deffets[0])
+        self.AffichageUneLignePuisUnEntreePourContinuer(liste_deffets[1])
+
+    def AfficheEffetFausseTerreur(self, liste_deffets):
+        self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi lance un cri terrifiant, mais vous y résistez !")
+        self.AffichageUneLignePuisUnEntreePourContinuer(liste_deffets[0])
+
+    def AfficheEffetDomovoi(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheEffetKikimora(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheActionDomovoi(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheActionKikimora(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+    
+    def AfficheEffetSuperEtoile(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheCuisineInfernaleCreationCommande(self, commande, temps):
+        print("Vous recevez une commande pour un des clients fantomatiques !")
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"Vous devez réaliser le plat [{commande}] pour le tour [{temps}] !")
+        
+    def AfficheCuisineInfernaleReussi(self, commande):
+        self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi se rapproche de vous d'un ton menacant...")
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"...puis récupère le plat [{commande}] que vous avez préparé avant de partir le servir pendant 2 tours !")
+
+    def AfficheCuisineInfernaleEchoue(self, commande, degats):
+        self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi se rapproche de vous d'un ton menacant...")
+        print(f"...avant de vous mettre un gigantesque upercut dans la machoire, furieux de ne pas trouver le plat [{commande}] !")
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"Vous perdez {degats} points de vie !\nEssayez de préparer votre plat dans le temps imparti la prochaine fois !")
+
+    def AfficheDebutActionCuisineInfernale(self):
+        print("       -{ Cuisiner [Action] }-\n")
+
+    def AfficheActionCuisineInfernale(self, numero, action, cout):
+        print(f" {numero} - [{action}] {cout}")
+
+    def AfficheFinActionCuisineInfernale(self):
+        choix = int(input("\nChoisissez avec les nombres (vous ne pouvez pas revenir en arrière) : "))
+        return choix
+    
+    def AfficheCommentaireActionCuisineInfernale(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheDebutIngredientCuisineInfernale(self):
+        print("       -{ Cuisiner [Ingredients] }-\n")
+
+    def AfficheIngredientCuisineInfernale(self, numero, ingredient, quantite):
+        print(f" {numero} - [{ingredient}] | {quantite} en stock |")
+
+    def AfficheFinIngredientCuisineInfernale(self):
+        choix = int(input("\nChoisissez avec les nombres (vous ne pouvez pas revenir en arrière) : "))
+        return choix
+    
+    def AfficheCommentaireIngredientCuisineInfernale(self, ingredient):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"...et l'utilisez avec l'ingredient [{ingredient}].")
+
+    def AfficheDebutCuissonCuisineInfernale(self, ingredient):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"...et rajoutez dedans l'ingredient [{ingredient}].")
+
+    def AfficheMelangeCuisineInfernale(self, ingredient_un, ingredient_deux):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"...et mélangez ensemble [{ingredient_un}] et [{ingredient_deux}].")
+
+    def AfficheCuisineInfernalePlatCuisine(self, plat_cuisine):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"Vous obtenez le plat [{plat_cuisine}] !")
+
+    def AffichePerteTempsCuisineInfernale(self, commentaire):
+        print("Vous perdez votre temps !")
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheDebutArretCuissonCuisineInfernale(self):
+        print("       -{ Cuisiner [Arrêt de la Cuisson] }-\n")
+
+    def AfficheArretCuissonCuisineInfernale(self, numero, ingredient, cuisson):
+        print(f" {numero} - [{ingredient}] | Cuisson : {cuisson} |")
+
+    def AfficheChoixArretCuissonCuisineInfernale(self):
+        choix = int(input("\nChoisissez avec les nombres (vous ne pouvez pas revenir en arrière) : "))
+        return choix
+    
+    def AfficheIngredientArretCuissonCuisineInfernale(self, ingredient):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"...et arrêtez la cuisson de l'ingrédient [{ingredient}].")
+
+    def AfficheCuisinePasAssezDeCuisineInfernale(self, raison):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"Cepandant, vous n'avez pas assez de {raison}, et échouez a produire le plat.")
+
+    def AfficheCommentaireIngredientCuisineAromatisationInfernale(self, ingredient):
+        print(f"...et l'utilisez... sur l'ingrédient... [{ingredient}].")
+        self.AffichageUneLignePuisUnEntreePourContinuer("Que Dieu aie pitié de vous comme vous n'avez pas eu pitié de cet ingrédient.")
+
+    def AfficheSystemeSupport(self, commentaire, commentaire_soin):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_soin)
+
+    def AfficheProtocoleSupernova(self, commentaire, commentaire_degat):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_degat)
+
+    def AfficheLaserAntipersonnel(self, commentaire, commentaire_degat):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_degat)
+
+    def AfficheFlashBang(self, commentaire, commentaire_degat):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_degat)
+
+    def AfficheGardienDeAme(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheGardienDeCorps(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheTank(self, degat):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"Vous pointez du doigt l'ennemi en face de vous, et votre Char Leclerc 3ème Génération à Dispositif GALIX, Canon Principal 120mm et Armement Secondaire à Mitrailleuse 12,7 mm Coaxiale et Mitrailleuse de 7,62 mm en Superstructure tire un obus dévastateur qui lui inflige {degat} points de dégâts !")
+        self.AffichageUneLignePuisUnEntreePourContinuer("Votre Char Leclerc 3ème Génération à Dispositif GALIX, Canon Principal 120mm et Armement Secondaire à Mitrailleuse 12,7 mm Coaxiale et Mitrailleuse de 7,62 mm en Superstructure se met alors en veille jusqu'au prochain combat.")
+
+    def AfficheCanigou(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheEppeeDamocles(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("Votre épée de Damocles finit par vous tomber sur la tête, se brisant a son contact !\nVous perdez l'artefact, ainsi que beaucoup de points de vie !")
+
+    def AfficheMorceauEtherFragile(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("Votre Morceau d'Ether Fragile finit par se briser, et vous perdez tout vos points de mana !")
+
+    def AfficheEffetEauBenite(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("Votre fiole d'eau bénite réagit avec votre mana !\nVous voila béni pendant un tour !")

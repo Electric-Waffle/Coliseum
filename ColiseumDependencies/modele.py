@@ -25,6 +25,7 @@ class Model:
             self.nombre_de_gold = int(input("Combien de golds ?"))
 
         else:
+            self.nom_du_personnage = Player.nom_du_personnage
             self.points_de_vie = Player.points_de_vie
             self.points_de_vie_max = Player.points_de_vie_max
             self.points_de_mana = Player.points_de_mana
@@ -43,9 +44,13 @@ class Model:
             self.quete_en_cours = Player.quete
             self.liste_dartefact_optionels = Player.liste_dartefacts_optionels
             self.nombre_de_red_coin = Player.nombre_de_red_coin
+            self.player_tags = Player.player_tags
             self.numero_de_letage = Player.numero_de_letage
+            if "Monstre De Niveau Superieur" in Player.player_tags:
+                self.numero_de_letage += 1
             self.est_une_mimique = Player.affronte_une_mimique
             self.monstre_EstUnBoss = Player.affronte_un_boss
+            self.commence_le_combat_confus = Player.commence_le_combat_confus
             self.stigma_joueur_positif = Player.stigma_positif
             self.stigma_joueur_negatif = Player.stigma_negatif
             self.stigma_joueur_bonus = Player.stigma_bonus
@@ -54,7 +59,8 @@ class Model:
             self.possede_une_gemme_vie = Player.gemme_de_vie  # rend 20% de vie a la fin d'un combat
             self.possede_une_gemme_magie = Player.gemme_de_mana  # rend 20% de mana a la fin d'un combat
             self.monstre_de_lobelisque = Player.affronte_obelisque
-            if Player.nom_de_letage in ["Jungle Cruelle"]:
+            self.boss_histoire = Player.affronte_fin_histoire
+            if Player.nom_de_letage in ["Jungle Cruelle", "Douves du Pénitent"]:
                 self.etage_alternatif = True
             else:
                 self.etage_alternatif = False
@@ -72,6 +78,8 @@ class Model:
         self.utilise_orbe_de_folie_nombre_tour = 0
         self.beni_par_feu_sacre = False
         self.beni_par_feu_sacre_nombre_tour = 0
+        self.concentre = False
+        self.concentre_nombre_tour = 0
         self.utilise_mirroir_eau = False
         self.mirroir_eau_nombre_tours = 0
         self.utilise_brume_sang = False
@@ -106,11 +114,14 @@ class Model:
         self.est_maudit_par_le_gold_nombre_tour = 0
         self.est_maudit_par_le_mana = False  # sorts coutent plus de mana
         self.est_maudit_par_le_mana_nombre_tour = 0
+        self.est_maudit_par_endurance = False #ne regénère plus d'endurance
+        self.est_maudit_par_endurance_nombre_tour = 0
         self.est_gele = False  # gele, prend 2x + de degats
         self.est_gele_nombre_tour = 0
         self.est_en_feu = False  # en feu, dégats sur le temps
         self.est_en_feu_nombre_tour = 0
         self.est_en_feu_degat = 0
+        self.player_tags = Player.player_tags
         self.est_paralyse = False  # paralysé, passe son tour
         self.est_paralyse_nombre_tour = 0
         self.est_maudit_par_les_techniques = False  # plus d'utilisation de techniques
@@ -150,6 +161,37 @@ class Model:
         self.mutagene_heretique_utilise = False
         self.mutagene_fanatique_utilise = False
         self.utilise_rafale = False
+        self.vie_domovoi = 2
+        self.retour_domovoi = 0
+        self.vie_kikimora = 2
+        self.retour_kikimora = 0
+        self.liste_ingredient = {"Mozarella":25,
+                                 "Tomate":25,
+                                 "Concombre":25,
+                                 "Rillette":25,
+                                 "Pain":25,
+                                 "Féta":25,
+                                 "Saucisson":25,
+                                 "Porc":25, 
+                                 "Poulet":25, 
+                                 "Haricot Vert":25, 
+                                 "Carotte":25, 
+                                 "Oignon Jaune":25, 
+                                 "Patate":25, 
+                                 "Thon":25, 
+                                 "Riz":25, 
+                                 "Pates":25, 
+                                 "Couscous":25,
+                                 "Fraise":25,
+                                 "Citron":25, 
+                                 "Ananas":25, 
+                                 "Chocolat":25, 
+                                 "Oeuf":25, 
+                                 "Beurre de Cacahuète":25, 
+                                 "Lait":25, 
+                                 "Caramel":25, 
+                                 "Vanille":25}
+        self.liste_cuisson = {}
 
         # influence de l'arbre de talent
         # FEU  (DMG OVER TIME)
@@ -584,6 +626,7 @@ class Model:
             "Position du Massif": 10,
             "Poussée d'Adrénaline": 30,
             "Iaido": 30,
+            "Cuisiner": 5,
         }
         degat_attaque_legere = 7
         if "Plaquette du Souvenir" in self.liste_dartefact_optionels:
@@ -903,12 +946,12 @@ class Model:
             "Sonata Absolutrice", #25% ou 40pv
         ]
         self.annuaire_de_pourcentage_de_soin_des_sorts = {
-            "Sonata Pitoyable": 3 + (self.points_de_intelligence // 2),
-            "Sonata Miséricordieuse": 5 + (self.points_de_intelligence // 2),
-            "Sonata Empathique": 12 + (self.points_de_intelligence // 2),
-            "Sonata Sincère": 17 + (self.points_de_intelligence // 2),
-            "Sonata Bienveillante": 20 + (self.points_de_intelligence // 2),
-            "Sonata Absolutrice": 25 + (self.points_de_intelligence // 2)
+            "Sonata Pitoyable": 3 + (self.points_de_intelligence // 4),
+            "Sonata Miséricordieuse": 5 + (self.points_de_intelligence // 4),
+            "Sonata Empathique": 12 + (self.points_de_intelligence // 4),
+            "Sonata Sincère": 17 + (self.points_de_intelligence // 4),
+            "Sonata Bienveillante": 20 + (self.points_de_intelligence // 4),
+            "Sonata Absolutrice": 25 + (self.points_de_intelligence // 4)
         }
         self.annuaire_de_soin_minimum_des_sorts = {
             "Sonata Pitoyable": 15 + (self.points_de_intelligence),
@@ -1168,7 +1211,9 @@ class Model:
             "Sonata Empathique": 20,
             "Sonata Sincère": 25,
             "Sonata Bienveillante": 30,
-            "Sonata Absolutrice": 40
+            "Sonata Absolutrice": 40,
+            "Faire fuir le Domovoï": 1,
+            "Faire fuir la Kikimora": 1,
         }
         # glossaire des sorts supplementaires
         if self.rafale:
@@ -1296,6 +1341,9 @@ class Model:
         self.monstre_passe_son_tour = False
         self.monstre_en_etat_de_choc = False
         self.monstre_en_etat_de_choc_nombre_tour = False
+        self.monstre_tags = []
+        self.monstre_commande = {}
+        self.monstre_commande_a_enlever = []
         self.monstre_points_de_vie = 20
         self.monstre_points_de_vie_max = 20
         self.monstre_points_de_mana = 20
@@ -1306,6 +1354,8 @@ class Model:
         self.monstre_points_de_intelligence = 1
         self.monstre_est_envol = False  # Envol, -30% chance de toucher
         self.monstre_est_envol_nombre_tour = 0
+        self.monstre_est_maudit = False  # Maudit, -2 pm par tours.
+        self.monstre_est_maudit_nombre_tour = 0
         self.monstre_est_gele = False  # Gele, prend 2x + de degats
         self.monstre_est_gele_nombre_tour = 0
         self.monstre_est_en_feu = False  # en feu, perd des pv par tour
@@ -1322,6 +1372,8 @@ class Model:
         self.monstre_est_regeneration = False  # regen, reprend vie par tour
         self.monstre_est_regeneration_nombre_tour = 0
         self.monstre_est_regeneration_soin = 0
+        self.monstre_est_service = False  # entrain de servir, pendant les batailles cuisine infernales
+        self.monstre_est_service_nombre_tour = 0
         self.monstre_liste_actions = []
         self.monstre_recompense = {"Attaque": 1, "Defence": 1}
 
@@ -1366,7 +1418,7 @@ class Model:
             "Aurelionite",
             "Sacatrésor",
         ]
-        self.liste_de_monstres_etage_9_10 = [
+        self.liste_de_monstres_etage_9_10_11 = [
             "Gluant",
             "Feu Follet",
             "Golem de Terre",
@@ -1397,10 +1449,11 @@ class Model:
             self.liste_de_monstres_etage_5_6,
             self.liste_de_monstres_etage_7_8,
             self.liste_de_monstres_etage_7_8,
-            self.liste_de_monstres_etage_9_10,
-            self.liste_de_monstres_etage_9_10,
+            self.liste_de_monstres_etage_9_10_11,
+            self.liste_de_monstres_etage_9_10_11,
         ]
         self.liste_de_boss = [
+            "Ah Kin",
             "Clone d'Obsidienne",
             "Chevalier Pourpre",
             "Roi Amonrê",
@@ -1423,6 +1476,18 @@ class Model:
             "Maitre Mage",
             "Amalgame",
             "Coliseum",
+        ]
+        self.liste_de_boss_rush = [
+            "Cauchemard",
+            "AstonRe",
+            "Ahmed (Entrée)",
+            "Roi Gluant",
+            "Obo la Cryobarbare",
+            "Mercenaire",
+            "Volontée Immortelle",
+            "Eris (?)",
+            "Spectre",
+            "Aurore",
         ]
         dir_path = Player.chemin_musique
         musique = dir_path + "\\"
@@ -1732,6 +1797,10 @@ class Model:
             "Ultima",
             "Dragon Ascendant",
             "Magie Abyssale",
+            "Systeme de Support",
+            "Protocole Supernova",
+            "Flash Bang",
+            "Laser Anti-Personnel",
         ]
         self.ANNUAIRECOUTSORTMONSTRE = {
             "Flamme": 5,
@@ -1763,7 +1832,7 @@ class Model:
             "Création de Lapis": 5,
             "Création Obsidienne": 5,
             "Création de la Montagne": 5,
-            "Création Continentale"
+            "Création Continentale": 5,
             "Vents de l'Ouest": 5,
             "Oméga Saignée": 5,
             "Mache": 5,
@@ -1778,7 +1847,7 @@ class Model:
             "Point Vital": 5,
             "Son Rapide": 5,
             "Bombe Arcanique": 5,
-            "Jugement": 5,
+            "Jugement": 10,
             "Explosion Renforcée": 5,
             "Explosion Maitrisée": 5,
             "Missile Arcanique": 5,
@@ -1792,7 +1861,7 @@ class Model:
             "Soin Avancé": 5,
             "Engloutis": 5,
             "Sonata Pitoyable": 5,
-            "Rejuvenation": 5,
+            "Rejuvenation": 6,
             "Sonata Miséricordieuse": 5,
             "Sonata Sincère": 5,
             "Tournicoti": 5,
@@ -1817,8 +1886,8 @@ class Model:
             "Vacarme Lent": 5,
             "Vide": 5,
             "Eveil de Runes": 5,
-            "Lamentations": 5,
-            "Invoquation Canope": 5,
+            "Lamentations": 8,
+            "Invoquation Canope": 10,
             "Magie Noire": 5,
             "Magie Ténébreuse": 5,
             "Tournicota": 5,
@@ -1830,6 +1899,10 @@ class Model:
             "Ultima": 5,
             "Dragon Ascendant": 5,
             "Magie Abyssale": 5,
+            "Systeme de Support": 5,
+            "Protocole Supernova": 5,
+            "Flash Bang": 5,
+            "Laser Anti-Personnel": 5,
         }
         self.annuaire_de_caracteristique_des_sorts_generaux_de_monstre = {
             # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
@@ -2090,7 +2163,7 @@ class Model:
                             "Les blessures de l'ennemi cicatrisent à l'aide du mana invoqué."],
             "Engloutis": [10 * self.numero_de_letage, 10, "L'ennemi engloutit un objet pour récupérer des points de vie.", 
                   "L'objet est absorbé par l'ennemi qui reprend des forces."],
-            "Rejuvenation": [40, 20, "L'ennemi invoque un sort de réjuvenation pour se régénérer.", 
+            "Rejuvenation": [35, 10, "L'ennemi invoque un sort de réjuvenation pour se régénérer.", 
                             "Une lueur énergétique entoure l'ennemi, le revitalisant et réparant ses blessures."],
             "Tournicoti": [45, 21, "Tournicoti ! Tournicoti !\nL'ennemi tourne sur lui même et ses vêtements deviennent verts .", "Il reprend des points de vie !"],
             "Sonata Pitoyable": [18, 9, "L'ennemi utilise le sort Sonata Pitoyable !", "Un bruit pathétique enveloppe l'ennemi et apaise la douleur de ses blessures."],
@@ -2236,7 +2309,7 @@ class Model:
                                 "...et son ultralaser vous frappe de plein fouet, laissant derrière un sillon de destruction !",
                                 "...et son ultralaser se transforme en un rayon dévastateur, vous pulvérisant dans une explosion cataclysmique !!",
                                 5, 5],
-            "Lame de Feu": [85, 10, 40, 3, 20, "L'ennemi matérialise une lame de feu dans sa main, puis la lance avec force sur sa cible...",
+            "Lame de Feu": [85, 8, 40, 3, 20, "L'ennemi matérialise une lame de feu dans sa main, puis la lance avec force sur sa cible...",
                                 "...mais sa lame de feu vous rate de peu, disparaissant dans un éclat de flammes.",
                                 "...et sa lame de feu vous transperce, laissant une brûlure béante !",
                                 "...et sa lame de feu se transforme en un raz-de-marée de flammes, vous déchirant dans une explosion de chaleur intense !!",
@@ -2267,7 +2340,7 @@ class Model:
                       "...et il vous touche, glaçant vos membres !",
                       "...et frappant avec force, il vous transperce de ses crocs glacés, vous laissant frissonnant !!",
                       4, 0],
-            "Lame de Gel": [85, 10, 25, 5, 20, "L'ennemi charge avec sa lame de gel, prêt à vous geler et à drainer votre vitalité...",
+            "Lame de Gel": [85, 8, 25, 5, 20, "L'ennemi charge avec sa lame de gel, prêt à vous geler et à drainer votre vitalité...",
                             "...mais il rate son coup, sa lame de gel s'émoussant sur le sol.",
                             "...et il vous touche, glaçant votre chair et drainant votre force vitale !",
                             "...et frappant avec force, il vous transperce de sa lame gelée, drainant votre vie et vous laissant engourdis et affaiblis !!",
@@ -2297,11 +2370,11 @@ class Model:
                         "...et il vous touche, aspirant votre force vitale pour se renforcer !",
                         "...et avec une habileté malveillante, il vous draine de votre vie, se renforçant alors que vous vous affaiblissez !!",
                         5, 0],
-            "Lame Pourpre": [85, 15, 20, 5, 20, "L'ennemi dégaine une lame sombre imprégnée de puissance vitale, prêt à vous trancher et à drainer votre vie...",
+            "Lame Pourpre": [85, 7, 20, 5, 80, "L'ennemi dégaine une lame sombre imprégnée de puissance vitale, prêt à vous trancher et à drainer votre vie...",
                       "...mais sa lame pourpre rate sa cible de justesse, glissant dans l'air sans vous toucher.",
                       "...et il vous touche, vous tranchant avec sa lame maudite et drainant votre vie !",
                       "...et avec une précision mortelle, il vous frappe de sa lame pourpre, vous drainant de votre vie et se renforçant !!",
-                      8, 0],
+                      8, 10],
             "Ascension Runique": [85, 17, 25, 3, 23, "L'ennemi invoque des runes sanguines pour une ascension sinistre, drainant votre énergie vitale pour se renforcer...",
                         "...mais son invocation échoue, les runes s'évaporant dans l'air sans effet.",
                         "...et il vous touche, drainant votre énergie vitale alors qu'il s'élève en puissance !",
@@ -2352,7 +2425,7 @@ class Model:
                                     "...et il vous touche avec son attaque massive, vous infligeant des dégâts importants.",
                                     "...et avec un coup colossal, il vous frappe violemment, vous causant d'énormes dégâts !!",
                                     0, 0],
-            "Lame Courageuse": [90, 14, 20, 3, 0, "L'ennemi brandit son épée avec courage, prêt à vous affronter...",
+            "Lame Courageuse": [90, 12, 20, 3, 0, "L'ennemi brandit son épée avec courage, prêt à vous affronter...",
                           "...mais son coup courageux manque sa cible, vous laissant indemne.",
                           "...et il vous frappe avec bravoure, vous infligeant des dégâts significatifs.",
                           "...et avec une attaque héroïque, il vous touche avec force, vous causant des dégâts !",
@@ -2389,7 +2462,7 @@ class Model:
             "Gemme Rouge": [40, 80, 10, "L'ennemi utilise une gemme rouge pour se soigner...",
                                         "...mais rien ne se passe.",
                                         "...et elle se met a émettre une lumière apaisante, le soignant !"],
-            "Medecine de Guerre": [35, 75, 10, "L'ennemi s'administre une médecine de guerre pour récupérer de ses blessures...",
+            "Medecine de Guerre": [25, 55, 5, "L'ennemi s'administre une médecine de guerre pour récupérer de ses blessures...",
                                                 "...sans succès.",
                                                 "...et il parvient a se rétablir juste assez pour terminer le combat !"],
             "Remede Divin": [50, 100, 13, "L'ennemi avale un remède divin pour restaurer sa santé...",

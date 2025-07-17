@@ -9,6 +9,8 @@ def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
+
+
 class Vue:
     def __init__(self, Player):
         self.Player = Player
@@ -16,33 +18,71 @@ class Vue:
         DIRPATH = Player.chemin_musique
         self.CHEMINMUSIQUE = DIRPATH + "\\sfx\\"
 
+        chemin_musique = os.path.dirname(os.path.realpath(__file__))
+        chemin_musique += f"\\nothing.mp3"
+        intialisation_musique = mixer.Sound(chemin_musique)
+        self.CHANNELMUSIQUECOMBAT = intialisation_musique.play()
+        self.CHANNELSONSORT = intialisation_musique.play()
+        self.CHANNELSONTECHNIQUE = intialisation_musique.play()
+
+    def StopMusiqueDeCombatSiDejaLancee(self):
+        if self.CHANNELMUSIQUECOMBAT.get_busy():
+            self.CHANNELMUSIQUECOMBAT.stop()
+
+    def StopMusiqueDeSortSiDejaLancee(self):
+        if self.CHANNELSONSORT.get_busy():
+            self.CHANNELSONSORT.stop()
+
+    def StopMusiqueDeTechniqueSiDejaLancee(self):
+        if self.CHANNELSONTECHNIQUE.get_busy():
+            self.CHANNELSONTECHNIQUE.stop()
+
+    def StopToutesMusiquesSiDejaLancee(self):
+        self.StopMusiqueDeCombatSiDejaLancee()
+        self.StopMusiqueDeSortSiDejaLancee()
+        self.StopMusiqueDeTechniqueSiDejaLancee()
+
     def AfficheSonSort(self, son):
+        self.StopMusiqueDeSortSiDejaLancee()
+
         musique = self.CHEMINMUSIQUE + son + ".wav"
-        self.SONSORT = mixer.Sound(musique)
-        self.SONSORT.set_volume(0.5)
-        self.SONSORT.play()
+
+        lancement_de_musique = mixer.Sound(musique)
+
+        lancement_de_musique.set_volume(0.5)
+
+        self.CHANNELSONSORT = lancement_de_musique.play()
 
     def AfficheSonTechnique(self, son):
-        musique = self.CHEMINMUSIQUE + son + ".wav"
-        self.SONTECHNIQUE = mixer.Sound(musique)
-        self.SONTECHNIQUE.set_volume(0.5)
-        self.SONTECHNIQUE.play()
+        self.StopMusiqueDeTechniqueSiDejaLancee()
 
-    def PlayMusic(self, musique):
-        mixer.init()
-        mixer.music.load(f"{musique}.mp3")
-        mixer.music.play(-1)
+        musique = self.CHEMINMUSIQUE + son + ".wav"
+
+        lancement_de_musique = mixer.Sound(musique)
+
+        lancement_de_musique.set_volume(0.5)
+
+        self.CHANNELSONSORT = lancement_de_musique.play()
+
+    def PlayMusic(self, musique, type_de_musique="loop"):
+        self.StopMusiqueDeCombatSiDejaLancee()
+        
+        lancement_de_musique = mixer.Sound(f"{musique}.mp3")
+        if type_de_musique == "loop":
+            self.CHANNELMUSIQUECOMBAT = lancement_de_musique.play(loops=-1)
+        else:
+            self.CHANNELMUSIQUECOMBAT = lancement_de_musique.play()
 
     def PlaySound(self, musique):
-        musique = self.CHEMINMUSIQUE + musique + ".mp3"
-        mixer.init()
-        mixer.music.load(musique)
-        mixer.music.play()
+        musique = self.CHEMINMUSIQUE + musique
+        self.PlayMusic(musique, "normal")
+
 
     def PlayIntro(self, musique):
-        mixer.init()
-        mixer.music.load(f"{musique}.mp3")
-        mixer.music.play()
+        self.PlayMusic(musique, "intro")
+
+    def PlaySon(self, musique):
+        self.PlayMusic(musique, "son")
 
     def PrintInfo(self, hp, damage): #old
         print(f"Vous avez fait {damage} points de dégats !")
@@ -141,6 +181,7 @@ class Vue:
         return int(input("(Faites votre choix :)"))
 
     def AfficheFaveursExplosives(self, commentaire):
+
         print("Malgrès la force de l'explosion, vous arrivez à vous relever.")
         print(commentaire)
         self.EntreePourContinuer()
@@ -191,6 +232,26 @@ class Vue:
         print(description_element)
         self.EntreePourContinuer()
 
+    def AfficheFairPlay(self, musique):
+        self.PlayMusic(musique)
+        print("Vous avez gagné !")
+        self.EntreePourContinuer()
+        print("Cepandant... l'ennemi s'est bien battu.")
+        print("Il a réussi a vous enlever tellement de vie, que vous avez du vous contenter d'une victoire sur le fil.")
+        print("Vous avez du finir le combat avec moins d'un sixième de votre vie maximum.")
+        self.EntreePourContinuer()
+        print("Cepandant, une victoire sur le fil, ce n'est pas assez ! Il faut complètement dominer l'ennemi du début a la fin !")
+        print("Offrir aux spectateurs quelque chose d'éblouissant ! La suprématie par la puissance !")
+        self.EntreePourContinuer()
+        print("La suprématie par la puissance, c'est sur ces mots que vous avez fondé votre existance...")
+        self.EntreePourContinuer()
+        self.StopToutesMusiquesSiDejaLancee()
+        print("...et c'est sur ces mots que vous la finirez.")
+        self.EntreePourContinuer()
+        self.PlaySound()
+        print("Pour l'amour du fair play, et comme un signe de reconnaissance envers votre ennemi, vous mettez un terme a votre vie.")
+        self.EntreePourContinuer()
+
     def AfficheMalJaune(self):
         print("L'ennemi conjure une sphère de lumière qui s'élève dans les airs.")
         print("La salle se retrouve baignée dans une teinte dorée.")
@@ -231,106 +292,12 @@ class Vue:
         print(f"L'ennemi récupere {soin} points de vie.")
         self.EntreePourContinuer()
 
-    def ShowGameOverScreen(self, musique1, musique2):
-        mixer.init()
-        mixer.music.load(f"{musique1}.mp3")
-        mixer.music.play()
+    def ShowGameOverScreen(self, musique1):
+        self.PlaySon(musique1)
         print("Votre vision se brouille, et bientôt le monde entier se résume a une tache floue dans l'horizon.")
         print("Vous refermez vos yeux pour la toute dernière fois.")
         self.EntreePourContinuer()
-        print("[AVENTURE TERMINE]")
-        self.EntreePourContinuer()
-        print("[CALCUL DE LA CONTRIBUTION DU PERSONNAGE EN COURS...]")
-        time.sleep(3)
-        clear_console()
-        print("[CALCUL TERMINE]")
-        self.EntreePourContinuer()
-        print("[CONTRIBUTION DU PERSONNAGE INSUFFISANTE]")
-        self.EntreePourContinuer()
-        print("[REALISATION DU DESIR REFUSEE]")
-        self.EntreePourContinuer()
-        print("[MORT VALIDEE]")
-        self.EntreePourContinuer()
-        self.PlayMusic(musique2)
-        print(
-            "|                                                                                         "
-        )
-        print(
-            "|       .-.             .                                                                 "
-        )
-        print(
-            "|      (0.0)                                 +                 .               _.._       "
-        )
-        print(
-            "|       |m|                                                                  .' .-'`      "
-        )
-        print(
-            "|       |=|                                                                 /  /          "
-        )
-        print(
-            "|       |=|                x                       +                     x  |  |          "
-        )
-        print(
-            "|   /|__|_|__|\                                                             \  '.___.;    "
-        )
-        print(
-            "|  (    ( )    )  *                                        x                 '._  _./     "
-        )
-        print(
-            "|   \|\/\\'/\/|/         .                    .                                  ``        "
-        )
-        print(
-            "|     |  Y  |                                                                             "
-        )
-        print(
-            "|     |  |  |                          .                        *                         "
-        )
-        print(
-            "|     |  |  |                                                                             "
-        )
-        print(
-            "|    _|  |  |___________         .                              __________________________"
-        )
-        print(
-            "| __/ |  |  |\          \             _________________________/                          "
-        )
-        print(
-            "|/  \ |  |  |  \         \  _________/                                  88888888          "
-        )
-        print(
-            "|   __|  |  |   |__       \/                                          888888888888        "
-        )
-        print(
-            "|/\/  |  |  |   |\ |______/                                          88888\88/88888       "
-        )
-        print(
-            "| <   +\ |  |\ />  \\'                         ______ ______          888888yy888888       "
-        )
-        print(
-            "|  >   + \  |  \    |                       _/      Y      \_         88888||88888        "
-        )
-        print(
-            "|        + \|+  \  < \                     // Game  | ~~ ~  \\\         88  ||  88         "
-        )
-        print(
-            "|  (O)      +    |    )                   // ~ ~ ~~ |   Over \\\            ||             "
-        )
-        print(
-            "|   |             \  /\                  //________.|.________\\\           ||             "
-        )
-        print(
-            "| ( | )   (o)      \/  )                `----------`-'----------'          ||             "
-        )
-        print(
-            "|_\\\|//__( | )______)_/                                                    ||             "
-        )
-        print(
-            "|        \\\|//                                        Appuyez sur entrée pour terminer.  "
-        )
-        input(
-            "|_________________________________________________________________________________________"
-        )
-        sys.exit()
+        
 
     def AfficheResultatFuite(self, commentaire):
         print("Vous tentez de prendre la fuite...")
@@ -338,22 +305,17 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheFuite(self, musique, commentaire):
-        mixer.init()
-        mixer.music.load(f"{musique}.mp3")
-        mixer.music.play()
+        self.PlaySon(musique)
         print(commentaire)
         self.EntreePourContinuer()
 
     def AfficheWinObelisque(self, musique):
-        mixer.init()
-        mixer.music.load(f"{musique}.mp3")
-        mixer.music.play()
+        self.PlaySon(musique)
         print("Vous avez remporté le combat !")
         self.EntreePourContinuer()
         print("Mais alors que vous vous approchez de l'ennemi pour absorber sa puissance,"
               " vous le voyez se dissoudre et ne laisser rien derriere lui.")
         self.EntreePourContinuer()
-        mixer.quit()
 
     def AfficheTitreRecompense(self, musique, nom):
         self.PlayMusic(musique)
@@ -488,7 +450,7 @@ class Vue:
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AffichageSacrifice(self, commentaire1, commentaire2, commentaire3, commentaire4):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print(commentaire1)
         self.EntreePourContinuer()
         print(commentaire2)
@@ -597,7 +559,8 @@ class Vue:
         print(f"Les éléments se débattent dans votre âme et vous infligent {degat_malediction_du_mana} points de vie.")
         self.EntreePourContinuer()
 
-    def AfficheUtilisationItem(self, commentaire, commentaire_item):
+    def AfficheUtilisationItem(self, commentaire, commentaire_item, son):
+        self.AfficheSonTechnique(son)
         print(commentaire)
         print(commentaire_item)
         self.EntreePourContinuer()
@@ -883,7 +846,7 @@ class Vue:
         return int(input("Choisissez une réponse avec les nombres : "))
     
     def AfficheResurrectionApprenti(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print(" *Je...Je...vais mourir ?* ")
         print(" *non...* ")
         dummies = input("Appuyez sur entree pour continuer")
@@ -944,7 +907,7 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheResurrectionArmeeAnge(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("L'Arméee des Anges commenca a devenir plus épars.'")
         self.EntreePourContinuer()
         print("La victoire semblait être a portée.")
@@ -963,7 +926,7 @@ class Vue:
         clear_console()
 
     def AfficheResurrectionArchange(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("L'Armée de la Fin commenca a devenir plus épars.")
         self.EntreePourContinuer()
         print("Et a ce moment...")
@@ -986,7 +949,7 @@ class Vue:
         clear_console()
 
     def AfficheResurrectionMaitreMage(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("Le Maitre Mage pose un genou a terre, et commence a haleter.")
         self.EntreePourContinuer()
         print("*C'est que je suis plus tout jeune moi !*\n*Tu sais depuis combien de centaines d'années je poireaute ici ??*")
@@ -1015,13 +978,13 @@ class Vue:
         self.EntreePourContinuer()
 
     def AfficheResurrectionColiseum(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("")
         self.EntreePourContinuer()
         self.PlayMusic(musique + "boss_10_phase_2")
 
     def AfficheResurrectionCauchemard(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("intro de la phase 2")
         self.PlayIntro(musique + "alt_1_phase_2_intro")
         self.EntreePourContinuer()
@@ -1030,21 +993,21 @@ class Vue:
         self.PlayMusic(musique + "alt_1_phase_2")
 
     def AfficheResurrectionAhmedEntree(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         self.EntreePourContinuer()
         print("Phase 2")
         self.EntreePourContinuer()
         self.PlayMusic(musique + "alt_3_phase_2")
 
     def AfficheResurrectionAhmedPlat(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         self.EntreePourContinuer()
         print("Phase 3")
         self.EntreePourContinuer()
         self.PlayMusic(musique + "alt_3_phase_3")
 
     def AfficheResurrectionGluancelot(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("intro de la phase 1")
         self.PlayIntro(musique + "alt_4_phase_1_intro")
         self.EntreePourContinuer()
@@ -1053,21 +1016,21 @@ class Vue:
         self.PlayMusic(musique + "alt_4_phase_1")
 
     def AfficheResurrectionVolonteeImmortelle(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         self.EntreePourContinuer()
         print("Phase 2")
         self.EntreePourContinuer()
         self.PlayMusic(musique + "alt_7_phase_2")
 
     def AfficheResurrectionVolonteePersistante(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         self.EntreePourContinuer()
         print("Phase 3")
         self.EntreePourContinuer()
         self.PlayMusic(musique + "alt_7_phase_3")
 
     def AfficheResurrectionVolonteeInstable(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("intro de la phase 4")
         self.PlayIntro(musique + "alt_7_phase_4_intro")
         self.EntreePourContinuer()
@@ -1076,14 +1039,14 @@ class Vue:
         self.PlayMusic(musique + "alt_7_phase_4")
 
     def AfficheResurrectionSpectre(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         self.EntreePourContinuer()
         print("Phase 2")
         self.EntreePourContinuer()
         self.PlayMusic(musique + "alt_9_phase_2")
 
     def AfficheResurrectionAurore(self, musique):
-        mixer.quit()
+        self.StopToutesMusiquesSiDejaLancee()
         print("intro de la phase 2")
         self.PlayIntro(musique + "alt_10_phase_2_intro")
         self.EntreePourContinuer()
@@ -1235,6 +1198,45 @@ class Vue:
     def AfficheCanigou(self, commentaire):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
+    def AfficheMage(self,commentaire, commentaire_effet):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_effet)
+
+    def AfficheEffetImpotent(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheSparifique(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheOmnipotent(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaSecondSouffle(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaRechargeRapide(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaTranshumanisme(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaPauseRepas(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaFatigueChronique(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheMauvaisTachyonExplose(self):
+        self.AfficheSonTechnique("DARK")
+        self.AffichageUneLignePuisUnEntreePourContinuer("Votre tachyon instable dépasse sa charge maximum et vous explose à la figure !\nVous perdez 999 points de vie.")
+
+    def AfficheBonTachyonExplose(self):
+        self.AfficheSonTechnique("DARK")
+        self.AffichageUneLignePuisUnEntreePourContinuer("Votre extracteur de tachyon est chargé à bloc !\nIl brille d'une lumière divine et vous béni pendant 5 tours !")
+    
+    def AfficheDopage(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("Le Dopage du monstre a ruiné son corps !\nIl perd un peu de vie et devient gelé pendant 5 tours !")
+
     def AfficheEppeeDamocles(self):
         self.AffichageUneLignePuisUnEntreePourContinuer("Votre épée de Damocles finit par vous tomber sur la tête, se brisant a son contact !\nVous perdez l'artefact, ainsi que beaucoup de points de vie !")
 
@@ -1243,3 +1245,14 @@ class Vue:
 
     def AfficheEffetEauBenite(self):
         self.AffichageUneLignePuisUnEntreePourContinuer("Votre fiole d'eau bénite réagit avec votre mana !\nVous voila béni pendant un tour !")
+
+    def AffichageMonstreDopeRecompense(self, commentaire1, commentaire2):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire1)
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire2)
+    
+    def AfficheMimiqueMorte(self, commentaire1, commentaire2):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire1)
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire2)
+
+    def AfficheBonTachyonUtilisation(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("L'extracteur de tachyon convertit 50% de sa charge en énergie afin de vous permettre de faire votre action gratuitement !")

@@ -2,6 +2,7 @@
 import vue
 import os
 import random
+import time
 
 
 def clear_console():
@@ -11,17 +12,19 @@ def clear_console():
 
 class Control:
 
-    def __init__(self, Player, Trader):
+    def __init__(self, Player, Trader, Floormaker, Sove):
         """Ne prend rien, ne retourne rien.
 
         Initialise la vue, et l'ensemble du modèle
          (sauf la variable benediction_du_mana)
         """
         self.Player = Player
+        self.Floormaker = Floormaker
         self.tirage = Trader
+        self.Sove = Sove
         self.vue = vue.Vue(Player)
         self.modele = modele.Model(Player)
-        self.sound_of_action = "item"
+        self.sound_of_action = "ITEM"
         clear_console()
 
     def SetBenedictionDuMana(self):
@@ -118,130 +121,133 @@ class Control:
                         return True
                 return False
         elif self.modele.monstre_points_de_vie < 1:
-            if self.modele.monstre_nombre_de_vies_supplementaire > 0:
-                self.EnleveAlterationEtat()
-                self.modele.monstre_passe_son_tour = True
-                self.modele.commentaire_de_resurection_de_monstre = "...fatigué par sa resurection."
-                self.modele.monstre_nombre_de_vies_supplementaire -= 1
-                vie_recupere = round(0.5 * self.modele.monstre_points_de_vie_max)
-                commentaire = (
-                    "Alors que l'ennemi allait mourir, il "
-                    "prend une pose particuliere et hurle."
-                    "\nDe par sa détermination, il reprend"
-                    f" {vie_recupere} points de vie, mais son"
-                    " teint perd en couleur et vivacité.\nD'après"
-                    " son état, il devrait etre capable de refaire"
-                    f" ceci {self.modele.monstre_nombre_de_vies_supplementaire} fois."
-                )
-                if self.modele.stigma_monstre_positif == "Cendres du Renouveau":
-                    vie_recupere = self.modele.monstre_points_de_vie_max
-                    self.modele.monstre_passe_son_tour = False
-                    self.modele.commentaire_de_resurection_de_monstre = "Aucun"
+            if self.Player.malediction == "Impotent" and self.modele.nombre_de_tours <= 5:
+                self.EffetImpotent()
+            else:
+                if self.modele.monstre_nombre_de_vies_supplementaire > 0:
+                    self.EnleveAlterationEtat()
+                    self.modele.monstre_passe_son_tour = True
+                    self.modele.commentaire_de_resurection_de_monstre = "...fatigué par sa resurection."
+                    self.modele.monstre_nombre_de_vies_supplementaire -= 1
+                    vie_recupere = round(0.5 * self.modele.monstre_points_de_vie_max)
                     commentaire = (
-                        "Soudainement, L'ennemi s'embrase et disparait dans un nuage de cendre. "
-                        "\nLe nuage se met alors a tourner, tourner, tourner, puis se regroupe en une "
-                        "forme particulière, comme une statue noire de jais."
-                        f"\nLa statue se met alors a prendre des couleurs, et bientot vous"
-                        " retrouvez votre ennemi en pleine forme, avec tout ses points de vie.\nD'après"
+                        "Alors que l'ennemi allait mourir, il "
+                        "prend une pose particuliere et hurle."
+                        "\nDe par sa détermination, il reprend"
+                        f" {vie_recupere} points de vie, mais son"
+                        " teint perd en couleur et vivacité.\nD'après"
                         " son état, il devrait etre capable de refaire"
                         f" ceci {self.modele.monstre_nombre_de_vies_supplementaire} fois."
                     )
-                elif self.modele.monstre_nom == "Ah Kin" and self.modele.monstre_nombre_de_vies_supplementaire in [9, 6, 3]:
-                    self.modele.monstre_tags.append("En Fuite")
-                elif self.modele.monstre_nom == "Armée des Anges":
-                    musique = self.modele.CHEMINABSOLUMUSIQUE 
-                    self.modele.monstre_passe_son_tour = False
-                    if self.modele.monstre_nombre_de_vies_supplementaire == 0 :
-                        self.vue.AfficheResurrectionArmeeAnge(musique)
-                        self.modele.monstre_nom = "Armée de la Fin"
-                        self.SetAttributesFromName()
-                    else:
+                    if self.modele.stigma_monstre_positif == "Cendres du Renouveau":
                         vie_recupere = self.modele.monstre_points_de_vie_max
+                        self.modele.monstre_passe_son_tour = False
                         self.modele.commentaire_de_resurection_de_monstre = "Aucun"
                         commentaire = (
-                            "Le son d'un cor retenti. Les renforts de l'armée s'approchent."
-                            "\nD'après votre instinct, il ne devrait y avoir plus que"
-                            f" {self.modele.monstre_nombre_de_vies_supplementaire} autres vagues."
+                            "Soudainement, L'ennemi s'embrase et disparait dans un nuage de cendre. "
+                            "\nLe nuage se met alors a tourner, tourner, tourner, puis se regroupe en une "
+                            "forme particulière, comme une statue noire de jais."
+                            f"\nLa statue se met alors a prendre des couleurs, et bientot vous"
+                            " retrouvez votre ennemi en pleine forme, avec tout ses points de vie.\nD'après"
+                            " son état, il devrait etre capable de refaire"
+                            f" ceci {self.modele.monstre_nombre_de_vies_supplementaire} fois."
                         )
-                elif self.modele.monstre_nom == "Armée de la Fin":
-                    musique = self.modele.CHEMINABSOLUMUSIQUE 
-                    self.modele.monstre_passe_son_tour = False
-                    if self.modele.monstre_nombre_de_vies_supplementaire == 0 :
-                        self.vue.AfficheResurrectionArchange(musique)
-                        self.modele.monstre_nom = "Archange Michael"
+                    elif self.modele.monstre_nom == "Ah Kin" and self.modele.monstre_nombre_de_vies_supplementaire in [9, 6, 3]:
+                        self.modele.monstre_tags.append("En Fuite")
+                    elif self.modele.monstre_nom == "Armée des Anges":
+                        musique = self.modele.CHEMINABSOLUMUSIQUE 
+                        self.modele.monstre_passe_son_tour = False
+                        if self.modele.monstre_nombre_de_vies_supplementaire == 0 :
+                            self.vue.AfficheResurrectionArmeeAnge(musique)
+                            self.modele.monstre_nom = "Armée de la Fin"
+                            self.SetAttributesFromName()
+                        else:
+                            vie_recupere = self.modele.monstre_points_de_vie_max
+                            self.modele.commentaire_de_resurection_de_monstre = "Aucun"
+                            commentaire = (
+                                "Le son d'un cor retenti. Les renforts de l'armée s'approchent."
+                                "\nD'après votre instinct, il ne devrait y avoir plus que"
+                                f" {self.modele.monstre_nombre_de_vies_supplementaire} autres vagues."
+                            )
+                    elif self.modele.monstre_nom == "Armée de la Fin":
+                        musique = self.modele.CHEMINABSOLUMUSIQUE 
+                        self.modele.monstre_passe_son_tour = False
+                        if self.modele.monstre_nombre_de_vies_supplementaire == 0 :
+                            self.vue.AfficheResurrectionArchange(musique)
+                            self.modele.monstre_nom = "Archange Michael"
+                            self.SetAttributesFromName()
+                        else:
+                            vie_recupere = self.modele.monstre_points_de_vie_max
+                            self.modele.commentaire_de_resurection_de_monstre = "Aucun"
+                            commentaire = (
+                                "Le son d'un cor retenti. Les renforts de l'armée s'approchent."
+                                "\nD'après votre instinct, il ne devrait y avoir plus que"
+                                f" {self.modele.monstre_nombre_de_vies_supplementaire} autres vagues."
+                            )
+                    if self.modele.monstre_nom in ["Maitre Mage", "Apprentie", "Coliseum", "Cauchemard",
+                                                "Ahmed (Entrée)", "Ahmed (Plat de résistance)", "Roi Gluant",
+                                                "Volontée Immortelle", "Volontée Persistante", "Volontée Instable",
+                                                "Spectre", "Aurore"] and self.modele.monstre_nombre_de_vies_supplementaire == 0:
+                        chemin_musique = self.modele.CHEMINABSOLUMUSIQUE 
+                        if self.modele.monstre_nom == "Maitre Mage":
+                            self.modele.commentaire_de_resurection_de_monstre = "...un peu sonné par sa transformation."
+                            self.vue.AfficheResurrectionMaitreMage(chemin_musique)
+                            self.modele.monstre_nom = "Ministre du Mana"
+                        elif self.modele.monstre_nom == "Apprentie":
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour s'adapter a son nouvel hôte."
+                            self.vue.AfficheResurrectionApprenti(chemin_musique)
+                            self.modele.monstre_nom = "Minaraï"
+                        elif self.modele.monstre_nom == "Coliseum":
+                            self.modele.commentaire_de_resurection_de_monstre = "...afin de se libérer de son ancienne forme."
+                            self.vue.AfficheResurrectionColiseum(chemin_musique)
+                            self.modele.monstre_nom = "Pierre de Désir"
+                        elif self.modele.monstre_nom == "Cauchemard" :
+                            self.modele.monstre_tags.remove("Super Etoile")
+                            self.modele.monstre_tags.remove("Terreur")
+                            self.modele.monstre_tags.append("Fausse Terreur")
+                            self.modele.commentaire_de_resurection_de_monstre = "...affaibli par le chant positif."
+                            self.vue.AfficheResurrectionCauchemard(chemin_musique)
+                            self.modele.monstre_nom = "Cauchemard (Affaibli)" #zzzzzz
+                        elif self.modele.monstre_nom == "Ahmed (Entrée)" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour reprendre ses esprits après le rush."
+                            self.vue.AfficheResurrectionAhmedEntree(chemin_musique)
+                            self.modele.monstre_nom = "Ahmed (Plat de résistance)" #zzzzzz
+                        elif self.modele.monstre_nom == "Ahmed (Plat de résistance)" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour reprendre ses esprits après le rush."
+                            self.vue.AfficheResurrectionAhmedPlat(chemin_musique)
+                            self.modele.monstre_nom = "Ahmed (Dessert)" #zzzzzz
+                        elif self.modele.monstre_nom == "Roi Gluant" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour fermer les yeux de son défunt souverain."
+                            self.vue.AfficheResurrectionGluancelot(chemin_musique)
+                            self.modele.monstre_nom = "Gluantcelot" #zzzzzz
+                        elif self.modele.monstre_nom == "Volontée Immortelle" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour souffler un coup."
+                            self.vue.AfficheResurrectionVolonteeImmortelle(chemin_musique)
+                            self.modele.monstre_nom = "Volontée Persistante" #zzzzzz
+                        elif self.modele.monstre_nom == "Volontée Persistante" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour reprendre ses esprits."
+                            self.vue.AfficheResurrectionVolonteePersistante(chemin_musique)
+                            self.modele.monstre_nom = "Volontée Instable" #zzzzzz
+                        elif self.modele.monstre_nom == "Volontée Instable" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour se reconcentrer sur son adversaire."
+                            self.vue.AfficheResurrectionVolonteeInstable(chemin_musique)
+                            self.modele.monstre_nom = "Volontée Indomptable" #zzzzzz
+                        elif self.modele.monstre_nom == "Spectre" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour se disputer avec les autres âmes en peine."
+                            self.vue.AfficheResurrectionSpectre(chemin_musique)
+                            self.modele.monstre_nom = "Spectre (Agonie)" #zzzzzz
+                        elif self.modele.monstre_nom == "Aurore" :
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour se masser l'endroit ou se situe sa marque du sacrifice."
+                            self.vue.AfficheResurrectionAurore(chemin_musique)
+                            self.modele.monstre_nom = "Divine Faucheuse" #zzzzzz
                         self.SetAttributesFromName()
                     else:
-                        vie_recupere = self.modele.monstre_points_de_vie_max
-                        self.modele.commentaire_de_resurection_de_monstre = "Aucun"
-                        commentaire = (
-                            "Le son d'un cor retenti. Les renforts de l'armée s'approchent."
-                            "\nD'après votre instinct, il ne devrait y avoir plus que"
-                            f" {self.modele.monstre_nombre_de_vies_supplementaire} autres vagues."
-                        )
-                if self.modele.monstre_nom in ["Maitre Mage", "Apprenti", "Coliseum", "Cauchemard",
-                                               "Ahmed (Entrée)", "Ahmed (Plat de résistance)", "Roi Gluant",
-                                               "Volontée Immortelle", "Volontée Persistante", "Volontée Instable",
-                                               "Spectre", "Aurore"] and self.modele.monstre_nombre_de_vies_supplementaire == 0:
-                    chemin_musique = self.modele.CHEMINABSOLUMUSIQUE 
-                    if self.modele.monstre_nom == "Maitre Mage":
-                        self.modele.commentaire_de_resurection_de_monstre = "...un peu sonné par sa transformation."
-                        self.vue.AfficheResurrectionMaitreMage(chemin_musique)
-                        self.modele.monstre_nom = "Ministre du Mana"
-                    elif self.modele.monstre_nom == "Apprenti":
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour s'adapter a son nouvel hôte."
-                        self.vue.AfficheResurrectionApprenti(chemin_musique)
-                        self.modele.monstre_nom = "Minaraï"
-                    elif self.modele.monstre_nom == "Coliseum":
-                        self.modele.commentaire_de_resurection_de_monstre = "...afin de se libérer de son ancienne forme."
-                        self.vue.AfficheResurrectionColiseum(chemin_musique)
-                        self.modele.monstre_nom = "Pierre de Désir"
-                    elif self.modele.monstre_nom == "Cauchemard" :
-                        self.modele.monstre_tags.remove("Super Etoile")
-                        self.modele.monstre_tags.remove("Terreur")
-                        self.modele.monstre_tags.append("Fausse Terreur")
-                        self.modele.commentaire_de_resurection_de_monstre = "...affaibli par le chant positif."
-                        self.vue.AfficheResurrectionCauchemard(chemin_musique)
-                        self.modele.monstre_nom = "Cauchemard (Affaibli)" #zzzzzz
-                    elif self.modele.monstre_nom == "Ahmed (Entrée)" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour reprendre ses esprits après le rush."
-                        self.vue.AfficheResurrectionAhmedEntree(chemin_musique)
-                        self.modele.monstre_nom = "Ahmed (Plat de résistance)" #zzzzzz
-                    elif self.modele.monstre_nom == "Ahmed (Plat de résistance)" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour reprendre ses esprits après le rush."
-                        self.vue.AfficheResurrectionAhmedPlat(chemin_musique)
-                        self.modele.monstre_nom = "Ahmed (Dessert)" #zzzzzz
-                    elif self.modele.monstre_nom == "Roi Gluant" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour fermer les yeux de son défunt souverain."
-                        self.vue.AfficheResurrectionGluancelot(chemin_musique)
-                        self.modele.monstre_nom = "Gluantcelot" #zzzzzz
-                    elif self.modele.monstre_nom == "Volontée Immortelle" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour souffler un coup."
-                        self.vue.AfficheResurrectionVolonteeImmortelle(chemin_musique)
-                        self.modele.monstre_nom = "Volontée Persistante" #zzzzzz
-                    elif self.modele.monstre_nom == "Volontée Persistante" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour reprendre ses esprits."
-                        self.vue.AfficheResurrectionVolonteePersistante(chemin_musique)
-                        self.modele.monstre_nom = "Volontée Instable" #zzzzzz
-                    elif self.modele.monstre_nom == "Volontée Instable" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour se reconcentrer sur son adversaire."
-                        self.vue.AfficheResurrectionVolonteeInstable(chemin_musique)
-                        self.modele.monstre_nom = "Volontée Indomptable" #zzzzzz
-                    elif self.modele.monstre_nom == "Spectre" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour se disputer avec les autres âmes en peine."
-                        self.vue.AfficheResurrectionSpectre(chemin_musique)
-                        self.modele.monstre_nom = "Spectre (Agonie)" #zzzzzz
-                    elif self.modele.monstre_nom == "Aurore" :
-                        self.modele.commentaire_de_resurection_de_monstre = "...pour se masser l'endroit ou se situe sa marque du sacrifice."
-                        self.vue.AfficheResurrectionAurore(chemin_musique)
-                        self.modele.monstre_nom = "Divine Faucheuse" #zzzzzz
-                    self.SetAttributesFromName()
+                        if self.modele.monstre_nom in ["Volontée Immortelle", "Volontée Persistante", "Volontée Instable"]:
+                            vie_recupere = self.modele.monstre_points_de_vie_max
+                        self.modele.monstre_points_de_vie = vie_recupere
+                        self.vue.AfficheResurrection(commentaire)
                 else:
-                    if self.modele.monstre_nom in ["Volontée Immortelle", "Volontée Persistante", "Volontée Instable", "Volontée Indomptable"]:
-                        vie_recupere = self.modele.monstre_points_de_vie_max
-                    self.modele.monstre_points_de_vie = vie_recupere
-                    self.vue.AfficheResurrection(commentaire)
-            else:
-                return False
+                    return False
         return True
     
     def EnleveAlterationEtat(self):
@@ -412,12 +418,14 @@ class Control:
                         for action in liste_daction_a_passer_a_vue:
                             affichage_cout = ""
                             if titre_du_menu == "Sorts":
+                                action_sans_affix = self.EnleveurAffix(action)
                                 affichage_cout = self.ConstructionAffichageCoutSort(
-                                    action
+                                    action_sans_affix
                                 )
                             elif titre_du_menu == "Techniques":
+                                action_sans_affix = self.EnleveurAffix(action)
                                 affichage_cout = (
-                                    self.ConstructionAffichageCoutTechnique(action)
+                                    self.ConstructionAffichageCoutTechnique(action_sans_affix)
                                 )
                             elif titre_du_menu == "Items":
                                 affichage_cout = self.ConstructionAffichageCoutItems(
@@ -502,13 +510,16 @@ class Control:
 
     def PatternDesignConstantUpdater(self):
         #sert a tester plusieurs types de dégats sans avoir a changer les dégats de chaques attaques et sorts
-        bonus_equilibrage = 25
+        bonus_equilibrage = 50
         # degat des sorts   BASIQUE
         bonus_odin = 0
         nombre_aleatoire_pour_odin = random.randint(0, 100)
         if (self.modele.stigma_joueur_bonus == "Faveurs d'Odin") and (nombre_aleatoire_pour_odin <= 8):
             bonus_odin = 500
         bonus_malediction_mana = 0
+        bonus_hyde = 0
+        if self.modele.miss_hyde_transformation :
+            bonus_hyde = 50
         if self.modele.malediction_du_mana:
             bonus_malediction_mana = 25
         bonus_adrenaline = 0
@@ -557,8 +568,10 @@ class Control:
             + bonus_stigma
             + bonus_talent
             + bonus_odin
+            + bonus_hyde
             + bonus_equilibrage
             + bonus_artefact
+            + self.modele.accumulation_degat_sort
         )
         self.modele.DEGATBONUSSORTS -= (
             self.modele.monstre_points_de_resistance * 3
@@ -581,6 +594,9 @@ class Control:
         nombre_aleatoire_pour_odin = random.randint(0, 100)
         if (self.modele.stigma_joueur_bonus == "Faveurs d'Odin") and (nombre_aleatoire_pour_odin <= 8):
             bonus_odin = 500
+        bonus_hyde = 0
+        if self.modele.miss_hyde_transformation :
+            bonus_hyde = 50
         bonus_adrenaline = 0
         if self.modele.utilise_pousse_adrenaline:
             bonus_adrenaline = 50
@@ -628,8 +644,10 @@ class Control:
             + bonus_stigma
             + bonus_talent
             + bonus_odin
+            + bonus_hyde
             + bonus_equilibrage
             + bonus_artefact
+            + self.modele.accumulation_degat_technique
         )
         self.modele.DEGATBONUSATTAQUE -= malus_stigma
 
@@ -677,7 +695,11 @@ class Control:
         bonus_gel = 0
         if self.modele.monstre_est_gele and self.modele.choc_thermique:
             bonus_gel = 200
-        self.modele.DEGATBONUSATTAQUEFEU = bonus_talent + bonus_stigma + bonus_gel
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Incandescent":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Feu"]
+        self.modele.DEGATBONUSATTAQUEFEU = bonus_talent + bonus_stigma + bonus_gel + bonus_uppgrade + bonus_benediction_chamane
         # degat des sorts de feu
         bonus_talent = 0
         if self.modele.affinite_au_feu:
@@ -688,7 +710,11 @@ class Control:
         bonus_gel = 0
         if self.modele.monstre_est_gele and self.modele.choc_thermique:
             bonus_gel = 200
-        self.modele.DEGATBONUSSORTFEU = bonus_talent + bonus_stigma + bonus_gel
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Incandescent":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Feu"]
+        self.modele.DEGATBONUSSORTFEU = bonus_talent + bonus_stigma + bonus_gel + bonus_uppgrade + bonus_benediction_chamane
         # degat du feu
         bonus_talent = 0
         if self.modele.surchauffe:
@@ -709,7 +735,11 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_positif == "Electrodynamisme":
             malus_stigma += 20
-        self.modele.DEGATBONUSATTAQUEFOUDRE = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Conducteur":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Foudre"]
+        self.modele.DEGATBONUSATTAQUEFOUDRE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         self.modele.DEGATBONUSATTAQUEFOUDRE -= malus_stigma
         # degat des sorts de foudre
         bonus_talent = 0
@@ -721,7 +751,11 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_positif == "Electrodynamisme":
             malus_stigma += 20
-        self.modele.DEGATBONUSSORTFOUDRE = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Conducteur":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Foudre"]
+        self.modele.DEGATBONUSSORTFOUDRE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         self.modele.DEGATBONUSSORTFOUDRE -= malus_stigma
         # degat de la paralysie (par neurotransmitteur)
         self.modele.DEGATPARALYSIE = 2  # %de vie du monstre
@@ -736,7 +770,11 @@ class Control:
             bonus_stigma += 15
         elif self.modele.stigma_monstre_negatif == "Cryophobia":
             bonus_stigma += 15
-        self.modele.DEGATBONUSATTAQUEGLACE = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Glaciaire":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Glace"]
+        self.modele.DEGATBONUSATTAQUEGLACE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         # degat des sorts de glace
         bonus_talent = 0
         if self.modele.affinite_de_glace:
@@ -746,7 +784,11 @@ class Control:
             bonus_stigma += 25
         elif self.modele.stigma_monstre_negatif == "Cryophobia":
             bonus_stigma += 45
-        self.modele.DEGATBONUSSORTGLACE = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Glaciaire":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Glace"]
+        self.modele.DEGATBONUSSORTGLACE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         # degat de la gelure (quand on en sort)
         self.modele.DEGATGELURE = 5  # %de vie du monstre
         # degat des attk de terre
@@ -756,7 +798,11 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_negatif == "Géodynamisme":
             malus_stigma += 25
-        self.modele.DEGATBONUSATTAQUETERRE = bonus_talent
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Rocailleux":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Terre"]
+        self.modele.DEGATBONUSATTAQUETERRE = bonus_talent + bonus_uppgrade + bonus_benediction_chamane
         self.modele.DEGATBONUSATTAQUETERRE -= malus_stigma
         # degat des sorts de terre
         bonus_talent = 0
@@ -765,7 +811,11 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_negatif == "Géodynamisme":
             malus_stigma += 25
-        self.modele.DEGATBONUSSORTTERRE = bonus_talent
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Rocailleux":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Terre"]
+        self.modele.DEGATBONUSSORTTERRE = bonus_talent + bonus_uppgrade + bonus_benediction_chamane
         self.modele.DEGATBONUSSORTTERRE -= malus_stigma
         # degat de la lapidation
         bonus_artefact = 0
@@ -779,7 +829,11 @@ class Control:
         bonus_stigma = 0
         if self.modele.stigma_monstre_negatif == "Anisotrope":
             bonus_stigma += 25
-        self.modele.DEGATBONUSATTAQUEPHYSIQUE = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Musclé":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Chair"]
+        self.modele.DEGATBONUSATTAQUEPHYSIQUE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         # degat des sorts physiques
         bonus_talent = 0
         if self.modele.affinite_de_effort:
@@ -787,7 +841,11 @@ class Control:
         bonus_stigma = 0
         if self.modele.stigma_monstre_negatif == "Anisotrope":
             bonus_stigma += 25
-        self.modele.DEGATBONUSSORTPHYSIQUE = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Musclé":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Chair"]
+        self.modele.DEGATBONUSSORTPHYSIQUE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         # degat des attk de sang
         bonus_talent = 0
         if self.modele.affinite_du_sang:
@@ -795,7 +853,11 @@ class Control:
         bonus_stigma = 0
         if self.modele.stigma_monstre_negatif == "Faible Hematopoïèse":
             bonus_stigma += 25
-        self.modele.DEGATBONUSATTAQUESANG = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Sain":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Sang"]
+        self.modele.DEGATBONUSATTAQUESANG = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         # degat des sorts de sang
         bonus_talent = 0
         if self.modele.affinite_du_sang:
@@ -803,7 +865,11 @@ class Control:
         bonus_stigma = 0
         if self.modele.stigma_monstre_negatif == "Faible Hematopoïèse":
             bonus_stigma += 25
-        self.modele.DEGATBONUSSORTSANG = bonus_talent + bonus_stigma
+        bonus_benediction_chamane = 0
+        if self.Player.benediction == "Sain":
+            bonus_benediction_chamane = 75
+        bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Sang"]
+        self.modele.DEGATBONUSSORTSANG = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
         # degat de la saignée
         bonus_talent = 0
         self.modele.DEGATSAIGNEE = bonus_talent
@@ -898,7 +964,7 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_positif == "Roche Ténébreuse":
             malus_stigma = 100
-        self.modele.CHANCEBONUSDEFAIREBRULER += bonus_vulnerable + bonus_charge
+        self.modele.CHANCEBONUSDEFAIREBRULER += bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_brulure)
         self.modele.CHANCEBONUSDEFAIREBRULER -= malus_stigma
         # pourcentage de paralyser
         bonus_vulnerable = 0
@@ -909,7 +975,7 @@ class Control:
         bonus_artefact = 0
         if "Fiole d'Eclair" in self.modele.liste_dartefact_optionels:
             bonus_artefact += 5
-        self.modele.CHANCEBONUSDEFAIREPARALYSER = bonus_vulnerable + bonus_charge + bonus_artefact
+        self.modele.CHANCEBONUSDEFAIREPARALYSER = bonus_vulnerable + bonus_charge + bonus_artefact + round(self.modele.accumulation_chance_paralysie)
         # pourcentage de geler
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
@@ -919,7 +985,7 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_bonus == "Nordique":
             malus_stigma = 100
-        self.modele.CHANCEBONUSDEFAIREGELER = 0 + bonus_vulnerable + bonus_charge
+        self.modele.CHANCEBONUSDEFAIREGELER = 0 + bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_gelure)
         self.modele.CHANCEBONUSDEFAIREGELER -= malus_stigma
         # pourcentage de lapider
         bonus_vulnerable = 0
@@ -933,7 +999,7 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_positif == "Armure de Plates":
             malus_stigma = 100
-        self.modele.CHANCEBONUSDEFAIRELAPIDER = 0 + bonus_vulnerable + bonus_charge + bonus_artefact
+        self.modele.CHANCEBONUSDEFAIRELAPIDER = 0 + bonus_vulnerable + bonus_charge + bonus_artefact + round(self.modele.accumulation_chance_lapider)
         self.modele.CHANCEBONUSDEFAIRELAPIDER -= malus_stigma
         # pourcentage de saignee
         bonus_vulnerable = 0
@@ -944,7 +1010,7 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_bonus == "Corps d'Acier":
             malus_stigma = 100
-        self.modele.CHANCEBONUSDEFAIRESAIGNER = 0 + bonus_vulnerable + bonus_charge
+        self.modele.CHANCEBONUSDEFAIRESAIGNER = 0 + bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_drainer)
         self.modele.CHANCEBONUSDEFAIRESAIGNER -= malus_stigma
         # pourcentage de louper une attaque
         malus_envol = 0
@@ -1023,15 +1089,21 @@ class Control:
         bonus_artefact = 0
         if "Bandeau Catharsis" in self.modele.liste_dartefact_optionels:
             bonus_artefact += 10
+        bonus_hyde = 0
+        if self.modele.miss_hyde_transformation :
+            bonus_hyde = 50
         bonus_stigma = 0
         if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
             bonus_stigma = 25
         bonus_force = self.modele.monstre_points_de_force * 10
-        self.modele.DEGATTECHNIQUEBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact
+        self.modele.DEGATTECHNIQUEBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde
         # pourcentage de degat bonus de sort contre le joueur
         bonus_gel = 0
         if self.modele.est_gele:
             bonus_gel = 50
+        bonus_hyde = 0
+        if self.modele.miss_hyde_transformation :
+            bonus_hyde = 50
         bonus_artefact = 0
         if "Bandeau Catharsis" in self.modele.liste_dartefact_optionels:
             bonus_artefact += 15
@@ -1039,7 +1111,7 @@ class Control:
         if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
             bonus_stigma = 25
         bonus_force = self.modele.monstre_points_de_intelligence * 10
-        self.modele.DEGATSORTBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact
+        self.modele.DEGATSORTBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde
         # pourcentage de se faire enflammer (pas de modificateurs pour l'instant)
         self.modele.CHANCEBONUSJOUEURENFEU = 0
         # pourcentage de se faire geler (pas de modificateurs pour l'instant)
@@ -1059,7 +1131,10 @@ class Control:
         bonus_defence = (
             self.modele.points_de_defence + self.modele.gain_de_defence
         ) * 3
-        self.modele.BONUSREDUCTIONDEGATSURJOUEUR = bonus_defence
+        malus_hyde = 0
+        if self.modele.miss_hyde_transformation :
+            malus_hyde = 50
+        self.modele.BONUSREDUCTIONDEGATSURJOUEUR = bonus_defence - malus_hyde
         # reduction du cout en mana des sorts generaux
         bonus_talent = 0
         if self.modele.connaissance:
@@ -1131,7 +1206,7 @@ class Control:
                 self.modele.monstre_nom = "Armée des Anges"
             elif self.modele.nom_du_personnage == "Peralta":
                 self.modele.monstre_nom = "Doug Trudy"
-            elif self.modele.nom_du_personnage == "Bob Doré":
+            elif self.modele.nom_du_personnage == "Voyageur":
                 self.modele.monstre_nom = "Thémis"
         else:
             if self.modele.numero_de_letage == 0:
@@ -1156,8 +1231,8 @@ class Control:
                 self.modele.monstre_nom = self.modele.liste_de_monstres_etage_9_10_11[
                     (random.randint(0, 19))
                 ]
-            elif self.modele.numero_de_letage == 0:
-                self.modele.monstre_nom = "Gluant"
+            # elif self.modele.numero_de_letage == 0:
+                # self.modele.monstre_nom = "Gluant"
         if self.modele.est_une_mimique:
             self.modele.monstre_nom = "Mimique"
 
@@ -1205,7 +1280,7 @@ class Control:
                 "Soin": "Sort",
                 "Flamme": "Sort"
             }
-            self.modele.monstre_recompense = {"Vie max": 2, "Gold": 15 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie max": 2, "Gold": 15 + gold_bonus_par_etage, "Materiau": "Coeur Gravitaire"}
 
 ###################################################################################################################################
         elif self.modele.monstre_nom == "AstonRe":
@@ -1541,7 +1616,7 @@ class Control:
                 "Poing de Feu": "Technique", # brule
                 "Brulevent": "Technique" # rend muet
             }
-            self.modele.monstre_recompense = {"Mana max": 2, "Gold": 10 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Mana max": 2, "Gold": 10 + gold_bonus_par_etage, "Materiau": "Ectoplasme Chaud"}
         elif self.modele.monstre_nom == "Golem de Terre":
             self.modele.stigma_monstre_positif = "Géodynamisme"
             self.modele.stigma_monstre_negatif = "Corps Massif"
@@ -1558,7 +1633,7 @@ class Control:
                 "Eboulis": "Technique",  # peux lapider
                 "Poing de Mana": "Sort"
             }
-            self.modele.monstre_recompense = {"Vie max": 1, "Degat coup critique": 1, "Gold": 20 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie max": 1, "Degat coup critique": 1, "Gold": 20 + gold_bonus_par_etage, "Materiau": "Poussière Animée"}
         elif self.modele.monstre_nom == "Ombre Tangible":
             self.modele.stigma_monstre_positif = "Malédiction"
             self.modele.stigma_monstre_negatif = "Astralien"
@@ -1574,7 +1649,7 @@ class Control:
                 "Confusion": "Sort", # confond
                 "Poing de Mana": "Sort"
             }
-            self.modele.monstre_recompense = {"Mana max": 1, "Degat sort critique": 1, "Gold": 15 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Mana max": 1, "Degat sort critique": 1, "Gold": 15 + gold_bonus_par_etage, "Materiau": "Ether Non-Newtonien"}
         elif self.modele.monstre_nom == "Clone de Verre":
             self.modele.stigma_monstre_positif = "Brisures"
             self.modele.stigma_monstre_negatif = "Fragile"
@@ -1589,7 +1664,7 @@ class Control:
                 "Durcissement Argilite": "Technique", # augmente def
                 "Tir Arcanique": "Sort"
             }
-            self.modele.monstre_recompense = {"Vie max": 1, "Vie": 15, "Mana max": 1, "Mana": 15, "Gold": 15 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie max": 1, "Vie": 15, "Mana max": 1, "Mana": 15, "Gold": 15 + gold_bonus_par_etage, "Materiau": "Eclat de Verre"}
         elif self.modele.monstre_nom == "Métroïde":
             self.modele.stigma_monstre_positif = "Xénoanatomie"
             self.modele.stigma_monstre_negatif = "Cryophobia"
@@ -1604,7 +1679,7 @@ class Control:
                 "Drain": "Technique", # draine vie
                 "Impact": "Technique", # degat
             }
-            self.modele.monstre_recompense = {"Taux sort critique": 1, "Mana max": 3, "Gold": 35 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Taux sort critique": 1, "Mana max": 3, "Gold": 35 + gold_bonus_par_etage, "Materiau": "Fluide Alien"}
         elif self.modele.monstre_nom == "Trienun":
             self.modele.stigma_monstre_positif = "Fièvre du Jeu"
             self.modele.stigma_monstre_negatif = "Addict"
@@ -1620,7 +1695,7 @@ class Control:
                 "Bandit Manchot": "Sort", # lance 3 symbole. feu, glace ou paralysie ou les trois, pour lui ou joueur  [x]
                 "Ruée vers l'or": "Sort" # donne mal jaune
             }
-            self.modele.monstre_recompense = {"Taux sort critique": 1,"Taux coup critique": 1, "Gold": 50 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Taux sort critique": 1,"Taux coup critique": 1, "Gold": 50 + gold_bonus_par_etage, "Materiau": "Morceau de Cloche"}
         elif self.modele.monstre_nom == "Phénix Juvénile":
             self.modele.stigma_monstre_positif = "Cendres du Renouveau"
             self.modele.stigma_monstre_negatif = "Faible Hematopoïèse"
@@ -1636,7 +1711,7 @@ class Control:
                 "Coup du Foie": "Technique", # rend bléssé
                 "Possession du mana": "Sort", # sorts coutent plus cher
             }
-            self.modele.monstre_recompense = {"Taux esquive": 1, "Taux coup critique": 1, "Vie max": 3, "Gold": 35 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Taux esquive": 1, "Taux coup critique": 1, "Vie max": 3, "Gold": 35 + gold_bonus_par_etage, "Materiau": "Ecaille de Phénix"}
         elif self.modele.monstre_nom == "Rochemikaze":
             self.modele.stigma_monstre_positif = "Faveurs Explosives"
             self.modele.stigma_monstre_negatif = "Surveillé"
@@ -1653,7 +1728,7 @@ class Control:
                 "Regénération Basaltique": "Sort", # peut rendre bcp pv
                 "Explosion": "Sort",
             }
-            self.modele.monstre_recompense = {"Attaque": 1, "Vie": 20, "Gold": 35 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Attaque": 1, "Vie": 20, "Gold": 35 + gold_bonus_par_etage, "Materiau": "Roche Glycérine"}
         elif self.modele.monstre_nom == "Loup de Glace":
             self.modele.stigma_monstre_positif = "Instincts de Bête"
             self.modele.stigma_monstre_negatif = "Cryolien"
@@ -1669,7 +1744,7 @@ class Control:
                 "Hurlement": "Technique", #pas de technique, pas de sorts  [x]
                 "Cercueil de Neige": "Sort", # gele
             }
-            self.modele.monstre_recompense = {"Degat coup critique": 2, "Vie max": 2, "Gold": 35 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Degat coup critique": 2, "Vie max": 2, "Gold": 35 + gold_bonus_par_etage, "Materiau": "Poil Gelé"}
         elif self.modele.monstre_nom == "Voleur Félin":
             self.modele.stigma_monstre_positif = "Auromancie"
             self.modele.stigma_monstre_negatif = "Copycat"
@@ -1685,7 +1760,7 @@ class Control:
                 "Cat-astrophe": "Sort", #gele,enflamme,draine en mm temps [x]
                 "Point Vital": "Sort", # gros degat critiques
             }
-            self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage, "Degat sort critique": 2}
+            self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage, "Degat sort critique": 2, "Materiau": "Moustache de Chat"}
         elif self.modele.monstre_nom == "Siffloteur":
             self.modele.stigma_monstre_positif = "Extinction de Voix"
             self.modele.stigma_monstre_negatif = "Sang Doré"
@@ -1703,7 +1778,7 @@ class Control:
                 "Son Rapide": "Sort", #Fais perdre bcp pv
                 "Son Lent": "Sort" #fais perdre bcp mana [x]
             }
-            self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage, "Materiau": "Fragment Osseux"}
         elif self.modele.monstre_nom == "Lapin du Désastre":
             self.modele.stigma_monstre_positif = "Fertilité"
             self.modele.stigma_monstre_negatif = "Violence"
@@ -1720,7 +1795,7 @@ class Control:
                 "Oeuil Maudit": "Sort", #augmente cout mana
                 "Carotte Magique": "Sort", #soin
             }
-            self.modele.monstre_recompense = {"Vie max": 4, "Gold": 45 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Vie max": 4, "Gold": 45 + gold_bonus_par_etage, "Materiau": "Iris du Malheur"}
         elif self.modele.monstre_nom == "Cerf Voleur":
             self.modele.stigma_monstre_positif = "Rituel Vaudoo"
             self.modele.stigma_monstre_negatif = "Hématophobe"
@@ -1737,7 +1812,7 @@ class Control:
                 "Vole-Ame": "Sort", # perd viemax [x]
                 "Coup de Foudre": "Sort", # paralyse
             }
-            self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage, "Taux sort critique": 1}
+            self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage, "Taux sort critique": 1, "Materiau": "Velour de Cervidé"}
         elif self.modele.monstre_nom == "Aspiratrésor Blindé":
             self.modele.stigma_monstre_positif = "Circuits Logique"
             self.modele.stigma_monstre_negatif = "Surcharge Processeur"
@@ -1750,7 +1825,7 @@ class Control:
             self.modele.monstre_liste_actions = {
                 "Aspiration": "Technique" # prend gold, mana + vie, manamax + viemax, taux critique sort+ attaque, force + intelligence, defence [x]
             }
-            self.modele.monstre_recompense = {"Gold": 60 + gold_bonus_par_etage, "Intelligence": 1, "Defence": 1, "Taux sort critique": 1, "Taux coup critique":1}
+            self.modele.monstre_recompense = {"Gold": 60 + gold_bonus_par_etage, "Intelligence": 1, "Defence": 1, "Taux sort critique": 1, "Taux coup critique":1, "Materiau": "Composants Electroniques"}
         elif self.modele.monstre_nom == "Gluant de Crystal":
             self.modele.stigma_monstre_positif = "Esotéricisme"
             self.modele.stigma_monstre_negatif = "Anisotropie"
@@ -1768,7 +1843,7 @@ class Control:
                 "Flamme Avancée": "Sort", #brule
                 "Rituel": "Sort", #perd vie, malediction vie + mana + item 2 tours [x]
             }
-            self.modele.monstre_recompense = {"Mana max": 3, "Vie max": 3}
+            self.modele.monstre_recompense = {"Mana max": 3, "Vie max": 3, "Materiau": "Eclat de Crystal"}
         elif self.modele.monstre_nom == "Sixenun":
             self.modele.stigma_monstre_positif = "Carrousel Chanceux"
             self.modele.stigma_monstre_negatif = "Consummé"
@@ -1782,7 +1857,7 @@ class Control:
                 "Roulette": "Technique", #lance roulette. mise ou pas = critique ou pas. si rouge, foule d'effet sur joueur. si vert, foule d'effet sur ennemi. [x]
                 "Jet d'Argent": "Technique", #jette piece passe a travers sorts, 75% gros degats , 25% attrape gold. [x]
             }
-            self.modele.monstre_recompense = {"Mana": 100, "Vie": 100, "Attaque": 1, "Gold": 60 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Mana": 100, "Vie": 100, "Attaque": 1, "Gold": 60 + gold_bonus_par_etage, "Materiau": "Pilules de Roulette"}
         elif self.modele.monstre_nom == "Siffloteur de Jade":
             self.modele.stigma_monstre_positif = "Bouclier Acoustique"
             self.modele.stigma_monstre_negatif = "Mégalovania"
@@ -1800,7 +1875,7 @@ class Control:
                 "Vacarme Rapide": "Sort", #Fais perdre bcp pv + 50% blesse [x]
                 "Vacarme Lent": "Sort" #fais perdre bcp mana + 50% instable (plus de mana par sorts) [x]
             }
-            self.modele.monstre_recompense = {"Degat sort critique": 2, "Degat coup critique": 2, "Gold": 30 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Degat sort critique": 2, "Degat coup critique": 2, "Gold": 30 + gold_bonus_par_etage, "Materiau": "Fragment de Jade"}
         elif self.modele.monstre_nom == "Aurelionite":
             self.modele.stigma_monstre_positif = "Toucher de Midas"
             self.modele.stigma_monstre_negatif = "Aveuglé"
@@ -1818,7 +1893,7 @@ class Control:
                 "Oméga Lapidation": "Sort", #degat +lapide
                 "Oméga Saignée": "Sort", # drain vie
             }
-            self.modele.monstre_recompense = {"Defence": 2, "Gold": 100 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Defence": 2, "Gold": 100 + gold_bonus_par_etage, "Materiau": "Poussière Dorée Animée"}
         elif self.modele.monstre_nom == "Sacatrésor":
             self.modele.stigma_monstre_positif = "Manipulation"
             self.modele.stigma_monstre_negatif = "Inflammable"
@@ -1832,7 +1907,7 @@ class Control:
                 "Gemme Rouge": "Technique", #soin
                 "Gemme Bleue": "Technique", #vol mana [x]
             }
-            self.modele.monstre_recompense = {"Taux esquive": 1, "Vie max": 2, "Mana max": 2, "Taux sort critique": 1, "Taux coup critique":1, "Gold": 150 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Taux esquive": 1, "Vie max": 2, "Mana max": 2, "Taux sort critique": 1, "Taux coup critique":1, "Gold": 150 + gold_bonus_par_etage, "Materiau": "Gemme Bleue"}
         elif self.modele.monstre_nom == "Mimique":
             self.modele.stigma_monstre_positif = "Abomination"
             self.modele.stigma_monstre_negatif = "Homoncule"
@@ -1840,7 +1915,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = round(2.5 * self.modele.numero_de_letage)
             self.modele.monstre_points_de_resistance = round(2.5 * self.modele.numero_de_letage)
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = round(60 * self.modele.numero_de_letage)
+            self.modele.monstre_points_de_vie_max = round((60 * self.modele.numero_de_letage) + 100)
             self.modele.monstre_points_de_mana_max = 100
             self.modele.monstre_liste_actions = {
                 "Avale": "Technique", #bcp degat
@@ -1848,9 +1923,108 @@ class Control:
                 "Engloutis": "Sort", #soin
                 "Mache": "Sort", #drain saignee
             }
+            liste_action_supplementaire = {}
+            if self.modele.numero_de_letage == 2:
+                liste_action_supplementaire = {
+                    "Coup de Boule": "Technique",
+                    "Etranglement": "Technique", # rend muet
+                    "Soin": "Sort",
+                    "Flamme": "Sort",
+                    "Tout Feu Tout Flamme": "Sort", # combo electrique, pour le feu [x]
+                    "Feu Regénérateur": "Sort", # soin
+                    "Poing de Feu": "Technique", # brule
+                    "Brulevent": "Technique", # rend muet
+                    "Frappe Lourde": "Technique",  # gros degat, peu chance toucher
+                    "Poing Eclat": "Technique",  # rend blesse
+                    "Durcissement Argilite": "Technique",  # plus de defence  [x]
+                    "Eboulis": "Technique",  # peux lapider
+                    "Poing de Mana": "Sort",
+                    "Froideur d'Outretombe": "Sort", # gele
+                    "Claquement de Foudre": "Sort", # paralyse
+                    "Confusion": "Sort", # confond
+                    "Poing de Mana": "Sort",
+                    "Attaque Légère": "Technique",
+                    "Durcissement Argilite": "Technique", # augmente def
+                    "Tir Arcanique": "Sort"
+                }
+            elif self.modele.numero_de_letage == 4:
+                liste_action_supplementaire = {
+                    "Accrochage": "Technique", # paralyse et degat
+                    "Drain": "Technique", # draine vie
+                    "Impact": "Technique", # degat
+                    "Réglages d'Usine": "Sort", #soin
+                    "Volepièce": "Sort", # prend golds [x]
+                    "Bandit Manchot": "Sort", # lance 3 symbole. feu, glace ou paralysie ou les trois, pour lui ou joueur  [x]
+                    "Ruée vers l'or": "Sort", # donne mal jaune
+                    "Souffle de Feu": "Technique",
+                    "Envol": "Technique", #reduit les chances de toucher de 30%  [x]
+                    "Coup du Foie": "Technique", # rend bléssé
+                    "Possession du mana": "Sort", # sorts coutent plus cher
+                    "Roulé-Boulet": "Technique", # confond
+                    "Jet de Magma": "Technique", # enflamme
+                    "Tomberoche": "Technique", # lapide
+                    "Regénération Basaltique": "Sort", # peut rendre bcp pv
+                    "Explosion": "Sort",
+                    "Morsure de Givre": "Technique", #peux geler
+                    "Coup de Griffe": "Technique", #peu degat, gros degat crit
+                    "Hurlement": "Technique", #pas de technique, pas de sorts  [x]
+                    "Cercueil de Neige": "Sort", # gele
+                }
+            elif self.modele.numero_de_letage == 6:
+                liste_action_supplementaire = {
+                    "Attire-Gold": "Technique", #prend du gold [x]
+                    "Lèche-Blessure": "Technique", # soin
+                    "Cat-astrophe": "Sort", #gele,enflamme,draine en mm temps [x]
+                    "Point Vital": "Sort", # gros degat critiques
+                    "Vents du Nord": "Sort", #gele
+                    "Vents du Sud": "Sort", #brule
+                    "Vents de l'Est": "Sort", #paralyse
+                    "Vents de l'Ouest": "Sort", #draine
+                    "Son Rapide": "Sort", #Fais perdre bcp pv
+                    "Son Lent": "Sort", #fais perdre bcp mana [x]
+                    "Morsure": "Technique", #gros degats
+                    "Gel": "Sort", # gele
+                    "Giga Gel": "Sort", # peut geler sur longtemps
+                    "Oeuil Maudit": "Sort", #augmente cout mana
+                    "Carotte Magique": "Sort", #soin
+                    "Coup Anti-Magie": "Technique", #attaaque meme si protection [x]
+                    "Attire-Magie": "Technique", #perd pm [x]
+                    "Coup de pierre": "Technique", # lapide
+                    "Vole-Ame": "Sort", # perd viemax [x]
+                    "Coup de Foudre": "Sort", # paralyse
+                    "Aspiration": "Technique" # prend gold, mana + vie, manamax + viemax, taux critique sort+ attaque, force + intelligence, defence [x]
+                }
+            elif self.modele.numero_de_letage in [8, 10]:
+                liste_action_supplementaire = {
+                    "Gros Coup de Boule": "Technique",
+                    "Corruption": "Technique", #drain
+                    "Laser": "Technique",  # laser brule vie + mana [x]
+                    "Soin Avancé": "Sort", #soin
+                    "Flamme Avancée": "Sort", #brule
+                    "Rituel": "Sort", #perd vie, malediction vie + mana + item 2 tours [x]
+                    "Roulette": "Technique", #lance roulette. mise ou pas = critique ou pas. si rouge, foule d'effet sur joueur. si vert, foule d'effet sur ennemi. [x]
+                    "Jet d'Argent": "Technique", #jette piece passe a travers sorts, 75% gros degats , 25% attrape gold. [x]
+                    "Tempêtes du Nord": "Sort", #gele + 50% plus de sorts [x]
+                    "Tempêtes du Sud": "Sort", #brule + 50% plus de techniques [x]
+                    "Tempêtes de l'Est": "Sort", #paralyse + 50% confus (plus item) [x]
+                    "Tempêtes de l'Ouest": "Sort", #draine + 50% mal jaune (action coute gold) [x]
+                    "Vacarme Rapide": "Sort", #Fais perdre bcp pv + 50% blesse [x]
+                    "Vacarme Lent": "Sort", #fais perdre bcp mana + 50% instable (plus de mana par sorts) [x]
+                    "Lame Dorée": "Technique", #peut donner mal jaune
+                    "Ultralaser": "Technique", #peut bruler
+                    "Constructions du Zénith": "Technique", #soin
+                    "Oméga Gelure": "Sort", #gele
+                    "Oméga Lapidation": "Sort", #degat +lapide
+                    "Oméga Saignée": "Sort", # drain vie
+                    "Gemme Rouge": "Technique", #soin
+                    "Gemme Bleue": "Technique", #vol mana [x]
+                }
+            for action in liste_action_supplementaire:
+                self.modele.monstre_liste_actions[action] = liste_action_supplementaire[action]
+
             self.modele.monstre_recompense = {"Taux esquive": 1, "Mana max": 5, 
                                               "Vie max": 5, "Degat sort critique": 3, 
-                                              "Degat coup critique": 3, "Gold": 25 + gold_bonus_par_etage}
+                                              "Degat coup critique": 3, "Gold": 25 + gold_bonus_par_etage, "Materiau": "Fragment Insatiable"}
 
         # Boss
         elif self.modele.monstre_nom == "Clone d'Obsidienne":
@@ -1928,7 +2102,7 @@ class Control:
                 "Combo Misérable": "Technique" #combo electrique , mais maudit [x]
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 150 + gold_bonus_par_etage, "Taux sort critique": 10, "Endurance": 10 }
-        elif self.modele.monstre_nom == "Apprenti":
+        elif self.modele.monstre_nom == "Apprentie":
             self.modele.stigma_monstre_positif = "Sort Chanceux"
             self.modele.stigma_monstre_negatif = "Anxiété Sociale"
             self.modele.stigma_monstre_bonus = "Mal Jaune"
@@ -2365,20 +2539,28 @@ class Control:
 
 
     def AfficheMonstreNiveauEtMusique(self):
-        if self.modele.numero_de_letage == 10 and self.Player.nom_de_letage != "Limbes Flétrissants":
+        numero_musique = self.modele.numero_de_letage
+        if "Monstre De Niveau Superieur" in self.modele.player_tags:
+            numero_musique -= 1
+        if "Monstre Dopé" in self.modele.player_tags:
+            numero_musique -= 2
+
+        if (numero_musique == 10 and self.Player.nom_de_letage != "Limbes Flétrissants") or self.Player.mode_jukebox :
             nom_de_la_musique = self.Player.musique_combat_10
+        elif self.modele.est_une_mimique:
+            nom_de_la_musique = "mimic"
         elif self.modele.boss_histoire:
             nom_de_la_musique = "story_end"
         elif not self.modele.monstre_EstUnBoss:
-            nom_de_la_musique =  f"battle_theme_{self.modele.numero_de_letage}"
+            nom_de_la_musique =  f"battle_theme_{numero_musique}"
         elif self.Player.nom_de_letage == "Limbes Flétrissants":
             if self.modele.monstre_nom == "Roi Gluant":
                 nom_de_la_musique = "battle_theme_1"
             else:
                 nom_de_la_musique = f"alt_{self.Player.numero_boss_alt}_phase_1"
         else:
-            nom_de_la_musique = f"boss_{self.modele.numero_de_letage}"
-        if self.modele.etage_alternatif:
+            nom_de_la_musique = f"boss_{numero_musique}"
+        if self.modele.etage_alternatif :
             nom_de_la_musique += "_alt"
         musique = self.modele.CHEMINABSOLUMUSIQUE + nom_de_la_musique
         self.vue.AfficheMonstreLevelMusique(
@@ -2397,6 +2579,8 @@ class Control:
                 self.EffetReflexPiegePhysique()
         if self.modele.stigma_joueur_positif == "Bénie par les Fées":
             self.EffetStigmaBeniParLesFees()
+        if self.modele.stigma_joueur_negatif == "Fatigue Chronique":
+            self.EffetStigmaFatigueChronique()
         if self.modele.stigma_joueur_negatif == "Flemme":
             self.EffetStigmaFlemme()
         elif self.modele.stigma_joueur_negatif == "Ange Déchue":
@@ -2413,6 +2597,38 @@ class Control:
             self.modele.est_maudit_par_les_items_nombre_tour += 5
         if "Char Leclerc 3ème Génération à Dispositif GALIX, Canon Principal 120mm et Armement Secondaire à Mitrailleuse 12,7 mm Coaxiale et Mitrailleuse de 7,62 mm en Superstructure" in self.modele.liste_dartefact_optionels:
             self.AppliqueTank()
+        if "Mage" in self.modele.liste_dartefact_optionels:
+            self.AppliqueMage()
+        if "Boss Blessé" in self.modele.player_tags:
+            degat = round(self.modele.monstre_points_de_vie_max * 0.15)
+            self.modele.monstre_points_de_vie -= degat
+        if "Totem de la Force" in self.modele.liste_dartefact_optionels:
+            self.modele.utilise_fruit_jindagee = True
+            self.modele.utilise_fruit_jindagee_nombre_tour += 3
+        if "Totem de la Sagesse" in self.modele.liste_dartefact_optionels:
+            self.modele.utilise_fruit_aatma = True
+            self.modele.utilise_fruit_aatma_nombre_tour += 3
+        if "Totem du Courage" in self.modele.liste_dartefact_optionels:
+            nombre_aleatoire = random.randint(1, 5)
+            if nombre_aleatoire == 1:
+                self.modele.accumulation_chance_brulure += 4
+            elif nombre_aleatoire == 2:
+                self.modele.accumulation_chance_gelure += 5
+            elif nombre_aleatoire == 3:
+                self.modele.accumulation_chance_paralysie += 2.5
+            elif nombre_aleatoire == 4:
+                self.modele.accumulation_chance_lapider += 4
+            elif nombre_aleatoire == 5:
+                self.modele.accumulation_chance_drainer += 4
+        if "Monstre Dopé" in self.Player.player_tags:
+            self.modele.monstre_est_gele = True
+            self.modele.monstre_est_gele_nombre_tour += 5
+            self.modele.monstre_points_de_vie -= round(self.modele.monstre_points_de_vie_max * 0.1)
+            self.vue.AfficheDopage()
+        if self.Player.malediction == "Ascétique":
+            self.modele.points_de_vie += round(self.modele.points_de_vie_max * 0.2)
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        
 
     def AppliqueTank(self):
         degat = round(self.modele.monstre_points_de_vie_max * 0.15)
@@ -2424,6 +2640,48 @@ class Control:
         if nombre_aleatoire <= 7:
             self.modele.passe_son_tour = True
             self.modele.flemme = True
+
+    def EffetStigmaFatigueChronique(self):
+        nombre_aleatoire = random.randint(0, 100)
+
+        chance_de_passer_tour = 0
+        commentaire = "A cause de "
+        if 1 <= self.modele.points_de_vie <= 15:
+            commentaire += "votre vie très faible, "
+            chance_de_passer_tour += 3
+        elif 16 <= self.modele.points_de_vie <= 30:
+            chance_de_passer_tour += 2
+            commentaire += "votre vie faible, "
+        elif 31 <= self.modele.points_de_vie <= 45:
+            chance_de_passer_tour += 1
+            commentaire += "votre vie moyenne, "
+        if 1 <= self.modele.points_de_mana <= 15:
+            chance_de_passer_tour += 3
+            commentaire += "votre mana très faible, "
+        elif 16 <= self.modele.points_de_mana <= 30:
+            chance_de_passer_tour += 2
+            commentaire += "votre mana faible, "
+        elif 31 <= self.modele.points_de_mana <= 45:
+            chance_de_passer_tour += 1
+            commentaire += "votre mana moyen, "
+        if 1 <= self.modele.points_de_endurance <= 15:
+            chance_de_passer_tour += 3
+            commentaire += "votre endurance très faible, "
+        elif 16 <= self.modele.points_de_endurance <= 30:
+            chance_de_passer_tour += 2
+            commentaire += "votre endurance faible, "
+        elif 31 <= self.modele.points_de_endurance <= 45:
+            chance_de_passer_tour += 1
+            commentaire += "votre endurance moyenne, "
+        commentaire += " vous sentez une grande fatigue vous envahir..."
+        if chance_de_passer_tour == 9 :
+            chance_de_passer_tour = 10
+            commentaire = "A cause de votre très faible vie, mana et endurance, vous sentez une grande fatigue vous envahir..."
+
+        if nombre_aleatoire < chance_de_passer_tour:
+            self.modele.passe_son_tour = True
+            self.modele.fatigue_chronique = True
+            self.vue.AfficheStigmaFatigueChronique(commentaire)
 
     def EffetStigmaAngeDechue(self):
         limite_de_pv = round(self.modele.points_de_vie_max * 0.10)
@@ -2437,7 +2695,7 @@ class Control:
         sante_recupere = round(self.modele.points_de_vie_max * 0.03)
         sante_recupere = self.SiZeroRameneAUn(sante_recupere)
         self.modele.points_de_vie += sante_recupere
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheBeniParLesFees(sante_recupere)
 
     def EffetRapidePiegeElectrique(self):
@@ -2487,7 +2745,7 @@ class Control:
         saignee = self.AppliqueLimitationSaignee(saignee)
         self.modele.monstre_points_de_vie -= saignee
         self.modele.points_de_vie += saignee
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         phrase = (
             f"Il se retrouve paralysé pendant 2 tours,"
             f" s'embrase et gèle simultanément pendant 5 tours,"
@@ -2518,7 +2776,40 @@ class Control:
         )
         self.vue.AfficherAttaquePremierTour(element, phrase)
 
-    def EquilibragePointsDeVieEtMana(self):
+    def ChangeChargeMauvaisTachyon(self, action):
+        if action in ["attaque" , "sort"]:
+            self.modele.charge_mauvais_tachyon += 10
+        elif action == "item" :
+            self.modele.charge_mauvais_tachyon += 5
+        elif action == "defense":
+            self.modele.charge_mauvais_tachyon -= 5
+        elif action == "passe tour" :
+            self.modele.charge_mauvais_tachyon -= 10
+        if self.modele.charge_mauvais_tachyon < 0:
+            self.modele.charge_mauvais_tachyon = 0
+        elif self.modele.charge_mauvais_tachyon >= 100:
+            self.modele.charge_mauvais_tachyon = 0
+            self.modele.points_de_vie -= 999
+            self.vue.AfficheMauvaisTachyonExplose()
+
+    def ChangeChargeBonTachyon(self, action):
+        if action in ["attaque" , "sort"]:
+            self.modele.charge_bon_tachyon += 3
+        elif action == "tour":
+            self.modele.charge_bon_tachyon += 5
+        elif action == "item" :
+            self.modele.charge_bon_tachyon += 2
+        elif action == "defense":
+            self.modele.charge_bon_tachyon += 1
+        elif action == "passe tour" :
+            self.modele.charge_bon_tachyon += 0
+        if self.modele.charge_bon_tachyon >= 110:
+            self.modele.charge_bon_tachyon = 0
+            self.modele.beni_par_feu_sacre = True
+            self.modele.beni_par_feu_sacre_nombre_tour += 6
+            self.vue.AfficheBonTachyonExplose()
+
+    def EquilibragePointsDeVieEtManaEtEndurance(self):
         if self.modele.points_de_vie > self.modele.points_de_vie_max:
             self.modele.points_de_vie = self.modele.points_de_vie_max
         if self.modele.points_de_mana > self.modele.points_de_mana_max:
@@ -2529,13 +2820,14 @@ class Control:
             self.modele.monstre_points_de_vie = self.modele.monstre_points_de_vie_max
         elif self.modele.monstre_points_de_mana > self.modele.monstre_points_de_mana_max:
             self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
+        if self.modele.points_de_endurance > self.modele.points_de_endurance_max:
+            self.modele.points_de_endurance = self.modele.points_de_endurance_max
+        if self.modele.points_de_endurance < 0 and not "Couronne Sacrée" in self.modele.liste_dartefact_optionels:
+            self.modele.points_de_endurance = 0
 
     def EffetStigmaToucherDeMidas(self):
         degat = round(self.modele.nombre_de_gold * 0.1)
         commentaire = "Ouch !"
-        if self.modele.nom_du_personnage == "Bob Doré":
-            degat = round(self.modele.points_de_vie_max * 0.9)
-            commentaire = "Votre être tout entier réagit au stigma de l'Aurelionite !\nVous prenez d'immenses dégâts !"
         degat = self.EnleveVieAuJoueur(degat)
         if self.modele.points_de_vie < 0:
             commentaire = (
@@ -2551,7 +2843,7 @@ class Control:
             mana_siphone = round(self.modele.points_de_mana_max * 0.1)
             self.modele.points_de_mana -= mana_siphone
             self.modele.monstre_points_de_mana += mana_siphone
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             self.vue.AfficheSiphonDeMana(mana_siphone)
 
     def EffetStigmaFaveursExplosives(self):
@@ -2571,6 +2863,7 @@ class Control:
                             "avant qu'elle ne vous quitte définitivement."
                         )
                     self.vue.AfficheFaveursExplosives(commentaire)
+                    clear_console()
                 else:
                     self.modele.InCombat = False
                     self.modele.type_de_derniere_action_utilisee = "Fuir"
@@ -2583,7 +2876,7 @@ class Control:
     def EffetStigmaBenedictionDivine(self):
         vie_reprise = round(self.modele.monstre_points_de_vie_max * 0.03)
         self.modele.monstre_points_de_vie += vie_reprise
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheBenedictionDivine(vie_reprise)
 
     def EffetStigmaBomberman(self):
@@ -2592,7 +2885,7 @@ class Control:
             vie_perdue = round(self.modele.points_de_vie_max * 0.1)
             vie_perdue = self.EnleveVieAuJoueur(vie_perdue)
             self.CheckePuisAppliqueTransmutation(vie_perdue)
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             self.vue.AfficheBomberman(vie_perdue)
         if self.modele.commentaire_transmutation_degat != "":
             self.vue.AfficheTransmutationDegat(self.modele.commentaire_transmutation_degat)
@@ -2625,7 +2918,7 @@ class Control:
                 type_delement = "*Sang*"
                 saignee = round(self.modele.points_de_vie_max * 0.03)
                 self.modele.monstre_points_de_vie += saignee
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 saignee = self.EnleveVieAuJoueur(saignee)
                 description_element = (
                     f"Vous vous faites drainer {saignee} points de vie !"
@@ -2688,7 +2981,7 @@ class Control:
                 saignee = round(self.modele.monstre_points_de_vie_max * 0.03)
                 saignee = self.AppliqueLimitationSaignee(saignee)
                 self.modele.points_de_vie += saignee
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 self.modele.monstre_points_de_vie -= saignee
                 self.EquilibragePointDeVieMonstrePerduParStigma()
                 description_element = f"Il se fait drainer {saignee} points de vie !"
@@ -2746,7 +3039,7 @@ class Control:
         # a cause de l'attaque iaido
         if self.modele.en_plein_iaido:
             # iaido arrété car paralysie
-            if self.modele.est_paralyse and not self.modele.flemme:
+            if self.modele.est_paralyse and not self.modele.flemme and not self.modele.fatigue_chronique:
                 commentaire = "... et votre concentration pour le iaido est stoppée par la paralysie."
                 self.modele.en_plein_iaido = False
                 self.modele.en_plein_iaido_nombre_tour = 0
@@ -2755,9 +3048,18 @@ class Control:
                 commentaire = "... et votre concentration pour le iaido est stoppée par votre flemme inhérente."
                 self.modele.en_plein_iaido = False
                 self.modele.en_plein_iaido_nombre_tour = 0
+            # iaido arrété car fatigue
+            elif self.modele.fatigue_chronique and not self.modele.est_paralyse:
+                commentaire = "... et votre concentration pour le iaido est stoppée par votre fatigue chronique."
+                self.modele.en_plein_iaido = False
+                self.modele.en_plein_iaido_nombre_tour = 0
             # iaido arrété car paralysie + flemme
             elif self.modele.flemme and self.modele.est_paralyse:
                 commentaire = "... et votre concentration pour le iaido est stoppée par un mélange de paralysie et de flemme."
+                self.modele.en_plein_iaido = False
+                self.modele.en_plein_iaido_nombre_tour = 0
+            elif self.modele.fatigue_chronique and self.modele.est_paralyse:
+                commentaire = "... et votre concentration pour le iaido est stoppée par un mélange de paralysie et de fatigue."
                 self.modele.en_plein_iaido = False
                 self.modele.en_plein_iaido_nombre_tour = 0
             elif (
@@ -2789,9 +3091,14 @@ class Control:
         ):
             commentaire = "...car la vision d'horreur de ce monstre abominable vous glace le sang."
             self.modele.abomination_touche = False
-        # a cause de la flemme
+        # a cause d'un stigma
         else:
-            commentaire = "...car vous avez tout simplement la flemme."
+            if self.modele.stigma_joueur_negatif == "Trouble Obsessionnel Compulsif":
+                commentaire = "...pour aller ramasser les restes d'items et autre déchets par terre."
+            elif self.modele.stigma_joueur_negatif == "Fatigue Chronique":
+                commentaire = "...terrassé par votre fatigue."
+            else:
+                commentaire = "...car vous avez tout simplement la flemme."
         if iaido_effectue:
             self.Iaido()
         else:
@@ -2863,7 +3170,7 @@ class Control:
             if "Lame Spectrale" in self.modele.liste_dartefact_optionels:
                 mana_recupere = round(self.modele.points_de_mana_max * 0.1)
                 self.RecouvrementDeMana(mana_recupere)
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 commentaire += (
                 f"\nDe plus, votre Lame Spectrale vous rapporte {mana_recupere} points de mana !"
             )
@@ -2885,6 +3192,7 @@ class Control:
             degat = round(
                 ((self.modele.est_en_feu_degat) / 100) * self.modele.points_de_vie_max
             )
+            degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat)
             if degat <= 1:
                 degat = 2
             degat = self.EnleveVieAuJoueur(degat)
@@ -2978,9 +3286,9 @@ class Control:
             if soin_du_fruit < 13:
                 soin_du_fruit = 13
         vie_soignee = soin_de_la_feuille + soin_du_fruit
-        vie_soignee = self.AppliqueSupportBonusItem(vie_soignee)
+        vie_soignee = self.AppliqueSupportBonusItem(vie_soignee, "vie")
         self.modele.points_de_vie += vie_soignee
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheAatmaEtJindagee(commentaire, vie_soignee, type_de_soin)
 
     def AppliqueEffetAatma(self):
@@ -2997,9 +3305,9 @@ class Control:
             if soin_du_fruit < 13:
                 soin_du_fruit = 13
         mana_soigne = soin_de_la_feuille + soin_du_fruit
-        mana_soigne = self.AppliqueSupportBonusItem(mana_soigne)
+        mana_soigne = self.AppliqueSupportBonusItem(mana_soigne, "mana")
         self.RecouvrementDeMana(mana_soigne)
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheAatmaEtJindagee(commentaire, mana_soigne, type_de_soin)
 
     def AppliqueRegenerationMonstre(self):
@@ -3007,10 +3315,12 @@ class Control:
         pourcentage_soin = self.modele.monstre_est_regeneration_soin
         soin = round(self.modele.monstre_points_de_vie_max * (pourcentage_soin / 100))
         self.modele.monstre_points_de_vie += soin
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheRegenerationMonstre(soin)
 
     def AppliqueEtMetAJourAlterationEtat(self):
+        if self.modele.bon_tachyon:
+            self.ChangeChargeBonTachyon("tour")
         commentaire = ""
         # Joueur
         # sous la rafale
@@ -3071,6 +3381,12 @@ class Control:
             if self.modele.beni_par_feu_sacre_nombre_tour == 0:
                 self.modele.beni_par_feu_sacre = False
                 commentaire += "\nLa bénédiction du feu sacré s'estompe !"
+        # sous la transformoation en miss hyde
+        if self.modele.miss_hyde_transformation:
+            self.modele.miss_hyde_transformation_nombre_tour -= 1
+            if self.modele.miss_hyde_transformation_nombre_tour == 0:
+                self.modele.miss_hyde_transformation = False
+                commentaire += "\nLa malédiction de Hyde s'estompe !"
         # sous la folie
         if self.modele.utilise_orbe_de_folie:
             self.modele.utilise_orbe_de_folie_nombre_tour -= 1
@@ -3137,7 +3453,7 @@ class Control:
                     commentaire += "\nVotre Pin's se met à vibrer. Vous reprenez 10 pv et 10 pm !"
                     self.modele.points_de_vie += 10
                     self.modele.points_de_mana += 10
-                    self.EquilibragePointsDeVieEtMana()
+                    self.EquilibragePointsDeVieEtManaEtEndurance()
         # paralysé, passe son tour
         if self.modele.est_paralyse:
             self.modele.est_paralyse_nombre_tour -= 1
@@ -3154,8 +3470,11 @@ class Control:
                 else:
                     self.modele.liste_cuisson[ingredient] -= 1
         # plus de métamorphose
-        if self.modele.metamorphose and self.modele.nombre_de_tours == 2:
-            commentaire += "\nLa métamorphose ne fait plus effet !"
+        if self.modele.metamorphose :
+            self.modele.metamorphose_nombre_tour -= 1
+            if self.modele.metamorphose_nombre_tour == 0:
+                commentaire += "\nLa métamorphose ne fait plus effet !"
+                self.modele.metamorphose = False
         # plus d'utilisation de techniques
         if self.modele.est_maudit_par_les_techniques:
             self.modele.est_maudit_par_les_techniques_nombre_tour -= 1
@@ -3189,6 +3508,11 @@ class Control:
             if self.modele.utilise_hydromel_nombre_tour == 0:
                 self.modele.utilise_hydromel = False
                 commentaire += "\nL'hydromel ne fait plus effet !"
+        # ramasse déchet
+        if self.modele.tour_passe_car_ramasse_item != 0:
+            self.modele.tour_passe_car_ramasse_item -= 1            
+            if self.modele.tour_passe_car_ramasse_item == 0:
+                commentaire += "\nVous avez fini de nettoyer le sol !"
         # utilise l'ambroisie
         if self.modele.utilise_ambroisie:
             self.modele.utilise_ambroisie_nombre_tour -= 1
@@ -3249,9 +3573,10 @@ class Control:
         if self.modele.rejuvenation:
             self.AppliqueTalentRejuvenation()
         # arrete de faire passer son tour au joueur
-        if self.modele.passe_son_tour and not self.modele.est_paralyse and not self.modele.en_plein_iaido and not self.modele.flemme:
+        if self.modele.passe_son_tour and not self.modele.est_paralyse and not self.modele.en_plein_iaido and not self.modele.flemme and not self.modele.fatigue_chronique and self.modele.tour_passe_car_ramasse_item == 0:
             self.modele.passe_son_tour = False
             self.modele.flemme = False
+            self.modele.fatigue_chronique = False
 
         # Monstres
         # en fuite, fuit le combat
@@ -3402,8 +3727,8 @@ class Control:
     def CheckForGameOver(self):
         if self.modele.points_de_vie <= 0:
             musique1 = self.modele.CHEMINABSOLUMUSIQUE + "death"
-            musique2 = self.modele.CHEMINABSOLUMUSIQUE + "ending"
-            self.vue.ShowGameOverScreen(musique1, musique2)
+            self.vue.ShowGameOverScreen(musique1)
+            self.Player.player_tags.append("KIA")
 
     def MontreFuiteOuRecompense(self):
         #enleve les bonus mutagene
@@ -3430,165 +3755,241 @@ class Control:
         self.Player.degat_sort_critique = self.modele.degat_de_sort_critique
         self.Player.taux_desquive = self.modele.taux_de_esquive
         self.Player.nombre_de_gold = self.modele.nombre_de_gold
+        if self.modele.mauvais_tachyon:
+            self.Player.charge_mauvais_tachyon = self.modele.charge_mauvais_tachyon
+        if self.modele.bon_tachyon:
+            self.Player.charge_bon_tachyon = self.modele.charge_bon_tachyon
         self.Player.quete = self.modele.quete_en_cours
-        if self.modele.type_de_derniere_action_utilisee == "Fuir" or "En Fuite" in self.modele.monstre_tags:
-            musique = self.modele.CHEMINABSOLUMUSIQUE + "escape"
-            commentaire = "Vous avez fuit le combat !"
-            if "En Fuite" in self.modele.monstre_tags:
-                commentaire = "L'ennemi jette une bombe fumigène et s'enfuit dans le nuage fumée !"
-                self.Player.vies_du_gardien = self.modele.monstre_nombre_de_vies_supplementaire
-            self.vue.AfficheFuite(musique, commentaire)
-        elif self.modele.monstre_de_lobelisque:
-            musique = self.modele.CHEMINABSOLUMUSIQUE + "battle_win"
-            self.vue.AfficheWinObelisque(musique)
-        elif self.modele.boss_histoire:
+        if "KIA" in self.Player.player_tags:
             pass
         else:
-            if self.modele.monstre_nom == "Ah Kin":
-                self.Player.vies_du_gardien = 0
-            commentaire = ""
-            musique = self.modele.CHEMINABSOLUMUSIQUE + "battle_win"
-            self.vue.AfficheTitreRecompense(musique, self.modele.monstre_nom)
-            for cle in self.modele.monstre_recompense:
-                if cle == "Attaque":
-                    self.Player.points_de_force += self.modele.monstre_recompense[cle]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de force !"
-                elif cle == "Defence":
-                    self.Player.points_de_defence += self.modele.monstre_recompense[cle]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de défence !"
-                elif cle == "Intelligence":
-                    self.Player.points_dintelligence += (
-                        self.modele.monstre_recompense[cle]
-                    )
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points d'intelligence !"
-                elif cle == "Vie":
-                    self.Player.points_de_vie += self.modele.monstre_recompense[cle]
-                    commentaire = f"Vous regagnez {self.modele.monstre_recompense[cle]} points de vie !"
-                elif cle == "Vie max":
-                    self.Player.points_de_vie_max += self.modele.monstre_recompense[cle]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de vie maximum !"
-                elif cle == "Mana":
-                    self.Player.points_de_mana += self.modele.monstre_recompense[cle]
-                    commentaire = f"Vous regagnez {self.modele.monstre_recompense[cle]} points de mana !"
-                elif cle == "Mana max":
-                    self.Player.points_de_mana_max += self.modele.monstre_recompense[
-                        cle
-                    ]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de mana maximum !"
-                elif cle == "Endurance":
-                    self.Player.points_dendurance += self.modele.monstre_recompense[
-                        cle
-                    ]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points d'endurance maximum !"
-                elif cle == "Taux coup critique":
-                    self.Player.taux_coup_critique += self.modele.monstre_recompense[
-                        cle
-                    ]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]}% de chance de faire un coup critique !"
-                elif cle == "Degat coup critique":
-                    self.Player.degat_coup_critique += (
-                        self.modele.monstre_recompense[cle]
-                    )
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de degats de coup critique !"
-                elif cle == "Taux sort critique":
-                    self.Player.taux_sort_critique += self.modele.monstre_recompense[
-                        cle
-                    ]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]}% de chance de faire un sort critique !"
-                elif cle == "Taux esquive":
-                    self.Player.taux_desquive += self.modele.monstre_recompense[
-                        cle
-                    ]
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]}% de chance d'esquiver !"
-                elif cle == "Degat sort critique":
-                    self.Player.degat_sort_critique += (
-                        self.modele.monstre_recompense[cle]
-                    )
-                    commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de degats de sort critique !"
-                elif cle == "Red coin":
-                    self.Player.nombre_de_red_coin += self.modele.monstre_recompense[
-                        cle
-                    ]
-                    commentaire = (
-                        f"Vous gagnez {self.modele.monstre_recompense[cle]} Red Coin !"
-                    )
-                elif cle == "Tirage":
-                    self.tirage.UseTirage()
-                    commentaire = "La boite disparait..."
-                elif cle == "Méga Tirage":
-                    self.tirage.UseMegaTirage()
-                    commentaire = "La boite disparait..."
-                elif cle == "Gold":
-                    nombre_de_gold_gagne = self.modele.monstre_recompense[cle]
-                    bonus_gold_gagne = round((self.modele.numero_de_letage / 10) * nombre_de_gold_gagne) 
-                    nombre_de_gold_gagne += bonus_gold_gagne
-                    if self.modele.stigma_joueur_negatif == "Chrometophobia":
-                        nombre_de_gold_gagne = round(0.5 * nombre_de_gold_gagne)
-                    self.Player.nombre_de_gold += nombre_de_gold_gagne
-                    commentaire = f"Vous récuperez {nombre_de_gold_gagne} golds sur le cadavre de l'ennemi !"
-                    if self.modele.facture and self.modele.monstre_est_paralyse:
-                        self.Player.nombre_de_gold += (nombre_de_gold_gagne * 5)
-                        commentaire += ("\nLes esprits de foudre qui vous regardent vous battre depuis les tribunes du Coliseum sont enchantés"
-                                       " de voir que vous avez abattu de sang froid un ennemi paralysé et sans défence !\n"
-                                       f"Ils font pleuvoir des golds sur vous !\n"
-                                       f"Vous récuperez {(nombre_de_gold_gagne * 5)} golds  !")
-                    if self.modele.richesse_souterraine:
-                        self.Player.nombre_de_gold += (nombre_de_gold_gagne * 2)
-                        commentaire += ("\nVotre lien avec la terre fait qu'elle remonte des richesse souterraines"
-                                       " à la mort de l'ennemi pour vous féliciter de votre victoire.\nVous récuperez"
-                                       f" {(nombre_de_gold_gagne * 2)} golds  !")
-                    if "Bandeau Teinté" in self.modele.liste_dartefact_optionels:
-                        commentaire += ("\nVous récuperez les golds invoqués par votre bandeau pour contrebalancer les malheurs de votre combat."
-                                        f"\nVous récuperez {self.modele.nombre_de_tours} golds !")
-                        self.Player.nombre_de_gold += self.modele.nombre_de_tours
-                self.vue.AfficheRecompense(commentaire)
-            if self.modele.stigma_joueur_positif == "Conception du Mana":
-                mana_gagne = 2
-                self.Player.points_de_mana_max += mana_gagne
-                commentaire = f"Votre origine vous permet d'absorber l'essence même du monstre et de gagner {mana_gagne} points de mana maximum !"
-                self.vue.AfficheRecompense(commentaire)
-            if self.modele.possede_une_gemme_vie:
-                vie_regagnee = round(self.modele.points_de_vie_max * 0.25)
-                self.Player.points_de_vie += vie_regagnee
-                commentaire = f"Votre gemme de vie vous fait regagner {vie_regagnee} points de vie !"
-                self.vue.AfficheRecompense(commentaire)
-            if ("Marque du Tyrant" in self.Player.liste_dartefacts_optionels) and (self.modele.points_de_vie_max == self.modele.points_de_vie):
-                self.Player.points_de_vie += 1
-                self.Player.points_de_vie_max += 1
-                commentaire = f"Vous tendez la main vers L'ennemi, et votre Marque du Tyrant vous donne 1 point de vie max supplémentaire !"
-                self.vue.AfficheRecompense(commentaire)
-            if self.modele.possede_une_gemme_magie:
-                mana_regagne = round(self.modele.points_de_mana_max * 0.25)
-                self.Player.points_de_mana += mana_regagne
-                commentaire = f"Votre gemme de mana vous fait regagner {mana_regagne} points de mana !"
-                self.vue.AfficheRecompense(commentaire)
-            if self.modele.stigma_joueur_negatif == "Incontrolable":
-                commentaire = "Vous perdez votre controle sur votre réserve de mana et perdez tout vos points de mana."
-                self.Player.points_de_mana = 0
-                self.vue.AfficheRecompense(commentaire)
-            bonus_charge = 0
-            if "Element [Ame] Surchargé" in self.modele.liste_dartefact_optionels:
-                bonus_charge += 1
-            self.Player.nombre_de_monstres_tues += 1 + bonus_charge
-            commentaire = f"Le nombre d'âmes que vous avez absorbé passe à {self.Player.nombre_de_monstres_tues}."
-            self.vue.AfficheRecompense(commentaire)
-            if self.Player.points_de_mana > self.Player.points_de_mana_max:
-                self.Player.points_de_mana = self.Player.points_de_mana_max
-            if self.Player.points_de_vie > self.Player.points_de_vie_max:
-                self.Player.points_de_vie = self.Player.points_de_vie_max
-            self.vue.EntreePourContinuer()
-            if self.Player.quete != "None":
-                self.ResultatQuete()
-            #Ajout des sacrifices
-            if self.modele.sacrifice_actif:
-                self.Player.nombre_de_sacrifices += 1
-                commentaire1 = ("Vous regardez l'ennemi gisant sur le sol, et voyez une lueur bleue émaner de son corps.")
-                commentaire2 = ("Cette lueur commence doucement a monter, avant de venir s'écraser a toute vitesse sur votre bras noirci.")
-                commentaire3 = ("Des lettres apparaissent alors au niveau du dos de votre main :"
-                                "\n\n                          SACRIFICE"
-                                f"\n\n                              {self.Player.nombre_de_sacrifices}\n")
-                commentaire4 = ("Les lettres disparaissent, et tout revient a la normale.")
-                self.vue.AffichageSacrifice(commentaire1, commentaire2, commentaire3, commentaire4)
+            if self.modele.stigma_joueur_negatif == "Fair Play" and self.modele.points_de_vie <= round(self.modele.points_de_vie_max * 0.15):
+                musique = self.modele.CHEMINABSOLUMUSIQUE + "battle_win"
+                self.vue.AfficheFairPlay(musique)
+                musique1 = self.modele.CHEMINABSOLUMUSIQUE + "death"
+                self.vue.ShowGameOverScreen(musique1)
+                self.Player.player_tags.append("KIA")
+            elif self.modele.type_de_derniere_action_utilisee == "Fuir" or "En Fuite" in self.modele.monstre_tags:
+                musique = self.modele.CHEMINABSOLUMUSIQUE + "escape"
+                commentaire = "Vous avez fuit le combat !"
+                if "En Fuite" in self.modele.monstre_tags:
+                    commentaire = "L'ennemi jette une bombe fumigène et s'enfuit dans le nuage fumée !"
+                    self.Player.vies_du_gardien = self.modele.monstre_nombre_de_vies_supplementaire
+                self.vue.AfficheFuite(musique, commentaire)
+            else:
+                
+                if self.modele.monstre_de_lobelisque:
+                    musique = self.modele.CHEMINABSOLUMUSIQUE + "battle_win"
+                    self.vue.AfficheWinObelisque(musique)
+                elif self.modele.boss_histoire:
+                    pass
+                else:
+                    if self.modele.monstre_nom == "Ah Kin":
+                        self.Player.vies_du_gardien = 0
+                    commentaire = ""
+                    musique = self.modele.CHEMINABSOLUMUSIQUE + "battle_win"
+                    self.vue.AfficheTitreRecompense(musique, self.modele.monstre_nom)
+                    for cle in self.modele.monstre_recompense:
+                        if cle == "Attaque":
+                            self.Player.points_de_force += self.modele.monstre_recompense[cle]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de force !"
+                        elif cle == "Defence":
+                            self.Player.points_de_defence += self.modele.monstre_recompense[cle]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de défence !"
+                        elif cle == "Intelligence":
+                            self.Player.points_dintelligence += (
+                                self.modele.monstre_recompense[cle]
+                            )
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points d'intelligence !"
+                        elif cle == "Vie":
+                            self.Player.points_de_vie += self.modele.monstre_recompense[cle]
+                            commentaire = f"Vous regagnez {self.modele.monstre_recompense[cle]} points de vie !"
+                        elif cle == "Vie max":
+                            self.Player.points_de_vie_max += self.modele.monstre_recompense[cle]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de vie maximum !"
+                        elif cle == "Mana":
+                            self.Player.points_de_mana += self.modele.monstre_recompense[cle]
+                            commentaire = f"Vous regagnez {self.modele.monstre_recompense[cle]} points de mana !"
+                        elif cle == "Mana max":
+                            self.Player.points_de_mana_max += self.modele.monstre_recompense[
+                                cle
+                            ]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de mana maximum !"
+                        elif cle == "Endurance":
+                            self.Player.points_dendurance += self.modele.monstre_recompense[
+                                cle
+                            ]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points d'endurance maximum !"
+                        elif cle == "Taux coup critique":
+                            self.Player.taux_coup_critique += self.modele.monstre_recompense[
+                                cle
+                            ]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]}% de chance de faire un coup critique !"
+                        elif cle == "Degat coup critique":
+                            self.Player.degat_coup_critique += (
+                                self.modele.monstre_recompense[cle]
+                            )
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de degats de coup critique !"
+                        elif cle == "Taux sort critique":
+                            self.Player.taux_sort_critique += self.modele.monstre_recompense[
+                                cle
+                            ]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]}% de chance de faire un sort critique !"
+                        elif cle == "Taux esquive":
+                            self.Player.taux_desquive += self.modele.monstre_recompense[
+                                cle
+                            ]
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]}% de chance d'esquiver !"
+                        elif cle == "Degat sort critique":
+                            self.Player.degat_sort_critique += (
+                                self.modele.monstre_recompense[cle]
+                            )
+                            commentaire = f"Vous gagnez {self.modele.monstre_recompense[cle]} points de degats de sort critique !"
+                        elif cle == "Red coin":
+                            self.Player.nombre_de_red_coin += self.modele.monstre_recompense[
+                                cle
+                            ]
+                            commentaire = (
+                                f"Vous gagnez {self.modele.monstre_recompense[cle]} Red Coin !"
+                            )
+                        elif cle == "Tirage":
+                            self.tirage.UseTirage()
+                            commentaire = "La boite disparait..."
+                        elif cle == "Méga Tirage":
+                            self.tirage.UseMegaTirage()
+                            commentaire = "La boite disparait..."
+                        elif cle == "Gold":
+                            nombre_de_gold_gagne = self.modele.monstre_recompense[cle]
+                            bonus_gold_gagne = round((self.modele.numero_de_letage / 10) * nombre_de_gold_gagne)
+                            nombre_de_gold_gagne += bonus_gold_gagne
+                            nombre_de_gold_gagne += round(nombre_de_gold_gagne * (self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Noyau d'Aurelionite"] / 100 ))
+                            if self.Player.malediction == "Ascétique":
+                                nombre_de_gold_gagne -= round(nombre_de_gold_gagne * 0.5)
+                            if self.Player.benediction == "Materiel":
+                                nombre_de_gold_gagne += nombre_de_gold_gagne
+                            if self.modele.stigma_joueur_negatif == "Chrometophobia":
+                                nombre_de_gold_gagne -= round(0.25 * nombre_de_gold_gagne)
+                            self.Player.nombre_de_gold += nombre_de_gold_gagne
+                            commentaire = f"Vous récuperez {nombre_de_gold_gagne} golds sur le cadavre de l'ennemi !"
+                            if self.modele.facture and self.modele.monstre_est_paralyse:
+                                self.Player.nombre_de_gold += (nombre_de_gold_gagne * 5)
+                                commentaire += ("\nLes esprits de foudre qui vous regardent vous battre depuis les tribunes du Coliseum sont enchantés"
+                                            " de voir que vous avez abattu de sang froid un ennemi paralysé et sans défence !\n"
+                                            f"Ils font pleuvoir des golds sur vous !\n"
+                                            f"Vous récuperez {(nombre_de_gold_gagne * 5)} golds  !")
+                            if self.modele.richesse_souterraine:
+                                self.Player.nombre_de_gold += (nombre_de_gold_gagne * 2)
+                                commentaire += ("\nVotre lien avec la terre fait qu'elle remonte des richesse souterraines"
+                                            " à la mort de l'ennemi pour vous féliciter de votre victoire.\nVous récuperez"
+                                            f" {(nombre_de_gold_gagne * 2)} golds  !")
+                            if "Bandeau Teinté" in self.modele.liste_dartefact_optionels:
+                                commentaire += ("\nVous récuperez les golds invoqués par votre bandeau pour contrebalancer les malheurs de votre combat."
+                                                f"\nVous récuperez {self.modele.nombre_de_tours} golds !")
+                                self.Player.nombre_de_gold += self.modele.nombre_de_tours
+                        elif cle == "Materiau":
+                            nombre_aleatoire = random.randint(0,100)
+                            limite = 100
+                            if nombre_aleatoire <= limite:
+                                materiau = self.modele.monstre_recompense[
+                                    cle
+                                ]
+                                self.Player.liste_de_materiaux[materiau] += 1
+                                commentaire = (
+                                    f"L'ennemi lache le materiau [{self.modele.monstre_recompense[cle]}] !"
+                                )
+                                if self.modele.stigma_joueur_bonus == 'Démanteleur' and random.randint(0,100)<90 :
+                                    self.Player.liste_de_materiaux[materiau] += 1
+                                    commentaire += (
+                                        f"\nVous démentelez son cadavre d'une main experte et récupérez un deuxieme materiau !"
+                                    )
+                        self.vue.AfficheRecompense(commentaire)
+                    if self.modele.stigma_joueur_positif == "Conception du Mana":
+                        mana_gagne = 2
+                        self.Player.points_de_mana_max += mana_gagne
+                        commentaire = f"Votre origine vous permet d'absorber l'essence même du monstre et de gagner {mana_gagne} points de mana maximum !"
+                        self.vue.AfficheRecompense(commentaire)
+                    if self.modele.possede_une_gemme_vie:
+                        vie_regagnee = round(self.modele.points_de_vie_max * 0.25)
+                        self.Player.points_de_vie += vie_regagnee
+                        commentaire = f"Votre gemme de vie vous fait regagner {vie_regagnee} points de vie !"
+                        self.vue.AfficheRecompense(commentaire)
+                    if ("Marque du Tyrant" in self.Player.liste_dartefacts_optionels) and (self.modele.points_de_vie_max == self.modele.points_de_vie):
+                        self.Player.points_de_vie += 1
+                        self.Player.points_de_vie_max += 1
+                        commentaire = f"Vous tendez la main vers L'ennemi, et votre Marque du Tyrant vous donne 1 point de vie max supplémentaire !"
+                        self.vue.AfficheRecompense(commentaire)
+                    if self.modele.possede_une_gemme_magie:
+                        mana_regagne = round(self.modele.points_de_mana_max * 0.25)
+                        self.Player.points_de_mana += mana_regagne
+                        commentaire = f"Votre gemme de mana vous fait regagner {mana_regagne} points de mana !"
+                        self.vue.AfficheRecompense(commentaire)
+                    if self.modele.stigma_joueur_negatif == "Incontrolable":
+                        commentaire = "Vous perdez votre controle sur votre réserve de mana et perdez tout vos points de mana."
+                        self.Player.points_de_mana = 0
+                        self.vue.AfficheRecompense(commentaire)
+                    bonus_charge = 0
+                    if "Element [Ame] Surchargé" in self.modele.liste_dartefact_optionels:
+                        bonus_charge += 1
+                    self.Player.nombre_de_monstres_tues += 1 + bonus_charge
+                    commentaire = f"Le nombre d'âmes que vous avez absorbé passe à {self.Player.nombre_de_monstres_tues}."
+                    self.vue.AfficheRecompense(commentaire)
+                    if self.Player.points_de_mana > self.Player.points_de_mana_max:
+                        self.Player.points_de_mana = self.Player.points_de_mana_max
+                    if self.Player.points_de_vie > self.Player.points_de_vie_max:
+                        self.Player.points_de_vie = self.Player.points_de_vie_max
+                    self.vue.EntreePourContinuer()
+                    if self.Player.quete != "None":
+                        self.ResultatQuete()
+                    #Ajout des sacrifices
+                    if self.modele.sacrifice_actif:
+                        self.Player.nombre_de_sacrifices += 1
+                        commentaire1 = ("Vous regardez l'ennemi gisant sur le sol, et voyez une lueur bleue émaner de son corps.")
+                        commentaire2 = ("Cette lueur commence doucement a monter, avant de venir s'écraser a toute vitesse sur votre bras noirci.")
+                        commentaire3 = ("Des lettres apparaissent alors au niveau du dos de votre main :"
+                                        "\n\n                          SACRIFICE"
+                                        f"\n\n                              {self.Player.nombre_de_sacrifices}\n")
+                        commentaire4 = ("Les lettres disparaissent, et tout revient a la normale.")
+                        self.vue.AffichageSacrifice(commentaire1, commentaire2, commentaire3, commentaire4)
+                    # gain de la carte
+                    if "Monstre Dopé" in self.modele.player_tags:
+                        commentaire1 = ("Alors que vous examinez le cadavre du monstre, vous trouvez une main coupéee, épinglée au monstre par une des seringues.")
+                        commentaire1 += ("\nY est accrochée une carte sur laquelle se trouve la photo d'un homme dans la cinquantaine.")
+                        commentaire2 = ("Vous obtenez l'artefact [Carte de Sécurité] !")
+                        commentaire2 += ("\nUne carte retrouvée sur la cadavre d'un monstre particulièrement coriace, dopé a l'aide d'étranges substances.\nQui sait ce qu'elle peut bien faire ?")
+                        self.Player.liste_dartefacts_optionels.append("Carte de Sécurité")
+                        self.vue.AffichageMonstreDopeRecompense(commentaire1, commentaire2)
+                    if self.modele.est_une_mimique:
+                        commentaire1 = ("Le corps de la mimique git a terre...\nVous en profitez pour fouiller a l'interieur du coffre vivant.")
+                        commentaire2 = ("Vous en sortez un petit coffre de bois noir, que vous vous empressez d'ouvrir !")
+                        self.vue.AfficheMimiqueMorte(commentaire1, commentaire2)
+                        self.Floormaker.GiveRandomArtefact()
+                    if self.modele.monstre_EstUnBoss and self.Player.malediction == "Sparifique":
+                        commentaire = "D'anciennes forces maudites font appraitre une petite boite de bois noir devant vous, que vous vous empressez d'ouvrir !"
+                        self.vue.AfficheSparifique(commentaire)
+                        self.Floormaker.GiveRandomArtefact("None","Boss")
+                    if not self.modele.monstre_EstUnBoss and self.Player.benediction == "Omnipotent":
+                        commentaire = "Vous recevez la force d'anciennes prières !"
+                        nombre_aleatoire = random.randint(0,100)
+                        if nombre_aleatoire <= 50:
+                            self.Player.points_de_vie_max += 1
+                            commentaire += "\nVous gagnez un point de vie max !"
+                        else:
+                            self.Player.points_de_mana_max += 1
+                            commentaire += "\nVous gagnez un point de mana max !"
+                        self.vue.AfficheOmnipotent(commentaire)
+                    if self.modele.stigma_joueur_bonus == "Script":
+                        self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Ennemis", self.modele.monstre_nom)
+                
+        self.StopCombatSounds()
+
+    def StopCombatSounds(self):
+        self.vue.CHANNELSONSORT.set_volume(0)
+        self.vue.CHANNELSONTECHNIQUE.set_volume(0)
+        self.vue.CHANNELMUSIQUECOMBAT.set_volume(0)
+        time.sleep(0.01)
+        self.vue.CHANNELSONSORT.stop()
+        self.vue.CHANNELSONTECHNIQUE.stop()
+        self.vue.CHANNELMUSIQUECOMBAT.stop()
 
     def ResultatQuete(self):
         # quete interminable
@@ -3747,7 +4148,7 @@ class Control:
                 self.modele.nombre_de_gold -= round(self.modele.nombre_de_gold * 0.5)
                 self.modele.points_de_vie -= round(self.modele.points_de_vie * 0.5)
                 self.modele.points_de_mana -= round(self.modele.points_de_mana * 0.5)
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 self.modele.type_de_derniere_action_utilisee = "Fuir"
                 self.modele.InCombat = False
                 commentaire = "- ...c'est une mauvaise réponse."
@@ -3833,10 +4234,24 @@ class Control:
                 and not self.modele.est_une_mimique
             ):
                 self.EffetStigmaDernierChoix()
+        if self.modele.stigma_joueur_positif == "Second Souffle":
+            self.EffetStigmaSecondSouffle()
+        if self.modele.stigma_joueur_positif == "Recharge Rapide":
+            self.EffetStigmaRechargeRapide()
+        if self.modele.stigma_joueur_positif == "Transhumanisme":
+            self.EffetStigmaTranshumanisme()
+        if self.modele.stigma_joueur_negatif == "Pause Repas":
+            self.EffetStigmaPauseRepas()
+        if self.modele.stigma_joueur_negatif == "Miss Hyde":
+            self.EffetStigmaMissHyde()
+        if self.modele.stigma_joueur_negatif == "Fatigue Chronique":
+            self.EffetStigmaFatigueChronique()
         if self.modele.stigma_joueur_negatif == "Flemme":
             self.EffetStigmaFlemme()
         elif self.modele.stigma_joueur_negatif == "Ange Déchue":
             self.EffetStigmaAngeDechue()
+        if "Mage" in self.modele.liste_dartefact_optionels:
+            self.AppliqueMage()
         if self.modele.stigma_joueur_bonus == "Sanjiva":
             self.EffetStigmaSanjiva()
         elif self.modele.stigma_joueur_bonus == "Musculeux":
@@ -3889,6 +4304,8 @@ class Control:
             self.EffetTagKikimora()
         if "Super Etoile" in self.modele.monstre_tags:
             self.EffetSuperEtoile()
+        if self.Player.malediction == "Impotent" and self.modele.nombre_de_tours <= 5:
+            self.EffetImpotent()
         if "Cuisine Infernale" in self.modele.monstre_tags:
             self.EffetCuisineInfernale()
         if "Voluntad tin tuukul" in self.modele.monstre_tags:
@@ -3903,6 +4320,35 @@ class Control:
             self.EffetMorceauEtherFragile()
         if "Eau Bénite" in self.modele.liste_dartefact_optionels:
             self.EffetEauBenite()
+
+    def EffetImpotent(self):
+        if self.modele.monstre_points_de_vie != self.modele.monstre_points_de_vie_max:
+            self.modele.monstre_points_de_vie = self.modele.monstre_points_de_vie_max
+            commentaire = "D'anciennes forces maudites font reprendre à l'ennemi tout ses points de vie."
+            self.vue.AfficheEffetImpotent(commentaire)
+
+    def AppliqueMage(self):
+        if self.modele.points_de_vie < 10:
+            commentaire("Vos points de vie sont critiques, vous avez du mal a garder les yeux ouverts...")
+            commentaire_effet("...et l'ennemi en profite pour assener un coup magistral dans la tête de la Mage qui vous accompagnait.\nVous prenez pleine conscience de son sort alors qu'une flaque de sang se forme sous sa tête.")
+            self.Player.liste_dartefact_optionels.remove("Mage")
+            self.modele.liste_dartefact_optionels.remove("Mage")
+            self.vue.AfficheMage(commentaire, commentaire_effet)
+        else:
+            commentaire = "La Mage qui vous accompagne lance un sort sur l'ennemi ..."
+            nombre_aleatoire = random.randint(0, 3)
+            if nombre_aleatoire == 1 :
+                commentaire_effet = "Il s'embrase pendant 1 tour !"
+                self.modele.monstre_est_en_feu = True
+                self.modele.monstre_est_en_feu_nombre_tour += 2
+                self.modele.monstre_est_en_feu_degat = 3
+            elif nombre_aleatoire == 2 :
+                commentaire_effet = "Il gèle pendant 1 tour !"
+                self.modele.monstre_est_gele = True
+                self.modele.monstre_est_gele_nombre_tour += 2
+            else:
+                commentaire_effet = "...mais rien ne se passe.\n*Oups !*"
+            self.vue.AfficheMage(commentaire, commentaire_effet)
 
     def EffetEppeeDamocles(self):
         numero_aleatoire = random.randint(0, 100)
@@ -3943,7 +4389,52 @@ class Control:
     def EffetGardienDeAme(self):
         self.vue.AfficheGardienDeAme("Voluntad Tin Tuukul, l'esprit de l'âme, rend tout ses points de mana a l'ennemi !")
         self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
-    
+
+    def EffetStigmaSecondSouffle(self):
+        if self.modele.points_de_endurance < self.modele.points_de_endurance_max * 0.5 :
+            self.modele.points_de_endurance += 3
+            self.vue.AfficheStigmaSecondSouffle("Votre entrainement vous permet de calmer votre respiration a travers l'essouflement et vous regagnez des points d'endurance.")
+        if self.modele.points_de_endurance > self.modele.points_de_endurance_max :
+            self.modele.points_de_endurance = self.modele.points_de_endurance_max    
+
+    def EffetStigmaRechargeRapide(self):
+        if self.modele.points_de_mana < self.modele.points_de_mana_max * 0.5 :
+            self.RecouvrementDeMana(3)
+            self.vue.AfficheStigmaRechargeRapide("Vous invoquez dans votre esprit le gout que la dinde avait lors d'un de ces somptueux banquet a Venise... et reprenez des points de mana .")
+
+    def EffetStigmaTOC(self):
+        self.modele.passe_son_tour = True 
+        self.modele.tour_passe_car_ramasse_item += 2
+        self.PasserSonTour
+
+    def EffetStigmaTranshumanisme(self):
+        if self.modele.points_de_vie < self.modele.points_de_vie_max * 0.5 :
+            self.modele.points_de_vie += 3
+            self.vue.AfficheStigmaTranshumanisme("Vos blessures vous grattent... surement parce qu'elles guérissent déja. Vous reprenez quelques points de vie .")
+        if self.modele.points_de_vie > self.modele.points_de_vie_max :
+            self.modele.points_de_vie = self.modele.points_de_vie_max    
+
+    def EffetStigmaMissHyde(self):
+        if not self.modele.miss_hyde_transformation and random.randint(0,100)<=5 :
+            self.modele.miss_hyde_transformation = True
+            self.modele.miss_hyde_transformation_nombre_tour = 3
+            self.vue.AfficheStigmaTranshumanisme("Vous sentez la colère monter en vous, et la malédiction des Hyde prend le controle !")
+
+
+    def EffetStigmaPauseRepas(self):
+        if (random.randint(0,100) < 5 and not self.TousItemsVides()):
+
+            #  item aléatoire
+            item_a_manger = random.choice(self.ListeItemsPossedes())
+
+            #  disparition de l'item
+            self.modele.items[item_a_manger] -= 1
+
+            # récupération des pm
+            self.RecouvrementDeMana(int(round(self.modele.points_de_mana_max * 0.15)))
+
+            #  affichage de l'action
+            self.vue.AfficheStigmaPauseRepas(f"Vous avez faim. Vous farfouillez dans votre sac et sortez l\'item [{item_a_manger}] que vous vous empressez d'avaler.\nPas d'effets, mais vous reprenez quelques pm !")
 
     def EffetCuisineInfernale(self):
         # creer ou non une commande
@@ -4390,7 +4881,7 @@ class Control:
         temps += ajout_de_temps_par_cuisson
 
         # modificateur de temps, pour pas avoir a cuisiner h24 non plus
-        temps += temps
+        temps += ajout_de_temps_par_cuisson + self.modele.nombre_de_tours + (len(self.modele.monstre_commande) * 2) + (longueur_commande * 2)
 
         # on rajoute la commande a la liste de commande
         self.modele.monstre_commande[commande] = temps
@@ -4415,7 +4906,7 @@ class Control:
         if self.modele.vie_domovoi != 0:
             soin = 50 + round(self.modele.monstre_points_de_vie_max * 0.01)
             self.modele.monstre_points_de_vie += soin
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = f"Le Domovoï aux cotés de l'ennemi lance un sort de soin !\nL'ennemi reprend {soin} points de vie !"
             self.vue.AfficheEffetDomovoi(commentaire)
         
@@ -4423,7 +4914,7 @@ class Control:
         if self.modele.vie_kikimora != 0:
             soin = 3
             self.modele.monstre_points_de_mana += soin
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = f"La Kikimora aux cotés de l'ennemi lance un sort de transfert !\nL'ennemi reprend {soin} points de mana !"
             self.vue.AfficheEffetKikimora(commentaire)
 
@@ -4507,7 +4998,7 @@ class Control:
         self.ResetTypeElementUtiliseCeTour()
         self.RemiseAZeroMonsterTypeOfAction()
         # équilibre les pv et mana
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.EquilibragePointDeVieMonstrePerduParStigma()
         # augmente le nombre de tour
         self.modele.nombre_de_tours += 1
@@ -4520,7 +5011,7 @@ class Control:
             liste_alteration_joueur.append("[Montagne]")
         if self.modele.utilise_pousse_adrenaline:
             liste_alteration_joueur.append("[Adrénaline]")
-        if self.modele.metamorphose and (self.modele.nombre_de_tours in [1, 2]):
+        if self.modele.metamorphose:
             liste_alteration_joueur.append("[Métamorphose]")
         if self.modele.utilise_mirroir_eau:
             liste_alteration_joueur.append("[Réflexion]")
@@ -4534,6 +5025,12 @@ class Control:
             liste_alteration_joueur.append("[Paralysie]")
         if self.modele.beni_par_feu_sacre:
             liste_alteration_joueur.append("[Béni]")
+        if self.modele.miss_hyde_transformation:
+            liste_alteration_joueur.append("[Malédiction des Hyde]")
+        if self.modele.mauvais_tachyon:
+            liste_alteration_joueur.append(f"[Charge Tachyon Instable : {self.modele.charge_mauvais_tachyon}]")
+        if self.modele.bon_tachyon:
+            liste_alteration_joueur.append(f"[Accumulateur de Tachyon : {self.modele.charge_bon_tachyon}]")
         if self.modele.concentre:
             liste_alteration_joueur.append("[Concentration]")
         if self.modele.est_maudit_par_le_gold:
@@ -4597,6 +5094,24 @@ class Control:
             liste_alteration_joueur.append("[Teinte Hérétique]")
         if self.modele.mutagene_fanatique_utilise:
             liste_alteration_joueur.append("[Teinte Fanatique]")
+        if self.modele.accumulation_degat_technique != 0:
+            liste_alteration_joueur.append(f"[Dégâts Techniques +{self.modele.accumulation_degat_technique}%]")
+        if self.modele.accumulation_degat_sort != 0:
+            liste_alteration_joueur.append(f"[Dégâts Sorts +{self.modele.accumulation_degat_sort}%]")
+        if self.modele.accumulation_degat_technique_critique != 0:
+            liste_alteration_joueur.append(f"[Dégâts Crit. Techniques +{self.modele.accumulation_degat_technique_critique}]")
+        if self.modele.accumulation_degat_sort_critique != 0:
+            liste_alteration_joueur.append(f"[Dégâts Crit. Sorts +{self.modele.accumulation_degat_sort_critique}]")
+        if self.modele.accumulation_chance_brulure != 0:
+            liste_alteration_joueur.append(f"[Chances de Brûler +{self.modele.accumulation_chance_brulure}%]")
+        if self.modele.accumulation_chance_gelure != 0:
+            liste_alteration_joueur.append(f"[Chances de Geler +{self.modele.accumulation_chance_gelure}%]")
+        if self.modele.accumulation_chance_paralysie != 0:
+            liste_alteration_joueur.append(f"[Chances de Paralyser +{self.modele.accumulation_chance_paralysie}%]")
+        if self.modele.accumulation_chance_lapider != 0:
+            liste_alteration_joueur.append(f"[Chances de Lapider +{self.modele.accumulation_chance_lapider}%]")
+        if self.modele.accumulation_chance_drainer != 0:
+            liste_alteration_joueur.append(f"[Chances de Drainer +{self.modele.accumulation_chance_drainer}%]")
         # construction de la phrase a montrer
         # switch true =) rajoute l'alteration detat + espace
         # switch false =) rajouter alteration detat + retour a la ligne
@@ -4766,13 +5281,18 @@ class Control:
         # [0]=%touche, [1]=degat, [2]=%crit, [3]=degat crit, [4]=%element,
         # [5]=description, [6]=message si rate, [7]=si touche, [8]=si touche crit
         # [9]=nombre tours, [10]=effet element
+        action = self.EnleveurAffix(action, True)
         # regarde l'élément de l'action pour les bonus associés
-        self.CheckTypeOfAction(action)
+        self.SetTypeOfAction(action)
         # l'action est elle possible ? Applique le cout de l'action
         action_est_possible, raison_si_action_pas_possible = (
             self.CheckSiAttaquePossibleEtAppliqueCoutAttaque(action)
         )
         if action_est_possible:
+            if self.modele.mauvais_tachyon:
+                self.ChangeChargeMauvaisTachyon("attaque")
+            if self.modele.bon_tachyon:
+                self.ChangeChargeBonTachyon("attaque")
             if self.Player.quete == "Moqueries Techniques" and self.modele.monstre_EstUnBoss:
                 self.Player.quete = "Moqueries Techniques [Echec]"   
             # methode globale pour les attaques
@@ -4813,6 +5333,7 @@ class Control:
                 degat_critique += round(
                     (self.modele.DEGATBONUSATTAQUECRITIQUE / 100) * degat_critique
                 )
+                degat_critique += round(self.modele.accumulation_degat_technique_critique)
                 # application des modificateurs sur les chances d'appliquer un element
                 pourcentage_de_element = caracteristique_du_techniques[4]
                 if self.modele.a_utilise_feu_ce_tour:
@@ -4912,7 +5433,7 @@ class Control:
                                     caracteristique_du_techniques[10]
                                 )
                                 commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
-                        elif self.modele.a_utilise_foudre_ce_tour:
+                        if self.modele.a_utilise_foudre_ce_tour:
                             if self.modele.stigma_monstre_positif == "Hardi":
                                 commentaire_element = f"\nL'ennemi résiste a la paralysie !"
                             else:
@@ -4923,7 +5444,7 @@ class Control:
                                     nombre_tour_para
                                 )
                                 commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
-                        elif self.modele.a_utilise_glace_ce_tour:
+                        if self.modele.a_utilise_glace_ce_tour:
                             nombre_tour_gele = caracteristique_du_techniques[9] + self.modele.TOURBONUSENNEMIENGLACE
                             self.modele.monstre_est_gele = True
                             self.modele.monstre_est_gele_nombre_tour += (
@@ -4934,7 +5455,7 @@ class Control:
                                 commentaire_element = "De part son origine nordique, l'ennemi résiste au gel infligé !"
                                 self.modele.monstre_est_gele = False
                                 self.modele.monstre_est_gele_nombre_tour = 0
-                        elif self.modele.a_utilise_sang_ce_tour:
+                        if self.modele.a_utilise_sang_ce_tour:
                             if ("Voluntad U Kiikel") in self.modele.monstre_tags:
                                 commentaire_degat = f"\nVoluntad U Kiikel, l'esprit de sang, absorbe le drain de vie infligé à {self.modele.monstre_nom} !"
                             else:
@@ -4953,7 +5474,7 @@ class Control:
                                     (self.modele.SOINSSAIGNEE / 100) * degat_saignee
                                 )
                                 self.modele.points_de_vie += soin_saignee
-                                self.EquilibragePointsDeVieEtMana()
+                                self.EquilibragePointsDeVieEtManaEtEndurance()
                                 commentaire_element = f"\nVous drainez {degat_saignee} points de vie a l'adversaire, et en récuperez {soin_saignee} !"
                                 if self.modele.anemie:
                                     commentaire_element += self.AppliqueTalentAnemie()
@@ -4963,7 +5484,7 @@ class Control:
                                     degat_saignement = round(degat * 0.2)
                                     self.modele.monstre_points_de_vie -= degat_saignement
                                     commentaire_element += f"\nVous infligez {degat_saignement} points de vie a l'adversaire par saignement !"
-                        elif self.modele.a_utilise_terre_ce_tour:
+                        if self.modele.a_utilise_terre_ce_tour:
                             # calcul de lapidation
                             pourcentage_lapidation = caracteristique_du_techniques[10]
                             pourcentage_lapidation += self.modele.DEGATLAPIDATION
@@ -4982,6 +5503,156 @@ class Control:
                                     commentaire_element += self.AppliqueTalentEboulis(degat_lapidation)
                                 if self.modele.fracturation:
                                     commentaire_element += self.AppliqueTalentFracturation()
+                    nombre_aleatoire_basique = random.randint(0, 100)
+                    if "Utilise Feu Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Feu Basique")
+                        if nombre_aleatoire_basique <= 17:
+                            if self.modele.monstre_est_en_feu:
+                                nombre_aleatoire = random.randint(1, 100)
+                                if nombre_aleatoire <= 90:
+                                    # addition des tours
+                                    nombre_tour = 4
+                                    nombre_tour += self.modele.TOURBONUSENNEMIENFEU
+                                    if self.modele.stigma_monstre_negatif == "Inflammable":
+                                        nombre_tour += nombre_tour
+                                    if self.modele.utilise_rafale:
+                                        nombre_tour += nombre_tour
+                                    self.modele.monstre_est_en_feu_nombre_tour += (
+                                        nombre_tour
+                                    )
+                                    commentaire_element = f"\nVous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
+                                    # ajustement des degats
+                                    degat_du_feu = 7
+                                    if (
+                                        self.modele.monstre_est_en_feu_degat
+                                        < degat_du_feu
+                                    ):
+                                        self.modele.monstre_est_en_feu_degat = (
+                                            degat_du_feu
+                                        )
+                                else:
+                                    # finition des degats
+                                    pourcentage_degat_du_feu = (
+                                        self.modele.monstre_est_en_feu_nombre_tour
+                                        * (
+                                            self.modele.monstre_est_en_feu_degat
+                                            + self.modele.DEGATBONUSFEU
+                                        )
+                                    )
+                                    degat_du_feu = round(
+                                        pourcentage_degat_du_feu
+                                        * self.modele.monstre_points_de_vie_max
+                                    )
+                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    self.modele.monstre_points_de_vie -= degat_du_feu
+                                    # arret du feu
+                                    self.modele.monstre_est_en_feu_nombre_tour = 0
+                                    self.modele.monstre_est_en_feu_degat = 0
+                                    self.modele.monstre_est_en_feu = False
+                                    # paralysie
+                                    self.modele.monstre_est_paralyse = True
+                                    self.modele.monstre_est_paralyse_nombre_tour = 2
+                                    # construction du comentaire_element
+                                    commentaire_element = ("\nVous enflammez l'ennemi.\nCepandant, les"
+                                                        " deux feux s'éteignent mutuellement en"
+                                                        " consommant l'oxygène disponible, et lui "
+                                                        "font de gros dégâts.\nDe plus, le choc le "
+                                                        "paralyse !")
+                            else:
+                                # mise a feu du monstre
+                                self.modele.monstre_est_en_feu = True
+                                nombre_tour = 4
+                                nombre_tour += self.modele.TOURBONUSENNEMIENFEU
+                                if self.modele.stigma_monstre_negatif == "Inflammable":
+                                    nombre_tour += nombre_tour
+                                if self.modele.utilise_rafale:
+                                    nombre_tour += nombre_tour
+                                self.modele.monstre_est_en_feu_nombre_tour += (
+                                    nombre_tour
+                                )
+                                self.modele.monstre_est_en_feu_degat = (
+                                    7
+                                )
+
+                                commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
+                    elif "Utilise Glace Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Glace Basique")
+                        if nombre_aleatoire_basique <= 17:
+                            self.modele.monstre_est_gele = True
+                            nombre_tour_gele = 3 + self.modele.TOURBONUSENNEMIENGLACE
+                            self.modele.monstre_est_gele_nombre_tour += (
+                                nombre_tour_gele
+                            )
+                            commentaire_element = f"\nVous gelez l'ennemi pendant {nombre_tour_gele} tours !"
+                            if nombre_tour_gele <= 0 :
+                                commentaire_element = "De part son origine nordique, l'ennemi résiste au gel infligé !"
+                                self.modele.monstre_est_gele = False
+                                self.modele.monstre_est_gele_nombre_tour = 0
+                    elif "Utilise Terre Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Terre Basique")
+                        if nombre_aleatoire_basique <= 12:
+                            # calcul de lapidation
+                            pourcentage_lapidation = 85
+                            pourcentage_lapidation += self.modele.DEGATLAPIDATION
+                            degat_lapidation = round(
+                                (pourcentage_lapidation / 100) * degat
+                            )
+                            # application lapidation
+                            degat_lapidation= self.SiZeroRameneAUn(degat_lapidation)
+                            if ("Voluntad Le Luumo") in self.modele.monstre_tags:
+                                commentaire_degat += f"\nVoluntad Le Luumo, l'esprit de terre, absorbe la lapidation infligée sur {self.modele.monstre_nom} !"
+                            else:
+                                self.modele.monstre_points_de_vie -= degat_lapidation
+                                # construction du comentaire_element
+                                commentaire_element = f"\nVous infligez {degat_lapidation} points de vie supplémentaire par lapidation !"
+                                if self.modele.eboulis:
+                                    commentaire_element += self.AppliqueTalentEboulis(degat_lapidation)
+                                if self.modele.fracturation:
+                                    commentaire_element += self.AppliqueTalentFracturation()
+                    elif "Utilise Foudre Basique" in self.modele.player_tags:
+                        if nombre_aleatoire_basique <= 7:
+                            self.modele.player_tags.remove("Utilise Foudre Basique")
+                            if self.modele.stigma_monstre_positif == "Hardi":
+                                commentaire_element = f"\nL'ennemi résiste a la paralysie !"
+                            else:
+                                self.modele.monstre_est_paralyse = True
+                                self.modele.monstre_passe_son_tour = True
+                                nombre_tour_para = 2 + self.modele.TOURBONUSENNEMIENPARALYSIE
+                                self.modele.monstre_est_paralyse_nombre_tour += (
+                                    nombre_tour_para
+                                )
+                                commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
+                    elif "Utilise Sang Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Sang Basique")
+                        if nombre_aleatoire_basique <= 15:
+                            if ("Voluntad U Kiikel") in self.modele.monstre_tags:
+                                commentaire_degat = f"\nVoluntad U Kiikel, l'esprit de sang, absorbe le drain de vie infligé à {self.modele.monstre_nom} !"
+                            else:
+                                # calcul de la saignee
+                                pourcentage_saignee = 3
+                                pourcentage_saignee += self.modele.DEGATSAIGNEE
+                                degat_saignee = round(
+                                    (pourcentage_saignee / 100)
+                                    * self.modele.monstre_points_de_vie_max
+                                )
+                                degat_saignee = self.AppliqueLimitationSaignee(degat_saignee)
+                                # application de la saignee
+                                self.modele.monstre_points_de_vie -= degat_saignee
+                                soin_saignee = degat_saignee
+                                soin_saignee += round(
+                                    (self.modele.SOINSSAIGNEE / 100) * degat_saignee
+                                )
+                                self.modele.points_de_vie += soin_saignee
+                                self.EquilibragePointsDeVieEtManaEtEndurance()
+                                commentaire_element = f"\nVous drainez {degat_saignee} points de vie a l'adversaire, et en récuperez {soin_saignee} !"
+                                if self.modele.anemie:
+                                    commentaire_element += self.AppliqueTalentAnemie()
+                                if self.modele.baron_rouge:
+                                    commentaire_element += self.AppliqueTalentBaronRouge()
+                                if self.modele.anticoagulants:
+                                    degat_de_saignement = round(degat * 0.2)
+                                    self.modele.monstre_points_de_vie -= degat_de_saignement
+                                    commentaire_element += f"\nVous infligez {degat_de_saignement} points de vie a l'adversaire par saignement !"
                     degat = self.SiZeroRameneAUn(degat)
                     commentaire_degat = (
                         f"Vous infligez {degat} points de dégât a l'ennemi !"
@@ -5051,6 +5722,7 @@ class Control:
                     degat_critique += round(
                         (self.modele.DEGATBONUSATTAQUECRITIQUE / 100) * degat_critique
                     )
+                    degat_critique += round(self.modele.accumulation_degat_technique_critique)
                     # degats sont critiques ?
                     nombre_aleatoire = random.randint(0, 100)
                     if nombre_aleatoire < pourcentage_de_critique:
@@ -5136,7 +5808,7 @@ class Control:
                                     (self.modele.SOINSSAIGNEE / 100) * degat_saignee
                                 )
                                 self.modele.points_de_vie += soin_saignee
-                                self.EquilibragePointsDeVieEtMana()
+                                self.EquilibragePointsDeVieEtManaEtEndurance()
                                 commentaire_degat += f"\nVous drainez {degat_saignee} points de vie a l'adversaire, et en récuperez {soin_saignee} !"
                                 if self.modele.anemie:
                                     commentaire_degat += self.AppliqueTalentAnemie()
@@ -5280,7 +5952,7 @@ class Control:
             commentaire = "Vous tranchez l'ennemi en deux, et sa mort devient une véritée irrévoquable."
         self.vue.AfficheIaido(commentaire)
 
-    def CheckTypeOfAction(self, action):
+    def SetTypeOfAction(self, action):
         if (
             action in self.modele.sorts_de_feu
             or action in self.modele.techniques_de_feu
@@ -5370,6 +6042,60 @@ class Control:
         elif action in self.modele.techniques_de_ame:
             self.sound_of_action = "SOUL"
 
+    def CheckTypeOfAction(self, action):
+        if (
+            action in self.modele.sorts_de_feu
+            or action in self.modele.techniques_de_feu
+            or action == "Libération Enflammée"
+            or action == "Rafale"
+            or action == "Explosion de Feu Sacré"
+        ):
+            return "feu"
+        elif (
+            action in self.modele.sorts_de_foudre
+            or action in self.modele.techniques_de_foudre
+            or action == "Libération Fulgurante"
+            or action == "Combo Electrique"
+        ):
+            return "foudre"
+        elif (
+            action in self.modele.sorts_de_glace
+            or action in self.modele.techniques_de_glace
+            or action == "Libération Glaciale"
+            or action == "Mirroir d'Eau"
+            or action == "Avalanche"
+        ):
+            return "glace"
+        elif (
+            action in self.modele.sorts_de_physique
+            or action in self.modele.techniques_de_physique
+            or action == "Poussée d'Adrénaline"
+            or action == "Libération Physique"
+            or action == "Griffes du Démon"
+        ):
+            return "physique"
+        elif (
+            action in self.modele.sorts_de_sang
+            or action in self.modele.techniques_de_sang
+            or action == "Libération Sanglante"
+            or action == "Brume de Sang"
+            or action == "Bluff"
+        ):
+            return "sang"
+        elif (
+            action in self.modele.sorts_de_terre
+            or action in self.modele.techniques_de_terre
+            or action == "Avalanche"
+            or action == "Libération Holomélanocrate"
+            or action == "Posture de la Montagne"
+            or action == "Position du Massif"
+        ):
+            return "terre"
+        elif action in self.modele.sorts_de_soin:
+            return "soin"
+        elif action in self.modele.techniques_de_ame:
+            return "ame"
+
     def ResetTypeElementUtiliseCeTour(self):
         self.modele.a_utilise_feu_ce_tour = False
         self.modele.a_utilise_foudre_ce_tour = False
@@ -5434,6 +6160,17 @@ class Control:
             affichage_raison_sort_impossible = (
                 "Vous tentez de lancer le sort, mais aucun mot ne sort de votre bouche."
             )
+        # checke si les maledictions empechent le jouer de lancer le sort.
+        element_du_sort = self.CheckTypeOfAction(action)
+        if ((element_du_sort == "feu" and self.Player.malediction == "Apyre") or
+            (element_du_sort == "glace" and self.Player.malediction == "Infrigérable") or
+            (element_du_sort == "foudre" and self.Player.malediction == "Isolant") or
+            (element_du_sort == "physique" and self.Player.malediction == "Anoxique") or
+            (element_du_sort == "sang" and self.Player.malediction == "Exsangue") or
+            (element_du_sort == "terre" and self.Player.malediction == "Arénacé")):
+            affichage_raison_sort_impossible = (
+                "Vous tentez d'utiliser le sort, mais une force maudite vous en empêche."
+            )
         # si affichage_raison_sort_impossible est vide, alors on peut lancer le sort et on applique son cout. sinon, on retourne la raison.
         if affichage_raison_sort_impossible == "":
 
@@ -5456,8 +6193,15 @@ class Control:
             action_est_possible = True
             return action_est_possible, affichage_raison_sort_impossible
         else:
-            action_est_possible = False
-            return action_est_possible, affichage_raison_sort_impossible
+            if self.modele.bon_tachyon and self.modele.charge_bon_tachyon >= 50:
+                self.vue.AfficheBonTachyonUtilisation()
+                self.modele.charge_bon_tachyon -= 50
+                action_est_possible = True
+                affichage_raison_sort_impossible = ""
+                return action_est_possible, affichage_raison_sort_impossible
+            else:
+                action_est_possible = False
+                return action_est_possible, affichage_raison_sort_impossible
 
     def CheckSiAttaquePossibleEtAppliqueCoutAttaque(self, action):
         cout_vie = 0
@@ -5492,6 +6236,18 @@ class Control:
         # checke si le joueur peut lancer les technique.
         if self.modele.est_maudit_par_les_techniques:
             affichage_raison_technique_impossible = "Vous tentez d'utiliser la technique, mais le monde se met a tourner et vous vous retrouvez par terre, sans comprendre pourquoi."
+        # checke si les maledictions empechent le jouer de lancer l'attaque.
+        element_de_la_technique = self.CheckTypeOfAction(action)
+        if ((element_de_la_technique == "feu" and self.Player.malediction == "Apyre") or
+            (element_de_la_technique == "glace" and self.Player.malediction == "Infrigérable") or
+            (element_de_la_technique == "foudre" and self.Player.malediction == "Isolant") or
+            (element_de_la_technique == "physique" and self.Player.malediction == "Anoxique") or
+            (element_de_la_technique == "sang" and self.Player.malediction == "Exsangue") or
+            (element_de_la_technique == "terre" and self.Player.malediction == "Arénacé")
+        ):
+            affichage_raison_technique_impossible = (
+                "Vous tentez d'utiliser le sort, mais une force maudite vous en empêche."
+            )
         # si affichage_raison_technique_impossible est vide, alors on peut lancer le technique et on applique son cout. sinon, on retourne la raison.
         if affichage_raison_technique_impossible == "":
             if cout_vie_a_appliquer:
@@ -5503,16 +6259,218 @@ class Control:
         else:
             action_est_possible = False
             return action_est_possible, affichage_raison_technique_impossible
+        
+    def EnleveurAffix(self, action, doit_faire_action_affix=False):
+        liste_affix = ["~Rouge~", # +2 vie
+                                   "~Carmin~", # +4 vie
+                                   "~Violet~", # +2 mana
+                                   "~Pourpre~", # +4 mana
+                                   "~Jaune~", # +2 endurance
+                                   "~Doré~", # +4 endurance
+                                   "~Lolipop~", # +1 vie mana endurance
+                                   "~Bubblegum~", # +2 vie mana endurance
+                                   "~Escargot~", # +1% degat technique
+                                   "~Limace~", # +1% degat sorts
+                                   "~Citronnier~", # +0.5 degat critique technique
+                                   "~Citron~", # +1 degat critique technique
+                                   "~Cerisier~", # +0.5 degat critique sort
+                                   "~Cerise~", # +1 degat critique sort
+                                   "~Mars~", # +0.5% chance de bruler
+                                   "~Neptune~", # +0.5% chance de geler
+                                   "~Pluton~", # +0.25% chance de paralyser
+                                   "~Lune~", # +0.5% chance de lapider
+                                   "~Mercure~", # +0.5% chance de drain
+                                   "~Ordre~", # peut bruler
+                                   "~Aveugle~", # peut geler
+                                   "~Limitation~", # peut lapider
+                                   "~Transcendance~", # peut paralyser
+                                   "~Eveil~", # peut drainer
+                                   "~Antithèse~", # 15% chance d'arreter le gel
+                                   "~Chaotique~", # 15% chance d'arreter la brulure
+                                   "~Tache~", # 15% chance d'arreter la blessure
+                                   "~Rature~", # 15% chance d'arreter la deconcentration
+                                   "~Brouillon~", # 15% chance d'arreter la confusion
+                                   "~Paragraphe~", # 6% chance d'enlever gel + brulure + blessure + deconcentration + confusion
+                                   "~Magnum-Opus~", # 6% chance de donner numero_etage * 5 golds
+                                   "~Agrume~", # 6% chance d'être béni
+                                   "~Raisin~", # 6% chance d'être en folie
+                                   "~Durian~", # 6% chance d'être en furie
+                                   "~Gingembre~", # 6% chance d'être jindagee 2 tours
+                                   "~Mandragore~", # 6% chance d'être aatma 2 tours
+                                   "~Nigredo~", # 2% chance reprendre full vie
+                                   "~Albédo~", # 2% chance reprendre full mana
+                                   "~Citrinitas~", # 2% chance reprendre full endurance
+                                   "~Chrysalide~", # 2% chance devenir invincible 2 tours
+                                   ]
+        action_transformee_en_liste = list(action.split())
+        liste_mot = []
+        for mot in action_transformee_en_liste:
+            if mot in liste_affix:
+                if doit_faire_action_affix:
+                    self.DoAffixPurpose(mot)
+                else:
+                    pass
+            else:
+                liste_mot.append(mot)
+
+        action_sans_affixe = ""
+        for mot in liste_mot:
+            action_sans_affixe += mot
+            if liste_mot[len(liste_mot) - 1] != mot:
+                action_sans_affixe += " "
+
+        return action_sans_affixe
+
+    def DoAffixPurpose(self,mot):
+        numero_aleatoire = random.randint(0, 100)
+        if mot == "~Rouge~":
+            self.modele.points_de_vie += 2
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Carmin~":
+            self.modele.points_de_vie += 4
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Violet~":
+            self.modele.points_de_mana += 2
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Pourpre~":
+            self.modele.points_de_mana += 4
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Jaune~":
+            self.modele.points_de_endurance += 2
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Doré~":
+            self.modele.points_de_endurance += 4
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Lolipop~":
+            self.modele.points_de_vie += 1
+            self.modele.points_de_mana += 1
+            self.modele.points_de_endurance += 1
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Bubblegum~":
+            self.modele.points_de_vie += 2
+            self.modele.points_de_mana += 2
+            self.modele.points_de_endurance += 2
+            self.EquilibragePointsDeVieEtManaEtEndurance()
+        elif mot == "~Escargot~":
+            self.modele.accumulation_degat_technique += 1
+        elif mot == "~Limace~":
+            self.modele.accumulation_degat_sort += 1
+        elif mot == "~Citronnier~":
+            self.modele.accumulation_degat_technique_critique += 0.5
+        elif mot == "~Citron~":
+            self.modele.accumulation_degat_technique_critique += 1
+        elif mot == "~Cerisier~":
+            self.modele.accumulation_degat_sort_critique += 0.5
+        elif mot == "~Cerise~":
+            self.modele.accumulation_degat_sort_critique += 1
+        elif mot == "~Mars~":
+            self.modele.accumulation_chance_brulure += 0.5
+        elif mot == "~Neptune~":
+            self.modele.accumulation_chance_gelure += 0.5
+        elif mot == "~Pluton~":
+            self.modele.accumulation_chance_paralysie += 0.25
+        elif mot == "~Lune~":
+            self.modele.accumulation_chance_lapider += 0.5
+        elif mot == "~Mercure~":
+            self.modele.accumulation_chance_drainer += 0.5
+        elif mot == "~Antithèse~":
+            if numero_aleatoire <= 15 and self.modele.est_gele:
+                self.modele.est_gele_nombre_tour = 0
+                self.modele.est_gele = False
+        elif mot == "~Chaotique~":
+            if numero_aleatoire <= 15 and self.modele.est_en_feu:
+                self.modele.est_en_feu_nombre_tour = 0
+                self.modele.est_en_feu_degat = 0
+                self.modele.est_en_feu = False
+        elif mot == "~Tache~":
+            if numero_aleatoire <= 15 and self.modele.est_maudit_par_la_vie:
+                self.modele.est_maudit_par_la_vie_nombre_tour = 0
+                self.modele.est_maudit_par_la_vie = False
+        elif mot == "~Rature~":
+            if numero_aleatoire <= 15 and self.modele.est_maudit_par_le_mana:
+                self.modele.est_maudit_par_le_mana_nombre_tour = 0
+                self.modele.est_maudit_par_le_mana = False
+        elif mot == "~Brouillon~":
+            if numero_aleatoire <= 15 and self.modele.est_maudit_par_les_items:
+                self.modele.est_maudit_par_les_items_nombre_tour = 0
+                self.modele.est_maudit_par_les_items = False
+        elif mot == "~Paragraphe~":
+            if numero_aleatoire <= 5:
+                self.modele.est_maudit_par_les_items_nombre_tour = 0
+                self.modele.est_maudit_par_les_items = False
+                self.modele.est_maudit_par_le_mana_nombre_tour = 0
+                self.modele.est_maudit_par_le_mana = False
+                self.modele.est_maudit_par_la_vie_nombre_tour = 0
+                self.modele.est_maudit_par_la_vie = False
+                self.modele.est_en_feu_nombre_tour = 0
+                self.modele.est_en_feu_degat = 0
+                self.modele.est_en_feu = False
+                self.modele.est_gele_nombre_tour = 0
+                self.modele.est_gele = False
+        elif mot == "~Magnum-Opus~":
+            if numero_aleatoire <= 6:
+                self.modele.nombre_de_gold += self.modele.numero_de_letage * 5
+        elif mot == "~Agrume~":
+            if numero_aleatoire <= 6:
+                self.modele.beni_par_feu_sacre = True
+                self.modele.beni_par_feu_sacre_nombre_tour += 2        
+        elif mot == "~Raisin~":
+            if numero_aleatoire <= 6:
+                self.modele.utilise_orbe_de_folie = True
+                self.modele.utilise_orbe_de_folie_nombre_tour += 2
+        elif mot == "~Durian~":
+            if numero_aleatoire <= 6:
+                self.modele.utilise_orbe_de_furie = True
+                self.modele.utilise_orbe_de_furie_nombre_tour += 2
+        elif mot == "~Gingembre~":
+            if numero_aleatoire <= 6:
+                self.modele.utilise_fruit_jindagee = True
+                self.modele.utilise_fruit_jindagee_nombre_tour += 2
+        elif mot == "~Mandragore~":
+            if numero_aleatoire <= 6:
+                self.modele.utilise_fruit_aatma = True
+                self.modele.utilise_fruit_aatma_nombre_tour += 2
+        elif mot == "~Nigredo~":
+            if numero_aleatoire <= 2:
+                self.modele.points_de_vie == self.modele.points_de_vie_max
+        elif mot == "~Albédo~":
+            if numero_aleatoire <= 2:
+                self.modele.points_de_mana == self.modele.points_de_mana_max
+        elif mot == "~Citrinitas~":
+            if numero_aleatoire <= 2:
+                self.modele.points_de_endurance == self.modele.points_de_endurance_max
+        elif mot == "~Chrysalide~":
+            if numero_aleatoire <= 2:
+                self.modele.metamorphose = True
+                self.modele.metamorphose_nombre_tour += 2
+
+        elif mot == "~Ordre~":
+            self.modele.player_tags.append("Utilise Feu Basique")
+        elif mot == "~Aveugle~":
+            self.modele.player_tags.append("Utilise Glace Basique")
+        elif mot == "~Limitation~":
+            self.modele.player_tags.append("Utilise Terre Basique")
+        elif mot == "~Transcendance~":
+            self.modele.player_tags.append("Utilise Foudre Basique")
+        elif mot == "~Eveil~":
+            self.modele.player_tags.append("Utilise Sang Basique")
+
+
 
     def UseMagic(self, action):
         # [0]=%touche, [1]=degat, [2]=%crit, [3]=degat crit, [4]=%element,
         # [5]=description, [6]=message si rate, [7]=si touche, [8]=si touche crit
         # [9]=nombre tours, [10]=effet element
         self.RecupEndurance(4)
+        action = self.EnleveurAffix(action, True)
         action_est_possible, raison_si_action_pas_possible = (
                 self.CheckSiSortPossibleEtAppliqueCoutSort(action)
             )
         if action_est_possible:
+            if self.modele.mauvais_tachyon:
+                self.ChangeChargeMauvaisTachyon("sort")
+            if self.modele.bon_tachyon:
+                self.ChangeChargeBonTachyon("sort")
             if self.Player.quete == "Moqueries Magiques" and self.modele.monstre_EstUnBoss:
                 self.Player.quete = "Moqueries Magiques [Echec]"
             if action in self.modele.annuaire_de_caracteristique_des_sorts:
@@ -5520,7 +6478,7 @@ class Control:
                     action
                 ]
                 # regarde l'élément de l'action pour les bonus associés
-                self.CheckTypeOfAction(action)
+                self.SetTypeOfAction(action)
                 # application des modificateurs sur la chance de toucher
                 pourcentage_de_touche = caracteristique_du_sort[0]
                 if self.modele.oeuil_magique:
@@ -5568,6 +6526,7 @@ class Control:
                 degat_critique += round(
                     (self.modele.DEGATBONUSSORTCRITIQUE / 100) * degat_critique
                 )
+                degat_critique += round(self.modele.accumulation_degat_sort_critique)
                 # application des modificateurs sur les chances d'appliquer un element
                 pourcentage_de_element = caracteristique_du_sort[4]
                 if self.modele.a_utilise_feu_ce_tour:
@@ -5633,7 +6592,7 @@ class Control:
                                         pourcentage_degat_du_feu
                                         * self.modele.monstre_points_de_vie_max
                                     )
-                                    dega_du_feut = self.SiZeroRameneAUn(degat_du_feu)
+                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
                                     self.modele.monstre_points_de_vie -= degat_du_feu
                                     # arret du feu
                                     self.modele.monstre_est_en_feu_nombre_tour = 0
@@ -5665,7 +6624,7 @@ class Control:
                                 )
 
                                 commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
-                        elif self.modele.a_utilise_foudre_ce_tour:
+                        if self.modele.a_utilise_foudre_ce_tour:
                             if self.modele.stigma_monstre_positif == "Hardi":
                                 commentaire_element = f"\nL'ennemi résiste a la paralysie !"
                             else:
@@ -5676,7 +6635,7 @@ class Control:
                                     nombre_tour_para
                                 )
                                 commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
-                        elif self.modele.a_utilise_glace_ce_tour:
+                        if self.modele.a_utilise_glace_ce_tour:
                             self.modele.monstre_est_gele = True
                             nombre_tour_gele = caracteristique_du_sort[9] + self.modele.TOURBONUSENNEMIENGLACE
                             self.modele.monstre_est_gele_nombre_tour += (
@@ -5687,7 +6646,7 @@ class Control:
                                 commentaire_element = "De part son origine nordique, l'ennemi résiste au gel infligé !"
                                 self.modele.monstre_est_gele = False
                                 self.modele.monstre_est_gele_nombre_tour = 0
-                        elif self.modele.a_utilise_sang_ce_tour:
+                        if self.modele.a_utilise_sang_ce_tour:
                             if ("Voluntad U Kiikel") in self.modele.monstre_tags:
                                 commentaire_degat = f"\nVoluntad U Kiikel, l'esprit de sang, absorbe le drain de vie infligé à {self.modele.monstre_nom} !"
                             else:
@@ -5706,7 +6665,7 @@ class Control:
                                     (self.modele.SOINSSAIGNEE / 100) * degat_saignee
                                 )
                                 self.modele.points_de_vie += soin_saignee
-                                self.EquilibragePointsDeVieEtMana()
+                                self.EquilibragePointsDeVieEtManaEtEndurance()
                                 commentaire_element = f"\nVous drainez {degat_saignee} points de vie a l'adversaire, et en récuperez {soin_saignee} !"
                                 if self.modele.anemie:
                                     commentaire_element += self.AppliqueTalentAnemie()
@@ -5716,7 +6675,7 @@ class Control:
                                     degat_de_saignement = round(degat * 0.2)
                                     self.modele.monstre_points_de_vie -= degat_de_saignement
                                     commentaire_element += f"\nVous infligez {degat_de_saignement} points de vie a l'adversaire par saignement !"
-                        elif self.modele.a_utilise_terre_ce_tour:
+                        if self.modele.a_utilise_terre_ce_tour:
                             # calcul de lapidation
                             pourcentage_lapidation = caracteristique_du_sort[10]
                             pourcentage_lapidation += self.modele.DEGATLAPIDATION
@@ -5735,6 +6694,156 @@ class Control:
                                     commentaire_element += self.AppliqueTalentEboulis(degat_lapidation)
                                 if self.modele.fracturation:
                                     commentaire_element += self.AppliqueTalentFracturation()
+                    nombre_aleatoire_basique = random.randint(0, 100)
+                    if "Utilise Feu Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Feu Basique")
+                        if nombre_aleatoire_basique <= 15:
+                            if self.modele.monstre_est_en_feu:
+                                nombre_aleatoire = random.randint(1, 100)
+                                if nombre_aleatoire <= 90:
+                                    # addition des tours
+                                    nombre_tour = 4
+                                    nombre_tour += self.modele.TOURBONUSENNEMIENFEU
+                                    if self.modele.stigma_monstre_negatif == "Inflammable":
+                                        nombre_tour += nombre_tour
+                                    if self.modele.utilise_rafale:
+                                        nombre_tour += nombre_tour
+                                    self.modele.monstre_est_en_feu_nombre_tour += (
+                                        nombre_tour
+                                    )
+                                    commentaire_element = f"\nVous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
+                                    # ajustement des degats
+                                    degat_du_feu = 7
+                                    if (
+                                        self.modele.monstre_est_en_feu_degat
+                                        < degat_du_feu
+                                    ):
+                                        self.modele.monstre_est_en_feu_degat = (
+                                            degat_du_feu
+                                        )
+                                else:
+                                    # finition des degats
+                                    pourcentage_degat_du_feu = (
+                                        self.modele.monstre_est_en_feu_nombre_tour
+                                        * (
+                                            self.modele.monstre_est_en_feu_degat
+                                            + self.modele.DEGATBONUSFEU
+                                        )
+                                    )
+                                    degat_du_feu = round(
+                                        pourcentage_degat_du_feu
+                                        * self.modele.monstre_points_de_vie_max
+                                    )
+                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    self.modele.monstre_points_de_vie -= degat_du_feu
+                                    # arret du feu
+                                    self.modele.monstre_est_en_feu_nombre_tour = 0
+                                    self.modele.monstre_est_en_feu_degat = 0
+                                    self.modele.monstre_est_en_feu = False
+                                    # paralysie
+                                    self.modele.monstre_est_paralyse = True
+                                    self.modele.monstre_est_paralyse_nombre_tour = 2
+                                    # construction du comentaire_element
+                                    commentaire_element = ("\nVous enflammez l'ennemi.\nCepandant, les"
+                                                        " deux feux s'éteignent mutuellement en"
+                                                        " consommant l'oxygène disponible, et lui "
+                                                        "font de gros dégâts.\nDe plus, le choc le "
+                                                        "paralyse !")
+                            else:
+                                # mise a feu du monstre
+                                self.modele.monstre_est_en_feu = True
+                                nombre_tour = 4
+                                nombre_tour += self.modele.TOURBONUSENNEMIENFEU
+                                if self.modele.stigma_monstre_negatif == "Inflammable":
+                                    nombre_tour += nombre_tour
+                                if self.modele.utilise_rafale:
+                                    nombre_tour += nombre_tour
+                                self.modele.monstre_est_en_feu_nombre_tour += (
+                                    nombre_tour
+                                )
+                                self.modele.monstre_est_en_feu_degat = (
+                                    7
+                                )
+
+                                commentaire_element = f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
+                    elif "Utilise Glace Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Glace Basique")
+                        if nombre_aleatoire_basique <= 17:
+                            self.modele.monstre_est_gele = True
+                            nombre_tour_gele = 3 + self.modele.TOURBONUSENNEMIENGLACE
+                            self.modele.monstre_est_gele_nombre_tour += (
+                                nombre_tour_gele
+                            )
+                            commentaire_element = f"\nVous gelez l'ennemi pendant {nombre_tour_gele} tours !"
+                            if nombre_tour_gele <= 0 :
+                                commentaire_element = "De part son origine nordique, l'ennemi résiste au gel infligé !"
+                                self.modele.monstre_est_gele = False
+                                self.modele.monstre_est_gele_nombre_tour = 0
+                    elif "Utilise Terre Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Terre Basique")
+                        if nombre_aleatoire_basique <= 12:
+                            # calcul de lapidation
+                            pourcentage_lapidation = 85
+                            pourcentage_lapidation += self.modele.DEGATLAPIDATION
+                            degat_lapidation = round(
+                                (pourcentage_lapidation / 100) * degat
+                            )
+                            # application lapidation
+                            degat_lapidation= self.SiZeroRameneAUn(degat_lapidation)
+                            if ("Voluntad Le Luumo") in self.modele.monstre_tags:
+                                commentaire_degat += f"\nVoluntad Le Luumo, l'esprit de terre, absorbe la lapidation infligée sur {self.modele.monstre_nom} !"
+                            else:
+                                self.modele.monstre_points_de_vie -= degat_lapidation
+                                # construction du comentaire_element
+                                commentaire_element = f"\nVous infligez {degat_lapidation} points de vie supplémentaire par lapidation !"
+                                if self.modele.eboulis:
+                                    commentaire_element += self.AppliqueTalentEboulis(degat_lapidation)
+                                if self.modele.fracturation:
+                                    commentaire_element += self.AppliqueTalentFracturation()
+                    elif "Utilise Foudre Basique" in self.modele.player_tags:
+                        if nombre_aleatoire_basique <= 7:
+                            self.modele.player_tags.remove("Utilise Foudre Basique")
+                            if self.modele.stigma_monstre_positif == "Hardi":
+                                commentaire_element = f"\nL'ennemi résiste a la paralysie !"
+                            else:
+                                self.modele.monstre_est_paralyse = True
+                                self.modele.monstre_passe_son_tour = True
+                                nombre_tour_para = 2 + self.modele.TOURBONUSENNEMIENPARALYSIE
+                                self.modele.monstre_est_paralyse_nombre_tour += (
+                                    nombre_tour_para
+                                )
+                                commentaire_element = f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
+                    elif "Utilise Sang Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Sang Basique")
+                        if nombre_aleatoire_basique <= 15:
+                            if ("Voluntad U Kiikel") in self.modele.monstre_tags:
+                                commentaire_degat = f"\nVoluntad U Kiikel, l'esprit de sang, absorbe le drain de vie infligé à {self.modele.monstre_nom} !"
+                            else:
+                                # calcul de la saignee
+                                pourcentage_saignee = 3
+                                pourcentage_saignee += self.modele.DEGATSAIGNEE
+                                degat_saignee = round(
+                                    (pourcentage_saignee / 100)
+                                    * self.modele.monstre_points_de_vie_max
+                                )
+                                degat_saignee = self.AppliqueLimitationSaignee(degat_saignee)
+                                # application de la saignee
+                                self.modele.monstre_points_de_vie -= degat_saignee
+                                soin_saignee = degat_saignee
+                                soin_saignee += round(
+                                    (self.modele.SOINSSAIGNEE / 100) * degat_saignee
+                                )
+                                self.modele.points_de_vie += soin_saignee
+                                self.EquilibragePointsDeVieEtManaEtEndurance()
+                                commentaire_element = f"\nVous drainez {degat_saignee} points de vie a l'adversaire, et en récuperez {soin_saignee} !"
+                                if self.modele.anemie:
+                                    commentaire_element += self.AppliqueTalentAnemie()
+                                if self.modele.baron_rouge:
+                                    commentaire_element += self.AppliqueTalentBaronRouge()
+                                if self.modele.anticoagulants:
+                                    degat_de_saignement = round(degat * 0.2)
+                                    self.modele.monstre_points_de_vie -= degat_de_saignement
+                                    commentaire_element += f"\nVous infligez {degat_de_saignement} points de vie a l'adversaire par saignement !"
                     degat = self.SiZeroRameneAUn(degat)
                     commentaire_degat = (
                         f"Vous infligez {degat} points de dégât a l'ennemi !"
@@ -5758,8 +6867,158 @@ class Control:
                     if soin < self.modele.annuaire_de_soin_minimum_des_sorts[action]:
                         soin = self.modele.annuaire_de_soin_minimum_des_sorts[action]
                     self.modele.points_de_vie += soin
-                    self.EquilibragePointsDeVieEtMana()
+                    self.EquilibragePointsDeVieEtManaEtEndurance()
                     commentaire_soin = f"Vous reprenez {soin} points de vie !"
+                    nombre_aleatoire_basique = random.randint(0, 100)
+                    if "Utilise Feu Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Feu Basique")
+                        if nombre_aleatoire_basique <= 15:
+                            if self.modele.monstre_est_en_feu:
+                                nombre_aleatoire = random.randint(1, 100)
+                                if nombre_aleatoire <= 90:
+                                    # addition des tours
+                                    nombre_tour = 4
+                                    nombre_tour += self.modele.TOURBONUSENNEMIENFEU
+                                    if self.modele.stigma_monstre_negatif == "Inflammable":
+                                        nombre_tour += nombre_tour
+                                    if self.modele.utilise_rafale:
+                                        nombre_tour += nombre_tour
+                                    self.modele.monstre_est_en_feu_nombre_tour += (
+                                        nombre_tour
+                                    )
+                                    commentaire_soin += f"\nVous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
+                                    # ajustement des degats
+                                    degat_du_feu = 7
+                                    if (
+                                        self.modele.monstre_est_en_feu_degat
+                                        < degat_du_feu
+                                    ):
+                                        self.modele.monstre_est_en_feu_degat = (
+                                            degat_du_feu
+                                        )
+                                else:
+                                    # finition des degats
+                                    pourcentage_degat_du_feu = (
+                                        self.modele.monstre_est_en_feu_nombre_tour
+                                        * (
+                                            self.modele.monstre_est_en_feu_degat
+                                            + self.modele.DEGATBONUSFEU
+                                        )
+                                    )
+                                    degat_du_feu = round(
+                                        pourcentage_degat_du_feu
+                                        * self.modele.monstre_points_de_vie_max
+                                    )
+                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    self.modele.monstre_points_de_vie -= degat_du_feu
+                                    # arret du feu
+                                    self.modele.monstre_est_en_feu_nombre_tour = 0
+                                    self.modele.monstre_est_en_feu_degat = 0
+                                    self.modele.monstre_est_en_feu = False
+                                    # paralysie
+                                    self.modele.monstre_est_paralyse = True
+                                    self.modele.monstre_est_paralyse_nombre_tour = 2
+                                    # construction du comentaire_element
+                                    commentaire_soin += ("\nVous enflammez l'ennemi.\nCepandant, les"
+                                                        " deux feux s'éteignent mutuellement en"
+                                                        " consommant l'oxygène disponible, et lui "
+                                                        "font de gros dégâts.\nDe plus, le choc le "
+                                                        "paralyse !")
+                            else:
+                                # mise a feu du monstre
+                                self.modele.monstre_est_en_feu = True
+                                nombre_tour = 4
+                                nombre_tour += self.modele.TOURBONUSENNEMIENFEU
+                                if self.modele.stigma_monstre_negatif == "Inflammable":
+                                    nombre_tour += nombre_tour
+                                if self.modele.utilise_rafale:
+                                    nombre_tour += nombre_tour
+                                self.modele.monstre_est_en_feu_nombre_tour += (
+                                    nombre_tour
+                                )
+                                self.modele.monstre_est_en_feu_degat = (
+                                    7
+                                )
+
+                                commentaire_soin += f"\nVous enflammez l'ennemi pendant {nombre_tour} tours !"
+                    elif "Utilise Glace Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Glace Basique")
+                        if nombre_aleatoire_basique <= 17:
+                            self.modele.monstre_est_gele = True
+                            nombre_tour_gele = 3 + self.modele.TOURBONUSENNEMIENGLACE
+                            self.modele.monstre_est_gele_nombre_tour += (
+                                nombre_tour_gele
+                            )
+                            commentaire_soin += f"\nVous gelez l'ennemi pendant {nombre_tour_gele} tours !"
+                            if nombre_tour_gele <= 0 :
+                                commentaire_soin += "De part son origine nordique, l'ennemi résiste au gel infligé !"
+                                self.modele.monstre_est_gele = False
+                                self.modele.monstre_est_gele_nombre_tour = 0
+                    elif "Utilise Terre Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Terre Basique")
+                        if nombre_aleatoire_basique <= 12:
+                            # calcul de lapidation
+                            pourcentage_lapidation = 85
+                            pourcentage_lapidation += self.modele.DEGATLAPIDATION
+                            degat_lapidation = round(
+                                (pourcentage_lapidation / 100) * 30
+                            )
+                            # application lapidation
+                            degat_lapidation= self.SiZeroRameneAUn(degat_lapidation)
+                            if ("Voluntad Le Luumo") in self.modele.monstre_tags:
+                                commentaire_soin += f"\nVoluntad Le Luumo, l'esprit de terre, absorbe la lapidation infligée sur {self.modele.monstre_nom} !"
+                            else:
+                                self.modele.monstre_points_de_vie -= degat_lapidation
+                                # construction du comentaire_element
+                                commentaire_soin += f"\nVous infligez {degat_lapidation} points de vie supplémentaire par lapidation !"
+                                if self.modele.eboulis:
+                                    commentaire_element += self.AppliqueTalentEboulis(degat_lapidation)
+                                if self.modele.fracturation:
+                                    commentaire_element += self.AppliqueTalentFracturation()
+                    elif "Utilise Foudre Basique" in self.modele.player_tags:
+                        if nombre_aleatoire_basique <= 7:
+                            self.modele.player_tags.remove("Utilise Foudre Basique")
+                            if self.modele.stigma_monstre_positif == "Hardi":
+                                commentaire_soin += f"\nL'ennemi résiste a la paralysie !"
+                            else:
+                                self.modele.monstre_est_paralyse = True
+                                self.modele.monstre_passe_son_tour = True
+                                nombre_tour_para = 2 + self.modele.TOURBONUSENNEMIENPARALYSIE
+                                self.modele.monstre_est_paralyse_nombre_tour += (
+                                    nombre_tour_para
+                                )
+                                commentaire_soin += f"\nVous paralysez l'ennemi pendant {nombre_tour_para} tours !"
+                    elif "Utilise Sang Basique" in self.modele.player_tags:
+                        self.modele.player_tags.remove("Utilise Sang Basique")
+                        if nombre_aleatoire_basique <= 15:
+                            if ("Voluntad U Kiikel") in self.modele.monstre_tags:
+                                commentaire_soin += f"\nVoluntad U Kiikel, l'esprit de sang, absorbe le drain de vie infligé à {self.modele.monstre_nom} !"
+                            else:
+                                # calcul de la saignee
+                                pourcentage_saignee = 3
+                                pourcentage_saignee += self.modele.DEGATSAIGNEE
+                                degat_saignee = round(
+                                    (pourcentage_saignee / 100)
+                                    * self.modele.monstre_points_de_vie_max
+                                )
+                                degat_saignee = self.AppliqueLimitationSaignee(degat_saignee)
+                                # application de la saignee
+                                self.modele.monstre_points_de_vie -= degat_saignee
+                                soin_saignee = degat_saignee
+                                soin_saignee += round(
+                                    (self.modele.SOINSSAIGNEE / 100) * degat_saignee
+                                )
+                                self.modele.points_de_vie += soin_saignee
+                                self.EquilibragePointsDeVieEtManaEtEndurance()
+                                commentaire_soin += f"\nVous drainez {degat_saignee} points de vie a l'adversaire, et en récuperez {soin_saignee} !"
+                                if self.modele.anemie:
+                                    commentaire_soin += self.AppliqueTalentAnemie()
+                                if self.modele.baron_rouge:
+                                    commentaire_soin += self.AppliqueTalentBaronRouge()
+                                if self.modele.anticoagulants:
+                                    degat_de_saignement = 20
+                                    self.modele.monstre_points_de_vie -= degat_de_saignement
+                                    commentaire_soin += f"\nVous infligez {degat_de_saignement} points de vie a l'adversaire par saignement !"
                     self.vue.AfficheSortDeSoin(commentaire_sort, commentaire_description_du_sort, commentaire_soin)
                 elif action == "Rafale":
                     commentaire = ("Vous invoquez des vents venus d'autres mondes pour assister votre"
@@ -5814,7 +7073,7 @@ class Control:
                                      "\nVous perdez 3 points de vie max et 3 points de mana max. Vous ne vous sentez pas bien.")
                     self.modele.points_de_vie_max -= 3
                     self.modele.points_de_mana_max -= 3
-                    self.EquilibragePointsDeVieEtMana()
+                    self.EquilibragePointsDeVieEtManaEtEndurance()
                     self.modele.monstre_est_paralyse = True
                     self.modele.monstre_est_paralyse_nombre_tour += 4
                     self.vue.AfficheLiberationFoudre(commentaire, commentaire_2)
@@ -5846,7 +7105,7 @@ class Control:
                                      "entierement compatible avec la votre. Vous attrapez le Mal Jaune et devenez muet pendant 5 tours.")
                     self.modele.points_de_vie += degat
                     self.modele.monstre_points_de_vie -= degat
-                    self.EquilibragePointsDeVieEtMana()
+                    self.EquilibragePointsDeVieEtManaEtEndurance()
                     self.modele.est_maudit_par_le_gold = True
                     self.modele.est_maudit_par_le_gold_nombre_tour += 6
                     self.modele.est_maudit_par_les_sorts = True
@@ -5962,7 +7221,7 @@ class Control:
             if "Ecaille d'Ouroboros" in self.modele.liste_dartefact_optionels:
                 commentaire = "l'Ecaille d'Ouroboros réagit a votre sort, et vous reprenez 2 points de vie !"
                 self.modele.points_de_vie += 2
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 self.vue.AfficheOuroboros(commentaire)
         else:
             # affiche que laction s'est pas passée, et pourquoi
@@ -5972,7 +7231,7 @@ class Control:
         soin_mana = round(self.modele.points_de_vie_max*0.03)
         self.RecouvrementDeMana(soin_mana)
         commentaire = f"Les élements dans votre âme sont en harmonie, et vous regagnez {soin_mana} points de mana !"
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheBenedictionMana(commentaire)
 
     def UseItem(self, nom_de_litem):
@@ -5982,6 +7241,14 @@ class Control:
                 self.CheckSiItemPossible(nom_de_litem)
             )
         if action_est_possible:
+            self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Items", self.modele.monstre_nom)
+            if self.modele.mauvais_tachyon:
+                self.ChangeChargeMauvaisTachyon("item")
+            if self.modele.bon_tachyon:
+                self.ChangeChargeBonTachyon("item")
+            if self.modele.stigma_joueur_negatif == "Trouble Obsessionnel Compulsif":
+                self.EffetStigmaTOC()
+            self.sound_of_action = "ITEM"
             if "Force et Honneur" in self.Player.quete :
                 self.Player.quete = "Force et Honneur [Echec]"
             # enleve 1 au nombre d'item
@@ -5999,6 +7266,7 @@ class Control:
                     if soin < 8:
                         soin = 8
                     soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
+                    soin += self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Tisane d'Ecorce"]
                     commentaire_item = f"Vous reprenez {soin} pv pendant {nombre_tour} tours !"
                 elif nom_de_litem == "Fruit Jindagee":
                     self.modele.utilise_fruit_jindagee = True
@@ -6010,6 +7278,7 @@ class Control:
                     if soin < 13:
                         soin = 13
                     soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
+                    soin += self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Tisane d'Ecorce"]
                     commentaire_item = f"Vous reprenez {soin} pv pendant {nombre_tour} tours !"
             elif nom_de_litem in ["Feuille Aatma", "Fruit Aatma"]:
                 if nom_de_litem == "Feuille Aatma":
@@ -6022,6 +7291,7 @@ class Control:
                     if soin < 8:
                         soin = 8
                     soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
+                    soin += self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Tisane de Racine"]
                     commentaire_item = f"Vous reprenez {soin} pm pendant {nombre_tour} tours !"
                 elif nom_de_litem == "Fruit Aatma":
                     self.modele.utilise_fruit_aatma = True
@@ -6033,6 +7303,7 @@ class Control:
                     if soin < 13:
                         soin = 13
                     soin += round((self.modele.SUPPORTBONUSITEM / 100) * soin)
+                    soin += self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Tisane de Racine"]
                     commentaire_item = f"Vous reprenez {soin} pm pendant {nombre_tour} tours !"
             elif nom_de_litem in ["Crystal Elémentaire"]:
                 element_aleatoire = random.randint(1, 4)
@@ -6107,10 +7378,10 @@ class Control:
                     soin = round(self.modele.points_de_vie_max*0.3)
                     if soin < 39:
                         soin = 39
-                soin = self.AppliqueSupportBonusItem(soin)
+                soin = self.AppliqueSupportBonusItem(soin, "vie")
                 self.modele.points_de_vie += soin
                 commentaire_item = f"Vous appliquez le remède sur vos blessures et regagnez {soin} points de vie !"
-                self.EquilibragePointsDeVieEtMana
+                self.EquilibragePointsDeVieEtManaEtEndurance
             elif nom_de_litem in ["Pillule", "Pillule Superieure", "Pillule Divine"]:
                 if nom_de_litem == "Pillule":
                     soin = round(self.modele.points_de_mana_max*0.1)
@@ -6124,10 +7395,10 @@ class Control:
                     soin = round(self.modele.points_de_mana_max*0.3)
                     if soin < 39:
                         soin = 39
-                soin = self.AppliqueSupportBonusItem(soin)
+                soin = self.AppliqueSupportBonusItem(soin, "mana")
                 self.RecouvrementDeMana(soin)
                 commentaire_item = f"Vous avalez la pillule et regagnez {soin} points de mana !"
-                self.EquilibragePointsDeVieEtMana
+                self.EquilibragePointsDeVieEtManaEtEndurance
             elif nom_de_litem in ["Fléchette Rouge", "Fleche Rouge", "Fléchette Bleue", "Fleche Bleue"]:
                 commentaire_item = "Vous lancez l'objet, qui vient se planter dans le torse du monstre."
                 if nom_de_litem == "Fléchette Rouge":
@@ -6177,7 +7448,7 @@ class Control:
                 elif nom_de_litem == "Gourde de Poison":
                     self.modele.monstre_est_empoisonne_degat = 5
                     self.modele.monstre_est_empoisonne_nombre_tour = 6
-                    commentaire_item = "Vous jetez la fiole sur L'ennemi.\nLe poison rentre dans sonn systeme et il devient gravement empoisonné pendant 5 tours !"
+                    commentaire_item = "Vous jetez la fiole sur L'ennemi.\nLe poison rentre dans son systeme et il devient gravement empoisonné pendant 5 tours !"
             elif nom_de_litem in ["Sève d'Absolution", "Larme d'Absolution", "Soluté d'Absolution"]:
                 if not self.modele.monstre_EstUnBoss:
                     commentaire_item = "Vous répandez le contenu de l'objet sur le corps de l'ennemi...mais rien ne se passe."
@@ -6240,7 +7511,7 @@ class Control:
                 self.modele.points_de_mana_max += gain_mana
                 self.RecouvrementDeMana(gain_mana)
                 self.modele.gain_mana_mutagene = gain_mana
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 commentaire_item += f"\nVous gagnez {gain_mana} pm max et perdez {perd_vie} pv max pendant toute la durée du combat !"
             elif nom_de_litem in ["Mutagène Rouge", "Grand Mutagène Rouge"]:
                 if nom_de_litem == "Mutagène Rouge":
@@ -6264,7 +7535,7 @@ class Control:
                 self.modele.gain_vie_mutagene = gain_vie
                 self.modele.points_de_mana_max -= perd_mana
                 self.modele.perd_mana_mutagene = perd_mana
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 commentaire_item += f"\nVous perdez {perd_mana} pm max et gagnez {gain_vie} pv max pendant toute la durée du combat !"
             elif nom_de_litem in ["Mutagène Vert", "Grand Mutagène Vert"]:
                 if nom_de_litem == "Mutagène Vert":
@@ -6304,7 +7575,7 @@ class Control:
                 self.modele.points_de_vie += gain_vie
                 self.modele.points_de_mana_max += gain_mana
                 self.RecouvrementDeMana(gain_mana)
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 commentaire_item += f"\nVous gagnez {gain_mana} pm max, {gain_critique} pourcent de faire un coup critique et {gain_vie} pv max pendant toute la durée du combat !"
             elif nom_de_litem in ["Mutagène Hérétique", "Mutagène Fanatique"]:
                 if nom_de_litem == "Mutagène Hérétique":
@@ -6317,7 +7588,7 @@ class Control:
                     self.modele.points_de_vie_max += gain_vie
                     self.modele.points_de_vie += gain_vie
                     self.modele.gain_vie_mutagene = gain_vie
-                    self.EquilibragePointsDeVieEtMana()
+                    self.EquilibragePointsDeVieEtManaEtEndurance()
                     commentaire_item += f"\nVous gagnez {gain_vie} points de vie max pendant toute la durée du combat, mais ne pouvez plus faire de coups critiques !"
                 elif nom_de_litem == "Mutagène Fanatique":
                     commentaire_item = ("Vous vous injectez une substance ressemblant à un oeuf bleu en décomposition."
@@ -6330,9 +7601,9 @@ class Control:
                     self.modele.points_de_mana_max += gain_mana
                     self.RecouvrementDeMana(gain_mana)
                     self.modele.gain_mana_mutagene = gain_mana
-                    self.EquilibragePointsDeVieEtMana()
+                    self.EquilibragePointsDeVieEtManaEtEndurance()
                     commentaire_item += f"\nVous gagnez {gain_mana} points de mana max pendant toute la durée du combat, mais ne pouvez plus faire de coups critiques !"
-            self.vue.AfficheUtilisationItem(commentaire, commentaire_item)
+            self.vue.AfficheUtilisationItem(commentaire, commentaire_item, self.sound_of_action)
             self.modele.type_de_derniere_action_utilisee = "Items"
             self.modele.derniere_action_utilisee = nom_de_litem
         else:
@@ -6678,8 +7949,10 @@ class Control:
                 liste_symbole.append("Sept")
             self.vue.AfficheRouletteBanditManchot(commentaire)
         if liste_symbole[0] == liste_symbole[1] == liste_symbole[2]: 
-            commentaire = "\nJACKPOT !\nTout les symboles sont les mêmes !\nVous gagnez 777 golds !"
-            self.modele.nombre_de_gold += 777
+            gain = 777
+            gain += round(gain * (self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Noyau d'Aurelionite"] / 100 ))
+            self.Player.nombre_de_gold += gain
+            commentaire = f"\nJACKPOT !\nTout les symboles sont les mêmes !\nVous gagnez {gain} golds !"
             self.vue.AfficheBanditManchot(commentaire)
         else:
             commentaire = "\nVoici les résultats :"
@@ -6736,7 +8009,7 @@ class Control:
         commentaire = "L'ennemi joue un son lent et discordant.\nVotre âme est en completement chamboulée.\nOn dirait presque...\n...de la k-pop ?"
         mana_perdu = round(self.modele.points_de_mana_max * 0.2)
         self.modele.points_de_mana -= mana_perdu
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         commentaire_2 = f"Vous perdez {mana_perdu} points de mana !"
         self.vue.SonLent(commentaire, commentaire_2)
 
@@ -6759,7 +8032,7 @@ class Control:
         drain = round(self.modele.points_de_vie_max *0.05)
         drain = self.EnleveVieAuJoueur(drain)
         self.modele.monstre_points_de_vie += drain
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.CheckePuisAppliqueTransmutation(drain)
         commentaire_3 = (f"Au final, vous vous faites drainer {drain} points de vie. De plus, vous êtes gelé et brulé pendant 2 tours.")
         self.vue.AfficheFinCatastrophe(commentaire, commentaire_2, commentaire_3)
@@ -6879,7 +8152,7 @@ class Control:
         saignee = self.EnleveVieAuJoueur(saignee)
         self.CheckePuisAppliqueTransmutation(saignee)
         self.modele.monstre_points_de_vie_max += saignee
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         commentaire_effet = f"Vous vous faites drainer {saignee} points de vie !"
         self.vue.AfficheTempeteOuVacarme(commentaire, commentaire_effet)
         nombre_aleatoire = random.randint(0, 100)
@@ -6909,7 +8182,7 @@ class Control:
         commentaire = "L'ennemi produit un vacarme strident qui reste trop longtemps sur les même notes ! C'est pire que le crissement d'une craie sur un tableau !"
         degat = round(self.modele.points_de_mana_max * 0.2)
         self.modele.points_de_mana -= degat
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         commentaire_effet = f"Le son bouleverse jusqu'à votre âme, et vous fait perdre {degat} points de mana !"
         self.vue.AfficheTempeteOuVacarme(commentaire, commentaire_effet)
         nombre_aleatoire = random.randint(0, 100)
@@ -6964,7 +8237,7 @@ class Control:
             soin_monstre = round(self.modele.monstre_points_de_vie_max * (pourcentage/100))
             self.modele.points_de_vie += soin_joueur
             self.modele.monstre_points_de_vie += soin_monstre
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheEveilDeRunes(commentaire)
 
     def Lamentations(self):
@@ -7128,7 +8401,7 @@ class Control:
     def MagieAbyssale(self):
         commentaire = ("L'ennemi invoque la puissance d'entitées inconcevables, en plein sommeil, bercées par les clapotis du sang"
                        " sur la neige et les flammes de brasiers sépulcraux. Leurs berceaux de pus et de logique se balancant au grès d'un vent fantôme.")
-        chance_de_toucher = 85
+        chance_de_toucher = 55
         chance_de_toucher -= self.modele.CHANCEBONUSESQUIVE
         nombre_aleatoire = random.randint(0, 100)
         self.vue.AfficheDebutMagieNoire(commentaire)
@@ -7136,9 +8409,9 @@ class Control:
             commentaire = ("Vous sentez votre esprit fondre, se reformer en un vaisseau pouvant accueillir la conscience de ces créateurs"
                            " venant de temps immémoriels. L'horizon se transforme en un enchainement de lignes oranges, bleues, jaunes, définissant avec"
                            " grande précision votre monde et les évènements qui s'y produisent...\n...et c'est si be-[ERREUR: CONNECTION AVEC HOTE EN DANGER]")
-            mana_perdu = round(self.modele.points_de_mana_max * 0.2)
+            mana_perdu = round(self.modele.points_de_mana_max * 0.3)
             self.modele.points_de_mana -= mana_perdu
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire_effet = ("[NETTOYAGE DU CACHE EN COURS...]\n[NETTOYAGE TERMINE]\n \n"
                                  "[RECONNECTION EN COURS..]\n \n \n \nVous ouvrez les yeux et regardez l'ennemi surpris.\n"
                                  f"Attendez...Tour [{self.modele.nombre_de_tours}] ? Ca n'est pas possible... vous etiez"
@@ -7176,14 +8449,14 @@ class Control:
             self.CheckePuisAppliqueTransmutation(vie_perdue)
             mana_perdu = round(self.modele.points_de_mana_max*0.2)
             self.modele.points_de_mana -= mana_perdu
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire_effet += (f"\nVous perdez {vie_perdue} points de vie a cause de l'impact,"
                                  f" et vous perdez {mana_perdu} point de mana car votre âme "
                                  "souffre de la chaleur de ce feu mysterieux !")
         else:
             mana_gagne = round(self.modele.points_de_mana_max*0.2)
             self.RecouvrementDeMana(mana_gagne)
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire_effet = ("...l'ennemi sert le poing.\nLe mana accumulé n'a alors plus de sortie possible et se répend dans la salle.\nVous voyez"
                                  " l'ennemi regarder avec confusion la paume de sa main, puis se plaindre de la"
                                  " trahison d'une personne que vous ne voyez pas.\nCepandant, le mana dans la salle vous permet de recharger un peu vos propres réserves.")
@@ -7435,13 +8708,13 @@ class Control:
             saignee = round(self.modele.points_de_vie_max * 0.2)
             saignee = self.EnleveVieAuJoueur(saignee)
             self.modele.monstre_points_de_vie += saignee
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = ("Votre sang sort par vos narines, et forme une boule qui est aussitôt absorbée par l'ennemi."
                            f"\nVous vous faites drainer {saignee} points de vie !")
         elif choix == 2:
             mana_perdu = round(self.modele.points_de_mana_max * 0.25)
             self.modele.points_de_mana -= mana_perdu
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = ("Votre esprit se relache au dela de ce qui est possible, et vous perdez le controle sur votre réserve de mana."
                            f"\nVous perdez {mana_perdu} points de mana !")
         elif choix == 3:
@@ -7474,6 +8747,26 @@ class Control:
                 self.modele.taux_de_sort_critique = 0
         self.vue.AfficheTournicotez(commentaire)
 
+    def TousItemsVides(self):
+        for val in self.modele.items.values():
+            if val != 0:
+                return False  
+        return True  
+
+    def ListeItemsVides(self):
+        liste_vides = []
+        for cle, val in self.modele.items.items():
+            if val == 0:
+                liste_vides.append(cle) 
+        return liste_vides
+
+    def ListeItemsPossedes(self):
+        liste_possedes = []
+        for cle, val in self.modele.items.items():
+            if val > 0:
+                liste_possedes.append(cle) 
+        return liste_possedes
+
     def TomeDeSalomon(self):
         commentaire = "L'ennemi ouvre une réplique de l'Ars Goetia !\nUne partie de votre force se retrouve scellée..."
         self.vue.AfficheTomeDeSalomon(commentaire)
@@ -7481,7 +8774,7 @@ class Control:
         if nombre_aleatoire <= 6:
             mana_perdu = round(self.modele.points_de_mana_max*0.2)
             self.modele.points_de_mana -= mana_perdu
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = f"Votre mana est scellé ! Vous perdez {mana_perdu} points de mana !"
         if nombre_aleatoire <= 5:
             self.modele.est_maudit_par_les_items = True
@@ -7730,7 +9023,7 @@ class Control:
                             degat_saignee = self.EnleveVieAuJoueur(degat_saignee)
                             soin_saignee = degat_saignee
                             self.modele.monstre_points_de_vie += soin_saignee
-                            self.EquilibragePointsDeVieEtMana()
+                            self.EquilibragePointsDeVieEtManaEtEndurance()
                             commentaire_element = f"\nL'ennemi vous draine {degat_saignee} points de vie , et en récupere {soin_saignee} !"
                         elif self.modele.monstre_a_utilise_terre_ce_tour:
                             # calcul de lapidation
@@ -7769,7 +9062,7 @@ class Control:
                     if soin_applique < soin_minimum:
                         soin_applique = soin_minimum
                     self.modele.monstre_points_de_vie += soin_applique
-                    self.EquilibragePointsDeVieEtMana
+                    self.EquilibragePointsDeVieEtManaEtEndurance
                     #construire message a afficher
                     commentaire_degat = f"L'ennemi récupère {soin_applique} points de vie !"
                     #afficher resultat
@@ -7909,7 +9202,7 @@ class Control:
             soin += random.randint(1, 25)
         commentaire_soin = (f"Des méchanismes s'activent en lui, et il reprend {soin} points de vie !")
         self.modele.monstre_points_de_vie += soin
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheSystemeSupport(commentaire, commentaire_soin)
 
     def FlashBang(self):
@@ -8017,7 +9310,7 @@ class Control:
         if nombre_aleatoire < 55:
             gain_de_vie = round(self.modele.monstre_points_de_vie_max*0.2)
             self.modele.monstre_points_de_vie += gain_de_vie
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire_effet += f"\n     ...il reprend {gain_de_vie} points de vie !"
         if commentaire_effet == "Une aura bleue l'entoure, et...":
             commentaire_effet = "Mais rien ne se passe !"
@@ -8103,7 +9396,7 @@ class Control:
                 commentaire_reussite = f"{nombre_mana_perdu} boules unitaires de mana traversent votre torse pour venir se coller à l'aimant.\n \nCharmant."
             else:
                 commentaire_reussite = ("Vous sentez votre mana s'agiter dans votre réserve et sortez calmement un plus gros aimant pour le maintenir en place.\n \nPourquoi pas.")
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
         else:
             commentaire_reussite = ("Vous regardez l'ennemi avec le sourire satisfait et le haussement de sourcil rapide de celui qui à tout"
                                     " dépensé dans des sorts ratés et n'a plus de mana a se faire voler.\nVous vous sentez fier, même si vous ne le devriez pas.\n \nEn rétaliation, il "
@@ -8130,7 +9423,7 @@ class Control:
             self.modele.points_de_mana -= points_vie_mana_perdu
             points_vie_mana_perdu = self.EnleveVieAuJoueur(points_vie_mana_perdu)
             commentaire = f"{points_vie_mana_perdu} points de vie et de mana sont aspirés par la bouche béante !"
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             self.vue.AfficheAspiration(commentaire)
         if nombre_aleatoire <= 6:
             points_vie_mana_max_perdu = 1
@@ -8182,7 +9475,7 @@ class Control:
             self.CheckePuisAppliqueTransmutation(degat)
             mana_perdu = round(self.modele.points_de_mana_max*0.2)
             self.modele.points_de_mana -= mana_perdu
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             nombre_tour = 4
             
             commentaire_effet = ("Ce dernier carbonise la peau de votre thorax et fait bruler le mana dans votre réserve."
@@ -8254,7 +9547,7 @@ class Control:
                 self.modele.nombre_de_gold -= 5
                 vie_reprise = round(self.modele.monstre_points_de_vie_max*0.2)
                 self.modele.monstre_points_de_vie += vie_reprise
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 commentaire_mise = f"Et a cause de votre mise, l'ennemi regagne {vie_reprise} points de vie !"
             elif choix_mise == 3:
                 self.modele.nombre_de_gold -= 10
@@ -8287,7 +9580,7 @@ class Control:
                 self.modele.nombre_de_gold -= 5
                 vie_reprise = round(self.modele.points_de_vie_max*0.2)
                 self.modele.points_de_vie += vie_reprise
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 commentaire_mise = f"Et grâce à votre mise, vous regagnez {vie_reprise} points de vie !"
             elif choix_mise == 3:
                 self.modele.nombre_de_gold -= 10
@@ -8340,7 +9633,7 @@ class Control:
             pourcentage_aleatoire = random.randint(1,3)
             mana_perdu = round(self.modele.points_de_mana_max*(pourcentage_aleatoire/10))
             self.modele.points_de_mana -= mana_perdu
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire_reussite = ("Votre regard est mysterieusement attiré par la lumière étrange qui baigne maintenant la salle."
                                     "\nEn son sein, vous pouvez apercevoir un royaume au bord du déclin,"
                                     " et une femme somptueusement habillée regarder l'horizon d'un air mélancolique."
@@ -8421,7 +9714,7 @@ class Control:
             saignee = round(self.modele.points_de_vie_max * 0.25)
             saignee = self.EnleveVieAuJoueur(saignee)
             self.modele.monstre_points_de_vie += saignee
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire_item = f"Le crystal prend une teinte violette avant de se briser. Vous vous faites drainer {saignee} points de vie !"
         self.vue.AfficheCrystalElementaireDore(commentaire, commentaire_item)
 
@@ -8497,6 +9790,7 @@ class Control:
                 commentaire_element = ""
                 commentaire_a_afficher = caracteristique_du_techniques[7]
                 degat += degat_de_base
+
                 # ca fait un critique ?
                 if nombre_aleatoire < pourcentage_de_critique:
                     commentaire_a_afficher = caracteristique_du_techniques[8]
@@ -8583,7 +9877,7 @@ class Control:
                         degat_saignee = self.EnleveVieAuJoueur(degat_saignee)
                         soin_saignee = degat_saignee
                         self.modele.monstre_points_de_vie += soin_saignee
-                        self.EquilibragePointsDeVieEtMana()
+                        self.EquilibragePointsDeVieEtManaEtEndurance()
                         commentaire_element = f"\nL'ennemi vous draine {degat_saignee} points de vie , et en récupere {soin_saignee} !"
                     elif self.modele.a_utilise_terre_ce_tour:
                         # calcul de lapidation
@@ -8628,7 +9922,7 @@ class Control:
                     if soin_applique < soin_minimum:
                         soin_applique = soin_minimum
                     self.modele.monstre_points_de_vie += soin_applique
-                    self.EquilibragePointsDeVieEtMana
+                    self.EquilibragePointsDeVieEtManaEtEndurance
                     #construire message a afficher
                     commentaire_degat = f"L'ennemi récupère {soin_applique} points de vie !"
                 else :
@@ -8659,6 +9953,7 @@ class Control:
                     commentaire_a_afficher = caracteristique_du_techniques[5]
                     #appliquation des dégats:
                     degat = caracteristique_du_techniques[0]
+                    degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat)
                     degat = self.EnleveVieAuJoueur(degat)
                     self.CheckePuisAppliqueTransmutation(degat)
                     commentaire_degat = f"Vous perdez {degat} points de vie !"
@@ -8735,14 +10030,14 @@ class Control:
     def AppliqueTalentPyrophile(self):
         mana_regagne = round(self.modele.points_de_mana_max * 0.1)
         self.RecouvrementDeMana(mana_regagne)
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         commentaire = f"Le feu vous accueille comme un vieil ami et vous en tirez votre force.\nVous regagnez {mana_regagne} points de mana !"
         self.vue.AfficheTalentPyrophile(commentaire)
     
     def AppliqueTalentPyrosorcier(self):
         mana_regagne = round(self.modele.points_de_mana_max * 0.05)
         self.RecouvrementDeMana(mana_regagne)
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         commentaire = f"Vous tirez votre force de tout les feux, même de celui qui ravage votre ennemi.\nVous regagnez {mana_regagne} points de mana !"
         self.vue.AfficheTalentPyrosorcier(commentaire)
 
@@ -8756,7 +10051,7 @@ class Control:
         # calcul et application du soin
         vie_regagne = round(degat * 0.5)
         self.modele.points_de_vie += vie_regagne
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         commentaire = f"Les flammes sont sous votre commandement absolu, et vous ramène la vitalitée de celles et ceux qu'elles consumment.\nVous regagnez {vie_regagne} points de vie !"
         self.vue.AfficheTalentPyromage(commentaire)
 
@@ -8788,7 +10083,7 @@ class Control:
         commentaire = ("\nLes glaces sont sous votre commandement absolu, et retiennent une partie de la vitalitée perdue par l'ennemi en la gelant."
                        "\nElles vous la ramène ensuite sous forme de soin, au dégel de l'ennemi."
                        f"\nVous reprenez {vie_reprise} points de vie !")
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         self.vue.AfficheTalentCycleGlaciaire(commentaire)
 
     def AppliqueTalentFracturation(self):
@@ -8809,9 +10104,13 @@ class Control:
             self.modele.monstre_points_de_vie -= degat
         return commentaire_supplementaire
     
-    def AppliqueSupportBonusItem(self, points_de_soin_ou_mana):
+    def AppliqueSupportBonusItem(self, points_de_soin_ou_mana, type_de_soin):
         pourcentage = self.modele.SUPPORTBONUSITEM
         points_de_soin_ou_mana += round((pourcentage / 100) * points_de_soin_ou_mana)
+        if type_de_soin == "vie":
+            points_de_soin_ou_mana += self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Tisane d'Ecorce"]
+        elif type_de_soin == "mana":
+            points_de_soin_ou_mana += self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Tisane de Racine"]
         return points_de_soin_ou_mana
     
     def AppliqueTalentOeuilMagique(self):
@@ -8860,7 +10159,7 @@ class Control:
                 soin_saignee = degat_saignee
                 soin_saignee = round((self.modele.SOINSSAIGNEE / 100) * soin_saignee)
                 self.modele.points_de_vie += soin_saignee
-                self.EquilibragePointsDeVieEtMana()
+                self.EquilibragePointsDeVieEtManaEtEndurance()
                 commentaire_effet = f"L'ennemi se fait drainer {degat_saignee} points de vie et vous en regagnez {soin_saignee} !"
                 if self.modele.anemie:
                     commentaire_effet += self.AppliqueTalentAnemie()
@@ -8895,7 +10194,7 @@ class Control:
         if nombre_aleatoire <= 25:
             mana_recupere = round(self.modele.points_de_mana_max * 0.15)
             self.modele.points_de_mana_max += mana_recupere
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire_supplementaire = ("\nVous absorbez le mana contenu dans le sang drainé de l'ennemi."
                                           f"\nIVous récuperez {mana_recupere} points de mana !")
         return commentaire_supplementaire
@@ -8909,7 +10208,7 @@ class Control:
             drain = round(self.modele.monstre_points_de_vie_max * 0.25)
             self.modele.monstre_points_de_vie -= drain
             self.modele.points_de_vie += drain
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire += f"\nLa vitalité de l'ennemi répond a votre appel et vous lui drainez {drain} points de vie !"
         self.vue.AfficheTalentConditionLimite(commentaire)
     
@@ -8946,7 +10245,7 @@ class Control:
         if mana_regagne <= 0:
             mana_regagne = 1
         self.RecouvrementDeMana(mana_regagne)
-        self.EquilibragePointsDeVieEtMana()
+        self.EquilibragePointsDeVieEtManaEtEndurance()
         commentaire = ("Vous commandez au mana perdu de venir"
                        " augmenter votre puissance."
                        f"\nVous regagnez {mana_regagne} points de mana !")
@@ -8957,7 +10256,7 @@ class Control:
         if nombre_aleatoire in [1, 2]:
             soin = round(self.modele.points_de_vie_max * 0.2)
             self.modele.points_de_vie += soin
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = ("Votre corps est habitué à se regénérer grâce à de nombreuses"
                            " sources, et déclenche un processus de réjuvenation partielle"
                            f" par pur hasard.\nVous regagnez {soin} points de vie !")
@@ -8975,24 +10274,32 @@ class Control:
 
     def SeDefendre(self):
         self.RecupEndurance(7)
+        if self.modele.mauvais_tachyon:
+            self.ChangeChargeMauvaisTachyon("defense")
+        if self.modele.bon_tachyon:
+            self.ChangeChargeBonTachyon("defense")
         self.modele.se_defend = True
         commentaire = ("Vous ramenez vos bras a votre torse et vous préparez a recevoir un coup.")
         if self.modele.patience:
             soin = round(self.modele.points_de_vie_max * 0.05)
             self.modele.points_de_vie += soin
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire += f"\nLa Terre récompense votre patience. Vous reprenez {soin} points de vie !"
         self.vue.AfficheSeDefendre(commentaire)
 
     
     def PasserSonTour(self):
         self.RecupEndurance(14)
+        if self.modele.mauvais_tachyon:
+            self.ChangeChargeMauvaisTachyon("passe tour")
+        if self.modele.bon_tachyon:
+            self.ChangeChargeBonTachyon("passe tour")
         personnage = "Vous passez votre"
         commentaire = "...tout simplement."
         if self.modele.patience:
             soin = round(self.modele.points_de_vie_max * 0.1)
             self.modele.points_de_vie += soin
-            self.EquilibragePointsDeVieEtMana()
+            self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = f"...et reprenez {soin} points de vie."
         if "Chapelet de Moine" in self.modele.liste_dartefact_optionels:
             commentaire += "\nDe plus, votre chapelet se met a briller d'un feu sacré, et vous devenez [Béni] pendant 1 tour !"
@@ -9020,7 +10327,7 @@ class Control:
                 reduction_de_degat = 0.4
             degat = round ((1 - reduction_de_degat) * degat)
         degat = self.SiZeroRameneAUn(degat)
-        if self.modele.metamorphose and (self.modele.nombre_de_tours in [1, 2]):
+        if self.modele.metamorphose:
             self.vue.AfficheTalentMetamorphose()
         else:
             self.modele.points_de_vie -= degat

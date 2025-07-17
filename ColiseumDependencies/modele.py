@@ -48,6 +48,8 @@ class Model:
             self.numero_de_letage = Player.numero_de_letage
             if "Monstre De Niveau Superieur" in Player.player_tags:
                 self.numero_de_letage += 1
+            elif "Monstre Dopé" in Player.player_tags:
+                self.numero_de_letage += 2
             self.est_une_mimique = Player.affronte_une_mimique
             self.monstre_EstUnBoss = Player.affronte_un_boss
             self.commence_le_combat_confus = Player.commence_le_combat_confus
@@ -60,12 +62,31 @@ class Model:
             self.possede_une_gemme_magie = Player.gemme_de_mana  # rend 20% de mana a la fin d'un combat
             self.monstre_de_lobelisque = Player.affronte_obelisque
             self.boss_histoire = Player.affronte_fin_histoire
+            self.charge_mauvais_tachyon = 0
+            self.mauvais_tachyon = False
+            if Player.malediction == "Chronophage":
+                self.charge_mauvais_tachyon = Player.charge_mauvais_tachyon
+                self.mauvais_tachyon = True
+            self.charge_bon_tachyon = 0
+            self.bon_tachyon = False
+            if Player.benediction == "Accumulateur de Tachyon":
+                self.charge_bon_tachyon = Player.charge_bon_tachyon
+                self.bon_tachyon = True
             if Player.nom_de_letage in ["Jungle Cruelle", "Douves du Pénitent"]:
                 self.etage_alternatif = True
             else:
                 self.etage_alternatif = False
 
         # alteration de letat ou influence d'artefacts
+        self.accumulation_degat_technique = 0
+        self.accumulation_degat_sort = 0 
+        self.accumulation_degat_technique_critique = 0
+        self.accumulation_degat_sort_critique = 0
+        self.accumulation_chance_brulure = 0 
+        self.accumulation_chance_gelure = 0
+        self.accumulation_chance_paralysie = 0
+        self.accumulation_chance_lapider = 0
+        self.accumulation_chance_drainer = 0
         self.sacrifice_actif = False
         self.se_defend = False
         self.nombre_de_tours = 1
@@ -78,6 +99,8 @@ class Model:
         self.utilise_orbe_de_folie_nombre_tour = 0
         self.beni_par_feu_sacre = False
         self.beni_par_feu_sacre_nombre_tour = 0
+        self.miss_hyde_transformation = False
+        self.miss_hyde_transformation_nombre_tour = 0
         self.concentre = False
         self.concentre_nombre_tour = 0
         self.utilise_mirroir_eau = False
@@ -105,7 +128,9 @@ class Model:
             False  # Regarde si le stigma dernier choix a deja prit effet
         )
         self.passe_son_tour = False  # Passe son tour ou non
+        self.tour_passe_car_ramasse_item = 0  # nombre de tour passé a cause de TOC
         self.flemme = False  # savoir si le joueur a la flemme
+        self.fatigue_chronique = False  # savoir si le joueur est fatigué(e)
         self.en_plein_iaido = False  # savoir si le joueur est en plein iaido
         self.en_plein_iaido_nombre_tour = 0
         self.est_maudit_par_la_vie = False  # attaques coutent de la vie
@@ -417,6 +442,7 @@ class Model:
         self.metamorphose = False  # invincible pendant les 2 premiers tours du combat DONE
         if "Metamorphosis" in Player.talents_possedes:
             self.metamorphose = True
+            self.metamorphose_nombre_tour = 2
         self.bougie_magique = (
             False  # ennemi qui se dé-enflamme a 15% chance de se re-enflammer 1 t DONE
         )
@@ -558,6 +584,7 @@ class Model:
 
         self.techniques_de_physique = [
             "Attaque Légère",
+            "Attaque Lourde",
             "Poing Léger", #
             "Poing Renforcé", #
             "Poing Lourd", #
@@ -577,6 +604,7 @@ class Model:
         self.annuaire_de_cout_des_techniques = {
             "Griffes du Démon": 66,
             "Attaque Légère": 5,
+            "Attaque Lourde": 8,
             "Pira": 25,
             "Elektron": 25,
             "Tsumeta-Sa": 25,
@@ -636,6 +664,9 @@ class Model:
             "Attaque Légère": [95, degat_attaque_legere, 30, 4, 0, "Vous frappez l'ennemi avec peu de force, mais beaucoup de précision...", 
                                "...ce qui ne vous empeche pas de rater quand meme.", "..et le faites grimacer de douleur !", 
                                "et le faites reculer de plusieurs pas en arrière !!", 0, 0],
+            "Attaque Lourde": [95, degat_attaque_legere * 2, 35, 7, 0, "Vous frappez l'ennemi avec braucoup de force, mais énormément de précision...", 
+                               "...ce qui ne vous empeche pas de rater quand meme.", "..et lui cassez les cotes !", 
+                               "et lui broyez les os !!", 0, 0],
             "Lance Rapide": [80, 10, 20, 6, 8, 
                              "Vous concentrez de l'énergie dans votre lance et...", 
                              "...donnez un coup dans le vide.", 
@@ -920,6 +951,8 @@ class Model:
         ]
 
         self.sorts_de_physique = [
+            "Tir Arcanique",
+            "Missile Arcanique",
             "Explosion Légère",
             "Explosion Renforcée",
             "Explosion Lourde",
@@ -976,6 +1009,11 @@ class Model:
                               "...mais cela n'impressionne pas l'ennemi.", 
                               "...et faites sortir une boule de mana qui vient s'écraser sur l'ennemi !", 
                               "...en faites sortir une dizaine de petites boules de mana qui viennent projeter l'ennemi en arrière !!", 0, 0],
+            "Missile Arcanique": [95, 18, 30, 8, 0, 
+                              "Vous formez un triangle avec vos doigts...", 
+                              "...mais cela n'impressionne pas l'ennemi.", 
+                              "...et faites sortir une grosse boule de mana à grande vitesse qui vient s'écraser sur l'ennemi !", 
+                              "...en faites sortir une gigantesque boule de mana tourbillonnante qui explose au contact de l'ennemi !!", 0, 0],
             "Faisceau Rapide": [90, 14, 20, 2, 8, "Vous lancez un faisceau d'énergie avec une rapidité fulgurante, illuminant le champ de bataille...",
                               "...mais votre sort est dissipé par l'ennemi, l'énergie se dissipant dans l'air.",
                               "...et votre faisceau frappe l'ennemi avec une précision éclair, infligeant des dégâts rapides !",
@@ -1159,6 +1197,7 @@ class Model:
         }
         self.annuaire_de_cout_des_sorts = {
             "Tir Arcanique": 5,
+            "Missile Arcanique": 8,
             "Faisceau Rapide": 8,
             "Faisceau Statique": 15,
             "Faisceau Electrique": 20,
@@ -1457,7 +1496,7 @@ class Model:
             "Clone d'Obsidienne",
             "Chevalier Pourpre",
             "Roi Amonrê",
-            "Apprenti",
+            "Apprentie",
             "Bouffon",
             "Prince des Voleurs",
             "Roi Déchu",
@@ -1469,7 +1508,7 @@ class Model:
             "Clone d'Obsidienne",
             "Coquille Vide",
             "Roi Amonrê",
-            "Apprenti",
+            "Apprentie",
             "Bouffon",
             "Prince des Voleurs",
             "Roi Déchu",

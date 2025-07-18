@@ -2948,6 +2948,7 @@ class Control:
     def EquilibragePointDeVieMonstrePerduParStigma(self):
         if self.modele.monstre_points_de_vie < 1 and "Super Etoile" not in self.modele.monstre_tags:
             self.modele.monstre_points_de_vie = 1
+            self.vue.AfficheMonstreSurvieStigma()
 
     def EffetStigmaPatchwork(self):
         nombre_aleatoire = random.randint(0, 100)
@@ -4376,7 +4377,9 @@ class Control:
 
     def EffetCanigou(self):
         degat = round(self.modele.monstre_points_de_vie_max * 0.03)
+        print(f"vie monstre av {self.modele.monstre_points_de_vie}")
         self.modele.monstre_points_de_vie -= degat
+        print(f"vie monstre  ap {self.modele.monstre_points_de_vie}")
         self.vue.AfficheCanigou(f"Canigou saute sur l'ennemi et lui arrache une petite partie de son bras .\nIl perd {degat} points de vie !\nCa c'est un bon toutou !")
 
     def EffetGardienDeCorps(self):

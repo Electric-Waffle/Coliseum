@@ -11628,6 +11628,7 @@ class Floor:
                     except Exception as error:
                         WriteErrorInErrorLog(error)
                     Player.commence_le_combat_confus = False
+                    CheckForKIA()
                     PlayMusicDeLetage()
                     print("Vous entendez un crissement irrégulier, et la plaque de pression se retrouve bloquée dans sa position.")
                     print("Vous n'aurez pas a vous soucier de cette salle davantage.")
@@ -15406,7 +15407,7 @@ class Floor:
         
         elif type_douverture == "Don" :
             Player.liste_dartefacts_optionels.append(artefact_in_particular)
-            Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Artefacts", artefact_a_donner)
+            Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Artefacts", artefact_in_particular)
 
 
         else:

@@ -2722,7 +2722,7 @@ BIBLIOTHEQUEFINALE = {
         "Selon l'origine et la signification du nom, la nature de la chose qui recoit le nom, et la relation entre nommeur et nommé, et d'autre facteurs divers, on peut avoir plusieurs effets.",
         "Le premier exemple qui me vient a l'esprit, c'est les démons.\nLeur nom, donné par le roi des enfer en personne, est autant une signification de ce qu'ils représentent, qu'une représentation de ce qu'ils signifient.\nIl leur donne pouvoir et superiorité dans la bouche de Lucifer.",
         "Mais dans celle des mortels, c'est une chaine qui les force a être invoqué, ainsi qu'une barrière de sécurité entre invoqueur et invoqués.",
-        "J'ai passé ma vie a arpenter les différentes légendes et mythes, a suivre des noms qui se transforment d'une langue a une autre, d'un médium d'écriture a un autre, d'une région a une autre, sans véritablement changer de signification, ou en changeant complètement d'idéee véhiculée.\nVoici la somme de mes connaissances:",
+        "J'ai passé ma vie a arpenter les différentes légendes et mythes, a suivre des noms qui se transforment d'une langue a une autre, d'un médium d'écriture a un autre, d'une région a une autre, sans véritablement changer de signification, ou en changeant complètement d'idée véhiculée.\nVoici la somme de mes connaissances:",
         (
             "           - TYPES DE MOTS PUISSANTS (1/2) -"
          "\n\n~Rouge~ : La vie qui revient de 2 fois"
@@ -2879,7 +2879,7 @@ BIBLIOTHEQUEFINALE = {
             "       - TYPES DE POISSONS (2/2) -"
             "\n\nGrand Poisson Rouge, Vert, Bleu, Jaune, ou Blanc : Un petit poisson magique qui est devenu grand, et augmente votre force, magie, endurance, taux d'esquive ou nombre d'âme selon la couleur. Comme sa version plus jeune, vous devenez plus fort en le relachant. Mais a l'instar de sa version plus jeune, vous y gagnez bien plus en le mangeant !"
             "\n\nLutin : Un poisson abobinable en forme d'anneau gravé. Le Lutin s'accroche a un bijou comme un bernard l'hermite s'accroche a un dechet pour en faire une coquille. Quand il est remonté, il répend un phéromone qui le fait paraitre comme étant vraiment précieux, et qui incite le pécheur a mettre l'anneau au doigt.\nUne fois là, il injecte un tranquilisant dans le doigt, puis pond ses oeufs a l'interieur du sang de sa victime. Je vous laisse imaginer la suite. Cepandant, le bijou peut être précieux..."
-            "\n\nPoisson-rêve : Personne ne sait a quoi il ressemble, car personne ne l'a jamais remonté. Il met beaucoup de temps a s'accrocher a un hameçon, se débat férocement pendant très longtemps, et quand vous pensez enfin le remonter au dessus de l'eau, il n'y a rien au bout du fil. Enfin, rien, il y a toujours un objet dont le pécheur a besoin accroché là, comme si le poisson lachait prise a la derniere seconde et se remplacait par quelque chose, par un cadeau du destin. Certains doutent même d'avoir véritablement bataillé avec un poisson, après avoir pris l'objet, d'ou son nom."
+            "\n\nPoisson-rêve : Personne ne sait a quoi il ressemble, car personne ne l'a jamais remonté. Il met beaucoup de temps a s'accrocher a un hameçon, se débat férocement pendant très longtemps, et quand vous pensez enfin le remonter au dessus de l'eau, il n'y a rien au bout du fil. Enfin, rien, il y a toujours un objet dont le pécheur a besoin, accroché là, comme si le poisson lachait prise a la derniere seconde et se remplacait par quelque chose, par un cadeau du destin. Certains doutent même d'avoir véritablement bataillé avec un poisson, après avoir pris l'objet, d'ou son nom."
             "\n\n\n\n*Les poissons sont listés par ordre d'importance, avec les monstres qui mettent au minimum 35 secondes a mordre, et le poisson-rêve au minimum 55 secondes.*\n"
         )
     ],
@@ -5194,6 +5194,8 @@ class TraderUsage:
                 Affichage.EntreePourContinuer()
                 StopAllMusic()
                 time.sleep(5)
+                FloorMaker.StopAllVillageChannels()
+                FloorMaker.InitialisationOfTownVariations()
                 PlayMusicDeLetage()
                 print("*Bonjour !*")
                 Affichage.EntreePourContinuer()
@@ -6921,16 +6923,16 @@ class Affiche:
                 "\n*POUR LES CRIMES SUIVANT CONTRE VOTRE ROI MALGRES SES ANNEES DE BONS ET LOYAUX SERVICES, VOUS VOILA CONDAMNE A LA PEINE DE MORT :*"
                 "\n*TENTATIVE DE TRAHISON, TENTATIVE DE REGICIDE, TENTATIVE DE REBELLION, TENTATIVE DE REVOLUTION,*"
                 "\n*AVOIR CRACHE SUR UN TABLEAU DU ROI, AVOIR EXPRIME DE LA DISSATISFACTION ENVERS LE ROI ACTUEL,*"
-                "\n*AVOIR UN COMPORTEMENT SUSPECT PROCHE DE LA RESIDENCE DU ROI, AVOIR UN COMPORTEMENT SUSPECT PROCHE DE LA CAPITALE DU ROI,"
-                "\n*AVOIR UN COMPORTEMENT SUSPECT DANS LE ROYAUME DIRIGE PAR LE ROI, ET ENCORE 2324 AUTRES INFRACTIONS NON CITEE."
+                "\n*AVOIR UN COMPORTEMENT SUSPECT PROCHE DE LA RESIDENCE DU ROI, AVOIR UN COMPORTEMENT SUSPECT PROCHE DE LA CAPITALE DU ROI,*"
+                "\n*AVOIR UN COMPORTEMENT SUSPECT DANS LE ROYAUME DIRIGE PAR LE ROI, ET ENCORE 2324 AUTRES INFRACTIONS NON CITEE.*"
             )
             liste_commentaire.append(commentaire)
             commentaire = (
-                "*QUESTIONS SOUVENT POSEES :"
+                "*QUESTIONS SOUVENT POSEES :*"
                 "\n* - MAIS JE N'AI JAMAIS FAIT CELA !*"
                 "\n* - CELA DOIT ETRE UNE ERREUR !*"
                 "\n* - COMMENT PEUT ON SORTIR D'ICI ?*"
-                "\n*UNE SEULE REPONSE : UN ROI JUSTE NE PUNIT PAS LES INNOCENTS."
+                "\n*UNE SEULE REPONSE : UN ROI JUSTE NE PUNIT PAS LES INNOCENTS.*"
                 "\n*CONSIDEREZ VOTRE PRESENCE ICI COMME UNE PREUVE IRREFUTABLE DE VOTRE CULPABILITE.*"
                 "\n\n*PROTOCOLE DEXPLIQUATION TERMINE*"
                 "\n*PROTOCOLE DE COMBAT ENCLENCHE*"
@@ -8087,7 +8089,13 @@ class PlayerCaracteristics:
             print(f"Charge du tachyon instable : {Player.charge_mauvais_tachyon}")
         if Player.benediction == "Accumulateur de Tachyon":
             print(f"Charge de l'extracteur de Tachyon : {Player.charge_bon_tachyon}")
-
+        if Player.jetons != 0 :
+            print(f"Jetons Fidélité : {Player.jetons}")
+        if Sove.ModifieTagsDansSove("Checke", "Symbole Vu") :
+            level_de_la_cle =  Sove.ModifieLivraisonDansSove("Nombre", "Clé")
+            level_de_la_carte =  Sove.ModifieLivraisonDansSove("Nombre", "Carte")
+            print(f"\nClé jusqu'à l'étage [{level_de_la_cle + 3}]")
+            print(f"Carte jusqu'à l'étage [{level_de_la_carte + 3}]")
         print(" \n          -={{ Items }}=-"
               "\n1 - Retour"
         )
@@ -10213,6 +10221,10 @@ class Floor:
         time.sleep(0.05)
         print("\n")
         time.sleep(0.05)
+        print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
+        time.sleep(0.05)
+        print("\n")
+        time.sleep(0.05)
         print("\n1 - Gagnez 5 items aléatoires pour seulement 1 Jeton !")
         time.sleep(0.05)
         print("2 - Achetez 1 Redcoin pour un prix misérable de 2 Jetons !")
@@ -10244,6 +10256,8 @@ class Floor:
         print("              Traders Incorporated")
         print("                Fidelity Service")
         print("\n")
+        print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
+        print("\n")
         print("\n1 - Gagnez 5 items aléatoires pour seulement 1 Jeton !")
         print("2 - Achetez 1 Redcoin pour un prix misérable de 2 Jetons !")
         print("3 - Dépensez 3 Jetons et repartez chez vous avec un artefact !")
@@ -10266,6 +10280,8 @@ class Floor:
         print("              Traders Incorporated")
         print("                Fidelity Service")
         print("\n")
+        print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
+        print("\n")
         print("\n1 - Gagnez 5 items aléatoires pour seulement 1 Jeton !")
         print("2 - Achetez 1 Redcoin pour un prix misérable de 2 Jetons !")
         print("3 - Dépensez 3 Jetons et repartez chez vous avec un artefact !")
@@ -10287,6 +10303,8 @@ class Floor:
         print("              Traders Incorporated")
         print("                Fidelity Service")
         print("\n")
+        print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
+        print("\n")
         print("\n1 - Gagnez 5 items aléatoires pour seulement 1 Jeton !")
         print("2 - Achetez 1 Redcoin pour un prix misérable de 2 Jetons !")
         print("3 - Dépensez 3 Jetons et repartez chez vous avec un artefact !")
@@ -10306,6 +10324,8 @@ class Floor:
         print("              Traders Incorporated")
         print("                Fidelity Service")
         print("\n")
+        print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
+        print("\n")
         print("\n1 - Gagnez 5 items aléatoires pour seulement 1 Jeton !")
         print("2 - Achetez 1 Redcoin pour un prix misérable de 2 Jetons !")
         time.sleep(0.05)
@@ -10324,6 +10344,8 @@ class Floor:
         print("              Traders Incorporated")
         print("                Fidelity Service")
         print("\n")
+        print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
+        print("\n")
         print("\n1 - Gagnez 5 items aléatoires pour seulement 1 Jeton !")
         time.sleep(0.05)
         ClearConsole()
@@ -10340,6 +10362,8 @@ class Floor:
         print("")
         print("              Traders Incorporated")
         print("                Fidelity Service")
+        print("\n")
+        print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
         print("\n")
         time.sleep(0.05)
         ClearConsole()
@@ -12605,7 +12629,7 @@ class Floor:
                             liste_technique_disponibles.remove(technique_choisie)
                             liste_technique_nouvel_ordre.append(technique_choisie)
                             if len(liste_technique_disponibles) == 0 :
-                                print("Vous posez Zeroual sur l'enclume et frappez dessus avec un une masse rectangulaire à des points bien spécifiques.")
+                                print("Vous posez Zeroual sur l'enclume et frappez dessus avec une masse rectangulaire à des points bien spécifiques.")
                                 print("L'ordre avec lequel les techniques sont présentées a changé !")
                                 Affichage.EntreePourContinuer()
                                 Player.techniques_possedes = list(liste_technique_nouvel_ordre)
@@ -13207,6 +13231,8 @@ class Floor:
                             print("              Traders Incorporated")
                             print("                Fidelity Service")
                             print("\n")
+                            print(f"Bonjour Trader, nous avons détecté {Player.jetons} jeton en votre possession.")
+                            print("\n")
                             print("\n1 - Gagnez 5 items aléatoires pour seulement 1 Jeton !")
                             print("2 - Achetez 1 Redcoin pour un prix misérable de 2 Jetons !")
                             print("3 - Dépensez 3 Jetons et repartez chez vous avec un artefact !")
@@ -13321,9 +13347,9 @@ class Floor:
                         print("              Traders Incorporated")
                         print("                Fidelity Service")
                         print("\n")
-                        print("\nCher Trader, votre corps est votre plus grand outil pendant vos vente.")
-                        print("Avec son language, vous exhibez des idées qui germent dans les têtes de nos consommateur en incitant a l'achat !")
-                        print("Et avec sa forme, vous pouvez vous conformer aux marchandises que vous vendez, mettant ainsi vos clients dans la confiance.")
+                        print("\nCher Trader, votre corps est votre plus grand outil pendant vos ventes.")
+                        print("Avec son language, vous pouvez planter des idées qui germent dans les têtes de nos consommateurs et les incitent à l'achat.")
+                        print("Avec sa forme, vous pouvez proteger vos marchandises des perfides qui peuplent votre dimension.")
                         input("\nTouchez Entrée pour Continuer ")
                         ClearConsole()
                         print("                       ||")
@@ -14082,7 +14108,7 @@ class Floor:
                             print("Deux points verts apparaissent en face de vous.")
                             time.sleep(3)
                             ClearConsole()
-                            print("Ils vous fixe intensément.")
+                            print("Ils vous fixent intensément.")
                             time.sleep(3)
                             ClearConsole()
                             print("Vous sentez quelque chose de chaud sur votre visage.")
@@ -14276,7 +14302,7 @@ class Floor:
                     else:
                         print(f"{description} [{nom_action_a_evoluer}] devient [{nom_nouvelle_action}] !")
                     Affichage.EntreePourContinuer()
-                    print("Vous laissez la salle de repartez d'ou vous venez.")
+                    print("Vous tournez le dos à l'étrange colline et repartez d'ou vous venez.")
                     Affichage.EntreePourContinuer()
                 elif choix == 2:
                     print("Vous laissez votre regard se perdre dans le faux ciel peint au plafond...et sortez de la salle.")
@@ -17995,7 +18021,7 @@ class Observe:
             Affichage.EntreePourContinuer()
             print("Vous laissez la fontaine vide et retournez sur vos pas.")
             Affichage.EntreePourContinuer()
-        elif Player.points_de_vie == 1 and Player.points_de_mana == 0:
+        elif Player.points_de_vie <= 10 and Player.points_de_mana <= 5:
             StopAllMusic()
             print(
                 "Au détour d'une haie de roses blanches, vous découvrez une magnifique fontaine de marbre...?"
@@ -20687,7 +20713,10 @@ def DoBossFight():
                 WriteErrorInErrorLog(error)
             if "Boss Blessé" in Player.player_tags:
                 Player.player_tags.remove("Boss Blessé")
-            PlayMusicDeLetage()
+                
+            CheckForKIA()
+            if not "Fantome" in Player.player_tags:
+                PlayMusicDeLetage()
     else:
         if Player.nom_de_letage == "Limbes Flétrissants":
             print("Vous cherchez un moyen de descendre , ou d'affronter un boss, mais ne trouvez rien.")
@@ -21120,10 +21149,47 @@ def GoUp():
 def DoBossOrGoDown():
     game_in_session = True
 
+    # arrivage a la fin de l'étage sans clé
+    level_de_la_cle =  Sove.ModifieLivraisonDansSove("Nombre", "Clé")
+    if RegardeSiEtageCompletementObserve(FloorMaker.FloorBlueprint) and (level_de_la_cle+4)==Player.numero_de_letage:
+        print("Vous avez observé chaque salles de l'étage, sans trouver de clé.")
+        Affichage.EntreePourContinuer()
+        print("Vous regardez , impuissant, les horribles grilles de l'arène.")
+        Affichage.EntreePourContinuer()
+        print("I L  N ' Y  A  P L U S  R I E N  A  F A I R E")
+        Affichage.EntreePourContinuer()
+        print("Vous envisagez de rogner le métal, mais celui ci reste stoique face a vos efforts.")
+        Affichage.EntreePourContinuer()
+        print("Vous envisagez de remonter, mais ne retrouvez pas les marches que vous avez emprunté.")
+        Affichage.EntreePourContinuer()
+        print("Vous envisagez de demander de l'aide au marchand, mais celui-ci n'est trouvable nulle part.")
+        Affichage.EntreePourContinuer()
+        print("Vous cherchez a nouveau dans toute les salles de l'étage, mais ces dernieres sont vides.")
+        Affichage.EntreePourContinuer()
+        print("Et alors que vous revenez à l'Arène au centre de l'étage...")
+        Affichage.EntreePourContinuer()
+        print("...vous trouvez un carré de pierre alien, parsemé de trous depuis lesquels vous pouvez aperçevoir le scintillement de pieux de métal.")
+        Affichage.EntreePourContinuer()
+        print("Un simple piège.")
+        Affichage.EntreePourContinuer()
+        print("Une mort rapide.")
+        Affichage.EntreePourContinuer()
+        print("La plus douce pitiée du Coliseum.")
+        Affichage.EntreePourContinuer()
+        print("...")
+        Affichage.EntreePourContinuer()
+        print("...")
+        Affichage.EntreePourContinuer()
+        print("...")
+        Affichage.EntreePourContinuer()
+        print("...vous n'aurez pas saigné bien longtemps.")
+        Affichage.EntreePourContinuer()
+        Affichage.ShowDeath()
+
     if Player.mode_de_jeu == "Ascension":
         GoUp()
 
-    else:
+    elif not "Fantome" in Player.player_tags:
         # combat contre boss
         if not Player.boss_battu and not "Passe La Porte Redcoin" in Player.player_tags:
             DoBossFight()
@@ -21143,6 +21209,8 @@ def DoBossOrGoDown():
                     FloorMaker.SetupFloorLayout()
                 except Exception as error:
                     WriteErrorInErrorLog(error)
+
+        
     return game_in_session
             
 def GiveChoiceRealEndingOrNot():

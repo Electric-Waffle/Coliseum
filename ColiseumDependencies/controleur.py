@@ -1710,6 +1710,8 @@ class Control:
                 "Envol": "Technique", #reduit les chances de toucher de 30%  [x]
                 "Coup du Foie": "Technique", # rend bléssé
                 "Possession du mana": "Sort", # sorts coutent plus cher
+                "Feu Regénérateur": "Sort",
+                "Vents du Sud": "Sort",
             }
             self.modele.monstre_recompense = {"Taux esquive": 1, "Taux coup critique": 1, "Vie max": 3, "Gold": 35 + gold_bonus_par_etage, "Materiau": "Ecaille de Phénix"}
         elif self.modele.monstre_nom == "Rochemikaze":

@@ -2221,7 +2221,7 @@ class Model:
             "Possession du mana": [35, 4, "L'ennemi tente de s'approprier le flux de mana environnant...",
                                    "...mais il échappe a son controle",
                                    "...et il y arrive, le retournant contre vous."],
-            "Ruée vers l'or": [50, 4, "L'ennemi vous stimule avec des effets sonores et lumineux, l'incitant à dépenser des pièces...", 
+            "Ruée vers l'or": [50, 4, "L'ennemi vous stimule avec des effets sonores et lumineux, incitant à dépenser des pièces...", 
                                "...mais vous n'êtes pas très réceptif a ce genre de choses.", 
                                "...et fait naitre en vous les symptomes du Mal Jaune !"],
             "Confusion": [65, 3, "L'ennemi vous jette un sort de confusion...", 

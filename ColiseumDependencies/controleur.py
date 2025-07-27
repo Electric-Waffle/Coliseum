@@ -510,7 +510,26 @@ class Control:
 
     def PatternDesignConstantUpdater(self):
         #sert a tester plusieurs types de dégats sans avoir a changer les dégats de chaques attaques et sorts
-        bonus_equilibrage = 50
+        bonus_equilibrage_technique = self.modele.debug_bonus_equilibrage_technique
+        bonus_equilibrage_technique_critique = self.modele.debug_bonus_equilibrage_technique_critique
+        bonus_equilibrage_technique_feu = self.modele.debug_bonus_equilibrage_technique_feu
+        bonus_equilibrage_technique_terre = self.modele.debug_bonus_equilibrage_technique_terre
+        bonus_equilibrage_technique_foudre = self.modele.debug_bonus_equilibrage_technique_foudre
+        bonus_equilibrage_technique_glace = self.modele.debug_bonus_equilibrage_technique_glace
+        bonus_equilibrage_technique_physique = self.modele.debug_bonus_equilibrage_technique_physique
+        bonus_equilibrage_technique_sang = self.modele.debug_bonus_equilibrage_technique_sang
+        bonus_equilibrage_sort = self.modele.debug_bonus_equilibrage_sort
+        bonus_equilibrage_sort_critique = self.modele.debug_bonus_equilibrage_sort_critique
+        bonus_equilibrage_sort_feu = self.modele.debug_bonus_equilibrage_sort_feu
+        bonus_equilibrage_sort_terre = self.modele.debug_bonus_equilibrage_sort_terre
+        bonus_equilibrage_sort_foudre = self.modele.debug_bonus_equilibrage_sort_foudre
+        bonus_equilibrage_sort_glace = self.modele.debug_bonus_equilibrage_sort_glace
+        bonus_equilibrage_sort_physique = self.modele.debug_bonus_equilibrage_sort_physique
+        bonus_equilibrage_sort_sang = self.modele.debug_bonus_equilibrage_sort_sang
+        bonus_equilibrage_sang_regain_sante = self.modele.debug_bonus_sang_regain_sante
+        
+
+        
         # degat des sorts   BASIQUE
         bonus_odin = 0
         nombre_aleatoire_pour_odin = random.randint(0, 100)
@@ -569,7 +588,7 @@ class Control:
             + bonus_talent
             + bonus_odin
             + bonus_hyde
-            + bonus_equilibrage
+            + bonus_equilibrage_sort
             + bonus_artefact
             + self.modele.accumulation_degat_sort
         )
@@ -645,7 +664,7 @@ class Control:
             + bonus_talent
             + bonus_odin
             + bonus_hyde
-            + bonus_equilibrage
+            + bonus_equilibrage_technique
             + bonus_artefact
             + self.modele.accumulation_degat_technique
         )
@@ -666,7 +685,7 @@ class Control:
         if self.modele.stigma_joueur_negatif == "Famine":
             malus_stigma = 50
         self.modele.DEGATBONUSSORTCRITIQUE = (
-            self.modele.degat_de_sort_critique + bonus_stigma
+            self.modele.degat_de_sort_critique + bonus_stigma + bonus_equilibrage_sort_critique
         )
         self.modele.DEGATBONUSSORTCRITIQUE -= malus_stigma
         if "Chaine de Main" in self.modele.liste_dartefact_optionels:
@@ -681,9 +700,10 @@ class Control:
         if self.modele.stigma_joueur_negatif == "Famine":
             malus_stigma = 50
         self.modele.DEGATBONUSATTAQUECRITIQUE = (
-            self.modele.degat_de_coup_critique + bonus_stigma
+            self.modele.degat_de_coup_critique + bonus_stigma + bonus_equilibrage_technique_critique
         )
         self.modele.DEGATBONUSATTAQUECRITIQUE -= malus_stigma
+
 
         # degat des attk de feu    ELEMENTAIRE
         bonus_talent = 0
@@ -699,7 +719,8 @@ class Control:
         if self.Player.benediction == "Incandescent":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Feu"]
-        self.modele.DEGATBONUSATTAQUEFEU = bonus_talent + bonus_stigma + bonus_gel + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSATTAQUEFEU = bonus_talent + bonus_stigma + bonus_gel + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_technique_feu
+
         # degat des sorts de feu
         bonus_talent = 0
         if self.modele.affinite_au_feu:
@@ -714,7 +735,8 @@ class Control:
         if self.Player.benediction == "Incandescent":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Feu"]
-        self.modele.DEGATBONUSSORTFEU = bonus_talent + bonus_stigma + bonus_gel + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSSORTFEU = bonus_talent + bonus_stigma + bonus_gel + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_sort_feu
+
         # degat du feu
         bonus_talent = 0
         if self.modele.surchauffe:
@@ -725,6 +747,7 @@ class Control:
         if self.modele.stigma_monstre_negatif == "Cryolien":
             bonus_stigma += 20
         self.modele.DEGATBONUSFEU = bonus_talent + bonus_stigma
+
         # degat des attk de foudre
         bonus_talent = 0
         if self.modele.affinite_electrique:
@@ -739,8 +762,9 @@ class Control:
         if self.Player.benediction == "Conducteur":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Foudre"]
-        self.modele.DEGATBONUSATTAQUEFOUDRE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSATTAQUEFOUDRE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_technique_foudre
         self.modele.DEGATBONUSATTAQUEFOUDRE -= malus_stigma
+
         # degat des sorts de foudre
         bonus_talent = 0
         if self.modele.affinite_electrique:
@@ -755,12 +779,15 @@ class Control:
         if self.Player.benediction == "Conducteur":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Foudre"]
-        self.modele.DEGATBONUSSORTFOUDRE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSSORTFOUDRE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_sort_foudre
         self.modele.DEGATBONUSSORTFOUDRE -= malus_stigma
+
         # degat de la paralysie (par neurotransmitteur)
         self.modele.DEGATPARALYSIE = 2  # %de vie du monstre
+
         # degat du feu electrique (par luciole)
         self.modele.DEGATFEUELECTRIQUE = 4  # %de vie du monstre
+
         # degat des attk de glace
         bonus_talent = 0
         if self.modele.affinite_de_glace:
@@ -774,7 +801,8 @@ class Control:
         if self.Player.benediction == "Glaciaire":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Glace"]
-        self.modele.DEGATBONUSATTAQUEGLACE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSATTAQUEGLACE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_technique_glace
+
         # degat des sorts de glace
         bonus_talent = 0
         if self.modele.affinite_de_glace:
@@ -788,9 +816,11 @@ class Control:
         if self.Player.benediction == "Glaciaire":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Glace"]
-        self.modele.DEGATBONUSSORTGLACE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSSORTGLACE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_sort_glace
+
         # degat de la gelure (quand on en sort)
         self.modele.DEGATGELURE = 5  # %de vie du monstre
+
         # degat des attk de terre
         bonus_talent = 0
         if self.modele.affinite_de_terre:
@@ -802,8 +832,9 @@ class Control:
         if self.Player.benediction == "Rocailleux":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Terre"]
-        self.modele.DEGATBONUSATTAQUETERRE = bonus_talent + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSATTAQUETERRE = bonus_talent + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_technique_terre
         self.modele.DEGATBONUSATTAQUETERRE -= malus_stigma
+
         # degat des sorts de terre
         bonus_talent = 0
         if self.modele.affinite_de_terre:
@@ -815,13 +846,15 @@ class Control:
         if self.Player.benediction == "Rocailleux":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Terre"]
-        self.modele.DEGATBONUSSORTTERRE = bonus_talent + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSSORTTERRE = bonus_talent + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_sort_terre
         self.modele.DEGATBONUSSORTTERRE -= malus_stigma
+
         # degat de la lapidation
         bonus_artefact = 0
         if "Haricot Magique" in self.modele.liste_dartefact_optionels:
             bonus_artefact = 25
         self.modele.DEGATLAPIDATION = bonus_artefact  # %de degat supp
+
         # degat des attk physique
         bonus_talent = 0
         if self.modele.affinite_de_effort:
@@ -833,7 +866,8 @@ class Control:
         if self.Player.benediction == "Musclé":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Chair"]
-        self.modele.DEGATBONUSATTAQUEPHYSIQUE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSATTAQUEPHYSIQUE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_technique_physique
+
         # degat des sorts physiques
         bonus_talent = 0
         if self.modele.affinite_de_effort:
@@ -845,7 +879,8 @@ class Control:
         if self.Player.benediction == "Musclé":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Chair"]
-        self.modele.DEGATBONUSSORTPHYSIQUE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSSORTPHYSIQUE = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_sort_physique
+
         # degat des attk de sang
         bonus_talent = 0
         if self.modele.affinite_du_sang:
@@ -857,7 +892,8 @@ class Control:
         if self.Player.benediction == "Sain":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Sang"]
-        self.modele.DEGATBONUSATTAQUESANG = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSATTAQUESANG = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_technique_sang
+
         # degat des sorts de sang
         bonus_talent = 0
         if self.modele.affinite_du_sang:
@@ -869,17 +905,20 @@ class Control:
         if self.Player.benediction == "Sain":
             bonus_benediction_chamane = 75
         bonus_uppgrade = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Sang"]
-        self.modele.DEGATBONUSSORTSANG = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane
+        self.modele.DEGATBONUSSORTSANG = bonus_talent + bonus_stigma + bonus_uppgrade + bonus_benediction_chamane + bonus_equilibrage_sort_sang
+
         # degat de la saignée
         bonus_talent = 0
         self.modele.DEGATSAIGNEE = bonus_talent
+
         # soin de la saignée
         bonus_talent = 0
         if self.modele.nectar:
             bonus_talent += 30
-        self.modele.SOINSSAIGNEE = bonus_talent
+        self.modele.SOINSSAIGNEE = bonus_talent + bonus_equilibrage_sang_regain_sante
         if self.modele.stigma_monstre_negatif == "Sang Doré":
             self.modele.SOINSSAIGNEE += self.modele.SOINSSAIGNEE
+
         # attk âme
         self.modele.PIRADEGAT = self.modele.nombre_de_monstres_tues // 2
         self.modele.PIRABRULE = 5 * (self.modele.nombre_de_monstres_tues // 5)
@@ -900,6 +939,7 @@ class Control:
 
         self.modele.HADDEEDEGAT = self.modele.nombre_de_monstres_tues // 2
         self.modele.HADDEEDRAIN = 8 * (self.modele.nombre_de_monstres_tues // 10)
+
 
         # pourcentage de coup critique  POURCENTAGES
         bonus_benediction = 0
@@ -925,6 +965,7 @@ class Control:
             + bonus_mutation
             + bonus_benediction
         )
+
         # pourcentage de sort critique
         bonus_benediction = 0
         if self.modele.beni_par_feu_sacre:
@@ -955,6 +996,7 @@ class Control:
         if "Bandeau Catharsis" in self.modele.liste_dartefact_optionels:
             bonus_artefact += 5
         self.modele.CHANCEBONUSESQUIVE = bonus_caracteristique + bonus_artefact
+
         # pourcentage d'enflammer
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
@@ -976,6 +1018,7 @@ class Control:
         if "Fiole d'Eclair" in self.modele.liste_dartefact_optionels:
             bonus_artefact += 5
         self.modele.CHANCEBONUSDEFAIREPARALYSER = bonus_vulnerable + bonus_charge + bonus_artefact + round(self.modele.accumulation_chance_paralysie)
+        
         # pourcentage de geler
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
@@ -1001,6 +1044,7 @@ class Control:
             malus_stigma = 100
         self.modele.CHANCEBONUSDEFAIRELAPIDER = 0 + bonus_vulnerable + bonus_charge + bonus_artefact + round(self.modele.accumulation_chance_lapider)
         self.modele.CHANCEBONUSDEFAIRELAPIDER -= malus_stigma
+
         # pourcentage de saignee
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
@@ -1012,11 +1056,13 @@ class Control:
             malus_stigma = 100
         self.modele.CHANCEBONUSDEFAIRESAIGNER = 0 + bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_drainer)
         self.modele.CHANCEBONUSDEFAIRESAIGNER -= malus_stigma
+
         # pourcentage de louper une attaque
         malus_envol = 0
         if self.modele.monstre_est_envol:
             malus_envol = 30
         self.modele.CHANCERATERATTAQUE = malus_envol
+
         # pourcentage de louper un sort 
         malus_envol = 0
         if self.modele.monstre_est_envol:
@@ -1126,6 +1172,7 @@ class Control:
             self.modele.monstre_points_de_resistance + self.modele.monstre_gain_de_defence_nombre
         ) * 3
         self.modele.BONUSREDUCTIONDEGAT = bonus_defence
+
         # reduction des degats de base contre les joueurs
         bonus_defence = 0
         bonus_defence = (
@@ -1135,11 +1182,13 @@ class Control:
         if self.modele.miss_hyde_transformation :
             malus_hyde = 50
         self.modele.BONUSREDUCTIONDEGATSURJOUEUR = bonus_defence - malus_hyde
+
         # reduction du cout en mana des sorts generaux
         bonus_talent = 0
         if self.modele.connaissance:
             bonus_talent = 20
         self.modele.BONUSREDUCTIONMANASORTTOUT = bonus_talent
+
         # reduction du cout en mana des sorts de terre
         bonus_talent = 0
         if self.modele.poussiere_de_diamant:
@@ -1150,11 +1199,13 @@ class Control:
             if bonus_talent > 50:
                 bonus_talent = 50
         self.modele.BONUSREDUCTIONMANASORTTERRE = bonus_talent
+
         # reduction du cout en mana des sorts de foudre
         bonus_talent = 0
         if self.modele.energiseur:
             bonus_talent = 30
         self.modele.BONUSREDUCTIONMANASORTFOUDRE = bonus_talent
+
         # reduction du cout en mana des sorts de feu
         bonus_talent = 0
         if self.modele.utilise_rafale:

@@ -77,6 +77,25 @@ class Model:
             else:
                 self.etage_alternatif = False
 
+        # debug equilibrage
+        self.debug_bonus_equilibrage_technique = Player.debug_bonus_equilibrage_technique
+        self.debug_bonus_equilibrage_technique_critique = Player.debug_bonus_equilibrage_technique_critique
+        self.debug_bonus_equilibrage_technique_feu = Player.debug_bonus_equilibrage_technique_feu
+        self.debug_bonus_equilibrage_technique_terre = Player.debug_bonus_equilibrage_technique_terre
+        self.debug_bonus_equilibrage_technique_foudre = Player.debug_bonus_equilibrage_technique_foudre
+        self.debug_bonus_equilibrage_technique_glace = Player.debug_bonus_equilibrage_technique_glace
+        self.debug_bonus_equilibrage_technique_physique = Player.debug_bonus_equilibrage_technique_physique
+        self.debug_bonus_equilibrage_technique_sang = Player.debug_bonus_equilibrage_technique_sang
+        self.debug_bonus_equilibrage_sort = Player.debug_bonus_equilibrage_sort
+        self.debug_bonus_equilibrage_sort_critique = Player.debug_bonus_equilibrage_sort_critique
+        self.debug_bonus_equilibrage_sort_feu = Player.debug_bonus_equilibrage_sort_feu
+        self.debug_bonus_equilibrage_sort_terre = Player.debug_bonus_equilibrage_sort_terre
+        self.debug_bonus_equilibrage_sort_foudre = Player.debug_bonus_equilibrage_sort_foudre
+        self.debug_bonus_equilibrage_sort_glace = Player.debug_bonus_equilibrage_sort_glace
+        self.debug_bonus_equilibrage_sort_physique = Player.debug_bonus_equilibrage_sort_physique
+        self.debug_bonus_equilibrage_sort_sang = Player.debug_bonus_equilibrage_sort_sang
+        self.debug_bonus_sang_regain_sante = Player.debug_bonus_sang_regain_sante
+
         # alteration de letat ou influence d'artefacts
         self.accumulation_degat_technique = 0
         self.accumulation_degat_sort = 0 

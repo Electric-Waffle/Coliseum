@@ -3575,6 +3575,7 @@ LISTEDEMUSIQUE = [
     "Ré-Hydraté",
     "Pluie d'Automne",
     "Bêtise Humaine",
+    "Esotériques Réflexions",
     "Exploratio",
     "Les Joies du Combat",
     "Revenant",
@@ -3639,6 +3640,7 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["bathhouse", "Vous écoutez "],
     ["ending", "Vous écoutez "],
     ["reconfort", "Vous écoutez "],
+    ["debug", "Vous écoutez "],
     ["etage_1", "Vous écoutez "],
     ["battle_theme_1", "Vous écoutez "],
     ["boss_1", "Vous écoutez "],
@@ -3792,6 +3794,27 @@ ANNUAIREDECHOIXPOURREDCOIN = {
     25583669867: ["Fos", 5, "None"],
     255814477582: ["Haddee", 5, "None"],
 }
+
+DEBUG_OPTIONS = {
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques": "debug_bonus_equilibrage_technique",
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques Critiques": "debug_bonus_equilibrage_technique_critique",
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques de Feu": "debug_bonus_equilibrage_technique_feu",
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques de Terre": "debug_bonus_equilibrage_technique_terre",
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques de Foudre": "debug_bonus_equilibrage_technique_foudre",
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques de Glace": "debug_bonus_equilibrage_technique_glace",
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques Physique": "debug_bonus_equilibrage_technique_physique",
+    "Pourcentage Bonus de Dégâts pour toutes les Techniques de Sang": "debug_bonus_equilibrage_technique_sang",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts": "debug_bonus_equilibrage_sort",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts Critique": "debug_bonus_equilibrage_sort_critique",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts de Feu": "debug_bonus_equilibrage_sort_feu",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts de Terre": "debug_bonus_equilibrage_sort_terre",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts de Foudre": "debug_bonus_equilibrage_sort_foudre",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts de Glace": "debug_bonus_equilibrage_sort_glace",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts Physique": "debug_bonus_equilibrage_sort_physique",
+    "Pourcentage Bonus de Dégâts pour tout les Sorts de Sang": "debug_bonus_equilibrage_sort_sang",
+    "Pourcentage Bonus de Points de Vie Régénérés via Element Sang": "debug_bonus_sang_regain_sante"
+}
+
 
 
 class TraderUsage:
@@ -7855,7 +7878,7 @@ class PlayerCaracteristics:
         self.taux_desquive = 0
         self.nombre_de_gold = 0
         self.nombre_de_red_coin = 0
-        self.nombre_de_monstres_tues = 0
+        self.nombre_de_monstres_tues = 0 # == le nombre d'ame
         self.numero_de_letage = 1
         self.affronte_un_boss = False
         self.commence_le_combat_confus = False
@@ -7954,6 +7977,25 @@ class PlayerCaracteristics:
         self.malediction = RecupereMaledictionEnCours()
         self.charge_mauvais_tachyon = 0
         self.charge_bon_tachyon = 0
+        
+        # debug equilibrage
+        self.debug_bonus_equilibrage_technique = 50
+        self.debug_bonus_equilibrage_technique_critique = 0
+        self.debug_bonus_equilibrage_technique_feu = 0
+        self.debug_bonus_equilibrage_technique_terre = 0
+        self.debug_bonus_equilibrage_technique_foudre = 0
+        self.debug_bonus_equilibrage_technique_glace = 0
+        self.debug_bonus_equilibrage_technique_physique = 0
+        self.debug_bonus_equilibrage_technique_sang = 0
+        self.debug_bonus_equilibrage_sort = 50
+        self.debug_bonus_equilibrage_sort_critique = 0
+        self.debug_bonus_equilibrage_sort_feu = 0
+        self.debug_bonus_equilibrage_sort_terre = 0
+        self.debug_bonus_equilibrage_sort_foudre = 0
+        self.debug_bonus_equilibrage_sort_glace = 0
+        self.debug_bonus_equilibrage_sort_physique = 0
+        self.debug_bonus_equilibrage_sort_sang = 0
+        self.debug_bonus_sang_regain_sante = 0
 
     def checkForStigmaPlusAhti(self):
         if self.stigma_positif == "Esprit bien rangé, esprit libéré":
@@ -18800,6 +18842,59 @@ class SaveManagement:
             Player.charge_bon_tachyon
         )
 
+        # debug
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique"] = (
+            Player.debug_bonus_equilibrage_technique
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_critique"] = (
+            Player.debug_bonus_equilibrage_technique_critique
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_feu"] = (
+            Player.debug_bonus_equilibrage_technique_feu
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_terre"] = (
+            Player.debug_bonus_equilibrage_technique_terre
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_foudre"] = (
+            Player.debug_bonus_equilibrage_technique_foudre
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_glace"] = (
+            Player.debug_bonus_equilibrage_technique_glace
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_physique"] = (
+            Player.debug_bonus_equilibrage_technique_physique
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_sang"] = (
+            Player.debug_bonus_equilibrage_technique_sang
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort"] = (
+            Player.debug_bonus_equilibrage_sort
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_critique"] = (
+            Player.debug_bonus_equilibrage_sort_critique
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_feu"] = (
+            Player.debug_bonus_equilibrage_sort_feu
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_terre"] = (
+            Player.debug_bonus_equilibrage_sort_terre
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_foudre"] = (
+            Player.debug_bonus_equilibrage_sort_foudre
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_glace"] = (
+            Player.debug_bonus_equilibrage_sort_glace
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_physique"] = (
+            Player.debug_bonus_equilibrage_sort_physique
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_sang"] = (
+            Player.debug_bonus_equilibrage_sort_sang
+        )
+        self.dictionnaire_de_sauvegarde["debug_bonus_sang_regain_sante"] = (
+            Player.debug_bonus_sang_regain_sante
+        )
+
     def FromDictToPlayer(self):
         Player.nom_du_personnage = (self.dictionnaire_de_sauvegarde["Nom"]).strip('"')
         Player.stigma_positif = (
@@ -18985,6 +19080,59 @@ class SaveManagement:
         ]
         liste_de_artefacts_option = ast.literal_eval(chaine_de_caractere)
         Player.liste_dartefacts_optionels = liste_de_artefacts_option
+
+        # debug
+        Player.debug_bonus_equilibrage_technique = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique"]
+        )
+        Player.debug_bonus_equilibrage_technique_critique = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_critique"]
+        )
+        Player.debug_bonus_equilibrage_technique_feu = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_feu"]
+        )
+        Player.debug_bonus_equilibrage_technique_terre = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_terre"]
+        )
+        Player.debug_bonus_equilibrage_technique_foudre = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_foudre"]
+        )
+        Player.debug_bonus_equilibrage_technique_glace = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_glace"]
+        )
+        Player.debug_bonus_equilibrage_technique_physique = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_physique"]
+        )
+        Player.debug_bonus_equilibrage_technique_sang = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_technique_sang"]
+        )
+        Player.debug_bonus_equilibrage_sort = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort"]
+        )
+        Player.debug_bonus_equilibrage_sort_critique = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_critique"]
+        )
+        Player.debug_bonus_equilibrage_sort_feu = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_feu"]
+        )
+        Player.debug_bonus_equilibrage_sort_terre = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_terre"]
+        )
+        Player.debug_bonus_equilibrage_sort_foudre = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_foudre"]
+        )
+        Player.debug_bonus_equilibrage_sort_glace = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_glace"]
+        )
+        Player.debug_bonus_equilibrage_sort_physique = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_physique"]
+        )
+        Player.debug_bonus_equilibrage_sort_sang = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_equilibrage_sort_sang"]
+        )
+        Player.debug_bonus_sang_regain_sante = int(
+            self.dictionnaire_de_sauvegarde["debug_bonus_sang_regain_sante"]
+        )
 
     def FromDictToSaveFile(self, nom_du_fichier):
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -20221,6 +20369,111 @@ def InitialiseDictionnaireDePersonnageAAfficher():
         DICTIONNAIREDEPERSONNAGEAAFFICHER[numero_du_personnage] = nom_personnage
         numero_du_personnage += 1
 
+def ShowDebugMenu():
+    PlayMusic("debug")
+
+    while True:
+        while True:
+            try:
+                print("Behind the screen : Debug Menu\n")
+                print("0 - Quitter\n")
+                print("1 - Réinitialiser les valeurs\n")
+                for i, label in enumerate(DEBUG_OPTIONS, start=2):
+                    attr = DEBUG_OPTIONS[label]
+                    val = getattr(Player, attr)
+                    print(f"{i} - Configurer [{label}] (Actuellement : {val}%)")
+                print(f"\n{i+1} - Configurer les Caractéristiques du Joueur")
+                choix = int(input("\nChoisissez une action avec son nombre correspondant : "))
+                ClearConsole()
+                if 0 <= choix <= (len(DEBUG_OPTIONS) + 2):
+                    break
+            except ValueError:
+                ClearConsole()
+
+        if choix == 0:
+            PlayMusicDeLetage()
+            break
+
+        elif choix == 1:
+            # réinitialisation a 0
+            for attribute_name in DEBUG_OPTIONS:
+                setattr(Player, DEBUG_OPTIONS[attribute_name], 0)
+
+            # sauf pour certaines choses
+            setattr(Player, "debug_bonus_equilibrage_technique", 35)
+            setattr(Player, "debug_bonus_equilibrage_sort", 35)
+
+        elif choix == (len(DEBUG_OPTIONS) + 2):
+            attributs_modifiables = [
+                ("points_de_vie", "Points de vie"),
+                ("points_de_vie_max", "Points de vie max"),
+                ("points_de_mana", "Points de mana"),
+                ("points_de_mana_max", "Points de mana max"),
+                ("points_dendurance", "Points d'endurance"),
+                ("points_de_force", "Points de force"),
+                ("points_dintelligence", "Points d'intelligence"),
+                ("points_de_defence", "Points de défense"),
+                ("nombre_de_gold", "Nombre de gold"),
+                ("nombre_de_red_coin", "Nombre de redcoin"),
+                ("nombre_de_monstres_tues", "Nombre d'âmes récupérées")
+            ]
+
+            while True:
+                while True:
+                    try:
+                        print("Behind the screen : Character Values\n")
+                        print("0 - Retourner au menu principal\n")
+                        for i, (attr, nom_affichage) in enumerate(attributs_modifiables, start=1):
+                            valeur_actuelle = getattr(Player, attr)
+                            print(f"{i} - Configurer [{nom_affichage}] (Actuellement : {valeur_actuelle})")
+                        choix = int(input("\nChoisissez une action avec son nombre correspondant : "))
+                        ClearConsole()
+                        if choix in range(0, len(attributs_modifiables) + 1):
+                            break
+                    except ValueError:
+                        ClearConsole()
+
+                if choix == 0:
+                    break
+
+                attr_name, nom_affichage = attributs_modifiables[choix - 1]
+
+                while True:
+                    try:
+                        valeur_actuelle = getattr(Player, attr_name)
+                        print(f"Behind the screen : Modifier {nom_affichage} (Actuellement : {valeur_actuelle})\n")
+                        nouvelle_valeur = int(input("Entrez une nouvelle valeur (négative ou positive) : "))
+                        setattr(Player, attr_name, nouvelle_valeur)
+                        ClearConsole()
+                        break
+                    except ValueError:
+                        ClearConsole()
+
+
+            
+
+
+        else:
+            # Récupération dynamique de la variable choisie
+            label = list(DEBUG_OPTIONS.keys())[choix - 2]
+            attr = DEBUG_OPTIONS[label]
+
+            while True:
+                try:
+                    val_actuel = getattr(Player, attr)
+                    print(f"Configurer [{label}] (Actuellement : {val_actuel}%)\n\n")
+                    nouveau_val = int(input("Nouveau pourcentage (positif ou négatif) : "))
+                    setattr(Player, attr, nouveau_val)
+                    ClearConsole()
+                    break
+                except ValueError:
+                    ClearConsole()
+
+
+
+
+
+
 
 def ShowTutorial():
     PlayMusic("tutorial")
@@ -21251,7 +21504,7 @@ def GetChoix():
             if choix != 2 and Player.mode_de_jeu == "Ascension":
                 print("LECHEMINVERSLASCENSIONESTDROITILESTRIGIDENETECARTEPASDUCHEMINOUTOMBEDANSLESENTRAILLESDEMONODIEUESTOMAC")
                 Affichage.EntreePourContinuer()
-            elif choix in [1, 2, 3, 4, 5, 6, 7, 777]:
+            elif choix in [1, 2, 3, 4, 5, 6, 7, 8, 777]:
                 return choix
         except ValueError:
             ClearConsole()
@@ -21303,7 +21556,7 @@ def PlayMusicDeLetage():
         PlayMusic(f"etage_{nom_de_la_musique}")
 
 
-def GetNomEtage():
+def GetNomEtageEtDebugValues():
     try:
         dictionnaire = {}
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -21316,6 +21569,11 @@ def GetNomEtage():
                     "Valeur"
                 ]
         Player.nom_de_letage = dictionnaire["Nom de l'étage"]
+
+        # debug
+        for value_name in DEBUG_OPTIONS:
+            setattr(Player, DEBUG_OPTIONS[value_name], dictionnaire[DEBUG_OPTIONS[value_name]])
+
     except KeyError:
         pass
     except FileNotFoundError:
@@ -21407,6 +21665,7 @@ def DoJukebox():
         44 : {"Nom" : "L'Orage avant la Tempête", "Nom Réel" : "boss_introV2"},
         45 : {"Nom" : "Sillages Sur Une Mer de Rêves", "Nom Réel" : "gravestone"},
         46 : {"Nom" : "Bêtise Humaine", "Nom Réel" : "reconfort"},
+        47 : {"Nom" : "Esotériques Réflexions", "Nom Réel" : "debug"},
         
     }
     print("Vous frappez le sol de l'arène, et au lieu de monstres, une étrange machine sort du sol.")
@@ -21436,10 +21695,11 @@ def DoJukebox():
                 print("\n1 - Changer la musique de l'étage")
                 print("2 - Changer la musique des combats")
                 print("3 - Partir")
+                print("4 - Désactiver le mode jukebox et partir")
                 choix = int(input("(Faites votre choix avec les numéros :) "))
                 ClearConsole()
 
-                if choix in [1, 2, 3, 777]:
+                if choix in [1, 2, 3, 4]:
                     break
             except ValueError:
                 ClearConsole()
@@ -21449,11 +21709,13 @@ def DoJukebox():
             Affichage.EntreePourContinuer()
             break
 
-        elif choix == 777:
+        elif choix == 4:
             print("Mode Jukebox Désactivé")
             Player.mode_jukebox = False
             PlayMusicDeLetage()
+            print("Vous laissez le jukebox derrière vous, et il retourne dans le sol de l'arène.")
             Affichage.EntreePourContinuer()
+            break
 
         elif choix == 2:
             choix_effectue = False
@@ -21465,7 +21727,7 @@ def DoJukebox():
                             print(f"{numero} - {dictionnaire_musiques_jukebox[numero]['Nom']}")
                         choix = int(input("\n(Faites votre choix avec les numéros :) "))
                         ClearConsole()
-                        if choix in range (1, 47):
+                        if choix in range (1, len(dictionnaire_musiques_jukebox)+1):
                             break
                     except ValueError:
                         ClearConsole()
@@ -21503,7 +21765,7 @@ def DoJukebox():
                             print(f"{numero} - {dictionnaire_musiques_jukebox[numero]['Nom']}")
                         choix = int(input("(Faites votre choix avec les numéros :) "))
                         ClearConsole()
-                        if choix in range (1, 47):
+                        if choix in range (1, len(dictionnaire_musiques_jukebox)+1):
                             break
                     except ValueError:
                         ClearConsole()
@@ -23160,7 +23422,7 @@ Trader = TraderUsage()
 
 SetupGameMode()
 AffichageSecretPage3()
-GetNomEtage()
+GetNomEtageEtDebugValues()
 if Player.mode_de_jeu == "Erreur":
     print("ERREUR 404: FICHIER DE SAUVEGARDE PERMANENT INTROUVABLE")
     print("ASSUREZ VOUS D'AVOIR UN FICHIER NOMME S0VE.TXT DANS COLISEUMDEPENDENCIES")
@@ -23207,8 +23469,8 @@ while game_in_session:
                 Affichage.ParleAuPnj()
             else:
                 Affichage.ParleAuPnjNuit()
-
     else:
+
         if choix == 1:
             if Player.nom_de_letage == "Limbes Flétrissants":
                 print("Vous cherchez une arène, ou quelque chose dans le genre, et ne trouvez que le champ de terre battu.")
@@ -23222,11 +23484,13 @@ while game_in_session:
                 DoFight()  # DONE
             else:
                 DoJukebox()
+
         elif choix == 2:
             if Player.numero_de_letage == 0 and not Player.battu_le_sacrifie:
                 DoBossZero()
             else:
                 game_in_session = DoBossOrGoDown()  # DONE
+
         elif choix == 3:
             if Player.numero_de_letage == 0 :
                 print("Vous vous approchez de l'endroit ou se trouve le marchand...")
@@ -23238,20 +23502,24 @@ while game_in_session:
                 Affichage.EntreePourContinuer()
             else:
                 Trader.DoTrading()  # DONE
+
         elif choix == 4:
             FloorMaker.ShowFloor()
+
         elif choix == 5:
             if "Combattant le Gardien" in Player.player_tags:
                 print("Vous sortez votre sacoche, mais vous n'arrivez pas a vous souvenir comment utiliser vos objets ou vos sorts avec votre esprit confus, alors vous la raccrochez à sa place.")
                 Affichage.EntreePourContinuer()
             else:
                 Player.ShowPlayerCaracteristicsAndItems()  # DONE
+
         elif choix == 6:
             if "Combattant le Gardien" in Player.player_tags:
                 print("Vous cherchez vos redcoins, mais votre esprit confus vous empeche de trouver quoi que ce soit.")
                 Affichage.EntreePourContinuer()
             else:
                 DoRedcoin()  # DONE
+
         elif choix == 7:
             if "Combattant le Gardien" in Player.player_tags:
                 print("[ERREUR :", end=' ', flush=True)
@@ -23262,6 +23530,12 @@ while game_in_session:
                 ClearConsole()
             else:
                 Save.SaveTheGame()  # DONE
+
+        # Menu de Debug
+        elif choix == 8:
+            ShowDebugMenu()
+            Save.SaveTheGameSansAffichage()
+
         elif choix == 777:
             if not Player.mode_jukebox:
                 print("Mode Jukebox Activé")

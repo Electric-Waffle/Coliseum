@@ -42,7 +42,7 @@ class Model:
             self.taux_de_esquive = Player.taux_desquive
             self.nombre_de_gold = Player.nombre_de_gold
             self.quete_en_cours = Player.quete
-            self.liste_dartefact_optionels = Player.liste_dartefacts_optionels
+            self.liste_dartefacts_optionels = Player.liste_dartefacts_optionels
             self.nombre_de_red_coin = Player.nombre_de_red_coin
             self.player_tags = Player.player_tags
             self.numero_de_letage = Player.numero_de_letage

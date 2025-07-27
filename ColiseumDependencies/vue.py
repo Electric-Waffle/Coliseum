@@ -1244,7 +1244,7 @@ class Vue:
         self.AffichageUneLignePuisUnEntreePourContinuer("Votre Morceau d'Ether Fragile finit par se briser, et vous perdez tout vos points de mana !")
 
     def AfficheMonstreSurvieStigma(self):
-        self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi survit aux effets inslfigés a sa condition !\nFinissez le !")
+        self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi survit aux effets infligés a sa condition !\nFinissez le !")
 
     def AfficheEffetEauBenite(self):
         self.AffichageUneLignePuisUnEntreePourContinuer("Votre fiole d'eau bénite réagit avec votre mana !\nVous voila béni pendant un tour !")

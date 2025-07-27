@@ -59,8 +59,8 @@ class Control:
         applique les effets et introductions liés a une résurrection
         """
         if self.modele.points_de_vie < 1:
-            if "Voile de Ino" in self.modele.liste_dartefact_optionels:
-                self.modele.liste_dartefact_optionels.remove("Voile de Ino")
+            if "Voile de Ino" in self.modele.liste_dartefacts_optionels:
+                self.modele.liste_dartefacts_optionels.remove("Voile de Ino")
                 vie_recupere = round(0.66 * self.modele.points_de_vie_max)
                 self.modele.points_de_vie = vie_recupere
                 self.modele.beni_par_feu_sacre = True
@@ -70,7 +70,7 @@ class Control:
                     f"\nVous vous mettez alors a briller et regagnez {vie_recupere} points de vie !"
                     "\nDe plus, vous vous sentez béni par la déesse elle-même !\nVos deux prochaines attaques seront des coups critiques !"
                 )
-                if "Oeuil de Phénix" in self.modele.liste_dartefact_optionels:
+                if "Oeuil de Phénix" in self.modele.liste_dartefacts_optionels:
                     commentaire += "\nDe plus, votre Oeuil de Phénix s'accroche a votre poitrine et vous injecte une grosse dose de mana !"
                     self.modele.points_de_mana = self.modele.points_de_mana_max
                 self.vue.AfficheResurrection(commentaire)
@@ -94,7 +94,7 @@ class Control:
                         "\nLa poussiere laissée derriere par ses mouvements"
                         f" s'infiltre dans vos plaies, et vous regagnez {vie_recupere} points de vie !"
                     )
-                    if "Oeuil de Phénix" in self.modele.liste_dartefact_optionels:
+                    if "Oeuil de Phénix" in self.modele.liste_dartefacts_optionels:
                         commentaire += "\nDe plus, votre Oeuil de Phénix s'accroche a votre poitrine et vous injecte une grosse dose de mana !"
                         self.modele.points_de_mana = self.modele.points_de_mana_max
                     self.vue.AfficheResurrection(commentaire)
@@ -113,7 +113,7 @@ class Control:
                         self.modele.points_de_vie = round(self.modele.points_de_vie_max * 0.1)
                         self.vue.AfficheResurrection(commentaire)
                         return True
-                if "Echarde de Pinocchio" in self.modele.liste_dartefact_optionels:
+                if "Echarde de Pinocchio" in self.modele.liste_dartefacts_optionels:
                     if nombre_aleatoire in [1, 2]:
                         commentaire = "Vous sentez la vie vous quitter.\nOu pas.\n \nVotre mort durant ce combat n'etait qu'un simple mensonge. \nEn fait, vous n'avez même jamais perdu de vie !"
                         self.modele.points_de_vie = self.modele.points_de_vie_max
@@ -291,7 +291,7 @@ class Control:
         else:
             taux_de_reussite_de_la_fuite = self.modele.taux_de_esquive + 40
             nombre_aleatoire = random.randint(0, 100)
-            if "Masque d'Oblivion" in self.modele.liste_dartefact_optionels:
+            if "Masque d'Oblivion" in self.modele.liste_dartefacts_optionels:
                 # fuite garantie
                 nombre_aleatoire = 0
             if nombre_aleatoire > taux_de_reussite_de_la_fuite:  # fuite echec
@@ -568,7 +568,7 @@ class Control:
         if self.modele.stigma_monstre_negatif == "Astralien":
             bonus_stigma += 15
         bonus_artefact = 0
-        if "Morceau d'Ether Fragile" in self.modele.liste_dartefact_optionels:
+        if "Morceau d'Ether Fragile" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 25
         malus_stigma = 0
         if self.modele.stigma_joueur_negatif == "Serment d'Hyppocrate":
@@ -599,9 +599,9 @@ class Control:
             self.modele.DEGATBONUSSORTS = -100
 
         amelioration_degats_totaux = 0
-        if ["Cape Victorieuse"] in self.modele.liste_dartefact_optionels:
+        if ["Cape Victorieuse"] in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += (self.modele.nombre_de_monstres_tues * 0.5)
-        if ["Contrat de Travail"] in self.modele.liste_dartefact_optionels:
+        if ["Contrat de Travail"] in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += round(self.modele.nombre_de_gold // 50)
         self.modele.DEGATBONUSSORTS += ((amelioration_degats_totaux / 100)* self.modele.DEGATBONUSSORTS)
 
@@ -643,7 +643,7 @@ class Control:
         if self.modele.stigma_monstre_negatif == "Fragile":
             bonus_stigma += 10
         bonus_artefact = 0
-        if "Epée de Damocles" in self.modele.liste_dartefact_optionels:
+        if "Epée de Damocles" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 25
         malus_stigma = 0
         if self.modele.stigma_joueur_negatif == "Serment d'Hyppocrate":
@@ -671,9 +671,9 @@ class Control:
         self.modele.DEGATBONUSATTAQUE -= malus_stigma
 
         amelioration_degats_totaux = 0
-        if ["Cape Victorieuse"] in self.modele.liste_dartefact_optionels:
+        if ["Cape Victorieuse"] in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += (self.modele.nombre_de_monstres_tues * 0.5)
-        if ["Contrat de Travail"] in self.modele.liste_dartefact_optionels:
+        if ["Contrat de Travail"] in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += round(self.modele.nombre_de_gold // 50)
         self.modele.DEGATBONUSATTAQUE += ((amelioration_degats_totaux / 100)* self.modele.DEGATBONUSATTAQUE)
 
@@ -688,7 +688,7 @@ class Control:
             self.modele.degat_de_sort_critique + bonus_stigma + bonus_equilibrage_sort_critique
         )
         self.modele.DEGATBONUSSORTCRITIQUE -= malus_stigma
-        if "Chaine de Main" in self.modele.liste_dartefact_optionels:
+        if "Chaine de Main" in self.modele.liste_dartefacts_optionels:
             self.modele.DEGATBONUSSORTCRITIQUE += self.modele.DEGATBONUSSORTCRITIQUE
             
 
@@ -851,7 +851,7 @@ class Control:
 
         # degat de la lapidation
         bonus_artefact = 0
-        if "Haricot Magique" in self.modele.liste_dartefact_optionels:
+        if "Haricot Magique" in self.modele.liste_dartefacts_optionels:
             bonus_artefact = 25
         self.modele.DEGATLAPIDATION = bonus_artefact  # %de degat supp
 
@@ -993,7 +993,7 @@ class Control:
         # pourcentage d'esquive 
         bonus_caracteristique = self.modele.taux_de_esquive
         bonus_artefact = 0
-        if "Bandeau Catharsis" in self.modele.liste_dartefact_optionels:
+        if "Bandeau Catharsis" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 5
         self.modele.CHANCEBONUSESQUIVE = bonus_caracteristique + bonus_artefact
 
@@ -1001,7 +1001,7 @@ class Control:
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
         bonus_charge = 0
-        if "Element [Feu] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Feu] Surchargé" in self.modele.liste_dartefacts_optionels:
             bonus_charge += 10
         malus_stigma = 0
         if self.modele.stigma_monstre_positif == "Roche Ténébreuse":
@@ -1012,10 +1012,10 @@ class Control:
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
         bonus_charge = 0
-        if "Element [Foudre] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Foudre] Surchargé" in self.modele.liste_dartefacts_optionels:
             bonus_charge += 10
         bonus_artefact = 0
-        if "Fiole d'Eclair" in self.modele.liste_dartefact_optionels:
+        if "Fiole d'Eclair" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 5
         self.modele.CHANCEBONUSDEFAIREPARALYSER = bonus_vulnerable + bonus_charge + bonus_artefact + round(self.modele.accumulation_chance_paralysie)
         
@@ -1023,7 +1023,7 @@ class Control:
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
         bonus_charge = 0
-        if "Element [Glace] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Glace] Surchargé" in self.modele.liste_dartefacts_optionels:
             bonus_charge += 15
         malus_stigma = 0
         if self.modele.stigma_monstre_bonus == "Nordique":
@@ -1034,10 +1034,10 @@ class Control:
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
         bonus_charge = 0
-        if "Element [Terre] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Terre] Surchargé" in self.modele.liste_dartefacts_optionels:
             bonus_charge += 15
         bonus_artefact = 0
-        if "Fossile Figé" in self.modele.liste_dartefact_optionels:
+        if "Fossile Figé" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 7
         malus_stigma = 0
         if self.modele.stigma_monstre_positif == "Armure de Plates":
@@ -1049,7 +1049,7 @@ class Control:
         bonus_vulnerable = 0
         bonus_vulnerable = self.modele.monstre_niveau_de_vulnerabilite * 5
         bonus_charge = 0
-        if "Element [Sang] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Sang] Surchargé" in self.modele.liste_dartefacts_optionels:
             bonus_charge += 15
         malus_stigma = 0
         if self.modele.stigma_monstre_bonus == "Corps d'Acier":
@@ -1074,7 +1074,7 @@ class Control:
         if self.modele.aura_de_feu:
             bonus_talent += 3
         bonus_artefact = 0
-        if "Charbon Primordial" in self.modele.liste_dartefact_optionels:
+        if "Charbon Primordial" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 1
         malus_stigma = 0
         self.modele.TOURBONUSENNEMIENFEU = bonus_talent + bonus_artefact
@@ -1083,9 +1083,9 @@ class Control:
         if self.modele.ere_glaciaire:
             bonus_talent += 3
         bonus_artefact = 0
-        if "Miette de Pain Congelée" in self.modele.liste_dartefact_optionels:
+        if "Miette de Pain Congelée" in self.modele.liste_dartefacts_optionels:
             bonus_artefact = 2
-        if "Saphir de Gel" in self.modele.liste_dartefact_optionels:
+        if "Saphir de Gel" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 1
         malus_stigma = 0
         if self.modele.stigma_monstre_bonus == "Nordique":
@@ -1133,7 +1133,7 @@ class Control:
         if self.modele.est_gele:
             bonus_gel = 50
         bonus_artefact = 0
-        if "Bandeau Catharsis" in self.modele.liste_dartefact_optionels:
+        if "Bandeau Catharsis" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 10
         bonus_hyde = 0
         if self.modele.miss_hyde_transformation :
@@ -1151,7 +1151,7 @@ class Control:
         if self.modele.miss_hyde_transformation :
             bonus_hyde = 50
         bonus_artefact = 0
-        if "Bandeau Catharsis" in self.modele.liste_dartefact_optionels:
+        if "Bandeau Catharsis" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 15
         bonus_stigma = 0
         if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
@@ -1215,14 +1215,14 @@ class Control:
         malus_alteration_etat = 0
         if self.modele.est_maudit_par_le_mana:
             malus_alteration_etat = 75
-            if "Morceau de Plomb" in self.modele.liste_dartefact_optionels:
+            if "Morceau de Plomb" in self.modele.liste_dartefacts_optionels:
                 malus_alteration_etat = 40
         self.modele.BONUSCOUTMALEDICTIONMANA = malus_alteration_etat
         # cout vie malediction
         malus_alteration_etat = 0
         if self.modele.est_maudit_par_la_vie or self.modele.est_maudit_par_le_gold:
             malus_alteration_etat = 10
-            if "Chaperon Rouge" in self.modele.liste_dartefact_optionels:
+            if "Chaperon Rouge" in self.modele.liste_dartefacts_optionels:
                 malus_alteration_etat = 6.5
         self.modele.BONUSCOUTMALEDICTIONVIEOUGOLD = malus_alteration_etat
         #chance du monstre de faire un sort critique :
@@ -2648,20 +2648,20 @@ class Control:
         if self.modele.commence_le_combat_confus:
             self.modele.est_maudit_par_les_items = True
             self.modele.est_maudit_par_les_items_nombre_tour += 5
-        if "Char Leclerc 3ème Génération à Dispositif GALIX, Canon Principal 120mm et Armement Secondaire à Mitrailleuse 12,7 mm Coaxiale et Mitrailleuse de 7,62 mm en Superstructure" in self.modele.liste_dartefact_optionels:
+        if "Char Leclerc 3ème Génération à Dispositif GALIX, Canon Principal 120mm et Armement Secondaire à Mitrailleuse 12,7 mm Coaxiale et Mitrailleuse de 7,62 mm en Superstructure" in self.modele.liste_dartefacts_optionels:
             self.AppliqueTank()
-        if "Mage" in self.modele.liste_dartefact_optionels:
+        if "Mage" in self.modele.liste_dartefacts_optionels:
             self.AppliqueMage()
         if "Boss Blessé" in self.modele.player_tags:
             degat = round(self.modele.monstre_points_de_vie_max * 0.15)
             self.modele.monstre_points_de_vie -= degat
-        if "Totem de la Force" in self.modele.liste_dartefact_optionels:
+        if "Totem de la Force" in self.modele.liste_dartefacts_optionels:
             self.modele.utilise_fruit_jindagee = True
             self.modele.utilise_fruit_jindagee_nombre_tour += 3
-        if "Totem de la Sagesse" in self.modele.liste_dartefact_optionels:
+        if "Totem de la Sagesse" in self.modele.liste_dartefacts_optionels:
             self.modele.utilise_fruit_aatma = True
             self.modele.utilise_fruit_aatma_nombre_tour += 3
-        if "Totem du Courage" in self.modele.liste_dartefact_optionels:
+        if "Totem du Courage" in self.modele.liste_dartefacts_optionels:
             nombre_aleatoire = random.randint(1, 5)
             if nombre_aleatoire == 1:
                 self.modele.accumulation_chance_brulure += 4
@@ -2875,7 +2875,7 @@ class Control:
             self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
         if self.modele.points_de_endurance > self.modele.points_de_endurance_max:
             self.modele.points_de_endurance = self.modele.points_de_endurance_max
-        if self.modele.points_de_endurance < 0 and not "Couronne Sacrée" in self.modele.liste_dartefact_optionels:
+        if self.modele.points_de_endurance < 0 and not "Couronne Sacrée" in self.modele.liste_dartefacts_optionels:
             self.modele.points_de_endurance = 0
 
     def EffetStigmaToucherDeMidas(self):
@@ -3207,7 +3207,7 @@ class Control:
         # a cause de letat de choc
         elif self.modele.monstre_en_etat_de_choc:
             degat = 15
-            if "Orbe de Disruption" in self.modele.liste_dartefact_optionels:
+            if "Orbe de Disruption" in self.modele.liste_dartefacts_optionels:
                 degat += 10
             commentaire = (
                 f"...et récupère son mana.\nIl perd {degat} points de vie a cause de son réservoir de mana troué."
@@ -3221,7 +3221,7 @@ class Control:
                 self.modele.monstre_en_etat_de_choc = False
             else:
                 self.modele.monstre_points_de_vie -= degat
-            if "Lame Spectrale" in self.modele.liste_dartefact_optionels:
+            if "Lame Spectrale" in self.modele.liste_dartefacts_optionels:
                 mana_recupere = round(self.modele.points_de_mana_max * 0.1)
                 self.RecouvrementDeMana(mana_recupere)
                 self.EquilibragePointsDeVieEtManaEtEndurance()
@@ -3503,7 +3503,7 @@ class Control:
                 self.modele.est_en_feu = False
                 self.modele.est_en_feu_degat = 0
                 commentaire += "\nVous n'êtes plus en feu !"
-                if "Pin's Extincteur" in self.modele.liste_dartefact_optionels:
+                if "Pin's Extincteur" in self.modele.liste_dartefacts_optionels:
                     commentaire += "\nVotre Pin's se met à vibrer. Vous reprenez 10 pv et 10 pm !"
                     self.modele.points_de_vie += 10
                     self.modele.points_de_mana += 10
@@ -3544,7 +3544,7 @@ class Control:
         # plus d'utilisation d'item
         if self.modele.est_maudit_par_les_items:
             self.modele.est_maudit_par_les_items_nombre_tour -= 1
-            if "Bague de l'Âne" in self.modele.liste_dartefact_optionels:
+            if "Bague de l'Âne" in self.modele.liste_dartefacts_optionels:
                 self.modele.est_maudit_par_les_items_nombre_tour = 0
             if self.modele.est_maudit_par_les_items_nombre_tour == 0:
                 self.modele.est_maudit_par_les_items = False
@@ -3936,7 +3936,7 @@ class Control:
                                 commentaire += ("\nVotre lien avec la terre fait qu'elle remonte des richesse souterraines"
                                             " à la mort de l'ennemi pour vous féliciter de votre victoire.\nVous récuperez"
                                             f" {(nombre_de_gold_gagne * 2)} golds  !")
-                            if "Bandeau Teinté" in self.modele.liste_dartefact_optionels:
+                            if "Bandeau Teinté" in self.modele.liste_dartefacts_optionels:
                                 commentaire += ("\nVous récuperez les golds invoqués par votre bandeau pour contrebalancer les malheurs de votre combat."
                                                 f"\nVous récuperez {self.modele.nombre_de_tours} golds !")
                                 self.Player.nombre_de_gold += self.modele.nombre_de_tours
@@ -3982,7 +3982,7 @@ class Control:
                         self.Player.points_de_mana = 0
                         self.vue.AfficheRecompense(commentaire)
                     bonus_charge = 0
-                    if "Element [Ame] Surchargé" in self.modele.liste_dartefact_optionels:
+                    if "Element [Ame] Surchargé" in self.modele.liste_dartefacts_optionels:
                         bonus_charge += 1
                     self.Player.nombre_de_monstres_tues += 1 + bonus_charge
                     commentaire = f"Le nombre d'âmes que vous avez absorbé passe à {self.Player.nombre_de_monstres_tues}."
@@ -4304,7 +4304,7 @@ class Control:
             self.EffetStigmaFlemme()
         elif self.modele.stigma_joueur_negatif == "Ange Déchue":
             self.EffetStigmaAngeDechue()
-        if "Mage" in self.modele.liste_dartefact_optionels:
+        if "Mage" in self.modele.liste_dartefacts_optionels:
             self.AppliqueMage()
         if self.modele.stigma_joueur_bonus == "Sanjiva":
             self.EffetStigmaSanjiva()
@@ -4366,13 +4366,13 @@ class Control:
             self.EffetGardienDeAme()
         if "Voluntad U Wíinkilal" in self.modele.monstre_tags:
             self.EffetGardienDeCorps()
-        if "Canigou" in self.modele.liste_dartefact_optionels:
+        if "Canigou" in self.modele.liste_dartefacts_optionels:
             self.EffetCanigou()
-        if "Epée de Damocles" in self.modele.liste_dartefact_optionels:
+        if "Epée de Damocles" in self.modele.liste_dartefacts_optionels:
             self.EffetEppeeDamocles()
-        if "Morceau d'Ether Fragile" in self.modele.liste_dartefact_optionels:
+        if "Morceau d'Ether Fragile" in self.modele.liste_dartefacts_optionels:
             self.EffetMorceauEtherFragile()
-        if "Eau Bénite" in self.modele.liste_dartefact_optionels:
+        if "Eau Bénite" in self.modele.liste_dartefacts_optionels:
             self.EffetEauBenite()
 
     def EffetImpotent(self):
@@ -4383,10 +4383,10 @@ class Control:
 
     def AppliqueMage(self):
         if self.modele.points_de_vie < 10:
-            commentaire("Vos points de vie sont critiques, vous avez du mal a garder les yeux ouverts...")
-            commentaire_effet("...et l'ennemi en profite pour assener un coup magistral dans la tête de la Mage qui vous accompagnait.\nVous prenez pleine conscience de son sort alors qu'une flaque de sang se forme sous sa tête.")
-            self.Player.liste_dartefact_optionels.remove("Mage")
-            self.modele.liste_dartefact_optionels.remove("Mage")
+            commentaire = "Vos points de vie sont critiques, vous avez du mal a garder les yeux ouverts..."
+            commentaire_effet = "...et l'ennemi en profite pour assener un coup magistral dans la tête de la Mage qui vous accompagnait.\nVous prenez pleine conscience de son sort alors qu'une flaque de sang se forme sous sa tête."
+            self.Player.liste_dartefacts_optionels.remove("Mage")
+            self.modele.liste_dartefacts_optionels.remove("Mage")
             self.vue.AfficheMage(commentaire, commentaire_effet)
         else:
             commentaire = "La Mage qui vous accompagne lance un sort sur l'ennemi ..."
@@ -5119,21 +5119,21 @@ class Control:
             liste_alteration_joueur.append("[Folie]")
         if self.modele.utilise_orbe_de_furie:
             liste_alteration_joueur.append("[Furie]")
-        if "Element [Glace] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Glace] Surchargé" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Element {Glace} Surchargé]")
-        if "Element [Foudre] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Foudre] Surchargé" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Element {Foudre} Surchargé]")
-        if "Element [Feu] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Feu] Surchargé" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Element {Feu} Surchargé]")
-        if "Element [Terre] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Terre] Surchargé" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Element {Terre} Surchargé]")
-        if "Element [Sang] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Sang] Surchargé" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Element {Sang} Surchargé]")
-        if "Element [Corps] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Corps] Surchargé" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Element {Corps} Surchargé]")
-        if "Element [Ame] Surchargé" in self.modele.liste_dartefact_optionels:
+        if "Element [Ame] Surchargé" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Element {Ame} Surchargé]")
-        if "Canigou" in self.modele.liste_dartefact_optionels:
+        if "Canigou" in self.modele.liste_dartefacts_optionels:
             liste_alteration_joueur.append("[Canigou]")
         if self.modele.mutagene_bleu_utilise or self.modele.grand_mutagene_bleu_utilise:
             liste_alteration_joueur.append("[Teinte de Saphir]")
@@ -5413,7 +5413,7 @@ class Control:
                     if nombre_aleatoire < pourcentage_de_critique:
                         commentaire_a_afficher = caracteristique_du_techniques[8]
                         degat += degat_critique
-                        if "Pièce Fondue" in self.modele.liste_dartefact_optionels:
+                        if "Pièce Fondue" in self.modele.liste_dartefacts_optionels:
                             commentaire_a_afficher += "\nL'artefact [Pièce Fondue] maudit l'ennemi !"
                             self.modele.monstre_est_maudit = True
                             self.modele.monstre_est_maudit_nombre_tour += 2
@@ -5784,7 +5784,7 @@ class Control:
                     if nombre_aleatoire < pourcentage_de_critique:
                         degat_de_base += degat_critique
                         commentaire_a_afficher += "\nCoup critique !"
-                        if "Pièce Fondue" in self.modele.liste_dartefact_optionels:
+                        if "Pièce Fondue" in self.modele.liste_dartefacts_optionels:
                             commentaire_a_afficher += "\nL'artefact [Pièce Fondue] maudit l'ennemi !"
                             self.modele.monstre_est_maudit = True
                             self.modele.monstre_est_maudit_nombre_tour += 2
@@ -6232,7 +6232,7 @@ class Control:
 
             nombre_aleatoire_qui_definit_si_le_sort_est_gratuit = 50
 
-            if "Serment d'Heimdall" in self.modele.liste_dartefact_optionels:
+            if "Serment d'Heimdall" in self.modele.liste_dartefacts_optionels:
                 nombre_aleatoire_qui_definit_si_le_sort_est_gratuit = random.randint(0, 100)
 
             if nombre_aleatoire_qui_definit_si_le_sort_est_gratuit in range(1, 4):
@@ -6272,10 +6272,10 @@ class Control:
             cout_vie_a_appliquer = True
         # checke si le joueur a assez d'endurance. Non = affichage raison.
         if ((self.modele.points_de_endurance < cout_endurance and not
-            ("Couronne Sacrée" in self.modele.liste_dartefact_optionels))
+            ("Couronne Sacrée" in self.modele.liste_dartefacts_optionels))
             or
             (self.modele.points_de_endurance <= 0 and
-            ("Couronne Sacrée" in self.modele.liste_dartefact_optionels))
+            ("Couronne Sacrée" in self.modele.liste_dartefacts_optionels))
         ):
             affichage_raison_technique_impossible = "Vous tentez d'utiliser la technique...mais vous vous effondrez, haletant, sur le sol de l'arène."
         # checke si le jjoueur a assez de vie. Non = affichage raison.
@@ -7274,7 +7274,7 @@ class Control:
                                        "\nCela vous laisse le temps de réfléchir, et vous décidez de laisser la kikimora tranquille."
                                        "\nPensez, cela serait honteux d'aller aggresser quelqu'un qui n'est plus sur le champ de bataille !")
                     self.vue.AfficheActionKikimora(commentaire)
-            if "Ecaille d'Ouroboros" in self.modele.liste_dartefact_optionels:
+            if "Ecaille d'Ouroboros" in self.modele.liste_dartefacts_optionels:
                 commentaire = "l'Ecaille d'Ouroboros réagit a votre sort, et vous reprenez 2 points de vie !"
                 self.modele.points_de_vie += 2
                 self.EquilibragePointsDeVieEtManaEtEndurance()
@@ -7315,7 +7315,7 @@ class Control:
                 if nom_de_litem == "Feuille Jindagee":
                     self.modele.utilise_feuille_jindagee = True
                     nombre_tour = 3
-                    if "Larme d'Yggdrasil" in self.modele.liste_dartefact_optionels:
+                    if "Larme d'Yggdrasil" in self.modele.liste_dartefacts_optionels:
                         nombre_tour += 3
                     self.modele.utilise_feuille_jindagee_nombre_tour += nombre_tour
                     soin = 5 + round(self.modele.points_de_vie_max * 0.05)
@@ -7327,7 +7327,7 @@ class Control:
                 elif nom_de_litem == "Fruit Jindagee":
                     self.modele.utilise_fruit_jindagee = True
                     nombre_tour = 3
-                    if "Larme d'Yggdrasil" in self.modele.liste_dartefact_optionels:
+                    if "Larme d'Yggdrasil" in self.modele.liste_dartefacts_optionels:
                         nombre_tour += 3
                     self.modele.utilise_fruit_jindagee_nombre_tour += nombre_tour
                     soin = 10 + round(self.modele.points_de_vie_max * 0.1)
@@ -7340,7 +7340,7 @@ class Control:
                 if nom_de_litem == "Feuille Aatma":
                     self.modele.utilise_feuille_aatma = True
                     nombre_tour = 3
-                    if "Larme d'Yggdrasil" in self.modele.liste_dartefact_optionels:
+                    if "Larme d'Yggdrasil" in self.modele.liste_dartefacts_optionels:
                         nombre_tour += 3
                     self.modele.utilise_feuille_aatma_nombre_tour += nombre_tour
                     soin = 5 + round(self.modele.points_de_mana_max * 0.05)
@@ -7352,7 +7352,7 @@ class Control:
                 elif nom_de_litem == "Fruit Aatma":
                     self.modele.utilise_fruit_aatma = True
                     nombre_tour = 3
-                    if "Larme d'Yggdrasil" in self.modele.liste_dartefact_optionels:
+                    if "Larme d'Yggdrasil" in self.modele.liste_dartefacts_optionels:
                         nombre_tour += 3
                     self.modele.utilise_fruit_aatma_nombre_tour += nombre_tour
                     soin = 10 + round(self.modele.points_de_mana_max * 0.1)
@@ -7382,11 +7382,11 @@ class Control:
                     self.modele.monstre_est_vulnerable = True
                     self.modele.monstre_est_vulnerable_nombre_tour += 3
                     self.modele.monstre_niveau_de_vulnerabilite = 10
-                if ("Gant de Midas" in self.modele.liste_dartefact_optionels) and self.modele.est_gele:
+                if ("Gant de Midas" in self.modele.liste_dartefacts_optionels) and self.modele.est_gele:
                     commentaire_item += "De plus, l'artefact [Gant de Midas] réagit au crystal et vous soigne de votre [Gelure] !"
                     self.modele.est_gele = False
                     self.modele.est_gele_nombre_tour = 0
-                if ("Gant d'Héphaïstos" in self.modele.liste_dartefact_optionels) and self.modele.est_en_feu:
+                if ("Gant d'Héphaïstos" in self.modele.liste_dartefacts_optionels) and self.modele.est_en_feu:
                     commentaire_item += "De plus, l'artefact [Gant d'Héphaïstos] réagit au crystal et vous soigne de votre [Brulure] !"
                     self.modele.est_en_feu = False
                     self.modele.est_en_feu_nombre_tour = 0
@@ -7404,7 +7404,7 @@ class Control:
                 if nom_de_litem == "Orbe de Furie":
                     self.modele.utilise_orbe_de_furie = True
                     self.modele.utilise_orbe_de_furie_nombre_tour = 2
-                    if "Larmes de Vénus" in self.modele.liste_dartefact_optionels:
+                    if "Larmes de Vénus" in self.modele.liste_dartefacts_optionels:
                         self.modele.utilise_orbe_de_furie_nombre_tour += 1
                         commentaire_item = ("Vous tenez l'orbe entre vos main et plongez votre regard dans la chose furieuse qui tourne a l'interieur."
                                             "\nElle rentre alors dans votre esprit et augmente de maniere significative les degats de vos deux prochaines attaque !")
@@ -7414,7 +7414,7 @@ class Control:
                 elif nom_de_litem == "Orbe de Folie":
                     self.modele.utilise_orbe_de_folie = True
                     self.modele.utilise_orbe_de_folie_nombre_tour = 2
-                    if "Larmes de Vénus" in self.modele.liste_dartefact_optionels:
+                    if "Larmes de Vénus" in self.modele.liste_dartefacts_optionels:
                         self.modele.utilise_orbe_de_folie_nombre_tour += 1
                         commentaire_item = ("Vous tenez l'orbe entre vos main et plongez votre regard dans la chose folle qui tourne a l'interieur."
                                             "\nElle rentre alors dans votre esprit et augmente de maniere significative les degats de vos deux prochains sorts !")
@@ -7935,7 +7935,7 @@ class Control:
                 "L'assaut des flamelettes s'arrete enfin."
                 "\nEt vous les avez tous esquivés !"
             )
-            if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -8517,7 +8517,7 @@ class Control:
                                  " l'ennemi regarder avec confusion la paume de sa main, puis se plaindre de la"
                                  " trahison d'une personne que vous ne voyez pas.\nCepandant, le mana dans la salle vous permet de recharger un peu vos propres réserves.")
             commentaire_effet += f"\nVous regagnez {mana_gagne} points de mana !"
-            if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire_effet += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -9267,7 +9267,7 @@ class Control:
         nombre_aleatoire = random.randint(0, 100)
         if nombre_aleatoire <= 25:
             commentaire_degat = ("Mais le programme plante !")
-            if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire_degat += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -9299,7 +9299,7 @@ class Control:
         nombre_aleatoire = random.randint(0, 100)
         if nombre_aleatoire <= 25:
             commentaire_degat = ("Mais le programme plante !")
-            if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire_degat += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -9541,7 +9541,7 @@ class Control:
         else:
             commentaire_effet = ("Mais une erreur de calcul dans le traitement des rayons de lumière fait que le laser"
                            " s'éclate en ensemble chaotique de plus petits lasers qui laissent sur les murs de profonds sillages carbonisés.")
-            if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire_effet += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -9673,7 +9673,7 @@ class Control:
             commentaire_reussite = ("Vous amenez votre lame devant vous et lui faites faire une rotation à 90°."
                                     "\nLa pièce frappe de plein fouet votre lame et se fait devier vers le plafond."
                                     "\n \nVous la récuperez à sa descente et gagnez 1 gold !")
-            if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire_reussite += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -9697,7 +9697,7 @@ class Control:
                                     f"\n \nVous revenez à vous mais sentez que {mana_perdu} points de mana ont disparu de votre réserve !")
         else:
             commentaire_reussite = ("Vous fermez les yeux devant la lumière magique, et ne les rouvrez que lorsque la salle redevient normale.")
-            if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire_reussite += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -9954,7 +9954,7 @@ class Control:
             else:
                 commentaire_a_afficher = caracteristique_du_techniques[6]
                 commentaire_degat = "L'ennemi ne vous inflige aucun dégât."
-                if "Tiare de Suie" in self.modele.liste_dartefact_optionels:
+                if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
                     commentaire_a_afficher += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
                     self.modele.beni_par_feu_sacre = True
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
@@ -10357,19 +10357,19 @@ class Control:
             self.modele.points_de_vie += soin
             self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire = f"...et reprenez {soin} points de vie."
-        if "Chapelet de Moine" in self.modele.liste_dartefact_optionels:
+        if "Chapelet de Moine" in self.modele.liste_dartefacts_optionels:
             commentaire += "\nDe plus, votre chapelet se met a briller d'un feu sacré, et vous devenez [Béni] pendant 1 tour !"
             self.modele.beni_par_feu_sacre = True
             self.modele.beni_par_feu_sacre_nombre_tour += 2
-        if "Dessin Nostalgique" in self.modele.liste_dartefact_optionels:
+        if "Dessin Nostalgique" in self.modele.liste_dartefacts_optionels:
             commentaire += "\nDe plus, le dessin dans votre poche vous calme, et vous gagnez l'effet [Concentration] pendant 2 tours !"
             self.modele.concentre = True
             self.modele.concentre += 2
-        if "Basalte Immonde" in self.modele.liste_dartefact_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
+        if "Basalte Immonde" in self.modele.liste_dartefacts_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
             commentaire += "\nDe plus, votre morceau de basalte allume en vous une colère insatiable, et vous gagnez l'effet [Furie] pendant 1 tour !"
             self.modele.utilise_orbe_de_furie = True
             self.modele.utilise_orbe_de_furie_nombre_tour += 2
-        if "Jade Impardonnable" in self.modele.liste_dartefact_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
+        if "Jade Impardonnable" in self.modele.liste_dartefacts_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
             commentaire += "\nDe plus, votre morceau de jade allume en vous une folie née de l'angoisse, et vous gagnez l'effet [Folie] pendant 1 tour !"
             self.modele.utilise_orbe_de_folie = True
             self.modele.utilise_orbe_de_folie_nombre_tour += 2
@@ -10379,7 +10379,7 @@ class Control:
     def EnleveVieAuJoueur(self, degat):
         if self.modele.se_defend:
             reduction_de_degat = 0.25
-            if "Bocle de Philoctète" in self.modele.liste_dartefact_optionels:
+            if "Bocle de Philoctète" in self.modele.liste_dartefacts_optionels:
                 reduction_de_degat = 0.4
             degat = round ((1 - reduction_de_degat) * degat)
         degat = self.SiZeroRameneAUn(degat)
@@ -10406,7 +10406,7 @@ class Control:
     def RecupEndurance(self, endurance_recuperee):
         if not self.modele.est_maudit_par_endurance:
             bonus_charge = 0
-            if "Element [Corps] Surchargé" in self.modele.liste_dartefact_optionels:
+            if "Element [Corps] Surchargé" in self.modele.liste_dartefacts_optionels:
                 bonus_charge += 4
             gain_endurance = endurance_recuperee + self.modele.numero_de_letage + bonus_charge
             self.modele.points_de_endurance += gain_endurance
@@ -10432,7 +10432,7 @@ class Control:
         self.modele.points_de_mana += points_de_mana_recouverts
         if self.modele.points_de_mana > self.modele.points_de_mana_max :
             self.modele.points_de_mana = self.modele.points_de_mana_max
-        if ["Collier de Nephilim"] in self.modele.liste_dartefact_optionels:
+        if ["Collier de Nephilim"] in self.modele.liste_dartefacts_optionels:
             self.modele.points_de_vie += round(points_de_mana_recouverts // 2)
             if self.modele.points_de_vie > self.modele.points_de_vie_max :
                 self.modele.points_de_vie = self.modele.points_de_vie_max

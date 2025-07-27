@@ -1962,39 +1962,39 @@ ANNUAIREPRIXVILLAGE = {
 
     "Clé" : [ # clé des étages
         {
-            "Fluide Alien" : 5,
-            "Roche Glycérine" : 5,
-            "Poil Gelé" : 5,
-            "Fragment Insatiable" : 5
+            "Fluide Alien" : 3,
+            "Roche Glycérine" : 3,
+            "Poil Gelé" : 3,
+            "Fragment Insatiable" : 2
         },
         {
-            "Moustache de Chat" : 5,
+            "Moustache de Chat" : 3,
             "Fragment Osseux" : 2,
-            "Iris du Malheur" : 5,
+            "Iris du Malheur" : 3,
             "Essence Astrale" : 15,
         },
         {
             "Coeur Gravitaire" : 15,
-            "Poil Gelé" : 15,
-            "Iris du Malheur" : 15,
+            "Poil Gelé" : 10,
+            "Iris du Malheur" : 8,
         },
         {
-            "Composants Electroniques" : 10,
-            "Eclat de Crystal" : 10,
-            "Poussière Dorée Animée" : 10
-        },
-        {
+            "Composants Electroniques" : 7,
             "Eclat de Crystal" : 7,
-            "Pilules de Roulette" : 7,
-            "Fragment de Jade" : 7,
-            "Poussière Dorée Animée" : 7,
-            "Gemme Bleue" : 7,
+            "Poussière Dorée Animée" : 7
         },
         {
-            "Fragment Mélioratif" : 15,
-            "Fragment Sophiste" : 15,
-            "Fragment de Fatalité" : 15,
-            "Fragment Insatiable" : 15,
+            "Eclat de Crystal" : 5,
+            "Pilules de Roulette" : 4,
+            "Fragment de Jade" : 5,
+            "Poussière Dorée Animée" : 6,
+            "Gemme Bleue" : 4,
+        },
+        {
+            "Fragment Mélioratif" : 10,
+            "Fragment Sophiste" : 10,
+            "Fragment de Fatalité" : 10,
+            "Fragment Insatiable" : 10,
         },
     ],
     
@@ -2002,25 +2002,25 @@ ANNUAIREPRIXVILLAGE = {
 
     "Carte" : [ # carte des étages
         {
-            "Carte Mentale" : 10
+            "Carte Mentale" : 5
         },
         {
-            "Carte Mentale" : 12
+            "Carte Mentale" : 7
         },
         {
-            "Carte Mentale" : 14
+            "Carte Mentale" : 9
         },
         {
-            "Carte Mentale" : 16
+            "Carte Mentale" : 11
         },
         {
-            "Carte Mentale" : 18
+            "Carte Mentale" : 13
         },
         {
-            "Carte Mentale" : 20
+            "Carte Mentale" : 15
         },
         {
-            "Carte Mentale" : 22
+            "Carte Mentale" : 17
         },
     ],
 }
@@ -4804,7 +4804,7 @@ class TraderUsage:
                                 self.BuyUppgrade(prix_de_luppgrade)
 
                                 print(f"Le marchand prend vos materiaux et vous donne un bon de commande sur lequel est écrit : [{objet_choisi} de niveau {level_actuel_de_uppgrade + 1}].")
-                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé dans une des salles de l'étage 1, et vous remercie de votre achat !")
+                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé chez le marchand, et vous remercie de votre achat !")
                                 Affichage.EntreePourContinuer()
 
                                 Sove.ModifieLivraisonDansSove("Ajout", objet_choisi)
@@ -4984,7 +4984,7 @@ class TraderUsage:
                     print("*Je disais donc, voici en gros les effets que nos articles auront sur le prochain aventurier que vous allez sponsoriser :*")
                     Affichage.EntreePourContinuer()
                     print("  - Le Chapeau")
-                    print("*Tissé avec la plus grande délicatesse, il augmente l'intelligence de 3 points par niveaux.*")
+                    print("*Tissé avec la plus grande délicatesse, il augmente l'intelligence de 4 points par niveaux.*")
                     Affichage.EntreePourContinuer()
                     print("  - Les Boucles d'Oreilles")
                     print("*Il y a un très subtil patterne dans les mailles du bijou qui orne ces boucles, et ce patterne augmente le taux de sort critique de 2% par niveaux.*")
@@ -4993,10 +4993,10 @@ class TraderUsage:
                     print("*Un chef d'oeuvre ! Des techniques aiguisées pendant des siècles qui augmentent le taux de techniques critiques de 2% par niveaux !*")
                     Affichage.EntreePourContinuer()
                     print("  - La Cotte de Maille")
-                    print("*J'ai étudié moi même une cotte de maille enchantée venant des Tout-Premiers, et cette réplique donne 3 points de défence supplémentaires par niveaux.*")
+                    print("*J'ai étudié moi même une cotte de maille enchantée venant des Tout-Premiers, et cette réplique donne 4 points de défence supplémentaires par niveaux.*")
                     Affichage.EntreePourContinuer()
                     print("  - Le Bracelet")
-                    print("*Un objet d'or fin qui mobilise le mana et le transforme en force, 3 points supplémentaires par niveaux.*")
+                    print("*Un objet d'or fin qui mobilise le mana et le transforme en force, 4 points supplémentaires par niveaux.*")
                     Affichage.EntreePourContinuer()
                     print("  - Les Gants")
                     print("*Ils sont renforcés au niveau des phalanges avec un alliage de cette roche qui compose les golem.*\n*Ca met plus de poid lors des attaques, et augmente les dégats critiques des techniques de 3 points par niveaux !*")
@@ -5106,7 +5106,7 @@ class TraderUsage:
                     print("Pack Premier Tour : un booster pack de produits a utiliser au premier tour sera donné a votre aventurier.")
                     print("Il comprend 1 fiole de poison, 1 sève d'exorcisme, 1 sève d'absolution, 1 Mutagène Rouge, 1 Mutagène Bleu et 1 Mutagène Vert par niveau.")
                     Affichage.EntreePourContinuer()
-                    print("L'herboriste vous lache la tête et retroune a ses occupations, alors que vous regardez le sol quelques instants pour cacher votre embarras.")
+                    print("L'herboriste vous lache la tête et retourne a ses occupations, alors que vous regardez le sol quelques instants pour cacher votre embarras.")
                     Affichage.EntreePourContinuer()
             else:
                 while True:
@@ -5166,7 +5166,7 @@ class TraderUsage:
                                 self.BuyUppgrade(prix_de_luppgrade)
 
                                 print(f"Le marchand prend vos materiaux et vous donne un bon de commande sur lequel est écrit : [{objet_choisi} de niveau {level_actuel_de_uppgrade + 1}].")
-                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé dans une des salles de l'étage 1, et vous remercie de votre achat !")
+                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé chez le marchand, et vous remercie de votre achat !")
                                 Affichage.EntreePourContinuer()
 
                                 Sove.ModifieLivraisonDansSove("Ajout", objet_choisi)
@@ -7062,7 +7062,7 @@ class Affiche:
             liste_commentaire.append(commentaire)
             commentaire = (
                 "Le sarcophage se souleve alors et une forme vaguement humaine zébrée de lignes de coutures avec un masque de pharaon en sort."
-                "\n*Le roi, dans sa folie, s'est emparé des cadavres de ses soi-disants ennemis qu'il a cousut entre eux. puis il a mit l'âme de son frère a l'interieur.*"
+                "\n*Le roi, dans sa folie, s'est emparé des cadavres de ses soi-disants ennemis qu'il a cousut entre eux. Puis, il a mit l'âme de son frère a l'interieur.*"
                 "\n*Je suis un monstre, une atrocitée, mais sur laquelle il avait enfin le controle que son esprit malade requit.*\n*Un Roi des sables du sud que l'on a enfermé dans ce corps....* "
             )
             liste_commentaire.append(commentaire)
@@ -10959,7 +10959,7 @@ class Floor:
                         "Vous faites la position du lotus au dessus du ley, et meditez."
                     )
                     print(
-                        "Votre esprit se faire remplir de sons, couleurs, et souvenirs que vous n'aviez jamais experiencé auparavant."
+                        "Votre esprit se fait remplir de sons, couleurs, et souvenirs que vous n'aviez jamais experiencé auparavant."
                     )
                     Affichage.EntreePourContinuer()
                     print(
@@ -12384,7 +12384,7 @@ class Floor:
                         "Les maisons qui longent l’artère principale sont aussi diverses que des sculptures exposées en plein air.",
                         "Une maison à la forme d’un cube géant attire votre attention, son propriétaire, vêtu d'une tunique rouge, vante les mérites de son toit en forme de prisme.",
                         "Un homme ajuste une étrange girouette en forme de dragon sur le toit de sa maison circulaire, lui donnant un air fantastique.",
-                        "Vous passez devant une maison haute et fine, presque tordue, ses fenêtres triangulaires brillent encore sous la lumière du crépuscule.",
+                        "Vous passez devant une maison haute et fine, presque tordue, ses fenêtres triangulaires brillent encore sous la lumière du jour.",
                         "Les pavés sous vos pieds semblent légèrement irréguliers, ajoutant un charme ancien à cette rue moderne.",
                         "Un enfant court entre deux maisons, son rire résonne tandis qu'il disparaît derrière une porte en bois sculpté.",
                         "Les propriétaires d’une maison aux murs en mosaïque colorée sont assis sur le seuil, discutant avec des voisins curieux.",
@@ -12393,7 +12393,7 @@ class Floor:
                         "Un passant s’arrête pour observer une maison en forme de dôme, en discutant avec l'architecte qui semble donner des détails techniques aux curieux.",
                         "Les lanternes de la rue commencent à s’allumer, leur lumière orangée se reflétant sur les façades d’une maison aux motifs floraux.",
                         "Une maison construite entièrement en bois sombre attire l’œil, avec ses sculptures minutieuses d’animaux qui décorent la façade.",
-                        "Une femme, vêtue de façon élégante, sort d’une maison aux allures de manoir gothique, le crépuscule accentue les contours sombres de l’édifice.",
+                        "Une femme, vêtue de façon élégante, sort d’une maison aux allures de manoir gothique, le sommeil a son zénith accentue les contours sombres de l’édifice.",
                         "Les maisons, si différentes les unes des autres, semblent être en compétition pour attirer les regards des passants.",
                         "Vous passez devant une maison étrange, avec une porte minuscule et un toit démesurément grand, rappelant une maison de conte de fées.",
                         "L’air est chaud, et les bruits des conversations des habitants se mêlent aux craquements du bois des maisons anciennes.",
@@ -17303,7 +17303,7 @@ class Observe:
                     Save.FromSaveFileToDict()
                     Save.FromDictToPlayer()
                     Affichage.EntreePourContinuer()
-                    print("REECRITURE EN COURS...")
+                    print("REECRITURE EN COURS DES DONNEES INVALIDES DANS SAVE.TXT...")
                     # remplacement des donnees de sauvegarde pour secret.
                     dir_path = os.path.dirname(os.path.realpath(__file__))
                     chemin_du_fichier_save = dir_path + "\\save.txt"

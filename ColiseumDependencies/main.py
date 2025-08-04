@@ -292,7 +292,7 @@ LISTERUMEURS = [
     "Les chercheurs d'artefacts se servant des positions des salles oublient souvent que l'arene prend un carré de 3x3 au centre de la carte. Par exemple : la première salle a droite de l'arène n'est pas aux coordonnées x=1 y=0, mais x=2 y=0.",
     "On peut rencontrer 4 couleurs de brazier differents dans les salles : bleu vert rouge ou noir. Il y a 3 artefacts que l'on peut obtenir en sacrifiant un gros nombre du bon item au brazier noir, et l'un de ces items sacrifiables est le fruit jindagee.",
     "Sacrifier un item dans le brazier vert permet d'augmenter une de ses caractéristiques, en référence avec l'item sacrifié.",
-    "Sacrifier un item dans le brazier rouge permet d'en avoir un autre de manière alétaoire. Sacrifiez le dans le brazier bleu, et vous aurez la version améliorée de cet item.", # moitié des rumeurs
+    "Sacrifier un item dans le brazier rouge permet d'en avoir un autre de manière aléatoire. Sacrifiez le dans le brazier bleu, et vous aurez la version améliorée de cet item.", # moitié des rumeurs
     "Il y à un Tout-Premier qui passe son temps a observer la lune dans la décharge à l'Ouest.\nApparemment, il avait trouvé toute les recettes du fabricateur et les auraient mises de manière cryptique, dans des histoires comme moyen mémo-technique, afin de s'en rapeller.",
     "Si il y a un monstre dopé a un étage, alors il y a aussi une salle étrange dans laquelle une bête féroce dort.\nLa corrélation entre les deux est incertaines, mais ce qui est sur, c'est que la bête n'est pas assez forte pour battre le boss toute seule.",
     "Certaines personnes auraient vu des symboles étranges sur le livre de la cigogne blueu au premier étage.\nElles sont sorties pour voir si elles étaient dans la bonne salle, et quand elles sont re-rentrées, les symboles avaient disparus.\nEt si on rentrait et sortiat de la salle jusqu'a voir les symboles ?",
@@ -4518,6 +4518,7 @@ class TraderUsage:
                         Sove.ModifieDechetsDansSove("Enleve", "Essence Dorée", 3)
                         Sove.ModifieArtefactDansSove("Ajout", artefact_choisi)
                         Sove.ModifieArtefactProposeDansSove("Enleve", artefact_choisi)
+                        liste_de_artefacts_possibles.remove(artefact_choisi)
 
                         if len(liste_de_artefacts_possibles) == 0:
                             artefact_choisi_aleatoirement = "Hors Stock"
@@ -5345,7 +5346,7 @@ class TraderUsage:
                             else:
                                 self.BuyUppgrade(prix_de_luppgrade)
 
-                                print(f"Vous murmurez vos souvenirs d'étages complets, et le Chuchoeur les dessine a la hate.")
+                                print(f"Vous murmurez vos souvenirs d'étages complets, et le Chuchoteur les dessine a la hate.")
                                 print("Il regarde ensuite ses dessins avec un regard fou, faisant une croix sur certains nombres et reliant certaines salles entre elles.")
                                 print("Puis, il sort un prototype de carte, sur laquelle sont écrit des millions de symboles différents, et chuchote quelques mots qui viennent se perdre dans les fibres de papier.")
                                 print(f"*Ca y est ! J'ai trouvé !*\n*Les Cartes des prochains voyageurs devraient maintenant pouvoir afficher la structure de l'étage {level_actuel_de_uppgrade + 4} !*")
@@ -6259,9 +6260,10 @@ class TraderUsage:
                 elif "Village Nuit" in liste_des_tags:
                     for number in range(26, 51):
                         liste_de_rumeurs_possibles.append(number)
-                for numero_de_rumeur in liste_de_rumeurs_possibles:
-                    if numero_de_rumeur in liste_de_rumeurs_entendues:
-                        liste_de_rumeurs_possibles.remove(numero_de_rumeur)
+                liste_de_rumeurs_possibles = [
+                    numero for numero in liste_de_rumeurs_possibles
+                    if numero not in liste_de_rumeurs_entendues
+                ]
 
                 liste_de_boissons = ["Diabolo Pêche", "Diabolo Kiwi", "Diabolo Citron", "Diabolo Fraise", "Jus de Cactus", "Jus de Fruit", "Smoothie au Brocoli", "Jus de Tomate", "Tabasco Extra-Fort", "Mayonnaise", "l'Air Pur qui Habite les Montagnes", "Cette Odeur de Vienoisserie devant les Boulangeries le Matin", "Lave en Fusion (sans sucre)", "Glaçons", "Plutonium Enrichi", "Pétillant a la Grenadine", "Thé Vert", "Thé Verre", "Troie", "Filaments", "Fromage Rapé", "Particules Elementaires (sans alcool)", "Menthe de Sirop", "Café (sans cafféine) (sans gluten) (sans sucre) (sans alcool) (sans eau) (sans grains de café) (sans café) (sans verre)", "Lait d'Amandes", "Chloroforme", "Sel", "Poivre", "Poussière et Autres Saletées Récupérées Sur Le Comptoir", "Terre", "Rien Du Tout (vous vouliez juste faire plaisir a la barman.. barwoman ?)", "verre de verre de verre de verre de verre de verre de verre de verre de verre de verre de verre de verre d'eau"]
                 boisson = random.choice(liste_de_boissons)
@@ -15572,7 +15574,7 @@ class Floor:
                             f"Vous gagnez {liste_recompense[cle]} points d'intelligence !"
                         )
                     elif cle == "Gold":
-                        gain_gold = Player.AddGoldToPlayer(liste_recompense[cle])
+                        gain_gold = Player.AddGoldToPlayer(liste_recompense[cle], True)
                         commentaire = f"Vous gagnez {gain_gold} golds !"
                     elif cle == "Vie":
                         Player.points_de_vie_max += liste_recompense[cle]
@@ -17439,13 +17441,16 @@ class Observe:
         )
         commentaire = "Dans l'eau bleutée, vous pouvez voir un profond abysse dans lequel se perd la lumière."
         nombre_aleatoire = random.randint(0, Player.points_de_mana_max)
-        if nombre_aleatoire == Player.points_de_mana:
+        nombre_aleatoire2 = random.randint(0, Player.points_de_mana_max)
+        nombre_aleatoire3 = random.randint(0, Player.points_de_mana_max)
+        print(nombre_aleatoire)
+        if Player.points_de_mana in [nombre_aleatoire, nombre_aleatoire2, nombre_aleatoire3]:
             chanceux = True
-            commentaire += "Et à l'interieur, une gigantesque baleine nage sereinement."
-        elif nombre_aleatoire == 0:
+            commentaire += " Et à l'interieur, une gigantesque baleine nage sereinement."
+        elif 0 in [nombre_aleatoire, nombre_aleatoire2, nombre_aleatoire3]:
             malchanceux = True
             commentaire += (
-                "Et tout au fond, une paire d'yeux qui vous regarde... fixement."
+                " Et tout au fond, une paire d'yeux qui vous regarde... fixement."
             )
         print(commentaire)
         print(
@@ -17956,33 +17961,33 @@ class Observe:
             time.sleep(2.5)
         ClearConsole()
         print("ET")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("LA")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("CHUTE")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("EST")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("INTERMINABLE")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print(
             "E  T     L  A     C  H  U  T  E     E  S  T     I  N  T  E  R  M  I  N  A  B  L  E"
         )
         Affichage.AfficheAvecUnTempsDattente(5)
         print("I N T E R M I N A B L E")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print("INTERMINABLE")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print("interminable")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print(" ._.__._..")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("  .___.")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("   ._.")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("    .")
-        Affichage.AfficheAvecUnTempsDattente(3)
+        Affichage.AfficheAvecUnTempsDattente(1)
         print("")
         Affichage.AfficheAvecUnTempsDattente(3)
         print("jjjejejeeeejeje")
@@ -17994,75 +17999,75 @@ class Observe:
         print("JEEEEEEEEEEEEEEEEEEEE Te")
         Affichage.AfficheAvecUnTempsDattente(1)
         print("J'ai fait un rêve.")
-        Affichage.AfficheAvecUnTempsDattente(10)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("Dedans, je jouais au coliseum.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("Une soirée banale, quoi.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("Et puis a un moment, j'ai vu de la couleur, des images.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("Des images perturbantes. C'est un jeu textuel après tout.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("Il n'est pas sensé y en avoir.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("Et puis j'ai vu un sourire.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("Il était...cruel.\nFroid.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("Tout droit sorti d'un documentaire animalier, ou d'une série policière.")
-        Affichage.AfficheAvecUnTempsDattente(8)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("Le moment ou le suspect fait comprendre qu'il joue avec les agents...")
-        Affichage.AfficheAvecUnTempsDattente(8)
-        print("Le moment ou la lionne comprend qu'elle a gagnée contre sa proie...")
-        Affichage.AfficheAvecUnTempsDattente(8)
+        Affichage.AfficheAvecUnTempsDattente(5)
+        print("Le moment ou la lionne voit sa rivale exilée...")
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("...un sourire pervers.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("...un sourire qui ne respecte pas la vie.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(4)
         print("...un sourire qui ne tient rien pour sacré.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(4)
         print("...un sourire...")
-        Affichage.AfficheAvecUnTempsDattente(5)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("...sadique.")
-        Affichage.AfficheAvecUnTempsDattente(5)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print(
             "Et puis je l'ai vu ouvrir sa bouche en grand, comme pour manger quelque chose."
         )
-        Affichage.AfficheAvecUnTempsDattente(8)
+        Affichage.AfficheAvecUnTempsDattente(4)
         print("Ce soir la, je crois que...")
-        Affichage.AfficheAvecUnTempsDattente(8)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("...j'ai perdu quelque chose.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print("Quelque chose de vital.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print("D'essentiel.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print("Des souvenirs, des sentiments, un bout de mon âme peut être ?")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("J'ai perdu quelque chose de vital.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print("Mais j'ai gagné une obsession.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(2)
         print(
             "Quand je me suis réveillé, on aurait dit que mon lit était devenu un étang."
         )
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print(
             "Dans cette flaque de transpiration, noire comme les ténèbres d'un abysse sans fond,"
         )
-        Affichage.AfficheAvecUnTempsDattente(8)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("J'y ai vu le reflet d'un mal qui m'a aggripé le bras.")
-        Affichage.AfficheAvecUnTempsDattente(8)
+        Affichage.AfficheAvecUnTempsDattente(4)
         print("Un mal fait de uns, de zéros, de zéros et de uns...")
         Affichage.AfficheAvecUnTempsDattente(12)
         print("...et de uns et de zéros...")
         Affichage.AfficheAvecUnTempsDattente(12)
         print("Quelque chose de digital, en tout point inoffensif.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(3)
         print("Je crois.")
-        Affichage.AfficheAvecUnTempsDattente(7)
+        Affichage.AfficheAvecUnTempsDattente(4)
         print("...")
-        Affichage.AfficheAvecUnTempsDattente(15)
+        Affichage.AfficheAvecUnTempsDattente(5)
         print("Il faut que je prenne plus de notes.")
         Affichage.AfficheAvecUnTempsDattente(5)
         StopAllMusic()
@@ -18274,7 +18279,7 @@ class Observe:
                     Affichage.EntreePourContinuer()
                     print("Meh. Peut etre pas.")
                     Affichage.EntreePourContinuer()
-                    Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("???", "MORS|ACERBIOR|EST|CUM|IN|NEGATIONE|ADHAESISTI|SICUT|MUSCAE|IN|CARNIVOR|PLANTAE|")
+                    Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("???", "MORS/ACERBIOR/EST/CUM/IN/NEGATIONE/ADHAESISTI/SICUT/MUSCAE/IN/CARNIVOR/PLANTAE/")
                     break
                 elif choix == 3:
                     numero_du_commentaire += 1
@@ -18391,7 +18396,7 @@ class Observe:
                         else:
                             commentaire = ""
                             for _ in range(1, 100):
-                                commentaire += "MORS|ACERBIOR|EST|CUM|IN|NEGATIONE|ADHAESISTI|SICUT|MUSCAE|IN|CARNIVOR|PLANTAE|"
+                                commentaire += "MORS/ACERBIOR/EST/CUM/IN/NEGATIONE/ADHAESISTI/SICUT/MUSCAE/IN/CARNIVOR/PLANTAE/"
         elif Player.boss_battu and (Player.nombre_dennemis_a_letage == 0):
             while True:
                 try:
@@ -20325,7 +20330,7 @@ def ShowRecup():
         14,
         100110,
         8624,
-        1512111113111013,
+        151211913131214,
         1342,
         1233,
         456852,
@@ -20365,7 +20370,7 @@ def ShowRecup():
             nom_de_limage = "python_properties_vue_Thread"  # page 13 (combo toutes pages donne seulement etage 0, etage 0 donne invitation.) a faire #
         elif choix == 14:
             nom_de_limage = "python_properties_modele"  # talent feu (e2) -
-        elif choix == 1512111113111013:
+        elif choix == 151211913131214:
             nom_de_limage = "python_properties_modele_Anox"  # talent glace (e4) -
         elif choix == 1233:
             nom_de_limage = "python_properties_main"  # talent foudre (e7) -
@@ -23378,7 +23383,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
     },
     "???" : {
         "jegardeleseigneurdevantmoisansrelâche;ilestàmadroite:jesuisinébranlable" : "paragraphe1",
-        "MORS|ACERBIOR|EST|CUM|IN|NEGATIONE|ADHAESISTI|SICUT|MUSCAE|IN|CARNIVOR|PLANTAE|" : "paragraphe2",
+        "MORS/ACERBIOR/EST/CUM/IN/NEGATIONE/ADHAESISTI/SICUT/MUSCAE/IN/CARNIVOR/PLANTAE/" : "paragraphe2",
         "INTERMINABLE" : "paragraphe3",
         "Montagnes d'or" : "paragraphe4",
         "Sérendipité" : "paragraphe5",

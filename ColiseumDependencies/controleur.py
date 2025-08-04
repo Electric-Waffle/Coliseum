@@ -2109,7 +2109,7 @@ class Control:
             self.modele.monstre_points_de_resistance = 8
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 220
-            self.modele.monstre_points_de_mana_max = 20
+            self.modele.monstre_points_de_mana_max = 30
             self.modele.monstre_liste_actions = {
                 "Lame de Feu": "Technique", #brule
                 "Lame de Gel": "Technique", #gele
@@ -2130,6 +2130,7 @@ class Control:
             self.modele.monstre_points_de_vie_max = 300
             self.modele.monstre_points_de_mana_max = 15
             self.modele.monstre_liste_actions = {
+                "Coup Anti-Magie": "Technique", #attaaque meme si protection [x]
                 "Lame de Feu": "Technique", #brule
                 "Lame de Gel": "Technique", #gele
                 "Lame Pourpre": "Technique", #draine
@@ -2613,7 +2614,7 @@ class Control:
                 nom_de_la_musique = f"alt_{self.Player.numero_boss_alt}_phase_1"
         else:
             nom_de_la_musique = f"boss_{numero_musique}"
-        if self.modele.etage_alternatif :
+        if self.modele.etage_alternatif and not self.modele.est_une_mimique :
             nom_de_la_musique += "_alt"
         musique = self.modele.CHEMINABSOLUMUSIQUE + nom_de_la_musique
         self.vue.AfficheMonstreLevelMusique(

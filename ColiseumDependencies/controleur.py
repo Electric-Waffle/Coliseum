@@ -4033,6 +4033,9 @@ class Control:
                         self.vue.AfficheOmnipotent(commentaire)
                     if self.modele.stigma_joueur_bonus == "Script":
                         self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Ennemis", self.modele.monstre_nom)
+                    if self.modele.possede_une_fee == False and "Fée dans un Bocal" in self.Player.liste_dartefacts_optionels:
+                        self.Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+                        self.Player.possede_une_fee = False
                 
         self.StopCombatSounds()
 

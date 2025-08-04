@@ -4644,7 +4644,8 @@ class TraderUsage:
                                 print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                 print("    Materiaux nécéssaires:")
                                 for materiau in prix_de_luppgrade:
-                                    print(f"      - {prix_de_luppgrade[materiau]} {materiau}")
+                                    nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                    print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                             print("\n")
 
                             numero += 1
@@ -4736,7 +4737,8 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau}")
+                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
                                 numero += 1
@@ -5128,7 +5130,8 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau}")
+                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
                                 numero += 1
@@ -5304,7 +5307,8 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau}")
+                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
                                 numero += 1
@@ -6132,7 +6136,8 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau}")
+                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
                                 numero += 1
@@ -11055,12 +11060,19 @@ class Floor:
                     print(f"Vous perdez {degat} points de vie.")
                     Affichage.EntreePourContinuer()
                     if Player.points_de_vie <= 0:
-                        StopAllMusic()
-                        PlaySound("death")
-                        print("Vous échouez a stopper le saignement, et perdez la vie.")
-                        Affichage.EntreePourContinuer()
-                        Player.player_tags.append("KIA")
-                        CheckForKIA()
+                        if Player.possede_une_fee == True and "Fée dans un Bocal" in Player.liste_dartefacts_optionels:
+                            Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+                            Player.possede_une_fee = False
+                            Player.points_de_vie = round(0.33 * Player.points_de_vie_max)
+                            print("Vous alliez mourir, mais votre fée sort de son bocal et vous sauve la mise. Ouf !")
+                            Affichage.EntreePourContinuer()
+                        else:
+                            StopAllMusic()
+                            PlaySound("death")
+                            print("Vous échouez a stopper le saignement, et perdez la vie.")
+                            Affichage.EntreePourContinuer()
+                            Player.player_tags.append("KIA")
+                            CheckForKIA()
                     else:
                         print(
                             "Le piège se ré-enclenche.\nEvitez de fouiller cette salle dans le futur !"
@@ -11668,12 +11680,19 @@ class Floor:
                     print(f"Vous perdez {degat} points de vie.")
                     Affichage.EntreePourContinuer()
                     if Player.points_de_vie <= 0:
-                        StopAllMusic()
-                        PlaySound("death")
-                        print("Vous échouez a stopper le saignement, et perdez la vie.")
-                        Affichage.EntreePourContinuer()
-                        Player.player_tags.append("KIA")
-                        CheckForKIA()
+                        if Player.possede_une_fee == True and "Fée dans un Bocal" in Player.liste_dartefacts_optionels:
+                            Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+                            Player.possede_une_fee = False
+                            print("Vous alliez mourir, mais votre fée sort de son bocal et vous sauve la mise. Ouf !")
+                            Player.points_de_vie = round(0.33 * Player.points_de_vie_max)
+                            Affichage.EntreePourContinuer()
+                        else :
+                            StopAllMusic()
+                            PlaySound("death")
+                            print("Vous échouez a stopper le saignement, et perdez la vie.")
+                            Affichage.EntreePourContinuer()
+                            Player.player_tags.append("KIA")
+                            CheckForKIA()
                 else:
                     print("Cepandant, des éclats de glace se forment aux endroits ou les flèches auraient du se planter.")
                     Affichage.EntreePourContinuer()
@@ -14688,12 +14707,19 @@ class Floor:
                             print(f"Vous perdez {degat} points de vie.")
                             Affichage.EntreePourContinuer()
                             if Player.points_de_vie <= 0:
-                                StopAllMusic()
-                                PlaySound("death")
-                                print("Vous échouez a stopper le saignement, et perdez la vie.")
-                                Affichage.EntreePourContinuer()
-                                Player.player_tags.append("KIA")
-                                CheckForKIA()
+                                if Player.possede_une_fee == True and "Fée dans un Bocal" in Player.liste_dartefacts_optionels:
+                                    Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+                                    Player.possede_une_fee = False
+                                    print("Vous alliez mourir, mais votre fée sort de son bocal et vous sauve la mise. Ouf !")
+                                    Player.points_de_vie = round(0.33 * Player.points_de_vie_max)
+                                    Affichage.EntreePourContinuer()
+                                else:
+                                    StopAllMusic()
+                                    PlaySound("death")
+                                    print("Vous échouez a stopper le saignement, et perdez la vie.")
+                                    Affichage.EntreePourContinuer()
+                                    Player.player_tags.append("KIA")
+                                    CheckForKIA()
                         else:
                             print("Cepandant, des éclats de glace se forment aux endroits ou les flèches auraient du se planter.")
                             Affichage.EntreePourContinuer()
@@ -14762,12 +14788,19 @@ class Floor:
                             print(f"Vous perdez {degat} points de vie.")
                             Affichage.EntreePourContinuer()
                             if Player.points_de_vie <= 0:
-                                StopAllMusic()
-                                PlaySound("death")
-                                print("Vous ne vous releverez jamais de cette explosion.")
-                                Affichage.EntreePourContinuer()
-                                Player.player_tags.append("KIA")
-                                CheckForKIA()
+                                if Player.possede_une_fee == True and "Fée dans un Bocal" in Player.liste_dartefacts_optionels:
+                                    Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+                                    Player.possede_une_fee = False
+                                    Player.points_de_vie = round(0.33 * Player.points_de_vie_max)
+                                    print("Vous alliez mourir, mais votre fée sort de son bocal et vous sauve la mise. Ouf !")
+                                    Affichage.EntreePourContinuer()
+                                else:
+                                    StopAllMusic()
+                                    PlaySound("death")
+                                    print("Vous ne vous releverez jamais de cette explosion.")
+                                    Affichage.EntreePourContinuer()
+                                    Player.player_tags.append("KIA")
+                                    CheckForKIA()
                         else:
                             print("Cepandant, alors que vous vous relevez, vous vous rendez compte que votre corps tout entier était recouvert d'une épaisse armure de glace qui a absorbé le choc.")
                             Affichage.EntreePourContinuer()
@@ -16562,6 +16595,11 @@ class Observe:
                 Player.points_de_mana_max -= 15
                 Player.points_de_mana -= 15
                 if Player.points_de_vie <= 0:
+                    if Player.possede_une_fee == True and "Fée dans un Bocal" in Player.liste_dartefacts_optionels:
+                        Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+                        Player.possede_une_fee = False
+                        print("...au point ou meme la fée qui sort de son bocal n'arrive pas a vous regénérer assez vite...")
+                        Affichage.EntreePourContinuer()
                     StopAllMusic()
                     PlaySound("death")
                     print("..et vous mourrez.")

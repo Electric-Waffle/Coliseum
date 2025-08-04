@@ -676,7 +676,7 @@ class Model:
             "Cuisiner": 5,
         }
         degat_attaque_legere = 7
-        if "Plaquette du Souvenir" in self.liste_dartefact_optionels:
+        if "Plaquette du Souvenir" in self.liste_dartefacts_optionels:
             degat_attaque_legere *= 3
         # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
         self.annuaire_de_caracteristique_des_techniques = {

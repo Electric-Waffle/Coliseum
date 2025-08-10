@@ -13,6 +13,8 @@ import traceback
 from turtle import *
 import math
 
+from collections import deque
+
 
 # 0nom 1description 2stigma+ 3stigma- 4stigma* 5techniques
 # 6sorts 7items 8talents 9vie 10mana 11force
@@ -241,12 +243,12 @@ MATERIAUXRANG6 = [
     "Fragment Sophiste",
     "Fragment de Fatalité",
     "Fragment Insatiable", 
-    "Hors Stock",
 ]
 MATERIAUXRANG7 = [
     "Essence Dorée",
     "Essence Astrale",
     "Essence Carmine",
+    "Hors Stock",
 
     "Clochette",
     "Oeuf de Fabergé",
@@ -297,13 +299,13 @@ LISTERUMEURS = [
     "Si il y a un monstre dopé a un étage, alors il y a aussi une salle étrange dans laquelle une bête féroce dort.\nLa corrélation entre les deux est incertaines, mais ce qui est sur, c'est que la bête n'est pas assez forte pour battre le boss toute seule.",
     "Certaines personnes auraient vu des symboles étranges sur le livre de la cigogne blueu au premier étage.\nElles sont sorties pour voir si elles étaient dans la bonne salle, et quand elles sont re-rentrées, les symboles avaient disparus.\nEt si on rentrait et sortiat de la salle jusqu'a voir les symboles ?",
     "Il y aurait un aventurier qui a vu une baleine dans l'oasis du troisième étage.\nEt alors qu'il jetait des pièces dedans, il a eu la meilleure chance possible dans ses gains !",
-    "Un aventurier prometteur aurait disparu au deuxieme étage.\nLorsque des gens ont demandé au majordome qui prend les commandes et les emmene au premier étage ce qui s'était passé, il a simplement répondu qu'il est allé étancher sa soif a la fontaine alors qu'il était a l'article de la mort, sans magie.",
+    "Un aventurier prometteur aurait disparu au deuxieme étage.\nLorsque des gens ont demandé au majordome qui prend les commandes et les emmene au premier étage ce qui s'était passé, il a simplement répondu qu'il est allé étancher sa soif a la fontaine alors qu'il était a l'article de la mort, et sans magie.",
     "Apparemment, si on arrive a augmenter le rang de son gain à ??? , a l'oasis du troisieme étage, quelque chose de terrifiant se passe.\nTellement terrifiant, que la seule aventuriere a avoir tenté l'experience a fuit l'étage sans se retourner.",
     "La pierre philosophale, Magnum Opus de tout les alchimistes, ne se trouve pas au quatrieme étage.\nLa bas, il n'y a qu'une prototype qui peut transformer un aventurier en or si il touche la pierre trop longtemps.\nCa doit être bizarre de se tranformer en or...",
-    "La tour d'horloge du cinquième étage est coincée sur un nombre particulier, mais personne ne sait ou inserer ce nombre.",
-    "La quête de rang S de l'automate du sixieme étage est tellement dure que personne ne l'a jamais réussie.\nMais d'apres lui, c'est une bonne chose, car il ne pourrait plus la donner si quqlqu'un la réussissait.",
+    "La tour d'horloge du cinquième étage est coincée sur un nombre particulier. Tous s'accordent a dire qu'il a une signification, mais personne ne sait oû quelqu'un pourrait utiliser ce nombre secret.",
+    "La quête de rang S de l'automate du sixieme étage est tellement dure que personne ne l'a jamais réussie.\nMais d'apres lui, c'est une bonne chose, car il ne pourrait plus la donner si quelqu'un la réussissait.",
     "Il existe un livre a l'étage sept qui permet d'oublier des technique en échange de caractéristiques.\nMais si on oublie un groupe de certaines caractéristiques, on gagne des effets supplémentaires.\nCes groupes seraient indiqués sur la page du livre par des symboles similaires...",
-    "Seul les plus curieux arriveront a trouver la bibliothèque personnelle du Maitre Mage à l'étage huit.\nMais deux livres ont le prénom Jean inscrit à la premiere page : Naissance du Monde et Comprendre la Noosphère.",
+    "Seul les plus curieux arriveront a trouver la bibliothèque personnelle du Maitre Mage à l'étage huit.\nParmis la tonne d'information qui y est contenue, un nom particulier y revient deux fois, gravé dans le cuir : Jean. Ces deux livres sont : Naissance du Monde et Comprendre la Noosphère.\n Peut etre que ce Jean y aurait laissé un message codé déchiffrable seulement avec les informations de ces deux livres ?",
     "Les infromations sur les salles ou les étages viennent d'un peu tout le monde, mais les informations sur les monstres ne viennent que de ces personnes là, vu que c'est compliqué de retenir des informations en plein combat.\nCes personnes ont deux points en commun : ils ont un esprit bien rangé, et ils se plaignet de ne pas avoir un livre ou noter leurs informations.",
     "Le Brasier Noir accepte les fruits aatma, les fruits jindagee, et les crystaux élémentaires.\nMais pour qu'il donne un artefact en échange, il faut sacrifier un bon nombre de ces objets là.",
     "Les Méchanismes Anciens sont enfaite des machines avec lesquelles les Dieux et Déesse experimentaient, pour voir les différentes applications que leurs pouvoirs divins pourraient avoir.\nUtilisés par des humains, les machines ont tendance a avoir des effets négatifs.\nMais si on pouvait prouver à ces machines que nous somme des Dieux, ces effets pourraient bien disparaitre...",
@@ -325,7 +327,7 @@ LISTERECETTES = [
     "...celui qui ne suit pas les règles de la physique et son compagnon au tempérament explosif...",
     "...la chaleur qui venait d'ailleurs, la couleur dans laquelle finiront par baigner nos coeurs...",
     "...petite bille, réceptacle de nos peines et bohneurs, objet de notre contemplation, animée par un éclat arraché au destin par des mains suppliantes...",
-    "...une volontée prise dans la roche, a laquelle on donne le pouvoir de conception des ames articficielles...",
+    "...une volontée prise dans la roche, a laquelle on donne le pouvoir de conception des ames artificielles...",
     "...autour du coeur orbite la magie et l'émerveillement...",
     "...ordonné et non-ordonné, silice et maille, fait par l'homme et fait par la nature : un prisme de ce qui est possible...",
     "...un reflet de nos vie, venu d'ailleurs, déformé par l'espace, mais quand même porteur des mêmes énergies qui nous font se mouvoir...",
@@ -334,7 +336,7 @@ LISTERECETTES = [
     "...ils mangent, ils avalent, ils engloutissent, comme des animaux programmés a la naissance pour la satisfaction a l'excès : electroniquement imparfaits...",
     "...on reconnait à la force du lion, la douceur de son poil. Pourquoi donc la nature mélange autant de contradictions....",
     "...quand on les entend parler pour rien dire, faisant des illogismes a chaque tournure de phrase, amenant la logique dans des coins obscurs ou elle se fait confondre par de grossières erreurs, l'homme avisé entendra le brâme d'un animal sans capacité de raisonnement...",
-    "...pourquoi donc les dieux ameraient ils le doré si il coule dans leurs veines, comme mué, animé, par la force de leur lignée et les défauts de leurs personnalitées ? Le sang me parait, pour de tels êtres, un materiau bien plus précieux...",
+    "...pourquoi donc les dieux aimeraient-ils le doré si il coule dans leurs veines, comme mué, animé, par la force de leur lignée et les défauts de leurs personnalitées ? Le sang me parait, pour de tels êtres, un materiau bien plus précieux...",
 ]
 DICTIONNAIREMATERIAUFUSION = {
     "Clochette" : ["Morceau de Cloche","Essence Dorée"],
@@ -3911,6 +3913,7 @@ class TraderUsage:
             "Méga Tirage",
             "Red Coin",
             "Gemme de Vie",
+            "Fée dans un Bocal",
         ]
         self.liste_item_etage_4 = [
             "Feuille Jindagee",
@@ -3922,6 +3925,7 @@ class TraderUsage:
             "Méga Tirage",
             "Red Coin",
             "Gemme de Vie",
+            "Fée dans un Bocal",
         ]
         self.liste_item_etage_5_6 = [
             "Feuille Jindagee",
@@ -3946,6 +3950,7 @@ class TraderUsage:
             "Red Coin",
             "Gemme de Vie",
             "Gemme d'Esprit",
+            "Fée dans un Bocal",
         ]
         self.liste_item_etage_9_10 = [
             "Feuille Jindagee",
@@ -4781,7 +4786,7 @@ class TraderUsage:
                         print("Vous lancez un regard percant au vendeur.")
                         Affichage.EntreePourContinuer()
                         print("*Le Médaillon augmente les chances qu'un monstre lache des materiaux de 5% par niveau.*")
-                        print("*Le Noyau augmente les gains de golds de 10% par niveau.*")
+                        print("*Le Noyau augmente les gains de golds de toute sources de 10% par niveau.*")
                         Affichage.EntreePourContinuer()
                         print("Le vendeur se rassoie et vous regarde de manière hautaine, un mélange apparent de dégout et d'arrogance plaqué sur son visage.")
                         Affichage.EntreePourContinuer() 
@@ -5674,7 +5679,7 @@ class TraderUsage:
                             "un jeune homme blond habillé de vert et coiffé d'un long chapeau",
                             "une jeune femme dotée d'une armure orange et rouge",
                             "un être étrange sans bras ni jambe, et dont les membres sont pourtant accroché a son torse",
-                            "un trentenaire doté d'un long manteau et d'une sorte de petit tournevis lumineux",
+                            "un trentenaire doté d'un long manteau et d'une sorte de petit tournevis lumineux, et accompagné d'une jeune femme,",
                             "une femme avec des long cheveux blond et habillée avec une robe rose",
                             "une femme aux cheveux verts et couronne de laurier dorés",
                             "un adolescent tout de noir vetu, avec des gants rouges et un masque de carnaval blanc recouvrant seulement ses yeux"
@@ -7023,9 +7028,9 @@ class Affiche:
                     liste_commentaire.append(commentaire)
                     commentaire = ("Une simple...")
                     liste_commentaire.append(commentaire)
-                    commentaire = ("...Coquille...")
+                    commentaire = ("        ...Coquille...")
                     liste_commentaire.append(commentaire)
-                    commentaire = ("......vide.")
+                    commentaire = ("                 ...vide.")
                     liste_commentaire.append(commentaire)
             else:
                 commentaire = (
@@ -11230,7 +11235,83 @@ class Floor:
                             Affichage.EntreePourContinuer()
                             print("Un plaisir couplé a une colère grandissante, comme un besoin de prouver une quelquonque supériorité?")
                             Affichage.EntreePourContinuer()
-                            print("Vous vous indulgez dans le confort de fortes émotions, et commencez un rire maniaque alors que les spectres de feu dansent autour de vous !")
+                            print("Vous vous réfugiez dans le confort de fortes émotions, et commencez un rire maniaque alors que les spectres de feu dansent autour de vous !")
+                            Affichage.EntreePourContinuer()
+                            print("...")
+                            Affichage.EntreePourContinuer()
+                            print("Quand vous reprenez vos esprits, vous êtes a terre, sans vêtements, des marques de brulures scarifiants les murs de la salle comme de la peau sur laquelle on défoulerait ses émotions.")
+                            Affichage.EntreePourContinuer()
+                            print("Dans votre main gauche, Zeroual avec 10 âmes aborbées d'on ne sait ou.")
+                            Affichage.EntreePourContinuer()
+                            print("Dans votre main droite, la pierre calcinée du piedestal.")
+                            Affichage.EntreePourContinuer()
+                            print("Plus aucun feu ne brule dans la salle.")
+                            print("Plus aucun spectre ne répandent leur colère.")
+                            Affichage.EntreePourContinuer()
+                            print("La salle est vide.")
+                            Affichage.EntreePourContinuer()
+                            print("Vous obtenez l'artefact [Basalte Immonde] !")
+                            print("Une roche impure, ayant absorbée les joies d'une colère sans limite pendant des centaines d'années.\nLorsque vous passez votre tour avec tout vos points de mana, vous entrez dans un état de furie pendant 1 tour !")
+                            print("De plus, le nombre de monstre que vous avez tué augmente de 10, pour une raison quelquonque !")
+                            caracteristique_de_la_salle["terminé par joueur"] = True
+                            FloorMaker.GiveRandomArtefact("Basalte Immonde","Don")
+                            Affichage.EntreePourContinuer()
+                            print("Vous vous rhabillez, et vous éloignez de la salle.")
+                            Affichage.EntreePourContinuer()
+                elif Player.numero_de_letage == 7:
+                    print("Vous arrivez dans une salle circulaire, contenant en son centre un piedestal griffoné de centaines de messages sans queue ni tête.")
+                    print("Loin au dessus du piedestal, vous apercevez une ouverture cerclée de vieille pierre.")
+                    Affichage.EntreePourContinuer()
+                    print("Une roche est posée sur le piedestal.")
+                    if Player.nom_de_letage != "Douves du Pénitent":
+                        print("Elle est enflammée, des dizaines de spectres de feu virevoltant autour d'elle dans une cacophonie de lamentations et d'accusations.")
+                    else:
+                        print("Elle est en dessous d'une cascade émanant de l'ouverture de pierre plus haut qui répand ses eaux sur la totalité de l'étage, et se pare d'une couleur sombre comme le charbon.")
+                    Affichage.EntreePourContinuer()
+                    while True:
+                        try:
+                            print("Que faire ?")
+                            print("\n1 - S'éloigner\n2 - Prendre la pierre")
+                            choix = int(
+                                input("\nChoisissez votre action avec les nombres : ")
+                            )
+                            ClearConsole()
+                            if choix in [1, 2]:
+                                break
+                        except ValueError:
+                            ClearConsole()
+                    if choix == 1:
+                        print("Vous vous éloignez de la salle.")
+                        Affichage.EntreePourContinuer()
+                    else:
+                        print("Vous vous approchez de la pierre, et posez votre main dessus.")
+                        Affichage.EntreePourContinuer()
+                        if Player.nom_de_letage == "Douves du Pénitent":
+                            print("Alors que vous la sortez de l'eau, sa couleur disparait comme si elle n'était qu'un simple rêve.")
+                            Affichage.EntreePourContinuer()
+                            print("Vous observez la simple pierre, qui se révèle être un jade intrigant contenant une plus petite roche dorée.")
+                            Affichage.EntreePourContinuer()
+                            print("Alors que vous la tenez dans votre main, vous jureriez entendre des sanglots autour de vous.")
+                            Affichage.EntreePourContinuer()
+                            print("Vous obtenez l'artefact [Jade Impardonnable] !")
+                            print("La cristallisation de centaines d'années de culpabilité.\nLorsque vous passez votre tour avec tout vos points de mana, vous entrez dans un état de folie pendant 1 tour !")
+                            caracteristique_de_la_salle["terminé par joueur"] = True
+                            FloorMaker.GiveRandomArtefact("Jade Impardonnable","Don")
+                            Affichage.EntreePourContinuer()
+                            print("Vous vous éloignez de la salle.")
+                            Affichage.EntreePourContinuer()
+                        else:
+                            print("Alors que vous commencez a grimacer sous l'effet du feu qui enveloppe la pierre....")
+                            Affichage.EntreePourContinuer()
+                            print("...vous vous rendez compte qu'il ne vous brule pas.")
+                            Affichage.EntreePourContinuer()
+                            print("Au contraire, il semble apaiser quelque chose de singulier, de primitif, enfoui a l'interieur de votre ADN.")
+                            Affichage.EntreePourContinuer()
+                            print("Vous sentez en vous un plaisir coupable, ressentit seulement après la réalisation d'une vengence.")
+                            Affichage.EntreePourContinuer()
+                            print("Un plaisir couplé a une colère grandissante, comme un besoin de prouver une quelquonque supériorité?")
+                            Affichage.EntreePourContinuer()
+                            print("Vous vous réfugiez dans le confort de fortes émotions, et commencez un rire maniaque alors que les spectres de feu dansent autour de vous !")
                             Affichage.EntreePourContinuer()
                             print("...")
                             Affichage.EntreePourContinuer()
@@ -11310,6 +11391,55 @@ class Floor:
                         Affichage.EntreePourContinuer()
                         print("Vous vous éloignez du puit.")
                         Affichage.EntreePourContinuer()
+                elif Player.numero_de_letage == 4:
+                    print("Au fond de celui-ci, vous apercevez des couleurs vives qui se déplacent par la force d'un vent inexistant.\n Et a coté, un petit clavecin.")
+                    Affichage.EntreePourContinuer()
+                    while True:
+                        while True:
+                            try:
+                                print("Que faire ?")
+                                print("\n1 - S'éloigner du puit\n2 - Jouer un air au clavecin")
+                                choix = int(
+                                    input("\nChoisissez votre action avec les nombres : ")
+                                )
+                                ClearConsole()
+                                if choix in [1, 2]:
+                                    break
+                            except ValueError:
+                                ClearConsole()
+                        if choix == 1:
+                            print("Vous vous éloignez du puit.")
+                            Affichage.EntreePourContinuer()
+                            break
+                        elif choix == 2 :
+                            StopAllMusic()
+                            result = doPiano()
+                            PlayMusicDeLetage()
+                            if result :
+                                print("La mélodie retentit dans la pièce, jusque au fond du puit.")
+                                Affichage.EntreePourContinuer()
+                                print("Vous sentez un tremblement venant d'en dessous, et jetez un coup d'oeuil dans l'ouverture de pierre.")
+                                Affichage.EntreePourContinuer()
+                                print("En bas, les couleurs chatoyantes qui dansaient dans le vide ont laissées place à un blanc immaculé, propre...")
+                                Affichage.EntreePourContinuer()
+                                print("...depuis lequel un puissant courant d'air empêche toute descente.")
+                                Affichage.EntreePourContinuer()
+                                print("...")
+                                Affichage.EntreePourContinuer()
+                                print("...")
+                                Affichage.EntreePourContinuer()
+                                print("...il commence a faire froid...")
+                                Affichage.EntreePourContinuer()
+                                print("L E  P R O C H A I N  E T A G E  C H A N G E  D E  P R O P R I E T A I R E\n")
+                                caracteristique_de_la_salle["terminé par joueur"] = True
+                                Player.etage_alternatif = True
+                                Affichage.EntreePourContinuer()
+                                print("Vous vous éloignez du puit.")
+                                Affichage.EntreePourContinuer()
+                                break
+                            else :
+                                print("Rien ne se passe.")
+                                Affichage.EntreePourContinuer()
                 elif Player.numero_de_letage == 6:
                     print("Au fond de celui-ci, vous apercevez les contours d'un feu entouré de petites flamelettes qui virevoltent, et entendez des murmures colériques remontant le long des parois du puit.")
                     Affichage.EntreePourContinuer()
@@ -14465,9 +14595,9 @@ class Floor:
                     Affichage.EntreePourContinuer()
                 elif choix == 1:
                     if Player.nombre_de_gold >= 100:
-                        print("Vous pensez a votre bourse et vous indulgez dans cet achat compulsif.")
+                        print("Vous pensez a votre bourse et vous vous cédez à cet achat compulsif.")
                         Affichage.EntreePourContinuer()
-                        print("Au bout du 100eme goold inséré, la porte de la niche s'ouvre et un chien bionique en sort !")
+                        print("Au bout du 100eme gold inséré, la porte de la niche s'ouvre et un chien bionique en sort !")
                         Affichage.EntreePourContinuer()
                         print("Ce dernier, relié a un tuyau greffé dans son cou, ouvre doucement les yeux et vous regarde d'un air exalté !")
                         Affichage.EntreePourContinuer()
@@ -15275,6 +15405,10 @@ class Floor:
             liste_salle_et_equivalent["COEUR"] = "Joyau de l'âme : Haine"
         elif Player.nom_de_letage == "Douves du Pénitent":
             liste_salle_et_equivalent["COEUR"] = "Joyau de l'âme : Regret"
+        elif Player.nom_de_letage == "Carnaval de Rouille":
+            liste_salle_et_equivalent["COEUR"] = "Salle du Théâtre : Chaos"
+        elif Player.nom_de_letage == "Le Lumisade":
+            liste_salle_et_equivalent["COEUR"] = "Salle du Théâtre : Ordre"
 
         if caracteristique_de_la_salle["type"] in liste_salle_et_equivalent:
             Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Salles", liste_salle_et_equivalent[caracteristique_de_la_salle["type"]])
@@ -18682,6 +18816,8 @@ class Observe:
                 Affichage.EntreePourContinuer()
                 print("Vous perdez 5 points de vie max !")
                 Player.points_de_vie_max -= 5
+                if Player.points_de_vie > Player.points_de_vie_max :
+                    Player.points_de_vie = Player.points_de_vie_max
                 Affichage.EntreePourContinuer()
                 if choix > len(liste_de_sorts_enregistres) :
                     artefact = liste_dartefact_debloque[choix - (len(liste_de_sorts_enregistres) + 1)]
@@ -21568,6 +21704,8 @@ def DefinitNomEtage():
         Player.nom_de_letage = "Tour de l'Esprit"
     elif Player.numero_de_letage == 5:
         Player.nom_de_letage = "Carnaval de Rouille"
+        if Player.etage_alternatif:
+            Player.nom_de_letage = "Le Lumisade"
     elif Player.numero_de_letage == 6:
         Player.nom_de_letage = "Bidonville du Clocher"
     elif Player.numero_de_letage == 7:
@@ -21589,9 +21727,9 @@ def DefinitNomEtage():
 
 def PlayMusicDeLetage():
     nom_de_la_musique = str(Player.numero_de_letage)
-    if Player.nom_de_letage in ["Jungle Cruelle", "Limbes Flétrissants", "Douves du Pénitent"]:
+    if Player.nom_de_letage in ["Jungle Cruelle", "Limbes Flétrissants", "Douves du Pénitent", "Le Lumisade"]:
         nom_de_la_musique += "_alt"
-    if Player.numero_de_letage == -1 and  Sove.ModifieTagsDansSove("Checke", "Village Nuit"):
+    if Player.numero_de_letage == -1 and Sove.ModifieTagsDansSove("Checke", "Village Nuit"):
         nom_de_la_musique += "_alt"
     if Player.nom_de_letage == "Dédale Frontière" or Player.mode_jukebox :
         PlayMusic(Player.musique_etage_10)
@@ -22164,7 +22302,7 @@ def PrepareTheVillage():
         Player.liste_de_materiaux["Essence de Sagesse"] = Player.points_dintelligence // 25
         Player.liste_de_materiaux["Essence de Résistance"] = Player.points_de_defence // 15
         Player.liste_de_materiaux["Essence Dorée"] = Player.nombre_de_gold // 100
-        Player.liste_de_materiaux["Essence Carmine"] = Player.nombre_de_red_coin // 10
+        Player.liste_de_materiaux["Essence Carmine"] = Player.nombre_de_red_coin // 5
         Player.liste_de_materiaux["Essence Astrale"] = Player.nombre_de_monstres_tues // 25
 
         for artefact in Player.liste_dartefacts_optionels:
@@ -22967,6 +23105,8 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Lame dans la Pierre : Execution" : "paragraphe6",
         "Joyau de l'âme : Haine" : "paragraphe6",
         "Joyau de l'âme : Regret" : "paragraphe6",
+        "Salle du Théâtre : Chaos" : "paragraphe6",
+        "Salle du Théâtre : Ordre" : "paragraphe6",
     },
     "Les Artefacts" : {
         "Graine de Grenade": ("Cette graine d'un fruit apprécié des dieux augmente votre vitalité.\nVie + 15"),  # vie t
@@ -23371,6 +23511,8 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Jungle Cruelle" : "paragraphe4",
         "Champs de Sables" : "paragraphe5",
         "Tour de l'Esprit" : "paragraphe6",
+        "Carnaval de Rouille" : "paragraphe6",
+        "Le Lumisade" : "paragraphe6",
         "Bidonville du Clocher" : "paragraphe6",
         "Cachots de l'Immonde" : "paragraphe6",
         "Douves du Pénitent" : "paragraphe6",
@@ -23462,6 +23604,42 @@ Trader = TraderUsage()
 #donnees_de_s0ve = Observation.GetPermanentThingsFromS0ve()
 #donnees_de_s0ve["Livraison"] = TEMP
 #Observation.SetPermanentThingsToS0ve(donnees_de_s0ve)
+
+
+def doPiano():
+    """
+    Attend que l'utilisateur entre une lettre de A à Z (majuscule ou minuscule)
+    ou le chiffre '1' pour quitter. Stocke les entrées dans une FIFO de taille 36.
+    Retourne True si la séquence des dernières lettres correspond à target_sequence.
+    Retourne False si l'utilisateur tape '1'.
+    """
+    # Normaliser la séquence cible en minuscules
+    target_sequence = list("pbvpopxyixciopozppbvpnmmnmvcpccvbn")
+
+    # FIFO de taille max 36
+    buffer = deque(maxlen=len(target_sequence))
+
+    while True:
+        # Demande à l'utilisateur
+        entry = input("Tapez une lettre correspondant à la note à jouer, ou 1 pour quitter : ").strip()
+
+        # Quitter si '1'
+        if entry == "1":
+            return False
+
+        # Vérifier que c'est bien une lettre A-Z
+        if len(entry) == 1 and entry.isalpha():
+            buffer.append(entry.lower())  # On stocke en minuscule
+        else:
+            print("Vous tapez dans le vide sur une touche inexistante.")
+            print("Vous avez l'air stupide.")
+            print("Vous devriez laisser le piano à quelqu'un qui s'y connait mieux.")
+            Affichage.EntreePourContinuer()
+            continue
+
+        # Vérifier si la séquence correspond
+        if list(buffer) == target_sequence:
+            return True
 
 SetupGameMode()
 AffichageSecretPage3()

@@ -2614,7 +2614,7 @@ class Control:
                 nom_de_la_musique = f"alt_{self.Player.numero_boss_alt}_phase_1"
         else:
             nom_de_la_musique = f"boss_{numero_musique}"
-        if self.modele.etage_alternatif and not self.modele.est_une_mimique :
+        if self.modele.etage_alternatif and not self.modele.est_une_mimique and not self.Player.mode_jukebox:
             nom_de_la_musique += "_alt"
         musique = self.modele.CHEMINABSOLUMUSIQUE + nom_de_la_musique
         self.vue.AfficheMonstreLevelMusique(
@@ -2893,8 +2893,8 @@ class Control:
 
     def EffetStigmaSiphonDeMana(self):
         nombre_aleatoire = random.randint(0, 100)
-        if nombre_aleatoire < 20:
-            mana_siphone = round(self.modele.points_de_mana_max * 0.1)
+        mana_siphone = round(self.modele.points_de_mana_max * 0.1)
+        if self.modele.points_de_mana >= mana_siphone and nombre_aleatoire < 20:
             self.modele.points_de_mana -= mana_siphone
             self.modele.monstre_points_de_mana += mana_siphone
             self.EquilibragePointsDeVieEtManaEtEndurance()
@@ -2906,6 +2906,7 @@ class Control:
         while choix not in [1, 2]:
             try:
                 choix = self.vue.GetFaveursExplosives(degat)
+                clear_console()
                 if choix == 1:
                     degat = self.EnleveVieAuJoueur(degat)
                     self.CheckePuisAppliqueTransmutation(degat)
@@ -3958,7 +3959,7 @@ class Control:
                                         f"\nVous démentelez son cadavre d'une main experte et récupérez un deuxieme materiau !"
                                     )
                         self.vue.AfficheRecompense(commentaire)
-                    if self.modele.stigma_joueur_positif == "Conception du Mana":
+                    if (self.modele.stigma_joueur_positif == "Conception du Mana" and random.randint(0,1) == 0):
                         mana_gagne = 2
                         self.Player.points_de_mana_max += mana_gagne
                         commentaire = f"Votre origine vous permet d'absorber l'essence même du monstre et de gagner {mana_gagne} points de mana maximum !"
@@ -4187,7 +4188,7 @@ class Control:
 
     def EffetStigmaSurveille(self):
         nombre_aleatoire = random.randint(0, 100)
-        if nombre_aleatoire == 1:
+        if nombre_aleatoire < 3:
             reponse = self.QuestionsDeAlfred()
             if reponse:
                 # 5a: si bonne réponse, change nom, fini combat, donne recompense
@@ -4434,9 +4435,9 @@ class Control:
 
     def EffetCanigou(self):
         degat = round(self.modele.monstre_points_de_vie_max * 0.03)
-        print(f"vie monstre av {self.modele.monstre_points_de_vie}")
+        # print(f"vie monstre av {self.modele.monstre_points_de_vie}")
         self.modele.monstre_points_de_vie -= degat
-        print(f"vie monstre  ap {self.modele.monstre_points_de_vie}")
+        # print(f"vie monstre  ap {self.modele.monstre_points_de_vie}")
         self.vue.AfficheCanigou(f"Canigou saute sur l'ennemi et lui arrache une petite partie de son bras .\nIl perd {degat} points de vie !\nCa c'est un bon toutou !")
 
     def EffetGardienDeCorps(self):
@@ -5060,8 +5061,23 @@ class Control:
         # équilibre les pv et mana
         self.EquilibragePointsDeVieEtManaEtEndurance()
         self.EquilibragePointDeVieMonstrePerduParStigma()
+        # clean les tags
+        self.cleanTags()
         # augmente le nombre de tour
         self.modele.nombre_de_tours += 1
+
+    def cleanTags(self):
+        for tag in [
+            "Utilise Feu Basique",
+            "Utilise Glace Basique",
+            "Utilise Terre Basique",
+            "Utilise Foudre Basique",
+            "Utilise Sang Basique"
+        ]:
+            try:
+                self.modele.player_tags.remove(tag)
+            except ValueError:
+                pass  # Le tag n'est pas dans la liste, on ignore
 
     def ConstruirePhraseAlterationEtatPourVue(self):
         # construction d'une liste d'alteration subies par le joueur
@@ -6754,6 +6770,7 @@ class Control:
                                     commentaire_element += self.AppliqueTalentEboulis(degat_lapidation)
                                 if self.modele.fracturation:
                                     commentaire_element += self.AppliqueTalentFracturation()
+
                     nombre_aleatoire_basique = random.randint(0, 100)
                     if "Utilise Feu Basique" in self.modele.player_tags:
                         self.modele.player_tags.remove("Utilise Feu Basique")
@@ -10138,7 +10155,7 @@ class Control:
         self.vue.AfficheTalentEclatDeGlace(commentaire)
 
     def AppliqueTalentCycleGlaciaire(self):
-        vie_reprise = round(self.modele.points_de_vie_max * 0.3)
+        vie_reprise = round(self.modele.points_de_vie_max * 0.25)
         self.modele.points_de_vie += vie_reprise
         commentaire = ("\nLes glaces sont sous votre commandement absolu, et retiennent une partie de la vitalitée perdue par l'ennemi en la gelant."
                        "\nElles vous la ramène ensuite sous forme de soin, au dégel de l'ennemi."

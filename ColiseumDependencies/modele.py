@@ -72,7 +72,7 @@ class Model:
             if Player.benediction == "Accumulateur de Tachyon":
                 self.charge_bon_tachyon = Player.charge_bon_tachyon
                 self.bon_tachyon = True
-            if Player.nom_de_letage in ["Jungle Cruelle", "Douves du Pénitent"]:
+            if Player.nom_de_letage in ["Jungle Cruelle", "Douves du Pénitent", "Le Lumisade"]:
                 self.etage_alternatif = True
             else:
                 self.etage_alternatif = False
@@ -1528,7 +1528,7 @@ class Model:
             "Coquille Vide",
             "Roi Amonrê",
             "Apprentie",
-            "Bouffon",
+            "Le Pianiste",
             "Prince des Voleurs",
             "Roi Déchu",
             "Maitre Mage",
@@ -1650,7 +1650,7 @@ class Model:
                 "Reponse a la question": 4,
             },
             {
-                "Question": ("Si je te brise les côtes la maintenant tout de suite,\nQuelles sont les chances que tu esquive ?"),
+                "Question": ("Si je tente de te briser les côtes la maintenant tout de suite,\nQuelles sont les chances que tu esquive ?"),
                 "Reponse 1": f"1 - {self.taux_de_esquive}",
                 "Reponse 2": f"2 - {self.taux_de_esquive * 2}",
                 "Reponse 3": f"3 - {self.taux_de_esquive - 1}",

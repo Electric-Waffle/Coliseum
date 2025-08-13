@@ -3599,6 +3599,10 @@ LISTEDEMUSIQUE = [
     "Fièvre du Samedi Soir",
     "Piñata",
     "Tragicomique",
+    "Obituaire de Morphée",
+    "Chasseur D'Etoiles",
+    "Memory Lane",
+    "Symphonie des Coeurs Immolés",
     "Combler les Vides",
     "Systèmes Défaillants",
     "Sa Majesté Des Mouches",
@@ -3610,7 +3614,7 @@ LISTEDEMUSIQUE = [
     "Coeur, Ego, Tango.",
     "Ossuaire Immaculé",
     "Dissonance Cognitive",
-    "Faux Semblants",
+    "Le Vieux Fourneau",
     "La Hache et le Grimoire",
     "Gr4c1euse Nécr0log1e",
     "Plum5 d'0ie",
@@ -3664,6 +3668,10 @@ LISTECARACTERISTIQUEMUSIQUE = [
     ["dance", "Vous écoutez "],
     ["battle_theme_5", "Vous écoutez "],
     ["boss_5", "Vous écoutez "],
+    ["etage_5_alt", "Vous écoutez "],
+    ["battle_theme_5_alt", "Vous écoutez "],
+    ["boss_5_alt_intro", "Vous écoutez "],
+    ["boss_5_alt", "Vous écoutez "],
     ["etage_6", "Vous écoutez "],
     ["battle_theme_6", "Vous écoutez "],
     ["boss_6", "Vous écoutez "],
@@ -21134,17 +21142,18 @@ def MenuDeDemarrage(Player):
 def ShowObservatorium():
     PlayMusic("observatorium")
     observatorium_complet = False
+    limite_observatorium_incomplet = 51
     while True:
         while True:
             try:
                 # affiche le menu
-                choix = ShowMenuObservatorium(observatorium_complet)
+                choix = ShowMenuObservatorium(observatorium_complet, limite_observatorium_incomplet)
                 ClearConsole()
                 if observatorium_complet:
                     if choix in range(1, (len(LISTEDEMUSIQUE)) + 2):
                         break
                 else:
-                    if choix in range(1, 46) or choix == 11525:
+                    if choix in range(1, limite_observatorium_incomplet) or choix == 11525:
                         break
             except ValueError:
                 ClearConsole()
@@ -21171,14 +21180,14 @@ def ShowObservatorium():
             PlayMusic("observatorium")
 
 
-def ShowMenuObservatorium(observatorium_complet):
+def ShowMenuObservatorium(observatorium_complet, limite_observatorium_incomplet):
     numero_affichage = 2
     print("  ~~{ Observatorium }~~")
     print("\n1 - Retour")
     for nom_musique in LISTEDEMUSIQUE:
         print(f"{numero_affichage} - {nom_musique}")
         numero_affichage += 1
-        if numero_affichage == 46 and not observatorium_complet:
+        if numero_affichage == limite_observatorium_incomplet and not observatorium_complet:
             break
     return int(input("\nChoisissez la musique avec les nombres : "))
 
@@ -22041,34 +22050,38 @@ def DoJukebox():
         17 : {"Nom" : "Carnaval", "Nom Réel" : "etage_5"},
         18 : {"Nom" : "Piñata", "Nom Réel" : "battle_theme_5"},
         19 : {"Nom" : "Tragicomique", "Nom Réel" : "boss_5"},
-        20 : {"Nom" : "Combler les Vides", "Nom Réel" : "etage_6"},
-        21 : {"Nom" : "Systèmes Défaillants", "Nom Réel" : "battle_theme_6"},
-        22 : {"Nom" : "Sa Majesté Des Mouches", "Nom Réel" : "boss_6"},
-        23 : {"Nom" : "Divin Karma", "Nom Réel" : "etage_7"},
-        24 : {"Nom" : "Folie Furieuse", "Nom Réel" : "battle_theme_7"},
-        25 : {"Nom" : "Comment Tuer le Grand Méchant Loup", "Nom Réel" : "boss_7"},
-        26 : {"Nom" : "Le Prix des Larmes", "Nom Réel" : "etage_7_alt"},
-        27 : {"Nom" : "Noblesse Oblige", "Nom Réel" : "battle_theme_7_alt"},
-        28 : {"Nom" : "Coeur, Ego, Tango.", "Nom Réel" : "boss_7_alt"},
-        29 : {"Nom" : "Ossuaire Immaculé", "Nom Réel" : "etage_8"},
-        30 : {"Nom" : "Dissonance Cognitive", "Nom Réel" : "battle_theme_8"},
-        31 : {"Nom" : "Faux Semblants", "Nom Réel" : "boss_8"},
-        32 : {"Nom" : "La Hache et le Grimoire", "Nom Réel" : "boss_8_phase_2"},
-        33 : {"Nom" : "Fièvre du Samedi Soir", "Nom Réel" : "dance"},
-        34 : {"Nom" : "S1mul4crum", "Nom Réel" : "etage_0"},
-        35 : {"Nom" : "Cruc1fix1on", "Nom Réel" : "boss_0"},
-        36 : {"Nom" : "V3tus S4nct0rum", "Nom Réel" : "battle_theme_0"},
-        37 : {"Nom" : "Réarr4ng3ment L1m1nal", "Nom Réel" : "etage_9"},
-        38 : {"Nom" : "4rythm1e", "Nom Réel" : "battle_theme_9"},
-        39 : {"Nom" : "Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme", "Nom Réel" : "boss_9"},
-        40 : {"Nom" : "Th3 L4byr1nth Génés1s", "Nom Réel" : "etage_10"},
-        41 : {"Nom" : "Sur l3 S3nt1er de l4 Gu3rr3", "Nom Réel" : "battle_theme_10"},
-        42 : {"Nom" : "Endorphines", "Nom Réel" : "tutorial"},
-        43 : {"Nom" : "Dangereuses Mélancolies", "Nom Réel" : "alfredproto"},
-        44 : {"Nom" : "L'Orage avant la Tempête", "Nom Réel" : "boss_introV2"},
-        45 : {"Nom" : "Sillages Sur Une Mer de Rêves", "Nom Réel" : "gravestone"},
-        46 : {"Nom" : "Bêtise Humaine", "Nom Réel" : "reconfort"},
-        47 : {"Nom" : "Esotériques Réflexions", "Nom Réel" : "debug"},
+        20 : {"Nom" : "Obituaire de Morphée", "Nom Réel" : "etage_5_alt"},
+        21 : {"Nom" : "Chasseur D'Etoiles", "Nom Réel" : "battle_theme_5_alt"},
+        22 : {"Nom" : "Memory Lane", "Nom Réel" : "boss_5_alt_intro"},
+        23 : {"Nom" : "Symphonie des Coeurs Immolés", "Nom Réel" : "boss_5_alt"},
+        24 : {"Nom" : "Combler les Vides", "Nom Réel" : "etage_6"},
+        25 : {"Nom" : "Systèmes Défaillants", "Nom Réel" : "battle_theme_6"},
+        26 : {"Nom" : "Sa Majesté Des Mouches", "Nom Réel" : "boss_6"},
+        27 : {"Nom" : "Divin Karma", "Nom Réel" : "etage_7"},
+        28 : {"Nom" : "Folie Furieuse", "Nom Réel" : "battle_theme_7"},
+        29 : {"Nom" : "Comment Tuer le Grand Méchant Loup", "Nom Réel" : "boss_7"},
+        30 : {"Nom" : "Le Prix des Larmes", "Nom Réel" : "etage_7_alt"},
+        31 : {"Nom" : "Noblesse Oblige", "Nom Réel" : "battle_theme_7_alt"},
+        32 : {"Nom" : "Coeur, Ego, Tango.", "Nom Réel" : "boss_7_alt"},
+        33 : {"Nom" : "Ossuaire Immaculé", "Nom Réel" : "etage_8"},
+        34 : {"Nom" : "Dissonance Cognitive", "Nom Réel" : "battle_theme_8"},
+        35 : {"Nom" : "Le Vieux Fourneau", "Nom Réel" : "boss_8"},
+        36 : {"Nom" : "La Hache et le Grimoire", "Nom Réel" : "boss_8_phase_2"},
+        37 : {"Nom" : "Fièvre du Samedi Soir", "Nom Réel" : "dance"},
+        38 : {"Nom" : "S1mul4crum", "Nom Réel" : "etage_0"},
+        39 : {"Nom" : "Cruc1fix1on", "Nom Réel" : "boss_0"},
+        40 : {"Nom" : "V3tus S4nct0rum", "Nom Réel" : "battle_theme_0"},
+        41 : {"Nom" : "Réarr4ng3ment L1m1nal", "Nom Réel" : "etage_9"},
+        42 : {"Nom" : "4rythm1e", "Nom Réel" : "battle_theme_9"},
+        43 : {"Nom" : "Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme", "Nom Réel" : "boss_9"},
+        44 : {"Nom" : "Th3 L4byr1nth Génés1s", "Nom Réel" : "etage_10"},
+        45 : {"Nom" : "Sur l3 S3nt1er de l4 Gu3rr3", "Nom Réel" : "battle_theme_10"},
+        46 : {"Nom" : "Endorphines", "Nom Réel" : "tutorial"},
+        47 : {"Nom" : "Dangereuses Mélancolies", "Nom Réel" : "alfredproto"},
+        48 : {"Nom" : "L'Orage avant la Tempête", "Nom Réel" : "boss_introV2"},
+        49 : {"Nom" : "Sillages Sur Une Mer de Rêves", "Nom Réel" : "gravestone"},
+        50 : {"Nom" : "Bêtise Humaine", "Nom Réel" : "reconfort"},
+        51 : {"Nom" : "Esotériques Réflexions", "Nom Réel" : "debug"},
         
     }
     print("Vous frappez le sol de l'arène, et au lieu de monstres, une étrange machine sort du sol.")

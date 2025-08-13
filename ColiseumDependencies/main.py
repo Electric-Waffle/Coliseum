@@ -6194,7 +6194,7 @@ class TraderUsage:
                                 if objet_choisi == "Sacoche":
                                     print("Vous obtenez la Sacoche !")
                                     print("Cet objet plein de souvenirs interfere avec tout ce que vous tenez comme acquis dans ce monde.")
-                                    print("Vous pouvez maintenant obtenir des essences carmines a votre mort, pour chaque paquets de 10 redcoins !")
+                                    print("Vous pouvez maintenant obtenir des essences carmines a votre mort, pour chaque paquets de 5 redcoins !")
                                 else:
                                     print("Vous obtenez l'Emblème de la Fin !")
                                     print("Ce blason infiniment précieux vous octroie la même autoritée que les tout premiers aventuriers, et vous permet d'ameliorer votre équipement a un tout autre niveau !")
@@ -7700,13 +7700,22 @@ class Affiche:
                 "\nVous voici au quatrième étage du Coliseum , une tour dédiée a l'étude de la magie."
             )
         elif Player.numero_de_letage == 5:
-            commentaire = (
-                "Vous laissez derrière vous les livres, et entendez une musique entêtante."
-                "\nDes clowns peints sur le mur, des manequins souriants simulant une foule désoeuvrée,"
-                "\ndes fausses attractions fabriquées a la hâte avec quelques bouts de carton ,"
-                "\net de vieilles enceintes crachant une musique joyeuse en boucle vous attendent en bas."
-                "\nVous voici au cinquième étage du Coliseum , une misérable fête foraine."
-            )
+            if Player.nom_de_letage == "Carnaval de Rouille" :
+                commentaire = (
+                    "Vous laissez derrière vous les livres, et entendez une musique entêtante."
+                    "\nDes clowns peints sur le mur, des manequins souriants simulant une foule désoeuvrée,"
+                    "\ndes fausses attractions fabriquées a la hâte avec quelques bouts de carton ,"
+                    "\net de vieilles enceintes crachant une musique joyeuse en boucle vous attendent en bas."
+                    "\nVous voici au cinquième étage du Coliseum , une misérable fête foraine."
+                )
+            else:
+                commentaire = (
+                    "Vous laissez derrière vous les livres, et ressentez la morsure du froid."
+                    "\nLe hall d'entrée d'un somptueux hotel, une délicieuse musique qui se répand depuis la salle du bal,"
+                    "\net des fenetres  donnant vue sur de magnifiques décord enneigés cerclés par des cathédrales montagnes de pierres vous attendent en bas."
+                    "\nTout est exquis, si on ne prete pas attention au manque de gens et aux taches de brulé sur les murs."
+                    "\nVous voici au cinquième étage du Coliseum , le grand et luxueux hôtel du Nord : Le Lumisade."
+                )
         elif Player.numero_de_letage == 6:
             commentaire = (
                 "Vous laissez derrière vous la fête, et ressentez une présence particulière."

@@ -287,10 +287,10 @@ LISTERUMEURS = [
     "Acheter plein de certificats vendu par la machine d'un des méchanismes anciens permet de garder les artefacts temporaire vendus par la machine pendant très longtemps. ",
     "Re-observer une salle avec des bols permet de faire apparaitre plus de bols, sans aucune limite. Pratique si vous voulez perdre votre argent !",
     "Il existe une très faible chance de récuperer tout l'argent jeté dans l'oasis du troisieme étage, lorsque l'on jette son argent dedans.",
-    "Utiliser l'artefact Larmes de Vénus dans le puit du 6eme étage fait completement changer l'ambiance du 7eme étage.",
+    "Utiliser l'artefact Larmes de Vénus dans le puit du 6eme étage fait complètement changer l'ambiance du 7eme étage.",
     "Le deuxieme étage contient un artefact qui peut aider les aventuriers orientés Force ou les aventuriers orientés Magie, selon si vous avez changé son ambiance avec le puit du premier étage, ou pas.",
-    "Chaque étages possèdent une salle secrête avec un méchanisme qui peut aider les avenurier d'une manière ou d'une autre. On peut aussi obtenir un artefact a chaque étages .",
-    "La salle a artefact du quatrieme étage contient une énigme assez complexe. Mais il faudrait apparemment faire attention aux nombres, qui signifieraient des positions spécifiques auxquelles se rendre.",
+    "Il y existe un lien entre le piano de la salle du théatre du 5eme étage et le clavecin de la salle du puit du 4eme étage. L'un fait de la musique sans corde, l'autre a des cordes mais ne fait aucun son. Si seulement on pouvait jouer la musique du piano sur le clavecin...",
+    "La salle à artefact du quatrieme étage contient une énigme assez complexe. Mais il faudrait apparemment faire attention aux nombres, qui signifieraient des positions spécifiques auxquelles se rendre.",
     "Les chercheurs d'artefacts se servant des positions des salles oublient souvent que l'arene prend un carré de 3x3 au centre de la carte. Par exemple : la première salle a droite de l'arène n'est pas aux coordonnées x=1 y=0, mais x=2 y=0.",
     "On peut rencontrer 4 couleurs de brazier differents dans les salles : bleu vert rouge ou noir. Il y a 3 artefacts que l'on peut obtenir en sacrifiant un gros nombre du bon item au brazier noir, et l'un de ces items sacrifiables est le fruit jindagee.",
     "Sacrifier un item dans le brazier vert permet d'augmenter une de ses caractéristiques, en référence avec l'item sacrifié.",
@@ -17064,10 +17064,10 @@ class Observe:
                         break
                     if choix in range(2, 8):
                         if choix == 2:
-                            cout = 150
+                            cout = 100
                             nom_de_litem = "Remède Divin"
                         elif choix == 3:
-                            cout = 170
+                            cout = 115
                             nom_de_litem = "Pillule Divine"
                         elif choix == 4:
                             cout = 200
@@ -17086,7 +17086,7 @@ class Observe:
                             if nom_de_litem == "Larmes de Vénus":
                                 FloorMaker.GiveRandomArtefact("Larmes de Vénus","Don")
                                 print("Vous achetez l'artefact [Larmes de Vénus] !")
-                                print("Cette fiole emplie d'un soluté magnifique permet d'apaiser les feux de la colère et ne laisse derrière que les ombres de la culpabilité.\nLes effets des orbes de folie et furie durent un tour de plus !")
+                                print("Cette fiole emplie d'un soluté magnifique permet d'apaiser les feux de la colère et ne laisse derrière que les ombres de la culpabilité.\nPasser son tour à 20% de chance de stopper les effets de Confusion !")
                             else:
                                 print(f"Vous achetez l'item [{nom_de_litem}] !")
                                 Player.items_possedes[nom_de_litem] += 1
@@ -23558,7 +23558,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
             ("Un bon toutou que son maitre a modifié dans l'espoir qu'il survive a son cancer.\nCe chien a moitié cyborg fait des dégâts a vos ennemis a chaque fin de tour !")
         ), 
         "Larmes de Vénus": (
-            ("Cette fiole emplie d'un soluté magnifique permet d'apaiser les feux de la colère et ne laisse derrière que les ombres de la culpabilité.\nLes effets des orbes de folie et furie durent un tour de plus !")
+            ("Cette fiole emplie d'un soluté magnifique permet d'apaiser les feux de la colère et ne laisse derrière que les ombres de la culpabilité.\nPasser son tour à 20% de chance de stopper les effets de Confusion.")
         ), 
         "Marque du Sacrifice": (
             ("La Marque Maudite que le Coliseum afflige a chacune de ses créations.\nVous empeche de sortir, vous permet de descendre dans le backstage du Coliseum, et vous rappelle a chaque instant d'un chose : vous n'êtes qu'un sacrifice, un sac de chair suintant du désir dont il a besoin pour devenir plus fort.")

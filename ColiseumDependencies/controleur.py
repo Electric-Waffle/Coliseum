@@ -7424,8 +7424,8 @@ class Control:
             elif nom_de_litem in ["Orbe de Furie", "Orbe de Folie"]:
                 if nom_de_litem == "Orbe de Furie":
                     self.modele.utilise_orbe_de_furie = True
-                    self.modele.utilise_orbe_de_furie_nombre_tour = 2
-                    if "Larmes de Vénus" in self.modele.liste_dartefacts_optionels:
+                    self.modele.utilise_orbe_de_furie_nombre_tour = 3
+                    if "Demi-Masque de l'Ordre" in self.modele.liste_dartefacts_optionels:
                         self.modele.utilise_orbe_de_furie_nombre_tour += 1
                         commentaire_item = ("Vous tenez l'orbe entre vos main et plongez votre regard dans la chose furieuse qui tourne a l'interieur."
                                             "\nElle rentre alors dans votre esprit et augmente de maniere significative les degats de vos deux prochaines attaque !")
@@ -7434,8 +7434,8 @@ class Control:
                                             "\nElle rentre alors dans votre esprit et augmente de maniere significative les degats de votre prochaine attaque !")
                 elif nom_de_litem == "Orbe de Folie":
                     self.modele.utilise_orbe_de_folie = True
-                    self.modele.utilise_orbe_de_folie_nombre_tour = 2
-                    if "Larmes de Vénus" in self.modele.liste_dartefacts_optionels:
+                    self.modele.utilise_orbe_de_folie_nombre_tour = 3
+                    if "Demi-Masque du Chaos" in self.modele.liste_dartefacts_optionels:
                         self.modele.utilise_orbe_de_folie_nombre_tour += 1
                         commentaire_item = ("Vous tenez l'orbe entre vos main et plongez votre regard dans la chose folle qui tourne a l'interieur."
                                             "\nElle rentre alors dans votre esprit et augmente de maniere significative les degats de vos deux prochains sorts !")
@@ -10362,6 +10362,11 @@ class Control:
             self.modele.points_de_vie += soin
             self.EquilibragePointsDeVieEtManaEtEndurance()
             commentaire += f"\nLa Terre récompense votre patience. Vous reprenez {soin} points de vie !"
+        if self.modele.est_maudit_par_les_items and "Larmes de Vénus" in self.modele.liste_dartefacts_optionels and random.randint(1,10) <= 2:
+            commentaire += f"\nVénus libère votre âme des toxines de la Confusion !"
+            self.modele.est_maudit_par_les_items = False
+            self.modele.est_maudit_par_les_items_nombre_tour = False
+        
         self.vue.AfficheSeDefendre(commentaire)
 
     

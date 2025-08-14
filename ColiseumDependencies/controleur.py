@@ -3,6 +3,7 @@ import vue
 import os
 import random
 import time
+from collections import deque
 
 
 def clear_console():
@@ -80,7 +81,7 @@ class Control:
                     commentaire = (
                         "Alors que vous alliez mourir, votre fée sort de son flacon. "
                         "\nCepandant, au lieu de vous aider, elle est repoussée par "
-                        "votre aura démonique maudite, et s'enfuie."
+                        "votre aura démoniaque maudite, et s'enfuie."
                     )
                     self.vue.AfficheResurrection(commentaire)
                     return False
@@ -114,7 +115,7 @@ class Control:
                         self.vue.AfficheResurrection(commentaire)
                         return True
                 if "Echarde de Pinocchio" in self.modele.liste_dartefacts_optionels:
-                    if nombre_aleatoire in [1, 2]:
+                    if nombre_aleatoire in [1, 2, 3, 4, 5]:
                         commentaire = "Vous sentez la vie vous quitter.\nOu pas.\n \nVotre mort durant ce combat n'etait qu'un simple mensonge. \nEn fait, vous n'avez même jamais perdu de vie !"
                         self.modele.points_de_vie = self.modele.points_de_vie_max
                         self.vue.AfficheResurrection(commentaire)
@@ -194,9 +195,15 @@ class Control:
                             self.vue.AfficheResurrectionMaitreMage(chemin_musique)
                             self.modele.monstre_nom = "Ministre du Mana"
                         elif self.modele.monstre_nom == "Apprentie":
-                            self.modele.commentaire_de_resurection_de_monstre = "...pour s'adapter a son nouvel hôte."
+                            self.modele.commentaire_de_resurection_de_monstre = "...pour s'adapter à son nouvel hôte."
                             self.vue.AfficheResurrectionApprenti(chemin_musique)
                             self.modele.monstre_nom = "Minaraï"
+                        elif self.modele.monstre_nom == "Le Pianiste":
+                            self.modele.commentaire_de_resurection_de_monstre = "...et tombe, inerte, à terre."
+                            self.vue.AfficheResurrectionPianiste(chemin_musique)
+                            self.modele.monstre_nom = "Noa"
+                            notes_restante, reussite = self.DoPianisteDerniereAttaque()
+                            return self.DoPianisteResultatDerniereAttaque(notes_restante, reussite)
                         elif self.modele.monstre_nom == "Coliseum":
                             self.modele.commentaire_de_resurection_de_monstre = "...afin de se libérer de son ancienne forme."
                             self.vue.AfficheResurrectionColiseum(chemin_musique)
@@ -2215,6 +2222,42 @@ class Control:
                 "Tournicotez": "Sort", #queston a repondre [x]
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
+        elif self.modele.monstre_nom == "Le Pianiste":
+            self.modele.stigma_monstre_positif = "Coeur Immolé"
+            self.modele.stigma_monstre_negatif = "Inconsolable Rage"
+            self.modele.stigma_monstre_bonus = "Nordique"
+            self.modele.monstre_points_de_force = 5
+            self.modele.monstre_points_de_intelligence = 15
+            self.modele.monstre_points_de_resistance = 12
+            self.modele.monstre_nombre_de_vies_supplementaire = 1
+            self.modele.monstre_points_de_vie_max = 750
+            self.modele.monstre_points_de_mana_max = 100
+            self.modele.monstre_liste_actions = {
+                "Do": "Sort", # reprend vie
+                "Ré": "Sort", # met le feu
+                "Mi": "Sort", # met la glace
+                "Fa": "Sort", # met la foudre 
+                "Sol": "Sort", # met le sang
+                "La": "Sort", # met le dégat
+                "Si": "Sort", # rend confus
+                "Symphonie": "Sort", # met feu glace sang degat
+                "Déchiquetage": "Technique", # Blesse énormément
+            }
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
+        elif self.modele.monstre_nom == "Noa":
+            self.modele.stigma_monstre_positif = "Coeur Immolé"
+            self.modele.stigma_monstre_negatif = "Inconsolable Rage"
+            self.modele.stigma_monstre_bonus = "Nordique"
+            self.modele.monstre_points_de_force = 0
+            self.modele.monstre_points_de_intelligence = 0
+            self.modele.monstre_points_de_resistance = 0
+            self.modele.monstre_nombre_de_vies_supplementaire = 0
+            self.modele.monstre_points_de_vie_max = 1
+            self.modele.monstre_points_de_mana_max = 1
+            self.modele.monstre_liste_actions = {
+                "Rien": "Technique", 
+            }
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
         elif self.modele.monstre_nom == "Prince des Voleurs":
             self.modele.stigma_monstre_positif = "Bomberman"
             self.modele.stigma_monstre_negatif = "Hautain"
@@ -3275,6 +3318,10 @@ class Control:
             if self.modele.choc_thermique:
                 self.modele.monstre_points_de_vie -= degat
                 commentaire = f"A cause du choc thermique entre sa gelure et sa brulure, il perd {degat * 2} points de vie !"
+            if self.modele.stigma_monstre_positif == "Coeur Immolé" and not self.modele.monstre_en_etat_de_choc and (self.modele.monstre_points_de_mana + round(degat * 0.5)) <= self.modele.monstre_points_de_mana_max :
+                mana_recup = round(degat * 0.5)
+                self.modele.monstre_points_de_mana += mana_recup
+                commentaire += f"Le coeur de l'ennemi à déja souffert par le feu, et sa présence lui permet de récupérer des points de mana."
             self.vue.AfficheFeuEtPoison(personnage, commentaire)
 
     def AppliqueFeuElectrique(self):
@@ -4035,9 +4082,9 @@ class Control:
                         self.vue.AfficheOmnipotent(commentaire)
                     if self.modele.stigma_joueur_bonus == "Script":
                         self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Ennemis", self.modele.monstre_nom)
-                    if self.modele.possede_une_fee == False and "Fée dans un Bocal" in self.Player.liste_dartefacts_optionels:
-                        self.Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
-                        self.Player.possede_une_fee = False
+            if self.modele.possede_une_fee == False and "Fée dans un Bocal" in self.Player.liste_dartefacts_optionels:
+                self.Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+                self.Player.possede_une_fee = False
                 
         self.StopCombatSounds()
 
@@ -8875,6 +8922,137 @@ class Control:
             commentaire += "\nVos sens sont scellés ! Vous devenez instable pendant 2 tours !"
         self.vue.AfficheTomeDeSalomon(commentaire)
 
+    def DoPianisteResultatDerniereAttaque(self, notes_restante, reussite):
+        if not reussite:
+            return False
+        else:
+            if notes_restante > 0:
+                self.modele.points_de_vie -= notes_restante * 15
+                self.AfficheSonTechnique("SOUL")
+                print(f"Les {notes_restante} notes restantes dans les airs vous tombent dessus et vous transpercent de toute part !\nVous perdez {notes_restante * 15} points de vie !")
+                dummies = input("Appuyez sur entree pour continuer")
+
+            if self.modele.points_de_vie <= 0 :
+                
+                if self.modele.possede_une_fee == True :
+                    self.modele.possede_une_fee = False
+                    self.modele.points_de_vie = round(0.66 * self.modele.points_de_vie_max)
+                    print(f"Votre Fée sort de son bocal et vous sauve la vie en soignant {round(0.66 * self.modele.points_de_vie_max)} points de vie !")
+                    dummies = input("Appuyez sur entree pour continuer")
+                    
+                elif "Voile de Ino" in self.modele.liste_dartefacts_optionels:
+                    self.modele.liste_dartefacts_optionels.remove("Voile de Ino")
+                    self.modele.points_de_vie = round(0.66 * self.modele.points_de_vie_max)
+                    print(f"Votre Voile se plaque sur votre visage et vous sauve la vie en soignant {round(0.66 * self.modele.points_de_vie_max)} points de vie !")
+                    dummies = input("Appuyez sur entree pour continuer")
+
+                else:
+                    print("Vous mourrez.")
+                    dummies = input("Appuyez sur entree pour continuer")
+                    return False
+                
+            print("Il n'y a plus de notes dans les airs.\nVous êtes en vie !\nFinissez le boss !")
+            dummies = input("Appuyez sur entree pour continuer")
+            return True
+
+
+    def DoPianisteDerniereAttaque(self):
+        
+        directions_possibles = ["Haut", "Bas", "Gauche", "Droite"]
+        directions = [random.choice(directions_possibles) for _ in range(20)]
+
+        mapping = {
+            "Haut": 8,
+            "Bas": 2,
+            "Gauche": 4,
+            "Droite": 6
+        }
+        
+        attaque_terminee_sans_mourir = True
+        start_time = time.time()
+        
+        # File FIFO des 3 derniers coups affichés
+        buffer = deque(maxlen=3)
+        
+        total_iterations = len(directions) + 3  # 3 tours de plus pour vider le décalage
+        remaining_directions = total_iterations
+        
+        for i in range(total_iterations):
+            affichage = ""
+
+            # Vérif du temps
+            if time.time() - start_time > 66:
+                return remaining_directions, attaque_terminee_sans_mourir
+            
+            # Vérif des PV
+            if self.modele.points_de_vie <= 0:
+                if self.modele.possede_une_fee == True :
+                    self.modele.possede_une_fee = False
+                    self.modele.points_de_vie = round(0.66 * self.modele.points_de_vie_max)
+                    affichage += f"Votre Fée sort de son bocal et vous sauve la vie en soignant {round(0.66 * self.modele.points_de_vie_max)} points de vie !"
+                    
+                elif "Voile de Ino" in self.modele.liste_dartefacts_optionels:
+                    self.modele.liste_dartefacts_optionels.remove("Voile de Ino")
+                    self.modele.points_de_vie = round(0.66 * self.modele.points_de_vie_max)
+                    affichage += f"Votre Voile se plaque sur votre visage et vous sauve la vie en soignant {round(0.66 * self.modele.points_de_vie_max)} points de vie !"
+
+                else:
+                    attaque_terminee_sans_mourir = False
+                    return remaining_directions, attaque_terminee_sans_mourir
+            
+            
+            if i < len(directions):
+                # Phase d'affichage de la direction
+                direction = directions[i]
+                match direction:
+                    case "Haut":
+                        affichage += "\nLe Pianiste lève les Bras en Haut !"
+                    case "Bas":
+                        affichage += "\nLe Pianiste baisse les Bras vers le Bas !"
+                    case "Gauche":
+                        affichage += "\nLe Pianiste déplace ses doigts vers la Gauche !"
+                    case "Droite":
+                        affichage += "\nLe Pianiste déplace ses doigts vers la Droite !"
+                buffer.append(direction)
+            else:
+                # Phase finale : pas de nouvelle direction, juste le buffer
+                affichage += "\n..."
+            
+            if len(buffer) < 3:
+                # Pas encore assez d'historique → juste ENTER
+                print(affichage)
+                input("Appuyez sur Entrée pour continuer")
+            else:
+                # On demande la direction d'il y a 3 coups
+                ancienne_direction = buffer[0]
+                affichage += "\nOù irez-vous ?\n"
+                for dir_name, num in mapping.items():
+                    affichage += f"{num} = {dir_name}  "
+                
+                while True:
+                    try:
+                        print(affichage)
+                        choix = int(input("\nFaites votre choix avec les nombres : "))
+                        clear_console()
+                        if choix in mapping.values():
+                            break
+                        else:
+                            print("Choix invalide. Réessayez.")
+                    except ValueError:
+                        clear_console()
+                
+                if choix == mapping[ancienne_direction]:
+                    print("Vous esquivez la vague de notes !")
+                else:
+                    print(f"Les notes vous transpercent et infligent 15 points de dégâts.\n"
+                        f"Il aurait fallu aller vers [{ancienne_direction}].")
+                    self.modele.points_de_vie -= 15
+                    self.AfficheSonTechnique("ICEt")
+            
+            remaining_directions = total_iterations - (i + 1)
+    
+
+
     def UltimeUltime(self):
         commentaire_description = ("L'ennemi se met à hurler et la salle entière se met a trembler !"
                        "\nUne aura dorée se met à l'entourer,"
@@ -9265,6 +9443,8 @@ class Control:
                     self.FlashBang()
                 elif action == "Laser Anti-Personnel":
                     self.LaserAntipersonnel()
+                elif action == "Symphonie":
+                    self.Symphonie()
             #affiche si les degats ont été changés par bluff, montagne, brume de sang ou mirroir d'eau
             if self.modele.commentaire_transmutation_degat != "":
                 self.vue.AfficheTransmutationDegat(self.modele.commentaire_transmutation_degat)
@@ -9328,6 +9508,24 @@ class Control:
             commentaire_degat = (f"Il charge puis tire un laser qui passe a travers vos éventuelles protections !\nVous perdez {degat_a_joueur} points de vie !")
             self.EnleveVieAuJoueur(degat_a_joueur)
         self.vue.AfficheLaserAntipersonnel(commentaire, commentaire_degat)
+
+    def Symphonie(self):
+        degat_a_joueur = round(self.modele.points_de_vie_max * 0.2)
+        commentaire = "L'ennemi lance une Symphonie !"
+
+        nombre_aleatoire = random.randint(0, 100)
+        if nombre_aleatoire <= 50:
+            commentaire_degat = ("Mais rien ne se passe.")
+            if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
+                    commentaire_degat += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
+                    self.modele.beni_par_feu_sacre = True
+                    self.modele.beni_par_feu_sacre_nombre_tour += 2
+        else:
+            commentaire_degat = (f"Des notes magiques sortent du piano et fusent a travers l'air, vous transpercant de toute part.")
+            commentaire_degat += (f"Vous devenez gelé, enflammé et confu pendant 4 tours !")
+            commentaire_degat += (f"De plus, vous perdez {degat_a_joueur} points de vie !")
+            self.EnleveVieAuJoueur(degat_a_joueur)
+        self.vue.AfficheSymphonie(commentaire, commentaire_degat)
     
     def Jugement(self):
         degat = self.modele.nombre_de_monstres_tues
@@ -9353,7 +9551,7 @@ class Control:
         self.modele.monstre_gain_de_defence_nombre_tour += 4
 
     def DurcissementCalcaire(self):
-        gain_de_points_de_defence = 12
+        gain_de_points_de_defence = 18
         commentaire = "L'ennemi rassemble le calcaire contenu dans les murs de la salle se faire une carapace solide !"
         commentaire_effet = f"Il gagne {gain_de_points_de_defence} points de défence pendant 3 tours !"
         self.vue.AfficheDurcissementCalcaire(commentaire, commentaire_effet)
@@ -10416,9 +10614,12 @@ class Control:
         return degat
     
     def RegardeSiMonstreAAssezDeMana(self, action):
-        if self.modele.monstre_points_de_mana >= self.modele.ANNUAIRECOUTSORTMONSTRE[action]:
+        cout_en_mana = self.modele.ANNUAIRECOUTSORTMONSTRE[action]
+        if self.modele.monstre_points_de_mana >= cout_en_mana:
+            if self.modele.stigma_monstre_negatif == "Inconsolable Rage" and self.modele.monstre_points_de_mana >= (cout_en_mana * 2) and random.randint(1,10) <= 2 :
+                cout_en_mana += cout_en_mana
             action_possible = True
-            self.modele.monstre_points_de_mana -= self.modele.ANNUAIRECOUTSORTMONSTRE[action]
+            self.modele.monstre_points_de_mana -= cout_en_mana
         else:
             action_possible = False
         return action_possible

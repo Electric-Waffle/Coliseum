@@ -1733,7 +1733,8 @@ class Model:
             "Thermosphère Brulante",
             "Thermosphère de la Fournaise",
             "Thermosphère Magmatique",
-            "Thermosphère Solaire"
+            "Thermosphère Solaire",
+            "Ré"
         ]
         self.sorts_de_foudre_de_monstre = [
             "Claquement de Foudre",
@@ -1743,7 +1744,8 @@ class Model:
             "Faisceau de l'Eclair",
             "Faisceau Foudroyant",
             "Rituel Canope",
-            "Faisceau de la Mort Blanche"
+            "Faisceau de la Mort Blanche",
+            "Fa"
         ]
         self.sorts_de_glace_de_monstre = [
             "Froideur d'Outretombe",
@@ -1755,7 +1757,8 @@ class Model:
             "Pic Froid",
             "Pic Glacial",
             "Pic Polaire",
-            "Pic Zéro"
+            "Pic Zéro",
+            "Mi"
         ]
         self.sorts_de_terre_de_monstre = [
             "Oméga Lapidation",
@@ -1772,7 +1775,8 @@ class Model:
             "Dance Parasite",
             "Houken",
             "Dance Destructrice",
-            "Dance Créatrice"
+            "Dance Créatrice",
+            "Sol"
         ]
         self.sorts_de_physique_de_monstre = [
             "Poing de Mana",
@@ -1786,7 +1790,8 @@ class Model:
             "Explosion Maitrisée",
             "Missile Arcanique",
             "Explosion Fatale",
-            "Explosion de la Comète"
+            "Explosion de la Comète",
+            "La"
         ]
         #SORTS SPECIAUX
         self.sorts_de_soin_de_monstre = [
@@ -1822,7 +1827,8 @@ class Model:
             ""
         ]
         self.sorts_de_confusion_de_monstre = [ # pas d'item
-            "Confusion"
+            "Confusion",
+            "Si"
         ]
         #SORTS SUPPLEMENTAIRES
         self.sorts_supplementaire_de_monstre = [ 
@@ -1859,6 +1865,7 @@ class Model:
             "Protocole Supernova",
             "Flash Bang",
             "Laser Anti-Personnel",
+            "Symphonie"
         ]
         self.ANNUAIRECOUTSORTMONSTRE = {
             "Flamme": 5,
@@ -1961,6 +1968,14 @@ class Model:
             "Protocole Supernova": 5,
             "Flash Bang": 5,
             "Laser Anti-Personnel": 5,
+            "Do": 10,
+            "Ré": 10,
+            "Mi": 10,
+            "Fa": 10,
+            "Sol": 10,
+            "La": 10,
+            "Si": 10,
+            "Symphonie": 20,
         }
         self.annuaire_de_caracteristique_des_sorts_generaux_de_monstre = {
             # %touche, degat, %crit, degat crit, %element, description, message si rate, si touche, si touche crit, nombre tours, effet element
@@ -1968,6 +1983,26 @@ class Model:
                        "...mais vous l'esquivez .", 
                        "...et elle vous brule !", 
                        "...et elle vous carbonise !!", 3, 5],
+            "Ré": [95, 10, 30, 15, 40, "L'ennemi fait un Do....", 
+                       "...mais rien ne se passe .", 
+                       "...et vous brulez !", 
+                       "...et vous vous enflammez !!", 3, 8],
+            "Mi": [95, 10, 30, 15, 20, "L'ennemi fait un Mi....", 
+                       "...mais rien ne se passe .", 
+                       "...et vous prenez froid !", 
+                       "...et vous gelez sur place !!", 4, 8],
+            "Fa": [95, 10, 30, 15, 10, "L'ennemi fait un Fa....", 
+                       "...mais rien ne se passe .", 
+                       "...et vous prenez la foudre !", 
+                       "...et vous vous faites transpercer par un éclair !!", 3, 8],
+            "Sol": [95, 10, 30, 15, 60, "L'ennemi fait un Sol....", 
+                       "...mais rien ne se passe .", 
+                       "...et des goutellettes de sang sortent par vos pores !", 
+                       "...et vous crachez du sang !!", 3, 10],
+            "La": [95, 20, 30, 20, 60, "L'ennemi fait un La....", 
+                       "...mais rien ne se passe .", 
+                       "...et votre corps vous fait mal !", 
+                       "...et vos organes se tordent !!", 3, 10],
             "Vents du Sud": [90, 5, 25, 5, 50, "L'ennemi invoque les vents brulants du Sud...", 
                              "...mais vous résistez aux temperatures extrêmes .", 
                              "...et vous commencez a bruler !",
@@ -2209,6 +2244,9 @@ class Model:
             # taux de reussite/soin minimum, tours d'effet/%soin, description, message si touche
             "Soin": [7, 8, "L'ennemi lance un sort de soin !", 
                      "Le mana l'enveloppe et il reprend des points de vie !"],
+            "Do": [30, 7, "L'ennemi fait un Do...", 
+                     "Ses blessures se referment, il reprend de la vie !"],
+            
             "Feu Regénérateur": [8, 10, "L'ennemi invoque un feu régénérateur pour restaurer ses points de vie.", 
                                 "Le feu répare ses os brisés et guérit ses blessures."],
             "Réglages d'Usine": [22, 11, "L'ennemi tente de réinitialiser ses points de vie avec des réglages d'usine.", 
@@ -2246,6 +2284,9 @@ class Model:
             "Confusion": [65, 3, "L'ennemi vous jette un sort de confusion...", 
                           "...mais il échoue.", 
                           "...et vos pensées deviennent aussi brouillées qu'un bruit de fond."],
+            "Si": [40, 5, "L'ennemi fait un Si...", 
+                          "...mais rien ne se passe.", 
+                          "...et votre champ de vision se met a tourner, incapacitant votre capacité de réflexion."],
         }
 
         # TECHNIQUES MONSTRE
@@ -2293,7 +2334,8 @@ class Model:
             "Lame Courageuse",
             "Attaque Titanesque",
             "Lame Ultime",
-            "Lame Vaillante"
+            "Lame Vaillante",
+            "Rien"
         ]
         #TECHNIQUES SPECIALES
         self.techniques_de_soin_de_monstre = [
@@ -2306,7 +2348,8 @@ class Model:
         ]
         self.techniques_de_blessure_de_monstre = [ # technique coute vie
             "Poing Eclat",
-            "Coup du Foie"
+            "Coup du Foie",
+            "Déchiquetage"
         ]
         self.techniques_de_deconcentration_de_monstre = [ # sorts coute plus de mana
             ""
@@ -2352,6 +2395,11 @@ class Model:
                        "...et son poing enflammé vous frappe, provoquant une brûlure vive !",
                        "...et son poing enflammé s'abat violemment, engendrant une explosion de flammes dévastatrice !!",
                        4, 5],
+            "Rien": [0, 0, 0, 0, 0, "L'ennemi est allongé sur le sol...",
+                       "...attendant simplement votre dernier coup.",
+                       "...attendant simplement votre dernier coup.",
+                       "...attendant simplement votre dernier coup.",
+                       0, 0],
             "Souffle de Feu": [85, 15, 30, 5, 30, "L'ennemi aspire profondément, puis libère un souffle brûlant sur vous...",
                                     "...mais son souffle de feu vous manque de peu, les flammes léchant l'air sans toucher.",
                                     "...et son souffle de feu vous englobe , les flammes laissant des marques de brûlure !",
@@ -2530,22 +2578,25 @@ class Model:
                                             "...et tombe en avant sous le poids de l'objet.",
                                             "...et il enveloppe l'ennemi, le protégeant et le soignant."],
 
-            "Poing Eclat": [7, 85, 4, "Le monstre vous assène un puissant coup de poing qui explose en une pluie d'éclats acérés...",
+            "Poing Eclat": [7, 85, 4, "L'ennemi vous assène un puissant coup de poing qui explose en une pluie d'éclats acérés...",
                             "...mais les éclats se dispersent dans l'air sans vous toucher .",
                             "...et vous êtes criblé de blessures alors que les éclats s'enfoncent profondément dans votre chair !"],
-            "Coup du Foie": [17, 75, 4, "Le monstre vous frappe violemment au niveau du foie...",
+            "Coup du Foie": [17, 75, 4, "L'ennemi vous frappe violemment au niveau du foie...",
                                         "...mais l'attaque rate son objectif de peu .",
                                         "...et vous sentez une douleur lancinante alors que le coup vous blesse et vous handicape !"],
-            "Lame Dorée": [15, 85, 5, "Le monstre vous attaque avec une lame dorée étincelante...",
+            "Déchiquetage": [25, 50, 4, "L'ennemi se jette sur vous, dans ses yeux brille la rage...",
+                                        "...mais vous l'esquivez aisément .",
+                                        "...et il vous lacère le corps avec ses ongles aiguisés !"],
+            "Lame Dorée": [15, 85, 5, "L'ennemi vous attaque avec une lame dorée étincelante...",
                             "...mais son attaque manque sa cible, vous laissant indemne.",
                             "...et vous sentez une étrange sensation de malaise alors que la lame vous infecte d'une maladie sournoise !"],
             "Etranglement": [5, 70, 3, "L'ennemi s'enroule autour de votre cou...", 
                              "...mais vous arrivez a vous débarrasser de son étreinte.", 
                              "...et vous étrangle sans ménagement."],
-            "Brulevent": [7, 70, 2, "Le monstre libère un souffle ardent qui consume tout l'oxygène de la salle...",
+            "Brulevent": [7, 70, 2, "L'ennemi libère un souffle ardent qui consume tout l'oxygène de la salle...",
                           "...mais vous parvenez à éviter de justesse le souffle brûlant.",
                           "...et vous vous retrouvez soudainement incapable de parler alors que la chaleur envahit votre gorge !"],
-            "Roulé-Boulet": [20, 75, 5, "Le monstre se met en boule et vous percute avec une force dévastatrice, vous envoyant valser à travers la pièce...",
+            "Roulé-Boulet": [20, 75, 5, "L'ennemi se met en boule et vous percute avec une force dévastatrice, vous envoyant valser à travers la pièce...",
                              "...mais vous parvenez à encaisser le coup sans trop de dommages, vous permettant de rester sur vos gardes.",
                             "...et vous vous retrouvez étourdi et désorienté, votre esprit confus par le choc violent !"],
 

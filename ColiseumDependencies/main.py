@@ -7137,29 +7137,98 @@ class Affiche:
             commentaire = "*...amène toi.*"
             liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 5:
-            commentaire = "Vous entendez du bruit vers un stand de chamboule-tout, et voyez une clochette dépasser d'une poubelle proche."
-            liste_commentaire.append(commentaire)
-            commentaire = (
-                "L'ennemi sort alors de sa cachette."
-                "\nIl est habillé avec des vêtements colorés déchirés, de grandes chaussures rouges trouées, "
-                "et un masque sur lequel est représenté un sourire béant."
-                "\nVous frissonnez en voyant la folie sanguinaire dans les yeux de l'ennemi, a travers un trou dans le costume."
-            )
-            liste_commentaire.append(commentaire)
-            commentaire = "*BONJOUR-JOUR VOYAGEUR ! JE SUIS LE BOUFFON BOUFFON ! JE SUIS ICI-CI POUR AMUSER-MUSER MON ROI !*"
-            liste_commentaire.append(commentaire)
-            commentaire = (
-                "*ET TU SAIS CE QUI L'AMUSERAIT BEAUCOUP ? MOI JE SAIS ! MOI JE SAIS !*"
-            )
-            liste_commentaire.append(commentaire)
-            commentaire = (
-                "*CA SERAIT TA TETE AU BOUT D'UN PIQUE ET TES TRIPES DANS UN GATEAU !*"
-            )
-            liste_commentaire.append(commentaire)
-            commentaire = "*ET PUIS SI JE FAIT CA IL ME LAISSERA SUREMENT-REMENT REMONTER DANS LE CHATEAU PAS VRAI ? ET PUIS IL ME LAISSERA MANGER AUTRE CHOSE QUE CES VOYAGEURS SANS RIEN SUR LES OS !*"
-            liste_commentaire.append(commentaire)
-            commentaire = "*JOUONS ! JOUONS ! YAHAHAHA !*"
-            liste_commentaire.append(commentaire)
+            if Player.nom_de_letage == "Le Lumisade":
+                StopAllMusic()
+                Affichage.IntroBoss("Un battement de cil plus tard, vous vous retrouvez à l'entrée de l'hotel.")
+                Affichage.IntroBoss("L'arène devant vous étant vide, vous vous tournez vers la salle de bal, depuis laquelle vous entendez une musique familière, la même qu'a votre arrivée à cet étage.")
+                Affichage.IntroBoss("Vous tendez une main hésitante sur la poignée de la porte...")
+                Affichage.IntroBoss("...les marques de brulures sont désormais omniprésentes.")
+                Affichage.IntroBoss("Un feu invisible, qui grignotte silencieusement le bois et le tissu.")
+                Affichage.IntroBoss("L'hotel brule.")
+                PlayMusic("boss_5_alt_intro")
+                commentaire = "*Cela fait toujours bizarre.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "La salle de bal est splendide, équipée de somptueuses tables de banquet."
+                liste_commentaire.append(commentaire)
+                commentaire = "*De se rapeller.*\n*Ou peut-être n'ai-je jamais oublié ?"
+                liste_commentaire.append(commentaire)
+                commentaire = "Le parquet ne crisse pas sous vos pas, les fenêtres sont ornées de cadres en chêne..."
+                liste_commentaire.append(commentaire)
+                commentaire = "*Un peu comme une pause, finalement.*\n*Je n'ai plus besoin de faire semblant, pendant juste un instant.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "Un doux feu crépite dans les différentes cheminées occupant des espaces décorés sur les cotés..."
+                liste_commentaire.append(commentaire)
+                commentaire = "*Certains disent qu'on peut se perdre dans son role.*\n*Cet étage là, c'est un peu comme une fenetre sur ce que j'étais, avant.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "Un magnifique piano blanc comme la neige throne au milieu de la salle, éclairé par un lustre de jade."
+                liste_commentaire.append(commentaire)
+                commentaire = "*Un magnifique panorama.*\n*Une tendre embrassade venue du passé.*\n*Un peu d'ordre dans la tempête chaotique qu'est ma vie.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "Le boss de l'étage est assis là, répétant la même musique , encore et encore."
+                liste_commentaire.append(commentaire)
+                commentaire = "*Tu sais, si j'avais pu jouer cette petite mélodie...*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*Impressionner le Roi...*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*Ou juste écouté mon père...*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*...alors peut être que j'aurais pu rester ici.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*Pas de fautes, pas d'embarras, pas de problèmes.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*J'ai mal appellé le diable, et il s'est tant amusé de mes bouffoneries qu'il m'a pris sous son aile.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*Mais je ne suis pas dupe.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "Vous sentez de la colère dans les notes."
+                liste_commentaire.append(commentaire)
+                commentaire = "*Il serait bien présomptueux de débarquer dans cette étrange batisse de chair et d'âme, et de s'attendre a ce que tout le monde soit un villain dans l'histoire.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*Certains sont des victimes, d'autres se réfugient dans la folie, d'autres encore sont aveuglés par la loyauté, et les derniers ont en eux le Mal dans toute son horreur.*\n*Mais tout vient d'un seul sentiment, Terriblement humain :*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*Le désir de vivre.*\n*De survivre.*\n*Tel un cafard vivant dans les cachots de la honte,*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*les palais de la force,*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*l'étreinte du désespoir,*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*mais vivant toujours.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "La musique se fait plus lente, mélancolique."
+                liste_commentaire.append(commentaire)
+                commentaire = "*Dans quoi un tel insecte peut se réconforter à part le passé ?*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*A part un nom, j'avais tout pour moi.*\n*Un Chateau de luxe et de satin dans lequel travailler, Une famille pour m'épauler, Un hobbie pour m'aporter fierté...*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*...et même quand tout cela s'est effondré, dans ces abysses de rancoeur et de folie, j'ai quand meme trouvé la force d'avancer, et le véritable amour !*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*Je me rapelle, on se tenait l'un à coté de l'autre, les mains sur le meme piano...*"
+                liste_commentaire.append(commentaire)
+
+            else :
+                commentaire = "Vous entendez du bruit vers un stand de chamboule-tout, et voyez une clochette dépasser d'une poubelle proche."
+                liste_commentaire.append(commentaire)
+                commentaire = (
+                    "L'ennemi sort alors de sa cachette."
+                    "\nIl est habillé avec des vêtements colorés déchirés, de grandes chaussures rouges trouées, "
+                    "et un masque sur lequel est représenté un sourire béant."
+                    "\nVous frissonnez en voyant la folie sanguinaire dans les yeux de l'ennemi, a travers un trou dans le costume."
+                )
+                liste_commentaire.append(commentaire)
+                commentaire = "*BONJOUR-JOUR VOYAGEUR ! JE SUIS LE BOUFFON BOUFFON ! JE SUIS ICI-CI POUR AMUSER-MUSER MON ROI !*"
+                liste_commentaire.append(commentaire)
+                commentaire = (
+                    "*ET TU SAIS CE QUI L'AMUSERAIT BEAUCOUP ? MOI JE SAIS ! MOI JE SAIS !*"
+                )
+                liste_commentaire.append(commentaire)
+                commentaire = (
+                    "*CA SERAIT TA TETE AU BOUT D'UN PIQUE ET TES TRIPES DANS UN GATEAU !*"
+                )
+                liste_commentaire.append(commentaire)
+                commentaire = "*ET PUIS SI JE FAIT CA IL ME LAISSERA SUREMENT-REMENT REMONTER DANS LE CHATEAU PAS VRAI ? ET PUIS IL ME LAISSERA MANGER AUTRE CHOSE QUE CES VOYAGEURS SANS RIEN SUR LES OS !*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*JOUONS ! JOUONS ! YAHAHAHA !*"
+                liste_commentaire.append(commentaire)
         elif Player.numero_de_letage == 6:
             commentaire = "Vous entendez des bruits de pas venant de derriere vous.\nAlors que vous vous retournez, vous les entendez encore derriere vous."
             liste_commentaire.append(commentaire)
@@ -7336,7 +7405,7 @@ class Affiche:
             liste_commentaire.append(commentaire)
             commentaire = "*...d'un faux génie, un trésor d'efforts sans résultats, une apprentie loyale brisé par ses propres démons...*"
             liste_commentaire.append(commentaire)
-            commentaire = "*...d'un homme du nord portant un masque de faux sourires, porté par l'espoir de revoir ses contrées...*"
+            commentaire = "*...d'un homme du nord portant un masque de faux sourires, porté par son désir de survivre...*"
             liste_commentaire.append(commentaire)
             commentaire = "*...d'un représentant du peuple des bas-fonds du royaume, sacrifié au nom d'une loi brimée par le sang et l'injustice...*"
             liste_commentaire.append(commentaire)
@@ -7393,6 +7462,52 @@ class Affiche:
                 commentaire = "" "\n" "\n"
         for commentaire in liste_commentaire:
             Affichage.IntroBoss(commentaire)
+
+        if Player.nom_de_letage == "Le Lumisade":
+            StopAllMusic()
+            PlayMusic("boss_5_alt_fight_intro", "intro")
+            print("C'était ma jolie oie des neiges, libérée le temps d'un soupir de son affreux canard…")
+            Affichage.AfficheAvecUnTempsDattente(3.3)
+            print("Un rayon de soleil aussi fort que l'amour parental, perçant a travers les glaces…")
+            Affichage.AfficheAvecUnTempsDattente(3.3)
+            print("J'ai fait tout pour garder le bon cap, être une bonne personne, profitant des rares éclaircies..")
+            Affichage.AfficheAvecUnTempsDattente(3.3)
+            print("Des joies, de mon futur, mon bohneur, mon destin radieux...")
+            Affichage.AfficheAvecUnTempsDattente(2.75)
+            print("..qui m'a été ARRACHE !")
+            Affichage.AfficheAvecUnTempsDattente(1)
+            print("La haine qui irradie des mots du boss vous fait sursauter.")
+            Affichage.AfficheAvecUnTempsDattente(0.5)
+            print("MERDE !")
+            time.sleep(0.25)
+            print("MERDE !")
+            time.sleep(0.25)
+            print("MERDE !")
+            time.sleep(0.25)
+            print("MERDE !")
+            time.sleep(0.25)
+            print("MERDE !")
+            Affichage.AfficheAvecUnTempsDattente(0.25)
+            print("QUELLE SITUATION DE MERDE !!!")
+            Affichage.AfficheAvecUnTempsDattente(1)
+            print("ROI DE MERDE !!!")
+            time.sleep(0.5)
+            print("PIERRE DE MERDE !!!")
+            time.sleep(0.5)
+            print("COLISEE DE MERDE !!!")
+            time.sleep(0.5)
+            print("DESTIN DE MERDE !!!")
+            Affichage.AfficheAvecUnTempsDattente(0.75)
+            print("J'AI FAIT QUOI POUR MERITER CETTE TORTURE ??? HEIN ???")
+            Affichage.AfficheAvecUnTempsDattente(1.75)
+            print("OH PERE, VOS DERNIERES VOLONTEES AURONT ETE MA PLUS GRANDE MALEDICTION...")
+            Affichage.AfficheAvecUnTempsDattente(2.75)
+            print("Le Boss se retourne.")
+            Affichage.AfficheAvecUnTempsDattente(0.5)
+            print("DANSONS MARIONETTE !")
+            Affichage.AfficheAvecUnTempsDattente(1.5)
+            Affichage.EntreePourContinuer()
+
 
     def AfficheDescente(self):
         if Player.nom_de_letage == "Limbes Flétrissants" and Player.numero_boss_alt != 11:
@@ -7729,7 +7844,7 @@ class Affiche:
                 commentaire = (
                     "Vous laissez derrière vous le royaume du prince des voleurs, et entendez le sons de quelques clapotis."
                     "\nDes murs de pierre nus, trainés dans la boue, des grilles protégeants quelques culs de sacs des rares personnes a s'aventurer ici, "
-                    "\net une peu profonde mais omniprésente couche d'eau tapissant le sol d'un étage qui ressemble plus a une prison innondée qu'a un lieu de vie."
+                    "\net une peu profonde mais omniprésente couche d'eau tapissant le sol d'un étage qui ressemble plus a une prison innondée qu'à un lieu de vie."
                     "\nVous voici au septieme étage du Coliseum , la bulle de confort d'un esprit torturé par ses propres décisions, pleurant a jamais un pardon qui ne peut être accordé."
                 )
             else:
@@ -23824,38 +23939,6 @@ def EcrireDansLivreCigogneBlanche():
             fichier.write("\n--------------------------------------------------------------------------------")
             fichier.write("\n--------------------------------------------------------------------------------\n")
 
-        
-    
-
-
-        
-
-
-
-
-
-
-
-
-
-
-StopAllMusic()
-Sove = SoveManagement()
-Save = SaveManagement()
-Observation = Observe()
-Player = PlayerCaracteristics()
-Draw = DrawInTurtle()
-Affichage = Affiche()
-FloorMaker = Floor()
-Ending = EndingAndGift()
-Trader = TraderUsage()
-
-
-#donnees_de_s0ve = Observation.GetPermanentThingsFromS0ve()
-#donnees_de_s0ve["Livraison"] = TEMP
-#Observation.SetPermanentThingsToS0ve(donnees_de_s0ve)
-
-
 def doPiano():
     """
     Attend que l'utilisateur entre une lettre de A à Z (majuscule ou minuscule)
@@ -23890,6 +23973,35 @@ def doPiano():
         # Vérifier si la séquence correspond
         if list(buffer) == target_sequence:
             return True
+    
+
+
+        
+
+
+
+
+
+
+
+
+
+
+StopAllMusic()
+Sove = SoveManagement()
+Save = SaveManagement()
+Observation = Observe()
+Player = PlayerCaracteristics()
+Draw = DrawInTurtle()
+Affichage = Affiche()
+FloorMaker = Floor()
+Ending = EndingAndGift()
+Trader = TraderUsage()
+
+#donnees_de_s0ve = Observation.GetPermanentThingsFromS0ve()
+#donnees_de_s0ve["Livraison"] = TEMP
+#Observation.SetPermanentThingsToS0ve(donnees_de_s0ve)
+
 
 SetupGameMode()
 AffichageSecretPage3()

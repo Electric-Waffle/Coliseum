@@ -1808,7 +1808,8 @@ class Model:
             "Sonata Sincère",
             "Tournicoti",
             "Sonata Bienveillante",
-            "Sonata Absolutrice"
+            "Sonata Absolutrice",
+            "Do"
         ]
         self.sorts_de_blessure_de_monstre = [ # technique coute vie
             ""
@@ -1983,22 +1984,22 @@ class Model:
                        "...mais vous l'esquivez .", 
                        "...et elle vous brule !", 
                        "...et elle vous carbonise !!", 3, 5],
-            "Ré": [95, 10, 30, 15, 40, "L'ennemi fait un Do....", 
+            "Ré": [95, 20, 30, 15, 40, "L'ennemi fait un Do....", 
                        "...mais rien ne se passe .", 
                        "...et vous brulez !", 
                        "...et vous vous enflammez !!", 3, 8],
-            "Mi": [95, 10, 30, 15, 20, "L'ennemi fait un Mi....", 
+            "Mi": [95, 20, 30, 15, 20, "L'ennemi fait un Mi....", 
                        "...mais rien ne se passe .", 
                        "...et vous prenez froid !", 
                        "...et vous gelez sur place !!", 4, 8],
-            "Fa": [95, 10, 30, 15, 10, "L'ennemi fait un Fa....", 
+            "Fa": [95, 20, 30, 15, 10, "L'ennemi fait un Fa....", 
                        "...mais rien ne se passe .", 
                        "...et vous prenez la foudre !", 
                        "...et vous vous faites transpercer par un éclair !!", 3, 8],
-            "Sol": [95, 10, 30, 15, 60, "L'ennemi fait un Sol....", 
+            "Sol": [95, 20, 30, 15, 60, "L'ennemi fait un Sol....", 
                        "...mais rien ne se passe .", 
                        "...et des goutellettes de sang sortent par vos pores !", 
-                       "...et vous crachez du sang !!", 3, 10],
+                       "...et vous crachez du sang !!", 3, 15],
             "La": [95, 20, 30, 20, 60, "L'ennemi fait un La....", 
                        "...mais rien ne se passe .", 
                        "...et votre corps vous fait mal !", 
@@ -2244,7 +2245,7 @@ class Model:
             # taux de reussite/soin minimum, tours d'effet/%soin, description, message si touche
             "Soin": [7, 8, "L'ennemi lance un sort de soin !", 
                      "Le mana l'enveloppe et il reprend des points de vie !"],
-            "Do": [30, 7, "L'ennemi fait un Do...", 
+            "Do": [50, 7, "L'ennemi fait un Do...", 
                      "Ses blessures se referment, il reprend de la vie !"],
             
             "Feu Regénérateur": [8, 10, "L'ennemi invoque un feu régénérateur pour restaurer ses points de vie.", 

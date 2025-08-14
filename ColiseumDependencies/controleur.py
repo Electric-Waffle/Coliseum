@@ -188,7 +188,7 @@ class Control:
                     if self.modele.monstre_nom in ["Maitre Mage", "Apprentie", "Coliseum", "Cauchemard",
                                                 "Ahmed (Entrée)", "Ahmed (Plat de résistance)", "Roi Gluant",
                                                 "Volontée Immortelle", "Volontée Persistante", "Volontée Instable",
-                                                "Spectre", "Aurore"] and self.modele.monstre_nombre_de_vies_supplementaire == 0:
+                                                "Spectre", "Aurore", "Le Pianiste"] and self.modele.monstre_nombre_de_vies_supplementaire == 0:
                         chemin_musique = self.modele.CHEMINABSOLUMUSIQUE 
                         if self.modele.monstre_nom == "Maitre Mage":
                             self.modele.commentaire_de_resurection_de_monstre = "...un peu sonné par sa transformation."
@@ -202,6 +202,7 @@ class Control:
                             self.modele.commentaire_de_resurection_de_monstre = "...et tombe, inerte, à terre."
                             self.vue.AfficheResurrectionPianiste(chemin_musique)
                             self.modele.monstre_nom = "Noa"
+                            self.SetAttributesFromName()
                             notes_restante, reussite = self.DoPianisteDerniereAttaque()
                             return self.DoPianisteResultatDerniereAttaque(notes_restante, reussite)
                         elif self.modele.monstre_nom == "Coliseum":
@@ -1300,6 +1301,7 @@ class Control:
 
     def SetAttributesFromName(self):
         # viemax vie resistance force intelligence viesbonus stigma +/-/*
+        ajout_bonus = True
 
         # Monstres
         gold_bonus_par_etage = round(125 * (self.modele.numero_de_letage / 10))
@@ -2245,6 +2247,7 @@ class Control:
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
         elif self.modele.monstre_nom == "Noa":
+            ajout_bonus = False
             self.modele.stigma_monstre_positif = "Coeur Immolé"
             self.modele.stigma_monstre_negatif = "Inconsolable Rage"
             self.modele.stigma_monstre_bonus = "Nordique"
@@ -2617,11 +2620,12 @@ class Control:
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 99999, 
                                        "Attaque": 99999, "Intelligence": 99999, "Endurance": 99999}
         #Initilaise des bonus de vie/mana pour tester différentes combinaisons
-        bonus_vie = 0
-        bonus_mana = 0
-        self.modele.monstre_points_de_vie_max += vie_bonus_par_etage + bonus_vie
+        if ajout_bonus :
+            bonus_vie = 0
+            bonus_mana = 0
+            self.modele.monstre_points_de_vie_max += vie_bonus_par_etage + bonus_vie
+            self.modele.monstre_points_de_mana_max += bonus_mana
         self.modele.monstre_points_de_vie = self.modele.monstre_points_de_vie_max
-        self.modele.monstre_points_de_mana_max += bonus_mana
         self.modele.monstre_points_de_mana = self.modele.monstre_points_de_mana_max
         if not self.modele.monstre_EstUnBoss and self.Player.battu_le_sacrifie:
             liste_de_gardien = ["Voluntad Káak", "Voluntad Hielo", "Voluntad Le Rayo", "Voluntad Le Luumo", "Voluntad U Kiikel", "Voluntad U Wíinkilal", "Voluntad Tin Tuukul"]
@@ -8923,14 +8927,16 @@ class Control:
         self.vue.AfficheTomeDeSalomon(commentaire)
 
     def DoPianisteResultatDerniereAttaque(self, notes_restante, reussite):
+        clear_console()
         if not reussite:
             return False
         else:
             if notes_restante > 0:
                 self.modele.points_de_vie -= notes_restante * 15
-                self.AfficheSonTechnique("SOUL")
+                self.vue.AfficheSonTechnique("SOUL")
                 print(f"Les {notes_restante} notes restantes dans les airs vous tombent dessus et vous transpercent de toute part !\nVous perdez {notes_restante * 15} points de vie !")
-                dummies = input("Appuyez sur entree pour continuer")
+                dummies = input("Appuyez sur Entrée pour continuer")
+                clear_console()
 
             if self.modele.points_de_vie <= 0 :
                 
@@ -8938,21 +8944,25 @@ class Control:
                     self.modele.possede_une_fee = False
                     self.modele.points_de_vie = round(0.66 * self.modele.points_de_vie_max)
                     print(f"Votre Fée sort de son bocal et vous sauve la vie en soignant {round(0.66 * self.modele.points_de_vie_max)} points de vie !")
-                    dummies = input("Appuyez sur entree pour continuer")
+                    dummies = input("Appuyez sur Entrée pour continuer")
+                    clear_console()
                     
                 elif "Voile de Ino" in self.modele.liste_dartefacts_optionels:
                     self.modele.liste_dartefacts_optionels.remove("Voile de Ino")
                     self.modele.points_de_vie = round(0.66 * self.modele.points_de_vie_max)
                     print(f"Votre Voile se plaque sur votre visage et vous sauve la vie en soignant {round(0.66 * self.modele.points_de_vie_max)} points de vie !")
-                    dummies = input("Appuyez sur entree pour continuer")
+                    dummies = input("Appuyez sur Entrée pour continuer")
+                    clear_console()
 
                 else:
                     print("Vous mourrez.")
-                    dummies = input("Appuyez sur entree pour continuer")
+                    dummies = input("Appuyez sur Entrée pour continuer")
+                    clear_console()
                     return False
                 
             print("Il n'y a plus de notes dans les airs.\nVous êtes en vie !\nFinissez le boss !")
-            dummies = input("Appuyez sur entree pour continuer")
+            dummies = input("Appuyez sur Entrée pour continuer")
+            clear_console()
             return True
 
 
@@ -8983,7 +8993,7 @@ class Control:
             # Vérif du temps
             if time.time() - start_time > 66:
                 return remaining_directions, attaque_terminee_sans_mourir
-            
+                   
             # Vérif des PV
             if self.modele.points_de_vie <= 0:
                 if self.modele.possede_une_fee == True :
@@ -9004,15 +9014,14 @@ class Control:
             if i < len(directions):
                 # Phase d'affichage de la direction
                 direction = directions[i]
-                match direction:
-                    case "Haut":
-                        affichage += "\nLe Pianiste lève les Bras en Haut !"
-                    case "Bas":
-                        affichage += "\nLe Pianiste baisse les Bras vers le Bas !"
-                    case "Gauche":
-                        affichage += "\nLe Pianiste déplace ses doigts vers la Gauche !"
-                    case "Droite":
-                        affichage += "\nLe Pianiste déplace ses doigts vers la Droite !"
+                if direction == "Haut":
+                    affichage += "\nLe Pianiste lève les Bras en Haut !"
+                elif direction == "Bas":
+                    affichage += "\nLe Pianiste baisse les Bras vers le Bas !"
+                elif direction == "Gauche":
+                    affichage += "\nLe Pianiste déplace ses doigts vers la Gauche !"
+                elif direction == "Droite":
+                    affichage += "\nLe Pianiste déplace ses doigts vers la Droite !"
                 buffer.append(direction)
             else:
                 # Phase finale : pas de nouvelle direction, juste le buffer
@@ -9022,6 +9031,7 @@ class Control:
                 # Pas encore assez d'historique → juste ENTER
                 print(affichage)
                 input("Appuyez sur Entrée pour continuer")
+                clear_console()
             else:
                 # On demande la direction d'il y a 3 coups
                 ancienne_direction = buffer[0]
@@ -9036,20 +9046,24 @@ class Control:
                         clear_console()
                         if choix in mapping.values():
                             break
-                        else:
-                            print("Choix invalide. Réessayez.")
                     except ValueError:
                         clear_console()
                 
                 if choix == mapping[ancienne_direction]:
                     print("Vous esquivez la vague de notes !")
                 else:
-                    print(f"Les notes vous transpercent et infligent 15 points de dégâts.\n"
-                        f"Il aurait fallu aller vers [{ancienne_direction}].")
+                    print(f"Les notes vous transpercent et infligent 15 points de dégâts !!\n"
+                        f"Il aurait fallu aller vers le/la [{ancienne_direction}] !")
                     self.modele.points_de_vie -= 15
-                    self.AfficheSonTechnique("ICEt")
+                    self.vue.AfficheSonTechnique("ICEt")
             
             remaining_directions = total_iterations - (i + 1)
+        
+        clear_console()
+        print("Vous attendez, alerte, que Le Pianiste finisse son morceau...")
+        time.sleep(66 - (time.time() - start_time))
+        clear_console()
+        return remaining_directions, attaque_terminee_sans_mourir
     
 
 
@@ -9522,8 +9536,14 @@ class Control:
                     self.modele.beni_par_feu_sacre_nombre_tour += 2
         else:
             commentaire_degat = (f"Des notes magiques sortent du piano et fusent a travers l'air, vous transpercant de toute part.")
-            commentaire_degat += (f"Vous devenez gelé, enflammé et confu pendant 4 tours !")
-            commentaire_degat += (f"De plus, vous perdez {degat_a_joueur} points de vie !")
+            commentaire_degat += (f"\nVous devenez gelé, enflammé et confu pendant 4 tours !")
+            commentaire_degat += (f"\nDe plus, vous perdez {degat_a_joueur} points de vie !")
+            self.modele.est_gele = True
+            self.modele.est_gele_nombre_tour += 5
+            self.modele.est_en_feu = True
+            self.modele.est_en_feu_nombre_tour += 5
+            self.modele.est_maudit_par_les_items = True
+            self.modele.est_maudit_par_les_items_nombre_tour += 5
             self.EnleveVieAuJoueur(degat_a_joueur)
         self.vue.AfficheSymphonie(commentaire, commentaire_degat)
     

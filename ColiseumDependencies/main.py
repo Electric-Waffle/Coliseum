@@ -297,7 +297,7 @@ LISTERUMEURS = [
     "Sacrifier un item dans le brazier rouge permet d'en avoir un autre de manière aléatoire. Sacrifiez le dans le brazier bleu, et vous aurez la version améliorée de cet item.", # moitié des rumeurs
     "Il y à un Tout-Premier qui passe son temps a observer la lune dans la décharge à l'Ouest.\nApparemment, il avait trouvé toute les recettes du fabricateur et les auraient mises de manière cryptique, dans des histoires comme moyen mémo-technique, afin de s'en rapeller.",
     "Si il y a un monstre dopé a un étage, alors il y a aussi une salle étrange dans laquelle une bête féroce dort.\nLa corrélation entre les deux est incertaines, mais ce qui est sur, c'est que la bête n'est pas assez forte pour battre le boss toute seule.",
-    "Certaines personnes auraient vu des symboles étranges sur le livre de la cigogne blueu au premier étage.\nElles sont sorties pour voir si elles étaient dans la bonne salle, et quand elles sont re-rentrées, les symboles avaient disparus.\nEt si on rentrait et sortiat de la salle jusqu'a voir les symboles ?",
+    "Certaines personnes auraient vu des symboles étranges sur le livre de la cigogne blueu au premier étage.\nElles sont sorties pour voir si elles étaient dans la bonne salle, et quand elles sont re-rentrées, les symboles avaient disparus.\nEt si on rentrait et sortiat de la salle jusqu'à voir les symboles ?",
     "Il y aurait un aventurier qui a vu une baleine dans l'oasis du troisième étage.\nEt alors qu'il jetait des pièces dedans, il a eu la meilleure chance possible dans ses gains !",
     "Un aventurier prometteur aurait disparu au deuxieme étage.\nLorsque des gens ont demandé au majordome qui prend les commandes et les emmene au premier étage ce qui s'était passé, il a simplement répondu qu'il est allé étancher sa soif a la fontaine alors qu'il était a l'article de la mort, et sans magie.",
     "Apparemment, si on arrive a augmenter le rang de son gain à ??? , a l'oasis du troisieme étage, quelque chose de terrifiant se passe.\nTellement terrifiant, que la seule aventuriere a avoir tenté l'experience a fuit l'étage sans se retourner.",
@@ -318,7 +318,7 @@ LISTERUMEURS = [
     "Le Maitre Mage ne serait pas un véritable Maitre, ni un véritable Mage.\nD'après les Tout-Premiers, l'appelation Mage pour les sorciers de haut niveaux ou même Maitre pour les plus grands de leur domaine n'est apparue qu'après la naissance de l'individu.\nEnfaite, Maitre Mage, c'est juste son nom et son prénom, et son apétance a la magie est telle, que l'on a utilisé son identité comme un adjectif.",
     "Le Roi Déchu n'est pas intrinsèquement paranoïaque et sociopathe.\nC'était une ordure, mais il est devenu fou soudainement, après une manifestation des paysans contre lui.",
     "Après le jour ou il s'est jeté dans le Colyseum, plus personne n'a entendu parler de la femme du Roi : la Reine.\nLe bruit court qu'elle aurait été fait prisonniere dans une cage du 7eme étage, mais on ne trouve la bas que des barreaux défoncés et le livre de la Cigogne Noire.",
-    "Le Marchand du Colyseum serait le fils de la Reine.\nCertains disent que son visage est déformé a cause de la concentration de mana, d'autre pense que la Reine a été battue quand elle était en période de grossesse, mais tout les Tout-Premiers s'accordent sur une chose :\nLe chiffon sale sur lequel sont disposé ses produit porte l'embleme du Royaume du Roi Déchu, et n'a pu appartenir qu'a la Reine.",
+    "Le Marchand du Colyseum serait le fils de la Reine.\nCertains disent que son visage est déformé a cause de la concentration de mana, d'autre pense que la Reine a été battue quand elle était en période de grossesse, mais tout les Tout-Premiers s'accordent sur une chose :\nLe chiffon sale sur lequel sont disposé ses produit porte l'embleme du Royaume du Roi Déchu, et n'a pu appartenir qu'à la Reine.",
     ]
 LISTERECETTES = [
     "...le signal des messes, et l'or dans son état primitif...",
@@ -2870,7 +2870,7 @@ BIBLIOTHEQUEFINALE = {
         "Premier mouvement : Légères Directions\nSi le poisson tire LEGEREMENT dans un sens, il faut OPPOSER son mouvement et tirer dans l'AUTRE sens !\nPar exemple, si le poisson tire légèrement vers la droite, tirez votre canne vers la gauche pour lui faire perdre le plus d'énergie !\nNotez qu'un poisson ne tirera jamais vers l'avant, vu que vous vous trouvez dans cette direction.\nDe plus, si vous êtes nouveau, vous allez paniquer et confondre, voire emmeler vos directions.\nRéfléchissez bien avant de faire quoi que ce soit !",
         "Deuxieme mouvement : Fortes Directions\nSi le poisson tire FORTEMENT dans un sens, il faut ACCOMODER son mouvement et tirer dans le MEME sens !\nTant d'énergie est utilisée pour ce genre de mouvement, alors autant aller dans son sens et lui faire perdre encore plus d'énergie !\nSi vous opposez son mouvement, il pourrait se décrocher le hameçon, voire briser votre ligne.\nEt même chose que pour le premier mouvement : le poisson n'ira jamais en avant, et vous allez surement confondre vos directions. Faites gaffe !",
         "Troisième mouvement : Epuisement\nSi le poisson se débat avec l'énergie du diable, ne touchez pas a votre canne !\nLe hameçon pourrait la-encore se décrocher, ou vous pourriez casser votre fil.\nLaissez le s'épuiser, et préparez vous a redonner un coup avec la canne au moment ou il montrera des signes de faiblesse.\nNe perdez pas de temps, et tentez de le remonter dès que vous pouvez !",
-        "Dernier mouvement : Repos\nSi le poisson fait des petits mouvements, ne pensez plus : Tirez le de toutes vos forces, plusieurs fois !\nTirez sur votre canne a répétition, jusqu'a ce que le poisson s'arrete de bouger, et là : vous donnez un grand coup.\nUn dernier conseil pour vous : Faites quand même attention.\nSi vous tirez encore après le *grand coup*, vous risquez de tirer pendant une phase ou il ne faut pas tirer !\nAlors gardez un oeil sur la condition du poisson, spammez votre canne a peche, et quand il ne faut donner qu'un seul grand coup, n'en donnez pas 15 autres !",
+        "Dernier mouvement : Repos\nSi le poisson fait des petits mouvements, ne pensez plus : Tirez le de toutes vos forces, plusieurs fois !\nTirez sur votre canne a répétition, jusqu'à ce que le poisson s'arrete de bouger, et là : vous donnez un grand coup.\nUn dernier conseil pour vous : Faites quand même attention.\nSi vous tirez encore après le *grand coup*, vous risquez de tirer pendant une phase ou il ne faut pas tirer !\nAlors gardez un oeil sur la condition du poisson, spammez votre canne a peche, et quand il ne faut donner qu'un seul grand coup, n'en donnez pas 15 autres !",
         "Ca y est ? Vous avez un poisson ? Superbe !\nVoyons ce que l'on peut en faire :",
         (   "       - TYPES DE POISSONS (1/2) -"
             "\n\nMonstres : Un monstre qui passait par là et s'est accroché a votre hameçon. C'est pas vraiment un poisson, mais ca arrive plus de fois qu'on peut le penser, surtout dans les trou de ver."
@@ -2887,7 +2887,7 @@ BIBLIOTHEQUEFINALE = {
     ],
     "Céleste": [
         "Madeline réouvra ses yeux.\nDevant elle se trouvait le directeur, sous une forme monstrueuse.\nCorrompu par son anxiété, ou peut être était-ce sa solitude ?",
-        "Elle laissa ses questions sans réponses et se retourna.\nSur le toit de l'hotel, elle pouvait se déplacer jusqu'a l'autre coté sans se faire bloquer par les monticules de valises.",
+        "Elle laissa ses questions sans réponses et se retourna.\nSur le toit de l'hotel, elle pouvait se déplacer jusqu'à l'autre coté sans se faire bloquer par les monticules de valises.",
         "C'était maintenant ou jamais.\nElle prit son élan et s'élanca dans les airs, avant de dasher sur une plateforme en contrebas.\nElle évita le directeur foncant sur elle, puis sauta sur le mur devant elle.",
         "Elle grimpa le mur et se mit a dasher vers le haut.",
         "Se prenant ainsi un ennemi en pleine tronche.",
@@ -2959,7 +2959,7 @@ BIBLIOTHEQUEFINALE = {
             "jusqu'à la fin de la partie)\n(1)roi :enfant empereur: aucun effet. Mais quand on l'a, on doit la poser la carte face retournée sur le front pour que tout le"
             "monde la voie."
         ),
-        "A chaque tour, les joueurs prennent une carte, et en jettent une.\nLe pouvoir de la carte jetée s'active.\nLe jeu continue jusqu'a ce qu'il n'y aie plus qu'une personne.\nSi il n'y a plus qu'une seule carte, c'est celui qui a la plus grande carte qui gagne.",
+        "A chaque tour, les joueurs prennent une carte, et en jettent une.\nLe pouvoir de la carte jetée s'active.\nLe jeu continue jusqu'à ce qu'il n'y aie plus qu'une personne.\nSi il n'y a plus qu'une seule carte, c'est celui qui a la plus grande carte qui gagne.",
     ],
     "Les Secrets du Manoir Hanté": [
         "La nuit était tombée sur le vieux manoir, enveloppant ses murs de mystère et de silence.",
@@ -3139,7 +3139,7 @@ LISTEEFFETSARTEFACT = {
                      "Defence": 2},  # defence t
     "Megingjord": {"Commentaire": "La ceinture de Thor qui lui donne une grande puissance pendant les moments critiques, ainsi que la capacité de soulever son marteau.",
                     "Degat coup critique": 10, "Degat sort critique": 10},  # degat critiques t
-    "Manne Céleste": {"Commentaire": "La seule source de nourriture des hébreux pendant 40 ans, gracieusement offerte par le Ciel, et qui leur a permit de marcher jusqu'a trouver leur terre d'adoption.",
+    "Manne Céleste": {"Commentaire": "La seule source de nourriture des hébreux pendant 40 ans, gracieusement offerte par le Ciel, et qui leur a permit de marcher jusqu'à trouver leur terre d'adoption.",
                        "Endurance": 10, "Vie": 10},  # endurance + vie t
     "Nœud Gordien": {"Commentaire": "Le cordage compliqué défait seulement par le Maitre de l'Asie, mais finalement tranché par Alexandre le Grand, et qui a gardé depuis une partie de sa force.",
                       "Attaque": 5},  # attaque t
@@ -6451,7 +6451,7 @@ class Affiche:
                 Affichage.EntreePourContinuer()
                 print("Mais ca n'a plus beaucoup d'importance ici, pas vrai ?")
                 Affichage.EntreePourContinuer()
-                print("Après avoir vécu autant de temps ici, ils sont devenus, fous, aigris, ou plein d'une sagesse insondable qui n'est accessibles qu'a celles et ceux qui seraient assez compétent pour recevoir et décrypter cette sagesse.")
+                print("Après avoir vécu autant de temps ici, ils sont devenus, fous, aigris, ou plein d'une sagesse insondable qui n'est accessibles qu'à celles et ceux qui seraient assez compétent pour recevoir et décrypter cette sagesse.")
                 Affichage.EntreePourContinuer()
                 print("Et pour ceux qui ne sont pas ici ?")
                 Affichage.EntreePourContinuer()
@@ -6507,7 +6507,7 @@ class Affiche:
                 print("Pareil a un organisme vivant, le Coliseum assimile tout ce qui rentre a l'interieur.\nEnsuite, après la mort des corps étrangers, il se passe un triage.")
                 self.EntreePourContinuer()
                 print("Si tu n'es pas assez fort, tu te fait digerer. Ton énergie vitale et ton mana servira au bon fonctionnement de la structure.")
-                print("Si tu a dépassé un certain point, alors tu es digéré jusqu'a un certain point. Tes compétences, charactéristiques, et meme ton corps n'existe plus, mais ton ame survie et est amenée ici.")
+                print("Si tu a dépassé un certain point, alors tu es digéré jusqu'à un certain point. Tes compétences, charactéristiques, et meme ton corps n'existe plus, mais ton ame survie et est amenée ici.")
                 print("Et si tu es assez fort, alors tu deviens un des acteurs principaux du Coliseum : Un boss.")
                 self.EntreePourContinuer()
                 print("Seulement, pour que le système marche, il faut que les acteurs soient, d'une certaine manière, immortels. Si ils mourraient au bout d'une seule représentation, ca serait pas rentable.")
@@ -7140,7 +7140,7 @@ class Affiche:
             if Player.nom_de_letage == "Le Lumisade":
                 StopAllMusic()
                 Affichage.IntroBoss("Un battement de cil plus tard, vous vous retrouvez à l'entrée de l'hotel.")
-                Affichage.IntroBoss("L'arène devant vous étant vide, vous vous tournez vers la salle de bal, depuis laquelle vous entendez une musique familière, la même qu'a votre arrivée à cet étage.")
+                Affichage.IntroBoss("L'arène devant vous étant vide, vous vous tournez vers la salle de bal, depuis laquelle vous entendez une musique familière, la même qu'à votre arrivée à cet étage.")
                 Affichage.IntroBoss("Vous tendez une main hésitante sur la poignée de la porte...")
                 Affichage.IntroBoss("...les marques de brulures sont désormais omniprésentes.")
                 Affichage.IntroBoss("Un feu invisible, qui grignotte silencieusement le bois et le tissu.")
@@ -7150,13 +7150,13 @@ class Affiche:
                 liste_commentaire.append(commentaire)
                 commentaire = "La salle de bal est splendide, équipée de somptueuses tables de banquet."
                 liste_commentaire.append(commentaire)
-                commentaire = "*De se rapeller.*\n*Ou peut-être n'ai-je jamais oublié ?"
+                commentaire = "*De se rapeller.*\n*Ou peut-être n'ai-je jamais oublié ?*"
                 liste_commentaire.append(commentaire)
                 commentaire = "Le parquet ne crisse pas sous vos pas, les fenêtres sont ornées de cadres en chêne..."
                 liste_commentaire.append(commentaire)
                 commentaire = "*Un peu comme une pause, finalement.*\n*Je n'ai plus besoin de faire semblant, pendant juste un instant.*"
                 liste_commentaire.append(commentaire)
-                commentaire = "Un doux feu crépite dans les différentes cheminées occupant des espaces décorés sur les cotés..."
+                commentaire = "Un doux feu crépite dans les différentes cheminées occupant des espaces décorés ..."
                 liste_commentaire.append(commentaire)
                 commentaire = "*Certains disent qu'on peut se perdre dans son role.*\n*Cet étage là, c'est un peu comme une fenetre sur ce que j'étais, avant.*"
                 liste_commentaire.append(commentaire)
@@ -7178,6 +7178,8 @@ class Affiche:
                 liste_commentaire.append(commentaire)
                 commentaire = "*J'ai mal appellé le diable, et il s'est tant amusé de mes bouffoneries qu'il m'a pris sous son aile.*"
                 liste_commentaire.append(commentaire)
+                commentaire = "*Et cette singulière erreur est devenu le point tournant de ma vie.*\n*Une bien trop amère leçon qui m'aura tout coûté.*"
+                liste_commentaire.append(commentaire)
                 commentaire = "*Mais je ne suis pas dupe.*"
                 liste_commentaire.append(commentaire)
                 commentaire = "Vous sentez de la colère dans les notes."
@@ -7198,7 +7200,7 @@ class Affiche:
                 liste_commentaire.append(commentaire)
                 commentaire = "*Dans quoi un tel insecte peut se réconforter à part le passé ?*"
                 liste_commentaire.append(commentaire)
-                commentaire = "*A part un nom, j'avais tout pour moi.*\n*Un Chateau de luxe et de satin dans lequel travailler, Une famille pour m'épauler, Un hobbie pour m'aporter fierté...*"
+                commentaire = "*A part un nom d'ici, j'avais tout pour moi.*\n*Un Chateau de luxe et de satin dans lequel travailler, Une famille pour m'épauler, Un hobbie pour m'aporter fierté...*"
                 liste_commentaire.append(commentaire)
                 commentaire = "*...et même quand tout cela s'est effondré, dans ces abysses de rancoeur et de folie, j'ai quand meme trouvé la force d'avancer, et le véritable amour !*"
                 liste_commentaire.append(commentaire)
@@ -7466,9 +7468,9 @@ class Affiche:
         if Player.nom_de_letage == "Le Lumisade":
             StopAllMusic()
             PlayMusic("boss_5_alt_fight_intro", "intro")
-            print("C'était ma jolie oie des neiges, libérée le temps d'un soupir de son affreux canard…")
+            print("C'était ma jolie oie des neiges, libérée le temps d'un soupir de son affreux canard...")
             Affichage.AfficheAvecUnTempsDattente(3.3)
-            print("Un rayon de soleil aussi fort que l'amour parental, perçant a travers les glaces…")
+            print("Un rayon de soleil aussi fort que l'amour parental, perçant a travers les glaces...")
             Affichage.AfficheAvecUnTempsDattente(3.3)
             print("J'ai fait tout pour garder le bon cap, être une bonne personne, profitant des rares éclaircies..")
             Affichage.AfficheAvecUnTempsDattente(3.3)
@@ -7476,7 +7478,7 @@ class Affiche:
             Affichage.AfficheAvecUnTempsDattente(2.75)
             print("..qui m'a été ARRACHE !")
             Affichage.AfficheAvecUnTempsDattente(1)
-            print("La haine qui irradie des mots du boss vous fait sursauter.")
+            print("L'hotel s'embrase dans un éclair de feu !")
             Affichage.AfficheAvecUnTempsDattente(0.5)
             print("MERDE !")
             time.sleep(0.25)
@@ -7503,10 +7505,9 @@ class Affiche:
             print("OH PERE, VOS DERNIERES VOLONTEES AURONT ETE MA PLUS GRANDE MALEDICTION...")
             Affichage.AfficheAvecUnTempsDattente(2.75)
             print("Le Boss se retourne.")
-            Affichage.AfficheAvecUnTempsDattente(0.5)
+            Affichage.AfficheAvecUnTempsDattente(1)
             print("DANSONS MARIONETTE !")
-            Affichage.AfficheAvecUnTempsDattente(1.5)
-            Affichage.EntreePourContinuer()
+            Affichage.AfficheAvecUnTempsDattente(1)
 
 
     def AfficheDescente(self):
@@ -7577,11 +7578,11 @@ class Affiche:
                 self.EntreePourContinuer()
                 print("Et il en profiterait dans une autre vie.")
                 self.EntreePourContinuer()
-                print("Terah sentit la pierre de désir fracturer l'espace pour venir jusqu'a lui.")
+                print("Terah sentit la pierre de désir fracturer l'espace pour venir jusqu'à lui.")
                 self.EntreePourContinuer()
                 print("Il vit une ombre affreuse venir de la cuisine.")
                 self.EntreePourContinuer()
-                print("Terah ignora la voix tordue de la chose en face, ferma les yeux, et compta jusqu'a quatre.")
+                print("Terah ignora la voix tordue de la chose en face, ferma les yeux, et compta jusqu'à quatre.")
                 time.sleep(2.5)
                 ClearConsole()
                 print("[B0NJ0uR PeTITT5 FL5URR !!§§:;/ 1L EST T3MPsss D- ]")
@@ -7833,7 +7834,7 @@ class Affiche:
                 )
         elif Player.numero_de_letage == 6:
             commentaire = (
-                "Vous laissez derrière vous la fête, et ressentez une présence particulière."
+                "Vous laissez derrière vous la folie, et ressentez une présence particulière."
                 "\nUn bidonville vide de monde, dans lequel sont parsemés horloges montres et alarmes brisées, "
                 "\ndes vieilles banderoles trouées accrochées au plafond, et une gigantesque tour d'horloge au milieu de l'arène vous attendent en bas."
                 "\nVous entendez le tic particulier d'un mécanisme, mais l'aiguille des secondes est coincée sur 13h42."
@@ -8350,9 +8351,9 @@ class PlayerCaracteristics:
                 print("Vous avez aussi des bons de commande sur lesquels sont écrit :\n")
                 for uppgrade in liste_de_uppgrade_a_afficher:
                     if uppgrade == "Clé":
-                        print(f"{uppgrade} allant jusqu'a l'étage {liste_de_uppgrade_a_afficher[uppgrade] + 3}")
+                        print(f"{uppgrade} allant jusqu'à l'étage {liste_de_uppgrade_a_afficher[uppgrade] + 3}")
                     elif uppgrade == "Carte":
-                        print(f"{uppgrade} allant jusqu'a l'étage {liste_de_uppgrade_a_afficher[uppgrade] + 4}")
+                        print(f"{uppgrade} allant jusqu'à l'étage {liste_de_uppgrade_a_afficher[uppgrade] + 4}")
                     else:
                         print(f"{uppgrade} de niveau {liste_de_uppgrade_a_afficher[uppgrade]}")
                 print("")
@@ -10111,7 +10112,7 @@ class Floor:
             salle_choisie = liste_de_salle_vide.pop(index_aleatoire)
             # attribuer une fonction a la salle affectée a ce numéro
             self.AttributingRoleToRoom(salle_choisie)
-            # recommencer jusqu'a ce qu'il n'y aie plus de numéros dans la liste
+            # recommencer jusqu'à ce qu'il n'y aie plus de numéros dans la liste
         # pour une raison inconnue, la derniere salle n'est pas attribuée a une fonction
         self.AttributingRoleToRoom(len(self.FloorBlueprint))
 
@@ -10967,7 +10968,7 @@ class Floor:
                         Ending.PrintEtEntreePourContinuer("*Si tu ne l'es pas, un petit récapitulatif :*")
                         Ending.PrintEtEntreePourContinuer("*Les Dieux fabriquent des machines qui utilisent leur divinité, pour voir jusqu'ou ils peuvent aller.*")
                         Ending.PrintEtEntreePourContinuer("*Ils construisent une machine pour travers les dimensions, arrivent dans un monde et rentrent en guerre avec lui.*")
-                        Ending.PrintEtEntreePourContinuer("*Grosse bataille, ils recrutent un héros humain et 4 héros de quatres races différentes pour garder la porte vers ce nouveau monde, jusqu'a trouver un moyen de l'arreter ou de gagner la guerre.*")
+                        Ending.PrintEtEntreePourContinuer("*Grosse bataille, ils recrutent un héros humain et 4 héros de quatres races différentes pour garder la porte vers ce nouveau monde, jusqu'à trouver un moyen de l'arreter ou de gagner la guerre.*")
                         Ending.PrintEtEntreePourContinuer("*Re-Grosse bataille, ils envoient la machine et leurs gardiens dans une autre dimension, mais voila : le frere jaloux du leader s'accroche au groupe pendant son transfert.*")
                         Ending.PrintEtEntreePourContinuer("*Et...on en sait pas plus.*")
                         Ending.PrintEtEntreePourContinuer("*Par contre, ca fait sortir toutes les troupes de l'autre monde, Re-Re-Grosse bataille, et tout les dieux meurent, mais ils referment la porte.*")
@@ -10987,7 +10988,7 @@ class Floor:
                         Ending.PrintEtEntreePourContinuer("*A la fin des Limbes.*")
                         Ending.PrintEtEntreePourContinuer("*C'est plutot malin de la part de la Pierre de Désir, mettre un pouvoir absolu derriere une congrégation de 10 être extremement puissants, derriere une porte impossible a ouvrir.*")
                         Ending.PrintEtEntreePourContinuer("*En plus, vu que l'on est dans un endroit qui représente une dimension dont laquelle rien ne devait sortir, même si quelqu'un récupère la divinité, il restera coincé ici a jamais.*")
-                        Ending.PrintEtEntreePourContinuer("*Ou jusqu'a ce que la Pierre de Désir vienne jeter un coup d'oeil et récupère le pauvre individu pour en faire un autre de ses boss.*")
+                        Ending.PrintEtEntreePourContinuer("*Ou jusqu'à ce que la Pierre de Désir vienne jeter un coup d'oeil et récupère le pauvre individu pour en faire un autre de ses boss.*")
                         Ending.PrintEtEntreePourContinuer("*Sauf que tu n'es pas un individu normal.*")
                         Ending.PrintEtEntreePourContinuer("*Tu peut prendre des objets appartenant aux dieux et faire comme si tu les avait toujours possédés.*")
                         Ending.PrintEtEntreePourContinuer("*Et une fois que tu recommence la descente du Coliseum...*")
@@ -11392,9 +11393,10 @@ class Floor:
                             Affichage.EntreePourContinuer()
                 elif Player.numero_de_letage == 5:
                     StopAllMusic()
-                    print("Vous arrivez sur un sol de bois noir, grinçant sous le pied.\nDe part et d'autres de ce sol se trouvent des rangées de sièges qui découpent l'horizon en infinis de satins et d'obscurité.")
+                    PlayMusic("wind")
+                    print("Vous arrivez sur un sol de bois noir, grinçant sous le pied.\nDe part et d'autres de ce sol se trouvent des rangées de sièges qui découpent l'horizon en infinis de satins et d'obscurité.\nBien au dessus de votre tête, vous apercevez la sortie d'un puit de pierre.")
                     Affichage.EntreePourContinuer()
-                    print("Un piano au centre de la scène semble pleurer une vieille mélodie.\nVous vous approchez plus prêt pour observer la partition jouée par l'instrument, mais a sa place...")
+                    print("Un piano au centre de la scène semble pleurer une vieille mélodie.\nVous vous approchez plus près pour observer la partition jouée par l'instrument, mais a sa place...")
                     if Player.nom_de_letage != "Carnaval de Rouille" and "Demi-Masque de l'Ordre" not in Player.liste_dartefacts_optionels:
                         print("... se trouve un demi-masque triste, en équilibre sur le pupitre.")
                     elif Player.nom_de_letage == "Carnaval de Rouille" and "Demi-Masque du Chaos" not in Player.liste_dartefacts_optionels:
@@ -11425,11 +11427,12 @@ class Floor:
                             PlayMusicDeLetage()
                             break
                         elif choix == 2:
+                            StopAllMusic()
                             print("Vous fermez les yeux, et vous concentrez sur la faible mélodie qui émane du piano.")
                             PlayMusic("lumisade")
                             Affichage.EntreePourContinuer()
                             if Player.nom_de_letage != "Carnaval de Rouille" :
-                                print("...vous pouvez maintenant dire que le tempo est bizarre, comme si la performance était faite d'une main mal assurée.\nD'un débutant.")
+                                print("...vous pouvez maintenant dire que le tempo est bizarre, comme si la performance était faite d'une main mal assurée.\nCelle d'un débutant.")
                                 Affichage.EntreePourContinuer()
                                 print("Vous avez bien mieux joué sur le clavecin.")
                                 Affichage.EntreePourContinuer()
@@ -11443,10 +11446,15 @@ class Floor:
                                 Affichage.EntreePourContinuer()
                                 print("Quel est donc le nom de ce piano sans corde et qui émet quand même du son ?")
                                 Affichage.EntreePourContinuer()
-                                print("Vous penchez la tête et trouvez une référence...\nhttps://www.onlinepianist.com/virtual-piano ?\nC'est quoi ce nom bizarre ?")
+                                print("Vous penchez la tête et trouvez une référence...singulière.")
+                                Affichage.EntreePourContinuer()
+                                print("Sur le coté du piano, se trouve une étiquette jaunie par le temps, sur laquelle on peut lire les mots\n\n[https://www.onlinepianist.com/virtual-piano]\n\n")
+                                Affichage.EntreePourContinuer()
+                                print("C'est quoi ce nom bizarre ?")
                                 Affichage.EntreePourContinuer()
                                 print("Vous laissez le piano bizarre tranquille.")
                             StopAllMusic()
+                            PlayMusic("wind")
                             Affichage.EntreePourContinuer()
                         else:
                             print("Vous vous approchez du demi-masque, et posez votre main dessus.")
@@ -11525,22 +11533,22 @@ class Floor:
                                 print("S'il te plait, tu es la seule personne ici qui...")
                                 Affichage.AfficheAvecUnTempsDattente(0.8)
                                 print("Oh ?")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("J'aime ta motivation.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Ca doit faire mal , non ?")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Mais le timing était parfait. Et c'est le plus important dans la comédie !")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Souriez, bouseux. Vous venez d'assurer votre place au sein du chateau...")
-                                Affichage.AfficheAvecUnTempsDattente(2)
-                                print("...mais bouseaux, ca fait trop bizarre. Voyons, il faudrait un nom avec la même sonorité...")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
+                                print("...mais bouseux, ca fait trop bizarre. Voyons, il faudrait un nom avec la même sonorité...")
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Ah ! Je l'ai !")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Tu t'apellera Bouffon. C'est ton nouveau nom de scène.")
                                 Affichage.AfficheAvecUnTempsDattente(4)
-                                print("-rouvez rien. Mais c'est pas grave, car voix dans votre esprit se sont enfin tues.")
+                                print("-rouvez rien. Mais c'est pas grave, car les voix dans votre esprit se sont enfin tues.")
                                 Affichage.EntreePourContinuer()
                                 print("Et le masque ?")
                                 Affichage.EntreePourContinuer()
@@ -11554,7 +11562,6 @@ class Floor:
                                 Affichage.EntreePourContinuer()
                                 print("Vous obtenez l'artefact [Demi-Masque du Chaos] !")
                                 print("Une séparation opaque entre votre coeur et une folie particulière, née dans la fracturation de l'âme, et baignant dans un nauséabond liquide ammniotique de pure anxiété.\nLes orbes de folie agissent pendant un tour supplémentaire !")
-                                caracteristique_de_la_salle["terminé par joueur"] = True
                                 FloorMaker.GiveRandomArtefact("Demi-Masque du Chaos","Don")
                                 Affichage.EntreePourContinuer()
                                 print("Un masque ? Cacher un masque ? Le truc que l'on crée pour cacher la personne qui le porte ?")
@@ -11585,79 +11592,79 @@ class Floor:
                                 print("..............plus.............profondément..............encore..........")
                                 Affichage.EntreePourContinuer()
                                 print("...")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Tu peux poser tes mains ici.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Voila, tu vois ? Si tu les écartes de cette manière, tu va pouvoir toucher toute ces touches en meme temps.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Quoi ?")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(2)
                                 print("Bien sûr que ca te servira plus tard ! Les invités de notre hotel ne se contenteront pas de ces petites musiques que tu as appris !")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Les véritables chefs ont composé des mélodies si complexes, meme ton vieux pere ne saurait comment les jouer.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Mais ce n'est pas grave, va. Pour l'instant, c'est suffisant. Tu es encore jeune, et je ne vais pas mourir demain !")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Je veux juste que tu sois prêt.")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(2)
                                 print("Vois tu, un homme ne peut se contenter d'une seule corde a son arc.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Tu te débrouille très bien avec la gestion du personnel, des clients, et du materiel. Mais vois tu, c'est dans les détails que se cachent les choses les plus importantes.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Imagine donc, tu rentre dans un hotel, et le patron descend te souhaiter la bienvenue.\nLes chambres sont propres.\nLes services proposés sont a la hauteur de ce a quoi tu t'attend.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Et alors que tu t'assoie a une table pour prendre un diner de haute qualité...")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("...le patron s'assoie sur le piano au centre de la pièce...")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("...et se met a jouer une symphonie ravissante.")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Crois moi mon grand, si la surprise ne se lira pas sur ton visage, c'est parce que tu sera trop occupé a parler de l'experience a tes amis !")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Et puis, de manière plus générale, c'est satisfaisant d'apprendre.\nDe changer, sans se changer.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Qui sait, ton talent au piano, ca sera peut etre la chose qui te fera rencontrer ton âme soeur !")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Je rigole, je rigole. Ne me regarde donc pas comme ca, voyons !")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("...")
-                                Affichage.AfficheAvecUnTempsDattente(1)
-                                print("...dis moi, fiston.")
-                                Affichage.AfficheAvecUnTempsDattente(1)
-                                print("Le roi a préparé une visite pour dans quelques semaines.")
-                                Affichage.AfficheAvecUnTempsDattente(1)
-                                print("Apparemment, son comportement est aussi détestable que l'hibver est froid en ces montagnes.")
                                 Affichage.AfficheAvecUnTempsDattente(2)
+                                print("...dis moi, fiston.")
+                                Affichage.AfficheAvecUnTempsDattente(3)
+                                print("Le roi a préparé une visite pour dans quelques semaines.")
+                                Affichage.AfficheAvecUnTempsDattente(3)
+                                print("Apparemment, son comportement est aussi détestable que l'hiver est froid en ces montagnes.")
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Et il déteste le froid encore plus qu'il n'est détestable.")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Quand il sera la, il se défoulera surement sur de pauvres gens.")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Promet moi...")
                                 Affichage.AfficheAvecUnTempsDattente(1)
                                 print("Promet moi d'être fort.")
-                                Affichage.AfficheAvecUnTempsDattente(1)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Promet moi de respecter sa volontée, quoi qu'elle soit.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Promet moi de faire tout ce qu'il demande, sans broncher.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Ne te met pas en danger, ne te met pas en avant, reste donc tranquille, et souris.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
-                                print("Je ne veut pas qu'il salisse ton talent ou qu'il viole ton héritage.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
+                                print("Je ne veux pas qu'il salisse ton talent ou qu'il viole ton héritage.")
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Je veux que tu devienne un talentueux pianiste et un fier directeur d'hotel.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("J'ai peur pour toi tu sais, plus que j'ai peur pour ces vieux os.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Mais j'aime ta motivation.")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Ca doit faire mal de devoir supporter un tel fardeau , non ?")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("Mais ton futur est parfait. Et c'est le plus important dans la ce cruel monde !")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Souris, fiston. Tu va assurer ta place au sein du Lumisade...")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(3)
                                 print("...mais avec ton nom, tu risque de t'attirer des ennuis. Voyons, il faudrait quelque chose qui ne fasse pas penser a ce pays...")
-                                Affichage.AfficheAvecUnTempsDattente(2)
+                                Affichage.AfficheAvecUnTempsDattente(4)
                                 print("Ah ! Je l'ai !")
                                 Affichage.AfficheAvecUnTempsDattente(2)
                                 print("Tu t'apellera *Le Pianiste*. C'est ton nouveau nom de scène.")
@@ -11746,7 +11753,7 @@ class Floor:
                         print("Vous vous éloignez du puit.")
                         Affichage.EntreePourContinuer()
                 elif Player.numero_de_letage == 4:
-                    print("Au fond de celui-ci, vous apercevez des couleurs vives qui se déplacent par la force d'un vent inexistant.\n Et a coté, un petit clavecin.")
+                    print("Au fond de celui-ci, vous apercevez un sol de bois noir, cerclé par des chaises de satin rouge.\n Et a coté du puit, un petit clavecin.")
                     Affichage.EntreePourContinuer()
                     while True:
                         while True:
@@ -11767,7 +11774,12 @@ class Floor:
                             break
                         elif choix == 2 :
                             StopAllMusic()
+                            print("Vos doigts s'enfoncent sur le clavier, mais aucun son de sort.\nBizarre, il y a pourtant des cordes a l'interieur...")
+                            Affichage.EntreePourContinuer()
+                            print("Vous tentez quand meme de jouer quelque chose, en vous servant des lettres inscrites sur les touches comme référence :")
+                            Affichage.EntreePourContinuer()
                             result = doPiano()
+                            ClearConsole()
                             PlayMusicDeLetage()
                             if result :
                                 print("La mélodie retentit dans la pièce, jusque au fond du puit.")
@@ -14461,7 +14473,7 @@ class Floor:
                                 Player.nombre_de_red_coin += 1
                                 Affichage.EntreePourContinuer()
                                 print("Vous arrachez le redcoin de l'amulette, et la laissez couler au fond de l'eau, oubliée pour l'éternitée...")
-                                print("...jusqu'a ce que l'anneau rentre en possession de quelqu'un d'autre.")
+                                print("...jusqu'à ce que l'anneau rentre en possession de quelqu'un d'autre.")
                                 Affichage.EntreePourContinuer()
                             elif prise == "Artefact":
                                 print("...et regardez avec intensité la petite boite noire qui y est pendue.")
@@ -14831,7 +14843,7 @@ class Floor:
                         Player.sorts_possedes.append(nom_nouvelle_action)
 
 
-                    print("Alors que vous vous approchez du nuage, la verdure se fait de plus en plus rare, jusqu'a ce que vos pas s'enfoncent dans un sol sec et aride.")
+                    print("Alors que vous vous approchez du nuage, la verdure se fait de plus en plus rare, jusqu'à ce que vos pas s'enfoncent dans un sol sec et aride.")
                     print("Vous continuez de vous avancer, utilisant les différentes lames pour vous hisser sur le sommet de la colline.")
                     Affichage.EntreePourContinuer()
                     print("Enfin, vous arrivez tout en haut, haletant.")
@@ -16254,7 +16266,7 @@ class Floor:
             self.nombre_de_plaque_pression = 8
         #evenement de letage 1 : corrompre la foret pour gagner des trucs de magie
         self.nombre_de_puit = 0
-        if Player.numero_de_letage in [1, 6]:
+        if Player.numero_de_letage in [1, 4, 6]:
             self.nombre_de_puit = 1
         # artefact de letage 2 (liane : besoin de machette rouillee)
         self.nombre_de_coffres_en_lianes = 0
@@ -16589,7 +16601,7 @@ class Observe:
         StopAllMusic()
         print("Alors que vous vous approchez du centre de la pièce, vous vous mettez a tomber, les deux pieds fermements ancrés dans le sol.")
         Affichage.EntreePourContinuer()
-        print("La salle se met alors a tourner, et changer d'apparence, jusqu'a ce que vous arriviez sur une chaise.")
+        print("La salle se met alors a tourner, et changer d'apparence, jusqu'à ce que vous arriviez sur une chaise.")
         Affichage.EntreePourContinuer()
         print("Une figure inconnue est assise, elle aussi, mais de l'autre coté d'une table d'ébène.")
         Affichage.EntreePourContinuer()
@@ -20696,7 +20708,7 @@ def PlayWavSound(musique):
 
 def ChoseCharacter():
     ClearConsole()
-    # recommence jusqu'a ce que le choix soit fait
+    # recommence jusqu'à ce que le choix soit fait
     while True:
         # Choix du personnage
         while True:
@@ -21131,7 +21143,7 @@ def ShowTutorial():
     print("Juste après, vous choisissez une action dans le menu affiché.")
     print("Votre action est effectuée, puis celle de l'ennemi a la suite.")
     print("Les différents effets d'altérations d'états s'appliquent")
-    print("Et on recommence jusqu'a ce qu'un des deux participant meure ou fuie.")
+    print("Et on recommence jusqu'à ce qu'un des deux participant meure ou fuie.")
     print(
         "\nGardez a l'esprit que vos points de vie (PV) représentent la vitalité qu'il vous reste,"
         "\net que si ils tombent a zéro, c'est terminé.\nCepandant, les points de mana (PM) servent juste"
@@ -22005,7 +22017,7 @@ def GiveChoiceRealEndingOrNot():
     Affichage.EntreePourContinuer()
     print("Vous pouvez absorber la Marque du Sacrifice de Jean afin d'entrer dans les profondeurs du Coliseum...")
     Affichage.EntreePourContinuer()
-    print("...ou la laisser pour n'aller qu'a la fin de l'histoire de votre personnage.")
+    print("...ou la laisser pour n'aller qu'à la fin de l'histoire de votre personnage.")
     Affichage.EntreePourContinuer()
     print("Le choix est votre.")
     Affichage.EntreePourContinuer()
@@ -23486,7 +23498,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
             "Cette perle passée de générations en générations par les plus grands empereurs du monde contient une partie de leur âme et confère a son porteur de multiples augmentations.\nAttaque + 2, Defence + 2, Intelligence + 2, Vie + 4, Mana + 4, Endurance + 5"),  # attaque, intelligence, defence, vie, mana, endurance
         "Voile de Ino": ("Le voile porté brièvement par Ulysse, et qui protege des attaques (permanent) et de la mort (une seule fois).\nDefence + 2"),  # defence t
         "Megingjord": ("La ceinture de Thor qui lui donne une grande puissance pendant les moments critiques, ainsi que la capacité de soulever son marteau.\nDegat coup critique + 10, Degat sort critique + 10"),  # degat critiques t
-        "Manne Céleste": ("La seule source de nourriture des hébreux pendant 40 ans, gracieusement offerte par le Ciel, et qui leur a permit de marcher jusqu'a trouver leur terre d'adoption.\nEndurance + 10, Vie + 10"),  # endurance + vie t
+        "Manne Céleste": ("La seule source de nourriture des hébreux pendant 40 ans, gracieusement offerte par le Ciel, et qui leur a permit de marcher jusqu'à trouver leur terre d'adoption.\nEndurance + 10, Vie + 10"),  # endurance + vie t
         "Nœud Gordien": ("Le cordage compliqué défait seulement par le Maitre de l'Asie, mais finalement tranché par Alexandre le Grand, et qui a gardé depuis une partie de sa force.\nAttaque + 5"),  # attaque t
         "Don de Terre": ("Un simple sac contenant les Redcoins d'une divinité de la Terre.\nRed coin + 2"),  # donne redcoin
         "Don de Foudre": ("Un simple sac contenant les Redcoins d'une divinité de la Foudre.\nRed coin + 2"),  # donne redcoin
@@ -23768,7 +23780,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Pavé de Mauvaises Intentions" : "paragraphe6",
         "Renaissance" : "paragraphe6",
         "Le Prix a Payer" : "paragraphe6",
-        "Malheureux jusqu'a la Fin des Temps" : "paragraphe5"
+        "Malheureux jusqu'à la Fin des Temps" : "paragraphe5"
     },
     "Les Fresques (Nouveaux Horizons)" : {
         "Les Lois de l'Homme" : "paragraphe1",
@@ -23779,7 +23791,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Véritable Prodige" : "paragraphe5",
         "Esprit Brisé" : "paragraphe5",
         "Le Temps et la Faucheuse" : "paragraphe5",
-        "Jusqu'a ce que la Mort nous Separe" : "paragraphe5",
+        "Jusqu'à ce que la Mort nous Separe" : "paragraphe5",
         "Père et Fils" : "paragraphe5",
         "Usurpateurs" : "paragraphe6",
         "Machinerie" : "paragraphe6",
@@ -23964,9 +23976,10 @@ def doPiano():
         if len(entry) == 1 and entry.isalpha():
             buffer.append(entry.lower())  # On stocke en minuscule
         else:
+            ClearConsole()
             print("Vous tapez dans le vide sur une touche inexistante.")
             print("Vous avez l'air stupide.")
-            print("Vous devriez laisser le piano à quelqu'un qui s'y connait mieux.")
+            print("Vous devriez laisser le clavecin à quelqu'un qui s'y connait mieux.")
             Affichage.EntreePourContinuer()
             continue
 

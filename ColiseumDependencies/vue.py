@@ -1128,6 +1128,9 @@ class Vue:
         self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi lance un cri terrifiant, mais vous y résistez !")
         self.AffichageUneLignePuisUnEntreePourContinuer(liste_deffets[0])
 
+    def AfficheOdeurPutride(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("L'ennemi dégage une puissante et douce odeur de chair en décomposition qui provoque une Dyspnée pendant 2 tours.\nVous ne récupérez plus de points d'endurance !")
+
     def AfficheEffetDomovoi(self, commentaire):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 

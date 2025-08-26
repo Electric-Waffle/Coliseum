@@ -276,8 +276,8 @@ LISTERUMEURS = [
     "Les redcoins, on peut en avoir en pêchant ! Mais c'est très très dur apparemment...",
     "On gagne une essence pour chaque paquet de 25 points de force ou intelligence qu'on avait a notre mort.",
     "On gagne une essence pour chaque paquet de 15 points de défence qu'on avait a notre mort.",
-    "On gagne une essence pour chaque paquet de 25 âmes absorbées qu'on avait a notre mort.",
-    "On gagne une essence pour chaque paquet de 50 points de vie max ou mana max qu'on avait a notre mort.",
+    "On gagne une essence pour chaque paquet de 10 âmes absorbées qu'on avait a notre mort.",
+    "On gagne une essence pour chaque paquet de 25 points de vie max ou mana max qu'on avait a notre mort.",
     "Les artefacts qui augmentent les caractéristiques donnent des Fragments Mélioratifs a notre mort.",
     "Les artefacts qui changent les mécaniques de combat donnent des Fragments Sophistes a notre mort.",
     "Un certain monstre qui prend l'apparence d'un coffre lache des Fragments Insatiable a sa mort.",
@@ -288,9 +288,9 @@ LISTERUMEURS = [
     "Re-observer une salle avec des bols permet de faire apparaitre plus de bols, sans aucune limite. Pratique si vous voulez perdre votre argent !",
     "Il existe une très faible chance de récuperer tout l'argent jeté dans l'oasis du troisieme étage, lorsque l'on jette son argent dedans.",
     "Utiliser l'artefact Larmes de Vénus dans le puit du 6eme étage fait complètement changer l'ambiance du 7eme étage.",
-    "Le deuxieme étage contient un artefact qui peut aider les aventuriers orientés Force ou les aventuriers orientés Magie, selon si vous avez changé son ambiance avec le puit du premier étage, ou pas.",
+    "Le deuxieme étage contient un artefact qui peut aider les aventuriers orientés Force ou les aventuriers orientés Magie, selon si vous avez changé son ambiance avec le puit du premier étage, ou pas.\nCette logique s'applique a tout les étages qui peuvent changer de propriétaire, et force les aventuriers a réflechir avant d'agir : quel artefact leur est le plus utile selon leurs charactéristiques ? Cela vaut il le coup de chnager l'étage ou pas ?",
     "Il y existe un lien entre le piano de la salle du théatre du 5eme étage et le clavecin de la salle du puit du 4eme étage. L'un fait de la musique sans corde, l'autre a des cordes mais ne fait aucun son. Si seulement on pouvait jouer la musique du piano sur le clavecin...",
-    "La salle à artefact du quatrieme étage contient une énigme assez complexe. Mais il faudrait apparemment faire attention aux nombres, qui signifieraient des positions spécifiques auxquelles se rendre.",
+    "La salle à artefact du quatrieme étage contient une énigme assez complexe. Mais il faudrait apparemment faire attention aux nombres, qui signifieraient des positions de salles spécifiques à observer dans un ordre spécifique.",
     "Les chercheurs d'artefacts se servant des positions des salles oublient souvent que l'arene prend un carré de 3x3 au centre de la carte. Par exemple : la première salle a droite de l'arène n'est pas aux coordonnées x=1 y=0, mais x=2 y=0.",
     "On peut rencontrer 4 couleurs de brazier differents dans les salles : bleu vert rouge ou noir. Il y a 3 artefacts que l'on peut obtenir en sacrifiant un gros nombre du bon item au brazier noir, et l'un de ces items sacrifiables est le fruit jindagee.",
     "Sacrifier un item dans le brazier vert permet d'augmenter une de ses caractéristiques, en référence avec l'item sacrifié.",
@@ -5564,10 +5564,10 @@ class TraderUsage:
                             print("Vous obtenez le Passe de Combat !")
                             Affichage.EntreePourContinuer()
                     else:
-                        print("*Les matchs de plus haute qualité, c'est pas pour les trucs dans ton genre.*\n*Va falloir cracher la monnaie si tu veut entrer dans la cours des grands, Bousin !*")
+                        print("*Les matchs de plus haute qualité, c'est pas pour les trucs dans ton genre.*\n*Va falloir cracher la monnaie si tu veut entrer dans la cour des grands, Bousin !*")
                         Affichage.EntreePourContinuer()
                         if niveau_de_colisee == 0:
-                            print("*Pour une carte de membre basique, faut pas faire trop cher sinon les moucherons dans ton genre ne pourraient pas piffer leur thune.*")
+                            print("*Pour une carte de membre basique, faut pas faire trop cher sinon les moucherons dans ton genre pourraient pas piffer leur thune.*")
                             print("*Disons... 10 essences astrales. Ouai, c'est suffisant !*")
                             Affichage.EntreePourContinuer()
                             prix = {"Essence Astrale" : 10}
@@ -5684,25 +5684,25 @@ class TraderUsage:
                             description_foule = "bruyante"
                         
                         liste_de_description_combat = [
-                            "un jeune homme blond habillé de vert et coiffé d'un long chapeau",
-                            "une jeune femme dotée d'une armure orange et rouge",
+                            "un jeune homme blond habillé de vert et coiffé d'un long chapeau pointu",
+                            "une jeune femme dotée d'une armure futuriste orange et rouge",
                             "un être étrange sans bras ni jambe, et dont les membres sont pourtant accroché a son torse",
                             "un trentenaire doté d'un long manteau et d'une sorte de petit tournevis lumineux, et accompagné d'une jeune femme,",
                             "une femme avec des long cheveux blond et habillée avec une robe rose",
-                            "une femme aux cheveux verts et couronne de laurier dorés",
-                            "un adolescent tout de noir vetu, avec des gants rouges et un masque de carnaval blanc recouvrant seulement ses yeux"
-                            "un enfant aux cheveux en piques, portant de grosses chaussures et une gigantesque clé",
+                            "une femme à l'aura divine, aux cheveux verts surmontés d'une couronne de lauriers dorés",
+                            "un adolescent portant un Glock, tout de noir vetu, avec des gants rouges et un masque de carnaval blanc recouvrant seulement ses yeux",
+                            "un enfant aux cheveux en piques, portant de grosses chaussures et une gigantesque clé jaune-argent",
                             "une petite boule rose toute joyeuse",
                             "un gros rat jaune avec une queue en forme d'éclair",
                             "un hérisson humanoïde bleu avec de grosses chaussures rouges et blanches",
-                            "un jeune homme aux cheveux en pique, doté d'une grosse épée a deux main d'apparence brute",
+                            "un jeune homme aux cheveux en pique, doté d'une gigantesque et brutale épée a deux main",
                             "un homme doté d'un épais manteau noir et d'une baguette magique, arborant une cicatrice sur le front",
                             "un vieillard a la longue barbe blanche, dotée d'un sceptre de bois noueux et d'un manteau blanc très épais",
-                            "une femme blonde avec une paire de lunettes d'viateurs sur la tête, a l'interieur d'un tank",
+                            "une femme blonde avec une paire de lunettes d'aviateurs sur la tête, a l'interieur d'un tank",
                             "une femme blonde dans un tracksuit jaune, armée d'un long katana",
                             "une trentenaire brune aux cheveux bouclés armée d'un fusil a impulsion, dotée d'un débardeur blanc taché de sang vert",
                             "un homme noir baraqué au crane chauve, bougeant ses pectoraux en rythme",
-                            "un homme noir a la coiffure impeccable, lunettes de soleil, et dents... pointues ? ",
+                            "un homme noir a la coiffure impeccable, lunettes de soleil, et dents... pointues ?",
                             "une trentenaire noire aux cheveux bouclés et regard puissant, arméee d'un katana parfaitement entretenu",
                             "un homme noir habillé avec des vêtements de shériff sur lequel sont brodé le nom *King Schultz*, et armé d'un révolver"
                         ]
@@ -6208,7 +6208,10 @@ class TraderUsage:
                 liste_des_tags =  Sove.ModifieTagsDansSove("Donne", None)
                 try:
                     print("     -=Saloon=-")
-                    print(f"  Essences Dorée : { Sove.ModifieDechetsDansSove('Nombre', 'Essence Dorée', None)} \n\n")
+                    print(f"  Essences Dorée : { Sove.ModifieDechetsDansSove('Nombre', 'Essence Dorée', None)}")
+                    if not "Clé de la Chambre" in liste_des_tags:
+                        print(f"  Essences Astrales : { Sove.ModifieDechetsDansSove('Nombre', 'Essence Astrale', None)}")
+                    print("\n")
                     if "Clé de la Chambre" in liste_des_tags:
                         print("1 - Dormir")
                     else:
@@ -7305,7 +7308,9 @@ class Affiche:
                 liste_commentaire.append(commentaire)
                 commentaire = "*J'ai jeté un chevalier qui ne voulait que mon bien dans un affreux paysage. Découpé mon frère pour creer un garde capable de me défendre de mes propres démons.*"
                 liste_commentaire.append(commentaire)
-                commentaire = "*Fusionné mes ministres avec la fabrique du temps, pour me protéger d'invisibles et tout-puissants ennemis. Contaminé de ma folie le plus drole des Hommes du nord.*"
+                commentaire = "*Fusionné mes ministres avec la fabrique du temps, pour me protéger d'invisibles et tout-puissants ennemis. Contaminé de ma folie le plus involontairement drole des Hommes du nord.*"
+                liste_commentaire.append(commentaire)
+                commentaire = "*J'ai brûlé sa chair et sa maison. Immolé son coeur.Tout ca pour une simple fausse note.*"
                 liste_commentaire.append(commentaire)
                 commentaire = "*J'ai tant blessé, pour ne pas être blessé a mon tour.*"
                 liste_commentaire.append(commentaire)
@@ -21042,7 +21047,7 @@ def ShowTutorial():
         "les gens de son peuple qu'il croyait dangereux. Au fur et a mesure des années, de plus en plus"
     )
     print(
-        "d'innoncents se sont retrouvé dans les arènes sordides, a combattre des créations monstrueuses de chair et de sang."
+        "d'innocents se sont retrouvé dans les arènes sordides, a combattre des créations monstrueuses de chair et de sang."
     )
     print(
         "Jusqu'à un beau matin de printemps ou le Roi, dans un généreux élan de folie et de paranoïa, décida de se jeter dans"
@@ -21071,7 +21076,7 @@ def ShowTutorial():
     )
     print("Comment faire ? Eh bien... devenir plus fort !")
     print(
-        "Chaques monstres tués vous rapoorte une amélioration de certaines de vos caractéristiques, et un peu de golds."
+        "Chaques monstres tués vous rapporte une amélioration de certaines de vos caractéristiques, et un peu de golds."
     )
     print(
         "Vous pouvez ensuite échanger vos golds contre des objets chez le marchand de l'étage."
@@ -21130,25 +21135,31 @@ def ShowTutorial():
     print("\n\n")
     Affichage.EntreePourContinuer()
     print("                    { Tutoriel }")
-    print("            { Partie 5 : Les Combats }")
+    print("            { Partie 5a : Le Coeur du Jeu }")
     print(
         "\nLe Coliseum s'explore en trois temps : "
-        "\nLe temps de repos, ou menu d'étage, qui permet de choisir ses actions"
+        "\nLe temps de repos, ou menu d'étage, qui permet de choisir l'action a faire"
         "\nLe temps d'observation, afin d'observer toute les salles de l'étage pour trouver objets, artefacts, et salles particulières."
-        "\nLe temps de combat, pour devenir plus fort ou battre le boss."
+        "\nLe temps de combat, pour devenir plus fort ou battre le boss.\n"
     )
-    print("\nEn temps de combat, tout se déroule au tour par tour.")
-    print("En premier lieu s'effectuent les actions de début de combat.")
-    print("Ensuite, vous choisissez un menu parmis ceux disponibles.")
-    print("Juste après, vous choisissez une action dans le menu affiché.")
-    print("Votre action est effectuée, puis celle de l'ennemi a la suite.")
-    print("Les différents effets d'altérations d'états s'appliquent")
-    print("Et on recommence jusqu'à ce qu'un des deux participant meure ou fuie.")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("            { Partie 5b : Le Déroulement des Combats }")
+    print("\nEn temps de combat, tout se déroule au tour par tour.\n")
+    print("En premier lieu s'effectuent les actions de début de combat.\n\t[Certains effets de certaines actions, Artefacts, ou encore taaAAaal8lents se font avant le début du combat, au tour 0.]\n")
+    print("Ensuite, vous choisissez un type d'action parmis celles disponibles.\n\t[Allez vous jeter un sort ? Effectuer une technique ? Utiliser un Item ?]\n")
+    print("Juste après, vous choisissez une action dans le menu affiché.\n\t[Si vous avez choisit de lancer un sort, il faut maintenant dire quel sort en particulier.]\n")
+    print("Votre action est effectuée, puis celle de l'ennemi a la suite.\n\t[En tant que combat au tour par tour classique, vous ne pouvez rien faire pendant que l'ennemi fait son action. Tout ou presque est déterminé par un mélange de nombres d'aléatoire et de comparaison de statistisques.]\n\t[Vous faire touhcer ou non, pour combien de points, tout cela est en dehors de votre controle immédiat , et ne dépend plus que d'une notion simple : Avez vous suffisamment préparé votre personnage ? Avec les bonnes caractéristiques ? Les bons items ? Les bons effets ? Tout est question de stratégie.]\n\t[Rares sont les attaques qui vous demandent expressément de faire quelque chose pour influer son résultat !]\n")
+    print("Enfin, Les différents effets d'altérations d'états s'appliquent.\n\t[Etes vous entrain de bruler ? De reprendre des poitns de vie ? L'ennemi est il affecté par une quelquonque malédiction ? Les altération d'état, effectifs une fois par tour, se font a la fin du tour de l'ennemi, sauf si il est mort. Stratégisez au mieux le moment de votre victoire pour profiter le plus possible des altérations d'état qui vous sont bénéfiques !]\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("            { Partie 5c : Nota Bene des Combats }")
+    print("\nOn recommence ce cycle (Type Action Joueur > Action Joueur > Quelqu'un est mort/fuie ? > Sinon Action Ennemi > Alteration Etat > Quelqu'un est mort/fuie ?) jusqu'à ce qu'un des deux participant meure ou fuie.\n\t[La fuite est un faux ami. Non seulement vous perdez les objets utilisés pendant le conbat, vous ne gagnez pas de caractéristiques, mais en plus l'ennemi disparait pour de bon !]\n\t[D'un autre coté, cela vous permet de rester en vie.]\n\t[Mais d'un autre coté, la fuite n'est pas garantie, et il arrive parfois que celle ci soit interdite.]")
     print(
         "\nGardez a l'esprit que vos points de vie (PV) représentent la vitalité qu'il vous reste,"
-        "\net que si ils tombent a zéro, c'est terminé.\nCepandant, les points de mana (PM) servent juste"
-        "a lancer des sorts, et peuvent descendre a zéro sans réelles conséquences."
-        "\nMême chose pour les points d'endurance (PE) qui servent a utiliser des techniques et remontent naturellement."
+        "\net que si ils tombent a zéro, c'est terminé.\n\nCepandant, les points de mana (PM) servent juste "
+        "à lancer des sorts, et peuvent descendre a zéro sans réelles conséquences.\n\t[Gardez à l'esprit que les sorts font en général plus de dégat que les techniques, mais qu'il est plus difficile de récupérer des points de mana, surtout en début de jeu.]"
+        "\n\nDe la meme maniere, pas de conséquence si vous n'avez plus de points d'endurance (PE), qui servent a utiliser des techniques et remontent naturellement.\n\t[Par *naturellement*, on entend *Entre chaque combats*. Si vous voulez faire remonter vos points d'endurance en plein combat, il faut faire une action qui n'en utilise pas : Sort, Item, Defense, ou encore Passer son Tour. Moins l'action demande de l'effort, plus elle est risquée, mais plus elle permet de reprendre des points d'endurances.]\n\t[Gardez bien cela a l'esprit : vous ne pouvez pas enchainer les techniques à l'infini ! Vous devez vous reposer de temps a autre !]"
     )
     print("\n\n")
     Affichage.EntreePourContinuer()
@@ -21174,7 +21185,7 @@ def ShowTutorial():
     Affichage.EntreePourContinuer()
     print("                    { Tutoriel }")
     print("        { Partie 6b : Foire aux Questions }")
-    print("\n*Ya un type bizarre qui execute les rochemikazes. C'est qui ?*")
+    print("\n*Ya un type bizarre qui execute les rochemikazes, de temps a autre. C'est qui ?*")
     print(" - C'est Alfred.")
     print(
         "\n*Ya des types de sorts et de techniques différentes qui inflige des effets élémentaires différents, non ?*"
@@ -21186,7 +21197,7 @@ def ShowTutorial():
         "\n*...et le reste ? Les autres altérations d'états ? Et les effets des talents ? Et les effets des stigmas ?\nVous n'avez rien expliqué !*"
     )
     print(
-        " - C'est aussi exact ! Le fun du Coliseum viens du fait que vous êtes lachés dans un environnement étranger, sans guide,"
+        " - C'est aussi exact ! Le fun du Coliseum vient du fait que vous êtes lachés dans un environnement étranger, sans guide,"
     )
     print(
         "et avec le moins d'expliquations possibles !"
@@ -21195,7 +21206,19 @@ def ShowTutorial():
     print("\n\n")
     Affichage.EntreePourContinuer()
     print("                    { Tutoriel }")
-    print("            { Partie 7 : Bonne chance ! }")
+    print("            { Partie 7 : Message de l'Auteur }")
+    print(
+        "\nCe jeu est un rpg roguelight tour par tour textuel.\nSi vous n'avez rien compris a cette phrase, ce n'est pas grave.\nL'important, c'est ce mot : T E X T U E L"
+    )
+    print(
+        "\nCe jeu ne possède pas (ou très très peu) de graphisme.\nLes lieux que vous allez découvrir, les combats que vous allez mener, les dialogues que vous allez vouloir passer, tout cela ne peut pas être montré : c'est donc écrit. Décrit.\nAu fil de longues lignes au langage fleuri et d'impressionnants paragraphes, vous allez pouvoir vivre cette aventure avec pour compagnons des musiques spécialements choisies, un carnet de note fouillu, et votre imagination débordante."
+    )
+    print("\nVous comprenez donc que si vous n'aimez pas lire, apprendre, ou imaginer a partir d'une ambiance, ce jeu n'est pas fait pour vous.\nJ'irais meme jusqu'a dire que vous allez passer a coté des clins d'oeils humoristiques, des incroyables secrets derrière lesquels se cachent la plupart du contenu, et du style d'écriture qui fait le charme de cet univers.\nJe ne peux imaginer aimer ce jeu tout en passant a coté de ces expériences.")
+    print("\nJoueurs et Joueuses habitués des graphismes soignés, abhorrant la lecture des pavés de texte, passant a toute hate les descriptions qui construisent et mettent en place les mondes fantastiques dans lesquels ils évoluent,\nContinuez a vos risques et périls.")
+    print("\n\n")
+    Affichage.EntreePourContinuer()
+    print("                    { Tutoriel }")
+    print("            { Dernière Partie : Bonne chance ! }")
     print(
         "\nMaintenant, vous savez tout ce qu'il y a a savoir pour débuter une partie."
     )
@@ -22667,14 +22690,14 @@ def PrepareTheVillage():
 
     #transforme le personnage et ses artefacts en materiaux si ce n'est pas le Voyageur
     if Player.stigma_negatif != "Indigérable":
-        Player.liste_de_materiaux["Essence de Vitalitée"] = Player.points_de_vie_max // 50
-        Player.liste_de_materiaux["Essence de Magie"] = Player.points_de_mana_max // 50
+        Player.liste_de_materiaux["Essence de Vitalitée"] = Player.points_de_vie_max // 25
+        Player.liste_de_materiaux["Essence de Magie"] = Player.points_de_mana_max // 25
         Player.liste_de_materiaux["Essence de Fortitude"] = Player.points_de_force // 25
         Player.liste_de_materiaux["Essence de Sagesse"] = Player.points_dintelligence // 25
         Player.liste_de_materiaux["Essence de Résistance"] = Player.points_de_defence // 15
         Player.liste_de_materiaux["Essence Dorée"] = Player.nombre_de_gold // 100
         Player.liste_de_materiaux["Essence Carmine"] = Player.nombre_de_red_coin // 5
-        Player.liste_de_materiaux["Essence Astrale"] = Player.nombre_de_monstres_tues // 25
+        Player.liste_de_materiaux["Essence Astrale"] = Player.nombre_de_monstres_tues // 10
 
         for artefact in Player.liste_dartefacts_optionels:
             if artefact in ARTEFACTMELIORATIF:

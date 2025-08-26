@@ -581,7 +581,7 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_joueur_negatif == "Serment d'Hyppocrate":
             malus_stigma = 25
-        if self.modele.stigma_monstre_negatif == "Lignée Royale":
+        if self.modele.stigma_monstre_positif == "Lignée Royale":
             malus_stigma += 50
         self.modele.DEGATBONUSSORTS = (
             (self.modele.numero_de_letage * 2)
@@ -1036,7 +1036,10 @@ class Control:
         malus_stigma = 0
         if self.modele.stigma_monstre_bonus == "Nordique":
             malus_stigma = 100
-        self.modele.CHANCEBONUSDEFAIREGELER = 0 + bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_gelure)
+        bonus_stigma = 0
+        if self.modele.stigma_monstre_negatif == "Conductivité Thermique":
+            bonus_stigma = 25
+        self.modele.CHANCEBONUSDEFAIREGELER = 0 + bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_gelure) + bonus_stigma
         self.modele.CHANCEBONUSDEFAIREGELER -= malus_stigma
         # pourcentage de lapider
         bonus_vulnerable = 0
@@ -1304,8 +1307,8 @@ class Control:
         ajout_bonus = True
 
         # Monstres
-        gold_bonus_par_etage = round(125 * (self.modele.numero_de_letage / 10))
-        vie_bonus_par_etage = round(500 * (self.modele.numero_de_letage / 10))
+        gold_bonus_par_etage = round(125 * (self.modele.numero_de_letage / 9))
+        vie_bonus_par_etage = round(500 * (self.modele.numero_de_letage / 8))
         if self.modele.monstre_nom == "Pierre":
             self.modele.stigma_monstre_positif = "Plus d'un Tour"
             self.modele.stigma_monstre_negatif = "Gluantin"
@@ -1324,7 +1327,7 @@ class Control:
             }
             self.modele.monstre_recompense = {"Vie max": 2}
         elif self.modele.monstre_nom == "???":  # récompense de Alfred
-            self.modele.monstre_recompense = {"Taux esquive": 2, "Attaque": 1, "Defence": 1, "Intelligence": 1, "Gold": 100 + gold_bonus_par_etage}
+            self.modele.monstre_recompense = {"Attaque": 2, "Defence": 2, "Intelligence": 2, "Gold": 100 + gold_bonus_par_etage}
         elif self.modele.monstre_nom == "Gluant":
             self.modele.stigma_monstre_positif = "Gluantesque"
             self.modele.stigma_monstre_negatif = "Gluantin"
@@ -1773,7 +1776,7 @@ class Control:
                 "Feu Regénérateur": "Sort",
                 "Vents du Sud": "Sort",
             }
-            self.modele.monstre_recompense = {"Taux esquive": 1, "Taux coup critique": 1, "Vie max": 3, "Gold": 35 + gold_bonus_par_etage, "Materiau": "Ecaille de Phénix"}
+            self.modele.monstre_recompense = {"Taux coup critique": 1, "Vie max": 3, "Gold": 35 + gold_bonus_par_etage, "Materiau": "Ecaille de Phénix"}
         elif self.modele.monstre_nom == "Rochemikaze":
             self.modele.stigma_monstre_positif = "Faveurs Explosives"
             self.modele.stigma_monstre_negatif = "Surveillé"
@@ -1969,7 +1972,7 @@ class Control:
                 "Gemme Rouge": "Technique", #soin
                 "Gemme Bleue": "Technique", #vol mana [x]
             }
-            self.modele.monstre_recompense = {"Taux esquive": 1, "Vie max": 2, "Mana max": 2, "Taux sort critique": 1, "Taux coup critique":1, "Gold": 150 + gold_bonus_par_etage, "Materiau": "Gemme Bleue"}
+            self.modele.monstre_recompense = {"Vie max": 4, "Mana max": 4, "Taux sort critique": 1, "Taux coup critique":1, "Gold": 150 + gold_bonus_par_etage, "Materiau": "Gemme Bleue"}
         elif self.modele.monstre_nom == "Mimique":
             self.modele.stigma_monstre_positif = "Abomination"
             self.modele.stigma_monstre_negatif = "Homoncule"
@@ -2084,9 +2087,9 @@ class Control:
             for action in liste_action_supplementaire:
                 self.modele.monstre_liste_actions[action] = liste_action_supplementaire[action]
 
-            self.modele.monstre_recompense = {"Taux esquive": 1, "Mana max": 5, 
-                                              "Vie max": 5, "Degat sort critique": 3, 
-                                              "Degat coup critique": 3, "Gold": 25 + gold_bonus_par_etage, "Materiau": "Fragment Insatiable"}
+            self.modele.monstre_recompense = {"Taux esquive": 1, "Mana max": 10, 
+                                              "Vie max": 10, "Degat sort critique": 10, 
+                                              "Degat coup critique": 10, "Gold": 25 + gold_bonus_par_etage, "Materiau": "Fragment Insatiable"}
 
         # Boss
         elif self.modele.monstre_nom == "Clone d'Obsidienne":
@@ -2108,7 +2111,7 @@ class Control:
                 "Coup de Boule": "Technique",
                 "Froideur d'Outretombe": "Sort", # gele
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 50 + gold_bonus_par_etage, "Mana max": 10, "Endurance": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 50 + gold_bonus_par_etage, "Defence": 1, "Attaque": 2, "Intelligence": 2, "Degat sort critique": 8, "Endurance": 8, "Vie max": 16, "Mana max": 16}
         elif self.modele.monstre_nom == "Chevalier Pourpre":
             self.modele.stigma_monstre_positif = "Armure de Plates"
             self.modele.stigma_monstre_negatif = "Trauma de Guerre"
@@ -2127,7 +2130,7 @@ class Control:
                 "Medecine de Guerre": "Technique", #soin
                 "Lamentations": "Sort", #blesse et maudit plus mana [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 10, "Endurance": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 25, "Endurance": 10}
         elif self.modele.monstre_nom == "Coquille Vide":
             self.modele.stigma_monstre_positif = "Armure de Plates"
             self.modele.stigma_monstre_negatif = "Trauma de Guerre"
@@ -2147,7 +2150,7 @@ class Control:
                 "Medecine de Guerre": "Technique", #soin
                 "Lamentations": "Sort", #blesse et maudit plus mana [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 10, "Endurance": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Mana max": 25, "Endurance": 10}
         elif self.modele.monstre_nom == "Roi Amonrê":
             self.modele.stigma_monstre_positif = "Bénédiction Divine"
             self.modele.stigma_monstre_negatif = "Patchwork"
@@ -2164,7 +2167,7 @@ class Control:
                 "Jugement": "Sort", #degat = monstre tue [x]
                 "Combo Misérable": "Technique" #combo electrique , mais maudit [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 150 + gold_bonus_par_etage, "Taux sort critique": 10, "Endurance": 10 }
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 150 + gold_bonus_par_etage, "Taux sort critique": 5, "Endurance": 17 }
         elif self.modele.monstre_nom == "Apprentie":
             self.modele.stigma_monstre_positif = "Sort Chanceux"
             self.modele.stigma_monstre_negatif = "Anxiété Sociale"
@@ -2223,9 +2226,9 @@ class Control:
                 "Tournicotons": "Sort", #vague a esquiver [x]
                 "Tournicotez": "Sort", #queston a repondre [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux coup critique": 5, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
         elif self.modele.monstre_nom == "Le Pianiste":
-            self.modele.stigma_monstre_positif = "Coeur Immolé"
+            self.modele.stigma_monstre_positif = "Coeur Inferno"
             self.modele.stigma_monstre_negatif = "Inconsolable Rage"
             self.modele.stigma_monstre_bonus = "Nordique"
             self.modele.monstre_points_de_force = 5
@@ -2248,7 +2251,7 @@ class Control:
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
         elif self.modele.monstre_nom == "Noa":
             ajout_bonus = False
-            self.modele.stigma_monstre_positif = "Coeur Immolé"
+            self.modele.stigma_monstre_positif = "Coeur Inferno"
             self.modele.stigma_monstre_negatif = "Inconsolable Rage"
             self.modele.stigma_monstre_bonus = "Nordique"
             self.modele.monstre_points_de_force = 0
@@ -2260,7 +2263,7 @@ class Control:
             self.modele.monstre_liste_actions = {
                 "Rien": "Technique", 
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 250 + gold_bonus_par_etage, "Taux sort critique": 5, "Vie max": 15, "Mana max": 15, "Endurance": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Taux sort critique": 12, "Taux coup critique": 12}
         elif self.modele.monstre_nom == "Prince des Voleurs":
             self.modele.stigma_monstre_positif = "Bomberman"
             self.modele.stigma_monstre_negatif = "Hautain"
@@ -2296,14 +2299,44 @@ class Control:
             self.modele.monstre_points_de_vie_max = 432
             self.modele.monstre_points_de_mana_max = 15
             self.modele.monstre_liste_actions = {
+                "Durcissement Calcaire": "Technique", # augmente def
                 "Lame Ultime": "Technique", #gros degats
+                "Attaque Titanesque": "Technique", #utilise orbe furie et attaque
+                "Magie Noire": "Sort", #blesse et hausse cout mana [x]
+                "Création Obsidienne": "Sort", #lapide
+                "Lame de Gel": "Technique", #gele
                 "Bouclier Ultime": "Technique", #reprend beaucoup de vie
+                "Panacée Universelle": "Technique", #soigne toute les altérations d'état [x]
                 "Laser Ultime": "Technique", #moyen degat et feu
                 "Sort Ultime": "Sort", #gros degat, perd mana [x]
                 "Ultime Ultime": "Sort", # impossible d'utiliser sorts et techniques [x]
                 "Ultima": "Sort", #ramene la vie du joueur a 10% [x]
             }
-            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 350 + gold_bonus_par_etage, "Defence": 5, "Attaque": 5, "Endurance": 10}
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 350 + gold_bonus_par_etage, "Defence": 5, "Attaque": 5, "Degat coup critique": 10, "Endurance": 10}
+        elif self.modele.monstre_nom == "Roi Damné":
+            self.modele.stigma_monstre_positif = "Odeur Putride" # 15% de chance de faire tomber en endurance [x]
+            self.modele.stigma_monstre_negatif = "Conductivité Thermique" # +25% de se faire geler [x]
+            self.modele.stigma_monstre_bonus = "Aura de Damnation" # blessé deconcentré tout le temps [x]
+            self.modele.monstre_points_de_force = 2
+            self.modele.monstre_points_de_intelligence = 1
+            self.modele.monstre_points_de_resistance = 30
+            self.modele.monstre_nombre_de_vies_supplementaire = 0
+            self.modele.monstre_points_de_vie_max = 664
+            self.modele.monstre_points_de_mana_max = 60
+            self.modele.monstre_liste_actions = {
+                "Lame Ultime": "Technique", #gros degats
+                "Attaque Titanesque": "Technique", #utilise orbe furie et attaque
+                "Eveil de Runes": "Sort", # differents effet selon la rune invoquée [x]
+                "Lame de Gel": "Technique", #gele
+                "Bouclier Ultime": "Technique", #reprend beaucoup de vie
+                "Panacée Universelle": "Technique", #soigne toute les altérations d'état [x]
+                "Giga Gel": "Sort", # peut geler sur longtemps
+                "Laser Ultime": "Technique", #moyen degat et feu
+                "Sort Ultime": "Sort", #gros degat, perd mana [x]
+                "Ultime Ultime": "Sort", # impossible d'utiliser sorts et techniques [x]
+                "Ultima": "Sort", #ramene la vie du joueur a 10% [x]
+            }
+            self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 350 + gold_bonus_par_etage, "Taux sort critique": 5, "Intelligence": 5, "Degat sort critique": 10, "Endurance": 10}
         elif self.modele.monstre_nom == "Maitre Mage":
             self.modele.stigma_monstre_positif = "Hardi"
             self.modele.stigma_monstre_negatif = "Aucun"
@@ -2992,6 +3025,13 @@ class Control:
         if self.modele.commentaire_transmutation_degat != "":
             self.vue.AfficheTransmutationDegat(self.modele.commentaire_transmutation_degat)
 
+    def EffetStigmaOdeurPutride(self):
+        nombre_aleatoire = random.randint(0, 100)
+        if nombre_aleatoire <= 15:
+            self.modele.est_maudit_par_endurance = True
+            self.modele.est_maudit_par_endurance_nombre_tour += 3
+            self.vue.AfficheOdeurPutride()
+
     def EffetStigmaPlusDUnTour(self):
         nombre_aleatoire = random.randint(0, 100)
         if nombre_aleatoire <= 10:
@@ -3322,10 +3362,10 @@ class Control:
             if self.modele.choc_thermique:
                 self.modele.monstre_points_de_vie -= degat
                 commentaire = f"A cause du choc thermique entre sa gelure et sa brulure, il perd {degat * 2} points de vie !"
-            if self.modele.stigma_monstre_positif == "Coeur Immolé" and not self.modele.monstre_en_etat_de_choc and (self.modele.monstre_points_de_mana + round(degat * 0.5)) <= self.modele.monstre_points_de_mana_max :
+            if self.modele.stigma_monstre_positif == "Pyrocien" and not self.modele.monstre_en_etat_de_choc and (self.modele.monstre_points_de_mana + round(degat * 0.5)) <= self.modele.monstre_points_de_mana_max :
                 mana_recup = round(degat * 0.5)
                 self.modele.monstre_points_de_mana += mana_recup
-                commentaire += f"Le coeur de l'ennemi à déja souffert par le feu, et sa présence lui permet de récupérer des points de mana."
+                commentaire += f"L'ennemi stimule ses veines de mana grâce au feu, et il récupère des points de mana."
             self.vue.AfficheFeuEtPoison(personnage, commentaire)
 
     def AppliqueFeuElectrique(self):
@@ -3513,6 +3553,12 @@ class Control:
                 self.modele.est_maudit_par_endurance = False
                 commentaire += "\nVous pouvez regagner de l'endurance !"
         # attaque coute de la vie
+        if self.modele.stigma_monstre_bonus == "Aura de Damnation":
+            self.modele.est_maudit_par_la_vie = True
+            self.modele.est_maudit_par_la_vie_nombre_tour = 2
+            self.modele.est_maudit_par_le_mana = True
+            self.modele.est_maudit_par_le_mana_nombre_tour = 2
+            commentaire += "\nVous n'arrivez pas a supporter l'aura de Damnation de l'ennemi ! Vous êtes blessé et déconcentré continuellement !"
         if self.modele.est_maudit_par_la_vie:
             self.modele.est_maudit_par_la_vie_nombre_tour -= 1
             if self.modele.est_maudit_par_la_vie_nombre_tour == 0:
@@ -3547,6 +3593,11 @@ class Control:
             self.modele.vie_kikimora = 2
             commentaire += "\nLa Kikimora sort de derriere son four et retourne avec son maître !"
         # en feu, dégats sur le temps
+        if self.modele.stigma_monstre_positif == "Coeur Inferno":
+            self.modele.est_en_feu = True
+            self.modele.est_en_feu_nombre_tour = 2
+            self.modele.est_en_feu_degat = 5
+            commentaire += "\nLes flammes qui incinèrent l'Arène vous font l'effet d'une fournaise ! Vous brûlez continuellement !"
         if self.modele.est_en_feu:
             self.AppliqueFeu()
             self.modele.est_en_feu_nombre_tour -= 1
@@ -4378,6 +4429,8 @@ class Control:
             self.EffetStigmaBenedictionDivine()
         elif self.modele.stigma_monstre_positif == "Bomberman":
             self.EffetStigmaBomberman()
+        elif self.modele.stigma_monstre_positif == "Odeur Putride":
+            self.EffetStigmaOdeurPutride()
         elif self.modele.stigma_monstre_positif == "Plus d'un Tour":
             self.EffetStigmaPlusDUnTour()
         if self.modele.stigma_monstre_negatif == "Mégalovania":
@@ -5495,6 +5548,8 @@ class Control:
                             # deja en feu ?
                             if self.modele.monstre_est_en_feu:
                                 nombre_aleatoire = random.randint(1, 100)
+                                if self.modele.stigma_monstre_positif == "Coeur Inferno":
+                                    nombre_aleatoire = 0
                                 if nombre_aleatoire <= 90:
                                     # addition des tours
                                     nombre_tour = caracteristique_du_techniques[9]
@@ -5636,6 +5691,8 @@ class Control:
                         if nombre_aleatoire_basique <= 17:
                             if self.modele.monstre_est_en_feu:
                                 nombre_aleatoire = random.randint(1, 100)
+                                if self.modele.stigma_monstre_positif == "Coeur Inferno":
+                                    nombre_aleatoire = 0
                                 if nombre_aleatoire <= 90:
                                     # addition des tours
                                     nombre_tour = 4
@@ -6685,6 +6742,8 @@ class Control:
                             # deja en feu ?
                             if self.modele.monstre_est_en_feu:
                                 nombre_aleatoire = random.randint(1, 100)
+                                if self.modele.stigma_monstre_positif == "Coeur Inferno":
+                                    nombre_aleatoire = 0
                                 if nombre_aleatoire <= 90:
                                     # addition des tours
                                     nombre_tour = caracteristique_du_sort[9]
@@ -6828,6 +6887,8 @@ class Control:
                         if nombre_aleatoire_basique <= 15:
                             if self.modele.monstre_est_en_feu:
                                 nombre_aleatoire = random.randint(1, 100)
+                                if self.modele.stigma_monstre_positif == "Coeur Inferno":
+                                    nombre_aleatoire = 0
                                 if nombre_aleatoire <= 90:
                                     # addition des tours
                                     nombre_tour = 4
@@ -7003,6 +7064,8 @@ class Control:
                         if nombre_aleatoire_basique <= 15:
                             if self.modele.monstre_est_en_feu:
                                 nombre_aleatoire = random.randint(1, 100)
+                                if self.modele.stigma_monstre_positif == "Coeur Inferno":
+                                    nombre_aleatoire = 0
                                 if nombre_aleatoire <= 90:
                                     # addition des tours
                                     nombre_tour = 4
@@ -10673,7 +10736,7 @@ class Control:
         elif element == "foudre":
             nombre_tour += round((self.modele.TOURBONUSJOUEURENPARALYSIE / 100) * nombre_tour)
             self.modele.est_paralyse = True
-            self.modele.est_paralyse_nombre_tour += nombre_tour
+            self.modele.est_paralyse_nombre_tour += nombre_tour + 1
 
     def RecouvrementDeMana(self, points_de_mana_recouverts):
         self.modele.points_de_mana += points_de_mana_recouverts

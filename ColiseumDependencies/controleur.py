@@ -2711,6 +2711,13 @@ class Control:
                 self.EffetGrandFroidPiegeGlace()
             if self.modele.reflex:
                 self.EffetReflexPiegePhysique()
+        if self.modele.stigma_joueur_positif == "Monsieur Loyal":
+            if (
+                not self.modele.dernier_choix_effectue
+                and not self.modele.monstre_EstUnBoss
+                and not self.modele.est_une_mimique
+            ):
+                self.EffetStigmaDernierChoix()
         if self.modele.stigma_joueur_positif == "Bénie par les Fées":
             self.EffetStigmaBeniParLesFees()
         if self.modele.stigma_joueur_negatif == "Fatigue Chronique":
@@ -4218,36 +4225,69 @@ class Control:
         while True:
             try:
                 choix = self.vue.GetStigmaDernierChoixChoice()
-                if choix == 1:
+                if choix in [1, 2]:
                     self.modele.dernier_choix_effectue = True
-                    break
-                elif choix == 2:
-                    self.modele.dernier_choix_effectue = True
+                    clear_console()
                     break
                 clear_console()
             except ValueError:
                 clear_console()
         if choix == 1:
-            liste_dennemis = self.modele.liste_de_monstre_totaux_pour_dernier_choix[self.modele.numero_de_letage - 1]
-            commentaire = "Vous laissez l'ennemi s'enfuir et regardez les tribunes autour. Quel nom allez vous appeler ?"
-            numero = 1
-            for nom in liste_dennemis:
-                commentaire += f"\n{numero} - {nom}" 
-                numero += 1   
-            while True:
-                try:
-                    choix = self.vue.GetStigmaDernierChoixEnnemyChoice(commentaire)
-                    if choix in range(1, (len(liste_dennemis) + 1)):
-                        ancien_monstre = self.modele.monstre_nom
-                        self.modele.monstre_nom = liste_dennemis[choix - 1]
-                        self.SetAttributesFromName()
-                        self.vue.AfficheNouveauMonstre(
-                            ancien_monstre, self.modele.monstre_nom
-                        )
-                        break
-                    clear_console()
-                except ValueError:
-                    clear_console()
+            if random.randint(0, 1) == 0:
+                liste_dennemis = self.modele.liste_de_monstre_totaux_pour_dernier_choix[self.modele.numero_de_letage - 1]
+                commentaire = "La foule est en délire !\nParmis les spectateurs, une étrange forme éclate de rire, et fait disparaitre l'ennemi avec un claquement de doigts.\nQui sera son remplaçant ?"
+                numero = 1
+                for nom in liste_dennemis:
+                    commentaire += f"\n{numero} - {nom}" 
+                    numero += 1   
+                while True:
+                    try:
+                        choix = self.vue.GetStigmaDernierChoixEnnemyChoice(commentaire)
+                        if choix in range(1, (len(liste_dennemis) + 1)):
+                            clear_console()
+                            ancien_monstre = self.modele.monstre_nom
+                            self.modele.monstre_nom = liste_dennemis[choix - 1]
+                            self.SetAttributesFromName()
+                            self.vue.AfficheNouveauMonstre(
+                                ancien_monstre, self.modele.monstre_nom
+                            )
+                            break
+                        clear_console()
+                    except ValueError:
+                        clear_console()
+            else:
+                liste_commentaires = [
+                    "La foule ne réagit pas.\nPeut être l'avez elle vu venir, le plot-twist...",
+                    "Les spectateurs se regardent, interloqués.\nVous l'entendez murmurer : *C'est quoi , un plot twist ?*",
+                    "Vous recevez une boite de thon sur le coin de la figure, alors que les spectres vous hue, en scandant *On en a marre des plot twist ! C'est un outil d'écriture pour les fénéants ! Surtout quand ya pas de foreshadowing avant !*",
+                    "La foule vous regarde, inexpressive.\nLe public est dur, aujourd'hui.",
+                    "*Renifler ? On est des spectres, andouille ! On a pas de nez !*\nSi les remarques de vos spectateurs vous amusent un peu, celles qui vous traitent de *spectrophobie* vous font carrément flipper.\nYa moyen de se faire cancel quand on est au fond d'un donjon ???",
+                    "Un lourd silence suit votre tirade.\nUn des spectateurs applaudit très fort, seul touché par votre humour.\nCela ne rend pas la scène moins génante.\nOuch.",
+                    "*On s'en fout de tes blagues !*\nOuch.",
+                    "*Bouh ! Montre nous tes pieds !*\nL'ennemi et vous vous retournez vers le spectatueur, qui s'arrête un instant avant de lacher un *Bah quoi ?* aussi sonore que désopilant.\nAu grand dam de la liberté d'expression, deux figures fantomatiques escortent le spectre en dehors des gradins.",
+                    "*Et sinon , pour quand le prochain épisode de Skyrim ?*\nVous vous étonnez de la présence d'un de vos viewers dans les gradins, et choisissez de répondre a son innocente question par un silence lourd en signification.",
+                    "Un spectre n'as pas compris.\nIl vous demande alors d'expliquer votre blague.\nSi votre mentor était là, il vous dirait : *On apelle ça un bide.* avant de lacher un taquin *git good* dont lui seul a le secret.",
+                    "Ca n'a pas marché.\nNe cherchez pas de raisons.\nL'humour, ya des jours avec et des jours sans.",
+                    "La foule est en délire !\nParmis les spectateurs, une étrange forme éclate de rire, et fait disparaitre l'ennemi avec un claquement de doigts.\nEnfin, elle claque des doigts, mais rien ne se passe.\nElle regarde, intelroqué, sa main, puis hausse les épaules.",
+                    "Si seulement...Mais non.\nPas de changements pour vous.",
+                    "Changer l'ennemi, c'est du 50/50.\nEt là, vous êtes dans le mauvais 50.\nCelui ou il se passe rien.",
+                    "Et c'est un non ! Bien essayé, mais c'est malheureusement insuffisant !",
+                    "La prochaine fois, peut être.\nMais pas *cette* prochaine fois.",
+                    "On auraitcru que ca marche cette fois ci.. sauf que ca a pas marché.",
+                    "La prochaine fois, peut être.\nMais pas... Ah , je l'ai déja faite, celle ci.",
+                    "C'est quand la derniere fois que vous avez bu de l'eau ?\nParce que j'aimerai dire *Comptez la dessus et buvez de l'eau !*, mais si vous en avaez bu récemment ca n'as pas de sens...",
+                    "Un petit jeu ?\nJe vous demande, parceque celui ci, vous l'avez perdu.\nEt par celui ci, j'entend *changer l'ennemi*.\nAllez je commence :\nQu'est-ce qui a 3 E et ne contient pourtant qu'une seule lettre ?\n\nVous chercherez la répone sur le net.",
+                    "Prenez un peu de temps, écoutez la musique.\nC'est sympa non ?\nC'est moi qui l'aie choisie !\n\nSinon, pour le changement d'ennemi, ca a pas marché, et tout le monde vous déteste.\nWomp Womp.",
+                    "Une étrange figure dans les gradin vous lance un *bof*, et vous comprenez que vous ne changerez pas l'ennemi de sitôt.",
+                    "Une étrange figure dans les gradins tend le bras, poing fermé sauf pour un pouce tendu a l'horizontale... et qui pointe maintenant vers le sol.\nDommage.",
+                    "...c'est vraiment avec ce genre d'humour que vous avez conquis les plateformes de streaming ???\nC'est qui vos viewers ?\nDes enfants ?",
+                    "Une lumière rouge illumine la pièce pendant un quart de seconde, et un bruit de buzzer se fait entendre.\nUn spectre, les mains posées sur un pupitre, regarde l'arène, et une voix se fait entendre :\n*Alors Pedro ? Quelle est votre réponse ?*\nLe Spectre répond alors : *Euh..Euh... C'est... c'est vraiment Nul ! Réponse A ! Et elle est Finale !*\nLa même voix se fait entendre : *Eh bien Pedro... c'est... c'est une bonne réponse ! A vous les 10 essences dorées !*\nVous arretez d'écouter les gradins se moquer de vous, et retournez au combat.\n\nUne larme perle au coin de vos yeux...\n",
+                    "Vous terminez de parlez et finissez par zozoter le dernier mot.\nNon seulement vous avez l'aire d'un couillon, mais en plus on se moque de vous.\nPas facile, les cheveux sur la langue...",
+                    "Vous pensez a énoncer les mots que vous avez soigneusements choisi, et vous raviser : la blague est vraiment trop pourrie.",
+                    "Craignos.\nMême moi j'aurais jamais dit ca devant un public.\nJ'ai aucune envie de décrire, ni d'imaginer la scène.\nOn va juste dire que ca a échoué.\nRetour au combat.",
+                    "Ca vous plait, toute ces répliques différentes ?\nMoi aussi !\n Dans la pluspart, je vous insulte cordialement, et ca c'est un vrai plaisir !\nJ'espère juste que c'est pas la premiere fois que vous échoué, sinon cette réplique vous paraitra bizarre.\nPardon ?\nOui, bien sûr.\nVous avez échoué a changer l'ennemi.\nChop Chop, retour au combat !",
+                ]
+                self.vue.StigmaDernierChoixEchec(liste_commentaires[random.randint(0, (len(liste_commentaires)-1))])
 
     def EffetStigmaSanjiva(self):
         limite = round(self.modele.points_de_vie_max * 0.05)
@@ -4388,13 +4428,6 @@ class Control:
     def ApplicationStigmaPourFinDuTour(self):
         if self.modele.stigma_joueur_positif == "Bénie par les Fées":
             self.EffetStigmaBeniParLesFees()
-        elif self.modele.stigma_joueur_positif == "Dernier Choix":
-            if (
-                not self.modele.dernier_choix_effectue
-                and not self.modele.monstre_EstUnBoss
-                and not self.modele.est_une_mimique
-            ):
-                self.EffetStigmaDernierChoix()
         if self.modele.stigma_joueur_positif == "Second Souffle":
             self.EffetStigmaSecondSouffle()
         if self.modele.stigma_joueur_positif == "Recharge Rapide":

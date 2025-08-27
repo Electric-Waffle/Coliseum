@@ -2397,7 +2397,7 @@ LISTEDEPERSONNAGE = {
             "\n           Entre dans le Coliseum pour vivre **l'aventure ultime**."
             "\n           Est connu pour son sens du showmanship inégalé."
         ),  # char
-        "Dernier Choix",  # char stigma +
+        "Monsieur Loyal",  # char stigma +
         "Pas d'Echappatoire",  # char stigma -
         "Aucun",  # char stigma *
         [

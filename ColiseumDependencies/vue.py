@@ -326,15 +326,14 @@ class Vue:
         print(commentaire)
 
     def AfficheNouveauMonstre(self, ancien_nom, nouveau_nom):
-        print(f"L'ennemi [{ancien_nom}] profite de votre pitié pour s'enfuir.")
-        print(f"Il se fait remmplacer par l'ennemi [{nouveau_nom}] !")
+        print(f"Dans le nuage de poudre de fée (peut être ..? En tout ca, ca y ressemble.) laissé par [{ancien_nom}]...")
+        print(f"...l'ennemi [{nouveau_nom}] apparait !")
         self.EntreePourContinuer()
 
     def GetStigmaDernierChoixChoice(self):
-        print("Vous lancez un regard froid a l'ennemi. Vous êtes désormais le seul garant de son futur.")
-        print("Vous pouvez :")
-        print("1 - Laisser l'ennemi partir et se faire remplacer par un autre de même niveau")
-        print("2 - Garder l'ennemi actuel")
+        print("Vous tournez votre regard vers les spectateurs, et lancez une tirade des plus extravagantes se finissant par :")
+        print("1 - ... Plot-Twist ! Et si vous ne l'aviez pas senti venir, reniflez plus fort ! (Chance que l'ennemi soit remplacé par un autre du même niveau)")
+        print("2 - ...et que le sort me soit favorable ! (L'ennemi reste le même)")
         return int(input("Choisissez une action avec les nombres : "))
 
     def AfficheSanjiva(self):
@@ -839,6 +838,9 @@ class Vue:
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def AfficheTalentRejuvenation(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def StigmaDernierChoixEchec(self, commentaire):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
     def GetStigmaDernierChoixEnnemyChoice(self, commentaire):

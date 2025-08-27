@@ -3611,7 +3611,7 @@ LISTEDEMUSIQUE = [
     "Sans Remords",
     "Le Prix des Larmes",
     "Noblesse Oblige",
-    "Coeur, Ego, Tango.",
+    "Coeur, Ego, Tango",
     "Ossuaire Immaculé",
     "Dissonance Cognitive",
     "Le Vieux Fourneau",
@@ -20843,7 +20843,7 @@ def ShowRecup():
         456852,
         3236353,
         313,
-        22,
+        25,
         935284761,
         5321139741,
         7415321139,
@@ -20861,7 +20861,7 @@ def ShowRecup():
             nom_de_limage = "python_properties_controleur"  # page 2 (e3) a faire #
         elif choix == 313:
             nom_de_limage = "python_properties_Thread_init"  # page 3 (arret roi, par matiere) a faire lore #
-        elif choix == 19:
+        elif choix == 25:
             nom_de_limage = "python_properties_controleur_Thread"  # page 4 (observatorium, par matiere) a faire secrets des observations #
         elif choix == 935284761:
             nom_de_limage = "python_properties_modele_Thread"  # page 5 (par tout talent combo talents) -
@@ -22221,7 +22221,7 @@ def DoJukebox():
         29 : {"Nom" : "Comment Tuer le Grand Méchant Loup", "Nom Réel" : "boss_7"},
         30 : {"Nom" : "Le Prix des Larmes", "Nom Réel" : "etage_7_alt"},
         31 : {"Nom" : "Noblesse Oblige", "Nom Réel" : "battle_theme_7_alt"},
-        32 : {"Nom" : "Coeur, Ego, Tango.", "Nom Réel" : "boss_7_alt"},
+        32 : {"Nom" : "Coeur, Ego, Tango", "Nom Réel" : "boss_7_alt"},
         33 : {"Nom" : "Ossuaire Immaculé", "Nom Réel" : "etage_8"},
         34 : {"Nom" : "Dissonance Cognitive", "Nom Réel" : "battle_theme_8"},
         35 : {"Nom" : "Le Vieux Fourneau", "Nom Réel" : "boss_8"},
@@ -24177,3 +24177,4 @@ Ending.DoEnding()
 # control.DebugGetUserChoice()
 # control.PatternDesignConstantUpdater()
 # control.Cat_astrophe()
+# CODE OBSERVATORIUM : 1521951822120151892113

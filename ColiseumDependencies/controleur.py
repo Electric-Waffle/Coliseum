@@ -693,11 +693,11 @@ class Control:
         if self.modele.stigma_joueur_negatif == "Famine":
             malus_stigma = 50
         self.modele.DEGATBONUSSORTCRITIQUE = (
-            self.modele.degat_de_sort_critique + bonus_stigma + bonus_equilibrage_sort_critique
+            bonus_stigma + bonus_equilibrage_sort_critique
         )
         self.modele.DEGATBONUSSORTCRITIQUE -= malus_stigma
         if "Chaine de Main" in self.modele.liste_dartefacts_optionels:
-            self.modele.DEGATBONUSSORTCRITIQUE += self.modele.DEGATBONUSSORTCRITIQUE
+            self.modele.DEGATBONUSSORTCRITIQUE += 100
             
 
         # degat des attaques crit
@@ -708,7 +708,7 @@ class Control:
         if self.modele.stigma_joueur_negatif == "Famine":
             malus_stigma = 50
         self.modele.DEGATBONUSATTAQUECRITIQUE = (
-            self.modele.degat_de_coup_critique + bonus_stigma + bonus_equilibrage_technique_critique
+            bonus_stigma + bonus_equilibrage_technique_critique
         )
         self.modele.DEGATBONUSATTAQUECRITIQUE -= malus_stigma
 
@@ -1823,7 +1823,11 @@ class Control:
                 "Attire-Gold": "Technique", #prend du gold [x]
                 "Lèche-Blessure": "Technique", # soin
                 "Cat-astrophe": "Sort", #gele,enflamme,draine en mm temps [x]
+                "Attaque Légère": "Technique",
+                "Confusion": "Sort", # confond
                 "Point Vital": "Sort", # gros degat critiques
+                "Ruée vers l'or": "Sort", # donne mal jaune
+                "Bombe Arcanique": "Sort",
             }
             self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage, "Degat sort critique": 2, "Materiau": "Moustache de Chat"}
         elif self.modele.monstre_nom == "Siffloteur":
@@ -1859,6 +1863,7 @@ class Control:
                 "Giga Gel": "Sort", # peut geler sur longtemps
                 "Oeuil Maudit": "Sort", #augmente cout mana
                 "Carotte Magique": "Sort", #soin
+                "Tout Feu Tout Flamme": "Sort", # combo electrique, pour le feu [x]
             }
             self.modele.monstre_recompense = {"Vie max": 4, "Gold": 45 + gold_bonus_par_etage, "Materiau": "Iris du Malheur"}
         elif self.modele.monstre_nom == "Cerf Voleur":
@@ -1876,6 +1881,10 @@ class Control:
                 "Coup de pierre": "Technique", # lapide
                 "Vole-Ame": "Sort", # perd viemax [x]
                 "Coup de Foudre": "Sort", # paralyse
+                "Frappe Lourde": "Technique",  # gros degat, peu chance toucher
+                "Poing Eclat": "Technique",  # rend blesse
+                "Lèche-Blessure": "Technique", # soin
+                "Ruée vers l'or": "Sort", # donne mal jaune
             }
             self.modele.monstre_recompense = {"Mana max": 4, "Gold": 45 + gold_bonus_par_etage, "Taux sort critique": 1, "Materiau": "Velour de Cervidé"}
         elif self.modele.monstre_nom == "Aspiratrésor Blindé":
@@ -2316,7 +2325,7 @@ class Control:
         elif self.modele.monstre_nom == "Roi Damné":
             self.modele.stigma_monstre_positif = "Odeur Putride" # 15% de chance de faire tomber en endurance [x]
             self.modele.stigma_monstre_negatif = "Conductivité Thermique" # +25% de se faire geler [x]
-            self.modele.stigma_monstre_bonus = "Aura de Damnation" # blessé deconcentré tout le temps [x]
+            self.modele.stigma_monstre_bonus = "Aura Corrosive" # blessé deconcentré tout le temps [x]
             self.modele.monstre_points_de_force = 2
             self.modele.monstre_points_de_intelligence = 1
             self.modele.monstre_points_de_resistance = 30
@@ -3560,12 +3569,12 @@ class Control:
                 self.modele.est_maudit_par_endurance = False
                 commentaire += "\nVous pouvez regagner de l'endurance !"
         # attaque coute de la vie
-        if self.modele.stigma_monstre_bonus == "Aura de Damnation":
+        if self.modele.stigma_monstre_bonus == "Aura Corrosive":
             self.modele.est_maudit_par_la_vie = True
             self.modele.est_maudit_par_la_vie_nombre_tour = 2
             self.modele.est_maudit_par_le_mana = True
             self.modele.est_maudit_par_le_mana_nombre_tour = 2
-            commentaire += "\nVous n'arrivez pas a supporter l'aura de Damnation de l'ennemi ! Vous êtes blessé et déconcentré continuellement !"
+            commentaire += "\nVous n'arrivez pas a supporter l'Aura Corrosive de l'ennemi ! Vous êtes blessé et déconcentré continuellement !"
         if self.modele.est_maudit_par_la_vie:
             self.modele.est_maudit_par_la_vie_nombre_tour -= 1
             if self.modele.est_maudit_par_la_vie_nombre_tour == 0:
@@ -4283,7 +4292,7 @@ class Control:
                     "...c'est vraiment avec ce genre d'humour que vous avez conquis les plateformes de streaming ???\nC'est qui vos viewers ?\nDes enfants ?",
                     "Une lumière rouge illumine la pièce pendant un quart de seconde, et un bruit de buzzer se fait entendre.\nUn spectre, les mains posées sur un pupitre, regarde l'arène, et une voix se fait entendre :\n*Alors Pedro ? Quelle est votre réponse ?*\nLe Spectre répond alors : *Euh..Euh... C'est... c'est vraiment Nul ! Réponse A ! Et elle est Finale !*\nLa même voix se fait entendre : *Eh bien Pedro... c'est... c'est une bonne réponse ! A vous les 10 essences dorées !*\nVous arretez d'écouter les gradins se moquer de vous, et retournez au combat.\n\nUne larme perle au coin de vos yeux...\n",
                     "Vous terminez de parlez et finissez par zozoter le dernier mot.\nNon seulement vous avez l'aire d'un couillon, mais en plus on se moque de vous.\nPas facile, les cheveux sur la langue...",
-                    "Vous pensez a énoncer les mots que vous avez soigneusements choisi, et vous raviser : la blague est vraiment trop pourrie.",
+                    "Vous pensez a énoncer les mots que vous avez soigneusements choisi, avant de vous raviser : la blague est vraiment trop pourrie.",
                     "Craignos.\nMême moi j'aurais jamais dit ca devant un public.\nJ'ai aucune envie de décrire, ni d'imaginer la scène.\nOn va juste dire que ca a échoué.\nRetour au combat.",
                     "Ca vous plait, toute ces répliques différentes ?\nMoi aussi !\n Dans la pluspart, je vous insulte cordialement, et ca c'est un vrai plaisir !\nJ'espère juste que c'est pas la premiere fois que vous échoué, sinon cette réplique vous paraitra bizarre.\nPardon ?\nOui, bien sûr.\nVous avez échoué a changer l'ennemi.\nChop Chop, retour au combat !",
                 ]
@@ -4450,7 +4459,7 @@ class Control:
             self.EffetStigmaSanjiva()
         elif self.modele.stigma_joueur_bonus == "Musculeux":
             self.EffetStigmaMusculeux()
-        if self.modele.stigma_monstre_positif == "Toucher de Midas":
+        if self.modele.stigma_monstre_positif == "Toucher de Midas" and random.randint(0,100) <= 5:
             self.EffetStigmaToucherDeMidas()
         elif self.modele.stigma_monstre_positif == "Abomination":
             self.EffetStigmaAbomination()
@@ -5539,14 +5548,20 @@ class Control:
                     (self.modele.BONUSREDUCTIONDEGAT / 100) * degat_de_base
                 )
                 # application des modificateurs sur les chances de coup critique
-                pourcentage_de_critique = caracteristique_du_techniques[2]
+                if caracteristique_du_techniques[2] >= 15:
+                    pourcentage_de_critique = random.randint(10, 15)
+                elif caracteristique_du_techniques[2] <= 5:
+                    pourcentage_de_critique = random.randint(0, 5)
+                else:
+                    pourcentage_de_critique = random.randint(5, 10)
                 pourcentage_de_critique += self.modele.CHANCECOUPCRITIQUE
                 # application des modificateurs sur les degats de coup critique
                 degat_critique = caracteristique_du_techniques[3]
+                degat_critique += self.modele.degat_de_coup_critique
+                degat_critique += round(self.modele.accumulation_degat_technique_critique)
                 degat_critique += round(
                     (self.modele.DEGATBONUSATTAQUECRITIQUE / 100) * degat_critique
                 )
-                degat_critique += round(self.modele.accumulation_degat_technique_critique)
                 # application des modificateurs sur les chances d'appliquer un element
                 pourcentage_de_element = caracteristique_du_techniques[4]
                 if self.modele.a_utilise_feu_ce_tour:
@@ -5936,10 +5951,11 @@ class Control:
                     pourcentage_de_critique += self.modele.CHANCECOUPCRITIQUE
                     # degat critique
                     degat_critique = round(degat_de_base * 0.25)
+                    degat_critique += self.modele.degat_de_coup_critique
+                    degat_critique += round(self.modele.accumulation_degat_technique_critique)
                     degat_critique += round(
                         (self.modele.DEGATBONUSATTAQUECRITIQUE / 100) * degat_critique
                     )
-                    degat_critique += round(self.modele.accumulation_degat_technique_critique)
                     # degats sont critiques ?
                     nombre_aleatoire = random.randint(0, 100)
                     if nombre_aleatoire < pourcentage_de_critique:
@@ -6736,14 +6752,20 @@ class Control:
                     (self.modele.BONUSREDUCTIONDEGAT / 100) * degat_de_base
                 )
                 # application des modificateurs sur les chances de coup critique
-                pourcentage_de_critique = caracteristique_du_sort[2]
+                if caracteristique_du_sort[2] >= 15:
+                    pourcentage_de_critique = random.randint(10, 15)
+                elif caracteristique_du_sort[2] <= 5:
+                    pourcentage_de_critique = random.randint(0, 5)
+                else:
+                    pourcentage_de_critique = random.randint(5, 10)
                 pourcentage_de_critique += self.modele.CHANCESORTCRITIQUE
                 # application des modificateurs sur les degats de coup critique
                 degat_critique = caracteristique_du_sort[3]
+                degat_critique += self.modele.degat_de_sort_critique
+                degat_critique += round(self.modele.accumulation_degat_sort_critique)
                 degat_critique += round(
                     (self.modele.DEGATBONUSSORTCRITIQUE / 100) * degat_critique
                 )
-                degat_critique += round(self.modele.accumulation_degat_sort_critique)
                 # application des modificateurs sur les chances d'appliquer un element
                 pourcentage_de_element = caracteristique_du_sort[4]
                 if self.modele.a_utilise_feu_ce_tour:
@@ -10721,7 +10743,7 @@ class Control:
             reduction_de_degat = 0.25
             if "Bocle de Philoctète" in self.modele.liste_dartefacts_optionels:
                 reduction_de_degat = 0.4
-            degat = round ((1 - reduction_de_degat) * degat)
+            degat = round((1 - reduction_de_degat) * degat)
         degat = self.SiZeroRameneAUn(degat)
         if self.modele.metamorphose:
             self.vue.AfficheTalentMetamorphose()

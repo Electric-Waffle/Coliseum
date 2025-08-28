@@ -3057,7 +3057,8 @@ BIBLIOTHEQUEFINALE = {
         ),
         "Testez votre connexion avec la conscience collective théorisée par Pierre avec ces nombres !\nSi vous n'êtes d'accord avec aucune de ces associations, alors il avait peut etre tort...",
         "Mortalité : 11 (stabilité, temporaire)",
-        "Étoile : 12 (guidance, illumination)" "Positif : 9 (passion, transformation)",
+        "Étoile : 12 (guidance, illumination)",
+        "Positif : 9 (passion, transformation)",
         "Négatif : 2 (froid, dualité)",
         "Intention : 7 (spiritualité, introspection)",
         "Energie : 3 (mouvement, émotion)",
@@ -4134,8 +4135,7 @@ class TraderUsage:
 
     def UseTirage(self):
         # sort ou technique ?
-        nombre_aleatoire = random.randint(0, 100)
-        if nombre_aleatoire <= 50:
+        if random.randint(0, 1) == 0 :
             type_tirage = "le sort"
         else:
             type_tirage = "la technique"
@@ -4368,6 +4368,7 @@ class TraderUsage:
                     Player.points_de_mana += 10
                     Player.points_de_mana_max += 10
                     Affichage.EntreePourContinuer()
+        Save.SaveTheGameSansAffichage()
             
 
     def DoTrading(self):
@@ -4385,7 +4386,7 @@ class TraderUsage:
                     print(f"   Vous avez {Player.nombre_de_gold} golds. ")
                     Trader.ShowItems()
                     choix = int(
-                        input("\nChoisissez l'item a prendre avec les nombres : ")
+                        input("\nChoisissez l'item a acheter avec les nombres : ")
                     )
                     ClearConsole()
                     if choix in range(1, (len(Trader.liste_item_actuelle) + 2)):
@@ -7255,7 +7256,7 @@ class Affiche:
             commentaire = "Vous le regardez, pensif. Cet enfant serait donc si agé ?"
             liste_commentaire.append(commentaire)
             commentaire = (
-                "*Pas de réponses ?*"
+                "*Pas de réponse ?*"
                 "\n*Tu dois être déterminé a en finir avec cet endroit.*"
                 "\n*Mais regarde donc : Ici repose toutes les personnes qui m'ont suivie.*"
                 "\n*Nous avons tenté de nous installer ici, mais le manque d'eau et de lumière nous a rendu fou.*"
@@ -7310,7 +7311,7 @@ class Affiche:
                 liste_commentaire.append(commentaire)
                 commentaire = "*Fusionné mes ministres avec la fabrique du temps, pour me protéger d'invisibles et tout-puissants ennemis. Contaminé de ma folie le plus involontairement drole des Hommes du nord.*"
                 liste_commentaire.append(commentaire)
-                commentaire = "*J'ai brûlé sa chair et sa maison. Immolé son coeur.Tout ca pour une simple fausse note.*"
+                commentaire = "*J'ai brûlé sa chair et sa maison. Immolé son coeur. Tout ca pour une simple fausse note.*"
                 liste_commentaire.append(commentaire)
                 commentaire = "*J'ai tant blessé, pour ne pas être blessé a mon tour.*"
                 liste_commentaire.append(commentaire)
@@ -7338,7 +7339,7 @@ class Affiche:
                 liste_commentaire.append(commentaire)
                 commentaire = "*MAITRE MAGE ! VALIDE MES CONVICTIONS !*"
                 liste_commentaire.append(commentaire)
-                commentaire = "Une aura dorée enveloppe le Roi."
+                commentaire = "Un halo cramoisi enveloppe la tête nue du Roi, et celui ci se met à dégager une puissante aura corrosive."
                 liste_commentaire.append(commentaire)
                 commentaire = "*AHAHAHA !! TU VOIS ? MEME LUI EST D'ACCORD !! J'AI TOUJOURS DES GENS DE MON COTE !!! RIEN N'EST DE MA FAUTE !!*"
                 liste_commentaire.append(commentaire)
@@ -7389,7 +7390,7 @@ class Affiche:
                 liste_commentaire.append(commentaire)
                 commentaire = "Une voix se met à résonner a l'interieur de la salle."
                 liste_commentaire.append(commentaire)
-                commentaire = "*Ce type a tué mon apprentie. Je m'occuperais personnellement de son cas. Débrouillez vous avec ca.*"
+                commentaire = "*Ce pion a tué mon apprentie. Je m'occuperais personnellement de son cas. Débrouillez vous avec ca.*"
                 liste_commentaire.append(commentaire)
                 commentaire = "Une armure d'or et de rubis magiques apparait sur le Roi Déchu. Une épée apparait a ses pieds."
                 liste_commentaire.append(commentaire)
@@ -7410,7 +7411,7 @@ class Affiche:
             liste_commentaire.append(commentaire)
             commentaire = "*...d'un roi dur mais juste, tranformé en monstre a son insu, gardé captif par les liens de la famille...*"
             liste_commentaire.append(commentaire)
-            commentaire = "*...d'un faux génie, un trésor d'efforts sans résultats, une apprentie loyale brisé par ses propres démons...*"
+            commentaire = "*...d'un faux génie, un trésor d'efforts sans résultats, une apprentie loyale brisée par ses propres démons...*"
             liste_commentaire.append(commentaire)
             commentaire = "*...d'un homme du nord portant un masque de faux sourires, porté par son désir de survivre...*"
             liste_commentaire.append(commentaire)
@@ -7425,7 +7426,7 @@ class Affiche:
             commentaire = "*Alors gardons cette conversation simple.*"
             liste_commentaire.append(commentaire)
             commentaire = (
-                "*le Maitre Mage prend une grande inspiration.*"
+                "le Maitre Mage prend une grande inspiration."
                 "\n*JE SUIS LE MAITRE MAGE, CREATEUR DE CES LIEUX. MA MAGIE COULE EN CHACUN DE CES MURS.*"
                 "\n*JE SUIS L'APOGEE DE TA QUETE, L'OBJECTIF FINAL DE TA DESTINEE !*"
             )
@@ -7862,7 +7863,7 @@ class Affiche:
                 )
         elif Player.numero_de_letage == 8:
             commentaire = (
-                "Vous laissez derrière vous les cris de désespoirs, et vous concentrez sur votre but."
+                "Vous laissez derrière vous les esprits torturés, et vous concentrez sur votre but."
                 "\nDes murs propres, neufs, ornés de torches. Un sol de marbre, dépassant les gradins, montant au plafond.\nEt une place au dessus de la sortie,"
                 " sur laquelle se trouve un vieil homme à la barbe blanche, soignée.\nVoila ce que vous trouvez en bas."
                 "\nVous voici au huitième étage du Coliseum , une arène digne de ce nom pour un affrontement avec son créateur."
@@ -13231,8 +13232,7 @@ class Floor:
                         Affichage.EntreePourContinuer()
                         liste_techniques_affixables = []
                         for technique in Player.techniques_possedes:
-                            if technique in LISTETECHNIQUES or technique == "Attaque Lourde":
-                                liste_techniques_affixables.append(technique)
+                            liste_techniques_affixables.append(technique)
                         while True:
                             while True:
                                 try:
@@ -13335,8 +13335,7 @@ class Floor:
                         Affichage.EntreePourContinuer()
                         liste_techniques_affixables = []
                         for technique in Player.techniques_possedes:
-                            if technique in LISTETECHNIQUES or technique == "Attaque Lourde":
-                                liste_techniques_affixables.append(technique)
+                            liste_techniques_affixables.append(technique)
                         while True:
                             while True:
                                 try:
@@ -13492,8 +13491,7 @@ class Floor:
                         Affichage.EntreePourContinuer()
                         liste_sorts_affixables = []
                         for sort in Player.sorts_possedes:
-                            if sort in LISTESORTS or sort == "Missile Arcanique":
-                                liste_sorts_affixables.append(sort)
+                            liste_sorts_affixables.append(sort)
                         while True:
                             while True:
                                 try:
@@ -13596,8 +13594,7 @@ class Floor:
                         Affichage.EntreePourContinuer()
                         liste_sorts_affixables = []
                         for sort in Player.sorts_possedes:
-                            if sort in LISTESORTS or sort == "Missile Arcanique":
-                                liste_sorts_affixables.append(sort)
+                            liste_sorts_affixables.append(sort)
                         while True:
                             while True:
                                 try:
@@ -17169,8 +17166,9 @@ class Observe:
                 Affichage.EntreePourContinuer()
                 print("*Ce genre de choses.*")
                 Affichage.EntreePourContinuer()
-                PlaySound("questdone")
                 print("Vous recevez un remède divin et une pillule divine !")
+                Affichage.EntreePourContinuer()
+                PlaySound("questdone")
                 print("Vous avez accompli la quête [La Générositée d'une Alchimiste] !")
                 Player.quete_complete.append(Player.quete)
                 if "None" in Player.quete_complete:
@@ -17191,8 +17189,8 @@ class Observe:
                                 "*J'espère que ce n'est pas moi, car je ne suis pas a vendre ! Ho ho ho !*"
                             )
                             print("1 - Partir")
-                            print("2 - Remède Divin: 150 golds")
-                            print("3 - Pillule Divine: 170 golds")
+                            print("2 - Remède Divin: 75 golds")
+                            print("3 - Pillule Divine: 80 golds")
                             print("4 - Grand Mutagène Doré: 200 golds")
                             print("5 - Soluté d'Absolution: 100 golds")
                             print("6 - Soluté d'Exorcisme: 200 golds")
@@ -17213,10 +17211,10 @@ class Observe:
                         break
                     if choix in range(2, 8):
                         if choix == 2:
-                            cout = 100
+                            cout = 75
                             nom_de_litem = "Remède Divin"
                         elif choix == 3:
-                            cout = 115
+                            cout = 80
                             nom_de_litem = "Pillule Divine"
                         elif choix == 4:
                             cout = 200
@@ -17251,12 +17249,13 @@ class Observe:
                                 " mais si vous n'avez pas assez de golds, ca me met dans l'embarras plus qu'autre chose .*"
                             )
                             Affichage.EntreePourContinuer()
-                            print("*Qu'importe, c'est l'intention qui compte !*")
-                            print("*Prenez donc ceci pour votre gentillesse.*")
-                            Affichage.EntreePourContinuer()
-                            print("Mariette vous donne un remède !")
-                            Player.items_possedes["Remède"] += 1
-                            Affichage.EntreePourContinuer()
+                            if Player.items_possedes["Remède"] <= 2 :
+                                print("*Qu'importe, c'est l'intention qui compte !*")
+                                print("*Prenez donc ceci pour votre gentillesse.*")
+                                Affichage.EntreePourContinuer()
+                                print("Mariette vous donne un remède !")
+                                Player.items_possedes["Remède"] += 1
+                                Affichage.EntreePourContinuer()
 
     def DoTheFinalLibrary(self):
         print(
@@ -17274,7 +17273,7 @@ class Observe:
                     for livre in BIBLIOTHEQUEFINALE:
                         print(f"{nombre_a_afficher} - Prendre le livre [{livre}]")
                         nombre_a_afficher += 1
-                    choix = int(input("Que souhaitez vous faire ?"))
+                    choix = int(input("Choisissez avec les nombre le livre que vous souhaitez prendre : "))
                     ClearConsole()
                     if choix in range(1, (len(BIBLIOTHEQUEFINALE) + 2)):
                         break
@@ -17287,7 +17286,7 @@ class Observe:
                 print("A votre plus grand soulagement, votre coeur se remet a battre.")
                 Affichage.EntreePourContinuer()
                 break
-            elif choix == 19:
+            elif choix == 21:
                 self.WriteInFinalBook()
             else:
                 print("Vous ouvrez le livre à une page aléatoire.")
@@ -20321,7 +20320,7 @@ class EndingAndGift:
             self.PrintEtEntreePourContinuer("Voila. Il l'avait enfin dit.")
             self.PrintEtEntreePourContinuer("Il avait mit fin a son aventure, a sa quête, a sa légende.")
             self.PrintEtEntreePourContinuer("Accompagnés par la pensée par ses amis et son petit ami qui l'attendait surement a la maison...")
-            self.PrintEtEntreePourContinuer("Ils ferait une grande soirée pour célébrer sa victoire...")
+            self.PrintEtEntreePourContinuer("Ils feraient une grande soirée pour célébrer sa victoire...")
             self.PrintEtEntreePourContinuer("Et il pourrait revoir toutes les personnes qu'il avait aidé pendant sa quête...")
             self.PrintEtEntreePourContinuer("...avant de vivre sa vie heureuse.")
             self.PrintEtEntreePourContinuer("Sa vraie vie.")
@@ -20965,7 +20964,11 @@ def ShowDebugMenu():
                 ("points_de_defence", "Points de défense"),
                 ("nombre_de_gold", "Nombre de gold"),
                 ("nombre_de_red_coin", "Nombre de redcoin"),
-                ("nombre_de_monstres_tues", "Nombre d'âmes récupérées")
+                ("nombre_de_monstres_tues", "Nombre d'âmes récupérées"),
+                ("taux_coup_critique", "Chance de faire une technique critique"),
+                ("degat_coup_critique", "Dégâts supplémentaires d'une technique critique"),
+                ("taux_sort_critique", "Chance de faire un sort critique"),
+                ("degat_sort_critique", "Dégâts supplémentaires d'un sort critique")
             ]
 
             while True:

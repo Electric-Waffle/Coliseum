@@ -19770,7 +19770,10 @@ class EndingAndGift:
         print("Changez de personnage et retentez l'aventure !")
         print("Qui sait combien d'artefacts il reste à débloquer, ou de secrets a découvrir...")
         Affichage.EntreePourContinuer()
-        Affichage.ShowDeath(True)
+        print("...")
+        Affichage.EntreePourContinuer()
+        print("...mais avant ca...")
+        Affichage.EntreePourContinuer()
 
 
     def ShowStory(self, nom, avant_le_combat):
@@ -20364,7 +20367,7 @@ class EndingAndGift:
             self.PrintEtEntreePourContinuer("Indéfiniment.")
             self.PrintEtEntreePourContinuer("...")
             self.PrintEtEntreePourContinuer("*Je vais y arriver.*")
-            self.PrintEtEntreePourContinuer("Et Redde sourit.")
+            self.PrintEtEntreePourContinuer("Et Jeremy sourit.")
             print("[FIN]")
             Affichage.EntreePourContinuer()
         elif nom == "Valfreya":  # DONE
@@ -20414,7 +20417,7 @@ class EndingAndGift:
         elif nom == "Bob":  # DONE
             self.PrintEtEntreePourContinuer("Bob fit quelques pas dans les herbes vertes de la plaine ou se situe le Coliseum.")
             self.PrintEtEntreePourContinuer("*AH-AH ! JE SUIS RESSORTI VAINQUEUR DU COLISEUM ! ENCORE UNE VICTOIRE A AJOUTER A MA BIBLIOGRAPHIE, BILLY !*")
-            self.PrintEtEntreePourContinuer("La tête d'un enfant roux, pas plus agé que 13 ans, sorti du grand sac a dos de Bob. Ses joues constellées de taches de rousseur s'activèrent.")
+            self.PrintEtEntreePourContinuer("La tête d'un enfant roux, pas plus agé que 13 ans, sorti du grand sac a dos de Bob. Ses joues constellées de taches de rousseur s'agitèrent.")
             self.PrintEtEntreePourContinuer("*Bob, Bob ! Tu n'as pas de bibliographie voyons ! Tu brule tout les livres qui parlent de toi en hurlant que les droits d'auteurs ne sont pas respectés !*")
             self.PrintEtEntreePourContinuer("*SILENCE, BILLY ! TU N'ES BIEN EVIDEMMENT PAS ASSEZ INTELLIGENT POUR COMPRENDRE CE QUE JE FAIS AU QUOTIDIEN !*")
             self.PrintEtEntreePourContinuer("*M-m-mais, Bob..*")
@@ -22581,27 +22584,31 @@ def CheckForKIA():
 def PrepareTheVillage():
     #affiche l'arrivée
     StopAllMusic()
-    print("[AVATAR DETECTE]")
-    print("[REPRISE DU SYSTEME]")
-    Affichage.EntreePourContinuer()
-    print("Vous avez l'impression de flotter dans le vide.")
-    Affichage.EntreePourContinuer()
-    print("Soudainement, vous vous sentez écrasé, frappé, jeté contre les barreaux gluants d'une cage invisible.")
-    Affichage.EntreePourContinuer()
-    if Player.stigma_negatif == "Indigérable":
-        print("Vous commencez a sentir vos items et votre être tout entier être réduit en bouillie, transformés en déchets, mais parce que vous êtes Indigérable, tout est entièrement détruit.")
-    else:
-        print("Vous commencez a sentir vos items et votre être tout entier être réduit en bouillie, transformés en déchets.")
-    Affichage.EntreePourContinuer()
-    print("Et puis..")
-    Affichage.EntreePourContinuer()
-    print("..plus rien.")
-    Affichage.EntreePourContinuer()
-    print("Vous entendez alors un son particulier, celui du vent contre le sol, et le bruit de pas des gens qui déambulent.")
-    Affichage.EntreePourContinuer()
-    print("Alors, vous ouvrez les yeux.")
-    Affichage.EntreePourContinuer()
-    time.sleep(2)
+    if "Fantome" in Player.player_tags:
+        Player.player_tags.remove("Fantome")
+
+        print("[AVATAR DETECTE]")
+        print("[REPRISE DU SYSTEME]")
+        Affichage.EntreePourContinuer()
+        print("Vous avez l'impression de flotter dans le vide.")
+        Affichage.EntreePourContinuer()
+        print("Soudainement, vous vous sentez écrasé, frappé, jeté contre les barreaux gluants d'une cage invisible.")
+        Affichage.EntreePourContinuer()
+        if Player.stigma_negatif == "Indigérable":
+            print("Vous commencez a sentir vos items et votre être tout entier être réduit en bouillie, transformés en déchets, mais parce que vous êtes Indigérable, tout est entièrement détruit.")
+        else:
+            print("Vous commencez a sentir vos items et votre être tout entier être réduit en bouillie, transformés en déchets.")
+        Affichage.EntreePourContinuer()
+        print("Et puis..")
+        Affichage.EntreePourContinuer()
+        print("..plus rien.")
+        Affichage.EntreePourContinuer()
+        print("Vous entendez alors un son particulier, celui du vent contre le sol, et le bruit de pas des gens qui déambulent.")
+        Affichage.EntreePourContinuer()
+        print("Alors, vous ouvrez les yeux.")
+        Affichage.EntreePourContinuer()
+        time.sleep(2)
+    
     
     #changer le numero et nom de l'étage, amener les characteristiques du perso a 0.
     #garder artefacts, nombre de monstre vaincus, redcoin et gold, materiaux
@@ -22710,8 +22717,58 @@ def PrepareTheVillage():
             elif artefact in ARTEFACTSOPHIQUE:
                 Player.liste_de_materiaux["Fragment Sophiste"] += 1
 
+        
+
     else:
         Player.BringBackListeMateriauxToZero()
+
+    if "Jeu Fini" in Player.player_tags:
+        Player.player_tags.remove("Jeu Fini")
+        
+        print("[ERREUR : IMPOSSIBLE DE SE CONECTER A AVATAR]")
+        Affichage.EntreePourContinuer()
+        print("[AVATAR EN DEHORS DU COLISEUM]")
+        Affichage.EntreePourContinuer()
+        print("[UTILISATION DES RESSOURCES ALLOUEES A ALGORITHME...]")
+        Affichage.EntreePourContinuer()
+        print("[CREATION D'UN AVATAR TEMPORAIRE POUR UTILISATION DES MATERIAUX RECUPERES...]")
+        Affichage.EntreePourContinuer()
+        if Player.stigma_negatif != "Indigérable":
+            print("[PROBLEME RENCONTRE LORS DU REMPLISSAGE DE LA LISTE DE MATERIAU]")
+            print(f"[DECOMPTE DU MATERIAU *{AugmenteMateriauDansDictionnaire(True)}* AUGMENTE]")
+            if random.randint(1,2) == 1 :
+                print(f"[DECOMPTE DU MATERIAU *{AugmenteMateriauDansDictionnaire(True)}* AUGMENTE]")
+                if random.randint(1,4) == 1 :
+                    print(f"[DECOMPTE DU MATERIAU *{AugmenteMateriauDansDictionnaire(True)}* AUGMENTE]")
+                    if random.randint(1,8) == 1 :
+                        print(f"[DECOMPTE DU MATERIAU *{AugmenteMateriauDansDictionnaire(True)}* AUGMENTE]")
+            Affichage.EntreePourContinuer()
+        else:
+            print("[PROBLEME RENCONTRE LORS DU REMPLISSAGE DE LA LISTE DE MATERIAU]")
+            Affichage.EntreePourContinuer()
+            print("[TRAIT *Indigérable* DETECTE DANS LA SAUVEGARDE]")
+            print("[LISTE DE MATERIAU VIDEE]")
+            Affichage.EntreePourContinuer()
+        print("[CREATION TERMINEE]")
+        Affichage.EntreePourContinuer()
+        print("[LES CHAMPS DU CREPUSCULE VOUS OUVRENT LEURS PORTES]")
+        Affichage.EntreePourContinuer()
+        print("Vous traversez en une seconde un torrent de sensation alors que tout les nerfs de votre nouveau corps se connectent entre eux.")
+        print("Vous vous y habituez.")
+        Affichage.EntreePourContinuer()
+        print("Le vent sur votre peau, malgrès la protection d'une tenue simple au tissu synthétique, vous fait l'effet d'un désagréable et uniforme choc électrique.")
+        print("Vous vous y habituez.")
+        Affichage.EntreePourContinuer()
+        print("Tout dans votre corps vous semble désordonné, pas a sa place. Comme si votre coeur était a gauche et que votre estomac n'était pas protégé par votre colonne vertébrale.")
+        print("Vous vous y habituez.")
+        Affichage.EntreePourContinuer()
+        print("Une etrange sensation vous prend au torse... vous comprenez que c'est le manque d'oxygène qui vous fait l'effet d'une boule de feu dans les poumons.")
+        print("Vous ne vous y habituez pas.")
+        Affichage.EntreePourContinuer()
+        print("Vous prenez alors une grande inspiration...")
+        print("...et ouvrez les yeux.")
+        Affichage.EntreePourContinuer()
+        time.sleep(2)
 
     Player.liste_dartefacts_optionels = []
     Player.points_de_defence = 0
@@ -22731,8 +22788,24 @@ def PrepareTheVillage():
     Save.SaveTheGameSansAffichage()
 
     #fin
-    Player.player_tags.remove("Fantome")
     PlaySound("wind")
+
+def AugmenteMateriauDansDictionnaire(retour = False):
+    liste_de_materiau_dedoublable = []
+    for materiau in Player.liste_de_materiaux :
+        if Player.liste_de_materiaux[materiau] >= 1:
+            liste_de_materiau_dedoublable.append(materiau)
+    
+    if len(liste_de_materiau_dedoublable) >= 1 :
+        materiau_choisi = liste_de_materiau_dedoublable[random.randint(0, (len(liste_de_materiau_dedoublable) - 1))]
+        Player.liste_de_materiaux[materiau_choisi] += round(Player.liste_de_materiaux[materiau_choisi] *(0.33 * random.randint(1, 6)))
+
+    if retour :
+        return materiau_choisi
+    
+
+
+
 
 def FuseMaterials(materiau_a, materiau_b):
     mixer.music.set_volume(0.1)
@@ -24083,6 +24156,7 @@ while game_in_session:
     # application de l'action
     if Player.numero_de_letage == -1:
         if choix == 1:
+            nma += 1
             FloorMaker.ShowFloor()
         elif choix == 2:
             Save.SaveTheGame()
@@ -24111,7 +24185,9 @@ while game_in_session:
             if Player.numero_de_letage == 0 and not Player.battu_le_sacrifie:
                 DoBossZero()
             else:
-                game_in_session = DoBossOrGoDown()  # DONE
+                if not DoBossOrGoDown():
+                   Player.player_tags.append("Jeu Fini")
+                   Ending.DoEnding()
 
         elif choix == 3:
             if Player.numero_de_letage == 0 :
@@ -24165,14 +24241,15 @@ while game_in_session:
                 PlayMusicDeLetage()
                 Affichage.EntreePourContinuer()
             DoJukebox()
-        if "Fantome" in Player.player_tags:
+
+        if "Fantome" in Player.player_tags or "Jeu Fini" in Player.player_tags:
             try:
                 PrepareTheVillage()
             except Exception as error:
                 WriteErrorInErrorLog(error)
-        
-Ending.DoEnding()
 
+  
+input("(Appuyez sur entrée pour fermer le jeu)")
 
 
 

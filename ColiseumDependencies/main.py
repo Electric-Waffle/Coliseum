@@ -24156,7 +24156,6 @@ while game_in_session:
     # application de l'action
     if Player.numero_de_letage == -1:
         if choix == 1:
-            nma += 1
             FloorMaker.ShowFloor()
         elif choix == 2:
             Save.SaveTheGame()

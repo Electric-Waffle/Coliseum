@@ -297,7 +297,7 @@ LISTERUMEURS = [
     "Sacrifier un item dans le brazier rouge permet d'en avoir un autre de manière aléatoire. Sacrifiez le dans le brazier bleu, et vous aurez la version améliorée de cet item.", # moitié des rumeurs
     "Il y à un Tout-Premier qui passe son temps a observer la lune dans la décharge à l'Ouest.\nApparemment, il avait trouvé toute les recettes du fabricateur et les auraient mises de manière cryptique, dans des histoires comme moyen mémo-technique, afin de s'en rapeller.",
     "Si il y a un monstre dopé a un étage, alors il y a aussi une salle étrange dans laquelle une bête féroce dort.\nLa corrélation entre les deux est incertaines, mais ce qui est sur, c'est que la bête n'est pas assez forte pour battre le boss toute seule.",
-    "Certaines personnes auraient vu des symboles étranges sur le livre de la cigogne blueu au premier étage.\nElles sont sorties pour voir si elles étaient dans la bonne salle, et quand elles sont re-rentrées, les symboles avaient disparus.\nEt si on rentrait et sortiat de la salle jusqu'à voir les symboles ?",
+    "Certaines personnes auraient vu des symboles étranges sur le livre de la cigogne bleue au premier étage.\nElles sont sorties pour voir si elles étaient dans la bonne salle, et quand elles sont re-rentrées, les symboles avaient disparus.\nEt si on rentrait et sortait de la salle jusqu'à voir les symboles ?",
     "Il y aurait un aventurier qui a vu une baleine dans l'oasis du troisième étage.\nEt alors qu'il jetait des pièces dedans, il a eu la meilleure chance possible dans ses gains !",
     "Un aventurier prometteur aurait disparu au deuxieme étage.\nLorsque des gens ont demandé au majordome qui prend les commandes et les emmene au premier étage ce qui s'était passé, il a simplement répondu qu'il est allé étancher sa soif a la fontaine alors qu'il était a l'article de la mort, et sans magie.",
     "Apparemment, si on arrive a augmenter le rang de son gain à ??? , a l'oasis du troisieme étage, quelque chose de terrifiant se passe.\nTellement terrifiant, que la seule aventuriere a avoir tenté l'experience a fuit l'étage sans se retourner.",
@@ -402,6 +402,7 @@ ANNUAIREPRIXVILLAGE = {
             "Pilules de Roulette": 6,  # Rang 4
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Sophiste": 3,  # Rang 6
             "Essence de Sagesse": 4,  # Rang 5
         },
@@ -466,6 +467,7 @@ ANNUAIREPRIXVILLAGE = {
             "Essence de Résistance": 1,    # Rang 5
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Sophiste": 2,        # Rang 6
             "Essence de Sagesse": 1,       # Rang 5
             "Velour de Cervidé": 1,        # Rang 3
@@ -534,6 +536,7 @@ ANNUAIREPRIXVILLAGE = {
             "Composants Electroniques": 2,    # Rang 3
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,         # Rang 6
             "Essence de Fortitude": 5,        # Rang 5
             "Poussière Animée": 5,            # Rang 1
@@ -602,6 +605,7 @@ ANNUAIREPRIXVILLAGE = {
             "Composants Electroniques": 4,       # Rang 3
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 3,            # Rang 6
             "Essence de Résistance": 5,          # Rang 5
             "Poil Gelé": 10,                     # Rang 2
@@ -670,6 +674,7 @@ ANNUAIREPRIXVILLAGE = {
             "Ether Non-Newtonien": 8,            # Rang 1
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 3,            # Rang 6
             "Essence de Fortitude": 6,           # Rang 5
             "Roche Glycérine": 8,                # Rang 2
@@ -737,6 +742,7 @@ ANNUAIREPRIXVILLAGE = {
             "Poil Gelé": 5,                      # Rang 2
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment de Fatalité": 3,           # Rang 6
             "Essence de Fortitude": 5,           # Rang 5
             "Eclat de Verre": 10,                # Rang 1
@@ -802,6 +808,7 @@ ANNUAIREPRIXVILLAGE = {
             "Ectoplasme Chaud": 5,            # Rang 1
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,         # Rang 6
             "Essence de Magie": 6,            # Rang 5
             "Poil Gelé": 10,                  # Rang 2
@@ -870,6 +877,7 @@ ANNUAIREPRIXVILLAGE = {
             "Ectoplasme Chaud": 4,            # Rang 1
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,         # Rang 6
             "Essence de Fortitude": 6,        # Rang 5
             "Coeur Gravitaire": 10,           # Rang 1
@@ -939,6 +947,7 @@ ANNUAIREPRIXVILLAGE = {
             "Ectoplasme Chaud": 5,            # Rang 1
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Sophiste": 3,           # Rang 6
             "Essence de Magie": 6,            # Rang 5
             "Fluide Alien": 10,               # Rang 2
@@ -1004,6 +1013,7 @@ ANNUAIREPRIXVILLAGE = {
             "Ether Non-Newtonien": 6,        # Rang 1
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,        # Rang 6
             "Essence de Fortitude": 6,       # Rang 5
             "Fluide Alien": 10,              # Rang 2
@@ -1070,6 +1080,7 @@ ANNUAIREPRIXVILLAGE = {
             "Poil Gelé": 6,                  # Rang 2
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,        # Rang 6
             "Essence de Vitalitée": 6,       # Rang 5
             "Fluide Alien": 10,              # Rang 2
@@ -1135,6 +1146,7 @@ ANNUAIREPRIXVILLAGE = {
             "Ecaille de Phénix": 5,          # Rang 2
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,        # Rang 6
             "Essence de Magie": 6,           # Rang 5
             "Poil Gelé": 10,                 # Rang 2
@@ -1196,6 +1208,7 @@ ANNUAIREPRIXVILLAGE = {
             "Essence de Fortitude": 4,        # Rang 5
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,         # Rang 6
             "Essence de Magie": 6,            # Rang 5
             "Roche Glycérine": 6,         # Rang 3
@@ -1259,6 +1272,7 @@ ANNUAIREPRIXVILLAGE = {
             "Essence de Magie": 4,
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,
             "Essence de Résistance": 6,
             "Poil Gelé": 8,
@@ -1322,6 +1336,7 @@ ANNUAIREPRIXVILLAGE = {
             "Composants Electroniques": 5,
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,
             "Essence de Sagesse": 6,
             "Poil Gelé": 5,
@@ -1384,6 +1399,7 @@ ANNUAIREPRIXVILLAGE = {
             "Poussière Animée": 6,
         },
         {  # Niveau 10
+            "Emblème de la Fin": 1,
             "Fragment Mélioratif": 4,
             "Essence de Sagesse": 5,
         },
@@ -1446,6 +1462,7 @@ ANNUAIREPRIXVILLAGE = {
         "Essence de Fortitude": 5,
     },
     {  # Niveau 10
+        "Emblème de la Fin": 1,
         "Fragment Mélioratif": 4,
         "Essence de Résistance": 6,
         "Poil Gelé": 6,
@@ -1507,6 +1524,7 @@ ANNUAIREPRIXVILLAGE = {
         "Essence de Magie": 5,
     },
     {  # Niveau 10
+        "Emblème de la Fin": 1,
         "Fragment Mélioratif": 4,
         "Essence de Sagesse": 15,
     },
@@ -1559,6 +1577,7 @@ ANNUAIREPRIXVILLAGE = {
     ],
     "Ration Jindagee Raffinée": [
         {  # Niveau 1
+            "Emblème de la Fin": 1,
             "Coeur Gravitaire": 3,            # Rang 1
             "Ectoplasme Chaud": 2,            # Rang 1
             "Roche Glycérine": 2,             # Rang 2
@@ -1613,6 +1632,7 @@ ANNUAIREPRIXVILLAGE = {
 
     "Ration Aatma Rafinée": [
         {  # Niveau 1
+            "Emblème de la Fin": 1,
             "Ether Non-Newtonien": 3,         # Rang 1
             "Poil Gelé": 2,                   # Rang 2
             "Eclat de Verre": 2,              # Rang 1
@@ -1655,6 +1675,7 @@ ANNUAIREPRIXVILLAGE = {
             "Velour de Cervidé": 3,           # Rang 3
         },
         {  # Niveau 4
+            "Emblème de la Fin": 1,
             "Essence de Sagesse": 3,          # Rang 5
             "Fragment Sophiste": 2,           # Rang 6
             "Composants Electroniques": 3,    # Rang 3
@@ -1747,6 +1768,7 @@ ANNUAIREPRIXVILLAGE = {
     ],
     "Ration Explosive Raffinée": [
         {  # Niveau 1
+            "Emblème de la Fin": 1,
             "Ether Non-Newtonien": 3,           # Rang 1
             "Coeur Gravitaire": 3,              # Rang 1
             "Roche Glycérine": 1,               # Rang 2
@@ -1801,6 +1823,7 @@ ANNUAIREPRIXVILLAGE = {
     ],
     "Pack de Flèches": [
         {  # Niveau 1
+            "Emblème de la Fin": 1,
             "Ether Non-Newtonien": 3,           # Rang 1
             "Ectoplasme Chaud": 3,              # Rang 1
             "Eclat de Verre": 1,                # Rang 1
@@ -1833,6 +1856,7 @@ ANNUAIREPRIXVILLAGE = {
             "Ectoplasme Chaud": 2,              # Rang 1
         },
         {  # Niveau 2
+            "Emblème de la Fin": 1,
             "Fluide Alien": 3,                  # Rang 2
             "Poil Gelé": 2,                     # Rang 2
             "Morceau de Cloche": 2,             # Rang 2
@@ -1848,84 +1872,111 @@ ANNUAIREPRIXVILLAGE = {
 
     "Médaillon de Leprechaun": [
         {  # Niveau 1
-            "Poussière Animée": 3,              # Rang 1
-            "Eclat de Verre": 3,                # Rang 1
-            "Poil Gelé": 1,                     # Rang 2
+            "Coeur Gravitaire": 3,              # Rang 1
+            "Poussière Animée": 3,                # Rang 1
+            "Eclat de Verre": 3,                     # Rang 1
         },
         {  # Niveau 2
-            "Ecaille de Phénix": 3,             # Rang 2
-            "Fluide Alien": 2,                  # Rang 2
-            "Fragment Osseux": 2,               # Rang 3
+            "Fluide Alien": 3,             # Rang 2
+            "Ecaille de Phénix": 3,                  # Rang 2
+            "Poil Gelé": 3,               # Rang 2
         },
         {  # Niveau 3
-            "Composants Electroniques": 2,      # Rang 3
-            "Velour de Cervidé": 2,             # Rang 3
-            "Gemme Bleue": 2,                   # Rang 4
+            "Moustache de Chat": 3,             # Rang 3
+            "Iris du Malheur": 3,                  # Rang 3
+            "Composants Electroniques": 3,              # Rang 3
+        },
+        {  # Niveau 4
+            "Emblème de la Fin": 1,
+            "Eclat de Crystal": 3,      # Rang 4
+            "Fragment de Jade": 3,             # Rang 4
+            "Gemme Bleue": 3,                   # Rang 4
+        },
+        {  # Niveau 5
+            "Essence de Vitalitée": 3,      # Rang 5
+            "Essence de Fortitude": 3,             # Rang 5
+            "Essence de Résistance": 3,                   # Rang 5
+            "Fragment Insatiable": 3,                   # Rang 6
         },
     ],
 
 
     "Noyau d'Aurelionite": [
         {  # Niveau 1
-            "Ether Non-Newtonien": 3,           # Rang 1
-            "Coeur Gravitaire": 2,              # Rang 1
-            "Eclat de Verre": 2,                # Rang 1
+            "Ectoplasme Chaud": 3,           # Rang 1
+            "Poussière Animée": 3,              # Rang 1
+            "Eclat de Verre": 3,                # Rang 1
         },
         {  # Niveau 2
-            "Fluide Alien": 2,                  # Rang 2
-            "Poil Gelé": 2,                     # Rang 2
-            "Morceau de Cloche": 3,             # Rang 2
+            "Ether Non-Newtonien": 4,                  # Rang 1
+            "Ectoplasme Chaud": 4,                     # Rang 1
+            "Ecaille de Phénix": 3,             # Rang 2
         },
         {  # Niveau 3
-            "Velour de Cervidé": 3,             # Rang 3
-            "Ecaille de Phénix": 3,             # Rang 2
-            "Fragment Osseux": 2,               # Rang 3
+            "Fluide Alien": 3,             # Rang 2
+            "Morceau de Cloche": 3,             # Rang 2
+            "Poil Gelé": 3,               # Rang 2
         },
         {  # Niveau 4
-            "Composants Electroniques": 2,      # Rang 3
-            "Gemme Bleue": 2,                   # Rang 4
-            "Fragment de Jade": 2,              # Rang 4
+            "Poil Gelé": 4,      # Rang 2
+            "Roche Glycérine": 4,                   # Rang 2
+            "Fragment Osseux": 3,              # Rang 3
         },
         {  # Niveau 5
-            "Essence de Vitalitée": 3,          # Rang 5
-            "Fragment Mélioratif": 2,           # Rang 6
-            "Essence de Fortitude": 3,          # Rang 5
+            "Velour de Cervidé": 3,          # Rang 3
+            "Iris du Malheur": 3,           # Rang 3
+            "Moustache de Chat": 3,          # Rang 3
         },
         {  # Niveau 6
-            "Perle de Chance": 5,               # Rang 7
-            "Ichor Divin": 5,                   # Rang 7
-            "Essence de Magie": 4,              # Rang 5
+            "Moustache de Chat": 4,               # Rang 3
+            "Composants Electroniques": 4,                   # Rang 3
+            "Pilules de Roulette": 3,              # Rang 4
         },
         {  # Niveau 7
-            "Réceptacle Anastral": 5,           # Rang 7
-            "Clochette": 5,                     # Rang 7
-            "Essence de Résistance": 4,         # Rang 5
+            "Eclat de Crystal": 3,           # Rang 4
+            "Poussière Dorée Animée": 3,                     # Rang 4
+            "Gemme Bleue": 3,         # Rang 4
         },
         {  # Niveau 8
-            "Encre de Pouvoir": 5,              # Rang 7
-            "Tissu Perceptif": 5,               # Rang 7
-            "Essence de Sagesse": 4,            # Rang 5
+            "Emblème de la Fin": 1,
+            "Gemme Bleue": 4,              # Rang 4
+            "Fragment de Jade": 4,               # Rang 4
+            "Essence de Vitalitée": 3,            # Rang 5
         },
         {  # Niveau 9
-            "Orbe Convergeant": 5,              # Rang 7
-            "Gemme Prismatique": 5,             # Rang 7
-            "Essence de Fortitude": 4,          # Rang 5
+            "Essence de Sagesse": 3,              # Rang 5
+            "Essence de Fortitude": 3,             # Rang 5
+            "Essence de Résistance": 3,          # Rang 5
         },
         {  # Niveau 10
-            "Fragment Sophiste": 4,             # Rang 6
-            "Fragment de Fatalité": 3,          # Rang 6
-            "Essence de Résistance": 4,         # Rang 5
+            "Essence de Magie": 4,             # Rang 5
+            "Essence de Vitalitée": 4,          # Rang 5
+            "Fragment Sophiste": 3,         # Rang 6
         },
         {  # Niveau 11
-            "Poussière Dorée Animée": 4,        # Rang 4
-            "Composants Electroniques": 3,      # Rang 3
-            "Gemme Bleue": 3,                   # Rang 4
+            "Fragment de Fatalité": 3,        # Rang 6
+            "Fragment Mélioratif": 3,      # Rang 6
+            "Fragment Insatiable": 3,                   # Rang 6
         },
         {  # Niveau 12
-            "Ecaille de Phénix": 3,             # Rang 2
-            "Fluide Alien": 2,                  # Rang 2
-            "Poussière Animée": 3,              # Rang 1
+            "Fragment Insatiable": 4,        # Rang 6
+            "Fragment Sophiste": 4,      # Rang 6
+            "Essence Carmine": 3,                   # Rang 7
         },
+        {  # Niveau 13
+            "Clochette": 3,        # Rang 7
+            "Perle de Chance": 3,      # Rang 7
+            "Antenne de Cérémonie": 3,                   # Rang 7
+        },
+        {  # Niveau 14
+            "Encre de Pouvoir": 4,        # Rang 7
+            "Tissu Perceptif": 4,      # Rang 7
+            "Ichor Divin": 3,                   # Rang 7
+        },
+        {  # Niveau 15
+            "Essence Dorée": 50,        # Rang 7
+        },
+        
     ],
 
 
@@ -5761,6 +5812,8 @@ class TraderUsage:
                         Affichage.EntreePourContinuer()
 
     def DoChamane(self):
+        benediction_actuelle = RecupereBenedictionEnCours()
+        malediction_actuelle = RecupereMaledictionEnCours()
         while True:
             while True:
                 print("     -=La Chamane=-\n\n")
@@ -5808,6 +5861,7 @@ class TraderUsage:
                     while True:
                         try:
                             
+                            benediction_actuelle = RecupereBenedictionEnCours()
                             malediction_actuelle = RecupereMaledictionEnCours()
                             print("     -=La Chamane=-")
                             print(f" Malédiction Activée : [{malediction_actuelle}] \n\n")
@@ -5824,13 +5878,13 @@ class TraderUsage:
                             print("6 - Activer la Malédiction [Exsangue]")
                             print("     # Les sorts et techniques de sang ne fonctionnent plus\n")
                             print("7 - Activer la Malédiction [Impotent]")
-                            print("     # Les ennemis sont invincibles pendant les 5 premiers tours\n")
+                            print("     # Les ennemis sont invincibles pendant les 3 premiers tours\n")
                             print("8 - Activer la Malédiction [Chronophage]")
                             print("     # Affecte le personnage avec le *Tachyon Instable*")
                             print("     # Le tachyon charge avec les actions et se décharge avec l'inaction.")
                             print("     # Si la charge arrive a 100% , c'est la mort.\n")
                             print("9 - Activer la Malédiction [Sparifique]")
-                            print("     # Ne gagne plus d'artefact, sauf en tuant un boss.\n")
+                            print("     # Ne gagne plus d'artefact, sauf en tuant les boss.\n")
                             print("10 - Activer la Malédiction [Ascétique]")
                             print("     # Diminue les gains de gold de 50%, regagne 10% de vie a chaque début de combat.\n")
                             print("11 - Activer la Malédiction [Pur]")
@@ -5862,6 +5916,7 @@ class TraderUsage:
                         try:
                             
                             benediction_actuelle = RecupereBenedictionEnCours()
+                            malediction_actuelle = RecupereMaledictionEnCours()
                             print("     -=La Chamane=-")
                             print(f" Bénédiction Activée : [{benediction_actuelle}] \n\n")
 
@@ -5989,7 +6044,7 @@ class TraderUsage:
             if choix == 1:
                 print("Vous posez une question a l'homme, mais il ne vous répond pas.")
                 Affichage.EntreePourContinuer()
-                print("Ses yeux perdus dans la lumière de la lune, ses cheveux soyeux, vous avez l'impression de regarde une peinture...")
+                print("Ses yeux perdus dans la lumière de la lune, ses cheveux soyeux, vous avez l'impression de regarder une peinture...")
                 Affichage.EntreePourContinuer()
                 print("Soudainement, il tourne la tête vers vous...")
                 Affichage.EntreePourContinuer()
@@ -6006,6 +6061,7 @@ class TraderUsage:
                     print("[TELEEECHARGEEMous regardez l'ENT EN CcafaitmalcafaitmalcafaitmalOURS]")
                     Affichage.EntreePourContinuer()
                     print("[TELECHARGaaaaaaaaEMENT TERMINE]")
+                    EcrireDansLivreCigogneBlanche()
                     Affichage.EntreePourContinuer()
                     print("L'homme enlève ses doigts de votre crane.")
                     Affichage.EntreePourContinuer()
@@ -6052,7 +6108,7 @@ class TraderUsage:
                     Affichage.EntreePourContinuer()
                     print("L'homme retire sa main de votre tête, et le monde s'arrête de tourner.")
                     Affichage.EntreePourContinuer()
-                    EcrireDansLivreCigogneBlanche
+                    EcrireDansLivreCigogneBlanche()
                 print("...")
                 Affichage.EntreePourContinuer()
                 print("..le fabricateur...")
@@ -6061,7 +6117,7 @@ class TraderUsage:
                 Affichage.EntreePourContinuer()
                 print("...")
                 Affichage.EntreePourContinuer()
-                print("L'Ancien replonge dans son silence lourd de conséquence.")
+                print("L'Ancien se replonge dans un silence lourd de conséquence.")
                 Affichage.EntreePourContinuer()
                 
 
@@ -6088,7 +6144,7 @@ class TraderUsage:
                     "d'une feuille solitaire qui revient encore et toujours a la vie alors qu'elle tombe de son arbre mort, voyageant a travers l'espace et le temps accompagné toujours par quelqu'un, et vouant son existance a la protection de la terre contre tout les dangers.",
                 ]
                 histoire = random.choice(liste_de_histoires)
-                print(f"Vous donnez une essence carmine a l'ancien, et celui ci commence a raconter un de ses nombreuses histoires...")
+                print(f"Vous donnez une essence carmine a l'ancien, et celui ci commence a raconter une de ses nombreuses histoires...")
                 print(f"Quelque chose a propos {histoire}.")
                 Affichage.EntreePourContinuer()
 
@@ -6135,7 +6191,7 @@ class TraderUsage:
                                 "Sacoche",
                                 "Emblème de la Fin",
                             ]
-                            print(f"     -=Banque=-\n\n")
+                            print(f"     -=L'Ancien=-\n\n")
                             numero = 1
                             for trade in liste_de_trades:
                                 level_actuel_de_uppgrade =  Sove.ModifieLivraisonDansSove("Nombre", trade)
@@ -6368,16 +6424,16 @@ class Affiche:
                 Affichage.EntreePourContinuer()
                 print("Et quand tu a vu toute les techniques d'un même niveau ?\nTu te retrouve bloqué a l'exterieur, a devoir payer quelques rares materiaux pour augmenter ton *grade*, afin de voir des matchs d'une plus grande intensité.")
                 Affichage.EntreePourContinuer()
-                print("En clair, tu ne peut pas voir les matchs du troisieme grade si tu n'a pas vu tout les matchs du premier et deuxieme grade.\Tu vois ou je veux en venir ?")
+                print("En clair, tu ne peut pas voir les matchs du troisieme grade si tu n'a pas vu tout les matchs du premier et deuxieme grade.\nTu vois ou je veux en venir ?")
                 Affichage.EntreePourContinuer()
                 print("Si tu veux regarder les matchs du colysée la nuit, il faut que tu regarde tout les matchs disponible la journée.\nTu pourra alors augmenter ton grade afin de voir les matchs de haut niveaux qui se déroulent maintenant.")
                 Affichage.EntreePourContinuer()
-                print("C'est cher, oui, mais si tu a réussi a arriver ici, c'est que tu dois etre assez riche en materiau pour te le permettre !\nOu peut etre fais tu partie de ces sans-abris qui jonchent les rues piétonnes et les bancs du quartier commercial, ayant vendu toute tes ressources pour arriver a voir la Nuit ?")
+                print("C'est cher, oui, mais si tu a réussi a arriver ici, c'est que tu dois etre assez riche en materiau pour te le permettre !\nOu peut etre fait tu partie de ces sans-abris qui jonchent les rues piétonnes et les bancs du quartier commercial, ayant vendu toute tes ressources pour arriver a voir la Nuit ?")
                 Affichage.EntreePourContinuer()
             elif choix == 2:
                 print("Effectivement.\nLe prix d'une nuit dans un hotel ou une maison est si cher, il agit comme une barrière naturelle qui empeche tout le monde de venir ici.")
                 Affichage.EntreePourContinuer()
-                print("Mais ne pense pas un seul instant être dans le monde des riche : certains donnent tout ce qu'ils ont pour pouvoir voir ce ciel étoilé.\nIl y a même un buisness qui emmene certaines personnes passer quelques années ici, puis les ramènent de force dans le Jour !")
+                print("Mais ne pense pas un seul instant être dans le monde des riche : certains donnent tout ce qu'ils ont pour pouvoir voir ce ciel étoilé.\nIl y a même un business qui emmene certaines personnes passer quelques années ici, puis les ramènent de force dans le Jour !")
                 Affichage.EntreePourContinuer()
                 print("Faire l'experience du calme et de la tranquilité avant d'être abruptement ramené devant le soleil implacable, ca en brise certains.")
                 Affichage.EntreePourContinuer()
@@ -6401,7 +6457,7 @@ class Affiche:
                 Affichage.EntreePourContinuer()
                 print("Tu fais partie de ces gens qui fondent leurs espoirs sur les aventuriers qui arrivent ?")
                 Affichage.EntreePourContinuer()
-                print("Je trouve ca un peu bête, surtout qu'au final, tu perd tes ressources si ils ne dépassent pas le 3eme étage.\nMoi par exemple, j'ai fondé ma fortune sur le buisness des prêts en materiaux.")
+                print("Je trouve ca un peu bête, surtout qu'au final, tu perd tes ressources si ils ne dépassent pas le 3eme étage.\nMoi par exemple, j'ai fondé ma fortune sur le business des prêts en materiaux.")
                 Affichage.EntreePourContinuer()
                 print("Ca , ca a de l'avenir !")
                 Affichage.EntreePourContinuer()
@@ -6419,7 +6475,7 @@ class Affiche:
                 Affichage.EntreePourContinuer()
                 print("...")
                 Affichage.EntreePourContinuer()
-                print("...je sais pas pourquoi j'ai dis ca...")
+                print("...je sais pas pourquoi j'ai dit ca...")
                 Affichage.EntreePourContinuer()
             elif choix == 5:
                 print("Personne n'a battu le Colyseum, donc je ne pourrait pas te dire si il existe !\nPar contre il existe une théorie surprenante sur son existance.")
@@ -6459,7 +6515,7 @@ class Affiche:
                 Affichage.EntreePourContinuer()
                 print("Et pour ceux qui ne sont pas ici ?")
                 Affichage.EntreePourContinuer()
-                print("Tu levs trouvera dans les champs alentours, aussi vivants que des zombies, a chercher une mort de l'égo qui ne viendra jamais.")
+                print("Tu les trouvera dans les champs alentours, aussi vivants que des zombies, a chercher une mort de l'égo qui ne viendra jamais.")
                 Affichage.EntreePourContinuer()
                 print("Pour l'instant, j'en connais deux : la chamane du temple au Sud, et...")
                 Affichage.EntreePourContinuer()
@@ -13076,7 +13132,7 @@ class Floor:
                 print("Après quelques efforts, vous arrivez en haut du monticule, et vous asseyez a coté de lui.")
                 Affichage.EntreePourContinuer()
                 Trader.DoAncien()
-                print("Vous admirez la lune encore quelques instants, avant de dévaller la pente du tad de dechet sur les fesses, et de repartir.")
+                print("Vous admirez la lune encore quelques instants, avant de dévaller la pente du tas de dechet sur les fesses, et de repartir.")
                 Affichage.EntreePourContinuer()
             elif caracteristique_de_la_salle["type"] == "HOTEL" :  # DONE 
 
@@ -23925,6 +23981,10 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Bob" : "paragraphe6",
         "Voyageur" : "paragraphe6",
         "Neil" : "paragraphe6",
+        "Ahti" : "paragraphe6",
+        "Alex" : "paragraphe6",
+        "Terrance" : "paragraphe6",
+        "Cassandra" : "paragraphe6",
     },
     "Les Ennemis" : {
         "Drone de Sécurité YucaTech Inc." : "paragraphe1",
@@ -23958,8 +24018,10 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Roi Amonrê" : "paragraphe1",
         "Apprentie" : "paragraphe1",
         "Bouffon" : "paragraphe1",
+        "Le Pianiste" : "paragraphe1",
         "Prince des Voleurs" : "paragraphe1",
         "Roi Déchu" : "paragraphe1",
+        "Roi Damné" : "paragraphe1",
         "Maitre Mage" : "paragraphe1",
         "Amalgame" : "paragraphe1",
         "Coliseum" : "paragraphe1",

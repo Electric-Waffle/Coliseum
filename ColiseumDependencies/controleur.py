@@ -122,7 +122,7 @@ class Control:
                         return True
                 return False
         elif self.modele.monstre_points_de_vie < 1:
-            if self.Player.malediction == "Impotent" and self.modele.nombre_de_tours <= 5:
+            if self.Player.malediction == "Impotent" and self.modele.nombre_de_tours <= 3:
                 self.EffetImpotent()
             else:
                 if self.modele.monstre_nombre_de_vies_supplementaire > 0:
@@ -4062,7 +4062,7 @@ class Control:
                                 self.Player.nombre_de_gold += self.modele.nombre_de_tours
                         elif cle == "Materiau":
                             nombre_aleatoire = random.randint(0,100)
-                            limite = 100
+                            limite = 25 + self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Médaillon de Leprechaun"]
                             if nombre_aleatoire <= limite:
                                 materiau = self.modele.monstre_recompense[
                                     cle
@@ -4071,7 +4071,7 @@ class Control:
                                 commentaire = (
                                     f"L'ennemi lache le materiau [{self.modele.monstre_recompense[cle]}] !"
                                 )
-                                if self.modele.stigma_joueur_bonus == 'Démanteleur' and random.randint(0,100)<90 :
+                                if self.modele.stigma_joueur_bonus == 'Démanteleur' and random.randint(0,100)<25 :
                                     self.Player.liste_de_materiaux[materiau] += 1
                                     commentaire += (
                                         f"\nVous démentelez son cadavre d'une main experte et récupérez un deuxieme materiau !"
@@ -4152,7 +4152,10 @@ class Control:
                             commentaire += "\nVous gagnez un point de mana max !"
                         self.vue.AfficheOmnipotent(commentaire)
                     if self.modele.stigma_joueur_bonus == "Script":
-                        self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Ennemis", self.modele.monstre_nom)
+                        if self.modele.monstre_EstUnBoss :
+                            self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Boss", self.modele.monstre_nom)
+                        else :
+                            self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Ennemis", self.modele.monstre_nom)
             if self.modele.possede_une_fee == False and "Fée dans un Bocal" in self.Player.liste_dartefacts_optionels:
                 self.Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
                 self.Player.possede_une_fee = False
@@ -7487,7 +7490,7 @@ class Control:
                 self.CheckSiItemPossible(nom_de_litem)
             )
         if action_est_possible:
-            self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Items", self.modele.monstre_nom)
+            self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Items", nom_de_litem)
             if self.modele.mauvais_tachyon:
                 self.ChangeChargeMauvaisTachyon("item")
             if self.modele.bon_tachyon:

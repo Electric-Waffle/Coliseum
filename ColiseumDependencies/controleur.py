@@ -1733,9 +1733,9 @@ class Control:
             self.modele.stigma_monstre_negatif = "Cryophobia"
             self.modele.monstre_points_de_force = 0
             self.modele.monstre_points_de_intelligence = 0
-            self.modele.monstre_points_de_resistance = 10
+            self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 100
+            self.modele.monstre_points_de_vie_max = 150
             self.modele.monstre_points_de_mana_max = 40
             self.modele.monstre_liste_actions = {
                 "Accrochage": "Technique", # paralyse et degat
@@ -1746,11 +1746,11 @@ class Control:
         elif self.modele.monstre_nom == "Trienun":
             self.modele.stigma_monstre_positif = "Fièvre du Jeu"
             self.modele.stigma_monstre_negatif = "Addict"
-            self.modele.monstre_points_de_force = 0
-            self.modele.monstre_points_de_intelligence = 0
-            self.modele.monstre_points_de_resistance = 0
+            self.modele.monstre_points_de_force = 5
+            self.modele.monstre_points_de_intelligence = 5
+            self.modele.monstre_points_de_resistance = 2
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 135
+            self.modele.monstre_points_de_vie_max = 140
             self.modele.monstre_points_de_mana_max = 40
             self.modele.monstre_liste_actions = {
                 "Réglages d'Usine": "Sort", #soin
@@ -1762,12 +1762,12 @@ class Control:
         elif self.modele.monstre_nom == "Phénix Juvénile":
             self.modele.stigma_monstre_positif = "Cendres du Renouveau"
             self.modele.stigma_monstre_negatif = "Faible Hematopoïèse"
-            self.modele.monstre_points_de_force = 4
-            self.modele.monstre_points_de_intelligence = 3
-            self.modele.monstre_points_de_resistance = 0
+            self.modele.monstre_points_de_force = 6
+            self.modele.monstre_points_de_intelligence = 0
+            self.modele.monstre_points_de_resistance = 8
             self.modele.monstre_nombre_de_vies_supplementaire = 1
             self.modele.monstre_points_de_vie_max = 100
-            self.modele.monstre_points_de_mana_max = 40
+            self.modele.monstre_points_de_mana_max = 20
             self.modele.monstre_liste_actions = {
                 "Souffle de Feu": "Technique",
                 "Envol": "Technique", #reduit les chances de toucher de 30%  [x]
@@ -1780,11 +1780,11 @@ class Control:
         elif self.modele.monstre_nom == "Rochemikaze":
             self.modele.stigma_monstre_positif = "Faveurs Explosives"
             self.modele.stigma_monstre_negatif = "Surveillé"
-            self.modele.monstre_points_de_force = 0
+            self.modele.monstre_points_de_force = 5
             self.modele.monstre_points_de_intelligence = 0
-            self.modele.monstre_points_de_resistance = 5
+            self.modele.monstre_points_de_resistance = 8
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 110
+            self.modele.monstre_points_de_vie_max = 130
             self.modele.monstre_points_de_mana_max = 40
             self.modele.monstre_liste_actions = {
                 "Roulé-Boulet": "Technique", # confond
@@ -1797,9 +1797,9 @@ class Control:
         elif self.modele.monstre_nom == "Loup de Glace":
             self.modele.stigma_monstre_positif = "Instincts de Bête"
             self.modele.stigma_monstre_negatif = "Cryolien"
-            self.modele.monstre_points_de_force = 6
-            self.modele.monstre_points_de_intelligence = 6
-            self.modele.monstre_points_de_resistance = 4
+            self.modele.monstre_points_de_force = 8
+            self.modele.monstre_points_de_intelligence = 8
+            self.modele.monstre_points_de_resistance = 6
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = 125
             self.modele.monstre_points_de_mana_max = 40
@@ -1817,7 +1817,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 12
             self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 75
+            self.modele.monstre_points_de_vie_max = 150
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Attire-Gold": "Technique", #prend du gold [x]
@@ -1837,7 +1837,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 15
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 80
+            self.modele.monstre_points_de_vie_max = 175
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Vents du Nord": "Sort", #gele
@@ -1855,7 +1855,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 12
             self.modele.monstre_points_de_resistance = 9
             self.modele.monstre_nombre_de_vies_supplementaire = 1
-            self.modele.monstre_points_de_vie_max = 50
+            self.modele.monstre_points_de_vie_max = 200
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Morsure": "Technique", #gros degats
@@ -1873,7 +1873,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 15
             self.modele.monstre_points_de_resistance = 14
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 75
+            self.modele.monstre_points_de_vie_max = 150
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Coup Anti-Magie": "Technique", #attaaque meme si protection [x]
@@ -1894,7 +1894,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 0
             self.modele.monstre_points_de_resistance = 15
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 25
+            self.modele.monstre_points_de_vie_max = 50
             self.modele.monstre_points_de_mana_max = 50
             self.modele.monstre_liste_actions = {
                 "Aspiration": "Technique" # prend gold, mana + vie, manamax + viemax, taux critique sort+ attaque, force + intelligence, defence [x]
@@ -1903,11 +1903,11 @@ class Control:
         elif self.modele.monstre_nom == "Gluant de Crystal":
             self.modele.stigma_monstre_positif = "Esotéricisme"
             self.modele.stigma_monstre_negatif = "Anisotropie"
-            self.modele.monstre_points_de_force = 20
-            self.modele.monstre_points_de_intelligence = 20
-            self.modele.monstre_points_de_resistance = 10
+            self.modele.monstre_points_de_force = 25
+            self.modele.monstre_points_de_intelligence = 25
+            self.modele.monstre_points_de_resistance = 25
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 150
+            self.modele.monstre_points_de_vie_max = 300
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Gros Coup de Boule": "Technique",
@@ -1921,11 +1921,11 @@ class Control:
         elif self.modele.monstre_nom == "Sixenun":
             self.modele.stigma_monstre_positif = "Carrousel Chanceux"
             self.modele.stigma_monstre_negatif = "Consummé"
-            self.modele.monstre_points_de_force = 0
+            self.modele.monstre_points_de_force = 15
             self.modele.monstre_points_de_intelligence = 0
-            self.modele.monstre_points_de_resistance = 15
+            self.modele.monstre_points_de_resistance = 22
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 110
+            self.modele.monstre_points_de_vie_max = 200
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Roulette": "Technique", #lance roulette. mise ou pas = critique ou pas. si rouge, foule d'effet sur joueur. si vert, foule d'effet sur ennemi. [x]
@@ -1939,7 +1939,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 25
             self.modele.monstre_points_de_resistance = 12
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 115
+            self.modele.monstre_points_de_vie_max = 220
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Tempêtes du Nord": "Sort", #gele + 50% plus de sorts [x]
@@ -1957,7 +1957,7 @@ class Control:
             self.modele.monstre_points_de_intelligence = 35
             self.modele.monstre_points_de_resistance = 0
             self.modele.monstre_nombre_de_vies_supplementaire = 2
-            self.modele.monstre_points_de_vie_max = 175
+            self.modele.monstre_points_de_vie_max = 250
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Lame Dorée": "Technique", #peut donner mal jaune
@@ -1973,9 +1973,9 @@ class Control:
             self.modele.stigma_monstre_negatif = "Inflammable"
             self.modele.monstre_points_de_force = 0
             self.modele.monstre_points_de_intelligence = 0
-            self.modele.monstre_points_de_resistance = 0
+            self.modele.monstre_points_de_resistance = 10
             self.modele.monstre_nombre_de_vies_supplementaire = 0
-            self.modele.monstre_points_de_vie_max = 20
+            self.modele.monstre_points_de_vie_max = 300
             self.modele.monstre_points_de_mana_max = 60
             self.modele.monstre_liste_actions = {
                 "Gemme Rouge": "Technique", #soin

@@ -306,19 +306,19 @@ LISTERUMEURS = [
     "La quête de rang S de l'automate du sixieme étage est tellement dure que personne ne l'a jamais réussie.\nMais d'apres lui, c'est une bonne chose, car il ne pourrait plus la donner si quelqu'un la réussissait.",
     "Il existe un livre a l'étage sept qui permet d'oublier des technique en échange de caractéristiques.\nMais si on oublie un groupe de certaines caractéristiques, on gagne des effets supplémentaires.\nCes groupes seraient indiqués sur la page du livre par des symboles similaires...",
     "Seul les plus curieux arriveront a trouver la bibliothèque personnelle du Maitre Mage à l'étage huit.\nParmis la tonne d'information qui y est contenue, un nom particulier y revient deux fois, gravé dans le cuir : Jean. Ces deux livres sont : Naissance du Monde et Comprendre la Noosphère.\n Peut etre que ce Jean y aurait laissé un message codé déchiffrable seulement avec les informations de ces deux livres ?",
-    "Les infromations sur les salles ou les étages viennent d'un peu tout le monde, mais les informations sur les monstres ne viennent que de ces personnes là, vu que c'est compliqué de retenir des informations en plein combat.\nCes personnes ont deux points en commun : ils ont un esprit bien rangé, et ils se plaignet de ne pas avoir un livre ou noter leurs informations.",
+    "Il existe une personne qui revient souvent dans le Coliseum, pour l'entretenir.\nCe qui est impressionant, c'est qu'il est le seul a pouvoir retenir des informations qu'il arrive à glaner sur les monstres, en pleine bataille.\nSi tout le monde notent les informations des salles ou des objets qu'ils utilisent, celui là est le seul a pouvoir noter des informations sur les monstres.\nDommage qu'on ne puisse pas extraire ces informations dans un livre pour les garder quelque part...",
     "Le Brasier Noir accepte les fruits aatma, les fruits jindagee, et les crystaux élémentaires.\nMais pour qu'il donne un artefact en échange, il faut sacrifier un bon nombre de ces objets là.",
     "Les Méchanismes Anciens sont enfaite des machines avec lesquelles les Dieux et Déesse experimentaient, pour voir les différentes applications que leurs pouvoirs divins pourraient avoir.\nUtilisés par des humains, les machines ont tendance a avoir des effets négatifs.\nMais si on pouvait prouver à ces machines que nous somme des Dieux, ces effets pourraient bien disparaitre...",
     "Les marchand du quartier commercial ont pour ordre de ne pas vendre leurs plus précieux produits, car ils pourraient être perdus si l'aventurier sponsorisé mourrait avant le troisieme étage.\nCepandant, il peuvent prodiguer ces services aux détenteurs d'un Emblème de la Fin, un emblème porté par les Tout-Premiers et qui confère une authorité sans faille.",
     "Il existe 4 livres de la Cigogne.\nLa Cigogne Rouge du 8ème étage absorbe les sorts.\nLa Cigogne Bleue du 1er étage permet d'apprendre les sorts absorbés par la Cigogne Rouge, et peut donner certains artefacts spéciaux.\nLa Cigogne Noire du 7ème étage permet d'oublier les sorts et techniques en échange de plus de pouvoir.\nLa Cigogne Blanche est un glossaire qui se lierait a un individu et écrirait ses pensées a chaque fois qu'il se synchronise avec lui, cepandant ce livre a été perdu quelque part dans les Champs du Crépuscule.",
-    "Les mimiques sont des monstres surpuissants qui utilisent les sorts et techniques de tout les montres de leur étage.\nElle seraient enfaite des dieux cupides nés des prières de plusieurs cultes dans le Colyseum, auquel aurait été donné un corps composé des cadavres des monstres cousus a un coffre d'artefact.",
-    "Des fresques apparaissent dans le Colyseum, parce que quelque chose veut que l'on connaisse les évenements qui ont donné naissance au donjon maudit.\nSi quelqu'un les regarde toute, il pourrait etre récompensé.",
+    "Les mimiques sont des monstres surpuissants qui utilisent les sorts et techniques de tout les montres de leur étage.\nElle seraient enfaite des dieux cupides nés des prières de plusieurs cultes dans le Coliseum, auquel aurait été donné un corps composé des cadavres des monstres cousus a un coffre d'artefact.",
+    "Des fresques apparaissent dans le Coliseum, parce que quelque chose veut que l'on connaisse les évenements qui ont donné naissance au donjon maudit.\nSi quelqu'un les regarde toute, il pourrait etre récompensé.",
     "De mystérieux obélisques a écran tactile se sont implantés dans certaines salles.\nC'est par eux que le marchand peut avoir tout les objets qu'il vend, et il peut donner des tokens a utiliser là bas si l'on dépense plein de golds en une seule fois dans son magasin.",
     "La Chamane dans le Temple au Sud ne serait pas une Tout-Première, mais un avatar créé par les supplications des Tout-Premier quand ils sont arrivé ici.\nElle possederait ainsi l'entiereté des malédictions et de la misère de celles et ceux qui l'ont priée, mais aussi les bénédictions nées du bohneur des gens qui ont trouvé une nouvelle vie dans les Champs du Crépuscule.",
     "Le Maitre Mage ne serait pas un véritable Maitre, ni un véritable Mage.\nD'après les Tout-Premiers, l'appelation Mage pour les sorciers de haut niveaux ou même Maitre pour les plus grands de leur domaine n'est apparue qu'après la naissance de l'individu.\nEnfaite, Maitre Mage, c'est juste son nom et son prénom, et son apétance a la magie est telle, que l'on a utilisé son identité comme un adjectif.",
     "Le Roi Déchu n'est pas intrinsèquement paranoïaque et sociopathe.\nC'était une ordure, mais il est devenu fou soudainement, après une manifestation des paysans contre lui.",
-    "Après le jour ou il s'est jeté dans le Colyseum, plus personne n'a entendu parler de la femme du Roi : la Reine.\nLe bruit court qu'elle aurait été fait prisonniere dans une cage du 7eme étage, mais on ne trouve la bas que des barreaux défoncés et le livre de la Cigogne Noire.",
-    "Le Marchand du Colyseum serait le fils de la Reine.\nCertains disent que son visage est déformé a cause de la concentration de mana, d'autre pense que la Reine a été battue quand elle était en période de grossesse, mais tout les Tout-Premiers s'accordent sur une chose :\nLe chiffon sale sur lequel sont disposé ses produit porte l'embleme du Royaume du Roi Déchu, et n'a pu appartenir qu'à la Reine.",
+    "Après le jour ou il s'est jeté dans le Coliseum, plus personne n'a entendu parler de la femme du Roi : la Reine.\nLe bruit court qu'elle aurait été fait prisonniere dans une cage du 7eme étage, mais on ne trouve la bas que des barreaux défoncés et le livre de la Cigogne Noire.",
+    "Le Marchand du Coliseum serait le fils de la Reine.\nCertains disent que son visage est déformé a cause de la concentration de mana, d'autre pense que la Reine a été battue quand elle était en période de grossesse, mais tout les Tout-Premiers s'accordent sur une chose :\nLe chiffon sale sur lequel sont disposé ses produit porte l'embleme du Royaume du Roi Déchu, et n'a pu appartenir qu'à la Reine.",
     ]
 LISTERECETTES = [
     "...le signal des messes, et l'or dans son état primitif...",
@@ -4710,7 +4710,12 @@ class TraderUsage:
                                 print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                 print("    Materiaux nécéssaires:")
                                 for materiau in prix_de_luppgrade:
-                                    nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                    if materiau != "Emblème de la Fin":
+                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                    else :
+                                        nombre_materiau_dans_sac = "Non Possédé" 
+                                        if Sove.ModifieLivraisonDansSove("Nombre", materiau) >= 1 :
+                                            nombre_materiau_dans_sac = "Possédé" 
                                     print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                             print("\n")
 
@@ -4803,7 +4808,12 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        if materiau != "Emblème de la Fin":
+                                            nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        else :
+                                            nombre_materiau_dans_sac = "Non Possédé" 
+                                            if Sove.ModifieLivraisonDansSove("Nombre", materiau) >= 1 :
+                                                nombre_materiau_dans_sac = "Possédé" 
                                         print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
@@ -4871,8 +4881,8 @@ class TraderUsage:
                             else:
                                 self.BuyUppgrade(prix_de_luppgrade)
 
-                                print(f"Le marchand prend vos materiaux et vous donne un bon de commande sur lequel est écrit : [{objet_choisi} de niveau {level_actuel_de_uppgrade + 1}].")
-                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé chez le marchand, et vous remercie de votre achat !")
+                                print(f"Le Banquier prend vos materiaux et vous donne un bon de commande sur lequel est écrit : [{objet_choisi} de niveau {level_actuel_de_uppgrade + 1}].")
+                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé chez le marchand de n'importe quel étage, et vous remercie de votre achat !")
                                 Affichage.EntreePourContinuer()
 
                                 Sove.ModifieLivraisonDansSove("Ajout", objet_choisi)
@@ -5196,7 +5206,12 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        if materiau != "Emblème de la Fin":
+                                            nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        else :
+                                            nombre_materiau_dans_sac = "Non Possédé" 
+                                            if Sove.ModifieLivraisonDansSove("Nombre", materiau) >= 1 :
+                                                nombre_materiau_dans_sac = "Possédé" 
                                         print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
@@ -5234,8 +5249,8 @@ class TraderUsage:
                             else:
                                 self.BuyUppgrade(prix_de_luppgrade)
 
-                                print(f"Le marchand prend vos materiaux et vous donne un bon de commande sur lequel est écrit : [{objet_choisi} de niveau {level_actuel_de_uppgrade + 1}].")
-                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé chez le marchand, et vous remercie de votre achat !")
+                                print(f"Le propriétaire de l'étal prend vos materiaux et vous donne un bon de commande sur lequel est écrit : [{objet_choisi} de niveau {level_actuel_de_uppgrade + 1}].")
+                                print("Il vous assure que le prochain aventurier pourra retrouver tout les objets que vous avez commandé chez le marchand de n'importe quel étage, et vous remercie de votre achat !")
                                 Affichage.EntreePourContinuer()
 
                                 Sove.ModifieLivraisonDansSove("Ajout", objet_choisi)
@@ -5243,9 +5258,13 @@ class TraderUsage:
 
     def CheckIfEnoughMaterials(self, prix_en_dictionnaire):
         for materiau in prix_en_dictionnaire:
-            prix_en_materiau = prix_en_dictionnaire[materiau]
-            
-            possible =  Sove.ModifieDechetsDansSove("Limite", materiau, prix_en_materiau)
+
+            if materiau != "Emblème de la Fin":
+                prix_en_materiau = prix_en_dictionnaire[materiau]
+                possible =  Sove.ModifieDechetsDansSove("Limite", materiau, prix_en_materiau)
+
+            else: 
+                possible = (Sove.ModifieLivraisonDansSove("Nombre", materiau) >= 1)
 
             if possible == False:
                 return False
@@ -5256,7 +5275,7 @@ class TraderUsage:
         for materiau in prix_en_dictionnaire:
             prix_en_materiau = prix_en_dictionnaire[materiau]
             if materiau != "Emblème de la Fin":
-                 Sove.ModifieDechetsDansSove("Enleve", materiau, prix_en_materiau)
+                Sove.ModifieDechetsDansSove("Enleve", materiau, prix_en_materiau)
 
     def DoMapTrader(self):
         while True:
@@ -5373,7 +5392,12 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        if materiau != "Emblème de la Fin":
+                                            nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        else :
+                                            nombre_materiau_dans_sac = "Non Possédé" 
+                                            if Sove.ModifieLivraisonDansSove("Nombre", materiau) >= 1 :
+                                                nombre_materiau_dans_sac = "Possédé" 
                                         print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
@@ -6207,7 +6231,12 @@ class TraderUsage:
                                     print(f"{numero} - {trade} niv. {level_actuel_de_uppgrade} ==) {trade} niv. {level_actuel_de_uppgrade + 1}")
                                     print("    Materiaux nécéssaires:")
                                     for materiau in prix_de_luppgrade:
-                                        nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        if materiau != "Emblème de la Fin":
+                                            nombre_materiau_dans_sac = Sove.ModifieDechetsDansSove("Nombre",materiau)
+                                        else :
+                                            nombre_materiau_dans_sac = "Non Possédé" 
+                                            if Sove.ModifieLivraisonDansSove("Nombre", materiau) >= 1 :
+                                                nombre_materiau_dans_sac = "Possédé" 
                                         print(f"      - {prix_de_luppgrade[materiau]} {materiau} [{nombre_materiau_dans_sac}]")
                                 print("\n")
 
@@ -6478,9 +6507,9 @@ class Affiche:
                 print("...je sais pas pourquoi j'ai dit ca...")
                 Affichage.EntreePourContinuer()
             elif choix == 5:
-                print("Personne n'a battu le Colyseum, donc je ne pourrait pas te dire si il existe !\nPar contre il existe une théorie surprenante sur son existance.")
+                print("Personne n'a battu le Coliseum, donc je ne pourrait pas te dire si il existe !\nPar contre il existe une théorie surprenante sur son existance.")
                 Affichage.EntreePourContinuer()
-                print("Dans le Colyseum, on ne peut voir que 8 boss, sans compter les variations du Chevalier Pourpre et du Roi Déchu.")
+                print("Dans le Coliseum, on ne peut voir que 8 boss, sans compter les variations du Chevalier Pourpre et du Roi Déchu.")
                 Affichage.EntreePourContinuer()
                 print("Sachant que les boss et les étages eux même changent entre les assauts, un aventurier devrait pouvoir tomber sur n'importe quel boss a chaque fois qu'il entre dans ce donjon maudit.")
                 Affichage.EntreePourContinuer()
@@ -6496,7 +6525,7 @@ class Affiche:
                 Affichage.EntreePourContinuer()
                 print("Et devinez ce que le cartographe a trouvé dans son algorithme ?")
                 Affichage.EntreePourContinuer()
-                print("Des milions de petites variables, inutilisées dans le modèle actuel du Colyseum.")
+                print("Des milions de petites variables, inutilisées dans le modèle actuel du Coliseum.")
                 Affichage.EntreePourContinuer()
                 print("Alors laissez moi vous poser la question :")
                 Affichage.EntreePourContinuer()
@@ -20076,7 +20105,7 @@ class EndingAndGift:
             self.PrintEtEntreePourContinuer("De Paris a Dublin...")
             self.PrintEtEntreePourContinuer("De Madrid a Moscou...")
             self.PrintEtEntreePourContinuer("De Johanesbourg a Kyoto...")
-            self.PrintEtEntreePourContinuer("Elle fit le tour du monde grace a la fortune ammassée dans le Colyseum...")
+            self.PrintEtEntreePourContinuer("Elle fit le tour du monde grace a la fortune ammassée dans le Coliseum...")
             self.PrintEtEntreePourContinuer("Evita de peu la mort grâce a ses nouveaux pouvoirs...")
             self.PrintEtEntreePourContinuer("Et rassembla tout les adeptes de la magie dans une grande communautée qui ne voyait ni la couleur de la peau, ni la classe sociale, ni le pays d'origine !")
             self.PrintEtEntreePourContinuer("Et ainsi son organisation grandit...")
@@ -20259,7 +20288,7 @@ class EndingAndGift:
             self.PrintEtEntreePourContinuer("Emy se laissa emporter ses émotions et imprima chaque centimètres de cette vue dans son esprit.")
             self.PrintEtEntreePourContinuer("Elle se mit au seuil de la sortie et huma les odeurs étrangères que le vent lui apportèrent...")
             self.PrintEtEntreePourContinuer("Puis elle se retourna.")
-            self.PrintEtEntreePourContinuer("Aussi beau que tout cela puisse paraitre, elle était enchainée au Colyseum.")
+            self.PrintEtEntreePourContinuer("Aussi beau que tout cela puisse paraitre, elle était enchainée au Coliseum.")
             self.PrintEtEntreePourContinuer("Elle ne le savait que trop bien.")
             self.PrintEtEntreePourContinuer("L'être corrompu qui dirige tout ce qui se trouve dans les arènes est un tyrant qui appose sa marque sur ses créations.")
             self.PrintEtEntreePourContinuer("La marque du sacrifice.")
@@ -23586,7 +23615,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Tas de Gold" : "Un tas de gold immaculé arrangé de manière quasi-parfaite.\nMais qui donc laisse ces richesses ici ?",
         "Caisse à Item" : "Une vieille caisse de bois vermoulu contenant des objets sous la forme d'un booster pack.\nLe symbole du royaume est placardé sur le coté, peut etre un reste de précédentes expeditions ordonnées par le Roi ?",
         "Mimique" : "On dirait un coffre avec des jambes longues, sur lequel trone divers colliers et bijou posés négligemment sur le bois.\nOn dirait aussi que cette horreur a été priée et décorée par des fanatiques.",
-        "Piege" : "Des barres de métal coulissante, projetée avec grande rapiditée sur les mains cupides qui touchent a ce qu'elle ne devrait pas.\nLes barres sont dépliables comme une matraque de police, et propulsées a l'aide de poudre a canon, alors que ces deux technologies n'étaient pas encore répendues a l'époque de la création du Colyseum.",
+        "Piege" : "Des barres de métal coulissante, projetée avec grande rapiditée sur les mains cupides qui touchent a ce qu'elle ne devrait pas.\nLes barres sont dépliables comme une matraque de police, et propulsées a l'aide de poudre a canon, alors que ces deux technologies n'étaient pas encore répendues a l'époque de la création du Coliseum.",
         "Ruine de la Cigogne Bleue" : "Une salle emplie de décombre dans laquelle se trouve le livre de la Cigogne Bleue.\nGrace a lui, on peut apprendre des sorts que l'on enregistre dans le livre de la Cigogne Rouge.\nMais d'une manière étrange, certains artefacts surpuissants peuvent aussi se retrouver dedans.\nPeut être qu'en sortant et re-rentrant de la salle, on pourrait faire apparaitre d'autres choses ?",
         "Fontaine Pétrifiante" : "Une jolie fontaine de marbre, décorée, sur laquelle se trouve une fée en état de biostase.\nSi l'on boit son eau après avoir conquit les monstres de l'arène ainsi que son boss, on gagne un énorme bonus a ses caractéristiques.",
         "Oasis de la Fortune" : "Une grande flaque d'eau qui semble disparaitre lorsque l'on s'approche d'elle.\nEn jettant des golds, on gagne des mutagène avec plus ou moins de raretée, que l'on peut augmenter pour un prix.\nL'inscription dans le reflet de l'étang me fait penser au *motto* d'une grande famille de marchand du Japon, qui assassinaient les clients qui touchaient le gros lot...",
@@ -23595,7 +23624,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Boutique de Mariette" : "Mariette, vampire sympathique, propose dans sa boutique des objets absoluments divins, en échange d'un peu de sang et de caractéristiques.\nQuand j'essaye d'acheter des choses alors que je n'ai pas assez, elle me donne toujours un remède gratuit !",
         "Cage de la Cigogne Noire" : "Une cage éventrée sur laquelle sont gravés les sanglots de la personne qui y était captive, et un livre a moitié brulé qui fait oublier les techniques et sorts non enchantés contre plus de caracteristiques.\nTenir ce livre me fait ressentir des choses indescriptibles, et une énorme dose de culpabilité.",
         "Bibliothèque Royale" : "Un simple extrait de la Bibliothèque du Roi, contenant des ouvrages de tout nature et de toute fonction, comme le livre de la Cigogne Rouge dans lequel on peut inscrire des sorts que l'on retrouvera dans le livre de la Cigogne bleue.\nLa recette de cookie y est absolument divine !",
-        "Demeure d'Alfred" : "Une masure entre les mondes, entre les dimensions, dont mon esprit ne peut comprendre la topographie.\nOn peut y échanger golds contre artefacts venant de la réserve personnelle d'Alfred, mais je me pose plutot une autre question : Si chaque portes derriere lui mène a un étage du Colyseum, pourquoi y en a-t-il 11 ?",
+        "Demeure d'Alfred" : "Une masure entre les mondes, entre les dimensions, dont mon esprit ne peut comprendre la topographie.\nOn peut y échanger golds contre artefacts venant de la réserve personnelle d'Alfred, mais je me pose plutot une autre question : Si chaque portes derriere lui mène a un étage du Coliseum, pourquoi y en a-t-il 11 ?",
         "Porte Divine" : "Une porte spéciale derriere la cascade d'une salle qui reproduit deux champs enserrant une rivière.\nLes symboles gravés sur la pierre sont de la même facture que les fresques...",
         "Salle à Clef" : "paragraphe1",
         "Les Leys" : "paragraphe2",

@@ -4074,8 +4074,10 @@ class Control:
                                 if self.modele.stigma_joueur_bonus == 'Démanteleur' and random.randint(0,100)<25 :
                                     self.Player.liste_de_materiaux[materiau] += 1
                                     commentaire += (
-                                        f"\nVous démentelez son cadavre d'une main experte et récupérez un deuxieme materiau !"
+                                        f"\nVous démantelez son cadavre d'une main experte et récupérez un deuxieme materiau !"
                                     )
+                            else : 
+                                continue
                         self.vue.AfficheRecompense(commentaire)
                     if (self.modele.stigma_joueur_positif == "Conception du Mana" and random.randint(0,1) == 0):
                         mana_gagne = 2
@@ -4156,8 +4158,8 @@ class Control:
                             self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Boss", self.modele.monstre_nom)
                         else :
                             self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Ennemis", self.modele.monstre_nom)
-            if self.modele.possede_une_fee == False and "Fée dans un Bocal" in self.Player.liste_dartefacts_optionels:
-                self.Player.liste_dartefacts_optionels.remove("Fée dans un Bocal")
+            if self.modele.possede_une_fee == False :
+                self.vue.AffichePlusDeFee()
                 self.Player.possede_une_fee = False
                 
         self.StopCombatSounds()
@@ -4610,7 +4612,7 @@ class Control:
     def EffetStigmaRechargeRapide(self):
         if self.modele.points_de_mana < self.modele.points_de_mana_max * 0.5 :
             self.RecouvrementDeMana(3)
-            self.vue.AfficheStigmaRechargeRapide("Vous invoquez dans votre esprit le gout que la dinde avait lors d'un de ces somptueux banquet a Venise... et reprenez des points de mana .")
+            self.vue.AfficheStigmaRechargeRapide("Vous invoquez dans votre esprit le gout que la dinde avait lors d'un de ces somptueux banquets a Venise... et reprenez des points de mana .")
 
     def EffetStigmaTOC(self):
         self.modele.passe_son_tour = True 
@@ -4632,7 +4634,7 @@ class Control:
 
 
     def EffetStigmaPauseRepas(self):
-        if (random.randint(0,100) < 5 and not self.TousItemsVides()):
+        if (random.randint(0,100) <= 8 and not self.TousItemsVides()):
 
             #  item aléatoire
             item_a_manger = random.choice(self.ListeItemsPossedes())

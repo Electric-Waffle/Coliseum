@@ -21505,7 +21505,7 @@ def RemiseAZeroDesVariablesPourProchainEtage():
     Player.boss_battu = False
     Player.redcoin_bought = False
     Player.red_coin_recu_par_extermination = False
-    Player.nombre_dennemis_a_letage = 10 + Player.numero_de_letage * 2
+    Player.nombre_dennemis_a_letage = 5 + Player.numero_de_letage * 2
     Player.flammes_rouge = 5
     Player.flammes_bleue = 3
     Player.flammes_verte = 2

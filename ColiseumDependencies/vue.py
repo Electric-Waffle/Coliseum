@@ -437,6 +437,9 @@ class Vue:
     def AfficheResurrection(self, commentaire):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
 
+    def AffichePlusDeFee(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("Vous regardez, dépité, votre flacon vide...\nIl va falloir trouver une autre Fée.")
+
     def AfficheMontagne(self, commentaire):
         self.AfficheSonSort("DIRTm")
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)

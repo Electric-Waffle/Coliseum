@@ -3618,143 +3618,106 @@ LISTEITEMAVANCE = [
     "Grand Mutagène Vert",
     "Grand Mutagène Doré",
 ]
-LISTEDEMUSIQUE = [
-    "Gigantomachie",
-    "Endorphines",
-    "Dangereuses Mélancolies",
-    "L'Orage avant la Tempête",
-    "Fanfare",
-    "Sillages Sur Une Mer de Rêves",
-    "Sels Sudatoires",
-    "Ré-Hydraté",
-    "Pluie d'Automne",
-    "Bêtise Humaine",
-    "Esotériques Réflexions",
-    "Exploratio",
-    "Les Joies du Combat",
-    "Revenant",
-    "Conte de Fée",
-    "Epineuses Rencontres",
-    "Le Chevalier Qu'on Ne Veut Pas Rencontrer",
-    "Affreux Fertile",
-    "Clair de Sang",
-    "Néophobie Alimentaire",
-    "Ruines d'Antan",
-    "Sables Mouvants",
-    "Euthanasie Régalienne",
-    "Pareísaktos",
-    "Pāramitā",
-    "Nerd Party",
-    "Jeux d'Enfants",
-    "Pantomime",
-    "Carnaval",
-    "Fièvre du Samedi Soir",
-    "Piñata",
-    "Tragicomique",
-    "Obituaire de Morphée",
-    "Chasseur D'Etoiles",
-    "Memory Lane",
-    "Symphonie des Coeurs Immolés",
-    "Combler les Vides",
-    "Systèmes Défaillants",
-    "Sa Majesté Des Mouches",
-    "Divin Karma",
-    "Folie Furieuse",
-    "Sans Remords",
-    "Le Prix des Larmes",
-    "Noblesse Oblige",
-    "Coeur, Ego, Tango",
-    "Ossuaire Immaculé",
-    "Dissonance Cognitive",
-    "Le Vieux Fourneau",
-    "La Hache et le Grimoire",
-    "Gr4c1euse Nécr0log1e",
-    "Plum5 d'0ie",
-    "Pr0s0pagn0sie",
-    "Mach1n3 Inf3rn4le",
-    "S1mul4crum",
-    "V3tus S4nct0rum",
-    "Cruc1fix1on",
-    "Réarr4ng3ment L1m1nal",
-    "4rythm1e",
-    "Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme",
-    "Th3 L4byr1nth Génés1s",
-    "Sur l3 S3nt1er de l4 Gu3rr3",
-    "Ad Inf1n1tum",
-    "La D1v1ne Coméd1e",
-    "Ap0gé3 Inv3rsée",
-    "Thé0r1e du Ch40s",
-    "Pénult1me",
-    "M0n Un1vers"
-]
-LISTECARACTERISTIQUEMUSIQUE = [
-    ["start", "Vous écoutez "],
-    ["tutorial", "Vous écoutez "],
-    ["alfredproto", "Vous écoutez "],
-    ["boss_introV2", "Vous écoutez "],
-    ["battle_win", "Vous écoutez "],
-    ["gravestone", "Vous écoutez "],
-    ["fishing", "Vous écoutez "],
-    ["bathhouse", "Vous écoutez "],
-    ["ending", "Vous écoutez "],
-    ["reconfort", "Vous écoutez "],
-    ["debug", "Vous écoutez "],
-    ["etage_1", "Vous écoutez "],
-    ["battle_theme_1", "Vous écoutez "],
-    ["boss_1", "Vous écoutez "],
-    ["etage_2", "Vous écoutez "],
-    ["battle_theme_2", "Vous écoutez "],
-    ["boss_2", "Vous écoutez "],
-    ["etage_2_alt", "Vous écoutez "],
-    ["battle_theme_2_alt", "Vous écoutez "],
-    ["boss_2_alt", "Vous écoutez "],
-    ["etage_3", "Vous écoutez "],
-    ["battle_theme_3", "Vous écoutez "],
-    ["boss_3", "Vous écoutez "],
-    ["darkness", "Vous écoutez "],
-    ["etage_4", "Vous écoutez "],
-    ["battle_theme_4", "Vous écoutez "],
-    ["boss_4", "Vous écoutez "],
-    ["boss_4_phase_2", "Vous écoutez "],
-    ["etage_5", "Vous écoutez "],
-    ["dance", "Vous écoutez "],
-    ["battle_theme_5", "Vous écoutez "],
-    ["boss_5", "Vous écoutez "],
-    ["etage_5_alt", "Vous écoutez "],
-    ["battle_theme_5_alt", "Vous écoutez "],
-    ["boss_5_alt_intro", "Vous écoutez "],
-    ["boss_5_alt", "Vous écoutez "],
-    ["etage_6", "Vous écoutez "],
-    ["battle_theme_6", "Vous écoutez "],
-    ["boss_6", "Vous écoutez "],
-    ["etage_7", "Vous écoutez "],
-    ["battle_theme_7", "Vous écoutez "],
-    ["boss_7", "Vous écoutez "],
-    ["etage_7_alt", "Vous écoutez "],
-    ["battle_theme_7_alt", "Vous écoutez "],
-    ["boss_7_alt", "Vous écoutez "],
-    ["etage_8", "Vous écoutez "],
-    ["battle_theme_8", "Vous écoutez "],
-    ["boss_8", "Vous écoutez "],
-    ["boss_8_phase_2", "Vous écoutez "],
-    ["observatorium", "Vous écoutez "],
-    ["quiet", "Vous écoutez "],
-    ["abyss", "Vous écoutez "],
-    ["tales", "Vous écoutez "],
-    ["etage_0", "Vous écoutez "],
-    ["battle_theme_0", "Vous écoutez "],
-    ["boss_0", "Vous écoutez "],
-    ["etage_9", "Vous écoutez "],
-    ["battle_theme_9", "Vous écoutez "],
-    ["boss_9", "Vous écoutez "],
-    ["etage_10", "Vous écoutez "],
-    ["battle_theme_10", "Vous écoutez "],
-    ["etage_10_alt", "Vous écoutez "],
-    ["etage_11", "Vous écoutez "],
-    ["battle_theme_11", "Vous écoutez "],
-    ["boss_11", "Vous écoutez "],
-    ["boss_11_phase_2", "Vous écoutez "],
-    ["boss_11_phase_3", "Vous écoutez "],
+MUSIQUES_OBSERVATORIUM = [
+    {"nom_affiche": "Gigantomachie", "fichier": "start", "description": "Vous écoutez Gigantomachie.", "code_deblocage": None},
+    {"nom_affiche": "Endorphines", "fichier": "tutorial", "description": "Vous écoutez Endorphines.", "code_deblocage": None},
+    {"nom_affiche": "Dangereuses Mélancolies", "fichier": "alfredproto", "description": "Vous écoutez Dangereuses Mélancolies.", "code_deblocage": None},
+    {"nom_affiche": "L'Orage avant la Tempête", "fichier": "boss_introV2", "description": "Vous écoutez L'Orage avant la Tempête.", "code_deblocage": None},
+    {"nom_affiche": "Fanfare", "fichier": "battle_win", "description": "Vous écoutez Fanfare.", "code_deblocage": None},
+    {"nom_affiche": "Sillages Sur Une Mer de Rêves", "fichier": "gravestone", "description": "Vous écoutez Sillages Sur Une Mer de Rêves.", "code_deblocage": None},
+    {"nom_affiche": "Sels Sudatoires", "fichier": "fishing", "description": "Vous écoutez Sels Sudatoires.", "code_deblocage": None},
+    {"nom_affiche": "Ré-Hydraté", "fichier": "bathhouse", "description": "Vous écoutez Ré-Hydraté.", "code_deblocage": None},
+    {"nom_affiche": "Pluie d'Automne", "fichier": "ending", "description": "Vous écoutez Pluie d'Automne.", "code_deblocage": None},
+    {"nom_affiche": "Bêtise Humaine", "fichier": "reconfort", "description": "Vous écoutez Bêtise Humaine.", "code_deblocage": None},
+    {"nom_affiche": "Ésotériques Réflexions", "fichier": "debug", "description": "Vous écoutez Esotériques Réflexions.", "code_deblocage": None},
+    {"nom_affiche": "Été Éternel", "fichier": "etage_-1", "description": "Vous écoutez Été Éternel.", "code_deblocage": None},
+    {"nom_affiche": "Douce Lune", "fichier": "etage_-1_alt", "description": "Vous écoutez Douce Lune.", "code_deblocage": None},
+    {"nom_affiche": "Fullmetal Armurier", "fichier": "blacksmith_variation", "description": "Vous écoutez Fullmetal Armurier.", "code_deblocage": None},
+    {"nom_affiche": "Thé Vert", "fichier": "witch_variation", "description": "Vous écoutez Thé Vert.", "code_deblocage": None},
+    {"nom_affiche": "Temps Et Argent", "fichier": "banker_variation", "description": "Vous écoutez Temps Et Argent.", "code_deblocage": None},
+    {"nom_affiche": "La Vieille Ecole", "fichier": "hawker_variation", "description": "Vous écoutez La Vieille Ecole.", "code_deblocage": None},
+    {"nom_affiche": "Courtoises Courbettes", "fichier": "retailer_variation", "description": "Vous écoutez Courtoises Courbettes.", "code_deblocage": None},
+    {"nom_affiche": "Exploratio", "fichier": "etage_1", "description": "Vous écoutez Exploratio.", "code_deblocage": None},
+    {"nom_affiche": "Les Joies du Combat", "fichier": "battle_theme_1", "description": "Vous écoutez Les Joies du Combat.", "code_deblocage": None},
+    {"nom_affiche": "Revenant", "fichier": "boss_1", "description": "Vous écoutez Revenant.", "code_deblocage": None},
+    {"nom_affiche": "Conte de Fée", "fichier": "etage_2", "description": "Vous écoutez Conte de Fée.", "code_deblocage": None},
+    {"nom_affiche": "Epineuses Rencontres", "fichier": "battle_theme_2", "description": "Vous écoutez Epineuses Rencontres.", "code_deblocage": None},
+    {"nom_affiche": "Le Chevalier Qu'on Ne Veut Pas Rencontrer", "fichier": "boss_2", "description": "Vous écoutez Le Chevalier Qu'on Ne Veut Pas Rencontrer.", "code_deblocage": None},
+    {"nom_affiche": "Affreux Fertile", "fichier": "etage_2_alt", "description": "Vous écoutez Affreux Fertile.", "code_deblocage": None},
+    {"nom_affiche": "Clair de Sang", "fichier": "battle_theme_2_alt", "description": "Vous écoutez Clair de Sang.", "code_deblocage": None},
+    {"nom_affiche": "Néophobie Alimentaire", "fichier": "boss_2_alt", "description": "Vous écoutez Néophobie Alimentaire.", "code_deblocage": None},
+    {"nom_affiche": "Loi de la Jungle", "fichier": "mimique_1", "description": "Vous écoutez Loi de la Jungle.", "code_deblocage": None},
+    {"nom_affiche": "Ruines d'Antan", "fichier": "etage_3", "description": "Vous écoutez Ruines d'Antan.", "code_deblocage": None},
+    {"nom_affiche": "Sables Mouvants", "fichier": "battle_theme_3", "description": "Vous écoutez Sables Mouvants.", "code_deblocage": None},
+    {"nom_affiche": "Euthanasie Régalienne", "fichier": "boss_3", "description": "Vous écoutez Euthanasie Régalienne.", "code_deblocage": None},
+    {"nom_affiche": "Pareísaktos", "fichier": "darkness", "description": "Vous écoutez Pareísaktos.", "code_deblocage": None},
+    {"nom_affiche": "Pāramitā", "fichier": "etage_4", "description": "Vous écoutez Pāramitā.", "code_deblocage": None},
+    {"nom_affiche": "Nerd Party", "fichier": "battle_theme_4", "description": "Vous écoutez Nerd Party.", "code_deblocage": None},
+    {"nom_affiche": "Jeux d'Enfants", "fichier": "boss_4", "description": "Vous écoutez Jeux d'Enfants.", "code_deblocage": None},
+    {"nom_affiche": "Pantomime", "fichier": "boss_4_phase_2", "description": "Vous écoutez Pantomime.", "code_deblocage": None},
+    {"nom_affiche": "Sciences Infusées", "fichier": "mimique_2", "description": "Vous écoutez Sciences Infusées.", "code_deblocage": None},
+    {"nom_affiche": "Carnaval", "fichier": "etage_5", "description": "Vous écoutez Carnaval.", "code_deblocage": None},
+    {"nom_affiche": "Fièvre du Samedi Soir", "fichier": "dance", "description": "Vous écoutez Fièvre du Samedi Soir.", "code_deblocage": None},
+    {"nom_affiche": "Piñata", "fichier": "battle_theme_5", "description": "Vous écoutez Piñata.", "code_deblocage": None},
+    {"nom_affiche": "Tragicomique", "fichier": "boss_5", "description": "Vous écoutez Tragicomique.", "code_deblocage": None},
+    {"nom_affiche": "Obituaire de Morphée", "fichier": "etage_5_alt", "description": "Vous écoutez Obituaire de Morphée.", "code_deblocage": None},
+    {"nom_affiche": "Chasseur D'Etoiles", "fichier": "battle_theme_5_alt", "description": "Vous écoutez Chasseur D'Etoiles.", "code_deblocage": None},
+    {"nom_affiche": "Memory Lane", "fichier": "boss_5_alt_intro", "description": "Vous écoutez Memory Lane.", "code_deblocage": None},
+    {"nom_affiche": "Symphonie des Coeurs Immolés", "fichier": "boss_5_alt", "description": "Vous écoutez Symphonie des Coeurs Immolés.", "code_deblocage": None},
+    {"nom_affiche": "Combler les Vides", "fichier": "etage_6", "description": "Vous écoutez Combler les Vides.", "code_deblocage": None},
+    {"nom_affiche": "Systèmes Défaillants", "fichier": "battle_theme_6", "description": "Vous écoutez Systèmes Défaillants.", "code_deblocage": None},
+    {"nom_affiche": "Sa Majesté Des Mouches", "fichier": "boss_6", "description": "Vous écoutez Sa Majesté Des Mouches.", "code_deblocage": None},
+    {"nom_affiche": "Sauce au Poivre", "fichier": "mimique_3", "description": "Vous écoutez Sauce au Poivre.", "code_deblocage": None},
+    {"nom_affiche": "Divin Karma", "fichier": "etage_7", "description": "Vous écoutez Divin Karma.", "code_deblocage": None},
+    {"nom_affiche": "Folie Furieuse", "fichier": "battle_theme_7", "description": "Vous écoutez Folie Furieuse.", "code_deblocage": None},
+    {"nom_affiche": "Sans Remords", "fichier": "boss_7", "description": "Vous écoutez Sans Remords.", "code_deblocage": None},
+    {"nom_affiche": "Le Prix des Larmes", "fichier": "etage_7_alt", "description": "Vous écoutez Le Prix des Larmes.", "code_deblocage": None},
+    {"nom_affiche": "Noblesse Oblige", "fichier": "battle_theme_7_alt", "description": "Vous écoutez Noblesse Oblige.", "code_deblocage": None},
+    {"nom_affiche": "Coeur, Ego, Tango", "fichier": "boss_7_alt", "description": "Vous écoutez Coeur, Ego, Tango.", "code_deblocage": None},
+    {"nom_affiche": "Ossuaire Immaculé", "fichier": "etage_8", "description": "Vous écoutez Ossuaire Immaculé.", "code_deblocage": None},
+    {"nom_affiche": "Dissonance Cognitive", "fichier": "battle_theme_8", "description": "Vous écoutez Dissonance Cognitive.", "code_deblocage": None},
+    {"nom_affiche": "Le Vieux Fourneau", "fichier": "boss_8", "description": "Vous écoutez Le Vieux Fourneau.", "code_deblocage": None},
+    {"nom_affiche": "La Hache et le Grimoire", "fichier": "boss_8_phase_2", "description": "Vous écoutez La Hache et le Grimoire.", "code_deblocage": None},
+    {"nom_affiche": "Révolution", "fichier": "mimique_4", "description": "Vous écoutez Révolution.", "code_deblocage": None},
+    {"nom_affiche": "Vicissitudes", "fichier": "finale", "description": "Vous écoutez La Fin D'Une Vie.", "code_deblocage": None},
+    {"nom_affiche": "La Fin D'Une Vie", "fichier": "story_end", "description": "Vous écoutez La Fin D'Une Vie.", "code_deblocage": None},
+    {"nom_affiche": "Gr4c1euse Nécr0log1e", "fichier": "observatorium", "description": "Vous écoutez Gr4c1euse Nécr0log1e.", "code_deblocage": 11525},
+    {"nom_affiche": "Plum5 d'0ie", "fichier": "quiet", "description": "Vous écoutez Plum5 d'0ie.", "code_deblocage": 11525},
+    {"nom_affiche": "Pr0s0pagn0sie", "fichier": "abyss", "description": "Vous écoutez Pr0s0pagn0sie.", "code_deblocage": 11525},
+    {"nom_affiche": "Mach1n3 Inf3rn4le", "fichier": "tales", "description": "Vous écoutez Mach1n3 Inf3rn4le.", "code_deblocage": 11525},
+    {"nom_affiche": "S1mul4crum", "fichier": "etage_0", "description": "Vous écoutez S1mul4crum.", "code_deblocage": 11525},
+    {"nom_affiche": "V3tus S4nct0rum", "fichier": "battle_theme_0", "description": "Vous écoutez V3tus S4nct0rum.", "code_deblocage": 11525},
+    {"nom_affiche": "Cruc1fix1on", "fichier": "boss_0", "description": "Vous écoutez Cruc1fix1on.", "code_deblocage": 11525},
+    {"nom_affiche": "Réarr4ng3ment L1m1nal", "fichier": "etage_9", "description": "Vous écoutez Réarr4ng3ment L1m1nal.", "code_deblocage": 11525},
+    {"nom_affiche": "4rythm1e", "fichier": "battle_theme_9", "description": "Vous écoutez 4rythm1e.", "code_deblocage": 11525},
+    {"nom_affiche": "Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme", "fichier": "boss_9", "description": "Vous écoutez Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme.", "code_deblocage": 11525},
+    {"nom_affiche": "Th3 L4byr1nth Génés1s", "fichier": "etage_10", "description": "Vous écoutez Th3 L4byr1nth Génés1s.", "code_deblocage": 11525},
+    {"nom_affiche": "Sur l3 S3nt1er de l4 Gu3rr3", "fichier": "battle_theme_10", "description": "Vous écoutez Sur l3 S3nt1er de l4 Gu3rr3.", "code_deblocage": 11525},
+    {"nom_affiche": "H0m0nculus", "fichier": "mimique_5", "description": "Vous écoutez H0m0nculus.", "code_deblocage": 11525},
+    {"nom_affiche": "La D1v1ne Coméd1e", "fichier": "etage_11", "description": "Vous écoutez La D1v1ne Coméd1e.", "code_deblocage": 11525},
+    {"nom_affiche": "Ap0gé3 Inv3rsée", "fichier": "battle_theme_11", "description": "Vous écoutez Ap0gé3 Inv3rsée.", "code_deblocage": 11525},
+    {"nom_affiche": "Thé0r1e du Ch40s", "fichier": "boss_11", "description": "Vous écoutez Thé0r1e du Ch40s.", "code_deblocage": 11525},
+    {"nom_affiche": "Pénult1me", "fichier": "boss_11_phase_2", "description": "Vous écoutez Pénult1me.", "code_deblocage": 11525},
+    {"nom_affiche": "M0n Un1vers", "fichier": "boss_11_phase_3", "description": "Vous écoutez M0n Un1vers.", "code_deblocage": 11525},
+    {"nom_affiche": "Death Gambit : Ad Infinitum", "fichier": "etage_10_alt", "description": "Vous écoutez Ad Infinitum.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Vilis Bestia", "fichier": "alt_1_phase_1", "description": "Vous écoutez Vilis Bestia.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Purgatio", "fichier": "alt_1_phase_2", "description": "Vous écoutez Purgatio.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Néo-Magickus", "fichier": "alt_2_phase_1", "description": "Vous écoutez Néo-Magickus.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Antipasti", "fichier": "alt_3_phase_1", "description": "Vous écoutez Antipasti.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Bouchées Doubles", "fichier": "alt_3_phase_2", "description": "Vous écoutez Bouchées Doubles.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Massacre Culinaire", "fichier": "alt_3_phase_3", "description": "Vous écoutez Massacre Culinaire.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Saint Graal", "fichier": "alt_4_phase_1", "description": "Vous écoutez Saint Graal", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Gladiateurs", "fichier": "alt_5_phase_1", "description": "Vous écoutez Gladiateurs.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Ceux Qui Partent", "fichier": "alt_6_phase_1", "description": "Vous écoutez Ceux Qui Partent.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Fantaisie Héroïque", "fichier": "alt_7_phase_1", "description": "Vous écoutez Fantaisie Héroïque.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : La Force Des Convictions", "fichier": "alt_7_phase_2", "description": "Vous écoutez La Force Des Convictions.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Le Rêve Au Bout Des Doigts", "fichier": "alt_7_phase_3", "description": "Vous écoutez Le Rêve Au Bout Des Doigts.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Se Battre Ensemble", "fichier": "alt_7_phase_4", "description": "Vous écoutez Se Battre Ensemble.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Humour Noir", "fichier": "alt_8_phase_1", "description": "Vous écoutez Humour Noir.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Affronter Son Trauma", "fichier": "alt_9_phase_1", "description": "Vous écoutez Affronter Son Trauma.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Sortir Des Ténèbres", "fichier": "alt_9_phase_2", "description": "Vous écoutez Sortir Des Ténèbres.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : A L'Article De La Mort", "fichier": "alt_10_phase_1", "description": "Vous écoutez A L'Article De La Mort.", "code_deblocage": 2831805},
+    {"nom_affiche": "Death Gambit : Pari Mortel", "fichier": "alt_10_phase_2", "description": "Vous écoutez Pari Mortel.", "code_deblocage": 2831805},
 ]
 DICTIONNAIREDEPERSONNAGEAAFFICHER = {}
 DICTIONNAIREITEMINITIAL = {
@@ -7652,10 +7615,15 @@ class Affiche:
                 print("Vous obtenez la Divinité de la Mort !")
                 print("\nC'est une photo du dernier panthéon des dieux, il y a bien longtemps.\nElle est imprégnée de la culpabilité du Dieu de la Mort, seul survivant de la Guerre de l'Interdit.")
                 print("\n - Vous pouvez désormais utiliser les méchanismes anciens a leurs plein potentiel !")
+                self.EntreePourContinuer()
                 print(" - Terah gagne le Deuxieme Stigma Positif [Réceptacle de la Mort] !")
+                self.EntreePourContinuer()
                 print(" - Vous pouvez désormais utiliser l'élément de la Mort ! Vous pouvez retrouver la liste des talents Ames dans le fichi[ERREUR : FICHIER INTROUVABLE] ")
                 print("[FICHIER NOM:122367325 ADDRESSE IPV4:(XXX) INTROUVABLE]")
+                self.EntreePourContinuer()
                 print(" - La porte aux redcoins s'ouvre désormais pour tout les personnages jouables ! Finissez le boss rush a nouveau pour gagner 5 artefacts et sortez directement a l'étage 11 !")
+                self.EntreePourContinuer()
+                print(" - Les musiques des Limbes s'offrent a vous dans l'observatorium : entrez le code 2831805 ! ")
                 self.EntreePourContinuer()
                 print("...?")
                 self.EntreePourContinuer()
@@ -11228,27 +11196,27 @@ class Floor:
                 )
                 Affichage.EntreePourContinuer()
                 print(
-                    "Seul bémol : une respiration sourde, saccadée, qui résonne dans toute la salle et dont les échos masquent l'origine."
+                    "Seul bémol : une respiration sourde, saccadée, provenant d'une sorte d'idole de chair grandeur nature.\nAh oui, et le coffre est a moitié enfoncé dans le torse de la créature."
                 )
-                print("Le trésor est peut-être gardé, après tout.")
                 Affichage.EntreePourContinuer()
                 while True:
                     try:
                         print("Que faire ?")
                         print("\n1 - Approcher le coffre")
-                        print("2 - Partir")
+                        print("2 - Inspecter les alentours")
+                        print("3 - Partir")
                         choix = int(
                             input("\nChoisissez votre action avec les nombres : ")
                         )
                         ClearConsole()
-                        if choix in [1, 2]:
+                        if choix in [1, 2, 3]:
                             break
                     except ValueError:
                         ClearConsole()
                 if choix == 1:
                     # lance le combat
                     print(
-                        "Vous vous approchez du coffre, et il prend soudainement vie !"
+                        "L'idole se lève et vous attaque !"
                     )
                     Affichage.EntreePourContinuer()
                     Player.affronte_une_mimique = True
@@ -11267,6 +11235,47 @@ class Floor:
                     
                     # fait que l'event soit finit et ne peut ps etre relancé
                     caracteristique_de_la_salle["terminé par joueur"] = True
+                if choix == 2:
+                    if Player.numero_de_letage == 2 :
+                        print("Vous observez la clairière dans laquelle se trouve l'idole.\nIl y a de nombreuses iconographies de personnages divins, religieux, ou juste mythiques.")
+                        Affichage.EntreePourContinuer()
+                        print("Vous trouvez aussi des relicats de feux grandioses, et de cierges humbles, posés a même le sol noir et spongieux...")
+                        Affichage.EntreePourContinuer()
+                        print("...un frisson vous parcourt le dos.")
+                        Affichage.EntreePourContinuer()
+                        print("Vous vous retournez vers une chapelle décrépite que vous n'aviez pas vu avant. Le bois rongé par les âges crépites sous vos pieds, comme si il prenait feu, et au centre se trouve un livre étrange couvert d'une...")
+                        print("...")
+                        Affichage.EntreePourContinuer()
+                        print("Vous y lisez ceci :")
+                        Affichage.EntreePourContinuer()
+                        print("*Nous, êtres de vie.*")
+                        print("*Nous, êtres de chair.*")
+                        print("*Nous, êtres de volontés.*")
+                        Affichage.EntreePourContinuer()
+                        print("*Vidons nos calices de leur vie à tes pieds.*")
+                        print("*Adorons ton image des chairs puissantes qui rodent la nuit.*")
+                        print("*Remplissons ton être de notre volonté immolée.*")
+                        Affichage.EntreePourContinuer()
+                        print("*Si le monde prend pitié de notre souffrance , si il juge que nos prières sont assez dévouées, si il appose son sceau karmique sur nos existances,*")
+                        print("*Alors, dieu artificiel, tu verra le jour.*")
+                        print("*Et tu offrira la mort a ce qui en veut a notre vie, notre chair, notre volontée.*")
+                        Affichage.EntreePourContinuer()
+                        print("*Simule la divinité de ce qui a habité ces murs, et offre nous ta bénédiction.*")
+                        print("*Aide nous : Comment faire pour ne pas mourir ?*")
+                        Affichage.EntreePourContinuer()
+                        print("La dernière phrase de la page est écrite avec une encre rouge : *Pour ne pas mourir, il faut tuer*")
+                        Affichage.EntreePourContinuer()
+                        print("Le reste du livre opppose une resistance a l'ouverture, comme si les pages étaient collées entre elles.")
+                        print("Vous laissez la chapelle fantomatique derrière vous et retournez au centre de la clairière.")
+                        Affichage.EntreePourContinuer()
+                    elif Player.numero_de_letage == 4 :
+                        print("")
+                    elif Player.numero_de_letage == 6 :
+                        print("")
+                    elif Player.numero_de_letage == 8 :
+                        print("")
+                    elif Player.numero_de_letage == 10 :
+                        print("")
                 else:
                     print("Vous reculez prudemment.")
                     Affichage.EntreePourContinuer()
@@ -20930,7 +20939,7 @@ def ShowRecup():
         456852,
         3236353,
         313,
-        25,
+        26,
         935284761,
         5321139741,
         7415321139,
@@ -21390,56 +21399,99 @@ def MenuDeDemarrage(Player):
 
 
 def ShowObservatorium():
+    """
+    Affiche le menu de l'Observatorium et joue la musique choisie.
+    Les musiques cachées sont débloquées via des codes secrets.
+    """
+    codes_deblocus = []
+    LISTE_CODES_SECRETS = [11525, 2831805]
     PlayMusic("observatorium")
-    observatorium_complet = False
-    limite_observatorium_incomplet = 51
+
+    # Construction du menu
+    musiques_disponibles = construire_choix_observatorium(codes_deblocus)
+
     while True:
-        while True:
-            try:
-                # affiche le menu
-                choix = ShowMenuObservatorium(observatorium_complet, limite_observatorium_incomplet)
-                ClearConsole()
-                if observatorium_complet:
-                    if choix in range(1, (len(LISTEDEMUSIQUE)) + 2):
-                        break
-                else:
-                    if choix in range(1, limite_observatorium_incomplet) or choix == 11525:
-                        break
-            except ValueError:
-                ClearConsole()
+
+        # AFFICHAGE
+
+        # Affichage du menu
+        print("  ~~{ Observatorium }~~\n")
+        for m in musiques_disponibles:
+            print(f"{m['index']} - {m['nom_affiche']}")
+
+        choix_str = input("\nChoisissez la musique avec le numéro ou entrez un code secret : ")
+        ClearConsole()
+
+        #--------------------------------------------------------------------------------------------
+        #CONSEQUENCES DU CHOIX JOUEUR
+
+        # vérifier que le joueur aie donné un nombre
+        try:
+            choix = int(choix_str)
+        except ValueError:
+            ClearConsole()
+            continue
+
+        # Vérifier si le joueur entre un code secret
+        if choix in LISTE_CODES_SECRETS:
+            if choix not in codes_deblocus:
+                codes_deblocus.append(choix)
+                StopAllMusic()
+                if choix == 11525 :
+                    print(
+                        "Les confins de l'observatorium s'ouvrent a vous, voyageurs sur une mer d'encre a la recherche de la véritée.\nPrenez seulement garde a ne pas couler entre les lignes du code qui régit ce monde, ou vous pourriez bien ne jamais remonter à la surface."
+                    )
+                    Affichage.EntreePourContinuer()
+                    PlayMusic("darkness")
+                elif choix == 2831805 :
+                    print(
+                        "Les souvenirs de la mort emplissent la salle et font jaillir le sol impur d'une terre aride.\nSeuls celles et ceux qui ont foulé cette terre peuvent entendre le vide raconter avec entrain les combats auxquel il a assisté."
+                    )
+                    Affichage.EntreePourContinuer()
+                    PlayMusic("alt_6_phase_1")
+                musiques_disponibles = construire_choix_observatorium(codes_deblocus)
+            continue
+
+        # Retour
         if choix == 1:
             PlayMusic("start")
             break
-        elif choix == 11525 and not observatorium_complet:
-            StopAllMusic()
-            observatorium_complet = True
-            print(
-                "Les confins de l'observatorium s'ouvrent a vous, voyageurs sur une mer d'encre a la recherche de la véritée."
-            )
+
+        # Jouer la musique choisie
+        musique_choisie = next((m for m in musiques_disponibles if m["index"] == choix), None)
+        if musique_choisie and musique_choisie["fichier"]:
+            PlayMusic(musique_choisie["fichier"])
+            print(musique_choisie["description"])
             Affichage.EntreePourContinuer()
+            if codes_deblocus[-1] == 11525:
+                PlayMusic("darkness")
+            if codes_deblocus[-1] == 2831805:
+                PlayMusic("alt_6_phase_1")
+            else:
+                PlayMusic("observatorium")
+
         else:
-            caracteristique_musique = LISTECARACTERISTIQUEMUSIQUE[choix - 2]
-            PlayMusic(f"{caracteristique_musique[0]}")
-            print(caracteristique_musique[1])
-            print("\n\n\n")
-            Affichage.EntreePourContinuer()
             ClearConsole()
-        if observatorium_complet:
-            PlayMusic("darkness")
-        else:
-            PlayMusic("observatorium")
 
+def construire_choix_observatorium(codes_deblocus):
+    ClearConsole()
+    # Construire la liste des musiques disponibles
+    musiques_disponibles = [{"index": 1, "nom_affiche": "Retour", "fichier": None}]
+        
+    index = 2
+    for musique in MUSIQUES_OBSERVATORIUM:
+        code_secret = musique.get("code_deblocage")
+        # Si pas de code secret ou code déjà débloqué, on l'affiche
+        if code_secret is None or code_secret in codes_deblocus:
+            musiques_disponibles.append({
+                "index": index,
+                "nom_affiche": musique["nom_affiche"],
+                "fichier": musique["fichier"],
+                "description": musique["description"]
+            })
+            index += 1
 
-def ShowMenuObservatorium(observatorium_complet, limite_observatorium_incomplet):
-    numero_affichage = 2
-    print("  ~~{ Observatorium }~~")
-    print("\n1 - Retour")
-    for nom_musique in LISTEDEMUSIQUE:
-        print(f"{numero_affichage} - {nom_musique}")
-        numero_affichage += 1
-        if numero_affichage == limite_observatorium_incomplet and not observatorium_complet:
-            break
-    return int(input("\nChoisissez la musique avec les nombres : "))
+    return musiques_disponibles
 
 
 def GetChoiceMenuColiseum():
@@ -22290,48 +22342,54 @@ def DoJukebox():
         7 : {"Nom" : "Affreux Fertile", "Nom Réel" : "etage_2_alt"},
         8 : {"Nom" : "Clair de Sang", "Nom Réel" : "battle_theme_2_alt"},
         9 : {"Nom" : "Néophobie Alimentaire", "Nom Réel" : "boss_2_alt"},
-        10 : {"Nom" : "Ruines d'Antan", "Nom Réel" : "etage_3"},
-        11 : {"Nom" : "Sables Mouvants", "Nom Réel" : "battle_theme_3"},
-        12 : {"Nom" : "Euthanasie Régalienne", "Nom Réel" : "boss_3"},
-        13 : {"Nom" : "Pāramitā", "Nom Réel" : "etage_4"},
-        14 : {"Nom" : "Nerd Party", "Nom Réel" : "battle_theme_4"},
-        15 : {"Nom" : "Jeux d'Enfants", "Nom Réel" : "boss_4"},
-        16 : {"Nom" : "Pantomime", "Nom Réel" : "boss_4_phase_2"},
-        17 : {"Nom" : "Carnaval", "Nom Réel" : "etage_5"},
-        18 : {"Nom" : "Piñata", "Nom Réel" : "battle_theme_5"},
-        19 : {"Nom" : "Tragicomique", "Nom Réel" : "boss_5"},
-        20 : {"Nom" : "Obituaire de Morphée", "Nom Réel" : "etage_5_alt"},
-        21 : {"Nom" : "Chasseur D'Etoiles", "Nom Réel" : "battle_theme_5_alt"},
-        22 : {"Nom" : "Memory Lane", "Nom Réel" : "boss_5_alt_intro"},
-        23 : {"Nom" : "Symphonie des Coeurs Immolés", "Nom Réel" : "boss_5_alt"},
-        24 : {"Nom" : "Combler les Vides", "Nom Réel" : "etage_6"},
-        25 : {"Nom" : "Systèmes Défaillants", "Nom Réel" : "battle_theme_6"},
-        26 : {"Nom" : "Sa Majesté Des Mouches", "Nom Réel" : "boss_6"},
-        27 : {"Nom" : "Divin Karma", "Nom Réel" : "etage_7"},
-        28 : {"Nom" : "Folie Furieuse", "Nom Réel" : "battle_theme_7"},
-        29 : {"Nom" : "Comment Tuer le Grand Méchant Loup", "Nom Réel" : "boss_7"},
-        30 : {"Nom" : "Le Prix des Larmes", "Nom Réel" : "etage_7_alt"},
-        31 : {"Nom" : "Noblesse Oblige", "Nom Réel" : "battle_theme_7_alt"},
-        32 : {"Nom" : "Coeur, Ego, Tango", "Nom Réel" : "boss_7_alt"},
-        33 : {"Nom" : "Ossuaire Immaculé", "Nom Réel" : "etage_8"},
-        34 : {"Nom" : "Dissonance Cognitive", "Nom Réel" : "battle_theme_8"},
-        35 : {"Nom" : "Le Vieux Fourneau", "Nom Réel" : "boss_8"},
-        36 : {"Nom" : "La Hache et le Grimoire", "Nom Réel" : "boss_8_phase_2"},
-        37 : {"Nom" : "Fièvre du Samedi Soir", "Nom Réel" : "dance"},
-        38 : {"Nom" : "S1mul4crum", "Nom Réel" : "etage_0"},
-        39 : {"Nom" : "Cruc1fix1on", "Nom Réel" : "boss_0"},
-        40 : {"Nom" : "V3tus S4nct0rum", "Nom Réel" : "battle_theme_0"},
-        41 : {"Nom" : "Réarr4ng3ment L1m1nal", "Nom Réel" : "etage_9"},
-        42 : {"Nom" : "4rythm1e", "Nom Réel" : "battle_theme_9"},
-        43 : {"Nom" : "Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme", "Nom Réel" : "boss_9"},
-        44 : {"Nom" : "Th3 L4byr1nth Génés1s", "Nom Réel" : "etage_10"},
-        45 : {"Nom" : "Sur l3 S3nt1er de l4 Gu3rr3", "Nom Réel" : "battle_theme_10"},
-        46 : {"Nom" : "Endorphines", "Nom Réel" : "tutorial"},
-        47 : {"Nom" : "Dangereuses Mélancolies", "Nom Réel" : "alfredproto"},
-        48 : {"Nom" : "L'Orage avant la Tempête", "Nom Réel" : "boss_introV2"},
-        49 : {"Nom" : "Sillages Sur Une Mer de Rêves", "Nom Réel" : "gravestone"},
-        50 : {"Nom" : "Bêtise Humaine", "Nom Réel" : "reconfort"},
-        51 : {"Nom" : "Esotériques Réflexions", "Nom Réel" : "debug"},
+        10 : {"Nom" : "Loi de la Jungle", "Nom Réel" : "mimique_1"},
+        11 : {"Nom" : "Ruines d'Antan", "Nom Réel" : "etage_3"},
+        12 : {"Nom" : "Sables Mouvants", "Nom Réel" : "battle_theme_3"},
+        13 : {"Nom" : "Euthanasie Régalienne", "Nom Réel" : "boss_3"},
+        14 : {"Nom" : "Pāramitā", "Nom Réel" : "etage_4"},
+        15 : {"Nom" : "Nerd Party", "Nom Réel" : "battle_theme_4"},
+        16 : {"Nom" : "Jeux d'Enfants", "Nom Réel" : "boss_4"},
+        17 : {"Nom" : "Pantomime", "Nom Réel" : "boss_4_phase_2"},
+        18 : {"Nom" : "Sciences Infusées", "Nom Réel" : "mimique_2"},
+        19 : {"Nom" : "Carnaval", "Nom Réel" : "etage_5"},
+        20 : {"Nom" : "Piñata", "Nom Réel" : "battle_theme_5"},
+        21 : {"Nom" : "Tragicomique", "Nom Réel" : "boss_5"},
+        22 : {"Nom" : "Obituaire de Morphée", "Nom Réel" : "etage_5_alt"},
+        23 : {"Nom" : "Chasseur D'Etoiles", "Nom Réel" : "battle_theme_5_alt"},
+        24 : {"Nom" : "Memory Lane", "Nom Réel" : "boss_5_alt_intro"},
+        25 : {"Nom" : "Symphonie des Coeurs Immolés", "Nom Réel" : "boss_5_alt"},
+        26 : {"Nom" : "Combler les Vides", "Nom Réel" : "etage_6"},
+        27 : {"Nom" : "Systèmes Défaillants", "Nom Réel" : "battle_theme_6"},
+        28 : {"Nom" : "Sa Majesté Des Mouches", "Nom Réel" : "boss_6"},
+        29 : {"Nom" : "Sauce au Poivre", "Nom Réel" : "mimique_3"},
+        30 : {"Nom" : "Divin Karma", "Nom Réel" : "etage_7"},
+        31 : {"Nom" : "Folie Furieuse", "Nom Réel" : "battle_theme_7"},
+        32 : {"Nom" : "Comment Tuer le Grand Méchant Loup", "Nom Réel" : "boss_7"},
+        33 : {"Nom" : "Le Prix des Larmes", "Nom Réel" : "etage_7_alt"},
+        34 : {"Nom" : "Noblesse Oblige", "Nom Réel" : "battle_theme_7_alt"},
+        35 : {"Nom" : "Coeur, Ego, Tango", "Nom Réel" : "boss_7_alt"},
+        36 : {"Nom" : "Ossuaire Immaculé", "Nom Réel" : "etage_8"},
+        37 : {"Nom" : "Dissonance Cognitive", "Nom Réel" : "battle_theme_8"},
+        38 : {"Nom" : "Le Vieux Fourneau", "Nom Réel" : "boss_8"},
+        39 : {"Nom" : "La Hache et le Grimoire", "Nom Réel" : "boss_8_phase_2"},
+        40 : {"Nom" : "Révolution", "Nom Réel" : "boss_8_phase_2"},
+        41 : {"Nom" : "Fièvre du Samedi Soir", "Nom Réel" : "dance"},
+        42 : {"Nom" : "S1mul4crum", "Nom Réel" : "etage_0"},
+        43 : {"Nom" : "Cruc1fix1on", "Nom Réel" : "boss_0"},
+        44 : {"Nom" : "V3tus S4nct0rum", "Nom Réel" : "battle_theme_0"},
+        45 : {"Nom" : "Réarr4ng3ment L1m1nal", "Nom Réel" : "etage_9"},
+        46 : {"Nom" : "4rythm1e", "Nom Réel" : "battle_theme_9"},
+        47 : {"Nom" : "Au Dé7our D’un S3nti3r Une Ch4rogn3 Infâme", "Nom Réel" : "boss_9"},
+        48 : {"Nom" : "Th3 L4byr1nth Génés1s", "Nom Réel" : "etage_10"},
+        49 : {"Nom" : "Sur l3 S3nt1er de l4 Gu3rr3", "Nom Réel" : "battle_theme_10"},
+        50 : {"Nom" : "Ad Inf1n1tum", "Nom Réel" : "etage_10_alt"},
+        51 : {"Nom" : "H0m0nculus", "Nom Réel" : "mimique_5"},
+        52 : {"Nom" : "Endorphines", "Nom Réel" : "tutorial"},
+        53 : {"Nom" : "Dangereuses Mélancolies", "Nom Réel" : "alfredproto"},
+        54 : {"Nom" : "L'Orage avant la Tempête", "Nom Réel" : "boss_introV2"},
+        55 : {"Nom" : "Sillages Sur Une Mer de Rêves", "Nom Réel" : "gravestone"},
+        56 : {"Nom" : "Bêtise Humaine", "Nom Réel" : "reconfort"},
+        57 : {"Nom" : "Esotériques Réflexions", "Nom Réel" : "debug"},
         
     }
     print("Vous frappez le sol de l'arène, et au lieu de monstres, une étrange machine sort du sol.")

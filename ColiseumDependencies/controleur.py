@@ -1985,9 +1985,9 @@ class Control:
         elif self.modele.monstre_nom == "Mimique":
             self.modele.stigma_monstre_positif = "Abomination"
             self.modele.stigma_monstre_negatif = "Homoncule"
-            self.modele.monstre_points_de_force = round(2.5 * self.modele.numero_de_letage)
-            self.modele.monstre_points_de_intelligence = round(2.5 * self.modele.numero_de_letage)
-            self.modele.monstre_points_de_resistance = round(2.5 * self.modele.numero_de_letage)
+            self.modele.monstre_points_de_force = round(10 * self.modele.numero_de_letage)
+            self.modele.monstre_points_de_intelligence = round(10 * self.modele.numero_de_letage)
+            self.modele.monstre_points_de_resistance = round(10 * self.modele.numero_de_letage)
             self.modele.monstre_nombre_de_vies_supplementaire = 0
             self.modele.monstre_points_de_vie_max = round((60 * self.modele.numero_de_letage) + 100)
             self.modele.monstre_points_de_mana_max = 100
@@ -1999,6 +1999,7 @@ class Control:
             }
             liste_action_supplementaire = {}
             if self.modele.numero_de_letage == 2:
+                self.modele.monstre_nom == "Mimique du Massacre : Ymir"
                 liste_action_supplementaire = {
                     "Coup de Boule": "Technique",
                     "Etranglement": "Technique", # rend muet
@@ -2022,6 +2023,7 @@ class Control:
                     "Tir Arcanique": "Sort"
                 }
             elif self.modele.numero_de_letage == 4:
+                self.modele.monstre_nom == "Mimique de l'Evolution : Frankenstein"
                 liste_action_supplementaire = {
                     "Accrochage": "Technique", # paralyse et degat
                     "Drain": "Technique", # draine vie
@@ -2045,6 +2047,7 @@ class Control:
                     "Cercueil de Neige": "Sort", # gele
                 }
             elif self.modele.numero_de_letage == 6:
+                self.modele.monstre_nom == "Mimique de l'Exaltation : Nostalgia Gaïus"
                 liste_action_supplementaire = {
                     "Attire-Gold": "Technique", #prend du gold [x]
                     "Lèche-Blessure": "Technique", # soin
@@ -2069,6 +2072,9 @@ class Control:
                     "Aspiration": "Technique" # prend gold, mana + vie, manamax + viemax, taux critique sort+ attaque, force + intelligence, defence [x]
                 }
             elif self.modele.numero_de_letage in [8, 10]:
+                self.modele.monstre_nom == "Mimique du Déïcide : Lucifer"
+                if self.modele.numero_de_letage == 10:
+                    self.modele.monstre_nom == "Mimique du Désir : Géhenna"
                 liste_action_supplementaire = {
                     "Gros Coup de Boule": "Technique",
                     "Corruption": "Technique", #drain
@@ -2691,7 +2697,9 @@ class Control:
         if (numero_musique == 10 and self.Player.nom_de_letage != "Limbes Flétrissants") or self.Player.mode_jukebox :
             nom_de_la_musique = self.Player.musique_combat_10
         elif self.modele.est_une_mimique:
-            nom_de_la_musique = "mimic"
+            nom_de_la_musique = "mimic_" + self.modele.numero_de_letage / 2
+            if self.modele.numero_de_letage not in [2,4,6,8,10]:
+                nom_de_la_musique = "mimic_1"
         elif self.modele.boss_histoire:
             nom_de_la_musique = "story_end"
         elif not self.modele.monstre_EstUnBoss:
@@ -4062,6 +4070,8 @@ class Control:
                                 self.Player.nombre_de_gold += self.modele.nombre_de_tours
                         elif cle == "Materiau":
                             nombre_aleatoire = random.randint(0,100)
+                            if self.modele.est_une_mimique :
+                                nombre_aleatoire = 0
                             limite = 25 + self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Médaillon de Leprechaun"]
                             if nombre_aleatoire <= limite:
                                 materiau = self.modele.monstre_recompense[

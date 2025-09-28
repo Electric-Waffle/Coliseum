@@ -42,7 +42,7 @@ class Model:
             self.taux_de_esquive = Player.taux_desquive
             self.nombre_de_gold = Player.nombre_de_gold
             self.quete_en_cours = Player.quete
-            self.liste_dartefacts_optionels = Player.liste_dartefacts_optionels
+            self.liste_dartefacts_optionels = list(Player.liste_dartefacts_optionels)
             self.nombre_de_red_coin = Player.nombre_de_red_coin
             self.player_tags = Player.player_tags
             self.numero_de_letage = Player.numero_de_letage
@@ -2650,6 +2650,7 @@ class Model:
         self.DEGATBONUSSORTPHYSIQUE = 0
         self.DEGATBONUSATTAQUESANG = 0
         self.DEGATBONUSSORTSANG = 0
+        self.DEGATBONUSMONSTREBERSERKER = 0
         self.DEGATTECHNIQUEBONUSDUMONSTRE = 0 #===
         self.DEGATSORTBONUSDUMONSTRE = 0 #===
         self.DEGATSAIGNEE = 0

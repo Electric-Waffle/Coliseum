@@ -1153,7 +1153,7 @@ class Control:
         if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
             bonus_stigma = 25
         bonus_force = self.modele.monstre_points_de_force * 10
-        self.modele.DEGATTECHNIQUEBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde
+        self.modele.DEGATTECHNIQUEBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde + self.modele.DEGATBONUSMONSTREBERSERKER
         # pourcentage de degat bonus de sort contre le joueur
         bonus_gel = 0
         if self.modele.est_gele:
@@ -1168,7 +1168,7 @@ class Control:
         if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
             bonus_stigma = 25
         bonus_force = self.modele.monstre_points_de_intelligence * 10
-        self.modele.DEGATSORTBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde
+        self.modele.DEGATSORTBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde + self.modele.DEGATBONUSMONSTREBERSERKER
         # pourcentage de se faire enflammer (pas de modificateurs pour l'instant)
         self.modele.CHANCEBONUSJOUEURENFEU = 0
         # pourcentage de se faire geler (pas de modificateurs pour l'instant)
@@ -2000,6 +2000,7 @@ class Control:
             liste_action_supplementaire = {}
             if self.modele.numero_de_letage == 2:
                 self.modele.monstre_nom == "Mimique du Massacre : Ymir"
+                self.modele.stigma_monstre_bonus = "Berserker"
                 liste_action_supplementaire = {
                     "Coup de Boule": "Technique",
                     "Etranglement": "Technique", # rend muet
@@ -2024,6 +2025,7 @@ class Control:
                 }
             elif self.modele.numero_de_letage == 4:
                 self.modele.monstre_nom == "Mimique de l'Evolution : Frankenstein"
+                self.modele.stigma_monstre_bonus = "Concoctions"
                 liste_action_supplementaire = {
                     "Accrochage": "Technique", # paralyse et degat
                     "Drain": "Technique", # draine vie
@@ -2048,6 +2050,7 @@ class Control:
                 }
             elif self.modele.numero_de_letage == 6:
                 self.modele.monstre_nom == "Mimique de l'Exaltation : Nostalgia Gaïus"
+                self.modele.stigma_monstre_bonus = "Apathie"
                 liste_action_supplementaire = {
                     "Attire-Gold": "Technique", #prend du gold [x]
                     "Lèche-Blessure": "Technique", # soin
@@ -2073,8 +2076,10 @@ class Control:
                 }
             elif self.modele.numero_de_letage in [8, 10]:
                 self.modele.monstre_nom == "Mimique du Déïcide : Lucifer"
+                self.modele.stigma_monstre_bonus = "Etoile"
                 if self.modele.numero_de_letage == 10:
                     self.modele.monstre_nom == "Mimique du Désir : Géhenna"
+                    self.modele.stigma_monstre_bonus = "Flammes du Désir"
                 liste_action_supplementaire = {
                     "Gros Coup de Boule": "Technique",
                     "Corruption": "Technique", #drain
@@ -2147,8 +2152,8 @@ class Control:
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Vie max": 25, "Endurance": 10}
         elif self.modele.monstre_nom == "Coquille Vide":
-            self.modele.stigma_monstre_positif = "Armure de Plates"
-            self.modele.stigma_monstre_negatif = "Trauma de Guerre"
+            self.modele.stigma_monstre_positif = "Odeur Putride"
+            self.modele.stigma_monstre_negatif = ""
             self.modele.stigma_monstre_bonus = "Corps d'Acier"
             self.modele.monstre_points_de_force = 6
             self.modele.monstre_points_de_intelligence = 3
@@ -2161,9 +2166,6 @@ class Control:
                 "Lame de Feu": "Technique", #brule
                 "Lame de Gel": "Technique", #gele
                 "Lame Pourpre": "Technique", #draine
-                "Lame Courageuse": "Technique", #gros degats
-                "Medecine de Guerre": "Technique", #soin
-                "Lamentations": "Sort", #blesse et maudit plus mana [x]
             }
             self.modele.monstre_recompense = {"Red coin": 1, "Tirage": 1, "Gold": 100 + gold_bonus_par_etage, "Mana max": 25, "Endurance": 10}
         elif self.modele.monstre_nom == "Roi Amonrê":
@@ -3124,6 +3126,67 @@ class Control:
             self.EquilibragePointDeVieMonstrePerduParStigma()
             self.vue.AffichePatchwork(vie_perdue)
 
+    def EffetStigmaBerserker(self):
+        pourcentage_perdu = 100 - round((self.modele.points_de_vie_max * 100) / self.modele.points_de_vie_max)
+        self.modele.DEGATBONUSMONSTREBERSERKER = pourcentage_perdu
+        if pourcentage_perdu >= 50 :
+            self.vue.AfficheStigmaBerserker(pourcentage_perdu)
+
+    def EffetStigmaFlammeDesir(self):
+        degat_flammes = round(self.modele.points_de_vie_max * 0.05)
+        if self.modele.points_de_vie <= degat_flammes :
+            degat_flammes = self.modele.points_de_vie - 1
+        self.EnleveVieAuJoueur(degat_flammes)
+        commentaire = f"Vous tentez de rester sur place pour passer votre tour ou vous défendre... mais les flammes du désir qui courent sur le sol vous brulent !\nVous perdez {degat_flammes} points de vie !"
+        self.vue.AfficheStigmaFlammeDesir(commentaire)
+
+    def EffetStigmaEtoile(self):
+        commentaire = "Quand l'Etoile Du Matin lance un sort, c'est le mana qui se plie à sa volontée."
+        self.vue.AfficheStigmaEtoile(commentaire)
+
+    def EffetStigmaConcoctions(self):
+        nombre_aleatoire = random.randint(0, 100)
+        if nombre_aleatoire <= 25 :
+            nombre_aleatoire = random.randint(0, 2)
+            if nombre_aleatoire == 0 :
+                self.modele.monstre_points_de_force += 2
+                commentaire = "L'ennemi devient plus fort !"
+            elif nombre_aleatoire == 1 :
+                self.modele.monstre_points_de_intelligence += 2
+                commentaire = "L'ennemi devient plus intelligent !"
+            else :
+                self.modele.monstre_points_de_resistance += 2
+                commentaire = "L'ennemi devient plus résistant !"
+            self.vue.AfficheStigmaConcoctions(commentaire)
+
+    def EffetStigmaApathie(self):
+        nombre_aleatoire = random.randint(0, 100)
+        if nombre_aleatoire <= 10 :
+
+            self.modele.est_maudit_par_le_gold = True
+            self.modele.est_maudit_par_les_items = True
+            self.modele.est_maudit_par_endurance = True
+
+            # plus vie/mana
+            self.modele.est_maudit_par_la_vie = True
+            self.modele.est_maudit_par_le_mana = True
+
+            # interdit sorts technique
+            self.modele.est_maudit_par_les_sorts = True
+            self.modele.est_maudit_par_les_techniques = True
+
+            self.modele.est_maudit_par_endurance_nombre_tour += 2
+            self.modele.est_maudit_par_les_items_nombre_tour += 2
+            self.modele.est_maudit_par_le_gold_nombre_tour += 3
+            self.modele.est_maudit_par_la_vie_nombre_tour += 3
+            self.modele.est_maudit_par_le_mana_nombre_tour += 3
+            self.modele.est_maudit_par_les_sorts_nombre_tour += 1
+            self.modele.est_maudit_par_les_techniques_nombre_tour += 1
+
+            self.vue.AfficheStigmaApathie()
+
+
+
     def EffetStigmaArlequin(self):
         nombre_aleatoire = random.randint(0, 100)
         if nombre_aleatoire <= 10:
@@ -3201,77 +3264,84 @@ class Control:
         return nom_action, type_action
 
     def RaisonDePasserSonTour(self):
-        personnage = "Vous passez votre"
-        iaido_effectue = False
-        # a cause de l'attaque iaido
-        if self.modele.en_plein_iaido:
-            # iaido arrété car paralysie
-            if self.modele.est_paralyse and not self.modele.flemme and not self.modele.fatigue_chronique:
-                commentaire = "... et votre concentration pour le iaido est stoppée par la paralysie."
-                self.modele.en_plein_iaido = False
-                self.modele.en_plein_iaido_nombre_tour = 0
-            # iaido arrété car flemme
-            elif self.modele.flemme and not self.modele.est_paralyse:
-                commentaire = "... et votre concentration pour le iaido est stoppée par votre flemme inhérente."
-                self.modele.en_plein_iaido = False
-                self.modele.en_plein_iaido_nombre_tour = 0
-            # iaido arrété car fatigue
-            elif self.modele.fatigue_chronique and not self.modele.est_paralyse:
-                commentaire = "... et votre concentration pour le iaido est stoppée par votre fatigue chronique."
-                self.modele.en_plein_iaido = False
-                self.modele.en_plein_iaido_nombre_tour = 0
-            # iaido arrété car paralysie + flemme
-            elif self.modele.flemme and self.modele.est_paralyse:
-                commentaire = "... et votre concentration pour le iaido est stoppée par un mélange de paralysie et de flemme."
-                self.modele.en_plein_iaido = False
-                self.modele.en_plein_iaido_nombre_tour = 0
-            elif self.modele.fatigue_chronique and self.modele.est_paralyse:
-                commentaire = "... et votre concentration pour le iaido est stoppée par un mélange de paralysie et de fatigue."
-                self.modele.en_plein_iaido = False
-                self.modele.en_plein_iaido_nombre_tour = 0
+        if self.modele.stigma_monstre_bonus == "Flammes du Désir":
+            self.EffetStigmaFlammeDesir()
+            self.modele.en_plein_iaido = False
+            self.modele.en_plein_iaido_nombre_tour = 0
+            self.modele.abomination_touche = False
+            self.modele.passe_son_tour = False
+        else :
+            personnage = "Vous passez votre"
+            iaido_effectue = False
+            # a cause de l'attaque iaido
+            if self.modele.en_plein_iaido:
+                # iaido arrété car paralysie
+                if self.modele.est_paralyse and not self.modele.flemme and not self.modele.fatigue_chronique:
+                    commentaire = "... et votre concentration pour le iaido est stoppée par la paralysie."
+                    self.modele.en_plein_iaido = False
+                    self.modele.en_plein_iaido_nombre_tour = 0
+                # iaido arrété car flemme
+                elif self.modele.flemme and not self.modele.est_paralyse:
+                    commentaire = "... et votre concentration pour le iaido est stoppée par votre flemme inhérente."
+                    self.modele.en_plein_iaido = False
+                    self.modele.en_plein_iaido_nombre_tour = 0
+                # iaido arrété car fatigue
+                elif self.modele.fatigue_chronique and not self.modele.est_paralyse:
+                    commentaire = "... et votre concentration pour le iaido est stoppée par votre fatigue chronique."
+                    self.modele.en_plein_iaido = False
+                    self.modele.en_plein_iaido_nombre_tour = 0
+                # iaido arrété car paralysie + flemme
+                elif self.modele.flemme and self.modele.est_paralyse:
+                    commentaire = "... et votre concentration pour le iaido est stoppée par un mélange de paralysie et de flemme."
+                    self.modele.en_plein_iaido = False
+                    self.modele.en_plein_iaido_nombre_tour = 0
+                elif self.modele.fatigue_chronique and self.modele.est_paralyse:
+                    commentaire = "... et votre concentration pour le iaido est stoppée par un mélange de paralysie et de fatigue."
+                    self.modele.en_plein_iaido = False
+                    self.modele.en_plein_iaido_nombre_tour = 0
+                elif (
+                    self.modele.stigma_monstre_positif == "Abomination"
+                    and self.modele.abomination_touche
+                ):
+                    commentaire = "... et votre concentration pour le iaido est stoppée par l'horrible vision de l'abomination devant vous."
+                    self.modele.en_plein_iaido = False
+                    self.modele.en_plein_iaido_nombre_tour = 0
+                    self.modele.abomination_touche = False
+                # iaido continue
+                else:
+                    if self.modele.en_plein_iaido_nombre_tour == 2:
+                        commentaire = (
+                            "...et vous concentrez votre pouvoir dans votre lame..."
+                        )
+                    elif self.modele.en_plein_iaido_nombre_tour == 1:
+                        commentaire = "...et vous commencez a voir le chemin a parcourir entre les atomes."
+                    elif self.modele.en_plein_iaido_nombre_tour == 0:
+                        self.modele.en_plein_iaido = False
+                        iaido_effectue = True
+            # a cause de la paralysie
+            elif self.modele.est_paralyse:
+                commentaire = "...mais vos muscles paralysés se détendent petit à petit."
+            # a cause du stigma Abobination
             elif (
                 self.modele.stigma_monstre_positif == "Abomination"
                 and self.modele.abomination_touche
             ):
-                commentaire = "... et votre concentration pour le iaido est stoppée par l'horrible vision de l'abomination devant vous."
-                self.modele.en_plein_iaido = False
-                self.modele.en_plein_iaido_nombre_tour = 0
+                commentaire = "...car la vision d'horreur de ce monstre abominable vous glace le sang."
                 self.modele.abomination_touche = False
-            # iaido continue
+            # a cause d'un stigma
             else:
-                if self.modele.en_plein_iaido_nombre_tour == 2:
-                    commentaire = (
-                        "...et vous concentrez votre pouvoir dans votre lame..."
-                    )
-                elif self.modele.en_plein_iaido_nombre_tour == 1:
-                    commentaire = "...et vous commencez a voir le chemin a parcourir entre les atomes."
-                elif self.modele.en_plein_iaido_nombre_tour == 0:
-                    self.modele.en_plein_iaido = False
-                    iaido_effectue = True
-        # a cause de la paralysie
-        elif self.modele.est_paralyse:
-            commentaire = "...mais vos muscles paralysés se détendent petit à petit."
-        # a cause du stigma Abobination
-        elif (
-            self.modele.stigma_monstre_positif == "Abomination"
-            and self.modele.abomination_touche
-        ):
-            commentaire = "...car la vision d'horreur de ce monstre abominable vous glace le sang."
-            self.modele.abomination_touche = False
-        # a cause d'un stigma
-        else:
-            if self.modele.stigma_joueur_negatif == "Trouble Obsessionnel Compulsif":
-                commentaire = "...pour aller ramasser les restes d'items et autre déchets par terre."
-            elif self.modele.stigma_joueur_negatif == "Fatigue Chronique":
-                commentaire = "...terrassé par votre fatigue."
+                if self.modele.stigma_joueur_negatif == "Trouble Obsessionnel Compulsif":
+                    commentaire = "...pour aller ramasser les restes d'items et autre déchets par terre."
+                elif self.modele.stigma_joueur_negatif == "Fatigue Chronique":
+                    commentaire = "...terrassé par votre fatigue."
+                else:
+                    commentaire = "...car vous avez tout simplement la flemme."
+            if iaido_effectue:
+                self.Iaido()
             else:
-                commentaire = "...car vous avez tout simplement la flemme."
-        if iaido_effectue:
-            self.Iaido()
-        else:
-            self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
-        if not self.modele.en_plein_iaido:
-            self.modele.passe_son_tour = False
+                self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
+            if not self.modele.en_plein_iaido:
+                self.modele.passe_son_tour = False
 
     def RaisonDePasserTourMonstre(self):
         personnage = "L'ennemi passe son"
@@ -4099,7 +4169,7 @@ class Control:
                         self.Player.points_de_vie += vie_regagnee
                         commentaire = f"Votre gemme de vie vous fait regagner {vie_regagnee} points de vie !"
                         self.vue.AfficheRecompense(commentaire)
-                    if ("Marque du Tyrant" in self.Player.liste_dartefacts_optionels) and (self.modele.points_de_vie_max == self.modele.points_de_vie):
+                    if ("Marque du Tyrant" in self.modele.liste_dartefacts_optionels) and (self.modele.points_de_vie_max == self.modele.points_de_vie):
                         self.Player.points_de_vie += 1
                         self.Player.points_de_vie_max += 1
                         commentaire = f"Vous tendez la main vers L'ennemi, et votre Marque du Tyrant vous donne 1 point de vie max supplémentaire !"
@@ -4142,11 +4212,11 @@ class Control:
                         commentaire1 += ("\nY est accrochée une carte sur laquelle se trouve la photo d'un homme dans la cinquantaine.")
                         commentaire2 = ("Vous obtenez l'artefact [Carte de Sécurité] !")
                         commentaire2 += ("\nUne carte retrouvée sur la cadavre d'un monstre particulièrement coriace, dopé a l'aide d'étranges substances.\nQui sait ce qu'elle peut bien faire ?")
-                        self.Player.liste_dartefacts_optionels.append("Carte de Sécurité")
+                        self.modele.liste_dartefacts_optionels.append("Carte de Sécurité")
                         self.vue.AffichageMonstreDopeRecompense(commentaire1, commentaire2)
                     if self.modele.est_une_mimique:
-                        commentaire1 = ("Le corps de la mimique git a terre...\nVous en profitez pour fouiller a l'interieur du coffre vivant.")
-                        commentaire2 = ("Vous en sortez un petit coffre de bois noir, que vous vous empressez d'ouvrir !")
+                        commentaire1 = ("Le corps de la mimique git a terre...\nVous en profitez pour fouiller a l'interieur du coffre doré.")
+                        commentaire2 = ("Vous en sortez un (autre) petit coffre de bois noir, que vous vous empressez d'ouvrir !")
                         self.vue.AfficheMimiqueMorte(commentaire1, commentaire2)
                         self.Floormaker.GiveRandomArtefact()
                     if self.modele.monstre_EstUnBoss and self.Player.malediction == "Sparifique":
@@ -4450,30 +4520,34 @@ class Control:
             self.vue.AfficheConsumme(self.modele.nombre_de_tours)
 
     def ApplicationStigmaPourFinDuTour(self):
+
+        # stigma joueur positif
         if self.modele.stigma_joueur_positif == "Bénie par les Fées":
             self.EffetStigmaBeniParLesFees()
-        if self.modele.stigma_joueur_positif == "Second Souffle":
+        elif self.modele.stigma_joueur_positif == "Second Souffle":
             self.EffetStigmaSecondSouffle()
-        if self.modele.stigma_joueur_positif == "Recharge Rapide":
+        elif self.modele.stigma_joueur_positif == "Recharge Rapide":
             self.EffetStigmaRechargeRapide()
-        if self.modele.stigma_joueur_positif == "Transhumanisme":
+        elif self.modele.stigma_joueur_positif == "Transhumanisme":
             self.EffetStigmaTranshumanisme()
-        if self.modele.stigma_joueur_negatif == "Pause Repas":
+        elif self.modele.stigma_joueur_negatif == "Pause Repas":
             self.EffetStigmaPauseRepas()
-        if self.modele.stigma_joueur_negatif == "Miss Hyde":
+        elif self.modele.stigma_joueur_negatif == "Miss Hyde":
             self.EffetStigmaMissHyde()
-        if self.modele.stigma_joueur_negatif == "Fatigue Chronique":
+        elif self.modele.stigma_joueur_negatif == "Fatigue Chronique":
             self.EffetStigmaFatigueChronique()
-        if self.modele.stigma_joueur_negatif == "Flemme":
+        elif self.modele.stigma_joueur_negatif == "Flemme":
             self.EffetStigmaFlemme()
         elif self.modele.stigma_joueur_negatif == "Ange Déchue":
             self.EffetStigmaAngeDechue()
-        if "Mage" in self.modele.liste_dartefacts_optionels:
-            self.AppliqueMage()
+
+        # stigma joueur bonus
         if self.modele.stigma_joueur_bonus == "Sanjiva":
             self.EffetStigmaSanjiva()
         elif self.modele.stigma_joueur_bonus == "Musculeux":
             self.EffetStigmaMusculeux()
+
+        # stigma monstre positif
         if self.modele.stigma_monstre_positif == "Toucher de Midas" and random.randint(0,100) <= 5:
             self.EffetStigmaToucherDeMidas()
         elif self.modele.stigma_monstre_positif == "Abomination":
@@ -4490,6 +4564,8 @@ class Control:
             self.EffetStigmaOdeurPutride()
         elif self.modele.stigma_monstre_positif == "Plus d'un Tour":
             self.EffetStigmaPlusDUnTour()
+
+        # stigma monstre negatif
         if self.modele.stigma_monstre_negatif == "Mégalovania":
             self.EffetStigmaMegalovania()
         elif self.modele.stigma_monstre_negatif == "Aveuglé":
@@ -4514,6 +4590,18 @@ class Control:
             self.EffetStigmaPatchwork()
         elif self.modele.stigma_monstre_negatif == "Arlequin":
             self.EffetStigmaArlequin()
+
+        # stigma montre bonus
+        if self.modele.stigma_monstre_bonus == "Berserker":
+            self.EffetStigmaBerserker()
+        elif self.modele.stigma_monstre_bonus == "Concoctions":
+            self.EffetStigmaConcoctions()
+        elif self.modele.stigma_monstre_bonus == "Apathie":
+            self.EffetStigmaApathie()
+
+        # effet artefact joueur ou tag mostre
+        if "Mage" in self.modele.liste_dartefacts_optionels:
+            self.AppliqueMage()
         if "Terreur" in self.modele.monstre_tags and self.IsMultipleOf(self.modele.nombre_de_tours, 6):
             self.EffetTagTerreur()
         if "Fausse Terreur" in self.modele.monstre_tags and self.IsMultipleOf(self.modele.nombre_de_tours, 6):
@@ -4578,6 +4666,7 @@ class Control:
             if self.modele.points_de_vie < 1:
                 self.modele.points_de_vie = 1
             self.Player.liste_dartefacts_optionels.remove("Epée de Damocles")
+            self.modele.liste_dartefacts_optionels.remove("Epée de Damocles")
             self.vue.AfficheEppeeDamocles()
     
     def EffetMorceauEtherFragile(self):
@@ -4585,6 +4674,7 @@ class Control:
         if numero_aleatoire in [1, 2, 3]:
             self.modele.points_de_mana = 0
             self.Player.liste_dartefacts_optionels.remove("Morceau d'Ether Fragile")
+            self.modele.liste_dartefacts_optionels.remove("Morceau d'Ether Fragile")
             self.vue.AfficheMorceauEtherFragile()
 
     def EffetEauBenite(self):
@@ -9793,15 +9883,16 @@ class Control:
         "Des runes anciennes gravées a l'interieur se mettent a scintiller"
         " et désactivent vos sorts de protection !"
         "\nPuis il tente de vous poignarder...")
-        self.modele.utilise_brume_sang = False
-        self.modele.brume_sang_nombre_tours = 0
-        self.modele.utilise_mirroir_eau = False
-        self.modele.mirroir_eau_nombre_tours = 0
+        
         nombre_aleatoire = random.randint(0, 100)
         chance_de_toucher = 80
         chance_de_toucher -= self.modele.CHANCEBONUSESQUIVE
         if nombre_aleatoire < chance_de_toucher:
-            degat = 15 + self.modele.monstre_level
+            self.modele.utilise_brume_sang = False
+            self.modele.brume_sang_nombre_tours = 0
+            self.modele.utilise_mirroir_eau = False
+            self.modele.mirroir_eau_nombre_tours = 0
+            degat = 20 + self.modele.monstre_level
             degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat)
             degat = self.EnleveVieAuJoueur(degat)
             commentaire_effet = f"..et vous taillade profondément le côté !\nVous perdez {degat} points de vie et devenez blessé pendant 3 tours !"
@@ -10701,56 +10792,62 @@ class Control:
         return degat_saignee
 
     def SeDefendre(self):
-        self.RecupEndurance(7)
-        if self.modele.mauvais_tachyon:
-            self.ChangeChargeMauvaisTachyon("defense")
-        if self.modele.bon_tachyon:
-            self.ChangeChargeBonTachyon("defense")
-        self.modele.se_defend = True
-        commentaire = ("Vous ramenez vos bras a votre torse et vous préparez a recevoir un coup.")
-        if self.modele.patience:
-            soin = round(self.modele.points_de_vie_max * 0.05)
-            self.modele.points_de_vie += soin
-            self.EquilibragePointsDeVieEtManaEtEndurance()
-            commentaire += f"\nLa Terre récompense votre patience. Vous reprenez {soin} points de vie !"
-        if self.modele.est_maudit_par_les_items and "Larmes de Vénus" in self.modele.liste_dartefacts_optionels and random.randint(1,10) <= 2:
-            commentaire += f"\nVénus libère votre âme des toxines de la Confusion !"
-            self.modele.est_maudit_par_les_items = False
-            self.modele.est_maudit_par_les_items_nombre_tour = False
+        if self.modele.stigma_monstre_bonus == "Flammes du Désir":
+            self.EffetStigmaFlammeDesir()
+        else :
+            self.RecupEndurance(7)
+            if self.modele.mauvais_tachyon:
+                self.ChangeChargeMauvaisTachyon("defense")
+            if self.modele.bon_tachyon:
+                self.ChangeChargeBonTachyon("defense")
+            self.modele.se_defend = True
+            commentaire = ("Vous ramenez vos bras a votre torse et vous préparez a recevoir un coup.")
+            if self.modele.patience:
+                soin = round(self.modele.points_de_vie_max * 0.05)
+                self.modele.points_de_vie += soin
+                self.EquilibragePointsDeVieEtManaEtEndurance()
+                commentaire += f"\nLa Terre récompense votre patience. Vous reprenez {soin} points de vie !"
+            if self.modele.est_maudit_par_les_items and "Larmes de Vénus" in self.modele.liste_dartefacts_optionels and random.randint(1,10) <= 2:
+                commentaire += f"\nVénus libère votre âme des toxines de la Confusion !"
+                self.modele.est_maudit_par_les_items = False
+                self.modele.est_maudit_par_les_items_nombre_tour = False
         
         self.vue.AfficheSeDefendre(commentaire)
 
     
     def PasserSonTour(self):
-        self.RecupEndurance(14)
-        if self.modele.mauvais_tachyon:
-            self.ChangeChargeMauvaisTachyon("passe tour")
-        if self.modele.bon_tachyon:
-            self.ChangeChargeBonTachyon("passe tour")
-        personnage = "Vous passez votre"
-        commentaire = "...tout simplement."
-        if self.modele.patience:
-            soin = round(self.modele.points_de_vie_max * 0.1)
-            self.modele.points_de_vie += soin
-            self.EquilibragePointsDeVieEtManaEtEndurance()
-            commentaire = f"...et reprenez {soin} points de vie."
-        if "Chapelet de Moine" in self.modele.liste_dartefacts_optionels:
-            commentaire += "\nDe plus, votre chapelet se met a briller d'un feu sacré, et vous devenez [Béni] pendant 1 tour !"
-            self.modele.beni_par_feu_sacre = True
-            self.modele.beni_par_feu_sacre_nombre_tour += 2
-        if "Dessin Nostalgique" in self.modele.liste_dartefacts_optionels:
-            commentaire += "\nDe plus, le dessin dans votre poche vous calme, et vous gagnez l'effet [Concentration] pendant 2 tours !"
-            self.modele.concentre = True
-            self.modele.concentre += 2
-        if "Basalte Immonde" in self.modele.liste_dartefacts_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
-            commentaire += "\nDe plus, votre morceau de basalte allume en vous une colère insatiable, et vous gagnez l'effet [Furie] pendant 1 tour !"
-            self.modele.utilise_orbe_de_furie = True
-            self.modele.utilise_orbe_de_furie_nombre_tour += 2
-        if "Jade Impardonnable" in self.modele.liste_dartefacts_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
-            commentaire += "\nDe plus, votre morceau de jade allume en vous une folie née de l'angoisse, et vous gagnez l'effet [Folie] pendant 1 tour !"
-            self.modele.utilise_orbe_de_folie = True
-            self.modele.utilise_orbe_de_folie_nombre_tour += 2
-        self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
+        if self.modele.stigma_monstre_bonus == "Flammes du Désir":
+            self.EffetStigmaFlammeDesir()
+        else:
+            self.RecupEndurance(14)
+            if self.modele.mauvais_tachyon:
+                self.ChangeChargeMauvaisTachyon("passe tour")
+            if self.modele.bon_tachyon:
+                self.ChangeChargeBonTachyon("passe tour")
+            personnage = "Vous passez votre"
+            commentaire = "...tout simplement."
+            if self.modele.patience:
+                soin = round(self.modele.points_de_vie_max * 0.1)
+                self.modele.points_de_vie += soin
+                self.EquilibragePointsDeVieEtManaEtEndurance()
+                commentaire = f"...et reprenez {soin} points de vie."
+            if "Chapelet de Moine" in self.modele.liste_dartefacts_optionels:
+                commentaire += "\nDe plus, votre chapelet se met a briller d'un feu sacré, et vous devenez [Béni] pendant 1 tour !"
+                self.modele.beni_par_feu_sacre = True
+                self.modele.beni_par_feu_sacre_nombre_tour += 2
+            if "Dessin Nostalgique" in self.modele.liste_dartefacts_optionels:
+                commentaire += "\nDe plus, le dessin dans votre poche vous calme, et vous gagnez l'effet [Concentration] pendant 2 tours !"
+                self.modele.concentre = True
+                self.modele.concentre += 2
+            if "Basalte Immonde" in self.modele.liste_dartefacts_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
+                commentaire += "\nDe plus, votre morceau de basalte allume en vous une colère insatiable, et vous gagnez l'effet [Furie] pendant 1 tour !"
+                self.modele.utilise_orbe_de_furie = True
+                self.modele.utilise_orbe_de_furie_nombre_tour += 2
+            if "Jade Impardonnable" in self.modele.liste_dartefacts_optionels and (self.modele.points_de_mana == self.modele.points_de_mana_max):
+                commentaire += "\nDe plus, votre morceau de jade allume en vous une folie née de l'angoisse, et vous gagnez l'effet [Folie] pendant 1 tour !"
+                self.modele.utilise_orbe_de_folie = True
+                self.modele.utilise_orbe_de_folie_nombre_tour += 2
+            self.vue.AfficheRaisonDePasserTour(personnage, commentaire)
 
 
     def EnleveVieAuJoueur(self, degat):
@@ -10767,14 +10864,18 @@ class Control:
         return degat
     
     def RegardeSiMonstreAAssezDeMana(self, action):
-        cout_en_mana = self.modele.ANNUAIRECOUTSORTMONSTRE[action]
-        if self.modele.monstre_points_de_mana >= cout_en_mana:
-            if self.modele.stigma_monstre_negatif == "Inconsolable Rage" and self.modele.monstre_points_de_mana >= (cout_en_mana * 2) and random.randint(1,10) <= 2 :
-                cout_en_mana += cout_en_mana
+        if self.modele.stigma_monstre_bonus == "Etoile":
+            self.EffetStigmaEtoile()
             action_possible = True
-            self.modele.monstre_points_de_mana -= cout_en_mana
-        else:
-            action_possible = False
+        else :
+            cout_en_mana = self.modele.ANNUAIRECOUTSORTMONSTRE[action]
+            if self.modele.monstre_points_de_mana >= cout_en_mana:
+                if self.modele.stigma_monstre_negatif == "Inconsolable Rage" and self.modele.monstre_points_de_mana >= (cout_en_mana * 2) and random.randint(1,10) <= 2 :
+                    cout_en_mana += cout_en_mana
+                action_possible = True
+                self.modele.monstre_points_de_mana -= cout_en_mana
+            else:
+                action_possible = False
         return action_possible
     
     def MetMonstreEnEtatDeChoc(self, action):

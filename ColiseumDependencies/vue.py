@@ -778,6 +778,21 @@ class Vue:
         time.sleep(temps)
         clear_console()
 
+    def AfficheStigmaBerserker(self, pourcentage):
+        self.AffichageUneLignePuisUnEntreePourContinuer(f"L'ennemi semble {pourcentage}% plus fort...")
+    
+    def AfficheStigmaConcoctions(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaFlammeDesir(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaEtoile(self, commentaire):
+        self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
+
+    def AfficheStigmaApathie(self):
+        self.AffichageUneLignePuisUnEntreePourContinuer("Un surplus de bohneur, la nostalgie et l'exhaltation s'empare de vous... et vous rendent apathique.\nVous n'avez plus envie de combattre...")
+
     def AfficheFinRoulette(self, commentaire_effet, commentaire_mise):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_effet)
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire_mise)

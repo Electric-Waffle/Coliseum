@@ -2699,9 +2699,10 @@ class Control:
         if (numero_musique == 10 and self.Player.nom_de_letage != "Limbes Flétrissants") or self.Player.mode_jukebox :
             nom_de_la_musique = self.Player.musique_combat_10
         elif self.modele.est_une_mimique:
-            nom_de_la_musique = "mimic_" + self.modele.numero_de_letage / 2
+            numero_etage_pour_mimique = str(int( self.modele.numero_de_letage / 2))
+            nom_de_la_musique = "mimique_" + numero_etage_pour_mimique
             if self.modele.numero_de_letage not in [2,4,6,8,10]:
-                nom_de_la_musique = "mimic_1"
+                nom_de_la_musique = "mimique_1"
         elif self.modele.boss_histoire:
             nom_de_la_musique = "story_end"
         elif not self.modele.monstre_EstUnBoss:

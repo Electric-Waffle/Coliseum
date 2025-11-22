@@ -1999,7 +1999,7 @@ class Control:
             }
             liste_action_supplementaire = {}
             if self.modele.numero_de_letage == 2:
-                self.modele.monstre_nom == "Mimique du Massacre : Ymir"
+                self.modele.monstre_nom = "Mimique du Massacre : Ymir"
                 self.modele.stigma_monstre_bonus = "Berserker"
                 liste_action_supplementaire = {
                     "Coup de Boule": "Technique",
@@ -2024,7 +2024,7 @@ class Control:
                     "Tir Arcanique": "Sort"
                 }
             elif self.modele.numero_de_letage == 4:
-                self.modele.monstre_nom == "Mimique de l'Evolution : Frankenstein"
+                self.modele.monstre_nom = "Mimique de l'Evolution : Frankenstein"
                 self.modele.stigma_monstre_bonus = "Concoctions"
                 liste_action_supplementaire = {
                     "Accrochage": "Technique", # paralyse et degat
@@ -2049,7 +2049,7 @@ class Control:
                     "Cercueil de Neige": "Sort", # gele
                 }
             elif self.modele.numero_de_letage == 6:
-                self.modele.monstre_nom == "Mimique de l'Exaltation : Nostalgia Gaïus"
+                self.modele.monstre_nom = "Mimique de l'Exaltation : Nostalgia Gaïus"
                 self.modele.stigma_monstre_bonus = "Apathie"
                 liste_action_supplementaire = {
                     "Attire-Gold": "Technique", #prend du gold [x]
@@ -2075,10 +2075,10 @@ class Control:
                     "Aspiration": "Technique" # prend gold, mana + vie, manamax + viemax, taux critique sort+ attaque, force + intelligence, defence [x]
                 }
             elif self.modele.numero_de_letage in [8, 10]:
-                self.modele.monstre_nom == "Mimique du Déïcide : Lucifer"
+                self.modele.monstre_nom = "Mimique du Déïcide : Lucifer"
                 self.modele.stigma_monstre_bonus = "Etoile"
                 if self.modele.numero_de_letage == 10:
-                    self.modele.monstre_nom == "Mimique du Désir : Géhenna"
+                    self.modele.monstre_nom = "Mimique du Désir : Géhenna"
                     self.modele.stigma_monstre_bonus = "Flammes du Désir"
                 liste_action_supplementaire = {
                     "Gros Coup de Boule": "Technique",

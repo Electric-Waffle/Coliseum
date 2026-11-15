@@ -3,12 +3,11 @@
 import os
 import random
 import sys
-import time
 
 from coliseum import services
 from coliseum.audio import PlayMusicDeLetage, StopAllMusic
 from coliseum.chemins import DOSSIER_RESSOURCES
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.erreurs import WriteErrorInErrorLog
 from coliseum.exploration.progression import RemiseAZeroDesVariablesPourProchainEtage
 from coliseum.combat.lancement import livrer_combat
@@ -158,7 +157,7 @@ def DoBossZero():
                 print("*Ca sera pas douloureux, promis juré !*")
                 services.Affichage.EntreePourContinuer()
                 print("*Et j'ai failli oublier : sans moi, le système d'ascension n'existe plus. Tu devrait renommer s1ve.txt en s0ve.txt, tu risque d'avoir une erreur sinon.*")
-                time.sleep(10)
+                attendre(10)
                 sys.exit()
             else:
                 #prendre les coordonnees d'une salle au pif

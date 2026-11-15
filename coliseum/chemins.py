@@ -9,8 +9,20 @@ autres lui demandent. Déplacer les ressources = modifier ce fichier uniquement.
 """
 
 import os
+import sys
 
-DOSSIER_RACINE = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
+def _trouver_la_racine():
+    # CONCEPT : un exécutable fabriqué par PyInstaller pose `sys.frozen`. Le
+    # code n'est alors plus dans des fichiers .py : `__file__` désigne un
+    # dossier interne à l'exécutable. Le seul repère fiable est l'emplacement
+    # de l'exécutable lui-même, à côté duquel sont posées les ressources.
+    if getattr(sys, "frozen", False):
+        return os.path.dirname(os.path.realpath(sys.executable))
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
+
+DOSSIER_RACINE = _trouver_la_racine()
 
 # Musiques, bruitages (sfx/), images secrètes et fichiers de sauvegarde.
 DOSSIER_RESSOURCES = os.path.join(DOSSIER_RACINE, "ColiseumDependencies")

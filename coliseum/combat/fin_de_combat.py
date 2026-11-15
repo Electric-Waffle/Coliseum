@@ -1,7 +1,7 @@
 """Surveillance des points de vie, résurrections, game over, fuite et récompenses."""
 
 import random
-import time
+from coliseum.console import attendre
 
 
 class FinDeCombatMixin:
@@ -497,7 +497,7 @@ class FinDeCombatMixin:
         self.vue.CHANNELSONSORT.set_volume(0)
         self.vue.CHANNELSONTECHNIQUE.set_volume(0)
         self.vue.CHANNELMUSIQUECOMBAT.set_volume(0)
-        time.sleep(0.01)
+        attendre(0.01)
         self.vue.CHANNELSONSORT.stop()
         self.vue.CHANNELSONTECHNIQUE.stop()
         self.vue.CHANNELMUSIQUECOMBAT.stop()

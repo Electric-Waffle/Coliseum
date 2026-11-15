@@ -4,12 +4,11 @@ import ast
 import os
 import random
 import sys
-import time
 
 from coliseum import services
 from coliseum.audio import PlayMusic, PlayMusicDeLetage, PlaySound, StopAllMusic
 from coliseum.chemins import DOSSIER_RESSOURCES
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.donnees.items import LISTEITEM, LISTEITEMDEFENCE
 from coliseum.exploration.plan_etage import RegardeSiEtageCompletementObserve
 from coliseum.joueur.bonus import (
@@ -545,7 +544,7 @@ class Affiche:
         services.Affichage.AfficheAvecUnTempsDattente(1.7)
         print("Le mutagène se révèle être un...")
         services.Affichage.AfficheAvecUnTempsDattente(1.5)
-        time.sleep(0.9)
+        attendre(0.9)
         print(f"Le mutagène se révèle être un [{recompense}] !")
         self.EntreePourContinuer()
         PlayMusicDeLetage()
@@ -561,7 +560,7 @@ class Affiche:
     def AfficheLongChargement(self):
         print("Récupération en cours, veuillez patienter...")
         print("(Temps d'attente estimé a 1 minute)")
-        time.sleep(60)
+        attendre(60)
         ClearConsole()
 
     def AfficheIntroCombat(self):
@@ -1181,23 +1180,23 @@ class Affiche:
             print("L'hotel s'embrase dans un éclair de feu !")
             services.Affichage.AfficheAvecUnTempsDattente(0.5)
             print("MERDE !")
-            time.sleep(0.25)
+            attendre(0.25)
             print("MERDE !")
-            time.sleep(0.25)
+            attendre(0.25)
             print("MERDE !")
-            time.sleep(0.25)
+            attendre(0.25)
             print("MERDE !")
-            time.sleep(0.25)
+            attendre(0.25)
             print("MERDE !")
             services.Affichage.AfficheAvecUnTempsDattente(0.25)
             print("QUELLE SITUATION DE MERDE !!!")
             services.Affichage.AfficheAvecUnTempsDattente(1)
             print("ROI DE MERDE !!!")
-            time.sleep(0.5)
+            attendre(0.5)
             print("PIERRE DE MERDE !!!")
-            time.sleep(0.5)
+            attendre(0.5)
             print("COLISEE DE MERDE !!!")
-            time.sleep(0.5)
+            attendre(0.5)
             print("DESTIN DE MERDE !!!")
             services.Affichage.AfficheAvecUnTempsDattente(0.75)
             print("J'AI FAIT QUOI POUR MERITER CETTE TORTURE ??? HEIN ???")
@@ -1288,10 +1287,10 @@ class Affiche:
                 print("Il vit une ombre affreuse venir de la cuisine.")
                 self.EntreePourContinuer()
                 print("Terah ignora la voix tordue de la chose en face, ferma les yeux, et compta jusqu'à quatre.")
-                time.sleep(2.5)
+                attendre(2.5)
                 ClearConsole()
                 print("[B0NJ0uR PeTITT5 FL5URR !!§§:;/ 1L EST T3MPsss D- ]")
-                time.sleep(1.5)
+                attendre(1.5)
                 sys.exit()
         elif "Passe La Porte Redcoin" not in services.Player.player_tags :
             print(
@@ -1435,7 +1434,7 @@ class Affiche:
                 print("Chargement en cours..")
             elif nombre in [3, 6]:
                 print("Chargement en cours...")
-            time.sleep(0.3)
+            attendre(0.3)
             ClearConsole()
         print("Chargement Terminé !")
         self.EntreePourContinuer()
@@ -1448,13 +1447,13 @@ class Affiche:
                 print("Sauvegarde en cours..")
             elif nombre in [3, 6]:
                 print("Sauvegarde en cours...")
-            time.sleep(0.3)
+            attendre(0.3)
             ClearConsole()
         print("Sauvegarde Terminé !")
         self.EntreePourContinuer()
 
     def AfficheAvecUnTempsDattente(self, temps):
-        time.sleep(temps)
+        attendre(temps)
         ClearConsole()
 
     def AffichageDescriptionEtage(self):
@@ -1674,7 +1673,7 @@ class Affiche:
             print("...")
             services.Affichage.EntreePourContinuer()
             print("*Oh. Fausse alerte alors ! Je m'attendais a quelque chose d'au-")
-            time.sleep(3)
+            attendre(3)
             ClearConsole()
             print("Un piano a queue tombe sur la Mage.")
             PlaySound("death")

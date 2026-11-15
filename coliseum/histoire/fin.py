@@ -2,12 +2,11 @@
 
 import ast
 from coliseum.combat import controleur
-import time
 
 from coliseum import services
 from coliseum import audio
 from coliseum.audio import PlayMusic, PlaySound, StopAllMusic
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.donnees.personnages import LISTEDEPERSONNAGE
 from coliseum.erreurs import WriteErrorInErrorLog
 
@@ -745,7 +744,7 @@ class EndingAndGift:
 
     def PrintEtEntreePourContinuerIntro(self, message, temps):
         print(message)
-        time.sleep(temps)
+        attendre(temps)
         ClearConsole()
 
     def ShowBeginingOfEnding(self):
@@ -781,7 +780,7 @@ class EndingAndGift:
         while True:
             try:
                 audio.CHANNELMUSIQUEDEBASE.set_volume(0)
-                time.sleep(0.01)
+                attendre(0.01)
                 audio.CHANNELMUSIQUEDEBASE.stop()
                 control.Battle()
                 services.Player.affronte_fin_histoire = False

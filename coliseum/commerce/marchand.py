@@ -1,13 +1,12 @@
 """Marchand du Coliseum et commerçants du village."""
 
 import random
-import time
 
 from coliseum import services
 from coliseum import audio
 from coliseum.audio import PermanentPlaySFX, PlayMusicDeLetage, PlaySound, StopAllMusic
 from coliseum.commerce.materiaux import FuseMaterials
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.donnees.actions import (
     LISTEACTIONRANG1,
     LISTEACTIONRANG2,
@@ -1460,7 +1459,7 @@ class TraderUsage:
                 print("Comme si il voyait... la chose derrière le masque.")
                 services.Affichage.EntreePourContinuer()
                 StopAllMusic()
-                time.sleep(5)
+                attendre(5)
                 services.FloorMaker.StopAllVillageChannels()
                 services.FloorMaker.InitialisationOfTownVariations()
                 PlayMusicDeLetage()
@@ -2486,18 +2485,18 @@ class TraderUsage:
                 services.Affichage.EntreePourContinuer()
                 StopAllMusic()
                 print("...fatigué......")
-                time.sleep(2)
+                attendre(2)
                 ClearConsole()
                 if "Village Jour" in liste_des_tags:
                     PlaySound("nighty")
-                    time.sleep(5.5)
+                    attendre(5.5)
                     print("Quand vous vous réveillez, vos yeux sont accueilli par la douce lueur d'une lune fixée dans le ciel.")
                     services.Affichage.EntreePourContinuer()
                     services.Sove.ModifieTagsDansSove("Ajout","Village Nuit")
                     services.Sove.ModifieTagsDansSove("Enleve","Village Jour")
                 elif "Village Nuit" in liste_des_tags:
                     PlaySound("daythy")
-                    time.sleep(3.9)
+                    attendre(3.9)
                     print("Quand vous vous réveillez, vos oreilles sont accueilli par le bruit de la rue bondée en dessous.")
                     services.Affichage.EntreePourContinuer()
                     services.Sove.ModifieTagsDansSove("Ajout","Village Jour")

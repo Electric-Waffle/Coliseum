@@ -1,12 +1,11 @@
 """Lieux du village (étage -1) : commerçants, quartiers, chemins et habitants."""
 
 import random
-import time
 
 from coliseum import services
 from coliseum import audio
 from coliseum.audio import PermanentPlaySFX
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.exploration.salles.registre import salle_de_type
 
 
@@ -64,7 +63,7 @@ def reveler_decharge(etage, salle):
                 services.Affichage.EntreePourContinuer()
 
         audio.CHANNELSFX.set_volume(0)
-        time.sleep(0.01)
+        attendre(0.01)
         audio.CHANNELSFX.stop()
         audio.CHANNELMUSIQUEDEBASE.set_volume(1)
 
@@ -102,7 +101,7 @@ def reveler_mage(etage, salle):
         print("Vous passez les portes de la tour, en veillant a ne pas taper votre tête sur le bas plafond.")
         services.Affichage.EntreePourContinuer()
         audio.CHANNELSFX.set_volume(0)
-        time.sleep(0.01)
+        attendre(0.01)
         audio.CHANNELSFX.stop()
         audio.CHANNELMUSIQUEDEBASE.set_volume(1)
     else:
@@ -183,7 +182,7 @@ def reveler_cartographe(etage, salle):
         print("Vous faites demi tour en veillant a ne pas marcher sur les symboles écrits a terre.")
         services.Affichage.EntreePourContinuer()
         audio.CHANNELSFX.set_volume(0)
-        time.sleep(0.01)
+        attendre(0.01)
         audio.CHANNELSFX.stop()
         audio.CHANNELMUSIQUEDEBASE.set_volume(1)
     else:
@@ -206,7 +205,7 @@ def reveler_arene(etage, salle):
     print("Vous laissez le coliseum derriere vous.")
     services.Affichage.EntreePourContinuer()
     audio.CHANNELSFX.set_volume(0)
-    time.sleep(0.01)
+    attendre(0.01)
     audio.CHANNELSFX.stop()
     audio.CHANNELMUSIQUEDEBASE.set_volume(1)
 
@@ -226,7 +225,7 @@ def reveler_fabricateur(etage, salle):
         print("Vous laissez la machine et sortez de la petite cabine.")
         services.Affichage.EntreePourContinuer()
         audio.CHANNELSFX.set_volume(0)
-        time.sleep(0.01)
+        attendre(0.01)
         audio.CHANNELSFX.stop()
         audio.CHANNELMUSIQUEDEBASE.set_volume(1)
     else:
@@ -505,7 +504,7 @@ def reveler_hotel(etage, salle):
     PermanentPlaySFX("noise")
     services.Trader.DoHotel()
     audio.CHANNELSFX.set_volume(0)
-    time.sleep(0.01)
+    attendre(0.01)
     audio.CHANNELSFX.stop()
     audio.CHANNELMUSIQUEDEBASE.set_volume(1)
     print("Vous repassez dramatiquement les portes battantes du saloon. C'est a dire, en donnant un grand coup de pied dedans.")
@@ -533,7 +532,7 @@ def reveler_jardin(etage, salle):
         PermanentPlaySFX("garden_ambiance")
         services.Affichage.ParlerAvecLeDirecteur()
         audio.CHANNELSFX.set_volume(0)
-        time.sleep(0.01)
+        attendre(0.01)
         audio.CHANNELSFX.stop()
         audio.CHANNELMUSIQUEDEBASE.set_volume(1)
     else:

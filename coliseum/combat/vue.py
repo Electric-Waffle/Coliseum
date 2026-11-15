@@ -3,12 +3,11 @@
 La vue ne décide de rien : le contrôleur lui passe les textes déjà construits.
 """
 
-import time
 
 from pygame import mixer
 
 from coliseum.chemins import DOSSIER_RESSOURCES
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 
 
 class Vue:
@@ -597,7 +596,7 @@ class Vue:
     
     def AfficheRouletteBanditManchot(self, commentaire):
         print(commentaire)
-        time.sleep(1)
+        attendre(1)
 
     def AfficheCatastrophe(self, commentaire):
         self.AffichageUneLignePuisUnEntreePourContinuer(commentaire)
@@ -670,7 +669,7 @@ class Vue:
     
     def AfficheDirectionTournicotons(self, direction_a_afficher):
         print(direction_a_afficher)
-        time.sleep(0.5)
+        attendre(0.5)
         ClearConsole()
 
     def AfficheDragonAscendant(self, commentaire):
@@ -682,7 +681,7 @@ class Vue:
     
     def AfficheDirectionDragonAscendant(self, direction_a_afficher):
         print(direction_a_afficher)
-        time.sleep(0.8)
+        attendre(0.8)
         ClearConsole()
 
     def AfficheDebutTournicota(self, commentaire):
@@ -716,7 +715,7 @@ class Vue:
 
     def AfficheDebutUltimaError(self, commentaire):
         print(commentaire)
-        time.sleep(2)
+        attendre(2)
         ClearConsole()
     
     def AfficheUltimaError(self, commentaire):
@@ -775,7 +774,7 @@ class Vue:
 
     def AfficheResultatRoulette(self, commentaire, temps):
         print(commentaire)
-        time.sleep(temps)
+        attendre(temps)
         ClearConsole()
 
     def AfficheStigmaBerserker(self, pourcentage):
@@ -887,42 +886,42 @@ class Vue:
         print(" *NOOOOOOOOOOOOOOOOOONNNNNNNNNNNNNNNNNNNNNNNNNN22223334E4444487898767890¨%§/.§%§§§§§§§§§§§§§§§§* ")
         dummies = input("¨%¨£%¨%§§%¨%§/../°09Entrée°0987654323456¨%%%%§§§§§§§§§§§§")
         ClearConsole()
-        time.sleep(2)
+        attendre(2)
         ClearConsole()
         print("L'apprenti brise son amulette !")
-        time.sleep(3)
+        attendre(3)
         ClearConsole()
         print("L'apprenti ouvre une fAAille dimensionnelle !")
-        time.sleep(5)
+        attendre(5)
         ClearConsole()
         print("Vouuuuuuujjjjjj VOUs faites ASPIRER dnades !")
-        time.sleep(3)
+        attendre(3)
         ClearConsole()
         print("*JEEEEEE NEEEEE VAIIIIIISSS PAAAAAAAAASSSSS MOOOOOOOOUUUUURRRRRIIIIIRRRRRR !!!!!!§§§§§§§!§!§§!!§!*")
-        time.sleep(3)
+        attendre(3)
         ClearConsole()
         self.PlayMusic(musique + "boss_4_phase_2")
         print(" (l'apprenti fait des signes magiques dans les airs et commence a grandir, augmenter de taille."
               " Sa peau devient noir. Sa puissSSSaNNce eSSSSttt décucucucucucucuplée. Son apprence est ppppproche d'un oni, démon japonais......;;;;;////)")
-        time.sleep(9)
+        attendre(9)
         ClearConsole()
         print(" (L'apprentiOIBENOUQEFJQNOHULe MINARAI recouvre des points de vie !")
-        time.sleep(3)
+        attendre(3)
         ClearConsole()
         print(" *JJJJjjjjjjjeeeee n''''''aaaaiiii   paaaaassaspapassss ffaittitittt tooooooottotouutuuttuttt ccccaaaaaa poppouuuuuuurrrr rrrrriieenenenennnnn !!!*")
-        time.sleep(5)
+        attendre(5)
         ClearConsole()
         print(" *ETTTTT TOIIIII ????????*")
-        time.sleep(4)
+        attendre(4)
         ClearConsole()
         print("*TTTTTUUUUUUU*")
-        time.sleep(4)
+        attendre(4)
         ClearConsole()
         print("*VVVVVAAAAAA*")
-        time.sleep(4)
+        attendre(4)
         ClearConsole()
         print("*MMMMOURRRIRR*")
-        time.sleep(4)
+        attendre(4)
         ClearConsole()
         self.EntreePourContinuer()
 
@@ -987,7 +986,7 @@ class Vue:
         print("Ce que signifiait sa présence, la réponse que les êtres divins ont apportés quand a sa puissance...")
         self.EntreePourContinuer()
         print("C'était une véritable Armée de la Fin.")
-        time.sleep(3)
+        attendre(3)
         self.PlayMusic(musique + "story_end")
         ClearConsole()
 
@@ -1010,7 +1009,7 @@ class Vue:
         print("*Si IL n'est pas assez concerné pour venir me proposer un autre deal..*")
         self.EntreePourContinuer()
         print("*...ca doit être parceque je n'ai pas encore tué un archange !*")
-        time.sleep(3)
+        attendre(3)
         self.PlayMusic(musique + "story_end")
         ClearConsole()
 
@@ -1025,20 +1024,20 @@ class Vue:
         print("*...pas bavard. Je vois. C'est parce que tu es décu du combat ?*")
         self.EntreePourContinuer()
         print("*Ne t'inquiète pas. C'est pas...*")
-        time.sleep(3)
+        attendre(3)
         self.PlayMusic(musique + "boss_8_phase_2")
         ClearConsole()
         print("Des ailes de mana sortent du dos du Maitre Mage.")
-        time.sleep(3)
+        attendre(3)
         ClearConsole()
         print("*...encORE...*")
-        time.sleep(2)
+        attendre(2)
         ClearConsole()
         print("Le mana environnant se met a trembler, et la foule hurle son engouement...")
-        time.sleep(3)
+        attendre(3)
         ClearConsole()
         print("*...FINI !*")
-        time.sleep(2)
+        attendre(2)
         ClearConsole()
         print("Vous assistez a la métamorphose du Maitre Mage en Ministre du Mana, grand commandant des forces de la nature !")
         self.EntreePourContinuer()

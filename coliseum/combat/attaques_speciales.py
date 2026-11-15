@@ -6,7 +6,7 @@ import random
 import time
 
 from coliseum.chemins import DOSSIER_RESSOURCES
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 
 # nom de l'action dans la fiche du monstre -> nom de la méthode qui la joue.
 # POURQUOI des noms de méthode et pas les méthodes elles-mêmes : la table est
@@ -1126,7 +1126,7 @@ class AttaquesSpecialesMixin:
         
         ClearConsole()
         print("Vous attendez, alerte, que Le Pianiste finisse son morceau...")
-        time.sleep(66 - (time.time() - start_time))
+        attendre(66 - (time.time() - start_time))
         ClearConsole()
         return remaining_directions, attaque_terminee_sans_mourir
 

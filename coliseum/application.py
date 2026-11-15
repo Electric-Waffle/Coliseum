@@ -15,12 +15,11 @@ fonction et l'inscrire dans la table, sans toucher à la boucle.
 """
 
 import sys
-import time
 
 from coliseum import audio, services
 from coliseum.audio import PlayMusic, PlayMusicDeLetage, StopAllMusic
 from coliseum.combat.lancement import DoFight
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.erreurs import WriteErrorInErrorLog
 from coliseum.exploration.progression import DoBossOrGoDown
 from coliseum.histoire.boss_zero import DoBossZero
@@ -187,7 +186,7 @@ def _afficher_une_fausse_erreur():
     print("[ERREUR :", end=" ", flush=True)
     for _ in range(200):
         print("ERREUR :", end=" ", flush=True)
-        time.sleep(0.01)
+        attendre(0.01)
     print("]", flush=True)
     ClearConsole()
 

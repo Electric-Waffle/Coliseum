@@ -11,7 +11,7 @@ Tous les chemins sont relatifs à la racine du projet.
 
 | Emplacement | Contenu |
 |---|---|
-| `Coliseum.py` | Point d'entrée. Lance le jeu sous le filet de sécurité global. |
+| `Coliseum.py` | Point d'entrée. Choisit l'écran (fenêtre ou console) et lance le jeu sous le filet de sécurité global. |
 | `coliseum/` | Tout le code. |
 | `ColiseumDependencies/*.mp3` | Musiques. |
 | `ColiseumDependencies/sfx/*.wav` | Bruitages de combat. |
@@ -31,7 +31,8 @@ Aucun module ne calcule ces chemins lui-même : ils viennent tous de
 | `application.py` | Boucle principale et tables d'actions des menus. |
 | `services.py` | Annuaire des neuf objets uniques (voir plus bas). |
 | `erreurs.py` | Les deux filets de sécurité. |
-| `audio.py`, `console.py`, `chemins.py`, `outils.py` | Socle technique. |
+| `audio.py`, `chemins.py`, `outils.py` | Socle technique. |
+| `console.py`, `terminal/` | L'écran du jeu : fenêtre ou console (voir la fiche 05). |
 | `donnees/` | Constantes : personnages, techniques, sorts, objets, artefacts, prix du village, textes. |
 | `joueur/` | Le joueur, ses talents, ses bénédictions, ses bonus. |
 | `interface/` | Menus, textes hors combat, dessin de la carte. |
@@ -71,6 +72,7 @@ Deux états transversaux sont à connaître, tous deux dans `services.Player` :
 ```
 python Coliseum.py
  └─ erreurs.executer_avec_rapport_de_crash(lancer)
+     ├─ console.utiliser(TerminalFenetre())        sauf avec l'option --console
      └─ application.lancer_le_jeu()
          1. audio.initialiser()                    ouvre le son, réserve 2 canaux
          2. services.initialiser()                 crée les neuf objets uniques

@@ -1,11 +1,10 @@
 """Machines et services de l'étage : arbre, bols, jacuzzi, chargeur, affixeurs, distributeur..."""
 
 import random
-import time
 
 from coliseum import services
 from coliseum.audio import PlayMusic, PlayMusicDeLetage, StopAllMusic
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.donnees.actions import LISTESORTS, LISTETECHNIQUES
 from coliseum.donnees.items import LISTEITEM
 from coliseum.outils import GetRandomItemFromList
@@ -504,7 +503,7 @@ def reveler_distributeur(etage, salle):
                 services.Player.nombre_de_gold -= item_choisi["Prix"]
                 services.FloorMaker.GiveRandomArtefact(item_choisi["Nom"],"Don")
                 print("Vous inserez l'argent dans la machine, tapez le code sur le clavier numérique, et patientez quelques instants.")
-                time.sleep(10)
+                attendre(10)
                 services.Affichage.EntreePourContinuer()
                 print("L'artefact tombe enfin dans la chute, et vous pouvez le récuperer.")
                 services.Affichage.EntreePourContinuer()

@@ -2,31 +2,12 @@
 
 import csv
 import os
-import time
-import tkinter as tk
-from tkinter import PhotoImage
 
 from coliseum import services
 from coliseum.audio import PlayMusic, StopAllMusic
 from coliseum.chemins import DOSSIER_RESSOURCES
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre, montrer_image
 from coliseum.donnees.musiques import MUSIQUES_OBSERVATORIUM
-
-
-def open_image(chemin_vers_limage):
-    # Créer une fenêtre Tkinter
-    root = tk.Tk()
-
-    # Créer une image Tkinter à partir du fichier
-    image = PhotoImage(file=chemin_vers_limage)
-
-    # Créer un canevas pour afficher l'image
-    canvas = tk.Canvas(root, width=image.width(), height=image.height())
-    canvas.pack()
-    canvas.create_image(0, 0, anchor=tk.NW, image=image)
-
-    # Boucle principale Tkinter
-    root.mainloop()
 
 
 def GetChoiceRecup():
@@ -114,7 +95,7 @@ def ShowRecup():
 
         dir_path = DOSSIER_RESSOURCES
         chemin_de_limage = dir_path + "\\__py.property__\\"
-        open_image(f"{chemin_de_limage}{nom_de_limage}.xldr")
+        montrer_image(f"{chemin_de_limage}{nom_de_limage}.xldr")
     else:
         print("                           Donnée Récupérée :")
         for _ in range (0, 21):
@@ -247,7 +228,7 @@ def AffichageSecretPage3():
                 )
                 if numero == 313:
                     break
-                time.sleep(0.01)
+                attendre(0.01)
                 ClearConsole()
                 numero += 1
             print("SOLUTION TROUVEE")

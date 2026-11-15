@@ -1,7 +1,6 @@
 """Arrivée au village après la mort ou la fin d'une run."""
 
 import random
-import time
 from turtle import (
     clear,
 )
@@ -10,6 +9,7 @@ from coliseum import services
 from coliseum.audio import PlaySound, StopAllMusic
 from coliseum.commerce.materiaux import AugmenteMateriauDansDictionnaire
 from coliseum.donnees.artefacts import ARTEFACTFATALITE, ARTEFACTMELIORATIF, ARTEFACTSOPHIQUE
+from coliseum.console import attendre
 
 
 def CheckForKIA():
@@ -44,7 +44,7 @@ def PrepareTheVillage():
         services.Affichage.EntreePourContinuer()
         print("Alors, vous ouvrez les yeux.")
         services.Affichage.EntreePourContinuer()
-        time.sleep(2)
+        attendre(2)
     
     
     #changer le numero et nom de l'étage, amener les characteristiques du perso a 0.
@@ -205,7 +205,7 @@ def PrepareTheVillage():
         print("Vous prenez alors une grande inspiration...")
         print("...et ouvrez les yeux.")
         services.Affichage.EntreePourContinuer()
-        time.sleep(2)
+        attendre(2)
 
     services.Player.liste_dartefacts_optionels = []
     services.Player.points_de_defence = 0

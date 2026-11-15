@@ -1,11 +1,10 @@
 """Salles de combats particuliers : gardiens, bête, boss caché, rituel, obélisque."""
 
 import ast
-import time
 
 from coliseum import services
 from coliseum.audio import PlayMusicDeLetage, StopAllMusic
-from coliseum.console import ClearConsole
+from coliseum.console import ClearConsole, attendre
 from coliseum.exploration.progression import DoBossOrGoDown
 from coliseum.histoire.boss_zero import DoBossZero
 from coliseum.combat.lancement import combattre, livrer_combat
@@ -81,31 +80,31 @@ def reveler_bete(etage, salle):
                 services.Affichage.EntreePourContinuer()
                 StopAllMusic()
                 print("Tout à coup, les alarmes éclatent et vous vous retrouvez plongé dans le noir.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 print("Vous entendez un craquement.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 print("Puis un autre.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 print("Deux points verts apparaissent en face de vous.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 print("Ils vous fixent intensément.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 print("Vous sentez quelque chose de chaud sur votre visage.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 print("Quelque chose est proche de vous.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 print("Vous fermez les yeux, et attendez votre fin.")
-                time.sleep(6)
+                attendre(6)
                 ClearConsole()
                 print("Mais rien ne vient.")
-                time.sleep(3)
+                attendre(3)
                 ClearConsole()
                 PlayMusicDeLetage()
                 print("Quand vous rouvrez vos yeux, l'obscurité a laissé place a la fine lumière qui passe a travers la porte éventrée de la salle.")

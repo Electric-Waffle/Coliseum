@@ -2,11 +2,11 @@
 
 from pygame import mixer
 import random
-import time
 
 from coliseum import services
 from coliseum.audio import PlaySFX
 from coliseum.donnees.village import DICTIONNAIREMATERIAUFUSION
+from coliseum.console import attendre
 
 
 def AugmenteMateriauDansDictionnaire(retour = False):
@@ -34,7 +34,7 @@ def FuseMaterials(materiau_a, materiau_b):
         if materiau_a in recette_fusion and materiau_b in recette_fusion:
             services.Sove.ModifieDechetsDansSove("Ajout", materiau, 1)
             PlaySFX("fusion_y")
-            time.sleep(5)
+            attendre(5)
             print(f"...il y a quelque chose à l'interieur !")
             services.Affichage.EntreePourContinuer()
             print(f"Vous obtenez [{materiau}] !")
@@ -42,7 +42,7 @@ def FuseMaterials(materiau_a, materiau_b):
             mixer.music.set_volume(1)
             return None
     PlaySFX("fusion_n")
-    time.sleep(5)
+    attendre(5)
     print(f"...il n'y a rien d'utilisable a l'interieur.")
     services.Affichage.EntreePourContinuer()
     mixer.music.set_volume(1)

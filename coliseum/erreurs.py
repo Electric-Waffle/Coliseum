@@ -13,11 +13,13 @@ l'extérieur, un processus terminé est un processus terminé.
 Ici, la différence est faite par le TYPE de l'exception (voir le CONCEPT plus bas).
 """
 
+import sys
 import time
 import traceback
 
 from coliseum import services
 from coliseum.chemins import JOURNAL_DES_ERREURS
+from coliseum.console import attendre
 
 CODE_SORTIE_NORMALE = 0
 CODE_SORTIE_CRASH = 1
@@ -50,7 +52,7 @@ def WriteErrorInErrorLog(erreur):
         "L'écriture d'un rapport d'erreur est en cours dans le fichier ColiseumDependenciesErrorLog.txt."
     )
     print("Veuilez patienter 3 secondes...")
-    time.sleep(3)
+    attendre(3)
     services.Affichage.EntreePourContinuer()
     _dedommager_le_joueur()
 
@@ -99,15 +101,39 @@ def executer_avec_rapport_de_crash(lancer):
 def _rapporter_le_crash():
     trace = traceback.format_exc()
     journal_ecrit = _essayer_d_ecrire_dans_le_journal()
+    if journal_ecrit:
+        suite = f"Ce rapport a été enregistré dans :\n{JOURNAL_DES_ERREURS}"
+    else:
+        suite = "Le rapport n'a pas pu être enregistré : copiez le texte ci-dessus."
+    if sys.stdout is None:
+        _rapporter_dans_une_boite_de_dialogue(trace, suite)
+        return
     print("\n\n" + "=" * 70)
     print("Le jeu a rencontré une erreur et doit se fermer.")
     print("=" * 70 + "\n")
     print(trace)
-    if journal_ecrit:
-        print(f"Ce rapport a été enregistré dans :\n{JOURNAL_DES_ERREURS}")
-    else:
-        print("Le rapport n'a pas pu être enregistré : copiez le texte ci-dessus.")
+    print(suite)
     _attendre_que_le_joueur_ait_lu()
+
+
+def _rapporter_dans_une_boite_de_dialogue(trace, suite):
+    # POURQUOI : un exécutable sans console n'a pas de sortie standard
+    # (`sys.stdout` vaut None). Si le jeu plante avant que sa fenêtre existe,
+    # `print` n'afficherait rien : une boîte de dialogue reste le seul moyen
+    # de prévenir le joueur.
+    try:
+        import tkinter
+        import tkinter.messagebox
+
+        racine = tkinter.Tk()
+        racine.withdraw()
+        tkinter.messagebox.showerror(
+            "Coliseum", f"Le jeu a rencontré une erreur et doit se fermer.\n\n{trace}\n{suite}"
+        )
+        racine.destroy()
+    except Exception:
+        # Plus aucun moyen d'afficher quoi que ce soit : le journal fait foi.
+        pass
 
 
 def _essayer_d_ecrire_dans_le_journal():
@@ -122,9 +148,10 @@ def _essayer_d_ecrire_dans_le_journal():
 
 
 def _attendre_que_le_joueur_ait_lu():
-    # Lancé par double-clic, le jeu tourne dans une console qui se ferme avec
-    # lui : sans cette pause, le rapport disparaîtrait avant d'être lu.
+    # Sans cette pause, la console ou la fenêtre se fermerait avec le jeu et
+    # le rapport disparaîtrait avant d'être lu.
     try:
         input("\nAppuyez sur entrée pour fermer la fenêtre : ")
-    except (EOFError, KeyboardInterrupt):
+    except (EOFError, KeyboardInterrupt, RuntimeError):
+        # RuntimeError : `input` n'a plus d'entrée standard où lire.
         pass

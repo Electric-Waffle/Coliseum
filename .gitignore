@@ -1,3 +1,5 @@
 Sauvegardes/
 ColiseumDependenciesErrorLog.txt
 __pycache__/
+build/
+dist/

@@ -61,6 +61,7 @@ def reveler_monstre_superieur(etage, salle):
     services.Player.player_tags.append("Monstre Dopé")
     livrer_combat()
     services.Player.player_tags.remove("Monstre Dopé")
+    CheckForKIA()
     PlayMusicDeLetage()
 
     # fait que l'event soit finit et ne peut ps etre relancé
@@ -467,6 +468,7 @@ def reveler_mimique(etage, salle):
         services.Player.affronte_une_mimique = True
         livrer_combat()
         services.Player.affronte_une_mimique = False
+        CheckForKIA()
         PlayMusicDeLetage()
 
         # fait que l'event soit finit et ne peut ps etre relancé

@@ -133,9 +133,9 @@ class PreparationMixin:
             self.modele.DEGATBONUSSORTS = -100
 
         amelioration_degats_totaux = 0
-        if ["Cape Victorieuse"] in self.modele.liste_dartefacts_optionels:
+        if "Cape Victorieuse" in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += (self.modele.nombre_de_monstres_tues * 0.5)
-        if ["Contrat de Travail"] in self.modele.liste_dartefacts_optionels:
+        if "Contrat de Travail" in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += round(self.modele.nombre_de_gold // 50)
         self.modele.DEGATBONUSSORTS += ((amelioration_degats_totaux / 100)* self.modele.DEGATBONUSSORTS)
 
@@ -205,9 +205,9 @@ class PreparationMixin:
         self.modele.DEGATBONUSATTAQUE -= malus_stigma
 
         amelioration_degats_totaux = 0
-        if ["Cape Victorieuse"] in self.modele.liste_dartefacts_optionels:
+        if "Cape Victorieuse" in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += (self.modele.nombre_de_monstres_tues * 0.5)
-        if ["Contrat de Travail"] in self.modele.liste_dartefacts_optionels:
+        if "Contrat de Travail" in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += round(self.modele.nombre_de_gold // 50)
         self.modele.DEGATBONUSATTAQUE += ((amelioration_degats_totaux / 100)* self.modele.DEGATBONUSATTAQUE)
 
@@ -540,7 +540,7 @@ class PreparationMixin:
         malus_stigma = 0
         if self.modele.stigma_monstre_positif == "Roche Ténébreuse":
             malus_stigma = 100
-        self.modele.CHANCEBONUSDEFAIREBRULER += bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_brulure)
+        self.modele.CHANCEBONUSDEFAIREBRULER = bonus_vulnerable + bonus_charge + round(self.modele.accumulation_chance_brulure)
         self.modele.CHANCEBONUSDEFAIREBRULER -= malus_stigma
         # pourcentage de paralyser
         bonus_vulnerable = 0
@@ -662,7 +662,7 @@ class PreparationMixin:
         if self.modele.coeur_de_glace:
             bonus_talent = -50
         bonus_stigma = 0
-        if self.modele.stigma_joueur_positif == ["Endurci"]:
+        if self.modele.stigma_joueur_positif == "Endurci":
             bonus_stigma = -100
         self.modele.CHANCEBONUSJOUEURPARALYSE = bonus_talent + bonus_stigma
         # pourcentage de degat bonus de technique contre le joueur
@@ -676,7 +676,7 @@ class PreparationMixin:
         if self.modele.miss_hyde_transformation :
             bonus_hyde = 50
         bonus_stigma = 0
-        if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
+        if self.modele.stigma_joueur_negatif == "Attache Physique":
             bonus_stigma = 25
         bonus_force = self.modele.monstre_points_de_force * 10
         self.modele.DEGATTECHNIQUEBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde + self.modele.DEGATBONUSMONSTREBERSERKER
@@ -691,7 +691,7 @@ class PreparationMixin:
         if "Bandeau Catharsis" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 15
         bonus_stigma = 0
-        if self.modele.stigma_joueur_negatif == ["Attache Physique"]:
+        if self.modele.stigma_joueur_negatif == "Attache Physique":
             bonus_stigma = 25
         bonus_force = self.modele.monstre_points_de_intelligence * 10
         self.modele.DEGATSORTBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde + self.modele.DEGATBONUSMONSTREBERSERKER

@@ -12,7 +12,7 @@ PATTERN : Strategy. Ce module ne sait rien faire lui-même : il délègue à un
 « terminal » interchangeable, choisi au lancement.
 - `TerminalSysteme` (coliseum/terminal/systeme.py) : la vraie console.
 - `TerminalFenetre` (coliseum/terminal/fenetre.py) : une fenêtre qui imite une
-  console et contient aussi la carte.
+  console et contient aussi la carte et les récaps du joueur et du monstre.
 Le reste du jeu ne sait pas lequel est actif. Ajouter un troisième écran
 (navigateur, autre bibliothèque graphique) = écrire une classe avec ces mêmes
 méthodes, sans toucher au jeu.

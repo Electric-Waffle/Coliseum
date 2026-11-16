@@ -8,6 +8,7 @@ from coliseum.console import ClearConsole
 from coliseum.donnees.actions import LISTESORTS, LISTETECHNIQUES
 from coliseum.donnees.items import LISTEITEM, LISTEITEMAVANCE, LISTEITEMBASE, LISTEITEMUPPGRADE
 from coliseum.combat.lancement import livrer_combat
+from coliseum.histoire.village import CheckForKIA
 from coliseum.exploration.salles.registre import salle_de_type
 
 
@@ -1236,6 +1237,7 @@ def reveler_peche(etage, salle):
                     print("Vous posez la canne et amenez la main a votre arme.")
                     services.Affichage.EntreePourContinuer()
                     livrer_combat()
+                    CheckForKIA()
                     print("Ouf !")
                     PlayMusicDeLetage()
                     services.Affichage.EntreePourContinuer()

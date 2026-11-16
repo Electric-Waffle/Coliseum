@@ -79,11 +79,28 @@ def rat_geant(combat):
             "Soin": "Sort",
         },
         recompense={"Vie max": 2, "Gold": 20 + combat.bonus_gold},
+        image=r"images\monstres\rat_geant.png",
     )
 ```
 
 Deux monstres ne peuvent pas porter le même nom : le décorateur lève une
 erreur au lancement du jeu.
+
+### Image du monstre
+
+`image` est le chemin de l'image montrée dans le récap du monstre, en haut à
+droite de la fenêtre, pendant le combat (fiche 05, section 4). Le chemin part
+du dossier `ColiseumDependencies` : l'exemple ci-dessus désigne
+`ColiseumDependencies\images\monstres\rat_geant.png`.
+
+- Le `r` devant les guillemets est nécessaire avec des antislashs. Les barres
+  obliques (`"images/monstres/rat_geant.png"`) fonctionnent aussi.
+- Formats acceptés : PNG et GIF.
+- Sans `image`, ou si le fichier est introuvable, le récap affiche
+  `-- No Data Found --` à la place de l'image ; les caractéristiques restent
+  affichées.
+- Un boss à phases peut donner une image différente dans la fiche de chaque
+  phase. Une phase sans `image` garde l'image de la phase précédente.
 
 ## 3. Faire apparaître le monstre
 
@@ -367,6 +384,7 @@ def mon_monstre(combat):
         recompense={"Vie max": 2, "Gold": 20 + combat.bonus_gold, "Materiau": "Coeur Gravitaire"},
 
         # --- facultatif
+        image=r"images\monstres\mon_monstre.png",  # image du récap, depuis ColiseumDependencies (PNG ou GIF)
         tags=["Terreur"],                         # marqueurs de mécaniques spéciales
         etat_initial={"est_maudit_par_les_items": True,          # autres attributs du modèle
                       "est_maudit_par_les_items_nombre_tour": 999},  # à fixer au début du combat
@@ -388,4 +406,5 @@ par `SetAttributesFromName()`, qui remplit alors la vie et le mana à leur maxim
 - [ ] les clés de `recompense` sont dans la liste reconnue
 - [ ] pour un boss à phases : branche dans `CheckHp()` et fiche de chaque phase
 - [ ] les fichiers de musique de l'étage existent
+- [ ] image posée dans `ColiseumDependencies` et chemin donné dans `image=` (facultatif)
 - [ ] description ajoutée dans `DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE` ("Les Ennemis" ou "Les Boss")

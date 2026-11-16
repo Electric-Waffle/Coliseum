@@ -1247,6 +1247,7 @@ def reveler_levier(etage, salle):
             services.Player.player_tags.append("Monstre De Niveau Superieur")
             livrer_combat()
             services.Player.player_tags.remove("Monstre De Niveau Superieur")
+            CheckForKIA()
             PlayMusicDeLetage()
         elif effet_aleatoire == 4:
             print(
@@ -1312,6 +1313,7 @@ def reveler_levier(etage, salle):
             print("...un monstre apparait !")
             services.Affichage.EntreePourContinuer()
             livrer_combat()
+            CheckForKIA()
             PlayMusicDeLetage()
         elif effet_aleatoire == 9:
             print("...un orbe bleu apparait !")

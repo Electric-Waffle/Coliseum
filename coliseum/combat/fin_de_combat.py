@@ -487,7 +487,11 @@ class FinDeCombatMixin:
                             self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Boss", self.modele.monstre_nom)
                         else :
                             self.Sove.RajouteEntreeAuLivreCigogneBlancheSiOnAPas("Les Ennemis", self.modele.monstre_nom)
-            if self.modele.possede_une_fee == False :
+            # La fée a été utilisée PENDANT ce combat : le joueur en avait une
+            # en entrant (self.Player) et le combat l'a consommée (self.modele).
+            # ATTENTION : tester seulement le modèle affichait le message à
+            # chaque fin de combat pour un joueur qui n'a jamais eu de fée.
+            if self.Player.possede_une_fee and not self.modele.possede_une_fee:
                 self.vue.AffichePlusDeFee()
                 self.Player.possede_une_fee = False
                 

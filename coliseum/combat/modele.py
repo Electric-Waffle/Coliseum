@@ -1404,6 +1404,7 @@ class Model:
         self.monstre_a_utilise_muet_ce_tour = False
         self.monstre_a_utilise_confus_ce_tour = False
         self.monstre_nom = "Bob"
+        self.monstre_image = None  # chemin de l'image du récap, donné par la fiche du monstre
         self.monstre_passe_son_tour = False
         self.monstre_en_etat_de_choc = False
         self.monstre_en_etat_de_choc_nombre_tour = False

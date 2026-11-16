@@ -28,6 +28,7 @@ Ajouter un monstre :
             vies_supplementaires=0, vie_max=40, mana_max=10,
             actions={"Coup de Boule": "Technique", "Soin": "Sort"},
             recompense={"Vie max": 2, "Gold": 20 + combat.bonus_gold},
+            image=r"images\monstres\rat_geant.png",
         )
 
 puis faire apparaître son nom (listes de monstres dans combat/modele.py).
@@ -49,6 +50,7 @@ _ATTRIBUT_DU_MODELE = {
     "actions": "monstre_liste_actions",
     "recompense": "monstre_recompense",
     "tags": "monstre_tags",
+    "image": "monstre_image",
 }
 
 
@@ -90,6 +92,9 @@ class FicheMonstre:
     - actions      : {nom de l'action: "Technique" ou "Sort"}
     - recompense   : {nom du gain: quantité}, donnée au joueur s'il gagne
     - tags         : marqueurs activant des mécaniques spéciales du combat
+    - image        : chemin de l'image du monstre, à partir du dossier
+                     ColiseumDependencies (PNG ou GIF), montrée dans le récap
+                     du monstre. Sans image : « -- No Data Found -- ».
     - etat_initial : autres attributs du modèle à fixer, {attribut: valeur}
     - bonus_de_vie_de_l_etage : False si la vie ne doit pas grandir avec l'étage
     - finition     : fonction(modele) appelée après l'application de la fiche,
@@ -99,7 +104,7 @@ class FicheMonstre:
     def __init__(self, stigma_positif=None, stigma_negatif=None, stigma_bonus=None,
                  force=None, intelligence=None, resistance=None,
                  vies_supplementaires=None, vie_max=None, mana_max=None,
-                 actions=None, recompense=None, tags=None,
+                 actions=None, recompense=None, tags=None, image=None,
                  etat_initial=None, bonus_de_vie_de_l_etage=True, finition=None):
         self.stigma_positif = stigma_positif
         self.stigma_negatif = stigma_negatif
@@ -113,6 +118,7 @@ class FicheMonstre:
         self.actions = actions
         self.recompense = recompense
         self.tags = tags
+        self.image = image
         self.etat_initial = etat_initial or {}
         self.bonus_de_vie_de_l_etage = bonus_de_vie_de_l_etage
         self.finition = finition

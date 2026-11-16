@@ -1,6 +1,6 @@
 """Point d'entrée du jeu.
 
-    python Coliseum.py             joue dans la fenêtre du jeu (texte + carte)
+    python Coliseum.py             joue dans la fenêtre du jeu (récaps, carte, texte)
     python Coliseum.py --console   joue dans le terminal, comme à l'origine
 
 Ce fichier ne fait que deux choses : choisir l'écran du jeu, puis lancer le
@@ -25,7 +25,13 @@ def lancer():
     if OPTION_CONSOLE not in sys.argv:
         from coliseum.terminal.fenetre import TerminalFenetre
 
-        console.utiliser(TerminalFenetre())
+        from coliseum.interface.recapitulatif import carte_possedee, recap_du_joueur, recap_du_monstre
+
+        fenetre = TerminalFenetre()
+        console.utiliser(fenetre)
+        # La fenêtre vient lire ces deux fonctions plusieurs fois par seconde
+        # pour tenir à jour les récaps du joueur et du monstre.
+        fenetre.suivre(recap_du_joueur, recap_du_monstre, carte_possedee)
 
     from coliseum.application import lancer_le_jeu
 

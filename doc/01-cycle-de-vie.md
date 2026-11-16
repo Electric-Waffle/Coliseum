@@ -73,6 +73,7 @@ Deux états transversaux sont à connaître, tous deux dans `services.Player` :
 python Coliseum.py
  └─ erreurs.executer_avec_rapport_de_crash(lancer)
      ├─ console.utiliser(TerminalFenetre())        sauf avec l'option --console
+     ├─ fenetre.suivre(recap_du_joueur, recap_du_monstre)   récaps tenus à jour (fiche 05, section 4)
      └─ application.lancer_le_jeu()
          1. audio.initialiser()                    ouvre le son, réserve 2 canaux
          2. services.initialiser()                 crée les neuf objets uniques

@@ -8,6 +8,7 @@ from coliseum.console import ClearConsole, attendre
 from coliseum.exploration.progression import DoBossOrGoDown
 from coliseum.histoire.boss_zero import DoBossZero
 from coliseum.combat.lancement import combattre, livrer_combat
+from coliseum.histoire.village import CheckForKIA
 from coliseum.exploration.salles.registre import salle_de_type
 
 
@@ -36,6 +37,7 @@ def reveler_petit_gardien(etage, salle):
     print("Vous entendez un bruit derrière vous, et découvrez un monstre !")
     services.Affichage.EntreePourContinuer()
     livrer_combat()
+    CheckForKIA()
     PlayMusicDeLetage()
 
     # fait que l'event soit finit et ne peut ps etre relancé

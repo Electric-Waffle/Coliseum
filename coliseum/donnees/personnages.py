@@ -666,6 +666,39 @@ LISTEDEPERSONNAGE = {
 }
 
 
+# Image de chaque personnage, affichée dans le récap en haut à gauche de la
+# fenêtre du jeu (coliseum/interface/recapitulatif.py).
+# Le chemin part du dossier ColiseumDependencies, par exemple :
+#     "Saumel": r"images\personnages\saumel.png",
+# ATTENTION : le `r` devant les guillemets est nécessaire avec des antislashs
+# (sans lui, Python lirait `\n` ou `\t` comme un caractère spécial). Les
+# barres obliques "images/personnages/saumel.png" fonctionnent aussi.
+# Formats acceptés : PNG et GIF. None, ou un personnage absent de la liste,
+# affiche « -- No Data Found -- » à la place de l'image.
+IMAGES_DES_PERSONNAGES = {
+    "Saumel": None,
+    "Elma": None,
+    "Auguste": None,
+    "Saria": None,
+    "Vesperum": None,
+    "Lucien": None,
+    "Élémia": None,
+    "Samantha": None,
+    "Emy": None,
+    "Terah": None,
+    "Peralta": None,
+    "Redde": None,
+    "Valfreya": None,
+    "Bob": None,
+    "Voyageur": None,
+    "Ahti": None,
+    "Alex": None,
+    "Terrance": None,
+    "Cassandra": None,
+    "Neil": None,
+}
+
+
 DICTIONNAIREDEPERSONNAGEAAFFICHER = {}
 
 

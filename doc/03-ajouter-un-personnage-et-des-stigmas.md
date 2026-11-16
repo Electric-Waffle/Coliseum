@@ -78,6 +78,13 @@ points suivants ne concernent que la fin de la run et le livre.
 | Artefact de récompense | entrée `"Mon Personnage": ["Nom de l'artefact", "description"]` dans `ARTEFACTETDESCRIPTION`, dans `GiveGift()` | voir l'avertissement ci-dessous |
 | Livre de la Cigogne Blanche | entrée dans `DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE["Les Personnages"]` (`donnees/bibliotheque.py`) | `KeyError` à l'écriture du livre |
 | Personnage caché | condition sur un tag permanent dans `ChoseCharacter()` et `GetChoixPersonnageChoice()`, comme pour "Neil" | le personnage est visible dès le début |
+| Image du récap | entrée `"Mon Personnage": r"images\personnages\mon_personnage.png"` dans `IMAGES_DES_PERSONNAGES` (`donnees/personnages.py`, juste sous `LISTEDEPERSONNAGE`) | le récap affiche `-- No Data Found --` à la place de l'image |
+
+L'image est montrée dans le récap du joueur, en haut à gauche de la fenêtre
+(fiche 05, section 4). Le chemin part du dossier `ColiseumDependencies` ;
+formats PNG et GIF. Elle est rangée dans un dictionnaire à part, et non dans
+la liste du personnage, parce que cette liste est lue par position : y ajouter
+une valeur aurait obligé à modifier les vingt personnages existants.
 
 **À vérifier.** `GiveGift()` lit `ARTEFACTETDESCRIPTION[nom_du_personnage]`
 sans valeur par défaut. Dans le code actuel, Alex, Terrance, Cassandra et Neil
@@ -286,6 +293,7 @@ Par convention, ces méthodes s'appellent `EffetStigma...` et vivent dans
 - [ ] entrée ajoutée à `LISTEDEPERSONNAGE`, 21 valeurs dans l'ordre
 - [ ] techniques, sorts, objets, talents et artefacts de départ existent sous ce nom exact
 - [ ] chaque stigma nouveau a au moins un test dans le code, avec le nom copié-collé
+- [ ] image dans `IMAGES_DES_PERSONNAGES` (facultatif)
 - [ ] branche dans `ShowStory()`
 - [ ] entrée dans `ARTEFACTETDESCRIPTION` (`GiveGift()`)
 - [ ] entrée dans `DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE["Les Personnages"]`

@@ -923,7 +923,9 @@ class ActionsJoueurMixin:
                             nombre_aleatoire_coup = 100
                         self.vue.AfficheComboElectrique(commentaire, paralyse)
                     degat = 5
-                    degat = (
+                    # `+=` : le bonus s'ajoute aux 5 points de base. L'ancien
+                    # `=` remplaçait la base par le seul bonus.
+                    degat += (
                         round(((self.modele.DEGATBONUSATTAQUE + self.modele.DEGATBONUSATTAQUEFOUDRE) / 100) * degat)
                     )
                     degat = degat * nombre_de_coup
@@ -2087,7 +2089,10 @@ class ActionsJoueurMixin:
                     pourcentage = (self.modele.DEGATBONUSSORTGLACE +
                                    self.modele.DEGATBONUSSORTTERRE +
                                    self.modele.DEGATBONUSSORTS)
-                    degat += round((pourcentage / 100) * degat_de_base )
+                    # ATTENTION : `degat = base + bonus`. L'ancien `degat += bonus`
+                    # utilisait une variable jamais créée dans cette branche
+                    # (UnboundLocalError) : lancer Avalanche faisait planter le combat.
+                    degat = degat_de_base + round((pourcentage / 100) * degat_de_base)
                     commentaire = ("Vous invoquez une avalanche de rochers et de glace !"
                                    "\nL'ennemi se retrouve gelé pendant 2 tours et"
                                    f" perd {degat} points de vie par lapidation ! ")

@@ -35,6 +35,8 @@ NOM = "Coliseum"
 DOSSIER_DE_SORTIE = os.path.join(RACINE, "dist")
 DOSSIER_DE_TRAVAIL = os.path.join(RACINE, "build")
 RESSOURCES = "ColiseumDependencies"
+# ATTENTION : un vrai fichier .ico (un .png renommé ne fonctionne pas).
+ICONE = os.path.join(RACINE, RESSOURCES, "icone.ico")
 
 # Présents dans le dossier de ressources mais inutiles au joueur.
 A_NE_PAS_COPIER = ("__pycache__", "pygame_bonne_version", "*.py", "*.pyc")
@@ -51,8 +53,12 @@ def construire_l_executable():
         "--distpath", DOSSIER_DE_SORTIE,
         "--workpath", DOSSIER_DE_TRAVAIL,
         "--specpath", DOSSIER_DE_TRAVAIL,
-        os.path.join(RACINE, "Coliseum.py"),
     ]
+    # Icône de Coliseum.exe (explorateur, barre des tâches). Facultative :
+    # sans le fichier, l'exécutable garde l'icône par défaut de PyInstaller.
+    if os.path.isfile(ICONE):
+        commande += ["--icon", ICONE]
+    commande.append(os.path.join(RACINE, "Coliseum.py"))
     subprocess.check_call(commande, cwd=RACINE)
 
 

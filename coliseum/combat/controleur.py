@@ -41,6 +41,7 @@ from coliseum.combat.preparation import PreparationMixin
 from coliseum.combat.stigmas import StigmasMixin
 from coliseum.combat.talents import TalentsMixin
 from coliseum.console import ClearConsole
+from coliseum.interface import recapitulatif
 
 
 class Control(
@@ -124,27 +125,37 @@ class Control(
 
     def Battle(self):
         """Déroule un combat complet, de l'apparition du monstre aux récompenses."""
-        self._preparer_le_combat()
-        while self.modele.InCombat:
-            # Les talents peuvent changer les caractéristiques des actions d'un
-            # tour à l'autre : les tables d'actions sont recalculées à chaque tour.
-            self.PatternDesignConstantUpdater()
-            if not self.CheckHp():
-                break
-            self._jouer_le_tour_du_joueur()
-            if not self.CheckHp():
-                break
-            type_de_laction_du_monstre = self._jouer_le_tour_du_monstre()
-            if not self.CheckHp(type_de_laction_du_monstre):
-                break
-            self.FinTour()
-        self.CheckForGameOver()
+        # CONCEPT : `try / finally`. Que le combat se termine normalement ou
+        # par une erreur, le récap du monstre est retiré de l'écran.
+        try:
+            self._preparer_le_combat()
+            while self.modele.InCombat:
+                # Les talents peuvent changer les caractéristiques des actions d'un
+                # tour à l'autre : les tables d'actions sont recalculées à chaque tour.
+                self.PatternDesignConstantUpdater()
+                if not self.CheckHp():
+                    break
+                self._jouer_le_tour_du_joueur()
+                if not self.CheckHp():
+                    break
+                type_de_laction_du_monstre = self._jouer_le_tour_du_monstre()
+                if not self.CheckHp(type_de_laction_du_monstre):
+                    break
+                self.FinTour()
+            self.CheckForGameOver()
+        finally:
+            # ATTENTION : à faire AVANT les récompenses. `MontreFuiteOuRecompense`
+            # recopie le modèle dans le joueur puis ajoute les gains au joueur :
+            # à partir de là, c'est le joueur que le récap doit relire.
+            recapitulatif.oublier_le_combat()
         self.MontreFuiteOuRecompense()
 
     def _preparer_le_combat(self):
         # Demande au joueur si le mana le bénit ou le maudit (talents d'affinité).
         self.SetBenedictionDuMana()
         self.MonsterMaker()
+        # Le monstre existe : son récap remplace la carte dans la fenêtre.
+        recapitulatif.suivre_le_combat(self)
         self.SetupTimeSands()
         self.PatternDesignConstantUpdater()
         self.AfficheMonstreNiveauEtMusique()
@@ -229,7 +240,7 @@ class Control(
         self.modele.points_de_mana += points_de_mana_recouverts
         if self.modele.points_de_mana > self.modele.points_de_mana_max :
             self.modele.points_de_mana = self.modele.points_de_mana_max
-        if ["Collier de Nephilim"] in self.modele.liste_dartefacts_optionels:
+        if "Collier de Nephilim" in self.modele.liste_dartefacts_optionels:
             self.modele.points_de_vie += round(points_de_mana_recouverts // 2)
             if self.modele.points_de_vie > self.modele.points_de_vie_max :
                 self.modele.points_de_vie = self.modele.points_de_vie_max

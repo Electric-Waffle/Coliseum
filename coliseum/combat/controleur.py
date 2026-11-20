@@ -97,6 +97,8 @@ class Control(
         # applique/affiche les alteration d'état et diminue leur
         # tours d'application de 1.
         self.AppliqueEtMetAJourAlterationEtat()
+        # le mana revient un peu chaque tour
+        self.RegenerationDeManaParTour()
         # applique les stigmas
         self.ApplicationStigmaPourFinDuTour()
         # remet a 0 les variable a_utilise_element_ce_tour
@@ -109,6 +111,16 @@ class Control(
         self.cleanTags()
         # augmente le nombre de tour
         self.modele.nombre_de_tours += 1
+
+    def RegenerationDeManaParTour(self):
+        """Rend 3 % du mana max (au moins 1) à la fin de chaque tour.
+
+        POURQUOI : le mana ne revenait par aucun moyen automatique. Avec 10 à
+        25 points au départ et des sorts à 5-40, on lançait 1 à 5 sorts par
+        combat, et les objets de mana devenaient obligatoires.
+        """
+        if self.modele.points_de_mana_max > 0 and self.modele.points_de_vie > 0:
+            self.RecouvrementDeMana(max(1, round(0.03 * self.modele.points_de_mana_max)))
 
     def cleanTags(self):
         for tag in [

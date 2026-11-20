@@ -432,18 +432,7 @@ class ActionsJoueurMixin:
                                     commentaire_element = f"\nVous enflammez l'ennemi pour {nombre_tour} tours supplémentaires !"
                                 else:
                                     # finition des degats
-                                    pourcentage_degat_du_feu = (
-                                        self.modele.monstre_est_en_feu_nombre_tour
-                                        * (
-                                            self.modele.monstre_est_en_feu_degat
-                                            + self.modele.DEGATBONUSFEU
-                                        )
-                                    )
-                                    degat_du_feu = round(
-                                        pourcentage_degat_du_feu
-                                        * self.modele.monstre_points_de_vie_max
-                                    )
-                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    degat_du_feu = self.CalculeCoupDeGraceDeLaBrulureSurMonstre()
                                     self.modele.monstre_points_de_vie -= degat_du_feu
                                     # arret du feu
                                     self.modele.monstre_est_en_feu_nombre_tour = 0
@@ -575,18 +564,7 @@ class ActionsJoueurMixin:
                                         )
                                 else:
                                     # finition des degats
-                                    pourcentage_degat_du_feu = (
-                                        self.modele.monstre_est_en_feu_nombre_tour
-                                        * (
-                                            self.modele.monstre_est_en_feu_degat
-                                            + self.modele.DEGATBONUSFEU
-                                        )
-                                    )
-                                    degat_du_feu = round(
-                                        pourcentage_degat_du_feu
-                                        * self.modele.monstre_points_de_vie_max
-                                    )
-                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    degat_du_feu = self.CalculeCoupDeGraceDeLaBrulureSurMonstre()
                                     self.modele.monstre_points_de_vie -= degat_du_feu
                                     # arret du feu
                                     self.modele.monstre_est_en_feu_nombre_tour = 0
@@ -1633,18 +1611,7 @@ class ActionsJoueurMixin:
                                         )
                                 else:
                                     # finition des degats
-                                    pourcentage_degat_du_feu = (
-                                        self.modele.monstre_est_en_feu_nombre_tour
-                                        * (
-                                            self.modele.monstre_est_en_feu_degat
-                                            + self.modele.DEGATBONUSFEU
-                                        )
-                                    )
-                                    degat_du_feu = round(
-                                        pourcentage_degat_du_feu
-                                        * self.modele.monstre_points_de_vie_max
-                                    )
-                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    degat_du_feu = self.CalculeCoupDeGraceDeLaBrulureSurMonstre()
                                     self.modele.monstre_points_de_vie -= degat_du_feu
                                     # arret du feu
                                     self.modele.monstre_est_en_feu_nombre_tour = 0
@@ -1778,18 +1745,7 @@ class ActionsJoueurMixin:
                                         )
                                 else:
                                     # finition des degats
-                                    pourcentage_degat_du_feu = (
-                                        self.modele.monstre_est_en_feu_nombre_tour
-                                        * (
-                                            self.modele.monstre_est_en_feu_degat
-                                            + self.modele.DEGATBONUSFEU
-                                        )
-                                    )
-                                    degat_du_feu = round(
-                                        pourcentage_degat_du_feu
-                                        * self.modele.monstre_points_de_vie_max
-                                    )
-                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    degat_du_feu = self.CalculeCoupDeGraceDeLaBrulureSurMonstre()
                                     self.modele.monstre_points_de_vie -= degat_du_feu
                                     # arret du feu
                                     self.modele.monstre_est_en_feu_nombre_tour = 0
@@ -1955,18 +1911,7 @@ class ActionsJoueurMixin:
                                         )
                                 else:
                                     # finition des degats
-                                    pourcentage_degat_du_feu = (
-                                        self.modele.monstre_est_en_feu_nombre_tour
-                                        * (
-                                            self.modele.monstre_est_en_feu_degat
-                                            + self.modele.DEGATBONUSFEU
-                                        )
-                                    )
-                                    degat_du_feu = round(
-                                        pourcentage_degat_du_feu
-                                        * self.modele.monstre_points_de_vie_max
-                                    )
-                                    degat_du_feu = self.SiZeroRameneAUn(degat_du_feu)
+                                    degat_du_feu = self.CalculeCoupDeGraceDeLaBrulureSurMonstre()
                                     self.modele.monstre_points_de_vie -= degat_du_feu
                                     # arret du feu
                                     self.modele.monstre_est_en_feu_nombre_tour = 0
@@ -2279,8 +2224,10 @@ class ActionsJoueurMixin:
                                        "\nPensez, cela serait honteux d'aller aggresser quelqu'un qui n'est plus sur le champ de bataille !")
                     self.vue.AfficheActionKikimora(commentaire)
             if "Ecaille d'Ouroboros" in self.modele.liste_dartefacts_optionels:
-                commentaire = "l'Ecaille d'Ouroboros réagit a votre sort, et vous reprenez 2 points de vie !"
-                self.modele.points_de_vie += 2
+                # valeur plate qui grandit avec l'étage : 1,5 PV par étage, arrondi
+                soin_ouroboros = max(1, round(1.5 * max(1, self.Player.numero_de_letage)))
+                commentaire = f"l'Ecaille d'Ouroboros réagit a votre sort, et vous reprenez {soin_ouroboros} points de vie !"
+                self.modele.points_de_vie += soin_ouroboros
                 self.EquilibragePointsDeVieEtManaEtEndurance()
                 self.vue.AfficheOuroboros(commentaire)
         else:

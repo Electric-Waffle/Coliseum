@@ -21,7 +21,7 @@ def PasseDeLivraisonABonus():
                 niveau_de_luppgrade = liste_de_uppgrade_a_afficher[uppgrade]
                 print(f"{uppgrade} de niveau {niveau_de_luppgrade}")
                 if uppgrade == "Chapeau":
-                    gain = 4 * niveau_de_luppgrade
+                    gain = 3 * niveau_de_luppgrade
                     print(f"     *Vous gagnez {gain} points d'intelligence !\n")
                     services.Player.points_dintelligence += gain
                 elif uppgrade == "Boucles d'Oreille":
@@ -37,7 +37,7 @@ def PasseDeLivraisonABonus():
                     print(f"     *Vous gagnez {gain} points de défence !\n")
                     services.Player.points_de_defence += gain
                 elif uppgrade == "Bracelet":
-                    gain = 4 * niveau_de_luppgrade
+                    gain = 3 * niveau_de_luppgrade
                     print(f"     *Vous gagnez {gain} points de force !\n")
                     services.Player.points_de_force += gain
                 elif uppgrade == "Gants":
@@ -71,28 +71,28 @@ def PasseDeLivraisonABonus():
                     print(f"     *Vous buvez immédiatement la concoction et votre corps récupere désormais {gain} points de vie supplémentaires lorsque il regagne des points de vie, et ce pour toute les sources !\n")
                     services.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Tisane d'Ecorce"] = gain
                 elif uppgrade == "Charge de Feu":
-                    gain = 5 * niveau_de_luppgrade
-                    print(f"     *Vous gagnez {gain}% de dégat supplémentaire pour vos attaques et sorts de feu !\n")
+                    gain = 10 * niveau_de_luppgrade
+                    print(f"     *Vous gagnez {gain}% de dégâts bonus pour vos attaques et sorts de feu !\n")
                     services.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Feu"] = gain
                 elif uppgrade == "Charge de Glace":
-                    gain = 5 * niveau_de_luppgrade
-                    print(f"     *Vous gagnez {gain}% de dégat supplémentaire pour vos attaques et sorts de glace !\n")
+                    gain = 10 * niveau_de_luppgrade
+                    print(f"     *Vous gagnez {gain}% de dégâts bonus pour vos attaques et sorts de glace !\n")
                     services.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Glace"] = gain
                 elif uppgrade == "Charge de Foudre":
-                    gain = 5 * niveau_de_luppgrade
-                    print(f"     *Vous gagnez {gain}% de dégat supplémentaire pour vos attaques et sorts de foudre !\n")
+                    gain = 10 * niveau_de_luppgrade
+                    print(f"     *Vous gagnez {gain}% de dégâts bonus pour vos attaques et sorts de foudre !\n")
                     services.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Foudre"] = gain
                 elif uppgrade == "Charge de Terre":
-                    gain = 5 * niveau_de_luppgrade
-                    print(f"     *Vous gagnez {gain}% de dégat supplémentaire pour vos attaques et sorts de terre !\n")
+                    gain = 10 * niveau_de_luppgrade
+                    print(f"     *Vous gagnez {gain}% de dégâts bonus pour vos attaques et sorts de terre !\n")
                     services.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Terre"] = gain
                 elif uppgrade == "Charge de Chair":
-                    gain = 5 * niveau_de_luppgrade
-                    print(f"     *Vous gagnez {gain}% de dégat supplémentaire pour vos attaques et sorts physiques !\n")
+                    gain = 10 * niveau_de_luppgrade
+                    print(f"     *Vous gagnez {gain}% de dégâts bonus pour vos attaques et sorts physiques !\n")
                     services.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Chair"] = gain
                 elif uppgrade == "Charge de Sang":
-                    gain = 5 * niveau_de_luppgrade
-                    print(f"     *Vous gagnez {gain}% de dégat supplémentaire pour vos attaques et sorts de sang !\n")
+                    gain = 10 * niveau_de_luppgrade
+                    print(f"     *Vous gagnez {gain}% de dégâts bonus pour vos attaques et sorts de sang !\n")
                     services.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Charge de Sang"] = gain
                 elif uppgrade == "Ration Jindagee":
                     gain = 2 * niveau_de_luppgrade

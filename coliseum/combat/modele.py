@@ -2705,6 +2705,8 @@ class Model:
         self.CHANCEBONUSJOUEURLAPIDE = 0 #===
         self.BONUSREDUCTIONDEGAT = 0
         self.BONUSREDUCTIONDEGATSURJOUEUR = 0 #====
+        self.DEFENCEEFFICACE = 0  # défence du joueur après malus (Miss Hyde) : sert à la réduction des coups
+        self.DEGATBONUSETAGEDUMONSTRE = 0  # bonus de dégâts des attaques normales des monstres selon l'étage
         self.BONUSREDUCTIONMANASORTTOUT = 0
         self.BONUSREDUCTIONMANASORTTERRE = 0
         self.BONUSREDUCTIONMANASORTFOUDRE = 0

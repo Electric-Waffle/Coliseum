@@ -515,7 +515,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
         "Petite Pierre Philosophale": ("Ce prototype permet de transmuter une quantitée limitée de choses en or.\nGold + 1000"),  # gold t
         "Anneau Cramoisi": ("Cet anneau forgé pendant la Guerre de l'Interdit a bu le sang de nombreux dieux et déesses afin de conferer leur endurance a son porteur.\nEndurance + 20"),  # endurance t
         "Orbe de Disruption": (
-            "Cet orbe vient de l'Ains Terra Net, le monde des voyageurs, et perturbe le mana environnant.\nLes monstres avec un réservoir de mana brisé perdent 10 pv supplémentaires par tour !"),  # degat quand ennemi plus mana
+            "Cet orbe vient de l'Ains Terra Net, le monde des voyageurs, et perturbe le mana environnant.\nLes monstres avec un réservoir de mana brisé perdent en plus 6 pv par numéro d'étage a chaque tour !"),  # degat quand ennemi plus mana
         "Plume de Munin": ("Cette plume vient de Munin, un des corbeaux d'Odin qui voyage a travers les neufs mondes, et confère a son porteur une certaine aisance a esquiver les attaques.\nTaux esquive + 6"),  # esquive t
         "Collier des Brísingar": ("Ce collier porté par Freya élève le corps et son réservoir de mana a une condition optimale pour le rendre plus charismatique.\nVie + 8, Mana + 8"),  # vie et mana t
         "Draupnir": ("D'après les légendes, cet anneau est sensé se multiplier par 9 toute les 9 nuits.\nIl n'a pas l'air de réagir pour le moment..."),  # gold t
@@ -555,7 +555,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
             "Un petit bouclier a fixer au niveau de la paume, ayant appartenu a un faiseur de légende.\nVotre défence augmente encore plus lorsque vous vous protégez."
         ),  # defence quand se protege * 1.5
         "Ecaille d'Ouroboros": (
-            "L'écaille d'un divin serpent signifiant le renouveau et l'infini.\nVous regagnez 2 points de vie a chaque utilisation de sorts."
+            "L'écaille d'un divin serpent signifiant le renouveau et l'infini.\nVous regagnez 1,5 point de vie par numéro d'étage (arrondi) a chaque utilisation de sorts."
         ),  # Rend 2 pv par utilisation de sort
         "Serment d'Heimdall": (
             "La marque du serment d'un dieu omniscient envers le peuple qui a continué a le prier dans le pire des moments.\nIl y a de très faibles chance qu'un sort utilise son mana au lieu du votre."
@@ -576,7 +576,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
             "La forme cristallisée du voeu du plus monstreux des hommes qui n'a formulé qu'une seule demande au génie en face de lui : Devenir une meilleure personne.\nVotre stigma négatif disparait a son contact."
         ),  # Efface le stigma négatif
         "Haricot Magique": (
-            "La graine d'une plante monstreuse amenant son planteur dans une dimension remplie de ses semblables, affamés et en manque de nutriments, cachée dans les nuages.\nSes racines tentaculaires cherchant le sang ne peuvent être stoppées que par une lame plantée dans la graine originelle.\nInvoque des roches depuis sa dimension d'origine, augmentant les dégâts de l'effet [Lapidation]."
+            "La graine d'une plante monstreuse amenant son planteur dans une dimension remplie de ses semblables, affamés et en manque de nutriments, cachée dans les nuages.\nSes racines tentaculaires cherchant le sang ne peuvent être stoppées que par une lame plantée dans la graine originelle.\nInvoque des roches depuis sa dimension d'origine, ajoutant +25% de dégâts bonus a l'effet [Lapidation]."
         ),  # 20% de degats supplémentaires par lapidation
         "Miette de Pain Congelée": (
             "La seule trace d'enfants emmenés dans les sombres forêts du continent pour y être perdus par leurs parents en manque d'argent.\nLa rancoeur d'âmes pures englouties par ce qui se cache dans les bois fait durer l'altération d'état [Gelure] pendant 2 tours supplémentaires."
@@ -606,13 +606,13 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
             ("Un artefact témoignant de l'amour entre un paysant devenu démon et une papesse devenue ange, laissée a leur enfant avant de mourir.\nRecouvrir des pm permet de recouvrir des pv, avec un ratio 2/1 (2pm regagnés ==) 1 pv regagné en plus)")
         ),
         "Cape Victorieuse": (
-            ("Une cape macabre cousue avec les fils d'un drapeau pirate et les ailes du Ministre du Mana.\nChaque ennemi tué augmente de 0.5% les dégâts totaux.")
+            ("Une cape macabre cousue avec les fils d'un drapeau pirate et les ailes du Ministre du Mana.\nChaque ennemi tué augmente de 0.5% votre bonus de dégâts total.")
         ),
         "Schmilblick": (
             ("Un bidule bizarre crée par une inventrice farfelue.\nA l'entrée d'un nouvel étage, toutes ses salles sont directement dessinées sur la carte (annule les effets du Monocle de Vérité)")
         ),
         "Contrat de Travail": (
-            ("Un bout de papier promettant la puissance aux économes afin qu'ils ne se fassent plus martyriser par le système.\nVous gagnez 2% de dégâts totaux supplementaire par paquets de 50 pièces possédé.")
+            ("Un bout de papier promettant la puissance aux économes afin qu'ils ne se fassent plus martyriser par le système.\nVotre bonus de dégâts total augmente de 1% par paquet de 50 pièces possédé (maximum +100%).")
         ),
         "Dessin Nostalgique": (
             ("Un dessin au charbon d'un vieil homme en plein sommeil, adossé contre une louve.\nPasser son tour donne l'altération d'état *Concentration* pendant 2 tours, qui réduit le nombre de pm nécéssaire pour chaque sorts.")
@@ -630,7 +630,7 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
             ("Une verre divin de lait fermenté apprécié par un certain dieu nordique jeté hors de son throne par une *valkyrie inutile au combat*.\nLes nouvelles techniques apprises donnent 10pm max supplémentaires.\nLes nouveaux sorts appris donnent 10pv max supplémentaires.")
         ),
         "Pin's Extincteur": (
-            ("Un joli pin's a accrocher sur un vêtement, représentant un extincteur rouge.\nLorsque l'effet Brulûre se termine, redonne 10pv et 10pm.")
+            ("Un joli pin's a accrocher sur un vêtement, représentant un extincteur rouge.\nLorsque l'effet Brulûre se termine, redonne 2 pv et 1,5 pm par numéro d'étage.")
         ),
         "Bandeau Teinté": (
             ("Une relique de Thémis, l'esprit de la Justice, marqué d'un curieux éclat doré.\nEn combat, vous gagnez 1 pièce a chaque tours.")
@@ -702,10 +702,10 @@ DICTIONNAIREDESCRIPTIONCIGOGNEBLANCHE = {
             ("La marque psychologique indélébile d'un prédateur sur sa proie. \nCe n'est pas vraiment un artefact, mais le stress a fait battre votre coeur tellement vite que vous gagnez 4 points d'endurance !")
         ), 
         "Epée de Damocles": (
-            ("Une épée suintant l'anxiété, ayant appartenue a un ancien roi.\nLes dégâts de vos techniques augmentent de 25%, mais il y a une faible probabilité que l'artefact vous tombe dessus, se brisant sur votre crane et vous infligeant de lourds dégâts.")
+            ("Une épée suintant l'anxiété, ayant appartenue a un ancien roi.\nAjoute +25% de dégâts bonus a vos techniques (ils s'additionnent a vos autres bonus de dégâts), mais il y a une faible probabilité que l'artefact vous tombe dessus, se brisant sur votre crane et vous infligeant de lourds dégâts.")
         ), 
         "Morceau d'Ether Fragile": (
-            ("Un catalyste pour les sorts très fragile, extrait directement de la fabrique de la réalité.\nLes dégâts de vos sorts augmentent de 25%, mais il y a une faible probabilité que l'artefact se brise spontanément, vous vidant alors de tout vos points de mana.")
+            ("Un catalyste pour les sorts très fragile, extrait directement de la fabrique de la réalité.\nAjoute +25% de dégâts bonus a vos sorts (ils s'additionnent a vos autres bonus de dégâts), mais il y a une faible probabilité que l'artefact se brise spontanément, vous vidant alors de tout vos points de mana.")
         ), 
         "Eau Bénite": (
             ("Une fiole légendaire devant laquelle des papes dévoués ont prié jours et nuits pendant 50 ans d'affilée.\nVous avez une faible chance d'être béni par le Feu Divin à la fin de chaque tours.")

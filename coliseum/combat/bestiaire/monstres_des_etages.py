@@ -437,6 +437,32 @@ def sacatresor(combat):
     )
 
 
+# FICHE PROVISOIRE : « Chinasous » figurait dans la liste des monstres des
+# étages 9 à 11 sans avoir de fiche. Il gardait les valeurs par défaut du modèle
+# et surtout aucune action : le tirage de son action plantait le combat. Les
+# valeurs ci-dessous sont un point de départ à régler (sans matériau, comme
+# aucun matériau ne lui est associé).
+@monstre("Chinasous")
+def chinasous(combat):
+    return FicheMonstre(
+        stigma_positif="Aucun",
+        stigma_negatif="Aucun",
+        force=8,
+        intelligence=8,
+        resistance=5,
+        vies_supplementaires=0,
+        vie_max=20,
+        mana_max=40,
+        actions={
+            "Coup de Boule": "Technique",
+            "Frappe Lourde": "Technique",
+            "Poing de Mana": "Sort",
+            "Soin": "Sort",
+        },
+        recompense={"Vie max": 2, "Degat coup critique": 1, "Gold": 40 + combat.bonus_gold},
+    )
+
+
 @monstre("Drone de Sécurité YucaTech Inc.")
 def drone_de_securite_yucatech_inc(combat):
     return FicheMonstre(

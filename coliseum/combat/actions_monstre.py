@@ -2,7 +2,12 @@
 
 import random
 
-from coliseum.combat.attaques_speciales import SORTS_SPECIAUX_DE_MONSTRE, TECHNIQUES_SPECIALES_DE_MONSTRE
+from coliseum.combat.attaques_speciales import (
+    SORTS_SPECIAUX_DE_MONSTRE,
+    SPECIALES_AVEC_JET_D_ESQUIVE,
+    TECHNIQUES_SPECIALES_DE_MONSTRE,
+)
+from coliseum.combat.reductions import degats_apres_la_defence_du_joueur
 
 
 class ActionsMonstreMixin:
@@ -149,19 +154,53 @@ class ActionsMonstreMixin:
                 f" vous ne perdez réellement que {degat} points de vie."
             )
 
-    def AppliqueDegatsBonusDuMonstreContreLeJoueur(self, degat):
+    def AppliqueDegatsBonusDuMonstreContreLeJoueur(self, degat, attaque_normale=False, avec_reduction_plate=True):
+        """Dégâts d'un coup de monstre : bonus du monstre, puis défense du joueur.
+
+        1. POOL : bonus de force (ou d'intelligence), gel du joueur, stigmas...
+           Ces pourcentages s'ADDITIONNENT entre eux, puis la somme s'applique
+           une seule fois à la base. Pour une attaque normale, le bonus d'étage
+           (+6 par étage au dessus du premier) entre dans la même somme.
+        2. DÉFENSE : réduction en pourcentage, puis réduction plate, avec un
+           plancher (voir reductions.py).
+
+        - attaque_normale : True pour les attaques des tables générales (pas
+          pour les attaques spéciales, dont la base grandit déjà avec l'étage).
+        - avec_reduction_plate : False pour les dégâts sur la durée (brûlure).
+        """
         if self.modele.type_daction_du_monstre == "Sort":
-            degat += round(
-            (self.modele.DEGATSORTBONUSDUMONSTRE / 100) * degat
-        )
+            pool = self.modele.DEGATSORTBONUSDUMONSTRE
         else:
-            degat += round(
-                (self.modele.DEGATTECHNIQUEBONUSDUMONSTRE / 100) * degat
-            )
-        degat -= round(
-            (self.modele.BONUSREDUCTIONDEGATSURJOUEUR / 100) * degat
-        )
-        return degat
+            pool = self.modele.DEGATTECHNIQUEBONUSDUMONSTRE
+        if attaque_normale:
+            pool += self.modele.DEGATBONUSETAGEDUMONSTRE
+        degat += round((pool / 100) * degat)
+        return degats_apres_la_defence_du_joueur(degat, self.modele.DEFENCEEFFICACE, avec_reduction_plate)
+
+    def LaSpecialeEstEsquivee(self, action):
+        """Jet d'esquive pour les attaques spéciales qui n'en avaient pas.
+
+        POURQUOI une liste : quelques attaques sont décrites comme inévitables
+        (Laser Anti-Personnel, Protocole Supernova) ou ont leur propre jet
+        (Coup Anti-Magie, Magie Noire, Jugement...). Seules celles de cette
+        liste reçoivent le jet commun.
+
+        Chance d'être touché = 100 - esquive, avec l'esquive plafonnée à 50
+        (voir ESQUIVE_UTILE_MAX) : sans esquive, rien ne change ; au mieux
+        l'attaque touche une fois sur deux, jamais moins.
+        """
+        if action not in SPECIALES_AVEC_JET_D_ESQUIVE:
+            return False
+        chance_d_etre_touche = 100 - self.modele.CHANCEBONUSESQUIVE
+        return random.randint(1, 100) > chance_d_etre_touche
+
+    def GereEsquiveDeLaSpeciale(self, action):
+        commentaire = f"L'ennemi lance [{action}]...\n...mais vous parvenez à l'esquiver !"
+        if "Tiare de Suie" in self.modele.liste_dartefacts_optionels:
+            commentaire += "\nL'artefact [Tiare de Suie] bénit votre échappée !"
+            self.modele.beni_par_feu_sacre = True
+            self.modele.beni_par_feu_sacre_nombre_tour += 2
+        self.vue.AfficheEsquiveDeLaSpeciale(commentaire)
 
     def UseMonsterMagic(self, action):
         # [0]=%touche, [1]=degat, [2]=%crit, [3]=degat crit, [4]=%element,
@@ -180,7 +219,7 @@ class ActionsMonstreMixin:
                 pourcentage_de_touche -= self.modele.CHANCEBONUSESQUIVE
                 # application des modificateurs sur les degats de base
                 degat_de_base = caracteristique_du_sort[1]
-                degat_de_base = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat_de_base)
+                degat_de_base = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat_de_base, attaque_normale=True)
                 # application des modificateurs sur les chances de coup critique
                 pourcentage_de_critique = caracteristique_du_sort[2]
                 pourcentage_de_critique += round((self.modele.CHANCESORTCRITIQUEDUMONSTRE/100)*pourcentage_de_critique)
@@ -232,16 +271,7 @@ class ActionsMonstreMixin:
                                     commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
                                 else:
                                     # finition des degats
-                                    pourcentage_degat_du_feu = (
-                                        self.modele.est_en_feu_nombre_tour
-                                        * (
-                                            self.modele.est_en_feu_degat
-                                        )
-                                    )
-                                    degat_du_feu = round(
-                                        pourcentage_degat_du_feu
-                                        * self.modele.points_de_vie_max
-                                    )
+                                    degat_du_feu = self.CalculeCoupDeGraceDeLaBrulureSurJoueur()
                                     degat_du_feu = self.EnleveVieAuJoueur(degat_du_feu)
                                     # arret du feu
                                     self.modele.est_en_feu_nombre_tour = 0
@@ -390,8 +420,11 @@ class ActionsMonstreMixin:
                     )
                 # attaques qui ne rentrent pas dans la méthode globale (fait plus que juste des degat ou un element)
                 elif action in SORTS_SPECIAUX_DE_MONSTRE:
-                    lancer_l_attaque_speciale = getattr(self, SORTS_SPECIAUX_DE_MONSTRE[action])
-                    lancer_l_attaque_speciale()
+                    if self.LaSpecialeEstEsquivee(action):
+                        self.GereEsquiveDeLaSpeciale(action)
+                    else:
+                        lancer_l_attaque_speciale = getattr(self, SORTS_SPECIAUX_DE_MONSTRE[action])
+                        lancer_l_attaque_speciale()
             #affiche si les degats ont été changés par bluff, montagne, brume de sang ou mirroir d'eau
             if self.modele.commentaire_transmutation_degat != "":
                 self.vue.AfficheTransmutationDegat(self.modele.commentaire_transmutation_degat)
@@ -415,7 +448,7 @@ class ActionsMonstreMixin:
             # application des modificateurs sur les degats de base
             degat = 0
             degat_de_base = caracteristique_du_techniques[1]
-            degat_de_base = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat_de_base)
+            degat_de_base = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat_de_base, attaque_normale=True)
             # application des modificateurs sur les chances de coup critique
             pourcentage_de_critique = caracteristique_du_techniques[2]
             pourcentage_de_critique += round((self.modele.CHANCECOUPCRITIQUEDUMONSTRE/100)*pourcentage_de_critique)
@@ -466,16 +499,7 @@ class ActionsMonstreMixin:
                                 commentaire_element = f"\nVous vous enflammez pour {nombre_tour} tours supplémentaires !"
                             else:
                                 # finition des degats
-                                pourcentage_degat_du_feu = (
-                                    self.modele.est_en_feu_nombre_tour
-                                    * (
-                                        self.modele.est_en_feu_degat
-                                    )
-                                )
-                                degat_du_feu = round(
-                                    pourcentage_degat_du_feu
-                                    * self.modele.points_de_vie_max
-                                )
+                                degat_du_feu = self.CalculeCoupDeGraceDeLaBrulureSurJoueur()
                                 degat_du_feu = self.EnleveVieAuJoueur(degat_du_feu)
                                 # arret du feu
                                 self.modele.est_en_feu_nombre_tour = 0
@@ -602,7 +626,7 @@ class ActionsMonstreMixin:
                     commentaire_a_afficher = caracteristique_du_techniques[5]
                     #appliquation des dégats:
                     degat = caracteristique_du_techniques[0]
-                    degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat)
+                    degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat, attaque_normale=True)
                     degat = self.EnleveVieAuJoueur(degat)
                     self.CheckePuisAppliqueTransmutation(degat)
                     commentaire_degat = f"Vous perdez {degat} points de vie !"
@@ -641,8 +665,11 @@ class ActionsMonstreMixin:
                 )
             # attaques qui ne rentrent pas dans la méthode globale (fait plus que juste des degat ou un element)
             elif action in TECHNIQUES_SPECIALES_DE_MONSTRE:
-                lancer_l_attaque_speciale = getattr(self, TECHNIQUES_SPECIALES_DE_MONSTRE[action])
-                lancer_l_attaque_speciale()
+                if self.LaSpecialeEstEsquivee(action):
+                    self.GereEsquiveDeLaSpeciale(action)
+                else:
+                    lancer_l_attaque_speciale = getattr(self, TECHNIQUES_SPECIALES_DE_MONSTRE[action])
+                    lancer_l_attaque_speciale()
         #affiche si les degats ont été changés par bluff, montagne, brume de sang ou mirroir d'eau
         if self.modele.commentaire_transmutation_degat != "":
             self.vue.AfficheTransmutationDegat(self.modele.commentaire_transmutation_degat)

@@ -34,6 +34,30 @@ class SoveManagement:
 
         services.Observation.SetPermanentThingsToS0ve(donnees_de_s0ve)
 
+    def ModifieCompteurDeDropDansSove(self, type_de_action, materiau):
+        """Compteur de malchance des drops de matériaux (voir combat/drop.py).
+
+        - "Donne"    : nombre d'échecs consécutifs pour ce matériau ;
+        - "Echec"    : en ajoute un ;
+        - "Reussite" : remet le compteur à zéro.
+
+        ATTENTION : la clé n'existe pas dans les anciens s0ve.txt. `get` avec
+        un dictionnaire vide évite l'erreur ; la clé est créée au premier
+        enregistrement.
+        """
+        donnees_de_s0ve = services.Observation.GetPermanentThingsFromS0ve()
+        compteurs = ast.literal_eval(donnees_de_s0ve.get("Compteur de drop", "{}"))
+
+        if type_de_action == "Donne":
+            return compteurs.get(materiau, 0)
+        elif type_de_action == "Echec":
+            compteurs[materiau] = compteurs.get(materiau, 0) + 1
+        elif type_de_action == "Reussite":
+            compteurs[materiau] = 0
+
+        donnees_de_s0ve["Compteur de drop"] = compteurs
+        services.Observation.SetPermanentThingsToS0ve(donnees_de_s0ve)
+
     def ModifieRumeursDansSove(self, type_de_action, numero_de_la_rumeur):
 
         donnees_de_s0ve = services.Observation.GetPermanentThingsFromS0ve()

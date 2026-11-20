@@ -1,10 +1,24 @@
 """Surveillance des points de vie, résurrections, game over, fuite et récompenses."""
 
 import random
+from coliseum.combat import drop
 from coliseum.console import attendre
 
 
 class FinDeCombatMixin:
+
+    def TireLeDropDeMateriau(self, materiau):
+        """True si le monstre lâche son matériau (compteur de malchance, voir drop.py).
+
+        Une mimique lâche toujours le sien, sans toucher au compteur.
+        """
+        if self.modele.est_une_mimique:
+            return True
+        bonus_de_leprechaun = self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Médaillon de Leprechaun"]
+        echecs = self.Sove.ModifieCompteurDeDropDansSove("Donne", materiau)
+        reussi = drop.le_materiau_tombe(echecs, drop.chance_moyenne(bonus_de_leprechaun))
+        self.Sove.ModifieCompteurDeDropDansSove("Reussite" if reussi else "Echec", materiau)
+        return reussi
 
     def CheckHp(self, type_de_laction="None"):
         """Peux prendre le type d'action du monstre, retourne True ou False si il reste de la vie ou pas
@@ -388,14 +402,8 @@ class FinDeCombatMixin:
                                                 f"\nVous récuperez {self.modele.nombre_de_tours} golds !")
                                 self.Player.nombre_de_gold += self.modele.nombre_de_tours
                         elif cle == "Materiau":
-                            nombre_aleatoire = random.randint(0,100)
-                            if self.modele.est_une_mimique :
-                                nombre_aleatoire = 0
-                            limite = 25 + self.Player.dictionnaire_duppgrade_qui_necessitent_plus_de_code_pour_fonctionner["Médaillon de Leprechaun"]
-                            if nombre_aleatoire <= limite:
-                                materiau = self.modele.monstre_recompense[
-                                    cle
-                                ]
+                            materiau = self.modele.monstre_recompense[cle]
+                            if self.TireLeDropDeMateriau(materiau):
                                 self.Player.liste_de_materiaux[materiau] += 1
                                 commentaire = (
                                     f"L'ennemi lache le materiau [{self.modele.monstre_recompense[cle]}] !"

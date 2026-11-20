@@ -49,6 +49,22 @@ SORTS_SPECIAUX_DE_MONSTRE = {
     "Symphonie": "Symphonie",
 }
 
+# Attaques spéciales qui n'avaient AUCUN jet de touche et infligent des dégâts
+# ou des malédictions au joueur : elles reçoivent maintenant le jet d'esquive
+# commun (voir LaSpecialeEstEsquivee dans actions_monstre.py).
+# Laissées de côté volontairement : Laser Anti-Personnel et Protocole Supernova
+# (décrits comme inévitables), Roulette (plusieurs issues mêlées), Ultima,
+# Aspiration, et celles qui ont déjà leur propre jet.
+SPECIALES_AVEC_JET_D_ESQUIVE = (
+    "Laser",
+    "Eveil de Runes",
+    "Tournicotons",
+    "Dragon Ascendant",
+    "Vacarme Rapide",
+    "Rituel",
+    "Lamentations",
+)
+
 TECHNIQUES_SPECIALES_DE_MONSTRE = {
     "Durcissement Argilite": "DurcissementArgilite",
     "Envol": "Envol",
@@ -1311,7 +1327,14 @@ class AttaquesSpecialesMixin:
         self.vue.AfficheSymphonie(commentaire, commentaire_degat)
 
     def Jugement(self):
-        degat = self.modele.nombre_de_monstres_tues
+        # Les dégâts dépendent du nombre d'âmes (monstres tués), mais saturent :
+        #     part des PV max = 25 % x âmes / (âmes + 20)
+        # 20 âmes : 12,5 % | 30 : 15 % | 60 : 18,8 % | 100 : 20,8 % | 250 : 23,1 %.
+        # Les premières âmes comptent beaucoup, les suivantes de moins en moins :
+        # la part tend vers 25 % sans jamais l'atteindre. L'ancien calcul
+        # (dégâts = nombre d'âmes) n'avait aucune limite.
+        ames = max(0, self.modele.nombre_de_monstres_tues)
+        degat = max(1, round(0.25 * self.modele.points_de_vie_max * ames / (ames + 20)))
         commentaire = "Le prince des sables invoque une balance et pose sur l'un de ses plateaux : une plume.\nPuis il tend la main vers vous..."
         nombre_aleatoire = random.randint(1, 100)
         if nombre_aleatoire < 50 :
@@ -1790,11 +1813,11 @@ class AttaquesSpecialesMixin:
             if self.modele.monstre_est_gele:
                 self.modele.monstre_est_gele = False
                 self.modele.monstre_est_gele_nombre_tour = 0
-            if self.modele.monstre_est_en_feu:
+            if self.modele.monstre_est_vulnerable:
                 self.modele.monstre_est_vulnerable = False
                 self.modele.monstre_est_vulnerable_nombre_tour = 0
                 self.modele.monstre_niveau_de_vulnerabilite = 0
-            if self.modele.monstre_est_en_feu:
+            if self.modele.monstre_est_empoisonne:
                 self.modele.monstre_est_empoisonne = False
                 self.modele.monstre_est_empoisonne_nombre_tour = 0
                 self.modele.monstre_est_empoisonne_degat = 0

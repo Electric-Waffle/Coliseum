@@ -1,8 +1,58 @@
-"""Altérations d'état (feu, poison, gel...) : application à chaque tour et affichage."""
+"""Altérations d'état (feu, poison, gel...) : application à chaque tour et affichage.
 
+La brûlure retire un pourcentage des PV MAX de sa cible à chaque tour. Elle
+ignore donc la résistance et la force : plus la cible a de PV, plus elle fait
+mal. Pour qu'elle ne tue pas un boss en quelques tours, ses valeurs sont
+bornées (voir les constantes ci-dessous).
+"""
+
+# Pourcentage maximal des PV max retiré par tour (palier + bonus, comme Ange de Feu).
+PLAFOND_BRULURE_PAR_TOUR_MONSTRE = 8
+PLAFOND_BRULURE_PAR_TOUR_BOSS = 3
+# Nombre maximal de tours de brûlure restant à courir, tous bonus de durée confondus.
+DUREE_MAX_DE_LA_BRULURE = 8
+# Coup de grâce (brûler une cible déjà en feu, 10 % des cas) : pourcentage maximal des PV max.
+PLAFOND_COUP_DE_GRACE_MONSTRE = 20
+PLAFOND_COUP_DE_GRACE_BOSS = 8
+PLAFOND_COUP_DE_GRACE_JOUEUR = 15
 
 
 class AlterationsMixin:
+
+    def PalierDeBrulureSurMonstre(self):
+        """Pourcentage des PV max que la brûlure retire au monstre ce tour-ci (plafonné)."""
+        bonus = round((self.modele.DEGATBONUSFEU / 100) * self.modele.monstre_est_en_feu_degat)
+        palier = self.modele.monstre_est_en_feu_degat + bonus
+        plafond = PLAFOND_BRULURE_PAR_TOUR_BOSS if self.modele.monstre_EstUnBoss else PLAFOND_BRULURE_PAR_TOUR_MONSTRE
+        return min(palier, plafond)
+
+    def CalculeDegatDeLaBrulureSurMonstre(self):
+        """Dégâts de brûlure du tour sur le monstre."""
+        # Les bonus de durée (Rafale, Inflammable, Charbon Primordial...) se
+        # multipliaient : on ramène ici ce qui dépasse le maximum.
+        self.modele.monstre_est_en_feu_nombre_tour = min(
+            self.modele.monstre_est_en_feu_nombre_tour, DUREE_MAX_DE_LA_BRULURE
+        )
+        degat = round((self.PalierDeBrulureSurMonstre() / 100) * self.modele.monstre_points_de_vie_max)
+        return self.SiZeroRameneAUn(degat)
+
+    def CalculeCoupDeGraceDeLaBrulureSurMonstre(self):
+        """Dégâts du coup de grâce : tours restants x palier, en % des PV max, plafonné.
+
+        ATTENTION : l'ancien calcul oubliait de diviser par 100 et infligeait
+        environ 20 fois les PV max de la cible (mort immédiate, boss compris).
+        """
+        tours_restants = min(self.modele.monstre_est_en_feu_nombre_tour, DUREE_MAX_DE_LA_BRULURE)
+        plafond = PLAFOND_COUP_DE_GRACE_BOSS if self.modele.monstre_EstUnBoss else PLAFOND_COUP_DE_GRACE_MONSTRE
+        pourcentage = min(tours_restants * self.PalierDeBrulureSurMonstre(), plafond)
+        return self.SiZeroRameneAUn(round((pourcentage / 100) * self.modele.monstre_points_de_vie_max))
+
+    def CalculeCoupDeGraceDeLaBrulureSurJoueur(self):
+        """Même calcul quand un monstre re-enflamme le joueur déjà en feu."""
+        pourcentage = min(
+            self.modele.est_en_feu_nombre_tour * self.modele.est_en_feu_degat, PLAFOND_COUP_DE_GRACE_JOUEUR
+        )
+        return self.SiZeroRameneAUn(round((pourcentage / 100) * self.modele.points_de_vie_max))
 
     def EnleveAlterationEtat(self):
         self.modele.monstre_en_etat_de_choc = False
@@ -156,7 +206,8 @@ class AlterationsMixin:
         elif self.modele.monstre_en_etat_de_choc:
             degat = 15
             if "Orbe de Disruption" in self.modele.liste_dartefacts_optionels:
-                degat += 10
+                # valeur plate qui grandit avec l'étage (voir doc/06-equilibrage.md)
+                degat += 6 * max(1, self.Player.numero_de_letage)
             commentaire = (
                 f"...et récupère son mana.\nIl perd {degat} points de vie a cause de son réservoir de mana troué."
             )
@@ -190,7 +241,8 @@ class AlterationsMixin:
             degat = round(
                 ((self.modele.est_en_feu_degat) / 100) * self.modele.points_de_vie_max
             )
-            degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat)
+            # sans réduction plate : la brûlure est déjà un pourcentage des PV max
+            degat = self.AppliqueDegatsBonusDuMonstreContreLeJoueur(degat, avec_reduction_plate=False)
             if degat <= 1:
                 degat = 2
             degat = self.EnleveVieAuJoueur(degat)
@@ -206,12 +258,7 @@ class AlterationsMixin:
         if self.modele.monstre_est_en_feu:
             personnage = "L'ennemi brule !"
             # Trouver un moyen de calculer les degats de feu
-            bonus = round((self.modele.DEGATBONUSFEU / 100) * self.modele.monstre_est_en_feu_degat)
-            degat = round(
-                ((self.modele.monstre_est_en_feu_degat + bonus) / 100)
-                * self.modele.monstre_points_de_vie_max
-            )
-            degat = self.SiZeroRameneAUn(degat)
+            degat = self.CalculeDegatDeLaBrulureSurMonstre()
             self.modele.monstre_points_de_vie -= degat
             commentaire = f"Il perd {degat} points de vie !"
             if self.modele.choc_thermique:
@@ -449,9 +496,13 @@ class AlterationsMixin:
                 self.modele.est_en_feu_degat = 0
                 commentaire += "\nVous n'êtes plus en feu !"
                 if "Pin's Extincteur" in self.modele.liste_dartefacts_optionels:
-                    commentaire += "\nVotre Pin's se met à vibrer. Vous reprenez 10 pv et 10 pm !"
-                    self.modele.points_de_vie += 10
-                    self.modele.points_de_mana += 10
+                    # valeurs plates qui grandissent avec l'étage
+                    etage = max(1, self.Player.numero_de_letage)
+                    soin_de_vie = 2 * etage
+                    soin_de_mana = max(1, round(1.5 * etage))
+                    commentaire += f"\nVotre Pin's se met à vibrer. Vous reprenez {soin_de_vie} pv et {soin_de_mana} pm !"
+                    self.modele.points_de_vie += soin_de_vie
+                    self.modele.points_de_mana += soin_de_mana
                     self.EquilibragePointsDeVieEtManaEtEndurance()
         # paralysé, passe son tour
         if self.modele.est_paralyse:

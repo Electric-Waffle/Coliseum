@@ -20,7 +20,7 @@ LISTEEFFETSARTEFACT = {
     "Anneau Cramoisi": {"Commentaire": "Cet anneau forgé pendant la Guerre de l'Interdit a bu le sang de nombreux dieux et déesses afin de conferer leur endurance a son porteur.",
                          "Endurance": 20},  # endurance t
     "Orbe de Disruption": {
-        "Commentaire": "Cet orbe vient de l'Ains Terra Net, le monde des voyageurs, et perturbe le mana environnant.\nLes monstres avec un réservoir de mana brisé perdent 10 pv supplémentaires par tour !",
+        "Commentaire": "Cet orbe vient de l'Ains Terra Net, le monde des voyageurs, et perturbe le mana environnant.\nLes monstres avec un réservoir de mana brisé perdent en plus 6 pv par numéro d'étage a chaque tour !",
     },  # degat quand ennemi plus mana
     "Plume de Munin": {"Commentaire": "Cette plume vient de Munin, un des corbeaux d'Odin qui voyage a travers les neufs mondes, et confère a son porteur une certaine aisance a esquiver les attaques.",
                         "Taux esquive": 6},  # esquive t
@@ -77,7 +77,7 @@ LISTEEFFETSARTEFACT = {
         "Commentaire": "Un petit bouclier a fixer au niveau de la paume, ayant appartenu a un faiseur de légende.\nVotre défence augmente encore plus lorsque vous vous protégez."
     },  # defence quand se protege * 1.5
     "Ecaille d'Ouroboros": {
-        "Commentaire": "L'écaille d'un divin serpent signifiant le renouveau et l'infini.\nVous regagnez 2 points de vie a chaque utilisation de sorts."
+        "Commentaire": "L'écaille d'un divin serpent signifiant le renouveau et l'infini.\nVous regagnez 1,5 point de vie par numéro d'étage (arrondi) a chaque utilisation de sorts."
     },  # Rend 2 pv par utilisation de sort
     "Serment d'Heimdall": {
         "Commentaire": "La marque du serment d'un dieu omniscient envers le peuple qui a continué a le prier dans le pire des moments.\nIl y a de très faibles chance qu'un sort utilise son mana au lieu du votre."
@@ -98,7 +98,7 @@ LISTEEFFETSARTEFACT = {
         "Commentaire": "La forme cristallisée du voeu du plus monstreux des hommes qui n'a formulé qu'une seule demande au génie en face de lui : Devenir une meilleure personne.\nVotre stigma négatif disparait a son contact."
     },  # Efface le stigma négatif
     "Haricot Magique": {
-        "Commentaire": "La graine d'une plante monstreuse amenant son planteur dans une dimension remplie de ses semblables, affamés et en manque de nutriments, cachée dans les nuages.\nSes racines tentaculaires cherchant le sang ne peuvent être stoppées que par une lame plantée dans la graine originelle.\nInvoque des roches depuis sa dimension d'origine, augmentant les dégâts de l'effet [Lapidation]."
+        "Commentaire": "La graine d'une plante monstreuse amenant son planteur dans une dimension remplie de ses semblables, affamés et en manque de nutriments, cachée dans les nuages.\nSes racines tentaculaires cherchant le sang ne peuvent être stoppées que par une lame plantée dans la graine originelle.\nInvoque des roches depuis sa dimension d'origine, ajoutant +25% de dégâts bonus a l'effet [Lapidation]."
     },  # 20% de degats supplémentaires par lapidation
     "Miette de Pain Congelée": {
         "Commentaire": "La seule trace d'enfants emmenés dans les sombres forêts du continent pour y être perdus par leurs parents en manque d'argent.\nLa rancoeur d'âmes pures englouties par ce qui se cache dans les bois fait durer l'altération d'état [Gelure] pendant 2 tours supplémentaires."
@@ -134,7 +134,7 @@ LISTEEFFETSARTEFACT = {
     },
     "Cape Victorieuse": {
         "Commentaire": ("Une cape macabre cousue avec les fils d'un drapeau pirate et les ailes du Ministre du Mana."
-                    "\nChaque ennemi tué augmente de 0.5% les dégâts totaux.")
+                    "\nChaque ennemi tué augmente de 0.5% votre bonus de dégâts total.")
     },
     "Schmilblick": {
         "Commentaire": ("Un bidule bizarre crée par une inventrice farfelue."
@@ -142,7 +142,7 @@ LISTEEFFETSARTEFACT = {
     },
     "Contrat de Travail": {
         "Commentaire": ("Un bout de papier promettant la puissance aux économes afin qu'ils ne se fassent plus martyriser par le système."
-                    "\nVous gagnez 2% de dégâts totaux supplementaire par paquets de 50 pièces possédé.")
+                    "\nVotre bonus de dégâts total augmente de 1% par paquet de 50 pièces possédé (maximum +100%).")
     },
     "Dessin Nostalgique": {
         "Commentaire": ("Un dessin au charbon d'un vieil homme en plein sommeil, adossé contre une louve."
@@ -168,7 +168,7 @@ LISTEEFFETSARTEFACT = {
     },
     "Pin's Extincteur": {
         "Commentaire": ("Un joli pin's a accrocher sur un vêtement, représentant un extincteur rouge."
-                    "\nLorsque l'effet Brulûre se termine, redonne 10pv et 10pm.")
+                    "\nLorsque l'effet Brulûre se termine, redonne 2 pv et 1,5 pm par numéro d'étage.")
     },
     "Bandeau Teinté": {
         "Commentaire": ("Une relique de Thémis, l'esprit de la Justice, marqué d'un curieux éclat doré."

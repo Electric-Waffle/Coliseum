@@ -205,10 +205,12 @@ Par convention, ces méthodes s'appellent `EffetStigma...` et vivent dans
   `if / elif`. Si le stigma positif du personnage figure dans cette chaîne,
   son stigma négatif de fin de tour n'est jamais exécuté. Pour un nouveau
   stigma négatif, écrire un `if` séparé plutôt que d'allonger la chaîne.
-- **Comparaison à une liste.** `preparation.py` contient
-  `self.modele.stigma_joueur_negatif == ["Attache Physique"]` : une chaîne
-  n'est jamais égale à une liste, ce test est toujours faux. Écrire
-  `== "Nom"` ou `in ["Nom A", "Nom B"]`.
+- **Comparaison à une liste.** Une chaîne n'est jamais égale à une liste :
+  `stigma == ["Nom"]` est toujours faux, et `["Nom"] in liste_d_artefacts`
+  aussi. Ces deux erreurs rendaient inactifs « Attache Physique », « Endurci »,
+  « Cape Victorieuse », « Contrat de Travail » et « Collier de Nephilim » ;
+  elles sont corrigées. Écrire `== "Nom"`, `"Nom" in liste` ou
+  `in ["Nom A", "Nom B"]`.
 - **Stigma du monstre.** Les monstres utilisent les mêmes noms, lus dans
   `self.modele.stigma_monstre_positif` / `_negatif` / `_bonus`. Un même stigma
   peut servir aux deux camps, mais chaque camp a ses propres tests.

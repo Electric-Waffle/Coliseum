@@ -3,7 +3,15 @@
 import random
 
 from coliseum.combat.bestiaire import ContexteDeCombat, fiche_du_monstre
+from coliseum.combat.reductions import ESQUIVE_UTILE_MAX, reduction_en_pourcentage
 from coliseum.console import ClearConsole
+
+# Cape Victorieuse et Contrat de Travail agrandissent le bonus de dégâts (le
+# « pool ») d'un pourcentage ; ce pourcentage ne dépasse jamais 100 %, c'est à
+# dire que le bonus au maximum double.
+PLAFOND_AMELIORATION_DEGATS_TOTAUX = 100
+# Bonus de dégâts des attaques normales des monstres, par étage au dessus du premier.
+BONUS_DEGATS_MONSTRE_PAR_ETAGE = 6
 
 # Le boss de fin d'histoire dépend du personnage joué.
 BOSS_D_HISTOIRE_PAR_PERSONNAGE = {
@@ -126,9 +134,10 @@ class PreparationMixin:
             + bonus_artefact
             + self.modele.accumulation_degat_sort
         )
-        self.modele.DEGATBONUSSORTS -= (
-            self.modele.monstre_points_de_resistance * 3
-        ) + malus_stigma
+        # ATTENTION : la résistance du monstre n'est plus retirée ici. Elle
+        # l'était en plus de la réduction appliquée au sort (BONUSREDUCTIONDEGAT),
+        # donc les sorts la subissaient deux fois et les techniques une seule.
+        self.modele.DEGATBONUSSORTS -= malus_stigma
         if self.modele.stigma_monstre_positif == "Esotericisme":
             self.modele.DEGATBONUSSORTS = -100
 
@@ -137,6 +146,7 @@ class PreparationMixin:
             amelioration_degats_totaux += (self.modele.nombre_de_monstres_tues * 0.5)
         if "Contrat de Travail" in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += round(self.modele.nombre_de_gold // 50)
+        amelioration_degats_totaux = min(amelioration_degats_totaux, PLAFOND_AMELIORATION_DEGATS_TOTAUX)
         self.modele.DEGATBONUSSORTS += ((amelioration_degats_totaux / 100)* self.modele.DEGATBONUSSORTS)
 
         bonus_esquive = round(self.modele.taux_de_esquive / 2)
@@ -209,6 +219,7 @@ class PreparationMixin:
             amelioration_degats_totaux += (self.modele.nombre_de_monstres_tues * 0.5)
         if "Contrat de Travail" in self.modele.liste_dartefacts_optionels:
             amelioration_degats_totaux += round(self.modele.nombre_de_gold // 50)
+        amelioration_degats_totaux = min(amelioration_degats_totaux, PLAFOND_AMELIORATION_DEGATS_TOTAUX)
         self.modele.DEGATBONUSATTAQUE += ((amelioration_degats_totaux / 100)* self.modele.DEGATBONUSATTAQUE)
 
         # degat des sorts crit
@@ -529,7 +540,11 @@ class PreparationMixin:
         bonus_artefact = 0
         if "Bandeau Catharsis" in self.modele.liste_dartefacts_optionels:
             bonus_artefact += 5
-        self.modele.CHANCEBONUSESQUIVE = bonus_caracteristique + bonus_artefact
+        # POURQUOI un plafond : l'esquive protège déjà des coups, augmente la
+        # chance de toucher (moitié) et de critique (tiers). Au dessus de 50,
+        # un monstre à 85 % de touche tomberait sous 35 % : trop proche de
+        # l'intouchable. Les deux autres bonus gardent la valeur non plafonnée.
+        self.modele.CHANCEBONUSESQUIVE = min(ESQUIVE_UTILE_MAX, bonus_caracteristique + bonus_artefact)
 
         # pourcentage d'enflammer
         bonus_vulnerable = 0
@@ -695,6 +710,11 @@ class PreparationMixin:
             bonus_stigma = 25
         bonus_force = self.modele.monstre_points_de_intelligence * 10
         self.modele.DEGATSORTBONUSDUMONSTRE = bonus_gel + bonus_stigma + bonus_force + bonus_artefact + bonus_hyde + self.modele.DEGATBONUSMONSTREBERSERKER
+        # bonus de dégâts des attaques NORMALES des monstres, selon l'étage.
+        # Additif : il s'ajoute aux autres bonus du monstre (sa force...), comme
+        # les bonus du joueur. Les attaques spéciales ne le reçoivent pas : leur
+        # base grandit déjà d'un point par étage (« base + niveau du monstre »).
+        self.modele.DEGATBONUSETAGEDUMONSTRE = BONUS_DEGATS_MONSTRE_PAR_ETAGE * max(0, self.modele.numero_de_letage - 1)
         # pourcentage de se faire enflammer (pas de modificateurs pour l'instant)
         self.modele.CHANCEBONUSJOUEURENFEU = 0
         # pourcentage de se faire geler (pas de modificateurs pour l'instant)
@@ -704,21 +724,19 @@ class PreparationMixin:
         # pourcentage de se faire lapider (pas de modificateurs pour l'instant)
         self.modele.CHANCEBONUSJOUEURLAPIDE = 0
         # reduction des degats de base contre les monstres
-        bonus_defence = 0
-        bonus_defence = (
+        # (formules dans coliseum/combat/reductions.py)
+        self.modele.BONUSREDUCTIONDEGAT = reduction_en_pourcentage(
             self.modele.monstre_points_de_resistance + self.modele.monstre_gain_de_defence_nombre
-        ) * 3
-        self.modele.BONUSREDUCTIONDEGAT = bonus_defence
+        )
 
         # reduction des degats de base contre les joueurs
-        bonus_defence = 0
-        bonus_defence = (
-            self.modele.points_de_defence + self.modele.gain_de_defence
-        ) * 3
+        # Miss Hyde retirait 50 % de réduction ; à 2 % par point, cela fait 25 points.
         malus_hyde = 0
         if self.modele.miss_hyde_transformation :
-            malus_hyde = 50
-        self.modele.BONUSREDUCTIONDEGATSURJOUEUR = bonus_defence - malus_hyde
+            malus_hyde = 25
+        self.modele.DEFENCEEFFICACE = max(0, self.modele.points_de_defence + self.modele.gain_de_defence - malus_hyde)
+        # gardé pour l'affichage : part de réduction en pourcentage seulement
+        self.modele.BONUSREDUCTIONDEGATSURJOUEUR = reduction_en_pourcentage(self.modele.DEFENCEEFFICACE)
 
         # reduction du cout en mana des sorts generaux
         bonus_talent = 0
